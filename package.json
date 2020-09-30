@@ -15,7 +15,7 @@
     "resources": "gulp downloadResources --require babel-register --gulpfile tasks",
     "rebuild-locales": "gulp rebuildLocales --require babel-register --gulpfile tasks",
     "increment": "yarn version --patch --no-git-tag-version",
-    "lint": "npx prettier --write Extension/**/*.{js,html,json} tasks/**/*.js",
+    "lint": "npx prettier --write Extension/**/*.{js,html,json} tasks/**/*.js tests/**/*.{js,html,json}",
     "lisence": "NODE_NO_WARNINGS=1 gulp addLisence --require babel-register --gulpfile tasks"
   },
   "babel": {

@@ -20,17 +20,13 @@ import eventStream from "event-stream";
 
 // add Lisence
 export const addLisence = () => {
-  const srcJs = "Extension/**/*.js";
-  const srcCss = "Extension/**/*.css";
-
   gulp.task("addLisence", () => {
     return eventStream.merge(
       gulp
-        .src(srcJs, { base: "./" })
-        .pipe(appendLisence())
-        .pipe(gulp.dest("./")),
-      gulp
-        .src(srcCss, { base: "./" })
+        .src(
+          ["Extension/**/*.js", "Extension/**/*.css", "!Extension/lib/libs"],
+          { base: "./" }
+        )
         .pipe(appendLisence())
         .pipe(gulp.dest("./"))
     );

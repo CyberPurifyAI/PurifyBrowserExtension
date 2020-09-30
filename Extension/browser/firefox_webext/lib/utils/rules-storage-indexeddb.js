@@ -22,7 +22,10 @@ purify.rulesStorageImpl = (function (purify, initialAPI) {
   var database;
 
   function onError(error) {
-    purify.console.error("Purify rulesStorage error: {0}", error.error || error);
+    purify.console.error(
+      "Purify rulesStorage error: {0}",
+      error.error || error
+    );
   }
 
   /**
