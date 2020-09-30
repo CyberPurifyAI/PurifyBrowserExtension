@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 /* global chrome, DevToolsRulesConstructor */
 
@@ -56,7 +56,7 @@ var browser = window.browser || chrome;
 
     var onPageChanged = function () {
       document.getElementById("preview-rule-button").value = "Preview";
-      delete window.adguardDevToolsPreview;
+      delete window.purifyDevToolsPreview;
     };
 
     browser.devtools &&
@@ -100,12 +100,12 @@ var browser = window.browser || chrome;
       e.preventDefault();
 
       if (window.selectedElementInfo) {
-        if (window.adguardDevToolsPreview) {
+        if (window.purifyDevToolsPreview) {
           // Remove preview
           cancelPreview();
           previewRuleButton.value = "Preview";
 
-          delete window.adguardDevToolsPreview;
+          delete window.purifyDevToolsPreview;
           return;
         }
 
@@ -117,7 +117,7 @@ var browser = window.browser || chrome;
 
         previewRuleButton.value = "Cancel preview";
 
-        window.adguardDevToolsPreview = true;
+        window.purifyDevToolsPreview = true;
       }
     });
 
@@ -351,7 +351,7 @@ var browser = window.browser || chrome;
   };
 
   var addRuleForElement = function () {
-    if (window.adguardDevToolsPreview) {
+    if (window.purifyDevToolsPreview) {
       // Remove preview
       cancelPreview();
     }

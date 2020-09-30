@@ -1,6 +1,6 @@
 (function (api) {
   // %START_RESERVED_DOMAINS% and %END_RESERVED_DOMAINS% serve as markers for the possibility to update RESERVED_DOMAINS object
-  // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1010
+  // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1010
   var publicSuffixes =
     //%START_RESERVED_DOMAINS%
 {

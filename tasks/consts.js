@@ -2,7 +2,7 @@ const LOCALES_BASE_URL = "https://twosky.adtidy.org/api/v1";
 export const LOCALES_DOWNLOAD_URL = `${LOCALES_BASE_URL}/download`;
 export const LOCALES_UPLOAD_URL = `${LOCALES_BASE_URL}/upload`;
 
-export const LAST_ADGUARD_FILTER_ID = 14;
+export const LAST_PURIFY_FILTER_ID = 14;
 
 export const BUILD_DIR = "build";
 
@@ -10,7 +10,7 @@ export const LOCALES_DIR = "./Extension/_locales/";
 
 export const FILTERS_DEST = "Extension/filters/%browser";
 
-export const PRIVATE_FILES = "private/AdguardBrowserExtension";
+export const PRIVATE_FILES = "private/PurifyBrowserExtension";
 
 export const EXTENSION_FILTERS_SERVER_URL_FORMAT =
   "https://filters.adtidy.org/extension/%browser";
@@ -31,21 +31,21 @@ export const LOCAL_SCRIPT_RULES_COMMENT =
   "3. We allow only custom rules got from the User filter (which user creates manually) or from this DEFAULT_SCRIPT_RULES object";
 
 // Firefox extension IDs
-export const FIREFOX_EXTENSION_ID_DEV = "adguardadblockerdev@purify.com";
-export const FIREFOX_EXTENSION_ID_BETA = "adguardadblockerbeta@purify.com";
-export const FIREFOX_EXTENSION_ID_RELEASE = "adguardadblocker@purify.com";
+export const FIREFOX_EXTENSION_ID_DEV = "purifyadblockerdev@purify.com";
+export const FIREFOX_EXTENSION_ID_BETA = "purifyadblockerbeta@purify.com";
+export const FIREFOX_EXTENSION_ID_RELEASE = "purifyadblocker@purify.com";
 
 // Update urls
 export const CHROME_UPDATE_URL =
-  "https://static.purify.com/extensions/adguardadblocker/beta/update.xml";
+  "https://static.purify.com/extensions/purifyadblocker/beta/update.xml";
 export const FIREFOX_WEBEXT_UPDATE_URL =
-  "https://static.purify.com/extensions/adguardadblocker/beta/update.json";
+  "https://static.purify.com/extensions/purifyadblocker/beta/update.json";
 
 // Codebase urls
 export const CHROME_CODEBASE_URL =
-  "https://static.purify.com/extensions/adguardadblocker/beta/chrome.crx";
+  "https://static.purify.com/extensions/purifyadblocker/beta/chrome.crx";
 export const FIREFOX_CODEBASE_URL =
-  "https://static.purify.com/extensions/adguardadblocker/beta/firefox.xpi";
+  "https://static.purify.com/extensions/purifyadblocker/beta/firefox.xpi";
 
 export const FIREFOX_WEBEXT = "FIREFOX_WEBEXT";
 

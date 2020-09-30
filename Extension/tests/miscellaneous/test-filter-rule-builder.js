@@ -85,7 +85,7 @@ QUnit.test("Invalid Style Syntax", (assert) => {
   }, new Error("Empty :style pseudo class: body:style()"));
 });
 
-// https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1600
+// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1600
 QUnit.test("Too short rules are ignored", (assert) => {
   let ruleText = "adg";
   let rule = purify.rules.builder.createRule(ruleText, 0);

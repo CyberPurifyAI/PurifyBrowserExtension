@@ -672,8 +672,8 @@ PopupController.prototype = {
     const footerDefaultTitle = footerDefault.querySelector(".footer__title");
     if (popupFooter && footerDefaultTitle) {
       if (options.isEdgeBrowser) {
-        popupFooter.innerHTML = `<div class="popup-footer--edge">© 2009-${new Date().getFullYear()} AdGuard Software Ltd</div>`;
-        // hide mobile app icons - https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1543
+        popupFooter.innerHTML = `<div class="popup-footer--edge">© 2009-${new Date().getFullYear()} CyberPurify Software Ltd</div>`;
+        // hide mobile app icons - https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1543
         const platforms = footerDefault.querySelector(".platforms");
         if (platforms) {
           platforms.style.display = "none";
@@ -681,7 +681,7 @@ PopupController.prototype = {
       } else {
         footerDefaultTitle.setAttribute(
           "title",
-          i18n.getMessage("popup_adguard_footer_title")
+          i18n.getMessage("popup_purify_footer_title")
         );
       }
     }
@@ -690,7 +690,7 @@ PopupController.prototype = {
     // Uncomment if condition bellow if you'd like to show
     // get premium button in the action window (extension popup)
 
-    // if (!options.isDisableShowAdguardPromoInfo) {
+    // if (!options.isDisableShowPurifyPromoInfo) {
     //     getPremium.style.display = 'block';
     //     popupFooter.style.display = 'none';
     // } else {
@@ -941,7 +941,7 @@ PopupController.prototype = {
 (function () {
   /**
    * TODO: check the following EDGE issue
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/551
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/551
    * MS Edge unexpectedly crashes on opening the popup.
    * We do not quite understand the reason for this behavior,
    * but we assume it happens due to code flow execution and changing the DOM.
@@ -951,7 +951,7 @@ PopupController.prototype = {
   const controller = new PopupController();
   controller.afterRender = function () {
     // Add some delay for show popup size properly
-    // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/505
+    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/505
     const timeout = 10;
     setTimeout(() => {
       controller.resizePopupWindow();

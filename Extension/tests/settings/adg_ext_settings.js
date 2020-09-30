@@ -12,7 +12,7 @@ const settingsJsonStr = JSON.stringify({
     "use-optimized-filters": false,
     "collect-hits-count": false,
     "show-context-menu": true,
-    "show-info-about-adguard": true,
+    "show-info-about-purify": true,
     "show-app-updated-info": true,
   },
   filters: {

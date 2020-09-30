@@ -992,7 +992,7 @@ ace.define("ace/mode/csp_highlight_rules", [], function (
   exports.CspHighlightRules = CspHighlightRules;
 });
 
-ace.define("ace/mode/adguard_highlight_rules", [], function (
+ace.define("ace/mode/purify_highlight_rules", [], function (
   require,
   exports,
   module
@@ -1006,7 +1006,7 @@ ace.define("ace/mode/adguard_highlight_rules", [], function (
     .JavaScriptHighlightRules;
   var CspHighlightRules = require("./csp_highlight_rules").CspHighlightRules;
 
-  var AdguardHighlightRules = function () {
+  var PurifyHighlightRules = function () {
     this.$rules = {
       start: [
         {
@@ -1231,15 +1231,15 @@ ace.define("ace/mode/adguard_highlight_rules", [], function (
     this.normalizeRules();
   };
 
-  AdguardHighlightRules.metaData = {
+  PurifyHighlightRules.metaData = {
     $schema:
       "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
     name: "Adblock",
     scopeName: "text.adblock",
   };
 
-  oop.inherits(AdguardHighlightRules, TextHighlightRules);
-  exports.AdguardHighlightRules = AdguardHighlightRules;
+  oop.inherits(PurifyHighlightRules, TextHighlightRules);
+  exports.PurifyHighlightRules = PurifyHighlightRules;
 });
 
 ace.define("ace/mode/folding/cstyle", [], function (require, exports, module) {
@@ -1393,29 +1393,29 @@ ace.define("ace/mode/folding/cstyle", [], function (require, exports, module) {
   }.call(FoldMode.prototype));
 });
 
-ace.define("ace/mode/adguard", [], function (require, exports, module) {
+ace.define("ace/mode/purify", [], function (require, exports, module) {
   "use strict";
 
   var oop = require("../lib/oop");
   var TextMode = require("./text").Mode;
-  var AdguardHighlightRules = require("./adguard_highlight_rules")
-    .AdguardHighlightRules;
+  var PurifyHighlightRules = require("./purify_highlight_rules")
+    .PurifyHighlightRules;
   var FoldMode = require("./folding/cstyle").FoldMode;
 
   var Mode = function () {
-    this.HighlightRules = AdguardHighlightRules;
+    this.HighlightRules = PurifyHighlightRules;
     this.foldingRules = new FoldMode();
   };
   oop.inherits(Mode, TextMode);
 
   (function () {
-    this.$id = "ace/mode/adguard";
+    this.$id = "ace/mode/purify";
   }.call(Mode.prototype));
 
   exports.Mode = Mode;
 });
 (function () {
-  ace.require(["ace/mode/adguard"], function (m) {
+  ace.require(["ace/mode/purify"], function (m) {
     if (typeof module == "object" && typeof exports == "object" && module) {
       module.exports = m;
     }

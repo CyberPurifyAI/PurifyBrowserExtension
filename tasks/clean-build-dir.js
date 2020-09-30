@@ -14,7 +14,7 @@ const paths = [
   path.join(BUILD_DIR, BRANCH, "firefox-standalone"),
   path.join(BUILD_DIR, BRANCH, `firefox-amo-${BRANCH}-unsigned`),
   path.join(BUILD_DIR, BRANCH, "edge"),
-  path.join(BUILD_DIR, BRANCH, "adguard-api"),
+  path.join(BUILD_DIR, BRANCH, "purify-api"),
 ];
 
 const clean = () => del(paths);

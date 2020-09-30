@@ -131,7 +131,7 @@ const createArtifact = async (done) => {
   // eslint-disable-next-line global-require
   const credentialsPath = path.resolve(
     __dirname,
-    "../private/AdguardBrowserExtension/mozilla_credentials.json"
+    "../private/PurifyBrowserExtension/mozilla_credentials.json"
   );
 
   // require called here in order to escape errors, until this module is really necessary

@@ -1,4 +1,4 @@
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   var ATTRIBUTE_START_MARK = "[";
@@ -366,4 +366,4 @@
 
   api.ContentFilterRule = ContentFilterRule;
   api.Wildcard = Wildcard;
-})(adguard, purify.rules);
+})(purify, purify.rules);

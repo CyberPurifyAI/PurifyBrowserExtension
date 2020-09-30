@@ -124,7 +124,7 @@
     const referrerUrl = getReferrerUrl(requestDetails);
 
     // truncate too long urls
-    // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1493
+    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1493
     const MAX_URL_LENGTH = 1024 * 16;
     if (requestUrl.length > MAX_URL_LENGTH) {
       requestUrl = requestUrl.slice(0, MAX_URL_LENGTH);
@@ -359,7 +359,7 @@
     if (
       requestType === purify.RequestTypes.DOCUMENT &&
       // Don't apply safebrowsing filter in case of redirect
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/995
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/995
       statusCode !== 301 &&
       statusCode !== 302
     ) {
@@ -417,7 +417,7 @@
    */
   function getCSPHeaders(requestDetails) {
     // Please note, that we do not modify response headers in Edge before Creators update:
-    // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/401
+    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/401
     // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8796739/
     if (purify.utils.browser.isEdgeBeforeCreatorsUpdate()) {
       return;
@@ -433,7 +433,7 @@
 
     /**
      * Retrieve $CSP rules specific for the request
-     * https://github.com/adguardteam/adguardbrowserextension/issues/685
+     * https://github.com/purifyteam/purifybrowserextension/issues/685
      */
     const cspRules = purify.webRequestService.getCspRules(
       tab,
@@ -525,7 +525,7 @@
    * If page uses service worker then it can do not fire main DOCUMENT request, that's why we check
    * frame data before scripts are injected
    * This listener should be added before any other listener of onCommitted event
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1459
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1459
    * @param details
    */
   const onCommittedCheckFrameUrl = (details) => {
@@ -569,9 +569,9 @@
   if (shouldUseInsertCSSAndExecuteScript) {
     /**
          * Applying CSS/JS rules from the background page.
-         * This function implements the algorithm suggested here: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1029
+         * This function implements the algorithm suggested here: https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1029
          * For faster script injection, we prepare scriptText onHeadersReceived event (we can't use onBeforeRequest
-         * event because we can't detect adguard application headers early in order to know should extension inject scripts or no),
+         * event because we can't detect purify application headers early in order to know should extension inject scripts or no),
          * save it and try to inject twice:
          * first time onResponseStarted event - this event fires early, but is not reliable
          * second time onCommitted event - this event fires on when part of document has been received, this event is reliable
@@ -761,7 +761,7 @@
          * This causes an issue when the page doesn't have its document.head or document.documentElement at the moment of
          * injection. So script waits for them. But if a quantity of frame-requests reaches FRAME_REQUESTS_LIMIT then
          * script stops waiting with the error.
-         * Description of the issue: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1004
+         * Description of the issue: https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1004
          */
         const injectedScript = `(function() {\
                     if (window.${variableName}) {\
@@ -791,7 +791,7 @@
                         if(frameRequests < FRAME_REQUESTS_LIMIT) {\
                             requestAnimationFrame(waitParent);\
                         } else {\
-                            console.log("AdGuard: document.head or document.documentElement were unavailable too long");\
+                            console.log("CyberPurify: document.head or document.documentElement were unavailable too long");\
                         }\
                     }\
                     waitParent();\
@@ -992,7 +992,7 @@
         const mainFrameUrl = purify.frames.getMainFrameUrl({ tabId });
         if (isIframeWithoutSrc(frameUrl, frameId, mainFrameUrl)) {
           purify.console.warn(
-            "Unexpected onCommitted event from this frame - frameId: {0}, frameUrl: {1}. See https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1046",
+            "Unexpected onCommitted event from this frame - frameId: {0}, frameUrl: {1}. See https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1046",
             frameId,
             frameUrl
           );
@@ -1042,7 +1042,7 @@
        * Also urls in these iframes may be "about:blank", "about:srcdoc", etc.
        * Due to this reason we prepare injections for them as for mainframe
        * and inject them only when onDOMContentLoaded fires
-       * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1046
+       * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1046
        * @param {{tabId: Number, url: String, processId: Number, frameId: Number, timeStamp: Number}} details
        */
       function tryInjectInIframesWithoutSrc(details) {

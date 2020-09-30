@@ -86,7 +86,7 @@ purify.windowsImpl = (function (purify) {
   var forEachNative = function (callback) {
     // https://developer.chrome.com/extensions/windows#method-getAll
     // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/windows/getAll
-    // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/569
+    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/569
     browser.windows.getAll({}, function (chromeWins) {
       for (var i = 0; i < chromeWins.length; i++) {
         var chromeWin = chromeWins[i];
@@ -103,7 +103,7 @@ purify.windowsImpl = (function (purify) {
   };
 
   return {
-    onCreated: onCreatedChannel, // callback (adguardWin, nativeWin)
+    onCreated: onCreatedChannel, // callback (purifyWin, nativeWin)
     onRemoved: onRemovedChannel, // callback (windowId)
     onUpdated: onUpdatedChannel, // empty
 
@@ -193,7 +193,7 @@ purify.tabsImpl = (function (purify) {
   function focusWindow(tabId, windowId, callback) {
     /**
      * Updating already focused window produces bug in Edge browser
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/675
+     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/675
      */
     getActive(function (activeTabId) {
       if (tabId !== activeTabId) {
@@ -274,7 +274,7 @@ purify.tabsImpl = (function (purify) {
         return;
       }
 
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/569
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/569
       browser.windows.getAll({}, function (wins) {
         if (wins) {
           for (var i = 0; i < wins.length; i++) {
@@ -334,7 +334,7 @@ purify.tabsImpl = (function (purify) {
          */
         /**
          * Content script may not have been loaded at this point yet.
-         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/580
+         * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/580
          */
         setTimeout(function () {
           sendMessage(tabId, { type: "update-tab-url", url: url });

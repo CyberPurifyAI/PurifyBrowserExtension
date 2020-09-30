@@ -1,21 +1,21 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   /**
@@ -553,14 +553,14 @@
     },
 
     /**
-     * Patch rule selector adding adguard mark and rule info in the content attribute
+     * Patch rule selector adding purify mark and rule info in the content attribute
      * Example:
-     * .selector { color: red } -> .selector { color: red, content: 'adguard{filterId};{ruleText} !important;}
+     * .selector { color: red } -> .selector { color: red, content: 'purify{filterId};{ruleText} !important;}
      * @param rule
      * @returns {String}
      */
     _addMarkerToInjectRule: function (rule) {
-      var INJECT_HIT_START = " content: 'adguard";
+      var INJECT_HIT_START = " content: 'purify";
       var HIT_SEP = encodeURIComponent(";");
       var HIT_END = "' !important;}\r\n";
 
@@ -590,14 +590,14 @@
     },
 
     /**
-     * Patch rule selector adding adguard mark rule info in the content attribute
+     * Patch rule selector adding purify mark rule info in the content attribute
      * Example:
-     * .selector -> .selector { content: 'adguard{filterId};{ruleText} !important;}
+     * .selector -> .selector { content: 'purify{filterId};{ruleText} !important;}
      * @param rule
      * @returns {String}
      */
     _addMarkerToElemhideRule: function (rule) {
-      var ELEMHIDE_HIT_START = " { display: none!important; content: 'adguard";
+      var ELEMHIDE_HIT_START = " { display: none!important; content: 'purify";
       var HIT_SEP = encodeURIComponent(";");
       var HIT_END = "' !important;}\r\n";
 
@@ -653,4 +653,4 @@
   };
 
   api.CssFilter = CssFilter;
-})(adguard, purify.rules);
+})(purify, purify.rules);

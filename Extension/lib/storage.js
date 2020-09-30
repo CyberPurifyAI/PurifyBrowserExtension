@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -36,7 +36,7 @@ purify.localStorageImpl =
 /**
  * This class manages local storage
  */
-purify.localStorage = (function (adguard, impl) {
+purify.localStorage = (function (purify, impl) {
   const getItem = function (key) {
     return impl.getItem(key);
   };
@@ -83,7 +83,7 @@ purify.localStorage = (function (adguard, impl) {
     init,
     isInitialized,
   };
-})(adguard, purify.localStorageImpl);
+})(purify, purify.localStorageImpl);
 
 /**
  * Rules storage interface. Implementation depends on browser
@@ -104,7 +104,7 @@ purify.rulesStorageImpl =
 /**
  * This class manages storage for filters.
  */
-purify.rulesStorage = (function (adguard, impl) {
+purify.rulesStorage = (function (purify, impl) {
   function getFilePath(filterId) {
     return `filterrules_${filterId}.txt`;
   }
@@ -185,4 +185,4 @@ purify.rulesStorage = (function (adguard, impl) {
     remove,
     init,
   };
-})(adguard, purify.rulesStorageImpl);
+})(purify, purify.rulesStorageImpl);

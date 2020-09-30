@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /* global IDBDatabase, indexedDB */
@@ -24,16 +24,16 @@
  * browser.storage.local has high memory and disk utilization.
  *
  * https://bugzilla.mozilla.org/show_bug.cgi?id=1371255
- * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/892
+ * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/892
  */
-purify.ulesStorageImpl = (function (adguard, initialAPI) {
-  var STORAGE_NAME = "AdguardRulesStorage";
+purify.ulesStorageImpl = (function (purify, initialAPI) {
+  var STORAGE_NAME = "PurifyRulesStorage";
 
   var database;
 
   function onError(error) {
     purify.onsole.error(
-      "Adguard rulesStorage error: {0}",
+      "Purify rulesStorage error: {0}",
       error.error || error
     );
   }
@@ -164,4 +164,4 @@ purify.ulesStorageImpl = (function (adguard, initialAPI) {
   };
 
   return api;
-})(adguard, purify.ulesStorageImpl || {});
+})(purify, purify.ulesStorageImpl || {});

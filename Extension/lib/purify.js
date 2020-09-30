@@ -1,7 +1,7 @@
 /**
- * Global adguard object
+ * Global purify object
  */
-var adguard = (function () {
+var purify = (function () {
   // eslint-disable-line
   /**
    * This function allows cache property in object. Use with javascript getter.
@@ -69,7 +69,7 @@ var adguard = (function () {
 
     /**
      * Define dummy modules.
-     * In case of simple adguard API, some modules aren't supported
+     * In case of simple purify API, some modules aren't supported
      */
     hitStats: hitStatsModule,
     filteringLog: filteringLogModule,

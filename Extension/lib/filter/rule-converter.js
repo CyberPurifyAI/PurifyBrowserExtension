@@ -1,33 +1,33 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard, api) {
+(function (purify, api) {
   const stringUtils = purify.utils.strings;
   /**
-   * AdGuard scriptlet mask
+   * CyberPurify scriptlet mask
    */
   // eslint-disable-next-line no-template-curly-in-string
-  const ADGUARD_SCRIPTLET_MASK = "${domains}#%#//scriptlet(${args})";
+  const PURIFY_SCRIPTLET_MASK = "${domains}#%#//scriptlet(${args})";
 
   /**
-   * AdGuard scriptlet exception mask
+   * CyberPurify scriptlet exception mask
    */
   // eslint-disable-next-line no-template-curly-in-string
-  const ADGUARD_SCRIPTLET_EXCEPTION_MASK = "${domains}#@%#//scriptlet(${args})";
+  const PURIFY_SCRIPTLET_EXCEPTION_MASK = "${domains}#@%#//scriptlet(${args})";
 
   /**
    * uBlock scriptlet rule mask
@@ -39,9 +39,9 @@
   const UBO_SCRIPTLET_EXCEPTION_MASK_2 = "#@#script:inject";
   const UBO_SCRIPT_TAG_MASK = "##^script";
   /**
-   * AdGuard max-length tag for uBlock scripts conversion
+   * CyberPurify max-length tag for uBlock scripts conversion
    */
-  const ADGUARD_SCRIPT_MAX_LENGTH = '[max-length="262144"]';
+  const PURIFY_SCRIPT_MAX_LENGTH = '[max-length="262144"]';
   /**
    * AdBlock Plus snippet rule mask
    */
@@ -49,7 +49,7 @@
   const ABP_SCRIPTLET_EXCEPTION_MASK = "#@$#";
 
   /**
-   * AdGuard CSS rule mask
+   * CyberPurify CSS rule mask
    */
   const ADG_CSS_MASK_REG = /#@?\$#.+?\s*\{.*\}\s*$/g;
 
@@ -101,7 +101,7 @@
   }
 
   /**
-   * Convert string of UBO scriptlet rule to AdGuard scritlet rule
+   * Convert string of UBO scriptlet rule to CyberPurify scritlet rule
    * @param {string} rule UBO scriptlet rule
    */
   function convertUboScriptletRule(rule) {
@@ -109,9 +109,9 @@
     const mask = rule.match(UBO_SCRIPTLET_MASK_REG)[0];
     let template;
     if (mask.indexOf("@") > -1) {
-      template = ADGUARD_SCRIPTLET_EXCEPTION_MASK;
+      template = PURIFY_SCRIPTLET_EXCEPTION_MASK;
     } else {
-      template = ADGUARD_SCRIPTLET_MASK;
+      template = PURIFY_SCRIPTLET_MASK;
     }
     const args = getStringInBraces(rule)
       .split(/, /g)
@@ -123,7 +123,7 @@
   }
 
   /**
-   * Convert string of ABP scriptlet rule to AdGuard scritlet rule
+   * Convert string of ABP scriptlet rule to CyberPurify scritlet rule
    * @param {string} rule UBO scriptlet rule
    */
   function convertAbpSnippetRule(rule) {
@@ -134,8 +134,8 @@
         : ABP_SCRIPTLET_EXCEPTION_MASK;
     const template =
       mask === ABP_SCRIPTLET_MASK
-        ? ADGUARD_SCRIPTLET_MASK
-        : ADGUARD_SCRIPTLET_EXCEPTION_MASK;
+        ? PURIFY_SCRIPTLET_MASK
+        : PURIFY_SCRIPTLET_EXCEPTION_MASK;
     const domains = stringUtils.substringBefore(rule, mask);
     const args = stringUtils.substringAfter(rule, mask);
     return args
@@ -206,7 +206,7 @@
         rules.push(`${domains}${uboScriptTag}${uboHasTextRule}(${attr})`);
       } else {
         rules.push(
-          `${domains}${adgScriptTag}[tag-content="${attr}"]${ADGUARD_SCRIPT_MAX_LENGTH}`
+          `${domains}${adgScriptTag}[tag-content="${attr}"]${PURIFY_SCRIPT_MAX_LENGTH}`
         );
       }
     }
@@ -343,7 +343,7 @@
       let convertedOptionsPart = conversionMap[optionsPart];
 
       // if option is $mp4, than it should go with $media option together
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1452
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1452
       if (optionsPart === MP4_OPTION) {
         // check if media is not already among options
         if (!optionsParts.some((option) => option === MEDIA_OPTION)) {
@@ -390,7 +390,7 @@
       // ||example.org^
       // ||example.org^$inline-font
       // ||example.org^$inline-script
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1506
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1506
       const allOptionReplacers = [
         [DOCUMENT_OPTION, POPUP_OPTION],
         [INLINE_SCRIPT_OPTION],
@@ -440,7 +440,7 @@
     stringUtils.startWith(rule, api.FilterRule.COMMENT);
 
   /**
-   * Convert external scriptlet rule to AdGuard scriptlet syntax
+   * Convert external scriptlet rule to CyberPurify scriptlet syntax
    * @param {string} rule convert rule
    */
   function convertRule(rule) {
@@ -480,4 +480,4 @@
   }
 
   api.ruleConverter = { convertRule };
-})(adguard, purify.rules);
+})(purify, purify.rules);

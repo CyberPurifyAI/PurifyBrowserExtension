@@ -1,4 +1,4 @@
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   /**
@@ -230,4 +230,4 @@
   };
 
   api.ContentFilter = ContentFilter;
-})(adguard, purify.rules);
+})(purify, purify.rules);

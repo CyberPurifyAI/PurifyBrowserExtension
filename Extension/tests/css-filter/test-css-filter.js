@@ -798,21 +798,21 @@ QUnit.test("Extended Css Build CssHits", (assert) => {
   assert.equal(commonCss.length, 1);
   assert.equal(
     commonCss[0].trim(),
-    ".banner { display: none!important; content: 'adguard2%3B%23%23.banner' !important;}"
+    ".banner { display: none!important; content: 'purify2%3B%23%23.banner' !important;}"
   );
   assert.equal(css.length, 2);
   assert.equal(
     css[0].trim(),
-    ".banner { display: none!important; content: 'adguard2%3B%23%23.banner' !important;}"
+    ".banner { display: none!important; content: 'purify2%3B%23%23.banner' !important;}"
   );
   assert.equal(
     css[1].trim(),
-    ".sponsored { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored' !important;}"
+    ".sponsored { display: none!important; content: 'purify1%3Bpurify.com%23%23.sponsored' !important;}"
   );
   assert.equal(extendedCss.length, 1);
   assert.equal(
     extendedCss[0].trim(),
-    ".sponsored[-ext-contains=test] { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
+    ".sponsored[-ext-contains=test] { display: none!important; content: 'purify1%3Bpurify.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
   );
 
   selectors = filter.buildCssHits("purify.com", genericHide);
@@ -822,17 +822,17 @@ QUnit.test("Extended Css Build CssHits", (assert) => {
   assert.equal(commonCss.length, 1);
   assert.equal(
     commonCss[0].trim(),
-    ".banner { display: none!important; content: 'adguard2%3B%23%23.banner' !important;}"
+    ".banner { display: none!important; content: 'purify2%3B%23%23.banner' !important;}"
   );
   assert.equal(css.length, 1);
   assert.equal(
     css[0].trim(),
-    ".sponsored { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored' !important;}"
+    ".sponsored { display: none!important; content: 'purify1%3Bpurify.com%23%23.sponsored' !important;}"
   );
   assert.equal(extendedCss.length, 1);
   assert.equal(
     extendedCss[0].trim(),
-    ".sponsored[-ext-contains=test] { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
+    ".sponsored[-ext-contains=test] { display: none!important; content: 'purify1%3Bpurify.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
   );
 });
 
@@ -1009,7 +1009,7 @@ QUnit.test("Test inject rules containing url in the css content", (assert) => {
   }, `Css injection rule with 'url' was omitted: ${ruleText}`);
 });
 
-// https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1444
+// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1444
 QUnit.test("Inject rules with backslash should be omitted", (assert) => {
   let ruleText =
     "example.com#$#body { background: \\75 rl(http://example.org/empty.gif) }";

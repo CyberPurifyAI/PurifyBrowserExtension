@@ -14,7 +14,7 @@ import {
   METADATA_DOWNLOAD_URL_FORMAT,
   FILTERS_DEST,
   METADATA_I18N_DOWNLOAD_URL_FORMAT,
-  LAST_ADGUARD_FILTER_ID,
+  LAST_PURIFY_FILTER_ID,
   FILTER_DOWNLOAD_URL_FORMAT,
   OPTIMIZED_FILTER_DOWNLOAD_URL_FORMAT,
 } from "./consts";
@@ -43,7 +43,7 @@ const filtersList = (browser) => {
     file: "filters_i18n.json",
   });
 
-  for (let i = 1; i <= LAST_ADGUARD_FILTER_ID; i++) {
+  for (let i = 1; i <= LAST_PURIFY_FILTER_ID; i++) {
     filters.push({
       url: FILTER_DOWNLOAD_URL_FORMAT.replace("%browser", browser).replace(
         "%filter",

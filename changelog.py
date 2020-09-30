@@ -11,7 +11,7 @@ import argparse
 import codecs
 import re
 
-BASE_URL = 'https://api.github.com/repos/AdguardTeam/'
+BASE_URL = 'https://api.github.com/repos/CyberPurify/'
 BRANCH_REGEX = r'(fix|bug|feature)(\/issues)?\/([0-9]+)[_-]?(.*)'
 
 ISSUE_TYPES = {

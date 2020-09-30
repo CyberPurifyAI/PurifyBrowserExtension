@@ -1,24 +1,24 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
  * Application settings provider.
  */
-(function (api, adguard) {
+(function (api, purify) {
   const FILTERS_SECTION = "filters.json";
   const GENERAL_SECTION = "general-settings.json";
   const EXTENSION_SPECIFIC_SECTION = "extension-specific-settings.json";
@@ -132,7 +132,7 @@
         "use-optimized-filters": purify.settings.isUseOptimizedFiltersEnabled(),
         "collect-hits-count": purify.settings.collectHitsCount(),
         "show-context-menu": purify.settings.showContextMenu(),
-        "show-info-about-adguard": purify.settings.isShowInfoAboutAdguardFullVersion(),
+        "show-info-about-purify": purify.settings.isShowInfoAboutPurifyFullVersion(),
         "show-app-updated-info": purify.settings.isShowAppUpdatedNotification(),
       },
     };
@@ -181,8 +181,8 @@
     );
     purify.settings.changeCollectHitsCount(!!set["collect-hits-count"]);
     purify.settings.changeShowContextMenu(!!set["show-context-menu"]);
-    purify.settings.changeShowInfoAboutAdguardFullVersion(
-      !!set["show-info-about-adguard"]
+    purify.settings.changeShowInfoAboutPurifyFullVersion(
+      !!set["show-info-about-purify"]
     );
     purify.settings.changeShowAppUpdatedNotification(
       !!set["show-app-updated-info"]
@@ -527,4 +527,4 @@
      */
     applySettingsBackup: applySettingsBackupJson,
   };
-})(purify.sync, adguard);
+})(purify.sync, purify);

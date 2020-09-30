@@ -1,25 +1,20 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Cyber Purify Browser Extension (https://cyberpurify.com).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Cyber Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Cyber Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
- * Adguard simple api
+ * Purify simple api
  * @type {{start, stop, configure}}
  */
-(function (adguard, global) {
+(function (purify, global) {
   "use strict";
 
   function noOpFunc() {}
@@ -227,20 +222,20 @@
   };
 
   purify.backend.configure({
-    localFiltersFolder: "adguard",
-    redirectSourcesFolder: "adguard",
+    localFiltersFolder: "purify",
+    redirectSourcesFolder: "purify",
     localFilterIds: [],
   });
 
-  global.adguardApi = {
+  global.purifyApi = {
     start: start,
     stop: stop,
     configure: configure,
     /**
      *  Fired when a request is blocked
      *  var onBlocked = function (details) {console.log(details);};
-     *  adguardApi.onRequestBlocked.addListener(onBlocked);
-     *  adguardApi.onRequestBlocked.removeListener(onBlocked);
+     *  purifyApi.onRequestBlocked.addListener(onBlocked);
+     *  purifyApi.onRequestBlocked.removeListener(onBlocked);
      *  details = {
      *      tabId: ...,
      *      requestUrl: "...",
@@ -252,4 +247,4 @@
      */
     onRequestBlocked: purify.webRequestService.onRequestBlocked,
   };
-})(adguard, window);
+})(purify, window);

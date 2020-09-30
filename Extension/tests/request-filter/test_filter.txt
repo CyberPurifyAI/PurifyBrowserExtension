@@ -1,14 +1,14 @@
 ! Title: English filter
 ! Version: 1.0.95.7
 ! Name: English filter
-! Description: EasyList + Adguard English filter. Filter list that specifically removes adverts on English language websites.
-! DescriptionEn: EasyList + Adguard English filter. Filter list that specifically removes adverts on English language websites.
+! Description: EasyList + CyberPurify English filter. Filter list that specifically removes adverts on English language websites.
+! DescriptionEn: EasyList + CyberPurify English filter. Filter list that specifically removes adverts on English language websites.
 ! TimeUpdated: 2016-09-22T11:00:26.567+03:00
-! Title: Adguard English Filter.
+! Title: CyberPurify English Filter.
 !
 ! Filter that enables removing of the ads from websites with English content.
 ! Originally based on the EasyList filter (https://easylist.adblockplus.org/).
-! Modified by Adguard team according to the complaints from users.
+! Modified by CyberPurify team according to the complaints from users.
 !
 ! Homepage: http://purify.com/filters.html#english
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
@@ -460,7 +460,7 @@ blockadblock.*###babasbmsgx
 pornve.com#%#window.encode64 = {};
 ! https://forum.purify.om/index.php?threads/13392/
 @@||pagead2.googlesyndication.com/pagead/osd.js$domain=lcpdfr.com
-! https://github.com/AdguardTeam/AdguardForWindows/issues/1291
+! https://github.com/CyberPurify/PurifyForWindows/issues/1291
 @@||cypt.ga^$generichide
 ! https://forum.purify.om/index.php?threads/13810/
 ||connect.cointent.com^$domain=allaboutjazz.com
@@ -478,7 +478,7 @@ pornve.com#%#window.encode64 = {};
 openload.co#%#Object.defineProperty(window, 'adblock2', { get: function() { return {}; } });
 ! https://forum.purify.om/index.php?threads/13710/
 @@||torrentmafia.net^$generichide
-! https://github.com/AdguardTeam/AdguardFilters/issues/2970
+! https://github.com/CyberPurify/PurifyFilters/issues/2970
 @@||viafree.dk$generichide
 @@||viafree.dk/*ads*/*ad*/
 ! https://forum.purify.om/index.php?threads/13659/
@@ -490,7 +490,7 @@ eurogamer.pl#%#Object.defineProperty(window, 'yafaIt', { get: function() { retur
 wrzko.ws##.kill-adblock-container
 ! html.net - anti-adblock ads
 @@||ad.doubleclick.net/ddm/ad/*$domain=html.net
-! https://github.com/AdguardTeam/AdguardFilters/issues/2944
+! https://github.com/CyberPurify/PurifyFilters/issues/2944
 peru21.pe#@#.adstop
 ! https://forum.purify.om/index.php?threads/13532/
 @@||tugaflix.com^$generichide
@@ -508,28 +508,28 @@ uploaded.net##[class*="pico"]
 @@||games-pc.ro/*adv*.js
 ! https://forum.purify.om/index.php?threads/13328/
 ||businesstoday.in/ad-blocker.html
-! https://github.com/AdguardTeam/AdguardFilters/issues/2930
+! https://github.com/CyberPurify/PurifyFilters/issues/2930
 @@||js.jansatta.com/ads_js.js
 ! https://forum.purify.om/index.php?threads/13234/
 @@||crackhex.com/ad.js
 ! https://forum.purify.om/index.php?threads/13277/
 seslimakale.com#@#.post-ad
-! https://github.com/AdguardTeam/AdguardFilters/issues/2926
+! https://github.com/CyberPurify/PurifyFilters/issues/2926
 @@||thenextweb.com$generichide
 ! https://forum.purify.om/index.php?threads/lcpdfr-com.13294/
 lcpdfr.com#@##HouseAd
-! https://github.com/AdguardTeam/AdguardFilters/issues/2912
+! https://github.com/CyberPurify/PurifyFilters/issues/2912
 @@||serve.popads.net/checkInventory.php|$domain=jav4.me
 ! https://forum.purify.om/index.php?threads/13263/
 @@||agarabi.com^$generichide
-! https://github.com/AdguardTeam/AdguardFilters/issues/2901
+! https://github.com/CyberPurify/PurifyFilters/issues/2901
 apkandroidfree.info###fab-over
 apkandroidfree.info###fab
-! https://github.com/AdguardTeam/AdguardBrowserExtension/issues/335
+! https://github.com/CyberPurify/PurifyBrowserExtension/issues/335
 @@||thoaimedia.com^$generichide
-! https://github.com/AdguardTeam/AdguardFilters/issues/2901
+! https://github.com/CyberPurify/PurifyFilters/issues/2901
 @@||xda-android-marshmallow.blogspot.com^$generichide
-! https://github.com/AdguardTeam/AdguardFilters/issues/2884
+! https://github.com/CyberPurify/PurifyFilters/issues/2884
 @@||crunchyroll.com^$generichide
 ! https://forum.purify.om/index.php?threads/13125/
 @@||adm.fwmrm.net/p/aetn_live/AdManager.swf$domain=fyi.tv
@@ -553,18 +553,18 @@ freewaresys.*###exposeMask
 @@||seomafia.net^$generichide
 ! https://forum.purify.om/index.php?threads/12850/
 @@||sadeemapk.com^$generichide
-! https://github.com/AdguardTeam/AdguardFilters/issues/2828
+! https://github.com/CyberPurify/PurifyFilters/issues/2828
 @@||xbox-store-checker.com/assets/js/*ads*.js
 ! https://forum.purify.om/index.php?threads/12744/
 @@||cmacapps.com^$generichide
 ! https://forum.purify.om/index.php?threads/12663/
 ||connect.cointent.com^$domain=pwinsider.com
-! https://github.com/AdguardTeam/AdguardFilters/issues/2792
+! https://github.com/CyberPurify/PurifyFilters/issues/2792
 investing.com#$##abPopup { display: none!important; }
 investing.com#$#body { overflow: visible!important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/2819
+! https://github.com/CyberPurify/PurifyFilters/issues/2819
 imageraider.com#@#.adsbygoogle
-! https://github.com/AdguardTeam/AdguardFilters/issues/2816
+! https://github.com/CyberPurify/PurifyFilters/issues/2816
 @@||cloudfront.net/mb*.gz.js$domain=hotslogs.com
 ! https://forum.purify.om/index.php?threads/12756/
 v3.co.uk#%#Object.defineProperty(window, '_r3z', { get: function() { return; } });
@@ -584,9 +584,9 @@ verliga.net###adb-enabled
 @@||163.172.29.124/pop.js
 ! https://forum.purify.om/index.php?threads/12300/
 intoday.in##.adblocker-page
-! https://github.com/AdguardTeam/AdguardFilters/issues/2743
+! https://github.com/CyberPurify/PurifyFilters/issues/2743
 @@||mid-day.com/Resources/middaymobile/js/ads.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2739
+! https://github.com/CyberPurify/PurifyFilters/issues/2739
 @@||economictimes.com/*ads*/*.cms
 ! https://forum.purify.om/index.php?threads/12321/
 @@||drop.ndtv.com/ndtv/images/*_zedo_
@@ -594,7 +594,7 @@ intoday.in##.adblocker-page
 ndtv.com#%#Object.defineProperty(window, 'getNoTopLatestNews', { get: function() { return {}; } });
 ! https://forum.purify.om/index.php?threads/12331/
 @@||financialexpress.com/wp-content/themes/vip/financialexpress/js/ads_js.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2568
+! https://github.com/CyberPurify/PurifyFilters/issues/2568
 timesofindia.indiatimes.com#%#AG_onLoad(function() { for (var key in window) { if (key.indexOf('_0x') == 0) { window[key] = []; } }; });
 ! https://forum.purify.om/index.php?threads/11823/
 @@||rapidgrab.pl^$generichide
@@ -603,16 +603,16 @@ timesofindia.indiatimes.com#%#AG_onLoad(function() { for (var key in window) { i
 debridnet.com#$#.myTestAd2 { height: 130px!important; position: absolute!important; left: -2000px!important;}
 ! https://forum.purify.om/index.php?threads/12183/
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=jarochos.net
-! https://github.com/AdguardTeam/AdguardFilters/issues/2662
+! https://github.com/CyberPurify/PurifyFilters/issues/2662
 @@||arsopo.com^$generichide
 ! https://forum.purify.om/index.php?threads/11799/
 premium-place.*##div[class*="ui-widget"]
-! https://github.com/AdguardTeam/AdguardFilters/issues/2414
+! https://github.com/CyberPurify/PurifyFilters/issues/2414
 @@||static.adf.ly/static/image/$domain=adf.ly
 @@||adf.ly/1market.php$domain=adf.ly
 adf.ly#@##bottom
 adf.ly#@#iframe
-! https://github.com/AdguardTeam/AdguardFilters/issues/2638
+! https://github.com/CyberPurify/PurifyFilters/issues/2638
 @@||hindustantimes.com/res/js/*ads*
 ! https://forum.purify.om/index.php?threads/11780/
 macbed.com#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
@@ -630,11 +630,11 @@ pokemonizle.net#@##adsense
 indiatimes.com#%#window.canRun = true;
 @@*ad*.cms$domain=indiatimes.com
 @@||indiatimes.com/wp-content/themes/*/js/*ads*.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2506
+! https://github.com/CyberPurify/PurifyFilters/issues/2506
 @@||timesofindia.com^$generichide
 @@||timesofindia.com/adsblocker.cms
 businesstoday.in###adbocker_alt
-! https://github.com/AdguardTeam/AdguardFilters/issues/2596
+! https://github.com/CyberPurify/PurifyFilters/issues/2596
 @@||adsur.it/y/service/ads/ads.js
 ! https://forum.purify.om/index.php?threads/10802/
 mma-core.com#%#var _st = window.setTimeout; window.setTimeout = function(a, b) { if(!/displayAdBlockedVideo/.test(a)){ _st(a,b);}};
@@ -646,15 +646,15 @@ mma-core.com#%#var _st = window.setTimeout; window.setTimeout = function(a, b) {
 @@||js.adscale.de/getads.js:adscale_slot_id/$domain=dasolo.org
 ! http://forum.purify.om/showthread.php?9817
 @@||crackhex.com/*.js.pagespeed.*.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2557
+! https://github.com/CyberPurify/PurifyFilters/issues/2557
 @@||wplocker.com/advertisement.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2508
-! https://github.com/AdguardTeam/AdguardFilters/issues/2534
+! https://github.com/CyberPurify/PurifyFilters/issues/2508
+! https://github.com/CyberPurify/PurifyFilters/issues/2534
 intoday.in#@#.ad_banner
 intoday.in#@#.right-ad
-! https://github.com/AdguardTeam/AdguardFilters/issues/2532
+! https://github.com/CyberPurify/PurifyFilters/issues/2532
 bournemouthecho.co.uk##.ad-blocker-warning
-! https://github.com/AdguardTeam/AdguardFilters/issues/2526
+! https://github.com/CyberPurify/PurifyFilters/issues/2526
 ! adblade and mkolite scripts
 ipatriot.com#%#Object.defineProperty(window, 'mk', { get: function() { return {}; } });
 ipatriot.com#%#window.blockAdBlock = function() {};
@@ -682,10 +682,10 @@ avaxhome.co#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
 ! https://forum.purify.om/index.php?threads/11281/
 audioboom.*##divDIV[class="pam white tc"]
 @@||directapk.net/themes/flow/frontend_assets/js/advertisement.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2347
+! https://github.com/CyberPurify/PurifyFilters/issues/2347
 @@||ads.servebom.com/tmnhead.js$domain=livescience.com
 livescience.com#%#Object.defineProperty(window, 'tmntag_raascallback', { get: function() { return; } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2374
+! https://github.com/CyberPurify/PurifyFilters/issues/2374
 onlinemoviewatchs.site#@#.afs_ads
 ! https://forum.purify.om/index.php?threads/10793/
 pizap.com#%#AG_onLoad(function() { window.showAdBlock = function() {}; });
@@ -708,25 +708,25 @@ ifate.com#@##banner_ad
 stadt-bremerhaven.de##.deadblocker-header-bar
 ! https://forum.purify.om/index.php?threads/mackie100projects-altervista-org-adblock-detected.10971/
 ||mackie100projects.altervista.org/wp-content/uploads/*.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2284
+! https://github.com/CyberPurify/PurifyFilters/issues/2284
 mocospace.com#@#.dfp_ad
 ! https://forum.purify.om/index.php?threads/10725/
 filechoco.com#@#.adsbox
 ! https://forum.purify.om/index.php?threads/10701/
 @@||wallpapershome.com/scripts/ads.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/955
+! https://github.com/CyberPurify/PurifyFilters/issues/955
 @@||thevideo.me/js/jspc.js?ab
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2204
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2204
 pcgames-download.net###niceMessage
 ! https://forum.purify.om/index.php?threads/10585/
 vipbox.nu#%#document.cookie = "xclsvip = 1";
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2019
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2019
 @@||videowood.tv$generichide
 ! https://forum.purify.om/index.php?threads/10369/
 @@||wholecloud.net/banner.php
 ! https://forum.purify.om/index.php?threads/10386/
 @@||maxcheaters.com^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2123
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2123
 @@||fxnews2016.info/embed/$generichide
 ! https://forum.purify.om/index.php?threads/10186/
 @@||zonasports.be^$generichide
@@ -736,7 +736,7 @@ techworld.com#%#Object.defineProperty(window, '_r3z', { get: function() { return
 @@/showads.js$domain=iptvsale.info
 ! https://forum.purify.om/index.php?threads/10151/
 @@||sitenow.me^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2107
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2107
 world4ufree.pw#@#.afs_ads
 ! https://forum.purify.om/index.php?threads/10112/
 ||techno360.in/wp-content/plugins/kill-adblock/
@@ -751,7 +751,7 @@ world4ufree.pw#@#.afs_ads
 ! https://forum.purify.om/index.php?threads/10067/
 @@||castfree.me^$generichide
 castfree.me#%#(function() { window.open_ = window.open; var w_open = window.open, regex = /dayt.pw/; window.open = function(a, b) { if (typeof a !== 'string' || !regex.test(a)) { w_open(a, b); } }; })();
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2039
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2039
 @@||b.scorecardresearch.com/beacon.js$domain=cravetv.ca
 @@||b.scorecardresearch.com/b$domain=cravetv.ca
 @@||platform.twitter.com/oct.js$domain=cravetv.ca
@@ -774,7 +774,7 @@ lawebdeldj.com#@#.afs_ads
 @@||starshd.xyz^$generichide
 ! http://forum.purify.om/showthread.php?10797
 keybr.*##div[class^="Supporter"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1993
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1993
 computerbase.de#@#.adsbox
 ! http://forum.purify.om/showthread.php?10599
 cloudtime.to#%#var v728x90=1;
@@ -806,12 +806,12 @@ cast4u.tv###notice
 @@||byetv.org^$generichide
 ! miuipro.ru - prevent download firmware
 @@||miuipro.ru/advert.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1909
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1909
 androconsejos.com#%#var AG_AntiAntiBlock = function() { var baseCreateElement = document.createElement; document.createElement = function(name) { if (name && name.match(/div|font|center/i)) { return null; } else { return baseCreateElement(name); } } };
 androconsejos.com#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1872
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1872
 @@||pcgamesn.com^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1877
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1877
 @@||wpmienphi.com^$generichide
 ! http://forum.purify.om/showthread.php?10001
 @@||tvstadium.net^$generichide
@@ -819,9 +819,9 @@ androconsejos.com#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
 sports4u.tv###notice
 ! http://forum.purify.om/showthread.php?9998
 @@||liveonlinetv247.info/embed/$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1805
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1805
 @@||embedupload.com^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1807
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1807
 theguardian.*##.js-adblock-sticky
 ! http://forum.purify.om/showthread.php?9782
 @@||byetv.org^$generichide
@@ -832,36 +832,36 @@ hdcast.org###notice
 @@||cdn.vipboxsa.co/js/cnads.js
 ! http://forum.purify.om/showthread.php?9750
 @@||millonbitcoin.com^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1784
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1784
 @@||nonags.com/ad/adframe.js
 ! http://forum.purify.om/showthread.php?9645
 @@||resources.sbs.com.au/vod/sbs/js/advertisement.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1753
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1753
 @@||savefile.co^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1738
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1738
 ||macos-app.com/wp-content/uploads/an-temp/
 ! http://forum.purify.om/showthread.php?9550
 thescene.com#%#Object.defineProperty(window, 'sniffAdBlock', { get: function() { return function() { }; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1702
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1702
 kissanime.to#%#AG_onLoad(function() { for (var key in window) { if (key.indexOf('DoDetect') == 0) { window[key] = function() { }; } }; });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1580
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1580
 birminghammail.co.uk#%#window.checkState = function() {};
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1697
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1697
 @@||kingofshrink.com^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1699
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1699
 debridfast.com#$#.myTestAd { height: 1px!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1640
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1640
 leechpremium.link#%#window.blockAdBlock = function() {};
 ! http://forum.purify.om/showthread.php?9268
 @@||genbird.com^$generichide
 ! http://forum.purify.om/showthread.php?9288
 @@||cdn.cpmstar.com/cached/js/advertisement.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1597
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1597
 cityam.com#%#Object.defineProperty(window, 'isAdBlockOn', { get: function() { return function() { }; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1589
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1589
 @@||appdn.net/wp-content/plugins/chilly-pot/assets/js/advertisement.min.js
 @@||appdn.net^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1852
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1852
 forbes.com#%#function setCookie(c_name,value,exdays) { var exdate=new Date(); exdate.setDate(exdate.getDate() + exdays); var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()); document.cookie = c_name+"="+c_value+"; path=/"; };
 forbes.com#%#AG_onLoad(function() { if (window.location.pathname.indexOf('/welcome') > -1) { setCookie('welcomeAd', 'true', 86400000); setCookie('dailyWelcomeCookie', 'true', 86400000); window.location = Cookies.get('toURL') || 'http://www.forbes.com/'; } });
 ! http://forum.purify.om/showthread.php?9202
@@ -879,25 +879,25 @@ wired.com#%#Object.defineProperty(window, 'blockAdBlock', { get: function() { re
 ||spylinks.org/adblock-detector.htm
 spylinks.org#$#.cap { margin-top: 0px!important; }
 @@||spylinks.org^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1541
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1541
 @@||filespace.com^$generichide
 ! http://forum.purify.om/showthread.php?9151
 ||skidrowcrack.com/adblockchecker.js
 ! http://forum.purify.om/showthread.php?9147
 @@||wallpapermania.eu/assets/js/ads.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1532
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1532
 @@||moviefull-hd.com^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1509
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1509
 pch.*###sfad-wrapper
 pch.*###sfad-greyback
 ! http://forum.purify.om/showthread.php?9049
 premium-place.com#@#.afs_ads
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1356
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1356
 @@||biggestplayer.cachefly.net/ad300.html
 @@||biggestplayer.cachefly.net/cricad.html
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1457
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1457
 world4ufree.cc#@#.afs_ads
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1416
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1416
 ||thinkcomputers.org/wp-content/uploads/an-temp/
 ! http://forum.purify.om/showthread.php?8957
 @@||static.filehorse.com/js/ads.js
@@ -906,28 +906,28 @@ idevice.ro#%#var AG_AntiAntiBlock = function() { var baseCreateElement = documen
 idevice.ro#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
 ! http://forum.purify.om/showthread.php?8880
 techno360.in#@#.afs_ads
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1361
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1361
 tweaktown.com#%#window.blockAdBlock = function() {};
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1373
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1373
 liberallogic101.com#@##sidebar_ad_1
 liberallogic101.com#@##text-37
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1310
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1310
 @@||64.150.180.102/banmanpro/a.aspx$domain=educationcanada.com
 @@||educationcanada.com/js/advertisement.js
 @@||educationcanada.com/js/blockadblock.js
 @@||educationcanada.com^$generichide
 @@||pagead2.googlesyndication.com/pagead/show_ads.js$domain=educationcanada.com
 educationcanada.com#%#AG_onLoad(function() { window.TestPage  = function() {}; });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1217
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1217
 cultofmac.*##.adblock-notification-wrapper
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1262
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1262
 fullstuff.net#%#var AG_AntiAntiBlock = function() { var baseCreateElement = document.createElement; document.createElement = function(name) { if (name && name.match(/div|font|center/i)) { return null; } else { return baseCreateElement(name); } } };
 fullstuff.net#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
 ! http://forum.purify.om/showthread.php?8563
 @@||cambabe.me^$elemhide
 ! meizufans.eu - BlockAdBlock script
 meizufans.eu#@##banner_ad
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1207
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1207
 @@||partner.googleadservices.com/gpt/pubads_impl_$domain=cwtv.com
 ! http://forum.purify.om/showthread.php?8295
 @@||uploadshub.com^$elemhide
@@ -936,18 +936,18 @@ meizufans.eu#@##banner_ad
 ! http://forum.purify.om/showthread.php?7533
 @@||pagead2.googlesyndication.com/pagead/show_ads.js$domain=cleodesktop.com
 @@||pagead2.googlesyndication.com/pagead/js/*/show_ads_impl.js$domain=cleodesktop.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/978
+! https://github.com/CyberPurify/ExperimentalFilter/issues/978
 @@||b.ifmnwi.club/adblockr.javascript$domain=cbs.com
 @@||b.ifmnwi.club/ads.bmp$domain=cbs.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1129
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1129
 @@||dozenofelites.com^$elemhide
 ! http://forum.purify.om/showthread.php?8092
 @@||uploadex.com^$elemhide
 ! http://forum.purify.om/showthread.php?8089
 @@||uploadocean.com^$elemhide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1079
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1079
 ||debridfast.com/blocker.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1078
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1078
 unixmen.com#@#.afs_ads
 ! http://forum.purify.om/showthread.php?7868
 @@/b/advertisement.js$domain=majorgeeks.com
@@ -959,7 +959,7 @@ unixmen.com#@#.afs_ads
 @@||b.ifmnwi.club/adblockr.javascript$domain=cbsnews.com
 ! http://forum.purify.om/showthread.php?7639
 @@||kissanime.to/ads/madads.aspx
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/918
+! https://github.com/CyberPurify/ExperimentalFilter/issues/918
 marketwatch.com#@#div[id="ad_DisplayAd"]
 marketwatch.com#@#.advertisement
 !
@@ -968,7 +968,7 @@ marketwatch.com#@#.advertisement
 apkdot.*##.downloadCountdown
 ! http://forum.purify.om/showthread.php?7533
 cleodesktop.com#$#div[id="myTestAd"] { height: 1px!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/880
+! https://github.com/CyberPurify/ExperimentalFilter/issues/880
 @@/scripts/adv.js$domain=securenetsystems.net
 ! http://forum.purify.om/showthread.php?7387
 ||avxwcuaagfcdn.net^$third-party
@@ -978,7 +978,7 @@ nadgames.com#@#.afs_ads
 ||salefiles.com/jss/blockadblock.js
 ! http://forum.purify.om/showthread.php?7200
 @@||biggestplayer.me^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/821
+! https://github.com/CyberPurify/ExperimentalFilter/issues/821
 mangamap.com#@#.afs_ads
 ! http://forum.purify.om/showthread.php?7108
 envatostuff.rocks##.adblock_detector
@@ -986,7 +986,7 @@ envatostuff.rocks##.adblock_detector
 zippymoviez.cc###h97e
 ! http://forum.purify.om/showthread.php?6948
 pornhub.*###abAlert
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/774
+! https://github.com/CyberPurify/ExperimentalFilter/issues/774
 dayt.se#$##synpit { height:1px!important; }
 ! http://forum.purify.om/showthread.php?6916
 @@||shush.se/_ads.js
@@ -995,9 +995,9 @@ dayt.se#$##synpit { height:1px!important; }
 @@||amazon-adsystem.com^$domain=washingtonpost.com
 @@||js.washingtonpost.com/wp-stat/echo2/canvases/
 ||pwapi.washingtonpost.com^
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/727
+! https://github.com/CyberPurify/ExperimentalFilter/issues/727
 @@||cdn.needrom.com/advert*.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/710
+! https://github.com/CyberPurify/ExperimentalFilter/issues/710
 mangacap.com#@#.afs_ads
 ! http://forum.purify.om/showthread.php?6501
 pixiz.*###adblock-detected
@@ -1009,7 +1009,7 @@ pixiz.*###adblock-detected
 @@||techonthenet.com/javascript/advert-min.js
 ! http://forum.purify.om/showthread.php?6126
 ||xsportnews.com/wp-content/uploads/an-temp/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/607
+! https://github.com/CyberPurify/ExperimentalFilter/issues/607
 @@||pzkysq.pink/adblockr.javascript$domain=cbsnews.com
 ! http://forum.purify.om/showthread.php?5748
 binbox.io#@#.banner-ad
@@ -1035,22 +1035,22 @@ microimg.biz#%#window.setTimeout=function() {};
 zippymoviez.com#%#window.setTimeout=function() {};
 ! uptobox.com - disable anti-block
 uptobox.com#%#window.setTimeout=function() {};
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/540
+! https://github.com/CyberPurify/ExperimentalFilter/issues/540
 incredibox.*###bbox-fd
 incredibox.*###box-abp
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/527
+! https://github.com/CyberPurify/ExperimentalFilter/issues/527
 @@||4shared.com/show_ad
 ! http://forum.purify.om/showthread.php?5363
 nitroflare.com#@#div[style="width: 728px; height: 90px; text-align: center;"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/431
+! https://github.com/CyberPurify/ExperimentalFilter/issues/431
 @@||pubads.g.doubleclick.net/gampad/ads?adk=$domain=viki.io
 ! http://forum.purify.om/showthread.php?4323
 @@||ps4news.com/ad/adframe.js
-! Fixing detection of blocking on RuTube.ru https://github.com/AdguardTeam/ExperimentalFilter/issues/474
+! Fixing detection of blocking on RuTube.ru https://github.com/CyberPurify/ExperimentalFilter/issues/474
 /adsrv.$domain=~rutube.ru
 unlockpwd.*,agameofthronespdf.*,codeclan.altervista.org,onlinemoviewatchs.*##body [id^="bsa"][style]
 ||adsrv.gpm-digital.com/*/gpmdigital/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/481 ; http://forum.purify.om/showthread.php?5105 ; http://forum.ppurify.m/showthread.php?9772
+! https://github.com/CyberPurify/ExperimentalFilter/issues/481 ; http://forum.purify.om/showthread.php?5105 ; http://forum.ppurify.m/showthread.php?9772
 @@||cdn.vipbox.tv/js/ads.js
 strikeout.co,vipleague.ws,vipleague.is,vipleague.se,vipleague.me,vipleague.co,vipleague.sx,vipbox.tv#$#.vip_052x003 {height: 150px!important;}
 strikeout.co,vipleague.ws,vipleague.is,vipleague.se,vipleague.me,vipleague.co,vipleague.sx,vipbox.tv#$#.vip_09x827 {height: 25px!important;}
@@ -1058,7 +1058,7 @@ strikeout.co,vipleague.ws,vipleague.is,vipleague.se,vipleague.me,vipleague.co,vi
 strikeout.co,vipleague.ws,vipleague.is,vipleague.se,vipleague.me,vipleague.co,vipleague.sx,vipbox.tv#%#Object.defineProperty(window, 'iExist', { get: function() { return {}; } });
 ! fixed anti-block on viki.com
 @@||pubads.g.doubleclick.net/gampad/ads?adk=*www.viki.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/436
+! https://github.com/CyberPurify/ExperimentalFilter/issues/436
 /abb-msg.js$domain=hardocp.com
 ! allsoftinone.com
 ! uptobox.com
@@ -1084,9 +1084,9 @@ n8fanclub.*##body > strong[id]
 fileplaneta.*,gamersglobal.de,latino-serialo.ru,lacasadeltikitaka.org,reality24horas.com#%#AG_onLoad(function() { AG_AntiAntiBlock(); });
 fileplaneta.*,gamersglobal.de,latino-serialo.ru,lacasadeltikitaka.org,reality24horas.com#%#var AG_AntiAntiBlock = function() { var baseCreateElement = document.createElement; document.createElement = function(name) { if (name && name.match(/div|font|center/i)) { return null; } else { return baseCreateElement(name); } } };
 ! anti-adblock
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/239#issuecomment-66791045
+! https://github.com/CyberPurify/ExperimentalFilter/issues/239#issuecomment-66791045
 labnol.org##.adsbygoogle > img
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/372
+! https://github.com/CyberPurify/ExperimentalFilter/issues/372
 doulci.net#@##adlabel
 doulci.net#@##ads
 doulci.net#@##adsense
@@ -1110,7 +1110,7 @@ dirtstyle.tv##.lightbox
 ! http://forum.purify.om/showthread.php?4846
 @@||ifirstrowpt.eu/advertisement.js
 ifirstrowpt.eu###adblockplus
-! http://www.wilderssecurity.com/threads/adguard-for-chrome-open-beta-test.362760/page-13#post-2472504
+! http://www.wilderssecurity.com/threads/purify-for-chrome-open-beta-test.362760/page-13#post-2472504
 inoreader.com#%#AG_onLoad(function() { window.adb_detected = function() {}; });
 inoreader.com#%#var adb_detected = function() {};
 ! http://forum.purify.om/showthread.php?4884
@@ -1549,13 +1549,13 @@ zrblog.net##a[href^="http://u.zrblog.net"]
 ||vmvps.com/aoyohost-com-bann
 ||yinooo.com^$third-party
 ||zrblog.net/zanzhu/virpus.gif
-! https://github.com/AdguardTeam/AdguardFilters/issues/3037
+! https://github.com/CyberPurify/PurifyFilters/issues/3037
 @@||hk.on.cc/mobile/js/lib/adbanner.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2552
+! https://github.com/CyberPurify/PurifyFilters/issues/2552
 baidu.com#@##results > div[class]:not(.result):not(.result-op):not(.sp-rslt-bar)
-! https://github.com/AdguardTeam/AdguardFilters/issues/2454
+! https://github.com/CyberPurify/PurifyFilters/issues/2454
 @@||livew.l.qq.com/livemsg?ty=web&ad_type=$domain=v.qq.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/846
+! https://github.com/CyberPurify/ExperimentalFilter/issues/846
 macapp.so#$##m2 { height: 5px!important; }
 !---------------------------------------------------------------------
 !------------------------------ Croatian -----------------------------
@@ -1572,16 +1572,16 @@ mob.hr###billboard_ad_container
 extra.cz#%#Object.defineProperty(window, 'windowWidth', { get: function() { return 300; } });
 extra.cz##.container > div[class^="ad "]
 !
-! https://github.com/AdguardTeam/AdguardFilters/issues/2893
+! https://github.com/CyberPurify/PurifyFilters/issues/2893
 ||mobilmania.cz/RssHubPager.ashx
-! https://github.com/AdguardTeam/AdguardFilters/issues/2737
+! https://github.com/CyberPurify/PurifyFilters/issues/2737
 @@||mitsubishiclub.cz^$generichide
 !
 extra.cz##a[class^="advert-"]
 extra.cz##.movingAd
 extra.cz##.AdTrack-CSS-Title
 extra.cz##a[href^="http://www.etarget.cz/"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1232
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1232
 ||idnes.cz/*.aspx?c=
 ! tipcars.com - broken POST requests
 @@||tipcars.com/karta_vozu$document
@@ -1631,7 +1631,7 @@ rozzlobenimuzi.*##body > a
 !------------------
 ! http://forum.purify.om/showthread.php?10082
 auto.cz#%#Object.defineProperty(window, 'abOpenHelp', { get: function() { return function() { }; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1232
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1232
 idnes.cz#%#Object.defineProperty(window, 'AdTrack', { get: function() { return; } });
 !
 mobilmania.cz#%#AG_onLoad(function() { window.VIDEO_AD_FORCE_YT = true; });
@@ -1646,7 +1646,7 @@ cez.cz#$#body { background: #333!important; }
 @@||ebimg.dk/misc/js/ads.js
 ! avisen.dk - anti-adblock
 ||cevd0tnyvecontent.net^$domain=avisen.dk
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1485
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1485
 @@||jyllands-posten.dk/app/*ads*.js
 !---------------------------------------------------------------------
 !------------------------------ Estonian -----------------------------
@@ -1671,36 +1671,36 @@ naurunappula.*##a[href^="http://bit.ly/"] > video
 !---------------------------------------------------------------------
 ! https://forum.purify.om/index.php?threads/13739/
 retinaboys.*###screen_block
-! https://github.com/AdguardTeam/AdguardFilters/issues/2947
+! https://github.com/CyberPurify/PurifyFilters/issues/2947
 igen.fr##body > a[style^="z-index:"]
 igen.fr#$##motherboard { top: 30px!important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/2879
+! https://github.com/CyberPurify/PurifyFilters/issues/2879
 @@||firstonetv.eu^$generichide
 firstonetv.eu##.video-grid > div[id][style]
 ! https://forum.purify.om/index.php?threads/7957/page-2#post-90715
 @@||cdn.videoplaza.tv/contrib/fr-m6/svm/homadConfigVideoplaza-w9.json
-! https://github.com/AdguardTeam/AdguardFilters/issues/2549
+! https://github.com/CyberPurify/PurifyFilters/issues/2549
 @@||90.63.192.161:81/application/$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1845
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1845
 @@||static.lexpress.fr/js/ads.js
 @@||static.lexpress.fr/*/ads.css
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1846
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1846
 ||cdn-analytics.ladmedia.fr/europe1/ablocker/$domain=europe1.fr
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1826
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1826
 @@||f1g.fr/build/*/adsense.js
 @@||foglio.basilic.io/ad/basilic.adsense.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1777
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1777
 alluc.ee###aovl
 @@||alluc.ee/js/ads.js
 ! http://forum.purify.om/showthread.php?9276
 @@||playerhd2.pw^$generichide
 playerhd2.pw###micontenedor > div#total
-! hifi.fr - advanced search is broken by Adguard injections
+! hifi.fr - advanced search is broken by CyberPurify injections
 @@||hifi.fr/pm_advancedsearch$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1415
-! broken by Adguard injections
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1415
+! broken by CyberPurify injections
 @@||mycanal.fr/library/Pelican/Ajax/$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/794
+! https://github.com/CyberPurify/ExperimentalFilter/issues/794
 @@||cdn.videoplaza.tv/contrib/fr-canalplus/svm/homadConfigVideoplaza-itele.json$domain=itele.fr
 ! http://forum.purify.om/showthread.php?6868
 coco.fr###overy
@@ -1742,7 +1742,7 @@ ncore.cc#@#.text-ad-links
 !------------------------------ Indian -------------------------------
 !---------------------------------------------------------------------
 !
-! https://github.com/AdguardTeam/AdguardFilters/issues/2810
+! https://github.com/CyberPurify/PurifyFilters/issues/2810
 ###__BULLETIN__bdiv[style="position"]
 ||203.94.227.140^$image,third-party
 ||203.94.248.40^$image,third-party
@@ -1778,15 +1778,15 @@ krucil.net##img[width="900"][height="50"]
 ! http://forum.purify.om/showthread.php?8881
 ||d2bj2texxib1qg.cloudfront.net^$third-party
 ||cloudfront.net^$third-party,domain=ynet.co.il
-! https://github.com/AdguardTeam/AdguardFilters/issues/2523
+! https://github.com/CyberPurify/PurifyFilters/issues/2523
 fxp.co.il#@#iframe[width="300"][height="250"]
 !---Anti-Adblock---
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/996
+! https://github.com/CyberPurify/ExperimentalFilter/issues/996
 goalim4you.site###f765
 !---------------------------------------------------------------------
 !------------------------------ Italian ------------------------------
 !---------------------------------------------------------------------
-! https://github.com/AdguardTeam/AdguardFilters/issues/3030
+! https://github.com/CyberPurify/PurifyFilters/issues/3030
 @@||calciomercato.com/promodisplay
 !
 megahd.tv##body > div[style] > div[id]:not([style]):not([id="megahd_wrapper"])
@@ -1812,7 +1812,7 @@ virgilio.it##div[id^="sponsy"]
 beppegrillo.it##div[id^="spazio_google_ads"]
 beppegrillo.it##div[id^="google3"]
 ||beppegrillo.it/js/cadetect.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2550
+! https://github.com/CyberPurify/PurifyFilters/issues/2550
 @@||aranzulla.it^*ads$domain=aranzulla.it
 !---------------------------------------------------------------------
 !------------------------------ Korean -------------------------------
@@ -1889,17 +1889,17 @@ p30day.*##.txtAdv
 @@||json.redir.redcdn.pl/http/o2/TVN-Adserver/*_www.mp4$domain=player.pl
 ||dcs.redcdn.pl/dcs/o2/TVN-Adserver/*_www.mp4$domain=player.pl,mp4
 !#################
-! https://github.com/AdguardTeam/AdguardFilters/issues/2862
+! https://github.com/CyberPurify/PurifyFilters/issues/2862
 optyczne.pl###warning[style^="z-index:"]
 ! https://forum.purify.om/index.php?threads/12963/
 @@||polvod.pl/advertisement.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/2735
+! https://github.com/CyberPurify/PurifyFilters/issues/2735
 ss.lv#@#[id^="ads_"]
 ! https://forum.purify.om/index.php?threads/12080/
 dobreprogramy.pl##a[href="http://loa2.dobregry.pl/"]
 ||static.dpcdn.pl/*/assets/img/skin_*/back.jpg
 dobreprogramy.pl###slide-menu > div.page-element.center.target > div[style="height: 250px; width: 970;"]
-! https://github.com/AdguardTeam/AdguardFilters/issues/2482
+! https://github.com/CyberPurify/PurifyFilters/issues/2482
 avito.ru#@#[class$="-ads"]
 ! https://forum.purify.om/index.php?threads/10523/
 ! https://forum.purify.om/index.php?threads/11423/
@@ -1909,19 +1909,19 @@ wyklady.org#@##banner_ad
 !
 ||partnerzyapi.ceneo.pl^$third-party
 ||bsxmuny.wp.pl^
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2138
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2138
 purepc.pl#@#.reklama
 ! https://forum.purify.om/index.php?threads/10119/
 @@||tvnturbo.pl^$generichide
 ! https://forum.purify.om/index.php?threads/9809/
 stooq.pl##div[onclick*="window.open('http://stooq.pl/ads/"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1855
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1855
 playpuls.pl#%#Object.defineProperty(window, 'ads', { get: function() { return {}; } });
 ! shinden.pl - anti-adblock
 @@||shinden.pl^$generichide
 ! czasbajki.pl - skip timer
 czasbajki.pl#%#AG_onLoad(function() { $('#kFinal').removeClass('kHidden'); $('#kSplash').remove(); });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1545
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1545
 lolsy.tv#%#(function() { var _setTimeout = window.setTimeout, regex = /bab_elementid/; window.setTimeout = function(a, b) { if ( typeof a !== 'string' || !regex.test(a) ) { _setTimeout(a, b); } }; })();
 lolsy.tv##.reklama-sidebar
 ! wp.pl - anti-adblock
@@ -1951,7 +1951,7 @@ interia.pl#%#document.cookie = "lltsg=1";
 !---------------------------------------------------------------------
 !------------------------------ Romanian -----------------------------
 !---------------------------------------------------------------------
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1835
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1835
 !---- Anti-adblock ---
 !
 !---------------------
@@ -2006,7 +2006,7 @@ ekstrabladet.dk#@##ad_container
 !---------------------------------------------------------------------
 !------------------------------ Taiwan -------------------------------
 !---------------------------------------------------------------------
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1240
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1240
 @@||m.gamer.com.tw^$elemhide
 !
 ||bahamut.com.tw/JS/ad/insideAD.js
@@ -2056,7 +2056,7 @@ nhaccuatui.*##div[class^="adv_"]
 !---------------------------------------------------------------------
 !------------------------------ Fixing other filters -----------------
 !---------------------------------------------------------------------
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/327
+! https://github.com/CyberPurify/ExperimentalFilter/issues/327
 @@||m.ynet.co.il/Promo.aspx^$document
 !
 ||pirsumot.co.il/banners/
@@ -2153,7 +2153,7 @@ pussytorrents.org#%#Object.defineProperty(window, 'initBCbongacams_popPopunder',
 ftop.ru#%#Object.defineProperty( window, 'random_imglink', { get: function() { return; } });
 ! imageban.ru - clickunder
 imageban.ru#%#Object.defineProperties(window, { "_impspcabe_alpha": { value: false, writable: false }, "_impspcabe_beta": { value: false, writable: false } });
-! github.com/AdguardTeam/AdguardFilters/issues/2999
+! github.com/CyberPurify/PurifyFilters/issues/2999
 imagefap.com#%#Object.defineProperty(window, 'ExoLoader', { get: function() { return []; } });
 ! https://forum.purify.om/index.php?threads/12947/
 clicknupload.link#%#Object.defineProperty(document, 'onclick', { get: function() { null; } });
@@ -2164,9 +2164,9 @@ bigfile.to#%#window.btoa = function() {};
 bigfile.to#%#Object.defineProperty( window, 'popupDownloadBtn', { get: function() { return; } });
 ! https://forum.purify.om/index.php?threads/13055/
 jkmk.net#%#Object.defineProperty(window, 'PopAds', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2927
+! https://github.com/CyberPurify/PurifyFilters/issues/2927
 linkshrink.net#%#Object.defineProperties(window, { "_impspcabe_alpha": { value: false, writable: false }, "_impspcabe_beta": { value: false, writable: false } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2952
+! https://github.com/CyberPurify/PurifyFilters/issues/2952
 the-watch-series.to#%#Object.defineProperties(window, { "_impspcabe_alpha": { value: false, writable: false }, "_impspcabe_beta": { value: false, writable: false } });
 ! https://forum.purify.om/index.php?threads/13415/
 mac-torrent-download.net#%#window.atob = function() { };
@@ -2182,7 +2182,7 @@ ddl-warez.to#%#document.cookie = "ddlpop=1"; document.cookie = "downloadpopup=1"
 yts.ag#%#Object.defineProperty(window, 'initPu', { get: function() { return {}; } });
 ! https://forum.purify.om/index.php?threads/13329/
 flashx.tv#%#Object.defineProperty(window, '_impspcabe_alpha', { get: function() { return false; } }); Object.defineProperty(window, '_impspcabe_beta', { get: function() { return false; } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2894
+! https://github.com/CyberPurify/PurifyFilters/issues/2894
 multiup.org#%#window.open = function() {};
 ! https://forum.purify.om/index.php?threads/12032/
 dailyuploads.net#%#(function() { var w_open = window.open, regex = /sapphirum.com/; window.open = function(a, b) { if (typeof a !== 'string' || !regex.test(a)) { w_open(a, b); } }; })();
@@ -2190,12 +2190,12 @@ dailyuploads.net#%#(function() { var w_open = window.open, regex = /sapphirum.co
 vipleague.co,zoomtv.me,vipbox.nu#%#Object.defineProperty(window, '_pao', { get: function() { return {}; } });
 ! https://forum.purify.om/index.php?threads/13189/
 8muses.com#%#Object.defineProperty(window, 'ExoLoader', { get: function() { return; } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2918
+! https://github.com/CyberPurify/PurifyFilters/issues/2918
 redtube.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPops', 'undefined__1'); }
 redtube.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPopsExpire', new Date(new Date().setYear(2020))); }
 redtube.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('pop_under_already_shown', 'true'); }
 redtube.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('pop_under_initial_date', new Date(new Date().setYear(2020))); }
-! https://github.com/AdguardTeam/AdguardFilters/issues/2887
+! https://github.com/CyberPurify/PurifyFilters/issues/2887
 xvideos.com#%#Object.defineProperty(window, 'openpop', { get: function() { return; } });
 ! https://forum.purify.om/index.php?threads/12855/
 xvideos.com#%#Object.defineProperty(Object.prototype, 'config/ads', { get: function() { return false; } });
@@ -2223,7 +2223,7 @@ vidbull.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { 
 vidbull.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPopsExpire', new Date(new Date().setYear(2020))); }
 ! https://forum.purify.om/index.php?threads/12586/
 thepiratebay.org#%#Object.defineProperty(window, '_wm', { get: function() { return null; } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2786
+! https://github.com/CyberPurify/PurifyFilters/issues/2786
 extratorrent.cc#%#Object.defineProperty(window, '_impspcabe_alpha', { get: function() { return false; } }); Object.defineProperty(window, '_impspcabe_beta', { get: function() { return false; } });
 ! https://forum.purify.om/index.php?threads/12146/
 allmyvideos.net#%#AG_onLoad(function() { setTimeout(function() {$('#mabl_html').remove(); $('#flvplayer_wrapper').show(); $('#player_code').show();$('#player_img').show(); }, 2000); });
@@ -2246,7 +2246,7 @@ uploads.to#%#AG_onLoad(function() { document.getElementById("chkIsAdd").checked 
 ! https://forum.purify.om/index.php?threads/11294/
 ! AdMaven clickunder
 bigfile.to,imgcandy.net,uptobox.*,embed.nowvideo.sx,uptostream.*,flashx.tv,userscloud.*,imageweb.ws#%#window.btoa = function() { };
-! https://github.com/AdguardTeam/AdguardFilters/issues/2581
+! https://github.com/CyberPurify/PurifyFilters/issues/2581
 uploads.to#%#Object.defineProperty(window, '_impspcabe_alpha', { get: function() { return false; } }); Object.defineProperty(window, '_impspcabe_beta', { get: function() { return false; } });
 ! https://forum.purify.om/index.php?threads/11655/
 wantdl.com#%#AG_onLoad(function() { if(document.cookie.indexOf("pop1") == -1) { document.cookie = "popunder=pop1"; } });
@@ -2256,16 +2256,16 @@ ndtv.com#%#AG_onLoad(function() { if (window.location.href.indexOf("hpinterstiti
 nypost.com#%#window.checkState = function() {};
 ! https://forum.purify.om/index.php?threads/10683/
 videomega.tv#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('ppu_main_none', 1 + (1 ? "; expires=" + (new Date((new Date()).getTime() )).toUTCString() : "")); }
-! https://github.com/AdguardTeam/AdguardFilters/issues/2345
+! https://github.com/CyberPurify/PurifyFilters/issues/2345
 pcmag.com#%#window.checkState = function() {};
 ! https://forum.purify.om/index.php?threads/11171/
 mediafire.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPops', '5'); }
 mediafire.com#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPopsExpire', new Date(new Date().setYear(2020))); }
-! https://github.com/AdguardTeam/AdguardFilters/issues/2319
+! https://github.com/CyberPurify/PurifyFilters/issues/2319
 tweaktown.com#%#window.checkState = function() {};
 ! https://forum.purify.om/index.php?threads/10775/
 aggregatorgetb.com#%#document.addEventListener=function() {};
-! https://github.com/AdguardTeam/AdguardFilters/issues/2283
+! https://github.com/CyberPurify/PurifyFilters/issues/2283
 constitution.com#%#var cv = function() {};
 ! https://forum.purify.om/index.php?threads/10844/
 notebookcheck-hu.*,notebookcheck.*,notebookcheck.net,notebookcheck.org,notebookcheck.biz,notebookcheck.it,notebookcheck.nl,notebookcheck.info,notebookcheck-tr.*,notebookcheck.se,notebookcheck-ru.com#%#window.uabpdl = window.uabInject = true;
@@ -2275,18 +2275,18 @@ uploaded.net#%#Object.defineProperty(window, 'e5V', { get: function() { return [
 imagetwist.com#%#AG_onLoad(function() { setTimeout(function() {document.cookie="ppu_sub=1"; document.cookie="ppu_main=1";}, 300); });
 ! https://forum.purify.om/index.php?threads/10656/
 crazy4tv.com#%#Object.defineProperty(window, 'swal', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2211
+! https://github.com/CyberPurify/PurifyFilters/issues/2211
 vid.ag#%#Object.defineProperties(window, { "_impspcabe_alpha": { value: false, writable: false }, "_impspcabe_beta": { value: false, writable: false } });
-! https://github.com/AdguardTeam/AdguardFilters/issues/2210
+! https://github.com/CyberPurify/PurifyFilters/issues/2210
 primewire.ag#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPops', '1'); }
 primewire.ag#%#if (typeof localStorage != 'undefined' && localStorage.setItem) { localStorage.setItem('InfNumFastPopsExpire', new Date(new Date().setYear(2020))); }
 ! https://forum.purify.om/index.php?threads/10425/
 go4up.com#%#Object.defineProperty(window, 'B1q', { get: function() { return []; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2019
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2019
 videowood.tv#%#document.cookie = "lvid_main=true"; document.cookie = "vid_sub=1"; document.cookie = "vid_subpub=3";
 ! https://forum.purify.om/index.php?threads/10340/
 chouhaa.info#%#Object.defineProperty(window, 'jsPopunder', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2141
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2141
 piratebay.host,pirateproxy.tf,ukpirate.click#%#Object.defineProperty(window, '_gunggo', { get: function() { return []; } });
 ! https://forum.purify.om/index.php?threads/10061/
 extratorrent.cc#%#AG_onLoad(function() { AG_removeElementBySelector('a[href^="http://adprovider.adlure.net/"]'); });
@@ -2297,15 +2297,15 @@ micast.tv#%#AG_onLoad(function() { setTimeout(function() {document.cookie = "vid
 keeplinks.eu#%#AG_onLoad(function() { window.p0t = undefined; });
 ! https://forum.purify.om/index.php?threads/9786/
 extremetube.com#%#Object.defineProperty(window, 'Advert', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1990
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1990
 streamcloud.eu#%#Object.defineProperty(window, 'UAParser', { get: function() { return function() { }; } });
 ! https://forum.purify.om/index.php?threads/9717/
 sportlive.me#%#window.setTimeout=function() {};
 ! http://forum.purify.om/showthread.php?10653
 drtuber.com#%#Object.defineProperty(window, '_impspcabe_alpha', { get: function() { return false; } }); Object.defineProperty(window, '_impspcabe_beta', { get: function() { return false; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1997
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1997
 cheatsheet.com#%#Object.defineProperty(window, 'xh', { get: function() { return []; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1982
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1982
 porn.com#%#document.cookie = "pu_count=1";
 ! http://forum.purify.om/showthread.php?8671
 userscloud.com#%#Object.defineProperty(window, '_impspcabe', { get: function() { return false; } });
@@ -2313,7 +2313,7 @@ userscloud.com#%#Object.defineProperty(window, '_impspcabe', { get: function() {
 uplod.it#%#Object.defineProperty(window, '_impspcabe_alpha', { get: function() { return false; } }); Object.defineProperty(window, '_impspcabe_beta', { get: function() { return false; } });
 ! http://forum.purify.om/showthread.php?9989
 streamlive.to#%#window.open = function() {};
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1828
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1828
 kitguru.net#%#AG_onLoad(function() { jQuery(function() { jQuery('body').unbind('click').removeAttr("body").css("cursor","default"); }); });
 ! http://forum.purify.om/showthread.php?9805
 adlice.com#%#Object.defineProperty(window, 'inc_popup', { get: function() { return {}; } });
@@ -2324,26 +2324,26 @@ byetv.org#%#window.open = function() {};
 dailymail.co.uk#%#Object.defineProperty(window, 'adBlockQueue', { get: function() { return null; } });
 ! http://forum.purify.om/showthread.php?8765
 hltv.org#%#AG_onLoad(function() { window.foo = function(){}; });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1690
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1690
 bessporno.tv#%#window.eval = function() {};
 ! http://forum.purify.om/showthread.php?9338
 pornxs.com#%#Object.defineProperty(window, 'th_ab_pop', { get: function() { return {}; } });
 ! http://forum.purify.om/showthread.php?9338
 youjizz.com#%#Object.defineProperty(window, 'th_ab_pop', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1642
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1642
 play3r.net#%#(function() { var w_open = window.open, regex = /goo.gl/; window.open = function(a, b) { if (typeof a !== 'string' || !regex.test(a)) { w_open(a, b); } }; })();
 ! cpmstar ads
 armorgames.*,onrpg.*,mmohuts.*,newgrounds.com#%#Object.defineProperty(window, 'cpmstar_siteskin', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1607
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1607
 ! spectrum.ieee.org - disable splach screen
 spectrum.ieee.org#%#Object.defineProperty(window, 'splashpage', { get: function() { return {}; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1570
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1570
 ! turbobit.net - block clickunder
 turbobit.net#%#Object.defineProperty(window, 'BetterJsPop', { get: function() { return {}; } });
 turbobit.net#%#function setCookie(c_name,exdays) { var exdate=new Date(); exdate.setDate(exdate.getDate() + exdays); var c_value=escape(exdate) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString()); document.cookie = c_name+"="+c_value+"; path=/"; };
 turbobit.net#%#AG_onLoad(function() { setCookie('turbobit1', 86400000); });
 turbobit.net#%#AG_onLoad(function() { setCookie('turbobit2', 86400000); });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1573
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1573
 libertyalliance.com#%#Object.defineProperty(window, 'zy', { get: function() { return {}; } });
 ! custompcreview.com - remove clickunder
 custompcreview.com#%#Object.defineProperty(window, 'bg_backgrounds', { get: function() { return []; } });
@@ -2353,13 +2353,13 @@ streamcloud.eu,tinypic.*,tube8.*,youporn.*,redtube.*,pornhub.com#%#Object.define
 imagebam.com#%#Object.defineProperty(window, '_wm', { get: function() { return function() { }; } });
 ! benchmarkreviews.com - remove clickunder
 benchmarkreviews.com#%#Object.defineProperty(window, 'bg_backgrounds', { get: function() { return []; } });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1416
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1416
 ! clickable background
 thinkcomputers.org#%#window.myatu_bgm = 0;
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1310
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1310
 ! educationcanada.com - prevent endless loading
 educationcanada.com#%#AG_onLoad(function() { AG_removeElementBySelector('ins[id^="aswift_"]'); });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1318
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1318
 clipconverter.cc#%#window.open = function() {};
 ! http://forum.purify.om/showthread.php?8685
 fastpik.net#%#window.open = function() {};
@@ -2372,7 +2372,7 @@ thepiratebay.plus,tpb.dashitz.*,thepiratebay.se#%#document.cookie = "tpbpop=5";
 ! http://forum.purify.om/showthread.php?8036
 picfox.org#%#AG_onLoad(function() { AG_removeElementBySelector('div[class="overlayBg"]'); });
 picfox.org#%#document.cookie = "popunder=1";
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/914
+! https://github.com/CyberPurify/ExperimentalFilter/issues/914
 vkpass.com#%#AG_onLoad(function() { window.adverto = function() {} });
 ! http://forum.purify.om/showthread.php?9219-Openload-Did-you-give-up
 openload.co,openload.io#%#window.open = function() {};
@@ -2386,7 +2386,7 @@ sendspace.com#%#AG_onLoad(function() { window.runad = function() {} });
 your-pictures.net#%#window.open = function() {};
 ! http://forum.purify.om/showthread.php?5837
 userscloud.com#%#AG_onLoad(function() { $('a[href^="http://websitedhoome.com/"]').removeAttr("href"); });
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/311
+! https://github.com/CyberPurify/ExperimentalFilter/issues/311
 chaturbate.com#%#document.cookie = "np3=5";
 ! http://forum.ru-board.com/topic.cgi?forum=5&topic=31105&start=1920
 180upload.com#%#AG_onLoad(function() { $('#use_installer').removeAttr('checked') });
@@ -2422,7 +2422,7 @@ fcore.eu,filecore.co.nz#%#AG_onLoad(function() { window.checkAds = function() {}
 pornhub.com#%#window.opera = true;
 ! http://forum.purify.om/showthread.php?3431
 secureupload.eu#%#window.open = function() {};
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/47
+! https://github.com/CyberPurify/ExperimentalFilter/issues/47
 kissanime.com#%#AG_onLoad(function() { window.DoDetect2 = function() {} });
 ! clickunder(empty) http://www.imagebam.com/image/fc3dc3397258172
 imagebam.com#%#window.open = function() {};
@@ -2472,24 +2472,24 @@ forbes.com#$#.container { top: 0px!important; }
 hltv.org#$#body { background-image: none !important; }
 !
 allmyvideos.net#$#div[style^="width: 315px; height: 266px;"] { height: 0px!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1828
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1828
 kitguru.net#$#body { background-image: none !important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1815
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1815
 allkeyshop.com#$#body.custom-background { background-image: none!important; }
 ! answers.yahoo.com - fixing "Ask a question" form
 answers.yahoo.com#$##Stencil.Answers #Aside { padding-top: 104px!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1642
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1642
 play3r.net#$#body { background-image: none!important; cursor: default!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1564
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1564
 custompcreview.com#$#body { background-size: 0px!important; cursor: default!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1518
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1518
 pcgameware.co.uk#$#body { background-image: none !important; }
 ! benchmarkreviews.com - branded background (the rules are not duplicate, 1st - for Chrome extension, 2nd - for app)
 benchmarkreviews.com#$#body { background-image: none!important; }
 benchmarkreviews.com#$#html > body { background-image: none!important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1416
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1416
 thinkcomputers.org#$#body.myatu_bgm_body { background-image: none !important; }
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1373
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1373
 liberallogic101.com#$#aside#text-37 { visibility: hidden!important; width: 0px!important; position: absolute!important; }
 ! http://forum.purify.om/showthread.php?8347
 limetorrents.cc#$#div[style^="float:left"] > a[rel="nofollow"] { visibility: hidden!important; position: fixed!important; }
@@ -2515,7 +2515,7 @@ neowin.net#$#div[class^="banner-"] { height: 0px!important; min-height:0px!impor
 ! https://forum.purify.om/index.php?threads/13055/
 ! https://forum.purify.om/index.php?threads/11841/
 ! http://forum.purify.om/showthread.php?9459
-! chia-anime.tv - ad in embedded(no Adguard injections)
+! chia-anime.tv - ad in embedded(no CyberPurify injections)
 ! Stream close button: http://hdstreams.net/channel-35/
 ! we are using content-rule because pages with ads are too small
 ! poong.tv (iframe stream, found on sportcategory.tv)
@@ -2566,7 +2566,7 @@ http://www.ads.$third-party
 !
 !##################
 !
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/997
+! https://github.com/CyberPurify/ExperimentalFilter/issues/997
 google.*,google.ad,google.ae,google.com.af,google.com.ag,google.com.ai,google.al,google.am,google.co.ao,google.com.ar,google.as,google.at,google.com.au,google.az,google.ba,google.com.bd,google.be,google.bf,google.bg,google.com.bh,google.bi,google.bj,google.com.bn,google.com.bo,google.com.br,google.bs,google.bt,google.co.bw,google.by,google.com.bz,google.ca,google.cd,google.cf,google.cg,google.ch,google.ci,google.co.ck,google.cl,google.cm,google.cn,google.com.co,google.co.cr,google.com.cu,google.cv,google.com.cy,google.cz,google.de,google.dj,google.dk,google.dm,google.com.do,google.dz,google.com.ec,google.ee,google.com.eg,google.es,google.com.et,google.fi,google.com.fj,google.fm,google.fr,google.ga,google.ge,google.gg,google.com.gh,google.com.gi,google.gl,google.gm,google.gp,google.gr,google.com.gt,google.gy,google.com.hk,google.hn,google.hr,google.ht,google.hu,google.co.id,google.ie,google.co.il,google.im,google.co.in,google.iq,google.is,google.it,google.je,google.com.jm,google.jo,google.co.jp,google.co.ke,google.com.kh,google.ki,google.kg,google.co.kr,google.com.kw,google.kz,google.la,google.com.lb,google.li,google.lk,google.co.ls,google.lt,google.lu,google.lv,google.com.ly,google.co.ma,google.md,google.me,google.mg,google.mk,google.ml,google.com.mm,google.mn,google.ms,google.com.mt,google.mu,google.mv,google.mw,google.com.mx,google.com.my,google.co.mz,google.com.na,google.com.nf,google.com.ng,google.com.ni,google.ne,google.nl,google.no,google.com.np,google.nr,google.nu,google.co.nz,google.com.om,google.com.pa,google.com.pe,google.com.pg,google.com.ph,google.com.pk,google.pl,google.pn,google.com.pr,google.ps,google.pt,google.com.py,google.com.qa,google.ro,google.ru,google.rw,google.com.sa,google.com.sb,google.sc,google.se,google.com.sg,google.sh,google.si,google.sk,google.com.sl,google.sn,google.so,google.sm,google.sr,google.st,google.com.sv,google.td,google.tg,google.co.th,google.com.tj,google.tk,google.tl,google.tm,google.tn,google.to,google.com.tr,google.tt,google.com.tw,google.co.tz,google.com.ua,google.co.ug,google.co.uk,google.com.uy,google.co.uz,google.com.vc,google.co.ve,google.vg,google.co.vi,google.com.vn,google.vu,google.ws,google.rs,google.co.za,google.co.zm,google.co.zw,google.cat###taw #tvcap ._hsi.mnr-c
 !
 ||zonasports.to/js/tiempo2.js
@@ -3179,7 +3179,7 @@ mspoweruser.*##aside[class^="widget shunno_widget_sidebar_"]
 showsport-tv.*##b[id$="ctimer"]
 mega.co.nz##body .good-times-left-block
 mega.co.nz##body .good-times-right-block
-userscloud.*##body > .st-container ~ div[class]:not(.adguard-alert)
+userscloud.*##body > .st-container ~ div[class]:not(.purify-alert)
 hardwareheaven.*##body > a > div[id$="_skin_panel_div"]
 turbobit.net##body > a#body-link
 live9.net##body > a[href^=" http://www.gofeed2all.eu"]
@@ -3655,9 +3655,9 @@ thevideobee.to#@#div > [style] > [class][style]
 ! https://forum.purify.om/index.php?threads/imdb-com.12359/
 ! Reported: https://forums.lanik.us/viewtopic.php?f=64&t=31882
 imdb.com#@#.ab_ninja
-! https://github.com/AdguardTeam/AdguardFilters/issues/2632
+! https://github.com/CyberPurify/PurifyFilters/issues/2632
 @@||messenger.com^$document
-! https://github.com/AdguardTeam/AdguardForWindows/issues/1044
+! https://github.com/CyberPurify/PurifyForWindows/issues/1044
 ! WFP driver issue
 @@||ovh.es^$content
 ! https://forum.purify.om/index.php?threads/10734/
@@ -3674,7 +3674,7 @@ imdb.com#@#.ab_ninja
 !-----------------------------------------
 ! https://forum.purify.om/index.php?threads/13998/
 petshop.ru#@#.advert-block
-! https://github.com/AdguardTeam/AdguardFilters/issues/3003
+! https://github.com/CyberPurify/PurifyFilters/issues/3003
 @@||assets.macys.com/dyn_img/site_ads/
 ! https://forum.purify.om/index.php?conversations/12877/
 @@||href.li$document
@@ -3687,16 +3687,16 @@ petshop.ru#@#.advert-block
 @@||wikipedia.org/w/index.php?title=$document
 ! https://forum.purify.om/index.php?threads/13580/
 @@||swedbank.ee^$document
-! https://github.com/AdguardTeam/AdguardFilters/issues/2936
+! https://github.com/CyberPurify/PurifyFilters/issues/2936
 tv-news-online.com#@#.header-ad
-! https://github.com/AdguardTeam/AdguardFilters/issues/2926
+! https://github.com/CyberPurify/PurifyFilters/issues/2926
 @@||cdn.intergi.com/hera/*.js$domain=thenextweb.com
-! https://github.com/AdguardTeam/AdguardFilters/issues/2906
+! https://github.com/CyberPurify/PurifyFilters/issues/2906
 ! Fixing issues with players
 @@||imasdk.googleapis.com/js/core/bridge*.html$domain=~spotify.com
-! https://github.com/AdguardTeam/AdguardFilters/issues/2908
+! https://github.com/CyberPurify/PurifyFilters/issues/2908
 @@||user.weiyun.com/newcgi/outlink.fcg$document
-! https://github.com/AdguardTeam/AdguardFilters/issues/2853
+! https://github.com/CyberPurify/PurifyFilters/issues/2853
 @@||static.youporn.phncdn.com/cb/assets/css/$domain=youporn.com
 ! https://forum.purify.om/index.php?threads/13009/
 @@||dlh.net/ajax/keyassign.php?$elemhide
@@ -3708,19 +3708,19 @@ tv-news-online.com#@#.header-ad
 @@clicks.$domain=cimbclicks.com.my,~third-party
 ! https://forum.purify.om/index.php?threads/12784/
 @@||googleadservices.com/gpt/pubads_impl_$domain=sports.ru
-! https://github.com/AdguardTeam/AdguardFilters/issues/2796
+! https://github.com/CyberPurify/PurifyFilters/issues/2796
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=globoplay.globo.com
 ! https://forum.purify.om/index.php?threads/11829/
 @@||linkbucks.com/scripts/intermissionLink.*.js$domain=zatnawqy.net
-! https://github.com/AdguardTeam/AdguardFilters/issues/2457
+! https://github.com/CyberPurify/PurifyFilters/issues/2457
 ecostream.tv#@#.adwrapper
-! https://github.com/AdguardTeam/AdguardFilters/issues/2631
+! https://github.com/CyberPurify/PurifyFilters/issues/2631
 ! Reported: https://forums.lanik.us/viewtopic.php?f=64&t=31659&p=98823#p98823
 @@||heartyhosting.com^$domain=muscleandfitness.com
 @@||gigya.com/comments.getComments$domain=muscleandfitness.com
 @@||cdn.gigya.com/js/gigya.services.plugins.base.min.js$domain=muscleandfitness.com
 @@||cdn.gigya.com/JS/socialize.js$domain=muscleandfitness.com
-! https://github.com/AdguardTeam/AdguardFilters/issues/2621
+! https://github.com/CyberPurify/PurifyFilters/issues/2621
 @@||ingdirect.com.au^$document
 ! https://forum.purify.om/index.php?threads/11960/
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=fox.com.tr
@@ -3731,10 +3731,10 @@ ecostream.tv#@#.adwrapper
 @@||amazon-adsystem.com/e/dtb/bid^$domain=kino.de
 ! Yandex projects - broken trailer player
 @@||yastatic.net/awaps-ad-sdk-js$domain=kinopoisk.ru|video.yandex.ru,script
-! https://github.com/AdguardTeam/AdguardFilters/issues/2519
+! https://github.com/CyberPurify/PurifyFilters/issues/2519
 @@||ncbi.nlm.nih.gov^$jsinject
-! https://github.com/AdguardTeam/AdguardFilters/issues/2314
-! sellercentral.amazon.com - broken by Adguard injections
+! https://github.com/CyberPurify/PurifyFilters/issues/2314
+! sellercentral.amazon.com - broken by CyberPurify injections
 @@||sellercentral.amazon.com/hz/inventory/$elemhide,jsinject
 @@||sellercentral.amazon.com/gp/remote-nav-html.html$elemhide,jsinject
 ! https://forum.purify.om/index.php?threads/11632/
@@ -3792,36 +3792,36 @@ mixesdb.com#@#iframe[width="100%"][height="120"]
 @@||gismeteo.ru/api/informer/*/180x150
 ! tagmanager.google.com - broken admin panel
 @@||tagmanager.google.com^$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2166
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2166
 @@||img.chefkoch-cdn.de/gujAd.min.js
 ! https://forum.purify.om/index.php?threads/10410/
 @@||image.exacttarget.com^$domain=optus.com.au
 ! https://forum.purify.om/index.php?threads/10286/
 @@||adm.fwmrm.net/crossdomain.xml
 @@||adm.fwmrm.net/p/cracklecom_flash_live/AdManager.swf^$domain=crackle.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2135
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2135
 @@||publico.es/publico/js/ads.min.js
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2149
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2149
 @@||btg.mtvnservices.com/aria/coda.html?site=nickelodeontv.ru$domain=nickelodeon.ru
 ! https://forum.purify.om/index.php?threads/10262/
 @@||secure-dcr.imrworldwide.com^$domain=9now.com.au
 ! https://forum.purify.om/index.php?threads/10201/
 @@||advertiser.cyberghostvpn.com/www/$domain=cyberghostvpn.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2084
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2084
 @@||eloqua.com^$domain=forms.progress.com
 ! https://forum.purify.om/index.php?threads/10103/
 forbes.com#@##vest-pocket-container-3
-! https://github.com/AdguardTeam/AdguardForMac/issues/72
+! https://github.com/CyberPurify/PurifyForMac/issues/72
 @@||linkedin.com/inbox/compose/dialog$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2031
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2031
 @@||cmbchina.com/ccard/gqcard/js/pop.js
-! my.bmi.ir - broken by Adguard injections
+! my.bmi.ir - broken by CyberPurify injections
 @@||my.bmi.ir^$elemhide,jsinject
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1989
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1989
 engadget.com#@#aside[role="banner"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2001
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2001
 klart.se#@#.advertisement
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1987
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1987
 @@||bills.clubs.nfl.com/assets/img/ads/
 ! http://forum.purify.om/showthread.php?10054
 @@.vaughnsoft.net/abvs.php?a=
@@ -3829,14 +3829,14 @@ klart.se#@#.advertisement
 realmadrid.ru#@#img[width="240"][height="400"]
 ! http://forum.purify.om/showthread.php?10458
 @@||chatropolis.com:1588/*/amazing?sid=$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1956
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1956
 @@||usaa.com^$document
-! https://github.com/AdguardTeam/AdguardForAndroid/issues/443
+! https://github.com/CyberPurify/PurifyForAndroid/issues/443
 @@||appex-rf.msn.com/*.js?adtype=
 ! http://forum.purify.om/showthread.php?10505
 @@||ad-text.ru^$domain=ad-text.ru
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1912
-! iBooks Store app - broken by Adguard injections
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1912
+! iBooks Store app - broken by CyberPurify injections
 @@||mzstatic.com/htmlResources/$elemhide,jsinject,domain=itunes.apple.com
 ! http://forum.purify.om/showthread.php?10383
 @@||adshell.net^$domain=fastflash.pw
@@ -3844,16 +3844,16 @@ realmadrid.ru#@#img[width="240"][height="400"]
 @@||ad.nl/ad/
 ! http://forum.purify.om/showthread.php?10424
 files.fm#@#.show_ads
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1908
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1908
 @@||cdn.interactivemedia.net/live/t-o-auto/live/globalAdTag.min.js$domain=tanken.t-online.de
 ! http://forum.purify.om/showthread.php?9842
-! vk.com - sometimes buttons are broken by Adguard injections
+! vk.com - sometimes buttons are broken by CyberPurify injections
 @@||vk.com/*.php?__query=$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1897
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1897
 @@||ulximg.com/image/*/banner/$domain=hotnewhiphop.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1888
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1888
 @@||tickets.oebb.at^$generichide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1878
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1878
 @@||ilan.memurlar.net/common/job/advert/images/*/headline.jpg|
 ! http://forum.purify.om/showthread.php?9914
 @@||seosprint.net/style/img/ad-
@@ -3862,7 +3862,7 @@ files.fm#@#.show_ads
 @@||l2topzone.com/ads.png
 @@||l2topzone.com/advertisement.js.php
 ! http://forum.purify.om/showthread.php?9939
-! xvideos.com - broken by Adguard injections
+! xvideos.com - broken by CyberPurify injections
 @@||xvideos.com/*/?_=$document
 ! http://forum.purify.om/showthread.php?9813
 @@||cdn.videoplaza.tv/contrib/no-vg/svm/homadConfigVideoplaza-vgtv.json^$domain=vgtv.no
@@ -3872,7 +3872,7 @@ sxsw.com#@#.sponsors
 @@/media/uploads/ads/*$domain=newauto46.ru
 ! gagadget.com - fixing voting
 gagadget.*##iframe[width="100%"][height="250"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1727
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1727
 @@||player.pstatic.gr/adman-video.js$domain=webtv.ert.gr
 ! http://forum.purify.om/showthread.php?9515
 oklmradio.com#@#iframe[width="100%"][height="250"]
@@ -3880,7 +3880,7 @@ oklmradio.com#@#iframe[width="100%"][height="250"]
 pochta.ru#@#.header-advert
 ! http://forum.purify.om/showthread.php?9461
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js^$domain=f5haber.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1697
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1697
 @@||pagead2.googlesyndication.com/pagead/show_ads.js$domain=kingofshrink.com
 ! mycokerewards.com - code validation is broken
 @@||partner.googleadservices.com/gpt/pubads_impl_$domain=mycokerewards.com
@@ -3894,20 +3894,20 @@ pochta.ru#@#.header-advert
 @@||adm.fwmrm.net/p/msn_live/AdManager.swf$domain=msn.*|s-msn.com
 ! http://forum.purify.om/showthread.php?9182
 @@||assets*.akamai.coub.com/assets/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1600
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1600
 theguardian.com#@#.ad_unit
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1569
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1569
 @@||coubsecureassets-a.akamaihd.net/assets/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1581
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1581
 @@||translate.yandex.net^$domain=speedtest.net
 ! Prevent blocking by third-party filters
 @@||cdn.purify.om/public/$domain=ppurify.pupurify.
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1537
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1537
 @@||wdr.ivwbox.de/cgi-bin/ivw/CP/$domain=wdr.de
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1499
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1499
 @@||plus.google.com/hangouts/_/CONVERSATION/$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1471
-! URL also was broken by Adguard injections
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1471
+! URL also was broken by CyberPurify injections
 @@||cowcotland.com/scripjs.php$document
 @@||cowcotland.com/scripjs.php
 ! neobux.com - broken browser extension
@@ -3922,40 +3922,40 @@ theguardian.com#@#.ad_unit
 @@||cdn.watch.aetnd.com^$domain=fyi.tv|cdn.watch.aetnd.com
 ! http://forum.purify.om/showthread.php?8705
 @@||pq-direct.revsci.net/pql$domain=cuptv.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1343
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1343
 @@||config.playwire.com/*/zeus.json$domain=explosm.net
 ! http://forum.purify.om/showthread.php?8813
 @@||freebitco.in^$generichide
 ! mega.nz - broken download
 @@||static.mega.nz/*/html/*.html$document
 ! http://forum.purify.om/showthread.php?8681
-! minnetonkamoccasin.com - images are broken by Adguard injections
+! minnetonkamoccasin.com - images are broken by CyberPurify injections
 @@||minnetonkamoccasin.com/colorswatch/json/$document
 ! http://forum.purify.om/showthread.php?8619
 anonymousemail.me#@#.adsense
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1155
-! cupsservice.com - internal links are broken by Adguard injections
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1155
+! cupsservice.com - internal links are broken by CyberPurify injections
 @@||cupsservice.com^$xmlhttprequest,document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1161
-! egb.com - navigation is broken by Adguard injections
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1161
+! egb.com - navigation is broken by CyberPurify injections
 @@||egb.com/ajax.php^$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1150
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1150
 @@||fls.doubleclick.net/activityi$domain=geforce.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1224
-! origin.com - broken by Adguard injections
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1224
+! origin.com - broken by CyberPurify injections
 @@||akamaihd.net/origin-com-store-webassets/$script,document
-! https://malwaretips.com/threads/adguard-v6-rc1-released.54444/page-4#post-466420
+! https://malwaretips.com/threads/purify-v6-rc1-released.54444/page-4#post-466420
 @@||huntington.com^$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1097
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1097
 @@||dw.cbsi.com/anonc.js$domain=giantbomb.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1209
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1209
 vladtv.com#@##cmn_ad_tag_head
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1166
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1166
 idownloadblog.com#@#.custom-ad
 idownloadblog.com#@#.header-ad
 ! Slimjet browser - broken translate function
 @@||slimjet.com/translate.php^$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1106
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1106
 asiaone.com#@#.main-ads
 ! intellicast.com - broken forecast
 @@||images.intellicast.com/App_Scripts/ad.min.js
@@ -3965,78 +3965,78 @@ asiaone.com#@#.main-ads
 ! Fixing signing into Windows 10 Store
 @@||auth.gfx.ms^$document
 @@||login.live.com/ppsecure/$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1073
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1073
 @@||adserver.adtech.de/?adrawdata/*/noperf$domain=files.snstatic.fi
-! bing.com - search broken by Adguard injections
+! bing.com - search broken by CyberPurify injections
 @@||bing.com/Passport.aspx$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/810
+! https://github.com/CyberPurify/ExperimentalFilter/issues/810
 @@||partner.googleadservices.com/gpt/pubads_$domain=nat-geo.ru
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/412
+! https://github.com/CyberPurify/ExperimentalFilter/issues/412
 @@||googleadservices.com/pagead/conversion.js$domain=greensad.com.ua
 ! http://forum.purify.om/showthread.php?7971
 @@||analytics.disneyinternational.com/ads/$other
 ! http://forum.purify.om/showthread.php?7889
-! The counter broken by Adguard injections
+! The counter broken by CyberPurify injections
 @@||banggood.com/index.php?com$document
 ! Fixing endless loading
 @@||pagead2.googlesyndication.com/pagead/js/*/show_ads_impl.js$domain=allday.news
 ! Fixing player on nbc.com/shows in desktop AG
 @@/AdManager.swf$domain=player.theplatform.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/983
+! https://github.com/CyberPurify/ExperimentalFilter/issues/983
 @@||partner.googleadservices.com/gpt/pubads_$domain=video.foxnews.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=video.foxnews.com
 ! newyorker.com - content was hidden
 newyorker.com#@#.ad-container
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/974
+! https://github.com/CyberPurify/ExperimentalFilter/issues/974
 @@||liverail.com/swf/*/vpaid-player.swf$domain=gametrailers.com
 @@||liverail.com/swf/*/admanager.swf$domain=gametrailers.com
 @@||liverail.com^$domain=cdn-static.liverail.com
 ! http://forum.purify.om/showthread.php?7697
 @@||googletagmanager.com/gtm.js$domain=kfc.co.th
-! https://github.com/AdguardTeam/AdguardForWindows/issues/464
-! protopage.com - broken by Adguard injections
+! https://github.com/CyberPurify/PurifyForWindows/issues/464
+! protopage.com - broken by CyberPurify injections
 ! Until 6.1 is not released
 @@||protopage.com^$elemhide
 ! http://forum.purify.om/showthread.php?7674
 @@||g2a.com/toolbar/$document
-! https://github.com/AdguardTeam/AdguardForWindows/issues/469
+! https://github.com/CyberPurify/PurifyForWindows/issues/469
 @@||telize.com/geoip$document
-! https://github.com/AdguardTeam/AdguardForWindows/issues/375
-! checkout broken by Adguard injections
+! https://github.com/CyberPurify/PurifyForWindows/issues/375
+! checkout broken by CyberPurify injections
 @@/shop/onepagecheckout/*$document
 @@/checkout/onepage/*$document
 @@/webapp/wcs/stores/servlet/*$document
 ! http://forum.purify.om/showthread.php?7487
 @@||cnn.com^*/ad_policy.xml$object-subrequest,domain=cnn.com
-! shasso.com - broken by Adguard injections
+! shasso.com - broken by CyberPurify injections
 @@||shasso.com/MyStoreOrders/$document
 ! offgamers.com - broken checkout
 @@||offgamers.com/checkout/buyNow/$document,xmlhttprequest
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/865
+! https://github.com/CyberPurify/ExperimentalFilter/issues/865
 @@||vle.aston.ac.uk/branding/themes/
 ! http://forum.purify.om/showthread.php?7303
 @@||dtdc.com/tracking/
 ! sh.st - broken counter
 @@||static.shorte.st/bundles/smeweb/$domain=sh.st
 @@||static.shorte.st/js/packed/smeadvert-locked.js$domain=sh.st
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/855
+! https://github.com/CyberPurify/ExperimentalFilter/issues/855
 @@/remote.php$document,xmlhttprequest,~third-party
 ! http://forum.purify.om/showthread.php?7066
 @@||adlink.wf^
 ! http://forum.purify.om/showthread.php?7009
 @@||sascdn.com/video/players/jwplayer/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/800
+! https://github.com/CyberPurify/ExperimentalFilter/issues/800
 @@||sgcpanel.com^$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/789
+! https://github.com/CyberPurify/ExperimentalFilter/issues/789
 @@||ghacks.net/wp-content/plugins/bwp-minify/min/$domain=ghacks.net
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/780
+! https://github.com/CyberPurify/ExperimentalFilter/issues/780
 @@||googleads.g.doubleclick.net/pagead/ads$domain=7k8x.com
 @@||pagead2.googlesyndication.com/pagead/scache/googlevideoadslibraryas3.swf$domain=7k8x.com
 @@||pagead2.googlesyndication.com/pagead/scache/googlevideoadslibrarylocalconnection.swf?googleConnection=_google_video_ads$domain=7k8x.com
 @@||googleads.g.doubleclick.net/pagead/test_domain.txt$domain=7k8x.com
 ! http://forum.purify.om/showthread.php?6964
 @@||teabox.com^$jsinject,elemhide
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/779
+! https://github.com/CyberPurify/ExperimentalFilter/issues/779
 @@||rad.msn.com/crossdomain.xml
 @@||rad.msn.com/ADSAdClient31.dll$domain=msn.com
 ! http://forum.purify.om/showthread.php?6957
@@ -4056,7 +4056,7 @@ multiup.org#@#.adbar
 @@||findvideo.tv/popunder.php$domain=filmovizija.me|filmovizija.in|filmovizija.*|filmovizija.net
 @@||creative.wwwpromoter.com/static/$script,domain=filmovizija.me|filmovizija.in|filmovizija.*|filmovizija.net
 ! http://forum.purify.om/showthread.php?6589
-! online.tivo.com - broken by Adguard injections
+! online.tivo.com - broken by CyberPurify injections
 @@||online.tivo.com^$elemhide,jsinject
 ! http://forum.purify.om/showthread.php?6428
 @@||cdn.flurry.com/js/flurry.js$domain=slantnews.com
@@ -4080,13 +4080,13 @@ multiup.org#@#.adbar
 @@||guru3d.com/core_javaload/$document
 ! pixelfederation.com - loading failed
 @@||portal.pixelfederation.com/*/login.php^$document
-! exclude Adguard website for now
+! exclude CyberPurify website for now
 ! TODO: remove these rules after fixing js on the site
 @@|http://purify.om/*.html$document
 @@|https://purify.om/*.html$document
 ! Disable Assistant in Hangouts
 @@||talkgadget.google.com^$jsinject
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/656
+! https://github.com/CyberPurify/ExperimentalFilter/issues/656
 @@||payeer.com/bitrix/components/payeer/system.auth.form/$document,xmlhttprequest
 ! Opera 12 - fixing developer tools
 @@||dragonfly.opera.com/app/$document
@@ -4097,7 +4097,7 @@ multiup.org#@#.adbar
 @@||techdays.ru/Banners/Redirect?bannerId=
 ! userscloud.com - unhide file name
 userscloud.com#@#a[href^="http://websitedhoome.com/"]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/605
+! https://github.com/CyberPurify/ExperimentalFilter/issues/605
 voat.co#@##header-banner
 ! http://forum.purify.om/showthread.php?5872
 starnursing.com#@##header-banner
@@ -4122,13 +4122,13 @@ marca.com#@#div[id^="div-gpt-ad-"]
 @@||pro.similarweb.com^$document
 ! bbc.co.uk - broken non-advertising branding
 @@||bbc.co.uk/modules/branding/css/$domain=bbc.co.uk
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/501
+! https://github.com/CyberPurify/ExperimentalFilter/issues/501
 @@||hosts-file.net/ad_servers.txt
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/488
+! https://github.com/CyberPurify/ExperimentalFilter/issues/488
 @@||google-analytics.com/analytics.js$domain=orbitum.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/472
+! https://github.com/CyberPurify/ExperimentalFilter/issues/472
 @@||omtrdc.net/b/ss/acsca-prod/$domain=amazon.ca|amazon.co.uk|amazon.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/439
+! https://github.com/CyberPurify/ExperimentalFilter/issues/439
 @@||zdmedia.ziffdavis.com/video/$domain=pcmag.com
 ! http://forum.purify.om/showthread.php?1575
 ebay.co.uk,ebay.*,ebay.de#@#.adv
@@ -4138,17 +4138,17 @@ forum.pac-rom.com#@#.banner_ads
 @@||b.scorecardresearch.com/crossdomain.xml$domain=espn.go.com
 ! exclude american express (fix retrieving of pdf billing statements)
 @@||online.americanexpress.com/myca/statementimage/$document
-! exclude Adguard preview service
+! exclude CyberPurify preview service
 @@||purify.rg^$document
 ! Fixed aliexpress.com styles
 @@||style.aliunicorn.com^$domain=alibaba.*|aliexpress.com
 ! Fixed: addons cannot be installed from addons.opera.com
 @@||addons.opera.com/ru/extensions/details/$document
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/161
+! https://github.com/CyberPurify/ExperimentalFilter/issues/161
 @@||dnsleaktest.com^$content,elemhide,jsinject
 ! http://forum.purify.om/showthread.php?4685
 @@||kayako.com/images/home/banner*.jpg
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/396
+! https://github.com/CyberPurify/ExperimentalFilter/issues/396
 @@/s1600/banner.png$domain=googlechromereleases.blogspot.ru
 ! http://forum.purify.om/showthread.php?4584
 @@||v.fwmrm.net/ad/$domain=theplatform.com
@@ -4166,7 +4166,7 @@ forum.pac-rom.com#@#.banner_ads
 @@||m.dbzstatic.com/assets/js/loader.js
 ! http://forum.purify.om/showthread.php?4415
 @@||topmarques.co.uk/classified/advert/$domain=topmarques.co.uk
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/360
+! https://github.com/CyberPurify/ExperimentalFilter/issues/360
 oregonlive.com#@##adv_header
 ! Fixing player on private.com/scenes/T
 @@||p.jwpcdn.com/*/skins/$third-party
@@ -4178,7 +4178,7 @@ oregonlive.com#@##adv_header
 @@||omegle.com^$jsinject
 ! http://forum.purify.om/showthread.php?4076
 @@||hackerslist.com/img/banner$~third-party
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/328
+! https://github.com/CyberPurify/ExperimentalFilter/issues/328
 @@||roleplayer.me/adframe_
 ! http://forum.purify.om/showthread.php?3931
 phrasemachine.com#@##adsense
@@ -4201,7 +4201,7 @@ ionomusic.com#@#object[width="300"][height="300"]
 ! http://forum.purify.om/showthread.php?3235-http-dropmefiles-com
 dropmefiles.com#@#.bnr
 dropmefiles.com#@#noindex .download_btn
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/232#issuecomment-65241751
+! https://github.com/CyberPurify/ExperimentalFilter/issues/232#issuecomment-65241751
 @@/adblock.js^$domain=cbs.com
 ! http://forum.purify.om/showthread.php?3411
 fb.eset.com#@##header-banner
@@ -4209,7 +4209,7 @@ fb.eset.com#@##header-banner
 @@_ad_300.$domain=bleacherreport.com
 ! http://forum.purify.om/showthread.php?3423-www-canalplus-fr
 @@||cdn.videoplaza.tv^$domain=canalplus.fr
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/242
+! https://github.com/CyberPurify/ExperimentalFilter/issues/242
 @@||haberartibir.com.tr/images/banner/logo.jpg
 @@||keep.google.com^$jsinject
 @@||omtrdc.net^$domain=amazon.co.uk|amazon.*|nintendo.net
@@ -4227,19 +4227,19 @@ fb.eset.com#@##header-banner
 ! Fixing ABPIndo (site hangs)
 @@||ad.admitad.com/goto/$domain=atavi.com
 detik.com#@#.banner_reg
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/51 - part2
+! https://github.com/CyberPurify/ExperimentalFilter/issues/51 - part2
 @@||cdn.videoplaza.tv^$third-party,domain=voxnow.de
 @@||static-fra.de^*/targeting.js$third-party,domain=voxnow.de
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/51
+! https://github.com/CyberPurify/ExperimentalFilter/issues/51
 @@||cdn.videoplaza.tv^$third-party,domain=rtl-now.rtl.de
 @@||static-fra.de^*/targeting.js$third-party,domain=rtl-now.rtl.de
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/71
+! https://github.com/CyberPurify/ExperimentalFilter/issues/71
 americannews.com#@#.wpInsertInPostAd
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/67
+! https://github.com/CyberPurify/ExperimentalFilter/issues/67
 @@||gorillanation.com/js/triggertag.js$domain=playstationlifestyle.net
 ! similarweb.com - Monthly Visits chart damaged when analyze some sites (for example Buysellads.com)
 @@||similarweb.com/website/data/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/72
+! https://github.com/CyberPurify/ExperimentalFilter/issues/72
 3dsiso.com#@##ad_global_above_footer
 ! http://forum.purify.om/showthread.php?2740
 @@||advertising.yahoo.com^$~third-party
@@ -4279,8 +4279,8 @@ sfml-dev.org#@##banner-container
 ! http://forum.purify.om/showthread.php?1098
 @@||irise.com^$document
 ! Fixing github sources
-@@||github.com/AdguardTeam/
-@@||raw.githubusercontent.com/AdguardTeam/
+@@||github.com/CyberPurify/
+@@||raw.githubusercontent.com/CyberPurify/
 ! Fixing continuous loading in video player
 @@/pubads*theguardian.com
 @@||sharethis.com^$third-party,domain=gamesradar.com
@@ -4548,7 +4548,7 @@ implbits.com#@#.banner_container
 @@||kyoka.gaikai.com/Kyoka/php/banner.js.php$domain=gaikai.com
 @@||moyareklama.ru/single_ad_new.php$elemhide
 @@||player.arsenal.com/adverts/video
-! Special for Mac OS X version of Adguard
+! Special for Mac OS X version of CyberPurify
 @@||itunes.apple.com$document
 @@||static.mobile.eu^*/resources/images/ads/superteaser_$image,domain=automobile.fr|automobile.it|mobile.eu|mobile.ro
 @@||tous-sports.fr/js/advertisement-AdBlock.js
@@ -4560,33 +4560,33 @@ implbits.com#@#.banner_container
 !-------------------- Fixing Stealth Mode ------------------
 !-----------------------------------------------------------
 ! https://forum.purify.om/index.php?threads/13787/ [Stealth Mode - hide IP]
-! https://github.com/AdguardTeam/AdguardFilters/issues/2808
+! https://github.com/CyberPurify/PurifyFilters/issues/2808
 ! https://forum.purify.om/index.php?threads/12685/
 ! http://forum.ru-board.com/topic.cgi?forum=5&topic=31105&start=3420#15
-! https://github.com/AdguardTeam/AdguardFilters/issues/2635
-! https://github.com/AdguardTeam/AdguardFilters/issues/2580
-! https://github.com/AdguardTeam/AdguardFilters/issues/2584
-! https://github.com/AdguardTeam/AdguardFilters/issues/2371
-! https://github.com/AdguardTeam/AdguardForWindows/issues/1118
+! https://github.com/CyberPurify/PurifyFilters/issues/2635
+! https://github.com/CyberPurify/PurifyFilters/issues/2580
+! https://github.com/CyberPurify/PurifyFilters/issues/2584
+! https://github.com/CyberPurify/PurifyFilters/issues/2371
+! https://github.com/CyberPurify/PurifyForWindows/issues/1118
 ! https://forum.purify.om/index.php?threads/11115/
-! https://github.com/AdguardTeam/AdguardFilters/issues/2242 [Stealth Mode - WebRTC]
-! https://github.com/AdguardTeam/StealthMode/issues/6
-! https://github.com/AdguardTeam/AdguardFilters/issues/2267
+! https://github.com/CyberPurify/PurifyFilters/issues/2242 [Stealth Mode - WebRTC]
+! https://github.com/CyberPurify/StealthMode/issues/6
+! https://github.com/CyberPurify/PurifyFilters/issues/2267
 ! https://forum.purify.om/index.php?threads/10557/
 ! https://forum.purify.om/index.php?threads/10586/
 ! https://forum.purify.om/index.php?threads/10585/
 ! https://forum.purify.om/index.php?threads/10573/
 ! https://forum.purify.om/index.php?threads/10575/
 ! https://forum.purify.om/index.php?threads/10577/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1803 [Stealth Mode - WebRTC]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1803 [Stealth Mode - WebRTC]
 ! https://forum.purify.om/index.php?threads/10252/page-2#post-82951 [Stealth Mode - WebRTC]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2166
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/797
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2166
+! https://github.com/CyberPurify/ExperimentalFilter/issues/797
 ! https://forum.purify.om/index.php?threads/10369/
 ! https://forum.purify.om/index.php?threads/10339/
 ! https://forum.purify.om/index.php?threads/10340/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2117
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2119 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2117
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2119 [Stealth Mode - third-party cookies]
 ! https://forum.purify.om/index.php?threads/10143/
 @@||static.comic.naver.net/staticimages/comicweb/naver/$image
 @@||imgcomic.naver.net^$image
@@ -4608,24 +4608,24 @@ implbits.com#@#.banner_container
 ! https://forum.purify.om/index.php?threads/10078/
 ! https://forum.purify.om/index.php?threads/10079/
 ! https://forum.purify.om/index.php?threads/10078/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2051
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2046 [Stealth Mode - hide IP]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2042 [Stealth Mode - Referrer]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2051
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2046 [Stealth Mode - hide IP]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2042 [Stealth Mode - Referrer]
 ! https://forum.purify.om/index.php?threads/9779/ [Stealth Mode - Referrer]
 ! https://forum.purify.om/index.php?threads/9646/ [Stealth Mode - Referrer]
 ! https://forum.purify.om/index.php?threads/9765/
 ! https://forum.purify.om/index.php?threads/9740/ [Stealth Mode - Referrer]
 ! https://forum.purify.om/index.php?threads/9743/ [Stealth Mode - Referrer]
 ! https://forum.purify.om/index.php?threads/9739/ [Stealth Mode - third-party cookies]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/2011 [Stealth Mode - third-party cookies]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1979 [Stealth Mode - third-party cookies]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1598 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/2011 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1979 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1598 [Stealth Mode - third-party cookies]
 ! http://forum.purify.om/showthread.php?10664 [Stealth Mode - third-party cookies]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1946 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1946 [Stealth Mode - third-party cookies]
 ! http://forum.purify.om/showthread.php?10530
 ! Fixing a Google captcha
 ! http://forum.purify.om/showthread.php?10562
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1957 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1957 [Stealth Mode - third-party cookies]
 ! flickr.com - fixing authorization
 @@||login.yahoo.com/config/
 @@||flickr.com/register_cookies.gne?
@@ -4634,12 +4634,12 @@ implbits.com#@#.banner_container
 @@||flickr.com/cookie_
 ! bild.de - fixing authorization
 ! vipracing.info - players are broken [Stealth Mode - Referrer]
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1898 [Stealth Mode - Referrer]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1898 [Stealth Mode - Referrer]
 ! prom.ua - fixing remote cart on third-party sites
 @@||my.prom.ua/remote/
 ! webaudioapi.com - audio samples are broken [Stealth Mode - WebRTC]
 @@||webaudioapi.com/samples/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1705 [Stealth Mode - Referrer]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1705 [Stealth Mode - Referrer]
 @@||thevideos.tv/embed-*.html$domain=putlocker.is
 ! Broken sync in Yandex Browser [Stealth Mode - User-agent]
 @@||sync.disk.yandex.net^
@@ -4653,29 +4653,29 @@ implbits.com#@#.banner_container
 @@||browser.yandex.*/sync/
 ! http://forum.purify.om/showthread.php?9453 [Stealth Mode - Referrer]
 @@||xmissymedia.com/galleries/$domain=xmissy.nl,image
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1667 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1667 [Stealth Mode - third-party cookies]
 @@||forgeofempires.com/game/json
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1646 [Stealth Mode - Referrer]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1646 [Stealth Mode - Referrer]
 @@||winvistaclub.com/wp-content/uploads/$domain=thewindowsclub.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1632 [Stealth Mode - Referrer, third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1632 [Stealth Mode - Referrer, third-party cookies]
 ! aliexpress.com - broken checkout
 @@||icashier.alipay.com^$domain=aliexpress.com
 @@||iopen.alipay.com/gateway.do$domain=aliexpress.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1499 [Stealth Mode - WebRTC]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1499 [Stealth Mode - WebRTC]
 @@||plus.google.com/hangouts/$document
 @@||plus.google.com/hangouts/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1592 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1592 [Stealth Mode - third-party cookies]
 ! Fixing authorization via github.com
 @@||github.com/login/
 @@||github.com/login?
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1549 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1549 [Stealth Mode - third-party cookies]
 @@||loginza.ru/api/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1543 [Stealth Mode - hide IP]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1543 [Stealth Mode - hide IP]
 @@||veehd.com/dl/
 ! solvemedia.com - captcha is broken [Stealth Mode - User-agent]
 ! nwolb.com - login failed [Stealth Mode - third-party cookies]
 @@||nwolb.com^
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1534 [Stealth Mode - hide IP]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1534 [Stealth Mode - hide IP]
 @@||tinypic.com/upload.php
 ! Fixing Yandex authorization [Stealth Mode - third-party cookies]
 @@||passport.yandex.ru^$domain=yandex.ua
@@ -4684,21 +4684,21 @@ implbits.com#@#.banner_container
 @@||pass.yandex.ru^
 @@||pass.yandex.kz^
 @@||mail.yandex.ru^$domain=yandex.ru
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1505 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1505 [Stealth Mode - third-party cookies]
 ! broken autentification with ulogin.ru
 @@||ulogin.ru/auth.php
 @@||ulogin.ru/fill.php
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1367 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1367 [Stealth Mode - third-party cookies]
 @@||adobelogin.com^
 @@||adobeid-*.services.adobe.com^
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1379 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1379 [Stealth Mode - third-party cookies]
 @@||facebook.com/*/dialog/oauth
 ! usps.com - access denied to tracking page [Stealth Mode - IP hiding]
 @@||tools.usps.com/go/TrackConfirmAction
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1202 [Stealth Mode - User-agent]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1202 [Stealth Mode - User-agent]
 @@||sync.opera.com/api/sync/
 @@||auth.opera.com^
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1109 [Stealth Mode - IP hiding]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1109 [Stealth Mode - IP hiding]
 @@||api.surfeasy.com/*/geo_lookup
 ! http://forum.purify.om/showthread.php?8067 [Stealth Mode - Referrer]
 @@||hypercomments.com/api/comments?_=
@@ -4709,12 +4709,12 @@ implbits.com#@#.banner_container
 @@||account.microsoft.com/?refd=
 !! 2. Jump to Google Store from other site
 @@||chrome.google.com/webstore/detail/
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/1666 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/1666 [Stealth Mode - third-party cookies]
 @@||microsoft.com/*=wsign
 @@||profile.microsoft.com/RegSysProfileCenter/
 @@||microsoft.com/*/signin.aspx
 @@||microsoft.com/*/signout.aspx
-! https://github.com/AdguardTeam/AdguardForWindows/issues/252 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/PurifyForWindows/issues/252 [Stealth Mode - third-party cookies]
 @@||answers.microsoft.com/*/completesignin
 @@||answers.microsoft.com/*/site/startsignin
 !! http://forum.purify.om/showthread.php?7406 (#119)
@@ -4729,16 +4729,16 @@ implbits.com#@#.banner_container
 @@||mycdn.me^$domain=ok.ru
 @@||odnoklassniki.ru/get$domain=ok.ru
 @@||ok.ru/web-api/music/conf
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/883 [Stealth Mode - Referrer]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/883 [Stealth Mode - Referrer]
 @@||media-imdb.com^$domain=imdb.*,image
 @@||media-imdb.com/images/*/imdb/js/$domain=imdb.com
 @@||media-imdb.com/images/*/imdb/css/$domain=imdb.com
 @@||media-imdb.com/images/*/prod/*.js$domain=imdb.com
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/812 [Stealth Mode - Referrer, third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/812 [Stealth Mode - Referrer, third-party cookies]
 @@||datacloudmail.ru^$domain=cloud.mail.ru
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/796 [Stealth Mode - Referrer, third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/796 [Stealth Mode - Referrer, third-party cookies]
 @@||google.com/recaptcha/api/
-! https://github.com/AdguardTeam/AdguardForWindows/issues/259
+! https://github.com/CyberPurify/PurifyForWindows/issues/259
 @@||cbox.ws/box/?boxid=$domain=exystence.net
 !! http://forum.purify.om/showthread.php?6047 (#376) [Stealth Mode - third-party cookies]
 !! Login to habrahabr projects; login to hypercomments on sites
@@ -4753,7 +4753,7 @@ implbits.com#@#.banner_container
 @@||login.wmtransfer.com^$document
 ! http://forum.purify.om/showthread.php?6681 [Stealth Mode - third-party cookies]
 @@||login.uid.me^$domain=ucoz.ru
-! https://github.com/AdguardTeam/ExperimentalFilter/issues/692 [Stealth Mode - third-party cookies]
+! https://github.com/CyberPurify/ExperimentalFilter/issues/692 [Stealth Mode - third-party cookies]
 @@||vodakpsdhdsdrm-vh.akamaihd.net/z/clips/
 ! http://forum.purify.om/showthread.php?6533 [Stealth Mode - Referrer]
 @@||195.82.146.52/logo/$domain=rutracker.org

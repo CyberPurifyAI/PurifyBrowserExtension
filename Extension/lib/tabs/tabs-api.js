@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 (function (purify) {
@@ -31,44 +31,44 @@
       };
 
       return {
-        onCreated: emptyListener, // callback (adguardWin, nativeWin)
+        onCreated: emptyListener, // callback (purifyWin, nativeWin)
         onRemoved: emptyListener, // callback (windowId, nativeWin)
-        onUpdated: emptyListener, // callback (adguardWin, nativeWin, type) (Defined only for Firefox)
+        onUpdated: emptyListener, // callback (purifyWin, nativeWin, type) (Defined only for Firefox)
 
         create: noOpFunc,
         getLastFocused: noOpFunc, // callback (windowId, nativeWin)
-        forEachNative: noOpFunc, // callback (nativeWin, adguardWin)
+        forEachNative: noOpFunc, // callback (nativeWin, purifyWin)
       };
     };
 
   purify.windows = (function (windowsImpl) {
     // eslint-disable-next-line no-unused-vars
-    const AdguardWin = {
+    const PurifyWin = {
       windowId: 1,
       type: "normal", // 'popup'
     };
 
     function noOpFunc() {}
 
-    const adguardWindows = Object.create(null); // windowId => AdguardWin
+    const purifyWindows = Object.create(null); // windowId => PurifyWin
 
-    windowsImpl.forEachNative((nativeWin, adguardWin) => {
-      adguardWindows[adguardWin.windowId] = adguardWin;
+    windowsImpl.forEachNative((nativeWin, purifyWin) => {
+      purifyWindows[purifyWin.windowId] = purifyWin;
     });
 
     const onCreatedChannel = purify.utils.channels.newChannel();
     const onRemovedChannel = purify.utils.channels.newChannel();
 
-    windowsImpl.onCreated.addListener((adguardWin) => {
-      adguardWindows[adguardWin.windowId] = adguardWin;
-      onCreatedChannel.notify(adguardWin);
+    windowsImpl.onCreated.addListener((purifyWin) => {
+      purifyWindows[purifyWin.windowId] = purifyWin;
+      onCreatedChannel.notify(purifyWin);
     });
 
     windowsImpl.onRemoved.addListener((windowId) => {
-      const adguardWin = adguardWindows[windowId];
-      if (adguardWin) {
-        onRemovedChannel.notify(adguardWin);
-        delete adguardWindows[windowId];
+      const purifyWin = purifyWindows[windowId];
+      if (purifyWin) {
+        onRemovedChannel.notify(purifyWin);
+        delete purifyWindows[windowId];
       }
     });
 
@@ -78,7 +78,7 @@
 
     const getLastFocused = function (callback) {
       windowsImpl.getLastFocused((windowId) => {
-        const metadata = adguardWindows[windowId];
+        const metadata = purifyWindows[windowId];
         if (metadata) {
           callback(metadata[0]);
         }
@@ -86,11 +86,11 @@
     };
 
     return {
-      onCreated: onCreatedChannel, // callback(adguardWin)
-      onRemoved: onRemovedChannel, // callback(adguardWin)
+      onCreated: onCreatedChannel, // callback(purifyWin)
+      onRemoved: onRemovedChannel, // callback(purifyWin)
 
       create,
-      getLastFocused, // callback (adguardWin)
+      getLastFocused, // callback (purifyWin)
     };
   })(purify.windowsImpl);
 
@@ -125,7 +125,7 @@
 
   purify.tabs = (function (tabsImpl) {
     // eslint-disable-next-line no-unused-vars
-    const AdguardTab = {
+    const PurifyTab = {
       tabId: 1,
       url: "url",
       title: "Title",
@@ -136,7 +136,7 @@
     };
 
     // eslint-disable-next-line no-unused-vars
-    const AdguardTabFrame = {
+    const PurifyTabFrame = {
       frameId: 1,
       url: "url",
       domainName: "domainName",
@@ -281,7 +281,7 @@
           callback(tab);
         } else {
           // Tab not found in the local state, but we are sure that this tab exists. Sync...
-          // TODO[Edge]: Relates to Edge Bug https://github.com/AdguardTeam/AdguardBrowserExtension/issues/481
+          // TODO[Edge]: Relates to Edge Bug https://github.com/PurifyTeam/PurifyBrowserExtension/issues/481
           tabsImpl.get(tabId, (tab) => {
             onTabCreated(tab);
             callback(tab);
@@ -300,7 +300,7 @@
       let tab = tabs[tabId];
       if (!tab && frameId === 0) {
         // Sync tab for that 'onCreated' event was missed.
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/481
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/481
         tab = {
           tabId,
           url,

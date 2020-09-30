@@ -15,21 +15,8 @@
  * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global purifyContent */
-
-(function (purify) {
-  "use strict";
-
-  window.i18n = purify.18n;
-
-  window.popupPage = {
-    sendMessage: purify.untimeImpl.sendMessage,
-    onMessage: purify.untimeImpl.onMessage,
-    closePopup() {
-      window.close();
-    },
-    resizePopup() {
-      // Doing nothing
-    },
-  };
-})(purifyContent);
+/**
+ * Global object for content scripts.
+ * !!! DO not change to const, because this variable will be redeclared in purify-api
+ */
+var purifyContent = {}; // eslint-disable-line no-unused-vars, no-var

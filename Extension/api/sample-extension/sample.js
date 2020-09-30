@@ -1,12 +1,12 @@
-/* global adguardApi */
+/* global purifyApi */
 /* eslint-disable no-console */
 
 // Init the configuration
 const configuration = {
-  // Adguard English filter alone
+  // Purify English filter alone
   filters: [2],
 
-  // Adguard is disabled on www.avira.com
+  // Purify is disabled on www.avira.com
   whitelist: ["www.avira.com"],
 
   // Array of custom rules
@@ -26,22 +26,22 @@ const onBlocked = function (details) {
   console.log(details);
 };
 
-adguardApi.onRequestBlocked.addListener(onBlocked);
+purifyApi.onRequestBlocked.addListener(onBlocked);
 
-adguardApi.start(configuration, () => {
-  console.log("Finished Adguard API initialization.");
+purifyApi.start(configuration, () => {
+  console.log("Finished Purify API initialization.");
 
-  // Now we want to disable Adguard on www.google.com
+  // Now we want to disable Purify on www.google.com
   configuration.whitelist.push("www.google.com");
-  adguardApi.configure(configuration, () => {
-    console.log("Finished Adguard API re-configuration");
+  purifyApi.configure(configuration, () => {
+    console.log("Finished Purify API re-configuration");
   });
 });
 
-// Disable Adguard in 1 minute
+// Disable Purify in 1 minute
 setTimeout(() => {
-  adguardApi.onRequestBlocked.removeListener(onBlocked);
-  adguardApi.stop(() => {
-    console.log("Adguard API has been disabled.");
+  purifyApi.onRequestBlocked.removeListener(onBlocked);
+  purifyApi.stop(() => {
+    console.log("Purify API has been disabled.");
   });
 }, 60 * 1000);

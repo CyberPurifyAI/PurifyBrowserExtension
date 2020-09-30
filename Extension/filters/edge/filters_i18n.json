@@ -1939,262 +1939,262 @@
 		},
 		"10": {
 			"ar": {
-				"description": "مانع الإعلانات AdGuard يوصى باستخدامها مع",
-				"name": "AdGuardتوصية"
+				"description": "مانع الإعلانات CyberPurify يوصى باستخدامها مع",
+				"name": "CyberPurifyتوصية"
 			},
 			"be": {
-				"description": "Фільтр рэкамендуецца выкарыстоўваць з AdGuard",
-				"name": "Рэкамендацыя AdGuard"
+				"description": "Фільтр рэкамендуецца выкарыстоўваць з CyberPurify",
+				"name": "Рэкамендацыя CyberPurify"
 			},
 			"da": {
-				"description": "Anbefalet til brug med AdGuard ad blocker",
-				"name": "AdGuard anbefaling"
+				"description": "Anbefalet til brug med CyberPurify ad blocker",
+				"name": "CyberPurify anbefaling"
 			},
 			"de": {
-				"description": "Für die Verwendung mit AdGuard-Werbeblocker empfohlen.",
-				"name": "AdGuard Empfehlung"
+				"description": "Für die Verwendung mit CyberPurify-Werbeblocker empfohlen.",
+				"name": "CyberPurify Empfehlung"
 			},
 			"en": {
-				"description": "Recommended to use with AdGuard ad blocker",
-				"name": "AdGuard recommendation"
+				"description": "Recommended to use with CyberPurify ad blocker",
+				"name": "CyberPurify recommendation"
 			},
 			"es": {
-				"description": "Recomendado para usar con el bloqueador de anuncios AdGuard",
-				"name": "Recomendación de AdGuard"
+				"description": "Recomendado para usar con el bloqueador de anuncios CyberPurify",
+				"name": "Recomendación de CyberPurify"
 			},
 			"es_ES": {
-				"description": "Recomendado para usar con el bloqueador de anuncios AdGuard",
-				"name": "Recomendación de AdGuard"
+				"description": "Recomendado para usar con el bloqueador de anuncios CyberPurify",
+				"name": "Recomendación de CyberPurify"
 			},
 			"fa": {
-				"description": "توصیه میشود با مسدودساز تبلیغ AdGuard استفاده شود",
-				"name": "AdGuard توصیه"
+				"description": "توصیه میشود با مسدودساز تبلیغ CyberPurify استفاده شود",
+				"name": "CyberPurify توصیه"
 			},
 			"fi": {
-				"description": "Recommended to use with AdGuard ad blocker",
-				"name": "AdGuard recommendation"
+				"description": "Recommended to use with CyberPurify ad blocker",
+				"name": "CyberPurify recommendation"
 			},
 			"fr": {
-				"description": "Utilisation recommandée avec bloqueur de publicités AdGuard",
-				"name": "Recommandé par AdGuard"
+				"description": "Utilisation recommandée avec bloqueur de publicités CyberPurify",
+				"name": "Recommandé par CyberPurify"
 			},
 			"hr": {
-				"description": "Preporučeno koristiti zajedno s AdGuard blokerom oglasa",
-				"name": "AdGuard preporuka"
+				"description": "Preporučeno koristiti zajedno s CyberPurify blokerom oglasa",
+				"name": "CyberPurify preporuka"
 			},
 			"hu": {
-				"description": "AdGuard hirdetésszűrővel ajánlott a használni",
-				"name": "AdGuard ajánlás"
+				"description": "CyberPurify hirdetésszűrővel ajánlott a használni",
+				"name": "CyberPurify ajánlás"
 			},
 			"id": {
-				"description": "Disarankan untuk digunakan dengan pemblokir iklan AdGuard",
-				"name": "Rekomendasi AdGuard"
+				"description": "Disarankan untuk digunakan dengan pemblokir iklan CyberPurify",
+				"name": "Rekomendasi CyberPurify"
 			},
 			"it": {
-				"description": "Consigliato per l'uso con il blocco degli annunci AdGuard",
-				"name": "Consiglio AdGuard"
+				"description": "Consigliato per l'uso con il blocco degli annunci CyberPurify",
+				"name": "Consiglio CyberPurify"
 			},
 			"ja": {
-				"description": "AdGuardの広告ブロッカーを使用することをおすすめします",
-				"name": "AdGuard推奨"
+				"description": "CyberPurifyの広告ブロッカーを使用することをおすすめします",
+				"name": "CyberPurify推奨"
 			},
 			"ko": {
-				"description": "AdGuard 광고 차단기와 함께 사용하기를 권장드립니다.",
-				"name": "AdGuard 권장"
+				"description": "CyberPurify 광고 차단기와 함께 사용하기를 권장드립니다.",
+				"name": "CyberPurify 권장"
 			},
 			"nl": {
-				"description": "Aanbevolen om te gebruiken met AdGuard adblocker",
-				"name": "AdGuard aanbeveling"
+				"description": "Aanbevolen om te gebruiken met CyberPurify adblocker",
+				"name": "CyberPurify aanbeveling"
 			},
 			"no": {
-				"description": "Anbefales for bruk med AdGuard-annonseblokkerer",
-				"name": "AdGuard-anbefaling"
+				"description": "Anbefales for bruk med CyberPurify-annonseblokkerer",
+				"name": "CyberPurify-anbefaling"
 			},
 			"pl": {
-				"description": "Zalecany do korzystania z AdGuardem",
-				"name": "Rekomendacja AdGuarda"
+				"description": "Zalecany do korzystania z CyberPurifyem",
+				"name": "Rekomendacja CyberPurifya"
 			},
 			"pt": {
-				"description": "Recomendado para usar com bloqueador de publicidade do AdGuard",
-				"name": "Recomendação do AdGuard"
+				"description": "Recomendado para usar com bloqueador de publicidade do CyberPurify",
+				"name": "Recomendação do CyberPurify"
 			},
 			"pt_BR": {
-				"description": "Recomendado usar com o AdGuard bloqueador de anúncios",
-				"name": "Recomendação do AdGuard"
+				"description": "Recomendado usar com o CyberPurify bloqueador de anúncios",
+				"name": "Recomendação do CyberPurify"
 			},
 			"pt_PT": {
-				"description": "Recomendado para usar com bloqueador de publicidade do AdGuard",
-				"name": "Recomendação do AdGuard"
+				"description": "Recomendado para usar com bloqueador de publicidade do CyberPurify",
+				"name": "Recomendação do CyberPurify"
 			},
 			"ru": {
-				"description": "Фильтр рекомендуется использовать с AdGuard",
-				"name": "Рекомендация AdGuard"
+				"description": "Фильтр рекомендуется использовать с CyberPurify",
+				"name": "Рекомендация CyberPurify"
 			},
 			"sk": {
-				"description": "Odporučené používať s AdGuard blokovačom reklamy",
-				"name": "Odporučené AdGuard"
+				"description": "Odporučené používať s CyberPurify blokovačom reklamy",
+				"name": "Odporučené CyberPurify"
 			},
 			"sl": {
-				"description": "Priporočljivo za uporabo z zaviralcem oglasov AdGuard",
-				"name": "Priporočilo AdGuarda"
+				"description": "Priporočljivo za uporabo z zaviralcem oglasov CyberPurify",
+				"name": "Priporočilo CyberPurifya"
 			},
 			"sr": {
-				"description": "Preporučuje se korišćenje sa AdGuard blokatorom reklama",
-				"name": "AdGuard preporuka"
+				"description": "Preporučuje se korišćenje sa CyberPurify blokatorom reklama",
+				"name": "CyberPurify preporuka"
 			},
 			"sv": {
-				"description": "Rekommenderas att användas tillsammans med AdGuard annonsblockerare",
-				"name": "AdGuardrekommendation"
+				"description": "Rekommenderas att användas tillsammans med CyberPurify annonsblockerare",
+				"name": "CyberPurifyrekommendation"
 			},
 			"tr": {
-				"description": "AdGuard reklam engelleyici ile kullanılması önerilir",
-				"name": "AdGuard'ın tavsiyesi"
+				"description": "CyberPurify reklam engelleyici ile kullanılması önerilir",
+				"name": "CyberPurify'ın tavsiyesi"
 			},
 			"uk": {
-				"description": "Фільтр рекомендується до використання з AdGuard",
-				"name": "Рекомендація AdGuard"
+				"description": "Фільтр рекомендується до використання з CyberPurify",
+				"name": "Рекомендація CyberPurify"
 			},
 			"vi": {
-				"description": "Được khuyến nghị sử dụng với trình chặn quảng cáo AdGuard",
-				"name": "Đề xuất AdGuard"
+				"description": "Được khuyến nghị sử dụng với trình chặn quảng cáo CyberPurify",
+				"name": "Đề xuất CyberPurify"
 			},
 			"zh": {
-				"description": "建议与 AdGuard 广告拦截器配合使用",
-				"name": "AdGuard 推荐"
+				"description": "建议与 CyberPurify 广告拦截器配合使用",
+				"name": "CyberPurify 推荐"
 			},
 			"zh_TW": {
-				"description": "被建議與 AdGuard 廣告封鎖器一起使用",
-				"name": "AdGuard 建議"
+				"description": "被建議與 CyberPurify 廣告封鎖器一起使用",
+				"name": "CyberPurify 建議"
 			}
 		},
 		"11": {
 			"ar": {
-				"description": "AdGuardلديه مراجع إلى عامل التصفية الأساسي لـ",
-				"name": "AdGuard مرجع عامل التصفية الأساسي لـ"
+				"description": "CyberPurifyلديه مراجع إلى عامل التصفية الأساسي لـ",
+				"name": "CyberPurify مرجع عامل التصفية الأساسي لـ"
 			},
 			"be": {
-				"description": "Мае адпраўкі да Базавага фільтра AdGuard",
-				"name": "Адпраўка да Базавага фільтра AdGuard"
+				"description": "Мае адпраўкі да Базавага фільтра CyberPurify",
+				"name": "Адпраўка да Базавага фільтра CyberPurify"
 			},
 			"da": {
-				"description": "Har referencer til AdGuard Basisfiltret",
-				"name": "AdGuard Basisfilter reference"
+				"description": "Har referencer til CyberPurify Basisfiltret",
+				"name": "CyberPurify Basisfilter reference"
 			},
 			"de": {
-				"description": "Basiert auf dem AdGuard Basis-Filter",
-				"name": "Basis: AdGuard Basis-Filter"
+				"description": "Basiert auf dem CyberPurify Basis-Filter",
+				"name": "Basis: CyberPurify Basis-Filter"
 			},
 			"en": {
-				"description": "Has references to the AdGuard Base filter",
-				"name": "AdGuard Base filter reference"
+				"description": "Has references to the CyberPurify Base filter",
+				"name": "CyberPurify Base filter reference"
 			},
 			"es": {
-				"description": "Tiene referencias al filtro base de AdGuard",
-				"name": "Referencia al filtro base de AdGuard"
+				"description": "Tiene referencias al filtro base de CyberPurify",
+				"name": "Referencia al filtro base de CyberPurify"
 			},
 			"es_ES": {
-				"description": "Tiene referencias al filtro base de AdGuard",
-				"name": "Referencia al filtro base de AdGuard"
+				"description": "Tiene referencias al filtro base de CyberPurify",
+				"name": "Referencia al filtro base de CyberPurify"
 			},
 			"fa": {
-				"description": "ارجاع دارد به فیلتر پایه AdGuard",
-				"name": "مرجع فیلتر پایه AdGuard"
+				"description": "ارجاع دارد به فیلتر پایه CyberPurify",
+				"name": "مرجع فیلتر پایه CyberPurify"
 			},
 			"fi": {
-				"description": "Has references to the AdGuard Base filter",
-				"name": "AdGuard Base filter reference"
+				"description": "Has references to the CyberPurify Base filter",
+				"name": "CyberPurify Base filter reference"
 			},
 			"fr": {
-				"description": "Contient des références au filtre Basique de AdGuard",
-				"name": "Référence au filtre Basique de AdGuard"
+				"description": "Contient des références au filtre Basique de CyberPurify",
+				"name": "Référence au filtre Basique de CyberPurify"
 			},
 			"hr": {
-				"description": "Ima reference na AdGuard Osnovni filtar",
-				"name": "Referenca AdGuard Osnovnog filtra"
+				"description": "Ima reference na CyberPurify Osnovni filtar",
+				"name": "Referenca CyberPurify Osnovnog filtra"
 			},
 			"hu": {
 				"description": "Rendelkezik kapcsolatokkal az Angol szűrővel",
 				"name": "Angol szűrő kapcsolat"
 			},
 			"id": {
-				"description": "Memiliki referensi ke penyaring dasar AdGuard",
-				"name": "Referensi penyaring dasar AdGuard"
+				"description": "Memiliki referensi ke penyaring dasar CyberPurify",
+				"name": "Referensi penyaring dasar CyberPurify"
 			},
 			"it": {
 				"description": "Ha riferimento ad un filtro inglese",
 				"name": "Riferimento ad un filtro inglese"
 			},
 			"ja": {
-				"description": "AdGuardベースフィルタへのリファレンスがあります",
-				"name": "AdGuardベースフィルタリファレンス"
+				"description": "CyberPurifyベースフィルタへのリファレンスがあります",
+				"name": "CyberPurifyベースフィルタリファレンス"
 			},
 			"ko": {
-				"description": "AdGuard 베이스 필터를 참조합니다.",
-				"name": "AdGuard 베이스 필터 참조"
+				"description": "CyberPurify 베이스 필터를 참조합니다.",
+				"name": "CyberPurify 베이스 필터 참조"
 			},
 			"nl": {
 				"description": "Refereert aan het Engelse filter",
 				"name": "Engels filter referentie"
 			},
 			"no": {
-				"description": "Har referanser til AdGuards hovedfilter",
-				"name": "Referanse for AdGuards hovedfilter"
+				"description": "Har referanser til CyberPurifys hovedfilter",
+				"name": "Referanse for CyberPurifys hovedfilter"
 			},
 			"pl": {
-				"description": "Zawiera odniesienia do podstawowego filtra AdGuard",
-				"name": "Odniesienie do filtra podstawowego AdGuard"
+				"description": "Zawiera odniesienia do podstawowego filtra CyberPurify",
+				"name": "Odniesienie do filtra podstawowego CyberPurify"
 			},
 			"pt": {
-				"description": "Tem referências à Base de filtros do AdGuard",
-				"name": "Referência da Base de filtros do AdGuard"
+				"description": "Tem referências à Base de filtros do CyberPurify",
+				"name": "Referência da Base de filtros do CyberPurify"
 			},
 			"pt_BR": {
-				"description": "Tem referências ao Filtro Base do AdGuard",
-				"name": "Referência ao Filtro Base do AdGuard"
+				"description": "Tem referências ao Filtro Base do CyberPurify",
+				"name": "Referência ao Filtro Base do CyberPurify"
 			},
 			"pt_PT": {
-				"description": "Tem referências à Base de filtros do AdGuard",
-				"name": "Referência da Base de filtros do AdGuard"
+				"description": "Tem referências à Base de filtros do CyberPurify",
+				"name": "Referência da Base de filtros do CyberPurify"
 			},
 			"ru": {
-				"description": "Имеет отсылки к Базовому фильтру AdGuard (например, часть правил взята оттуда)",
-				"name": "Отсылка к Базовому фильтру AdGuard"
+				"description": "Имеет отсылки к Базовому фильтру CyberPurify (например, часть правил взята оттуда)",
+				"name": "Отсылка к Базовому фильтру CyberPurify"
 			},
 			"sk": {
-				"description": "Obsahuje referencie na základný AdGuard filter",
-				"name": "Referencia na základný AdGuard filter"
+				"description": "Obsahuje referencie na základný CyberPurify filter",
+				"name": "Referencia na základný CyberPurify filter"
 			},
 			"sl": {
-				"description": "Ima sklicevanje na AdGuard Osnovni filter",
-				"name": "Sklicevanje na AdGuard Osnovni filter"
+				"description": "Ima sklicevanje na CyberPurify Osnovni filter",
+				"name": "Sklicevanje na CyberPurify Osnovni filter"
 			},
 			"sr": {
-				"description": "Ima reference ka AdGuard osnovnom filteru",
-				"name": "Referenca ka AdGuard osnovnom filteru"
+				"description": "Ima reference ka CyberPurify osnovnom filteru",
+				"name": "Referenca ka CyberPurify osnovnom filteru"
 			},
 			"sv": {
-				"description": "Har referenser till AdGuards grundfilter",
-				"name": "AdGuards grundfilterrefens"
+				"description": "Har referenser till CyberPurifys grundfilter",
+				"name": "CyberPurifys grundfilterrefens"
 			},
 			"tr": {
-				"description": "AdGuard Temel filtresini kaynak alır",
-				"name": "AdGuard Temel filtre referansı"
+				"description": "CyberPurify Temel filtresini kaynak alır",
+				"name": "CyberPurify Temel filtre referansı"
 			},
 			"uk": {
 				"description": "Посилається на англійський фільтр (наприклад, частина правил взята звідти)",
 				"name": "Посилання на англійський фільтр"
 			},
 			"vi": {
-				"description": "Có tham chiếu đến bộ lọc Cơ sở AdGuard",
-				"name": "Tham chiếu bộ lọc AdGuard Base"
+				"description": "Có tham chiếu đến bộ lọc Cơ sở CyberPurify",
+				"name": "Tham chiếu bộ lọc CyberPurify Base"
 			},
 			"zh": {
-				"description": "参考了 AdGuard 基础过滤器",
-				"name": "参考 AdGuard 基础过滤器"
+				"description": "参考了 CyberPurify 基础过滤器",
+				"name": "参考 CyberPurify 基础过滤器"
 			},
 			"zh_TW": {
-				"description": "與 AdGuard 基本過濾器有關",
-				"name": "AdGuard 基本過濾器參考"
+				"description": "與 CyberPurify 基本過濾器有關",
+				"name": "CyberPurify 基本過濾器參考"
 			}
 		},
 		"12": {
@@ -8463,12 +8463,12 @@
 	"filters": {
 		"1": {
 			"ar": {
-				"name": "فلترالروسية AdGuard",
+				"name": "فلترالروسية CyberPurify",
 				"description": "فلتر يتيح منع الإعلانات على مواقع الويب باللغة الروسية"
 			},
 			"be": {
 				"name": "Рускі фільтр",
-				"description": "Рускі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на рускай мове."
+				"description": "Рускі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на рускай мове."
 			},
 			"bg": {
 				"name": "Руски филтър",
@@ -8479,15 +8479,15 @@
 				"description": "Filtre que permet bloquejar els anunci de publicitat en Rus."
 			},
 			"da": {
-				"name": "AdGuard Russisk filter",
+				"name": "CyberPurify Russisk filter",
 				"description": "Filter som aktiverer annonceblokering på hjemmesider der er på russisk."
 			},
 			"de": {
-				"name": "AdGuard Russischer Filter",
+				"name": "CyberPurify Russischer Filter",
 				"description": "Filter, der Anzeigen auf russischen Webseiten blockiert."
 			},
 			"en": {
-				"name": "AdGuard Russian filter",
+				"name": "CyberPurify Russian filter",
 				"description": "Filter that enables ad blocking on websites in the Russian language."
 			},
 			"es": {
@@ -8499,23 +8499,23 @@
 				"description": "Filtro que permite el bloqueo de anuncios en sitios web en idioma ruso."
 			},
 			"fa": {
-				"name": "فیلتر روسی AdGuard",
+				"name": "فیلتر روسی CyberPurify",
 				"description": "این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های روسی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin venäjänkielen suodatin",
+				"name": "CyberPurifyin venäjänkielen suodatin",
 				"description": "Suodatin, joka tehostaa mainosten estoa erityisesti venäjänkielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre Russe AdGuard",
+				"name": "Filtre Russe CyberPurify",
 				"description": "Filtre permettant le blocage des publicités sur les sites web en Russe."
 			},
 			"he": {
-				"name": "מסנן רוסי של AdGuard",
+				"name": "מסנן רוסי של CyberPurify",
 				"description": "מסנן שמאפשר חסימת פרסומות באתרים בשפה הרוסית"
 			},
 			"hr": {
-				"name": "AdGuard Ruski filtar",
+				"name": "CyberPurify Ruski filtar",
 				"description": "Filtar za blokiranje oglasa na ruskom jeziku."
 			},
 			"hu": {
@@ -8523,94 +8523,94 @@
 				"description": "Szűrő ami engedélyezi a reklámok tiltását orosz weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Rusia",
+				"name": "Penyaring CyberPurify Rusia",
 				"description": "Penyaring yang memungkinkan pemblokiran iklan di situs web dalam bahasa Rusia."
 			},
 			"it": {
 				"name": "Filtro russo",
-				"description": "Filtro russo di Adguard. Filtro che attiva il blocco degli annunci sui siti web in russo."
+				"description": "Filtro russo di CyberPurify. Filtro che attiva il blocco degli annunci sui siti web in russo."
 			},
 			"ja": {
-				"name": "AdGuard ロシア語フィルタ",
+				"name": "CyberPurify ロシア語フィルタ",
 				"description": "ロシア語のWebサイトで広告ブロックを有効にするフィルタです。"
 			},
 			"ko": {
-				"name": "AdGuard 러시아 필터",
+				"name": "CyberPurify 러시아 필터",
 				"description": "러시아 사이트의 광고를 차단하는 필터"
 			},
 			"nl": {
 				"name": "Russisch filter",
-				"description": "AdGuard Russisch filte. Filter dat het blokkeren van advertenties op websites in de Russische taal mogelijk maakt."
+				"description": "CyberPurify Russisch filte. Filter dat het blokkeren van advertenties op websites in de Russische taal mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards russiske filter",
+				"name": "CyberPurifys russiske filter",
 				"description": "Filtrer som gjør det mulig å blokkere annonser på russiske nettsider."
 			},
 			"pl": {
-				"name": "Rosyjski filtr AdGuard",
+				"name": "Rosyjski filtr CyberPurify",
 				"description": "Filtr, który umożliwia blokowanie reklam na rosyjskich stronach internetowych."
 			},
 			"pt": {
-				"name": "Filtro Russo do AdGuard",
+				"name": "Filtro Russo do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites no idioma russo."
 			},
 			"pt_BR": {
-				"name": "Filtro Russo do AdGuard",
+				"name": "Filtro Russo do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Russo."
 			},
 			"pt_PT": {
-				"name": "Filtro Russo do AdGuard",
+				"name": "Filtro Russo do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites no idioma russo."
 			},
 			"ru": {
 				"name": "Русский фильтр",
-				"description": "Русский фильтр AdGuard. Фильтр, позволяющий убрать рекламу с сайтов на русском языке."
+				"description": "Русский фильтр CyberPurify. Фильтр, позволяющий убрать рекламу с сайтов на русском языке."
 			},
 			"sk": {
-				"name": "AdGuard ruský filter",
+				"name": "CyberPurify ruský filter",
 				"description": "Filter, ktorý umožňuje blokovať reklamy na stránkach v ruštine."
 			},
 			"sl": {
-				"name": "AdGuard Ruski filter",
+				"name": "CyberPurify Ruski filter",
 				"description": "Filter, ki omogoča onemogočanje oglasov na spletnih straneh v ruščini."
 			},
 			"sr": {
-				"name": "AdGuard Ruski filter",
+				"name": "CyberPurify Ruski filter",
 				"description": "Filter koji blokira reklame na sajtovima na ruskom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards ryskspråksfilter",
+				"name": "CyberPurifys ryskspråksfilter",
 				"description": "Filter som tillämpar reklamblockering på ryskspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard Rusça filtresi",
-				"description": "AdGuard Rusça filtresi. Özellikle Rusça sitelerde reklamların engellenmesini sağlayan filtresi."
+				"name": "CyberPurify Rusça filtresi",
+				"description": "CyberPurify Rusça filtresi. Özellikle Rusça sitelerde reklamların engellenmesini sağlayan filtresi."
 			},
 			"uk": {
-				"name": "Російський фільтр AdGuard",
+				"name": "Російський фільтр CyberPurify",
 				"description": "Фільтр, який дозволяє блокувати рекламу на вебсайтах російською мовою."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Nga",
-				"description": "Bộ lọc Adguard tiếng Nga. Bộ lọc kích hoạt chặn quảng cáo trên các website tiếng Nga."
+				"description": "Bộ lọc CyberPurify tiếng Nga. Bộ lọc kích hoạt chặn quảng cáo trên các website tiếng Nga."
 			},
 			"zh": {
-				"name": "AdGuard 俄语过滤器",
+				"name": "CyberPurify 俄语过滤器",
 				"description": "此过滤器可以在俄语网站上启用广告拦截功能。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 俄文過濾器",
+				"name": "CyberPurify 俄文過濾器",
 				"description": "啟用於俄語網站上的廣告封鎖之過濾器。"
 			}
 		},
 		"2": {
 			"ar": {
-				"name": "فلتر اساسيAdGuard",
+				"name": "فلتر اساسيCyberPurify",
 				"description": "قائمة سهلة + مرشح قاعدة ادجوارد. هذا الفلتر ضروري لحظر الإعلانات عالي الجودة"
 			},
 			"be": {
-				"name": "Базавы фільтр AdGuard",
-				"description": "EasyList + Базавы фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на англійскай мове."
+				"name": "Базавы фільтр CyberPurify",
+				"description": "EasyList + Базавы фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на англійскай мове."
 			},
 			"bg": {
 				"name": "Английски филтър",
@@ -8621,16 +8621,16 @@
 				"description": "Filtre basat en EasyList. Filtre que permet eliminar la publicitat de les pàgines web amb contingut en Anglès."
 			},
 			"da": {
-				"name": "AdGuard Basisfilter",
-				"description": "EasyList + AdGuard Basisfilter. Filter liste som specifikt fjerner reklamer på engelsksprogede websider."
+				"name": "CyberPurify Basisfilter",
+				"description": "EasyList + CyberPurify Basisfilter. Filter liste som specifikt fjerner reklamer på engelsksprogede websider."
 			},
 			"de": {
-				"name": "AdGuard Basis-Filter",
-				"description": "EasyList + AdGuard Basis-Filter. Dieser Filter ist für eine qualitative Blockierung von Anzeigen erforderlich."
+				"name": "CyberPurify Basis-Filter",
+				"description": "EasyList + CyberPurify Basis-Filter. Dieser Filter ist für eine qualitative Blockierung von Anzeigen erforderlich."
 			},
 			"en": {
-				"name": "AdGuard Base filter",
-				"description": "EasyList + AdGuard Base filter. This filter is necessary for quality ad blocking."
+				"name": "CyberPurify Base filter",
+				"description": "EasyList + CyberPurify Base filter. This filter is necessary for quality ad blocking."
 			},
 			"es": {
 				"name": "Filtro base",
@@ -8641,113 +8641,113 @@
 				"description": "EasyList + Filtro base. Este filtro es necesario para el bloqueo de anuncios de calidad."
 			},
 			"fa": {
-				"name": "فیلتر پایه AdGuard",
+				"name": "فیلتر پایه CyberPurify",
 				"description": "ایزی لیست انگلیسی + فیلتر اَدگارد انگلیسی. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های انگلیسی زبان است."
 			},
 			"fi": {
 				"name": "Englantilainen suodatin",
-				"description": "EasyList + AdGuardin englanninkielen suodatin, joka tehostaa mainosten estoa erityisesti englanninkielisillä sivustoilla."
+				"description": "EasyList + CyberPurifyin englanninkielen suodatin, joka tehostaa mainosten estoa erityisesti englanninkielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre Anglais AdGuard",
-				"description": "Basé sur filtre EasyList et filtre Basique AdGuard. Filtre achevant un haut niveau de blocage de publicités"
+				"name": "Filtre Anglais CyberPurify",
+				"description": "Basé sur filtre EasyList et filtre Basique CyberPurify. Filtre achevant un haut niveau de blocage de publicités"
 			},
 			"he": {
-				"name": "מסנן בסיס של AdGuard",
-				"description": "EasyList + מסנן בסיס של AdGuard. מסנן זה הכרחי עבור חסימת פרסומות איכותית"
+				"name": "מסנן בסיס של CyberPurify",
+				"description": "EasyList + מסנן בסיס של CyberPurify. מסנן זה הכרחי עבור חסימת פרסומות איכותית"
 			},
 			"hr": {
-				"name": "AdGuard Osnovni filtar",
-				"description": "EasyList + AdGuard Osnovni filtar. Ovaj filtar je potreban za kvalitetno blokiranje oglasa."
+				"name": "CyberPurify Osnovni filtar",
+				"description": "EasyList + CyberPurify Osnovni filtar. Ovaj filtar je potreban za kvalitetno blokiranje oglasa."
 			},
 			"hu": {
 				"name": "Angol szűrő",
 				"description": "EasyList-en alapuló szűrő ami lehetővé teszi a reklámok eltávolítását angol weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring dasar AdGuard",
-				"description": "EasyList + Penyaring dasar AdGuard. Penyaring ini diperlukan untuk pemblokiran iklan."
+				"name": "Penyaring dasar CyberPurify",
+				"description": "EasyList + Penyaring dasar CyberPurify. Penyaring ini diperlukan untuk pemblokiran iklan."
 			},
 			"it": {
 				"name": "Filtro inglese",
-				"description": "Easy List + Filtro inglese di Adguard. Filtro che rimuove specificatamente annunci sui siti web in lingua inglese."
+				"description": "Easy List + Filtro inglese di CyberPurify. Filtro che rimuove specificatamente annunci sui siti web in lingua inglese."
 			},
 			"ja": {
-				"name": "AdGuard ベースフィルタ",
-				"description": "EasyListとAdGuardベースフィルタを合わせたフィルタです。このフィルタは品質の高い広告ブロックに必要です。"
+				"name": "CyberPurify ベースフィルタ",
+				"description": "EasyListとCyberPurifyベースフィルタを合わせたフィルタです。このフィルタは品質の高い広告ブロックに必要です。"
 			},
 			"ko": {
-				"name": "AdGuard 베이스 필터",
-				"description": "EasyList와 AdGuard 베이스 필터를 합쳐 만든 필터. 이 필터는 수준높은 광고 차단을 위해 필요합니다."
+				"name": "CyberPurify 베이스 필터",
+				"description": "EasyList와 CyberPurify 베이스 필터를 합쳐 만든 필터. 이 필터는 수준높은 광고 차단을 위해 필요합니다."
 			},
 			"nl": {
 				"name": "Engels filter",
 				"description": "Gebaseerd op EasyList. Filter dat het verwijderen van advertenties op websites met Engelse inhoud mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards hovedfilter",
-				"description": "EasyList + AdGuards hovedfilter. Dette filteret er nødvendig for annonseblokkering av høy kvalitet."
+				"name": "CyberPurifys hovedfilter",
+				"description": "EasyList + CyberPurifys hovedfilter. Dette filteret er nødvendig for annonseblokkering av høy kvalitet."
 			},
 			"pl": {
-				"name": "Podstawowy filtr AdGuard",
-				"description": "EasyList + podstawowy filtr AdGuard. Te filtry są niezbędne do wysokiej jakości blokowania reklam."
+				"name": "Podstawowy filtr CyberPurify",
+				"description": "EasyList + podstawowy filtr CyberPurify. Te filtry są niezbędne do wysokiej jakości blokowania reklam."
 			},
 			"pt": {
-				"name": "Filtro de Base de AdGuard",
-				"description": "Filtro EasyList + Base de filtros do AdGuard. Este filtro é necessário para o bloqueio de anúncios de qualidade."
+				"name": "Filtro de Base de CyberPurify",
+				"description": "Filtro EasyList + Base de filtros do CyberPurify. Este filtro é necessário para o bloqueio de anúncios de qualidade."
 			},
 			"pt_BR": {
-				"name": "Filtro Base do AdGuard",
-				"description": "EasyList + Filtro Base do AdGuard. Este filtro é necessário para uma boa qualidade no bloqueio de anúncios."
+				"name": "Filtro Base do CyberPurify",
+				"description": "EasyList + Filtro Base do CyberPurify. Este filtro é necessário para uma boa qualidade no bloqueio de anúncios."
 			},
 			"pt_PT": {
-				"name": "Filtro de Base de AdGuard",
-				"description": "Filtro EasyList + Base de filtros do AdGuard. Este filtro é necessário para o bloqueio de anúncios de qualidade."
+				"name": "Filtro de Base de CyberPurify",
+				"description": "Filtro EasyList + Base de filtros do CyberPurify. Este filtro é necessário para o bloqueio de anúncios de qualidade."
 			},
 			"ru": {
-				"name": "Базовый фильтр AdGuard",
-				"description": "EasyList + Базовый фильтр AdGuard. Фильтр, позволяющий убрать рекламу с сайтов на английском языке."
+				"name": "Базовый фильтр CyberPurify",
+				"description": "EasyList + Базовый фильтр CyberPurify. Фильтр, позволяющий убрать рекламу с сайтов на английском языке."
 			},
 			"sk": {
-				"name": "AdGuard základný filter",
-				"description": "EasyList + AdGuard základný filter. Tento filter je potrebný pre kvalitné blokovanie reklamy."
+				"name": "CyberPurify základný filter",
+				"description": "EasyList + CyberPurify základný filter. Tento filter je potrebný pre kvalitné blokovanie reklamy."
 			},
 			"sl": {
-				"name": "AdGuard Osnovni filter",
-				"description": "EasyList + AdGuard osnovni filter. Ta filter je potreben za kakovostno onemogočanje oglasov."
+				"name": "CyberPurify Osnovni filter",
+				"description": "EasyList + CyberPurify osnovni filter. Ta filter je potreben za kakovostno onemogočanje oglasov."
 			},
 			"sr": {
-				"name": "AdGuard Osnovni filter",
-				"description": "EasyList + AdGuard osnovni filter. Ovaj filter je neophodan za kvalitetno blokiranje reklama."
+				"name": "CyberPurify Osnovni filter",
+				"description": "EasyList + CyberPurify osnovni filter. Ovaj filter je neophodan za kvalitetno blokiranje reklama."
 			},
 			"sv": {
-				"name": "AdGuards grundfilter",
-				"description": "EasyList + AdGuards grundfilter. Filtret krävs för effektiv annonsblockering."
+				"name": "CyberPurifys grundfilter",
+				"description": "EasyList + CyberPurifys grundfilter. Filtret krävs för effektiv annonsblockering."
 			},
 			"tr": {
-				"name": "AdGuard Temel filtresi",
-				"description": "EasyList + AdGuard Temel filtresi. Bu filtre kaliteli reklam engelleme için gereklidir."
+				"name": "CyberPurify Temel filtresi",
+				"description": "EasyList + CyberPurify Temel filtresi. Bu filtre kaliteli reklam engelleme için gereklidir."
 			},
 			"uk": {
-				"name": "Основний фільтр AdGuard",
-				"description": "EasyList + Основний фільтр AdGuard. Цей фільтр необхідний для якісного блокування реклами."
+				"name": "Основний фільтр CyberPurify",
+				"description": "EasyList + Основний фільтр CyberPurify. Цей фільтр необхідний для якісного блокування реклами."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Anh",
-				"description": "Bộ lọc EasyList + Adguard tiếng Anh. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Anh."
+				"description": "Bộ lọc EasyList + CyberPurify tiếng Anh. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Anh."
 			},
 			"zh": {
-				"name": "AdGuard 基础过滤器",
-				"description": "EasyList + AdGuard Base 过滤器。此过滤器是实现高质量的广告拦截所必需的。"
+				"name": "CyberPurify 基础过滤器",
+				"description": "EasyList + CyberPurify Base 过滤器。此过滤器是实现高质量的广告拦截所必需的。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 基本過濾器",
-				"description": "EasyList + AdGuard 基本過濾器。該過濾器對於優質的廣告封鎖是必要的。"
+				"name": "CyberPurify 基本過濾器",
+				"description": "EasyList + CyberPurify 基本過濾器。該過濾器對於優質的廣告封鎖是必要的。"
 			}
 		},
 		"3": {
 			"ar": {
-				"name": "AdGuard فلتر حماية تتبع",
+				"name": "CyberPurify فلتر حماية تتبع",
 				"description": "القائمة الأكثر شمولا من مختلف العدادات على الإنترنت وأدوات تحليلات الويب. استخدم هذا الفلتر ، إذا كنت لا تريد تتبع إجراءاتك على الإنترنت."
 			},
 			"be": {
@@ -8763,15 +8763,15 @@
 				"description": "La llista més comprensiva de varis comptadors en línia i eines d'anàlisi web. Si no voleu que les vostres accions a Internet quedin registrades, utilitzeu aquest filtre."
 			},
 			"da": {
-				"name": "AdGuard Beskyttelsesfilter mod Sporing",
+				"name": "CyberPurify Beskyttelsesfilter mod Sporing",
 				"description": "Den mest omfattende liste over forskellige online counters og web analytiske værktøjer. Hvis du ikke vil have, at dine handlinger på internettet skal blive sporet, så brug dette filter."
 			},
 			"de": {
-				"name": "AdGuard Tracking-Schutzfilter",
+				"name": "CyberPurify Tracking-Schutzfilter",
 				"description": "Die umfangreichste Liste von verschiedenen Online-Zähler und Web-Analytics-Tools. Wenn Sie nicht möchten, dass Ihre Aktionen im Internet verfolgt werden, verwenden Sie diesen Filter."
 			},
 			"en": {
-				"name": "AdGuard Tracking Protection filter",
+				"name": "CyberPurify Tracking Protection filter",
 				"description": "The most comprehensive list of various online counters and web analytics tools. Use this filter, if you do not want your actions on the Internet to be tracked."
 			},
 			"es": {
@@ -8783,23 +8783,23 @@
 				"description": "La lista más completa de varios contadores en línea y herramientas de análisis web. Utilice este filtro si no desea que se realice el rastreo de sus acciones en Internet."
 			},
 			"fa": {
-				"name": "فیلتر جاسوس افزار AdGuard",
+				"name": "فیلتر جاسوس افزار CyberPurify",
 				"description": "جامعترین لیست شمارنده های آنلاین گوناگون و ابزارهای تجزیه و تحلیل وب.اگر نمیخواهید اقدامات شما در وب رَدیابی شود،از این فیلتر استفاده کنید."
 			},
 			"fi": {
-				"name": "AdGuard seurannan estosuodatin",
+				"name": "CyberPurify seurannan estosuodatin",
 				"description": "Kaikista kattavin luettelo erilaisista verkkolaskureista ja verkkoanalyysityökaluista. Jos et halua että toimiasi internetissä voidaan seurata, käytä tätä suodatinta."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Anti espionnage",
+				"name": "Filtre CyberPurify Anti espionnage",
 				"description": "La liste la plus complète des différents compteurs en ligne et des outils pour analyse en ligne. Si vous ne voulez pas que vos actions sur internet soient suivies, utilisez ce filtre."
 			},
 			"he": {
-				"name": "מסנן הגנה מפני מעקב של AdGuard",
+				"name": "מסנן הגנה מפני מעקב של CyberPurify",
 				"description": "הרשימה המקיפה ביותר של מונים מקוונים שונים וכליי אנליטיקת רשת. השתמש במסנן זה אם אינך רוצה שהפעולות שלך על האינטרנט יהיו תחת מעקב"
 			},
 			"hr": {
-				"name": "AdGuard Filtar zaštite protiv praćenja",
+				"name": "CyberPurify Filtar zaštite protiv praćenja",
 				"description": "Najopsežniji popis različitih internetskih brojača i alata za web analizu. Upotrijebite ovaj filtar ako ne želite da se vaše internetske aktivnosti prate."
 			},
 			"hu": {
@@ -8807,7 +8807,7 @@
 				"description": "A legátfogóbb lista az online számlálok és web analizáló eszközökről. Ha nem akarod hogy minden lépésedet kövessék az interneten, használd ezt a szűrőt."
 			},
 			"id": {
-				"name": "Penyaring Spyware AdGuard",
+				"name": "Penyaring Spyware CyberPurify",
 				"description": "Daftar paling komprehensif dari berbagai penghitung online dan alat analisis web. Gunakan penyaring ini, jika Anda tidak ingin tindakan Anda di internet dilacak."
 			},
 			"it": {
@@ -8815,11 +8815,11 @@
 				"description": "La lista più esaustiva dei vari contatori online e tracciatori sul web. Se non vuoi che le tue azioni in Internet vengano tracciate, utilizza questo filtro."
 			},
 			"ja": {
-				"name": "AdGuard追跡防止フィルタ",
+				"name": "CyberPurify追跡防止フィルタ",
 				"description": "最も幅広い様々なオンラインカウンターおよびウェブ分析ツールのリスト。インターネット上での操作を追跡されたくない場合は、このフィルタをご利用ください。"
 			},
 			"ko": {
-				"name": "AdGuard 추적 보호 필터",
+				"name": "CyberPurify 추적 보호 필터",
 				"description": "온라인 트래커와 웹 분석 툴의 가장 종합적인 목록입니다. 당신이 인터넷에서 추적당하지 않고자 한다면, 이 필터를 사용하세요."
 			},
 			"nl": {
@@ -8827,23 +8827,23 @@
 				"description": "De meest uitgebreide lijst van verschillende online statistieken en web analyse tools. Als u wilt dat uw acties op het internet niet worden gevolgd, gebruik dan dit filter."
 			},
 			"no": {
-				"name": "AdGuards spionvarefilter",
+				"name": "CyberPurifys spionvarefilter",
 				"description": "Den mest omfattende listen over ulike tellere og analyseverktøy på nettet. Hvis du ikke vil at dine handlinger på Internett skal spores, bruk dette filteret."
 			},
 			"pl": {
-				"name": "Filtr elementów szpiegujących AdGuard",
+				"name": "Filtr elementów szpiegujących CyberPurify",
 				"description": "Najbardziej wszechstronna lista różnych liczników internetowych i narzędzi analizy sieci. Jeśli nie chcesz, aby Twoje działania w Internecie były śledzone, użyj tego filtra."
 			},
 			"pt": {
-				"name": "Filtro de Protecção de Monitorização do AdGuard",
+				"name": "Filtro de Protecção de Monitorização do CyberPurify",
 				"description": "A lista mais abrangente de vários contadores online e ferramentas de análise web. Se não quiser que as suas acções na internet sejam monitorizadas, use este filtro."
 			},
 			"pt_BR": {
-				"name": "Filtro de proteção contra rastreamento do AdGuard",
+				"name": "Filtro de proteção contra rastreamento do CyberPurify",
 				"description": "A lista mais abrangente para vários contadores online e ferramentas analíticas de sites. Use este filtro, se você não quiser que as suas ações na internet sejam rastreadas."
 			},
 			"pt_PT": {
-				"name": "Filtro de Protecção de Monitorização do AdGuard",
+				"name": "Filtro de Protecção de Monitorização do CyberPurify",
 				"description": "A lista mais abrangente de vários contadores online e ferramentas de análise web. Se não quiser que as suas acções na internet sejam monitorizadas, use este filtro."
 			},
 			"ru": {
@@ -8851,27 +8851,27 @@
 				"description": "Наиболее полный список различных интернет-счетчиков и систем интернет-аналитики. Если вы не желаете, чтобы за вашими действиями в интернете следили, используйте этот фильтр."
 			},
 			"sk": {
-				"name": "AdGuard filter proti sledovaniu",
+				"name": "CyberPurify filter proti sledovaniu",
 				"description": "Najrozsiahlejší zoznam rôznych online počítadiel a webových analytických nástrojov. Ak si neželáte, aby bola Vaša aktivita na internete sledovaná, použite tento filter."
 			},
 			"sl": {
-				"name": "AdGuard Filter zaščite sledenja",
+				"name": "CyberPurify Filter zaščite sledenja",
 				"description": "Najobsežnejši seznam različnih spletnih števcev in orodij za spletno analitiko. Uporabite ta filter, če ne želite, da se spremljajo vaše akcije na internetu."
 			},
 			"sr": {
-				"name": "AdGuard filter za zaštitu od praćenja",
+				"name": "CyberPurify filter za zaštitu od praćenja",
 				"description": "Najrazumljivija lista različitih mrežnih brojača i analitičkih alata. Ako ne želite da vaše radnje na internetu budu praćene, koristite ovu listu filtera."
 			},
 			"sv": {
-				"name": "AdGuard spårningsfilter",
+				"name": "CyberPurify spårningsfilter",
 				"description": "Den mest omfattande förteckningen över olika onlineräknare och webbanalysverktyg. Om du inte vill att dina aktiviteter på Internet ska spåras, använd det här filtret."
 			},
 			"tr": {
-				"name": "AdGuard İzleme Koruması filtresi",
+				"name": "CyberPurify İzleme Koruması filtresi",
 				"description": "Çeşitli çevrimiçi sayaçların ve web analitik araçlarının en kapsamlı listesi. İnternet üzerindeki hareketlerinizin izlenmesini istemiyorsanız bu filtreyi kullanın."
 			},
 			"uk": {
-				"name": "Фільтр захисту від стеження AdGuard",
+				"name": "Фільтр захисту від стеження CyberPurify",
 				"description": "Найповніший список різних інтернет-лічильників і систем веб-аналітики. Використовуйте цей фільтр, якщо не хочете, щоб за вашими діями в інтернеті стежили."
 			},
 			"vi": {
@@ -8879,17 +8879,17 @@
 				"description": "Danh sách toàn diện nhất về các bộ đếm và công cụ phân tích web. Nếu bạn không muốn hoạt động trên Internet bị theo dõi, hãy dùng bộ lọc này."
 			},
 			"zh": {
-				"name": "AdGuard 防跟踪保护过滤器",
+				"name": "CyberPurify 防跟踪保护过滤器",
 				"description": "最全面的各种在线计数器和网络分析工具列表。如果您不希望您在互联网上的行为被跟踪，请使用此过滤器。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 追蹤防護過濾器",
+				"name": "CyberPurify 追蹤防護過濾器",
 				"description": "各種線上計數器和網路分析工具之最全面的清單。如果您不想要您於網際網路上的活動被追蹤，使用該過濾器。"
 			}
 		},
 		"4": {
 			"ar": {
-				"name": "فلتر وسائل الاعلام الاجتماعيةAdGuard",
+				"name": "فلتر وسائل الاعلام الاجتماعيةCyberPurify",
 				"description": "تصفية لعناصر وسائل الاعلام الاجتماعية أزرار\"اعجبني\"  وما الى ذلك "
 			},
 			"be": {
@@ -8905,15 +8905,15 @@
 				"description": "Filtres per als widgets de les xarxes socials (Botons Like i semblants)."
 			},
 			"da": {
-				"name": "AdGuard Social medie filter",
+				"name": "CyberPurify Social medie filter",
 				"description": "Filter for sociale medier widgets (\"Synes godt om\" knapper og lignende)."
 			},
 			"de": {
-				"name": "AdGuard Social-Media-Filter",
+				"name": "CyberPurify Social-Media-Filter",
 				"description": "Filter für Social-Media-Widgets (\"Gefällt mir\"-Schaltflächen und Ähnliches)."
 			},
 			"en": {
-				"name": "AdGuard Social Media filter",
+				"name": "CyberPurify Social Media filter",
 				"description": "Filter for social media widgets (\"Like\" buttons and such)."
 			},
 			"es": {
@@ -8929,19 +8929,19 @@
 				"description": "فیلتر برای ویدجت رسانه های اجتماعی (مانند دکمه دوست دارم)."
 			},
 			"fi": {
-				"name": "AdGuardin sosiaalisen median suodatin",
+				"name": "CyberPurifyin sosiaalisen median suodatin",
 				"description": "Suodattaa sosiaalisen median vimpaimet (kuten \"Tykkää\"- ja \"Jaa\" -painikkeet)."
 			},
 			"fr": {
-				"name": "Filtre AdGuard pour médias sociaux",
+				"name": "Filtre CyberPurify pour médias sociaux",
 				"description": "Filtre pour les widgets des médias sociaux (bouton \"J'aime\" et similaires)."
 			},
 			"he": {
-				"name": "מסנן מדיה חברתית של AdGuard",
+				"name": "מסנן מדיה חברתית של CyberPurify",
 				"description": "מסנן עבור יישומוני מדיה חברתית (כפתורי \"אהבתי\" וכדומה)"
 			},
 			"hr": {
-				"name": "AdGuard Filtar društvenih mreža",
+				"name": "CyberPurify Filtar društvenih mreža",
 				"description": "Filtar za widgete društvenih mreža (\"Sviđa mi se\" dugme itd.)."
 			},
 			"hu": {
@@ -8949,7 +8949,7 @@
 				"description": "Szűrő közösségi média widgetekhez (Like gombok és ilyesmik)"
 			},
 			"id": {
-				"name": "Penyaring Media Sosial AdGuard",
+				"name": "Penyaring Media Sosial CyberPurify",
 				"description": "Penyaring untuk widget media sosial (tombol \"Suka\" dan semacamnya)."
 			},
 			"it": {
@@ -8957,11 +8957,11 @@
 				"description": "Filtro per i widget dei social network (bottoni \"mi piace\" e così via)."
 			},
 			"ja": {
-				"name": "AdGuard SNS用フィルタ",
+				"name": "CyberPurify SNS用フィルタ",
 				"description": "SNSウィジェット用フィルタ(いいね! ボタンなど)。"
 			},
 			"ko": {
-				"name": "AdGuard 소셜미디어 필터",
+				"name": "CyberPurify 소셜미디어 필터",
 				"description": "웹 사이트의 소셜 미디어 위젯을 차단합니다. (\"좋아요\" 버튼 등)"
 			},
 			"nl": {
@@ -8969,23 +8969,23 @@
 				"description": "Filter voor social media widgets (zoals 'like'-knoppen, e.d.)."
 			},
 			"no": {
-				"name": "AdGuards sosiale medier-filter",
+				"name": "CyberPurifys sosiale medier-filter",
 				"description": "Filter for sosiale medier-widgets (\"liker\"-knapper og slikt)."
 			},
 			"pl": {
-				"name": "Filtr mediów społecznościowych AdGuard",
+				"name": "Filtr mediów społecznościowych CyberPurify",
 				"description": "Filtr widżetów mediów społecznościowych (przyciski polubień i podobne)."
 			},
 			"pt": {
-				"name": "Filtro de redes sociais do AdGuard",
+				"name": "Filtro de redes sociais do CyberPurify",
 				"description": "Filtro para widgets de redes sociais (como botões \"Gostar\" e outros)."
 			},
 			"pt_BR": {
-				"name": "Filtro de Mídia Social do AdGuard",
+				"name": "Filtro de Mídia Social do CyberPurify",
 				"description": "Filtro para widgets de redes sociais (botões \"Curtir\", \"Tweetar\" e etc)."
 			},
 			"pt_PT": {
-				"name": "Filtro de redes sociais do AdGuard",
+				"name": "Filtro de redes sociais do CyberPurify",
 				"description": "Filtro para widgets de redes sociais (como botões \"Gostar\" e outros)."
 			},
 			"ru": {
@@ -8993,27 +8993,27 @@
 				"description": "Фильтр для виджетов социальных сетей (кнопки Мне нравится и тому подобное)."
 			},
 			"sk": {
-				"name": "AdGuard filter sociálnych sietí",
+				"name": "CyberPurify filter sociálnych sietí",
 				"description": "Filter pre widgety sociálnych sietí (tlačidlá \"Like\" a pod.)"
 			},
 			"sl": {
-				"name": "AdGuard Filter družbenih omrežij",
+				"name": "CyberPurify Filter družbenih omrežij",
 				"description": "Filter dodatkov družbenih medijev (gumbi 'Všečkaj' in podobno)."
 			},
 			"sr": {
-				"name": "AdGuard filter društvenih mreža",
+				"name": "CyberPurify filter društvenih mreža",
 				"description": "Filter za vidžete društvenih mreža (\"Like\" dugmići i tako to)."
 			},
 			"sv": {
-				"name": "AdGuards filter för sociala medier",
+				"name": "CyberPurifys filter för sociala medier",
 				"description": "Filter för socialmediawidgets (Gilla-knappar och liknande)"
 			},
 			"tr": {
-				"name": "AdGuard Sosyal Medya filtresi",
+				"name": "CyberPurify Sosyal Medya filtresi",
 				"description": "Sosyal ağ araçları (\"Beğen\" butonları vb) için bir filtre."
 			},
 			"uk": {
-				"name": "Фільтр соціальних мереж AdGuard",
+				"name": "Фільтр соціальних мереж CyberPurify",
 				"description": "Фільтр віджетів соціальних мереж (кнопки \"Мені подобається\", \"Поширити\" тощо)."
 			},
 			"vi": {
@@ -9021,17 +9021,17 @@
 				"description": "Một bộ lọc widget mạng xã hội (Nút Like và các đối tượng tương tự)."
 			},
 			"zh": {
-				"name": "AdGuard 社交媒体过滤器",
+				"name": "CyberPurify 社交媒体过滤器",
 				"description": "此过滤器适用于社交媒体小工具（“喜欢”按钮及类似的元素）。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 社群媒體過濾器",
+				"name": "CyberPurify 社群媒體過濾器",
 				"description": "用於社群媒體小工具（\"讚\"按鈕和諸如此類）之過濾器。"
 			}
 		},
 		"5": {
 			"ar": {
-				"name": "فلتر تجريبيAdGuard",
+				"name": "فلتر تجريبيCyberPurify",
 				"description": "تم تصميم عامل التصفية لاختبار قواعد معينه للتصفية الخطرة قبل اضافتها إلى عوامل التصفية الاساسيه."
 			},
 			"be": {
@@ -9047,15 +9047,15 @@
 				"description": "Filtre dissenyat per provar certes regles de filtrat perillosos abans que s'afegeixen als filtres bàsics."
 			},
 			"da": {
-				"name": "AdGuard Eksperimentel filter",
+				"name": "CyberPurify Eksperimentel filter",
 				"description": "Filter designet til at teste visse farlige filtreringsregler, før de tilføjes til basis filtreret."
 			},
 			"de": {
-				"name": "AdGuard Experimenteller Filter",
+				"name": "CyberPurify Experimenteller Filter",
 				"description": "Filter zum Testen von bestimmten riskanten Filterungsregeln, bevor sie dem Basisfilter hinzugefügt werden."
 			},
 			"en": {
-				"name": "AdGuard Experimental filter",
+				"name": "CyberPurify Experimental filter",
 				"description": "Filter designed to test certain hazardous filtering rules before they are added to the basic filters."
 			},
 			"es": {
@@ -9075,15 +9075,15 @@
 				"description": "Suodatin jonka tarkoituksena on testata tiettyjä vaarallisia suodatussääntöjä ennen kuin ne lisätään muihin suodattimiin."
 			},
 			"fr": {
-				"name": "Filtre expérimental AdGuard",
+				"name": "Filtre expérimental CyberPurify",
 				"description": "Filtre désigné pour tester certaines régles de filtrage dangereuses avant qu'elles ne soient ajoutées aux filtres de base."
 			},
 			"he": {
-				"name": "מסנן ניסיוני של AdGuard",
+				"name": "מסנן ניסיוני של CyberPurify",
 				"description": "מסנן שנועד לבחון כללי סינון בלתי בטוחים מסוימים לפני שהם מתווספים אל המסננים היסודיים"
 			},
 			"hr": {
-				"name": "AdGuard Eksperimentalni filtar",
+				"name": "CyberPurify Eksperimentalni filtar",
 				"description": "Filtar dizajniran za testiranje određenih opasnih pravila filtriranja prije nego se dodaju u opće filtre."
 			},
 			"hu": {
@@ -9091,7 +9091,7 @@
 				"description": "Szűrő amely kimondott veszélyes szűrési szabályok tesztelésére van tervezve, mielőtt az alap szűrő listába bekerülne."
 			},
 			"id": {
-				"name": "Penyaring eksperimental AdGuard",
+				"name": "Penyaring eksperimental CyberPurify",
 				"description": "Penyaring yang desain untuk menguji aturan penyaringan berbahaya tertentu sebelum mereka ditambah ke penyaring dasar."
 			},
 			"it": {
@@ -9099,11 +9099,11 @@
 				"description": "Filtro studiato per testare alcune pericolose regole di filtraggio prima che vengano aggiunte ai filtri base."
 			},
 			"ja": {
-				"name": "AdGuard 実験フィルタ",
+				"name": "CyberPurify 実験フィルタ",
 				"description": "特定の危険なフィルタリングルールを基本フィルタに追加する前にテストするように設計されたフィルタです。"
 			},
 			"ko": {
-				"name": "AdGuard 실험 필터",
+				"name": "CyberPurify 실험 필터",
 				"description": "위험할 수 있는 필터링 규칙을 기본 필터에 추가하기 전 실험하기 위한 필터입니다."
 			},
 			"nl": {
@@ -9111,23 +9111,23 @@
 				"description": "Filter ontworpen voor het testen van sommige gevaarlijke filterregels voordat deze worden toegevoegd aan de basisfilters."
 			},
 			"no": {
-				"name": "AdGuards eksperimentelle filter",
+				"name": "CyberPurifys eksperimentelle filter",
 				"description": "Filter designet for å teste visse farlige filtreringsregler før de legges til grunnfiltrene."
 			},
 			"pl": {
-				"name": "Eksperymentalny filtr AdGuard",
+				"name": "Eksperymentalny filtr CyberPurify",
 				"description": "Filtr przeznaczony do testowania niektórych ryzykownych reguł filtrowania zanim zostaną dodane do podstawowych filtrów."
 			},
 			"pt": {
-				"name": "Filtro experimental do AdGuard",
+				"name": "Filtro experimental do CyberPurify",
 				"description": "Filtro projectado para testar certas regras de filtragem perigosas antes de serem adicionadas aos filtros básicos."
 			},
 			"pt_BR": {
-				"name": "Filtro Experimental do AdGuard",
+				"name": "Filtro Experimental do CyberPurify",
 				"description": "Filtro concebido para testar certas regras de filtragem perigosas antes de serem adicionadas aos filtros básicos."
 			},
 			"pt_PT": {
-				"name": "Filtro experimental do AdGuard",
+				"name": "Filtro experimental do CyberPurify",
 				"description": "Filtro projectado para testar certas regras de filtragem perigosas antes de serem adicionadas aos filtros básicos."
 			},
 			"ru": {
@@ -9135,27 +9135,27 @@
 				"description": "Фильтр, предназначенный для проверки некоторых опасных правил фильтрации перед тем как они будут добавлены в основные фильтры."
 			},
 			"sk": {
-				"name": "AdGuard experimentálny filter",
+				"name": "CyberPurify experimentálny filter",
 				"description": "Filter navrhnutý na testovanie určitých riskantných filtračných pravidiel predtým, ako sú tieto pridaný do základných filtrov."
 			},
 			"sl": {
-				"name": "AdGuard Eksperimentalni filter",
+				"name": "CyberPurify Eksperimentalni filter",
 				"description": "Filter, oblikovan za preizkušanje nekaterih nevarnih pravil filtriranja, preden bodo dodani v osnovne filtre."
 			},
 			"sr": {
-				"name": "AdGuard eksperimentalni filter",
+				"name": "CyberPurify eksperimentalni filter",
 				"description": "Filter izrađen za testiranje nekih hazarderskih pravila filtriranja, pre nego što se dodaju u osnovne filtere."
 			},
 			"sv": {
-				"name": "AdGuards experimentella filter",
+				"name": "CyberPurifys experimentella filter",
 				"description": "Filter för att testa vissa riskfyllda filtreringsregler innan de läggs till de grundfiltren."
 			},
 			"tr": {
-				"name": "AdGuard Deneysel filtresi",
+				"name": "CyberPurify Deneysel filtresi",
 				"description": "Temel filtrelere eklenmeden önce bazı tehlikeli filtreleme kurallarının test edilmesi için tasarlanmıştır."
 			},
 			"uk": {
-				"name": "Експериментальний фільтр AdGuard",
+				"name": "Експериментальний фільтр CyberPurify",
 				"description": "Фільтр, призначений для тестування деяких правил фільтрування, перш ніж вони будуть додані до основних фільтрів."
 			},
 			"vi": {
@@ -9163,22 +9163,22 @@
 				"description": "Bộ lọc được thiết kế để thử nghiệm một số quy tắc lọc có rủi ro nhất định trước khi được thêm vào các bộ lọc thông thường."
 			},
 			"zh": {
-				"name": "AdGuard 实验性过滤器",
+				"name": "CyberPurify 实验性过滤器",
 				"description": "此过滤器设计用于在将某些有风险的过滤规则添加到基本过滤器之前对其进行测试。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 實驗性過濾器",
+				"name": "CyberPurify 實驗性過濾器",
 				"description": "旨在於某些有風險的過濾規則被加至基本的過濾器之前測試它們之過濾器。"
 			}
 		},
 		"6": {
 			"ar": {
-				"name": "فلترالألمانية AdGuard",
+				"name": "فلترالألمانية CyberPurify",
 				"description": "القائمة السهلة الالمانية + ادجوارد مرشح ألماني. لقائمة التصفية التي تزيل الإعلانات تحديدًا على مواقع الويب باللغة الألمانية"
 			},
 			"be": {
 				"name": "Нямецкі фільтр",
-				"description": "EasyList Germany + Нямецкі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на нямецкай мове."
+				"description": "EasyList Germany + Нямецкі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на нямецкай мове."
 			},
 			"bg": {
 				"name": "Немски филтър",
@@ -9189,16 +9189,16 @@
 				"description": "Filtre que permet bloquejar els anunci de publicitat en Alemán."
 			},
 			"da": {
-				"name": "AdGuard Tysk filter",
-				"description": "EasyList Germany + AdGuard Tysk filter. Filterliste som specifikt fjerner reklamer på tysksprogede websider."
+				"name": "CyberPurify Tysk filter",
+				"description": "EasyList Germany + CyberPurify Tysk filter. Filterliste som specifikt fjerner reklamer på tysksprogede websider."
 			},
 			"de": {
-				"name": "AdGuard Deutscher Filter",
-				"description": "EasyList Germany + AdGuard Deutscher filter. Filter, der Anzeigen auf deutschen Webseiten blockiert."
+				"name": "CyberPurify Deutscher Filter",
+				"description": "EasyList Germany + CyberPurify Deutscher filter. Filter, der Anzeigen auf deutschen Webseiten blockiert."
 			},
 			"en": {
-				"name": "AdGuard German filter",
-				"description": "EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in the German language."
+				"name": "CyberPurify German filter",
+				"description": "EasyList Germany + CyberPurify German filter. Filter list that specifically removes ads on websites in the German language."
 			},
 			"es": {
 				"name": "Filtro para alemán",
@@ -9213,114 +9213,114 @@
 				"description": "ایزی لیست آلمانی + فیلتر اَدگارد آلمانی. فیلتر اَدگارد آلمانی. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های آلمانی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin saksankielen suodatin",
-				"description": "EasyList saksa + AdGuardin saksankielen suodatin, joka tehostaa mainosten estoa erityisesti saksankielisillä sivustoilla."
+				"name": "CyberPurifyin saksankielen suodatin",
+				"description": "EasyList saksa + CyberPurifyin saksankielen suodatin, joka tehostaa mainosten estoa erityisesti saksankielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Allemand",
-				"description": "Filtre EasyList Germany et filtre AdGuard Allemand. Liste de filtres permettant de supprimer les publicités sur les sites web avec contenu en Allemand."
+				"name": "Filtre CyberPurify Allemand",
+				"description": "Filtre EasyList Germany et filtre CyberPurify Allemand. Liste de filtres permettant de supprimer les publicités sur les sites web avec contenu en Allemand."
 			},
 			"he": {
-				"name": "מסנן גרמני של AdGuard",
-				"description": "EasyList Germany + מסנן גרמני של AdGuard. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הגרמנית"
+				"name": "מסנן גרמני של CyberPurify",
+				"description": "EasyList Germany + מסנן גרמני של CyberPurify. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הגרמנית"
 			},
 			"hr": {
-				"name": "AdGuard Njemački filtar",
-				"description": "EasyList Njemačka + AdGuard Njemački filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na njemačkom jeziku."
+				"name": "CyberPurify Njemački filtar",
+				"description": "EasyList Njemačka + CyberPurify Njemački filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na njemačkom jeziku."
 			},
 			"hu": {
 				"name": "Német szűrő",
 				"description": "Szűrő ami engedélyezi a reklámok tiltását német weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Jerman",
-				"description": "EasyList Germany + Penyaring AdGuard Jerman. Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Jerman."
+				"name": "Penyaring CyberPurify Jerman",
+				"description": "EasyList Germany + Penyaring CyberPurify Jerman. Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Jerman."
 			},
 			"it": {
 				"name": "Filtro tedesco",
-				"description": "EasyList Germany + Filtro tedesco di Adguard. Filtro che rimuove specificatamente annunci sui siti web in lingua tedesca."
+				"description": "EasyList Germany + Filtro tedesco di CyberPurify. Filtro che rimuove specificatamente annunci sui siti web in lingua tedesca."
 			},
 			"ja": {
-				"name": "AdGuardドイツ語フィルタ",
-				"description": "EasyList GermanyとAdGuardドイツ語フィルタの合同。ドイツ語のウェブ広告を除去するフィルタリストです。"
+				"name": "CyberPurifyドイツ語フィルタ",
+				"description": "EasyList GermanyとCyberPurifyドイツ語フィルタの合同。ドイツ語のウェブ広告を除去するフィルタリストです。"
 			},
 			"ko": {
-				"name": "AdGuard 독일 필터",
-				"description": "EasyList Germany와 AdGuard 베이스 필터를 합쳐 만든 필터. 특히 독일어 웹사이트에서의 광고 삭제를 위한 필터 리스트입니다."
+				"name": "CyberPurify 독일 필터",
+				"description": "EasyList Germany와 CyberPurify 베이스 필터를 합쳐 만든 필터. 특히 독일어 웹사이트에서의 광고 삭제를 위한 필터 리스트입니다."
 			},
 			"nl": {
 				"name": "Duits filter",
-				"description": "EasyList Germany + AdGuard Duits filter. Filter dat het verwijderen van advertenties op websites in de Duitse taal mogelijk maakt."
+				"description": "EasyList Germany + CyberPurify Duits filter. Filter dat het verwijderen van advertenties op websites in de Duitse taal mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards tyske filter",
-				"description": "EasyList Germany + AdGuards tyske filter. Filterliste som spesifikt fjerner annonser på tyske nettsider."
+				"name": "CyberPurifys tyske filter",
+				"description": "EasyList Germany + CyberPurifys tyske filter. Filterliste som spesifikt fjerner annonser på tyske nettsider."
 			},
 			"pl": {
-				"name": "Niemiecki filtr AdGuard",
-				"description": "EasyList Germany + niemiecki filtr AdGuard. Filtry, które umożliwiają usuwanie reklam ze stron internetowych zawierających treść po niemiecku."
+				"name": "Niemiecki filtr CyberPurify",
+				"description": "EasyList Germany + niemiecki filtr CyberPurify. Filtry, które umożliwiają usuwanie reklam ze stron internetowych zawierających treść po niemiecku."
 			},
 			"pt": {
-				"name": "Filtro Alemão do AdGuard",
-				"description": "EasyList Germany + Filtro Alemão do AdGuard. Lista de filtros que remove especificamente anúncios em sites de língua alemã."
+				"name": "Filtro Alemão do CyberPurify",
+				"description": "EasyList Germany + Filtro Alemão do CyberPurify. Lista de filtros que remove especificamente anúncios em sites de língua alemã."
 			},
 			"pt_BR": {
-				"name": "Filtro Alemão do AdGuard",
-				"description": "EasyList Germany + Filtro Alemão do AdGuard. Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Alemão."
+				"name": "Filtro Alemão do CyberPurify",
+				"description": "EasyList Germany + Filtro Alemão do CyberPurify. Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Alemão."
 			},
 			"pt_PT": {
-				"name": "Filtro Alemão do AdGuard",
-				"description": "EasyList Germany + Filtro Alemão do AdGuard. Lista de filtros que remove especificamente anúncios em sites de língua alemã."
+				"name": "Filtro Alemão do CyberPurify",
+				"description": "EasyList Germany + Filtro Alemão do CyberPurify. Lista de filtros que remove especificamente anúncios em sites de língua alemã."
 			},
 			"ru": {
 				"name": "Немецкий фильтр",
-				"description": "EasyList Germany + Немецкий фильтр AdGuard. Фильтр, позволяющий блокировать рекламу на сайтах на немецком языке."
+				"description": "EasyList Germany + Немецкий фильтр CyberPurify. Фильтр, позволяющий блокировать рекламу на сайтах на немецком языке."
 			},
 			"sk": {
-				"name": "AdGuard nemecký filter",
-				"description": "EasyList Germany + AdGuard nemecký filter. Filter, ktorý špecificky odstraňuje reklamy na stránkach v nemčine."
+				"name": "CyberPurify nemecký filter",
+				"description": "EasyList Germany + CyberPurify nemecký filter. Filter, ktorý špecificky odstraňuje reklamy na stránkach v nemčine."
 			},
 			"sl": {
-				"name": "AdGuard Nemški filter",
-				"description": "EasyList Germany + AdGuard Nemški filter. Senam filtrov, ki posebej odstrani oglase na spletnih straneh v nemščini."
+				"name": "CyberPurify Nemški filter",
+				"description": "EasyList Germany + CyberPurify Nemški filter. Senam filtrov, ki posebej odstrani oglase na spletnih straneh v nemščini."
 			},
 			"sr": {
-				"name": "AdGuard nemački filter",
-				"description": "EasyList Nemačka + AdGuard nemački filter. Lista filtera koja posebno uklanja reklame na sajtovima na nemačkom jeziku."
+				"name": "CyberPurify nemački filter",
+				"description": "EasyList Nemačka + CyberPurify nemački filter. Lista filtera koja posebno uklanja reklame na sajtovima na nemačkom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards tyska filter",
-				"description": "EasyList Germany + AdGuards tyska filter. Filterlista som specifikt avlägsnar reklam på tyskspråkiga webbplatser."
+				"name": "CyberPurifys tyska filter",
+				"description": "EasyList Germany + CyberPurifys tyska filter. Filterlista som specifikt avlägsnar reklam på tyskspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard Almanca filtresi",
-				"description": "EasyList Germany + AdGuard Almanca filtresi. Özellikle Almanca sitelerde reklamları engelleyen filtre."
+				"name": "CyberPurify Almanca filtresi",
+				"description": "EasyList Germany + CyberPurify Almanca filtresi. Özellikle Almanca sitelerde reklamları engelleyen filtre."
 			},
 			"uk": {
-				"name": "Німецький фільтр AdGuard",
-				"description": "EasyList Germany + Німецький фільтр AdGuard. Фільтр, призначений спеціально для вилучення реклами на вебсайтах німецькою мовою."
+				"name": "Німецький фільтр CyberPurify",
+				"description": "EasyList Germany + Німецький фільтр CyberPurify. Фільтр, призначений спеціально для вилучення реклами на вебсайтах німецькою мовою."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Đức",
-				"description": "Bộ lọc EasyList + Adguard tiếng  Đức. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Đức."
+				"description": "Bộ lọc EasyList + CyberPurify tiếng  Đức. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Đức."
 			},
 			"zh": {
-				"name": "AdGuard 德语过滤器",
-				"description": "EasyList Germany + AdGuard 德语过滤器。此过滤器专门移除德语网站上的广告。"
+				"name": "CyberPurify 德语过滤器",
+				"description": "EasyList Germany + CyberPurify 德语过滤器。此过滤器专门移除德语网站上的广告。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 德文過濾器",
-				"description": "EasyList Germany + AdGuard 德文過濾器。特別地移除於德語網站上的廣告之過濾清單。"
+				"name": "CyberPurify 德文過濾器",
+				"description": "EasyList Germany + CyberPurify 德文過濾器。特別地移除於德語網站上的廣告之過濾清單。"
 			}
 		},
 		"7": {
 			"ar": {
-				"name": "فلتر ياباني AdGuard",
+				"name": "فلتر ياباني CyberPurify",
 				"description": "فلتر يتيح منع الإعلانات على مواقع الويب باللغة اليابانية"
 			},
 			"be": {
 				"name": "Японскі фільтр",
-				"description": "Японскі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на японскай мове."
+				"description": "Японскі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на японскай мове."
 			},
 			"bg": {
 				"name": "Японски филтър",
@@ -9331,15 +9331,15 @@
 				"description": "Filtre que permet bloquejar els anunci de publicitat en Japonés."
 			},
 			"da": {
-				"name": "AdGuard Japansk filter",
+				"name": "CyberPurify Japansk filter",
 				"description": "Filter som aktiverer annonceblokering på hjemmesider der er på japansk."
 			},
 			"de": {
-				"name": "AdGuard Japanischer Filter",
+				"name": "CyberPurify Japanischer Filter",
 				"description": "Filter, der Anzeigen auf japanischen Webseiten blockiert."
 			},
 			"en": {
-				"name": "AdGuard Japanese filter",
+				"name": "CyberPurify Japanese filter",
 				"description": "Filter that enables ad blocking on websites in the Japanese language."
 			},
 			"es": {
@@ -9355,19 +9355,19 @@
 				"description": "فیلتر اَدگارد ژاپنی. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های ژاپنی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin japaninkielen suodatin",
+				"name": "CyberPurifyin japaninkielen suodatin",
 				"description": "Suodatin, joka tehostaa mainosten estoa erityisesti japaninkielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Japonais",
+				"name": "Filtre CyberPurify Japonais",
 				"description": "Filtre permettant le blocage des publicités sur les sites web avec du contenu en Japonais."
 			},
 			"he": {
-				"name": "מסנן יפני של AdGuard",
+				"name": "מסנן יפני של CyberPurify",
 				"description": "מסנן שמאפשר חסימת פרסומות באתרים בשפה היפנית"
 			},
 			"hr": {
-				"name": "AdGuard Japanski filtar",
+				"name": "CyberPurify Japanski filtar",
 				"description": "Filtar za blokiranje oglasa na japanskom jeziku."
 			},
 			"hu": {
@@ -9375,94 +9375,94 @@
 				"description": "Szűrő ami engedélyezi a reklámok tiltását Japán weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Jepang",
+				"name": "Penyaring CyberPurify Jepang",
 				"description": "Penyaring yang memungkinkan pemblokiran iklan di situs web dalam bahasa Jepang."
 			},
 			"it": {
 				"name": "Filtro giapponese",
-				"description": "Filtro giapponese di Adguard. Filtro che attiva il blocco degli annunci sui siti internet in giapponese."
+				"description": "Filtro giapponese di CyberPurify. Filtro che attiva il blocco degli annunci sui siti internet in giapponese."
 			},
 			"ja": {
-				"name": "AdGuard 日本語フィルタ",
+				"name": "CyberPurify 日本語フィルタ",
 				"description": "日本語のWebサイトで広告ブロックを有効にするフィルタです。"
 			},
 			"ko": {
-				"name": "AdGuard 일본어 필터",
+				"name": "CyberPurify 일본어 필터",
 				"description": "일본어 사이트의 광고를 차단하는 필터입니다."
 			},
 			"nl": {
 				"name": "Japans filter",
-				"description": "AdGuard Japans filter. Filter dat het blokkeren van advertenties op websites in de Japanse taal mogelijk maakt."
+				"description": "CyberPurify Japans filter. Filter dat het blokkeren van advertenties op websites in de Japanse taal mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards japanske filter",
+				"name": "CyberPurifys japanske filter",
 				"description": "Filtrer som gjør det mulig å blokkere annonser på japanske nettsider."
 			},
 			"pl": {
-				"name": "Japoński filtr AdGuard",
+				"name": "Japoński filtr CyberPurify",
 				"description": "Filtr, który umożliwia blokowanie reklam na japońskich stronach internetowych."
 			},
 			"pt": {
-				"name": "Filtro Japonês do AdGuard",
+				"name": "Filtro Japonês do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites no idioma japonês."
 			},
 			"pt_BR": {
-				"name": "Filtro Japonês do AdGuard",
+				"name": "Filtro Japonês do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Japonês."
 			},
 			"pt_PT": {
-				"name": "Filtro Japonês do AdGuard",
+				"name": "Filtro Japonês do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites no idioma japonês."
 			},
 			"ru": {
 				"name": "Японский фильтр",
-				"description": "Японский фильтр AdGuard. Фильтр, позволяющий убрать рекламу с сайтов на японском языке."
+				"description": "Японский фильтр CyberPurify. Фильтр, позволяющий убрать рекламу с сайтов на японском языке."
 			},
 			"sk": {
-				"name": "AdGuard japonský filter",
+				"name": "CyberPurify japonský filter",
 				"description": "Filter, ktorý umožňuje blokovať reklamy na stránkach v japončine."
 			},
 			"sl": {
-				"name": "AdGuard Japonski filter",
+				"name": "CyberPurify Japonski filter",
 				"description": "Filter, ki omogoča zaviranje oglasov na spletnih straneh v japonščini."
 			},
 			"sr": {
-				"name": "AdGuard japanski filter",
+				"name": "CyberPurify japanski filter",
 				"description": "Filter koji blokira reklame na sajtovima na japanskom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards japanska filter",
+				"name": "CyberPurifys japanska filter",
 				"description": "Filter som blockerar reklam på japanskspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard Japonca filtresi",
-				"description": "AdGuard Japonca filtresi. Özellikle Japonca sitelerde reklamları engelleyen filtre."
+				"name": "CyberPurify Japonca filtresi",
+				"description": "CyberPurify Japonca filtresi. Özellikle Japonca sitelerde reklamları engelleyen filtre."
 			},
 			"uk": {
-				"name": "Японський фільтр AdGuard",
+				"name": "Японський фільтр CyberPurify",
 				"description": "Фільтр, який дозволяє блокувати рекламу на вебсайтах японською мовою."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Nhật",
-				"description": "Bộ lọc Adguard tiếng Nhật. Bộ lọc kích hoạt chặn quảng cáo trên các website tiếng Nhật."
+				"description": "Bộ lọc CyberPurify tiếng Nhật. Bộ lọc kích hoạt chặn quảng cáo trên các website tiếng Nhật."
 			},
 			"zh": {
-				"name": "AdGuard 日语过滤器",
+				"name": "CyberPurify 日语过滤器",
 				"description": "此过滤器可以在日语网站上启用广告拦截功能。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 日文過濾器",
+				"name": "CyberPurify 日文過濾器",
 				"description": "啟用於日語網站上的廣告封鎖之過濾器。"
 			}
 		},
 		"8": {
 			"ar": {
-				"name": "فلتر الهولنديةAdGuard",
+				"name": "فلتر الهولنديةCyberPurify",
 				"description": "قائمة الهولندية + فلترادجوارد الهولندية. قائمة التصفية التي تزيل الإعلانات على مواقع الويب باللغة الهولندية على وجه التحديد"
 			},
 			"be": {
 				"name": "Галандскі фільтр",
-				"description": "EasyList Dutch + Галандскі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на галандскай мове."
+				"description": "EasyList Dutch + Галандскі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на галандскай мове."
 			},
 			"bg": {
 				"name": "Холандски филтър",
@@ -9473,16 +9473,16 @@
 				"description": "Filtre que permet bloquejar els anunci de publicitat en Holandés."
 			},
 			"da": {
-				"name": "AdGuard Hollandsk filter",
-				"description": "EasyList Dutch + AdGuard Hollandsk filter. Filter liste som specifikt fjerner reklamer på hollandsksprogede websider."
+				"name": "CyberPurify Hollandsk filter",
+				"description": "EasyList Dutch + CyberPurify Hollandsk filter. Filter liste som specifikt fjerner reklamer på hollandsksprogede websider."
 			},
 			"de": {
-				"name": "AdGuard Niederländischer Filter",
-				"description": "EasyList Dutch + AdGuard niederländischer Filter. Filter, der Anzeigen auf niederländischen Webseiten blockiert."
+				"name": "CyberPurify Niederländischer Filter",
+				"description": "EasyList Dutch + CyberPurify niederländischer Filter. Filter, der Anzeigen auf niederländischen Webseiten blockiert."
 			},
 			"en": {
-				"name": "AdGuard Dutch filter",
-				"description": "EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in the Dutch language."
+				"name": "CyberPurify Dutch filter",
+				"description": "EasyList Dutch + CyberPurify Dutch filter. Filter list that specifically removes ads on websites in the Dutch language."
 			},
 			"es": {
 				"name": "Filtro para holandés",
@@ -9497,114 +9497,114 @@
 				"description": "ایزی لیست هلندی + فیلتر اَدگارد هلندی. فیلتر اَدگارد هلندی. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های هلندی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin hollanninkielen suodatin",
-				"description": "EasyList hollanti + AdGuardin hollanninkielen suodatin, joka tehostaa mainosten estoa erityisesti hollanninkielisillä sivustoilla."
+				"name": "CyberPurifyin hollanninkielen suodatin",
+				"description": "EasyList hollanti + CyberPurifyin hollanninkielen suodatin, joka tehostaa mainosten estoa erityisesti hollanninkielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Néerlandais",
-				"description": "Filtres EasyList Dutch et AdGuard Néerlandais. Liste de filtres permettant de supprimer les publicités sur les sites web avec contenu en Néerlandais."
+				"name": "Filtre CyberPurify Néerlandais",
+				"description": "Filtres EasyList Dutch et CyberPurify Néerlandais. Liste de filtres permettant de supprimer les publicités sur les sites web avec contenu en Néerlandais."
 			},
 			"he": {
-				"name": "מסנן הולנדי של AdGuard",
-				"description": "EasyList Dutch + מסנן הולנדי של AdGuard. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה ההולנדית"
+				"name": "מסנן הולנדי של CyberPurify",
+				"description": "EasyList Dutch + מסנן הולנדי של CyberPurify. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה ההולנדית"
 			},
 			"hr": {
-				"name": "AdGuard Nizozemski filtar",
-				"description": "EasyList Danska + AdGuard Danski filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na danskom jeziku."
+				"name": "CyberPurify Nizozemski filtar",
+				"description": "EasyList Danska + CyberPurify Danski filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na danskom jeziku."
 			},
 			"hu": {
 				"name": "Holland szűrő",
 				"description": "Szűrő ami engedélyezi a reklámok tiltását holland weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Belanda",
-				"description": "EasyList Dutch + Penyaring AdGuard Belanda. Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Belanda."
+				"name": "Penyaring CyberPurify Belanda",
+				"description": "EasyList Dutch + Penyaring CyberPurify Belanda. Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Belanda."
 			},
 			"it": {
 				"name": "Filtro olandese",
-				"description": "EasyList Dutch+ Filtro olandese di Adguard. Filtro che rimuove specificatamente annunci sui siti web in lingua olandese."
+				"description": "EasyList Dutch+ Filtro olandese di CyberPurify. Filtro che rimuove specificatamente annunci sui siti web in lingua olandese."
 			},
 			"ja": {
-				"name": "AdGuardオランダ語フィルタ",
-				"description": "EasyList DutchとAdGuardオランダ語フィルタの合同。オランダ語のウェブ広告を除去するフィルタリストです。"
+				"name": "CyberPurifyオランダ語フィルタ",
+				"description": "EasyList DutchとCyberPurifyオランダ語フィルタの合同。オランダ語のウェブ広告を除去するフィルタリストです。"
 			},
 			"ko": {
-				"name": "AdGuard 네덜란드 필터",
-				"description": "EasyList Dutch와 AdGuard 베이스 필터를 합쳐 만든 필터. 특히 네덜란드어 웹사이트에서의 광고 삭제를 위한 필터 리스트입니다."
+				"name": "CyberPurify 네덜란드 필터",
+				"description": "EasyList Dutch와 CyberPurify 베이스 필터를 합쳐 만든 필터. 특히 네덜란드어 웹사이트에서의 광고 삭제를 위한 필터 리스트입니다."
 			},
 			"nl": {
 				"name": "Nederlands filter",
-				"description": "EasyList Dutch + AdGuard Nederlands Filter dat het blokkeren van advertenties op Nederlandstalige websites mogelijk maakt."
+				"description": "EasyList Dutch + CyberPurify Nederlands Filter dat het blokkeren van advertenties op Nederlandstalige websites mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards nederlandske filter",
-				"description": "EasyList Dutch + AdGuards nederlandske filter. Filterliste som spesifikt fjerner annonser på nederlandske nettsider."
+				"name": "CyberPurifys nederlandske filter",
+				"description": "EasyList Dutch + CyberPurifys nederlandske filter. Filterliste som spesifikt fjerner annonser på nederlandske nettsider."
 			},
 			"pl": {
-				"name": "Holenderski filtr AdGuard",
-				"description": "EasyList Dutch + holenderski filtr AdGuard. Filtry, które umożliwiają blokowanie reklam na stronach internetowych zawierających treść po holendersku."
+				"name": "Holenderski filtr CyberPurify",
+				"description": "EasyList Dutch + holenderski filtr CyberPurify. Filtry, które umożliwiają blokowanie reklam na stronach internetowych zawierających treść po holendersku."
 			},
 			"pt": {
-				"name": "Filtro Holandês do AdGuard",
-				"description": "EasyList Dutch + Filtro Holandês do AdGuard. Lista de filtros que remove especificamente anúncios em sites de língua holandesa."
+				"name": "Filtro Holandês do CyberPurify",
+				"description": "EasyList Dutch + Filtro Holandês do CyberPurify. Lista de filtros que remove especificamente anúncios em sites de língua holandesa."
 			},
 			"pt_BR": {
-				"name": "Filtro Holandês do AdGuard",
-				"description": "EasyList Dutch + AdGuard Dutch filtro. Filtro que permite o bloqueio de anúncios em sites com o conteúdo holandês."
+				"name": "Filtro Holandês do CyberPurify",
+				"description": "EasyList Dutch + CyberPurify Dutch filtro. Filtro que permite o bloqueio de anúncios em sites com o conteúdo holandês."
 			},
 			"pt_PT": {
-				"name": "Filtro Holandês do AdGuard",
-				"description": "EasyList Dutch + Filtro Holandês do AdGuard. Lista de filtros que remove especificamente anúncios em sites de língua holandesa."
+				"name": "Filtro Holandês do CyberPurify",
+				"description": "EasyList Dutch + Filtro Holandês do CyberPurify. Lista de filtros que remove especificamente anúncios em sites de língua holandesa."
 			},
 			"ru": {
 				"name": "Голландский фильтр",
-				"description": "EasyList Dutch + Голландский фильтр AdGuard. Фильтр, позволяющий блокировать рекламу на сайтах на голландском языке."
+				"description": "EasyList Dutch + Голландский фильтр CyberPurify. Фильтр, позволяющий блокировать рекламу на сайтах на голландском языке."
 			},
 			"sk": {
-				"name": "AdGuard holandský filter",
-				"description": "EasyList Dutch + AdGuard holandský filter. Filter, ktorý umožňuje blokovať reklamy na stránkach v holandčine."
+				"name": "CyberPurify holandský filter",
+				"description": "EasyList Dutch + CyberPurify holandský filter. Filter, ktorý umožňuje blokovať reklamy na stránkach v holandčine."
 			},
 			"sl": {
-				"name": "AdGuard Nizozemski filter",
-				"description": "EasyList Dutch + AdGuard Nizozemski filter. Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v nizozemščini."
+				"name": "CyberPurify Nizozemski filter",
+				"description": "EasyList Dutch + CyberPurify Nizozemski filter. Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v nizozemščini."
 			},
 			"sr": {
-				"name": "AdGuard holandski filter",
-				"description": "EasyList Holandski + AdGuard holandski filter. Lista filtera koja posebno uklanja reklame sa sajtova na holandskom jeziku."
+				"name": "CyberPurify holandski filter",
+				"description": "EasyList Holandski + CyberPurify holandski filter. Lista filtera koja posebno uklanja reklame sa sajtova na holandskom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards nederländska filter",
-				"description": "EasyList Dutch + AdGuards holländska filter. Filterlista som specifikt avlägsnar reklam på holländskspråkiga webbplatser."
+				"name": "CyberPurifys nederländska filter",
+				"description": "EasyList Dutch + CyberPurifys holländska filter. Filterlista som specifikt avlägsnar reklam på holländskspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard Flemenkçe filtresi",
-				"description": "EasyList Dutch + AdGuard Flemenkçe filtresi. Özellikle Flemenkçe sitelerde reklamları engelleyen filtre."
+				"name": "CyberPurify Flemenkçe filtresi",
+				"description": "EasyList Dutch + CyberPurify Flemenkçe filtresi. Özellikle Flemenkçe sitelerde reklamları engelleyen filtre."
 			},
 			"uk": {
-				"name": "Голландський фільтр AdGuard",
-				"description": "EasyList Dutch + Голландський фільтр AdGuard. Фільтр, призначений спеціально для вилучення реклами на вебсайтах голландською мовою."
+				"name": "Голландський фільтр CyberPurify",
+				"description": "EasyList Dutch + Голландський фільтр CyberPurify. Фільтр, призначений спеціально для вилучення реклами на вебсайтах голландською мовою."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Hà Lan",
-				"description": "Bộ lọc EasyList + Adguard tiếng Hà Lan. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Hà Lan."
+				"description": "Bộ lọc EasyList + CyberPurify tiếng Hà Lan. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Hà Lan."
 			},
 			"zh": {
-				"name": "AdGuard 荷兰语过滤器",
-				"description": "EasyList Dutch + AdGuard 荷兰语过滤器。此过滤器专门移除荷兰语网站上的广告。"
+				"name": "CyberPurify 荷兰语过滤器",
+				"description": "EasyList Dutch + CyberPurify 荷兰语过滤器。此过滤器专门移除荷兰语网站上的广告。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 荷蘭文過濾器",
-				"description": "EasyList Dutch + AdGuard 荷蘭文過濾器。特別地移除於荷蘭語網站上的廣告之過濾清單。"
+				"name": "CyberPurify 荷蘭文過濾器",
+				"description": "EasyList Dutch + CyberPurify 荷蘭文過濾器。特別地移除於荷蘭語網站上的廣告之過濾清單。"
 			}
 		},
 		"9": {
 			"ar": {
-				"name": "فلترإسباني / برتغاليAdGuard",
+				"name": "فلترإسباني / برتغاليCyberPurify",
 				"description": "قائمة التصفية التي تزيل الإعلانات تحديدًا على مواقع الويب باللغتين الإسبانية والبرتغالية"
 			},
 			"be": {
 				"name": "Іспана-партугальскі фільтр",
-				"description": "Іспана-партугальскі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на іспанскай і партугальскай мовах."
+				"description": "Іспана-партугальскі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на іспанскай і партугальскай мовах."
 			},
 			"bg": {
 				"name": "Испански/Португалски филтър",
@@ -9615,15 +9615,15 @@
 				"description": "Filtre que permet bloquejar els anunci de publicitat en  Espanyol i Portugués."
 			},
 			"da": {
-				"name": "AdGuard Spansk/Portugisisk filter",
+				"name": "CyberPurify Spansk/Portugisisk filter",
 				"description": "Filterliste som specifikt fjerner reklamer på spansk/portugisisksprogede hjemmesider."
 			},
 			"de": {
-				"name": "AdGuard Spanischer/Portugiesischer Filter",
+				"name": "CyberPurify Spanischer/Portugiesischer Filter",
 				"description": "Filterliste, die spezifisch Werbeanzeigen auf spanisch-/portugiesischsprachigen Webseiten sperrt."
 			},
 			"en": {
-				"name": "AdGuard Spanish/Portuguese filter",
+				"name": "CyberPurify Spanish/Portuguese filter",
 				"description": "Filter list that specifically removes ads on websites in the Spanish and Portuguese languages."
 			},
 			"es": {
@@ -9639,19 +9639,19 @@
 				"description": "فیلتر اَدگارد اسپانیایی/پرتغالی. فیلتر اَدگارد اسپانیایی/پرتغالی. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های اسپانیایی/پرتغالی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin espanjan- ja portugalinkielten suodatin",
+				"name": "CyberPurifyin espanjan- ja portugalinkielten suodatin",
 				"description": "Suodatin, joka tehostaa mainosten estoa erityisesti portugalin- ja espanjankielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Espagnol/Portugais",
+				"name": "Filtre CyberPurify Espagnol/Portugais",
 				"description": "Liste de filtres faits pour bloquer les publicités sur les sites web en Espagnol et en Portugais."
 			},
 			"he": {
-				"name": "מסנן ספרדי/פורטוגלי של AdGuard",
+				"name": "מסנן ספרדי/פורטוגלי של CyberPurify",
 				"description": "רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הספרדית ובשפה הפורטוגזית"
 			},
 			"hr": {
-				"name": "AdGuard Španjolski/Portugalski filtar",
+				"name": "CyberPurify Španjolski/Portugalski filtar",
 				"description": "Popis filtara posebno dizajniranih za blokiranje oglasa na španjolskom i portugalskom jeziku."
 			},
 			"hu": {
@@ -9659,71 +9659,71 @@
 				"description": "Szűrő ami engedélyezi a reklámok tiltását spanyol és portugál weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Spanyol/Portugis",
+				"name": "Penyaring CyberPurify Spanyol/Portugis",
 				"description": "Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Spanyol dan Portugis."
 			},
 			"it": {
 				"name": "Filtro spagnolo/portoghese",
-				"description": "Filtro spagnolo/portoghese di Adguard. Filtro che rimuove specificatamente annunci sui siti web in lingua spagnola e portoghese."
+				"description": "Filtro spagnolo/portoghese di CyberPurify. Filtro che rimuove specificatamente annunci sui siti web in lingua spagnola e portoghese."
 			},
 			"ja": {
-				"name": "AdGuard スペイン語/ポルトガル語フィルタ",
+				"name": "CyberPurify スペイン語/ポルトガル語フィルタ",
 				"description": "スペイン語およびポルトガル語のWebサイトの広告を削除するフィルタリストです。"
 			},
 			"ko": {
-				"name": "AdGuard 스페인어/포르투갈어 필터",
+				"name": "CyberPurify 스페인어/포르투갈어 필터",
 				"description": "특히 스페인어와 포르투갈어로 된 웹사이트의 광고를 차단하는 필터 리스트입니다."
 			},
 			"nl": {
 				"name": "Spaans/Portugees filter",
-				"description": "AdGuard Spaans/Portugees filter. Filter dat het blokkeren van advertenties op websites in het Spaans en Portugees mogelijk maakt."
+				"description": "CyberPurify Spaans/Portugees filter. Filter dat het blokkeren van advertenties op websites in het Spaans en Portugees mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards spanske/portugisiske filter",
-				"description": "AdGuard spansk/portugisisk filter. Filterliste som spesifikt fjerner annonser på spanske og portugisiske nettsider."
+				"name": "CyberPurifys spanske/portugisiske filter",
+				"description": "CyberPurify spansk/portugisisk filter. Filterliste som spesifikt fjerner annonser på spanske og portugisiske nettsider."
 			},
 			"pl": {
-				"name": "Hiszpański/Portugalski filtr AdGuard",
+				"name": "Hiszpański/Portugalski filtr CyberPurify",
 				"description": "Filtr, który umożliwia blokowanie reklam na hiszpańskich i portugalskich stronach internetowych."
 			},
 			"pt": {
-				"name": "Filtro Espanhol/Português do AdGuard",
+				"name": "Filtro Espanhol/Português do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites de língua espanhola e portuguesa."
 			},
 			"pt_BR": {
-				"name": "Filtro Espanhol/Português do AdGuard",
+				"name": "Filtro Espanhol/Português do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em sites com o conteúdo Espanhol e Português."
 			},
 			"pt_PT": {
-				"name": "Filtro Espanhol/Português do AdGuard",
+				"name": "Filtro Espanhol/Português do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites de língua espanhola e portuguesa."
 			},
 			"ru": {
 				"name": "Испано-португальский фильтр",
-				"description": "Испано-португальский фильтр AdGuard. Фильтр, позволяющий блокировать рекламу на сайтах на испанском и португальском языках."
+				"description": "Испано-португальский фильтр CyberPurify. Фильтр, позволяющий блокировать рекламу на сайтах на испанском и португальском языках."
 			},
 			"sk": {
-				"name": "AdGuard španielsky/portugalský filter",
+				"name": "CyberPurify španielsky/portugalský filter",
 				"description": "Filter, ktorý špecificky odstraňuje reklamy na stránkach v španielčine a portugalčine."
 			},
 			"sl": {
-				"name": "AdGuard Španski/Portugalski filter",
+				"name": "CyberPurify Španski/Portugalski filter",
 				"description": "Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v španščini in portugalščini."
 			},
 			"sr": {
-				"name": "AdGuard špansko-portugalski filter",
+				"name": "CyberPurify špansko-portugalski filter",
 				"description": "Lista filtera koja uklanja reklame sa sajtova koji su na španskom i portugalskom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards spansk/portugisiska filter",
+				"name": "CyberPurifys spansk/portugisiska filter",
 				"description": "Filterlista som specifikt avlägsnar reklam på spanskspråkiga och portugisspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard İspanyolca/Portekizce filtresi",
+				"name": "CyberPurify İspanyolca/Portekizce filtresi",
 				"description": "Özellikle İspanyolca ve Portekizce sitelerde reklamları engelleyen filtre."
 			},
 			"uk": {
-				"name": "Іспано-португальський фільтр AdGuard",
+				"name": "Іспано-португальський фільтр CyberPurify",
 				"description": "Фільтр, призначений спеціально для вилучення реклами на вебсайтах іспанською та португальською мовами."
 			},
 			"vi": {
@@ -9731,11 +9731,11 @@
 				"description": "Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Tây Ban Nha và Bồ Đào Nha."
 			},
 			"zh": {
-				"name": "AdGuard 西班牙语/葡萄牙语过滤器",
+				"name": "CyberPurify 西班牙语/葡萄牙语过滤器",
 				"description": "此过滤器专门移除西班牙语及葡萄牙语网站上的广告。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 西班牙文/葡萄牙文過濾器",
+				"name": "CyberPurify 西班牙文/葡萄牙文過濾器",
 				"description": "特別地移除於西班牙語和葡萄牙語網站上的廣告之過濾清單。"
 			}
 		},
@@ -9883,7 +9883,7 @@
 		},
 		"11": {
 			"ar": {
-				"name": "فلترإعلانات الجوالAdGuard",
+				"name": "فلترإعلانات الجوالCyberPurify",
 				"description": "تصفيه لكافة شبكات الإعلانات المتنقلة المعروفة. مفيده للاجهزه النقالة."
 			},
 			"be": {
@@ -9899,7 +9899,7 @@
 				"description": "Filtre per totes les xarxes d'anuncis de publicitat conegudes"
 			},
 			"da": {
-				"name": "AdGuard Mobilannonce filter",
+				"name": "CyberPurify Mobilannonce filter",
 				"description": "Filter for alle kendte mobile annonce netværker. Brugbart for mobile enheder."
 			},
 			"de": {
@@ -9907,7 +9907,7 @@
 				"description": "Filter für alle bekannten mobilen Werbenetzwerke. Nützlich für mobile Geräte."
 			},
 			"en": {
-				"name": "AdGuard Mobile Ads filter",
+				"name": "CyberPurify Mobile Ads filter",
 				"description": "Filter for all known mobile ad networks. Useful for mobile devices."
 			},
 			"es": {
@@ -9927,7 +9927,7 @@
 				"description": "Suodattaa kaikki tunnetut mobiilimainokset"
 			},
 			"fr": {
-				"name": "Filtre AdGuard des publicités pour mobile",
+				"name": "Filtre CyberPurify des publicités pour mobile",
 				"description": "Filtre pour tous les réseaux publicitaires connus pour mobile. Utile pour tous types d'appareils portables."
 			},
 			"he": {
@@ -9935,7 +9935,7 @@
 				"description": "מסנן עבור כל הרשתות הידועות של פרסומות. שימושי עבור מכשירים ניידים"
 			},
 			"hr": {
-				"name": "AdGuard Filtar mobilnih oglasa",
+				"name": "CyberPurify Filtar mobilnih oglasa",
 				"description": "Filtar za sve poznate mobilne oglašavačke mreže. Koristan na mobilnim uređajima."
 			},
 			"hu": {
@@ -9943,7 +9943,7 @@
 				"description": "Szűrő az összes ismert mobil hálózat reklámokhoz"
 			},
 			"id": {
-				"name": "Penyaring Iklan Seluler AdGuard",
+				"name": "Penyaring Iklan Seluler CyberPurify",
 				"description": "Penyaring untuk semua iklan jaringan seluler yang dikenal"
 			},
 			"it": {
@@ -9951,11 +9951,11 @@
 				"description": "Filtro per tutte le reti di annunci mobile conosciute. Utile per dispositivi portatili."
 			},
 			"ja": {
-				"name": "AdGuard モバイル広告フィルタ",
+				"name": "CyberPurify モバイル広告フィルタ",
 				"description": "すべての既知のモバイル広告ネットワーク用フィルタ。モバイル端末に有用です。"
 			},
 			"ko": {
-				"name": "AdGuard 모바일 광고 필터",
+				"name": "CyberPurify 모바일 광고 필터",
 				"description": "알려진 모든 모바일 광고 네트워크를 차단하는 필터입니다. 모바일 기기에 유용합니다."
 			},
 			"nl": {
@@ -9963,23 +9963,23 @@
 				"description": "Filter voor alle bekende mobiele advertentie netwerken. Handig voor mobile apparaten."
 			},
 			"no": {
-				"name": "AdGuards mobilannonsefilter",
+				"name": "CyberPurifys mobilannonsefilter",
 				"description": "Filter for alle kjente mobilannonsenettverk. Nyttig for mobile enheter."
 			},
 			"pl": {
-				"name": "Filtr reklam dla urządzeń mobilnych AdGuard",
+				"name": "Filtr reklam dla urządzeń mobilnych CyberPurify",
 				"description": "Filtr dla wszystkich znanych mobilnych sieci reklamowych. Przydatny urządzeniom mobilnym."
 			},
 			"pt": {
-				"name": "Filtro de anúncios do AdGuard para dispositivos móveis",
+				"name": "Filtro de anúncios do CyberPurify para dispositivos móveis",
 				"description": "Filtro para todas as redes de anúncios móveis conhecidos. Útil para dispositivos móveis."
 			},
 			"pt_BR": {
-				"name": "Filtro de Dispositivo Móvel do AdGuard",
+				"name": "Filtro de Dispositivo Móvel do CyberPurify",
 				"description": "Filtrar todas as redes de publicidade móvel conhecidas. Útil para anúncios no celular."
 			},
 			"pt_PT": {
-				"name": "Filtro de anúncios do AdGuard para dispositivos móveis",
+				"name": "Filtro de anúncios do CyberPurify para dispositivos móveis",
 				"description": "Filtro para todas as redes de anúncios móveis conhecidos. Útil para dispositivos móveis."
 			},
 			"ru": {
@@ -9987,27 +9987,27 @@
 				"description": "Фильтр для рекламных сетей, используемых для рекламы на мобильных устройствах."
 			},
 			"sk": {
-				"name": "AdGuard filter mobilných reklám",
+				"name": "CyberPurify filter mobilných reklám",
 				"description": "Filter pre všetky známe siete mobilnej reklamy, Užitočné pre mobilné zariadenia."
 			},
 			"sl": {
-				"name": "AdGuard Filter mobilnih oglasov",
+				"name": "CyberPurify Filter mobilnih oglasov",
 				"description": "Filter vseh znanih mobilnih oglasnih omrežij. Uporaben za mobilne naprave."
 			},
 			"sr": {
-				"name": "AdGuard filter mobilnih reklama",
+				"name": "CyberPurify filter mobilnih reklama",
 				"description": "Filter za sve poznate mreže mobilnih reklama. Korisno za mobilne uređaje."
 			},
 			"sv": {
-				"name": "AdGuards filter för mobilannonser",
+				"name": "CyberPurifys filter för mobilannonser",
 				"description": "Filter för alla kända nätverk för mobilreklam. Användbar för mobila enheter."
 			},
 			"tr": {
-				"name": "AdGuard Mobil Reklam filtresi",
+				"name": "CyberPurify Mobil Reklam filtresi",
 				"description": "Bilinen tüm mobil reklam ağları için filtre. Mobil aygıtlar için yararlıdır."
 			},
 			"uk": {
-				"name": "Фільтр мобільної реклами AdGuard",
+				"name": "Фільтр мобільної реклами CyberPurify",
 				"description": "Фільтр для всіх відомих мобільних рекламних мереж. Корисний для мобільних пристроїв."
 			},
 			"vi": {
@@ -10015,22 +10015,22 @@
 				"description": "Một bộ lọc tất cả các mạng quảng cáo di động đã biết. Hữu dụng với thiết bị di động."
 			},
 			"zh": {
-				"name": "AdGuard 移动广告过滤器",
+				"name": "CyberPurify 移动广告过滤器",
 				"description": "该过滤器将过滤已知的所有移动广告网络。对移动设备非常有帮助。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 行動廣告過濾器",
+				"name": "CyberPurify 行動廣告過濾器",
 				"description": "用於所有已知的行動廣告網路之過濾器。對於行動裝置是有用的。"
 			}
 		},
 		"13": {
 			"ar": {
-				"name": "فلتر تركيAdGuard",
+				"name": "فلتر تركيCyberPurify",
 				"description": "قائمة التصفية التي تزيل الإعلانات تحديدًا على مواقع الويب باللغة التركية"
 			},
 			"be": {
 				"name": "Турэцкі фільтр",
-				"description": "Турецкий фильтр AdGuard. Фильтр, позволяющий убрать рекламу с сайтов на турецком языке."
+				"description": "Турецкий фильтр CyberPurify. Фильтр, позволяющий убрать рекламу с сайтов на турецком языке."
 			},
 			"bg": {
 				"name": "Турски филтър",
@@ -10041,15 +10041,15 @@
 				"description": "Filter list that specifically removes ads on websites in the Turkish language."
 			},
 			"da": {
-				"name": "AdGuard Tyrkisk filter",
+				"name": "CyberPurify Tyrkisk filter",
 				"description": "Filter som aktiverer annonceblokering på hjemmesider der er på tyrkisk."
 			},
 			"de": {
-				"name": "AdGuard Türkischer Filter",
+				"name": "CyberPurify Türkischer Filter",
 				"description": "Filterliste, die spezifisch Werbeanzeigen auf türkischsprachigen Webseiten sperrt."
 			},
 			"en": {
-				"name": "AdGuard Turkish filter",
+				"name": "CyberPurify Turkish filter",
 				"description": "Filter list that specifically removes ads on websites in the Turkish language."
 			},
 			"es": {
@@ -10061,113 +10061,113 @@
 				"description": "Lista de filtros que elimina específicamente los anuncios en sitios web en idioma turco."
 			},
 			"fa": {
-				"name": "فیلتر ترکی AdGuard",
+				"name": "فیلتر ترکی CyberPurify",
 				"description": "این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های ترکی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin turkinkielen suodatin",
+				"name": "CyberPurifyin turkinkielen suodatin",
 				"description": "Suodatin, joka tehostaa mainosten estoa erityisesti turkinkielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Turque",
+				"name": "Filtre CyberPurify Turque",
 				"description": "Liste de filtres qui supprime les publicités sur les sites web avec du contenu en Turque."
 			},
 			"he": {
-				"name": "מסנן טורקי של AdGuard",
+				"name": "מסנן טורקי של CyberPurify",
 				"description": "רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הטורקית"
 			},
 			"hr": {
-				"name": "AdGuard Turski filtar",
+				"name": "CyberPurify Turski filtar",
 				"description": "Popis filtara posebno dizajniranih za blokiranje oglasa na turskom jeziku."
 			},
 			"hu": {
 				"name": "Török szűrő",
-				"description": "Adguard Török szűrő. Hirdetések szűrése a Török nyelvű weboldalakon."
+				"description": "CyberPurify Török szűrő. Hirdetések szűrése a Török nyelvű weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Turki",
+				"name": "Penyaring CyberPurify Turki",
 				"description": "Didesain khusus untuk menyaring iklan di halaman web dalam bahasa Turki"
 			},
 			"it": {
 				"name": "Filtro Turco",
-				"description": "Filtro turco di Adguard. Filtro che rimuove specificatamente annunci sui siti internet in lingua turca."
+				"description": "Filtro turco di CyberPurify. Filtro che rimuove specificatamente annunci sui siti internet in lingua turca."
 			},
 			"ja": {
-				"name": "AdGuardトルコ語フィルタ",
+				"name": "CyberPurifyトルコ語フィルタ",
 				"description": "トルコ語のWebサイトの広告を特に削除するフィルタリストです。"
 			},
 			"ko": {
-				"name": "AdGuard 터키어 필터",
+				"name": "CyberPurify 터키어 필터",
 				"description": "특히 터키어 웹 사이트에서의 광고 차단을 위한 필터 리스트입니다."
 			},
 			"nl": {
 				"name": "Turks filter",
-				"description": "AdGuard Turks filter. Filter dat specifiek advertenties op websites in de Turkse taal verwijdert."
+				"description": "CyberPurify Turks filter. Filter dat specifiek advertenties op websites in de Turkse taal verwijdert."
 			},
 			"no": {
-				"name": "AdGuards tyrkiske filter",
+				"name": "CyberPurifys tyrkiske filter",
 				"description": "Filterliste som spesifikt fjerner annonser på tyrkiske nettsider."
 			},
 			"pl": {
-				"name": "Turecki filtr AdGuard",
+				"name": "Turecki filtr CyberPurify",
 				"description": "Filtr, który umożliwia blokowanie reklam na tureckich stronach internetowych."
 			},
 			"pt": {
-				"name": "Filtro Turco do AdGuard",
+				"name": "Filtro Turco do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites  de língua turca."
 			},
 			"pt_BR": {
-				"name": "Filtro Turco do AdGuard",
+				"name": "Filtro Turco do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Turco."
 			},
 			"pt_PT": {
-				"name": "Filtro Turco do AdGuard",
+				"name": "Filtro Turco do CyberPurify",
 				"description": "Filtro que permite o bloqueio de anúncios em websites  de língua turca."
 			},
 			"ru": {
 				"name": "Турецкий фильтр",
-				"description": "Турецкий фильтр AdGuard. Фильтр, позволяющий блокировать рекламу на сайтах на турецком языке."
+				"description": "Турецкий фильтр CyberPurify. Фильтр, позволяющий блокировать рекламу на сайтах на турецком языке."
 			},
 			"sk": {
-				"name": "AdGuard turecký filter",
+				"name": "CyberPurify turecký filter",
 				"description": "Filter, ktorý špecificky odstraňuje reklamy na stránkach v turečtine."
 			},
 			"sl": {
-				"name": "AdGuard Turški filter",
+				"name": "CyberPurify Turški filter",
 				"description": "Filtriraj seznam, ki posebej odstranjuje oglase na spletnih mestih v turšščini."
 			},
 			"sr": {
-				"name": "AdGuard turski filter",
+				"name": "CyberPurify turski filter",
 				"description": "Lista filtera koja posebno uklanja reklame sa sajtova koji su na turskom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards turkiska filter",
+				"name": "CyberPurifys turkiska filter",
 				"description": "Filterlista som specifikt avlägsnar reklam på turkspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard Türkçe filtresi",
+				"name": "CyberPurify Türkçe filtresi",
 				"description": "Özellikle Türkçe sitelerde reklamları engelleyen filtre."
 			},
 			"uk": {
-				"name": "Турецький фільтр AdGuard",
+				"name": "Турецький фільтр CyberPurify",
 				"description": "Фільтр, призначений спеціально для вилучення реклами на вебсайтах турецькою мовою."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Thổ Nhĩ Kỳ",
-				"description": "Bộ lọc Adguard tiếng Thổ Nhĩ Kỳ. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Thổ Nhĩ Kỳ."
+				"description": "Bộ lọc CyberPurify tiếng Thổ Nhĩ Kỳ. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Thổ Nhĩ Kỳ."
 			},
 			"zh": {
-				"name": "AdGuard 土耳其语过滤器",
+				"name": "CyberPurify 土耳其语过滤器",
 				"description": "专注于移除土耳其语网站网站上所刊列广告的过滤器。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 土耳其文過濾器",
+				"name": "CyberPurify 土耳其文過濾器",
 				"description": "特別地移除於土耳其語網站上的廣告之過濾清單。"
 			}
 		},
 		"14": {
 			"ar": {
-				"name": "فلتر المضايقاتAdGuard",
+				"name": "فلتر المضايقاتCyberPurify",
 				"description": "تحظر العناصر المزعجة على صفحات الويب، بما في ذلك إشعارات ملفات تعريف الارتباط بحاجيات الجهات الخارجية والنوافذ المنبثقة في الصفحة."
 			},
 			"be": {
@@ -10179,19 +10179,19 @@
 				"description": "Блокира дразнещите елементи на уеб страници, включително обявления на бисквитки от трети страни, джаджи и изскачащи прозорци в страницата."
 			},
 			"ca": {
-				"name": "AdGuard Annoyances filter",
+				"name": "CyberPurify Annoyances filter",
 				"description": "Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups."
 			},
 			"da": {
-				"name": "AdGuard Irritationsfilter",
+				"name": "CyberPurify Irritationsfilter",
 				"description": "Blokerer irriterende elementer på websiderne inkluderende cookies som lægger mærke til dig, tredje-parts widgets og popups på siderne."
 			},
 			"de": {
-				"name": "AdGuard Belästigungsfilter",
+				"name": "CyberPurify Belästigungsfilter",
 				"description": "Blockiert irritierende Elemente auf Webseiten, einschließlich Cookie-Benachrichtigungen, Widgets von Drittanbietern und Pop-ups."
 			},
 			"en": {
-				"name": "AdGuard Annoyances filter",
+				"name": "CyberPurify Annoyances filter",
 				"description": "Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups."
 			},
 			"es": {
@@ -10207,19 +10207,19 @@
 				"description": "مسدودسازی عناصر آزاردهنده در صفحات وب شامل ویدجت اخطار کوکی ثالث و در پاپ آپ صفحات."
 			},
 			"fi": {
-				"name": "AdGuard Annoyances filter",
+				"name": "CyberPurify Annoyances filter",
 				"description": "Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Anti nuisances",
+				"name": "Filtre CyberPurify Anti nuisances",
 				"description": "Bloque les éléments irritants des pages web incluant les notifications de cookies , widgets tiers-parties, fenêtres pop-up intrusives."
 			},
 			"he": {
-				"name": "מסנן מטרדים של AdGuard",
+				"name": "מסנן מטרדים של CyberPurify",
 				"description": "חוסם אלמנטים מעצבנים בדפי רשת כולל הודעות לגבי עוגיות, יישומוני צד שלישי וחלונות קופצים בתוך דפים"
 			},
 			"hr": {
-				"name": "AdGuard Filtar smetnji",
+				"name": "CyberPurify Filtar smetnji",
 				"description": "Blokira iritantne elemente na web stranicama, uključujući obavijesti o kolačićima, widgete drugih proizvođača i skočne prozore na stranici."
 			},
 			"hu": {
@@ -10227,7 +10227,7 @@
 				"description": "Irritáló elemek blokkolása,  beleértve: sütik, értesítések és harmadik féltől származó modulok és felugró ablakok."
 			},
 			"id": {
-				"name": "Penyaring Elemen Gangguan AdGuard",
+				"name": "Penyaring Elemen Gangguan CyberPurify",
 				"description": "Memblokir elemen yang menjengkelkan pada halaman web termasuk pemberitahuan cookie, widget pihak ketiga, dan popup di halaman."
 			},
 			"it": {
@@ -10235,11 +10235,11 @@
 				"description": "Blocca elementi invadenti sulle pagine web inclusi i widget che notificano sui cookie e i popup nelle pagine."
 			},
 			"ja": {
-				"name": "AdGuard 迷惑要素フィルタ",
+				"name": "CyberPurify 迷惑要素フィルタ",
 				"description": "Cookie通知、サードパーティーウィジェット、ページ内ポップアップなどを含む、ウェブページ上の鬱陶しい要素のブロックします。"
 			},
 			"ko": {
-				"name": "AdGuard 방해 요소 필터",
+				"name": "CyberPurify 방해 요소 필터",
 				"description": "기타 웹 브라우징을 방해하는 귀찮고 불필요한 요소를 차단합니다. 이는 유럽 웹 사이트의 '쿠키 확인', 다양한 서드파티 위젯, 팝업 등을 포함합니다."
 			},
 			"nl": {
@@ -10247,23 +10247,23 @@
 				"description": "Blokkeert irritante elementen op webpagina's, zoals cookie vermeldingen, widgets van derden en pop-ups."
 			},
 			"no": {
-				"name": "AdGuards forstyrrelser-filter",
+				"name": "CyberPurifys forstyrrelser-filter",
 				"description": "Blokkerer irriterende elementer på nettsider, inkludert informasjonskapsler, tredjeparts widgets og popup-vinduer på siden."
 			},
 			"pl": {
-				"name": "Filtr irytujących elementów AdGuard",
+				"name": "Filtr irytujących elementów CyberPurify",
 				"description": "Blokuje irytujące elementy na stronach internetowych, wliczając w to informacje o plikach cookie, widget'y osób trzecich oraz popup'y."
 			},
 			"pt": {
-				"name": "Filtro de aborrecimentos do AdGuard",
+				"name": "Filtro de aborrecimentos do CyberPurify",
 				"description": "Bloqueia elementos irritantes nas páginas da Web, incluindo avisos de cookies, widgets de terceiros e popups na página."
 			},
 			"pt_BR": {
-				"name": "Filtro para Aborrecimentos do AdGuard",
+				"name": "Filtro para Aborrecimentos do CyberPurify",
 				"description": "Bloqueia elementos irritantes em sites, incluindo aviso de cookies, widgets de terceiros, anúncios e pop-ups."
 			},
 			"pt_PT": {
-				"name": "Filtro de aborrecimentos do AdGuard",
+				"name": "Filtro de aborrecimentos do CyberPurify",
 				"description": "Bloqueia elementos irritantes nas páginas da Web, incluindo avisos de cookies, widgets de terceiros e popups na página."
 			},
 			"ru": {
@@ -10271,27 +10271,27 @@
 				"description": "Блокирует раздражители на страницах сайтов, включая уведомления об использовании cookie, всплывающие сообщения внутри сайта, сторонние виджеты, не имеющие отношения к функциональности сайта."
 			},
 			"sk": {
-				"name": "AdGuard filter proti obťažovaniu",
+				"name": "CyberPurify filter proti obťažovaniu",
 				"description": "Blokuje iritujúce prvky na webových stránkach vrátane cookie upozornení, widgety tretích strán a vlastné vyskakovacie texty."
 			},
 			"sl": {
-				"name": "AdGuard Filter motenj",
+				"name": "CyberPurify Filter motenj",
 				"description": "Onemogoča dražilne elemente na spletnih straneh, vključno z obvestili o piškotkih, dodatke drugih proizvajalcev in pojavna okna na straneh."
 			},
 			"sr": {
-				"name": "AdGuard filter dosađivanja",
+				"name": "CyberPurify filter dosađivanja",
 				"description": "Blokira iritantne elemente na stranicama uključujući obaveštenja o kolačićima, vidžete trećih strana i iskačuće prozore."
 			},
 			"sv": {
-				"name": "AdGuards Irritationsfilter",
+				"name": "CyberPurifys Irritationsfilter",
 				"description": "Blockerar irriterande element på webbsidor, inklusive cookiemeddelanden, tredjepartswidgetar och popup-fönster."
 			},
 			"tr": {
-				"name": "AdGuard Can Sıkıcı Öğeler filtresi",
+				"name": "CyberPurify Can Sıkıcı Öğeler filtresi",
 				"description": "Çerez bildirimleri, üçüncü taraf araçlar ve açılır pencereler dahil olmak üzere web sayfalarında rahatsız edici ögeleri engeller."
 			},
 			"uk": {
-				"name": "Фільтр подразників AdGuard",
+				"name": "Фільтр подразників CyberPurify",
 				"description": "Блокує надокучливі елементи на вебсторінках, включаючи сповіщення про куки, сторонні віджети та виринаючі вікна на сторінці."
 			},
 			"vi": {
@@ -10299,42 +10299,42 @@
 				"description": "Chặn những yếu tốt gây khó chịu trên trang web, bao gồm widget thông báo cookie bên thứ 3 và các popup trong trang."
 			},
 			"zh": {
-				"name": "AdGuard 恼人广告过滤器",
+				"name": "CyberPurify 恼人广告过滤器",
 				"description": "屏蔽网页上的恼人元素，包括 Cookie 通知，第三方小部件和页内弹出式窗口。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 惱人的事物過濾器",
+				"name": "CyberPurify 惱人的事物過濾器",
 				"description": "封鎖於網頁上令人惱怒的元件，包含 cookie 通知、第三方的小工具和在頁的彈出式視窗。"
 			}
 		},
 		"15": {
 			"ar": {
-				"name": "تصفيه أسماء المجالات المبسطةAdGuard",
+				"name": "تصفيه أسماء المجالات المبسطةCyberPurify",
 				"description": "الفلتر يتكون من عدة فلاتر أخرى (مرشح قاعد ادجوارد وفلتر الوسائط الاجتماعية وفلتر حماية التتبع وفلتر إعلانات الجوال و القائمة السهلة و الخصوصية السهلة) وتبسيطه على وجه التحديد ليكون متوافقًا بشكل أفضل مع حظر الإعلانات على مستوى دنس"
 			},
 			"be": {
 				"name": "DNS фільтр",
-				"description": "Фільтр, складзены з некалькіх фільтраў (Базавы фільтр AdGuard, Фільтр сацыяльных сетак, Фільтр лічыльнікаў і сістэм аналітыкі, Фільтр мабільнай рэкламы, EasyList і EasyPrivacy), і адмыслова спрошчаны, каб быць лепш сумяшчальным з блакаваннем рэкламы на роўні DNS."
+				"description": "Фільтр, складзены з некалькіх фільтраў (Базавы фільтр CyberPurify, Фільтр сацыяльных сетак, Фільтр лічыльнікаў і сістэм аналітыкі, Фільтр мабільнай рэкламы, EasyList і EasyPrivacy), і адмыслова спрошчаны, каб быць лепш сумяшчальным з блакаваннем рэкламы на роўні DNS."
 			},
 			"bg": {
-				"name": "AdGuard Simplified domain names filter",
-				"description": "Filter composed from several other filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking."
+				"name": "CyberPurify Simplified domain names filter",
+				"description": "Filter composed from several other filters (CyberPurify Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking."
 			},
 			"ca": {
-				"name": "AdGuard Simplified domain names filter",
-				"description": "Filter composed from several other filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking."
+				"name": "CyberPurify Simplified domain names filter",
+				"description": "Filter composed from several other filters (CyberPurify Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking."
 			},
 			"da": {
-				"name": "AdGuard DNS-filter",
-				"description": "Filter sammensat af flere forskellige filtre (AdGuard Basisfilter, Social Medie filter, Beskyttelsesfilter mod Sporing, Mobilannonce filter, EasyList og EasyPrivacy) og forenklet specifikt for at være bedre kompatibel med DNS-niveau annonceblokering."
+				"name": "CyberPurify DNS-filter",
+				"description": "Filter sammensat af flere forskellige filtre (CyberPurify Basisfilter, Social Medie filter, Beskyttelsesfilter mod Sporing, Mobilannonce filter, EasyList og EasyPrivacy) og forenklet specifikt for at være bedre kompatibel med DNS-niveau annonceblokering."
 			},
 			"de": {
-				"name": "AdGuard DNS-Filter",
-				"description": "Filter, der einige andere Filter kombiniert (AdGuard Basis-Filter, Social-Media-Filter, Tracking-Schutzfilter, Filter für mobile Anzeigen, EasyList und EasyPrivacy) und speziell vereinfacht ist, um die Kompatibilität für das Blocken von Werbung auf DNS-Ebene zu verbessern."
+				"name": "CyberPurify DNS-Filter",
+				"description": "Filter, der einige andere Filter kombiniert (CyberPurify Basis-Filter, Social-Media-Filter, Tracking-Schutzfilter, Filter für mobile Anzeigen, EasyList und EasyPrivacy) und speziell vereinfacht ist, um die Kompatibilität für das Blocken von Werbung auf DNS-Ebene zu verbessern."
 			},
 			"en": {
-				"name": "AdGuard DNS filter",
-				"description": "Filter composed of several other filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking."
+				"name": "CyberPurify DNS filter",
+				"description": "Filter composed of several other filters (CyberPurify Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) and simplified specifically to be better compatible with DNS-level ad blocking."
 			},
 			"es": {
 				"name": "Filtro DNS",
@@ -10345,138 +10345,138 @@
 				"description": "Filtro compuesto por varios filtros (Filtro base, filtro de redes sociales, filtro de protección contra rastreo, filtro para anuncios móviles, EasyList y EasyPrivacy) y está simplificado específicamente para ser compatible con el bloqueo de anuncios a nivel DNS."
 			},
 			"fa": {
-				"name": "فیلتر نام دامنه ساده شده AdGuard",
-				"description": "فیلتر تشکیل شده از چندین فیلتر دیگر (فیلتر پایه AdGuard،فیلتر انگلیسی، فیلتر رسانه اجتماعی، فیلت جاسوس افزار، فیلتر تبلیغات موبایل، EasyList،ایزی پیرویسی) و ساده شده مخصوصا برای سازگاری بهتر با مسدودسازی تبلیع در سطح DNS."
+				"name": "فیلتر نام دامنه ساده شده CyberPurify",
+				"description": "فیلتر تشکیل شده از چندین فیلتر دیگر (فیلتر پایه CyberPurify،فیلتر انگلیسی، فیلتر رسانه اجتماعی، فیلت جاسوس افزار، فیلتر تبلیغات موبایل، EasyList،ایزی پیرویسی) و ساده شده مخصوصا برای سازگاری بهتر با مسدودسازی تبلیع در سطح DNS."
 			},
 			"fi": {
-				"name": "AdGuardin DNS-suodatin",
-				"description": "Suodatin koostuu useista erillisistä suodattimista (AdGuard perussuodatin, sosiaalisen median suodatin, seurannan suodatin, mobiilimainosten suodatin, EasyList ja EasyPrivacy) ja se on erityisesti tiivistetty DNS-tason mainosten estoon sopivammaksi."
+				"name": "CyberPurifyin DNS-suodatin",
+				"description": "Suodatin koostuu useista erillisistä suodattimista (CyberPurify perussuodatin, sosiaalisen median suodatin, seurannan suodatin, mobiilimainosten suodatin, EasyList ja EasyPrivacy) ja se on erityisesti tiivistetty DNS-tason mainosten estoon sopivammaksi."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Noms de Domaine Simplifiés  (DNS).",
-				"description": "Filtre composé de plusieurs filtres ( Filtre AdGuard Basique, Filtre Réseaux sociaux, Filtre Anti-espionnage, Filtre Publicités Mobiles, EasyList et EasyPrivacy) et simplifié exprés pour maximiser sa compatibilité avec le niveau de blocage du DNS."
+				"name": "Filtre CyberPurify Noms de Domaine Simplifiés  (DNS).",
+				"description": "Filtre composé de plusieurs filtres ( Filtre CyberPurify Basique, Filtre Réseaux sociaux, Filtre Anti-espionnage, Filtre Publicités Mobiles, EasyList et EasyPrivacy) et simplifié exprés pour maximiser sa compatibilité avec le niveau de blocage du DNS."
 			},
 			"he": {
-				"name": "מסנן שמות תחום מופשטים של AdGuard",
+				"name": "מסנן שמות תחום מופשטים של CyberPurify",
 				"description": "מסנן שמשומש על ידי אדגגארד DNS. בעיקרון, משלב כמה מסננים (מסנן אנגלית, מסנן חברתי, מסנן ריגול, מסנן מודעות להתקנים ניידים, EasyList ו EasyPrivacy) טרנספורמצית DNS לסינון טוב יותר"
 			},
 			"hr": {
-				"name": "AdGuard DNS filtar",
-				"description": "Filtar je sastavljen od nekoliko drugih filtara (AdGuard Osnovni filtar, Filtar za društvene mreže, Filtar zaštite od praćenja, Filtar za mobilne oglase, EasyList i EasyPrivacy) i uz topojednostavljen da bi bio bolje kompatibilan sa blokiranjem oglasa na DNS razini."
+				"name": "CyberPurify DNS filtar",
+				"description": "Filtar je sastavljen od nekoliko drugih filtara (CyberPurify Osnovni filtar, Filtar za društvene mreže, Filtar zaštite od praćenja, Filtar za mobilne oglase, EasyList i EasyPrivacy) i uz topojednostavljen da bi bio bolje kompatibilan sa blokiranjem oglasa na DNS razini."
 			},
 			"hu": {
 				"name": "Egyszerűsített domain szűrés",
 				"description": "A szűrő több másik szűrő egyesítéséből(English filter, Social media filter, Spyware filter, Mobile ads filter, EasyList és EasyPrivacy)áll és egyszerűsítve lett, hogy jobban működjön a DNS szintű szűrőkkel."
 			},
 			"id": {
-				"name": "Penyaring nama domain yang disederhanakan AdGuard",
-				"description": "Penyaring terdiri atas beberapa penyaring lainnya (AdGuard Base filter, Social media filter, Spyware filter, Mobile ads filter, EasyList and EasyPrivacy) dan disederhanakan secara khusus agar lebih kompatibel dengan pemblokiran iklan tingkat DNS."
+				"name": "Penyaring nama domain yang disederhanakan CyberPurify",
+				"description": "Penyaring terdiri atas beberapa penyaring lainnya (CyberPurify Base filter, Social media filter, Spyware filter, Mobile ads filter, EasyList and EasyPrivacy) dan disederhanakan secara khusus agar lebih kompatibel dengan pemblokiran iklan tingkat DNS."
 			},
 			"it": {
-				"name": "Filtro DSN di Adguard",
-				"description": "Filtro utilizzato da Adguard DNS. Semplicemente, unisce diversi filtri (filtro Inglese, filtro Sociale, filtro Spyware, filtro annunci Mobile, EasyList e EasyPrivacy) transformato per un miglior filtraggio DNS."
+				"name": "Filtro DSN di CyberPurify",
+				"description": "Filtro utilizzato da CyberPurify DNS. Semplicemente, unisce diversi filtri (filtro Inglese, filtro Sociale, filtro Spyware, filtro annunci Mobile, EasyList e EasyPrivacy) transformato per un miglior filtraggio DNS."
 			},
 			"ja": {
-				"name": "AdGuard DNSフィルタ",
-				"description": "AdGuardベースフィルタ、SNS用フィルタ、追跡防止フィルタ、モバイル広告フィルタ、EasyList、EasyPrivacyから構成され、DNSレベルの広告ブロックとの互換性が向上するように簡素化されたフィルタです。"
+				"name": "CyberPurify DNSフィルタ",
+				"description": "CyberPurifyベースフィルタ、SNS用フィルタ、追跡防止フィルタ、モバイル広告フィルタ、EasyList、EasyPrivacyから構成され、DNSレベルの広告ブロックとの互換性が向上するように簡素化されたフィルタです。"
 			},
 			"ko": {
-				"name": "AdGuard DNS 필터",
-				"description": "여러 필터 (AdGuard 베이스 필터, 소셜 미디어 필터, 추적 보호 필터, 모바일 광고 필터, EasyList, EasyPrivacy)를 포함하며, 더 나은 DNS 레벨의 필터링을 위해 간소화 된 필터입니다."
+				"name": "CyberPurify DNS 필터",
+				"description": "여러 필터 (CyberPurify 베이스 필터, 소셜 미디어 필터, 추적 보호 필터, 모바일 광고 필터, EasyList, EasyPrivacy)를 포함하며, 더 나은 DNS 레벨의 필터링을 위해 간소화 된 필터입니다."
 			},
 			"nl": {
-				"name": "AdGuard DNS filter",
-				"description": "Filter samengesteld uit diverse andere filters (AdGuard Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) en vereenvoudigd om beter compatibel te zijn met DNS-level adblocking."
+				"name": "CyberPurify DNS filter",
+				"description": "Filter samengesteld uit diverse andere filters (CyberPurify Base filter, Social Media filter, Tracking Protection filter, Mobile Ads filter, EasyList and EasyPrivacy) en vereenvoudigd om beter compatibel te zijn met DNS-level adblocking."
 			},
 			"no": {
-				"name": "AdGuards forenklede domenenavnfilter",
-				"description": "Filter sammensatt av flere andre filtre (AdGuards hovedfilter, sosiale medier-filter, spionvare-filter, mobilannonser-filter, EasyList og EasyPrivacy) og forenklet spesielt for å være bedre kompatibelt med annonseblokkering på DNS-nivå."
+				"name": "CyberPurifys forenklede domenenavnfilter",
+				"description": "Filter sammensatt av flere andre filtre (CyberPurifys hovedfilter, sosiale medier-filter, spionvare-filter, mobilannonser-filter, EasyList og EasyPrivacy) og forenklet spesielt for å være bedre kompatibelt med annonseblokkering på DNS-nivå."
 			},
 			"pl": {
-				"name": "Filtr AdGuard DNS",
-				"description": "Filtr złożony z kilku innych filtrów (Podstawowy filtr AdGuard, Filtr mediów społecznościowych, Filtr elementów szpiegujących, Filtr reklam mobilnych, EasyList i EasyPrivacy), który został uproszczony dla lepszej zgodności z blokowaniem reklam na poziomie DNS."
+				"name": "Filtr CyberPurify DNS",
+				"description": "Filtr złożony z kilku innych filtrów (Podstawowy filtr CyberPurify, Filtr mediów społecznościowych, Filtr elementów szpiegujących, Filtr reklam mobilnych, EasyList i EasyPrivacy), który został uproszczony dla lepszej zgodności z blokowaniem reklam na poziomie DNS."
 			},
 			"pt": {
-				"name": "Filtro de nomes de domínio simplificado do AdGuard",
-				"description": "Filtro composto por vários outros filtros (Base de filtros do AdGuard, filtro de Redes Sociais, filtro de Protecção de Monitorização, filtro de Anúncios para Dispositivos Móveis, EasyList e EasyPrivacy) e simplificado especificamente para haver maior compatibilidade com o bloqueio de anúncios ao nível do DNS."
+				"name": "Filtro de nomes de domínio simplificado do CyberPurify",
+				"description": "Filtro composto por vários outros filtros (Base de filtros do CyberPurify, filtro de Redes Sociais, filtro de Protecção de Monitorização, filtro de Anúncios para Dispositivos Móveis, EasyList e EasyPrivacy) e simplificado especificamente para haver maior compatibilidade com o bloqueio de anúncios ao nível do DNS."
 			},
 			"pt_BR": {
-				"name": "Filtro para nomes de domínio simplificado do AdGuard",
-				"description": "Filtro composto de vários outros filtros (filtro base do AdGuard, filtro para mídia social, filtro de proteção contra rastreamento, filtro para dispositivo móvel, EasyList e EasyPrivacy). Também contém domínios simplificados para uma melhor compatibilidade no bloqueio de anúncios de nível DNS."
+				"name": "Filtro para nomes de domínio simplificado do CyberPurify",
+				"description": "Filtro composto de vários outros filtros (filtro base do CyberPurify, filtro para mídia social, filtro de proteção contra rastreamento, filtro para dispositivo móvel, EasyList e EasyPrivacy). Também contém domínios simplificados para uma melhor compatibilidade no bloqueio de anúncios de nível DNS."
 			},
 			"pt_PT": {
-				"name": "Filtro de nomes de domínio simplificado do AdGuard",
-				"description": "Filtro composto por vários outros filtros (Base de filtros do AdGuard, filtro de Redes Sociais, filtro de Protecção de Monitorização, filtro de Anúncios para Dispositivos Móveis, EasyList e EasyPrivacy) e simplificado especificamente para haver maior compatibilidade com o bloqueio de anúncios ao nível do DNS."
+				"name": "Filtro de nomes de domínio simplificado do CyberPurify",
+				"description": "Filtro composto por vários outros filtros (Base de filtros do CyberPurify, filtro de Redes Sociais, filtro de Protecção de Monitorização, filtro de Anúncios para Dispositivos Móveis, EasyList e EasyPrivacy) e simplificado especificamente para haver maior compatibilidade com o bloqueio de anúncios ao nível do DNS."
 			},
 			"ru": {
 				"name": "DNS фильтр",
-				"description": "Фильтр, составленный из нескольких фильтров (Базовый фильтр AdGuard, Фильтр социальных сетей, Фильтр счетчиков и систем аналитики, Фильтр мобильной рекламы, EasyList и EasyPrivacy), и специально упрощенный, чтобы быть лучше совместимым с блокировкой рекламы на уровне DNS."
+				"description": "Фильтр, составленный из нескольких фильтров (Базовый фильтр CyberPurify, Фильтр социальных сетей, Фильтр счетчиков и систем аналитики, Фильтр мобильной рекламы, EasyList и EasyPrivacy), и специально упрощенный, чтобы быть лучше совместимым с блокировкой рекламы на уровне DNS."
 			},
 			"sk": {
-				"name": "AdGuard DNS filter",
-				"description": "Filter zložený z viacerých iných filtrov (AdGuard základný filter, filter sociálnych sietí, filter proti sledovaniu, filter mobilnej reklamy, EasyList a EasyPrivacy), ktorý je zjednodušený pre lepšiu kompatibilitu s blokovaním reklamy na úrovni DNS."
+				"name": "CyberPurify DNS filter",
+				"description": "Filter zložený z viacerých iných filtrov (CyberPurify základný filter, filter sociálnych sietí, filter proti sledovaniu, filter mobilnej reklamy, EasyList a EasyPrivacy), ktorý je zjednodušený pre lepšiu kompatibilitu s blokovaním reklamy na úrovni DNS."
 			},
 			"sl": {
-				"name": "AdGuard Filter poenostavljenih imen domen",
-				"description": "Filter, sestavljen iz več drugih filtrov (AdGuard Osnovni filter, Filter družbenih medijev, Filter zaščite sledenja, Filter mobilnih oglasov, EasyList and EasyPrivacy) in poenostavljen posebej, da je bolj združljiv z zaviranjem oglasov na ravni DNS."
+				"name": "CyberPurify Filter poenostavljenih imen domen",
+				"description": "Filter, sestavljen iz več drugih filtrov (CyberPurify Osnovni filter, Filter družbenih medijev, Filter zaščite sledenja, Filter mobilnih oglasov, EasyList and EasyPrivacy) in poenostavljen posebej, da je bolj združljiv z zaviranjem oglasov na ravni DNS."
 			},
 			"sr": {
-				"name": "AdGuard pojednostavljeni filter domena",
-				"description": "Filter sastavljen od nekoliko drugih filtera (AdGuard osnovni filter, filter društvenih mreža, filter za zaštitu od praćenja, filter mobilnih reklama, EasyList i EasyPrivacy) Ovo je posebno pojednostavljeno kako bi bilo bolje kompatibilno sa blokiranjem reklama na DNS nivou."
+				"name": "CyberPurify pojednostavljeni filter domena",
+				"description": "Filter sastavljen od nekoliko drugih filtera (CyberPurify osnovni filter, filter društvenih mreža, filter za zaštitu od praćenja, filter mobilnih reklama, EasyList i EasyPrivacy) Ovo je posebno pojednostavljeno kako bi bilo bolje kompatibilno sa blokiranjem reklama na DNS nivou."
 			},
 			"sv": {
-				"name": "AdGuards förenklade domännamnsfilter",
-				"description": "Filter som kombinerar flera andra filter (AdGuards grundfilter, filter för sociala medier , spårningsfilter, filter för mobilannonser, EasyList och EasyPrivacy) och förenklade,  specifikt för förbättrad kompatibilitet med annonsblockering på DNS-nivå."
+				"name": "CyberPurifys förenklade domännamnsfilter",
+				"description": "Filter som kombinerar flera andra filter (CyberPurifys grundfilter, filter för sociala medier , spårningsfilter, filter för mobilannonser, EasyList och EasyPrivacy) och förenklade,  specifikt för förbättrad kompatibilitet med annonsblockering på DNS-nivå."
 			},
 			"tr": {
-				"name": "AdGuard DNS filtresi",
-				"description": "Temel olarak, birkaç filtreyi birleştirir (AdGuard Temel filtresi, Sosyal medya filtresi, Takip Engelleme filtresi, Mobil Reklam filtresi, EasyList filtresi ve EasyPrivacy filtresi) ve DNS ile daha iyi filtreleme ile reklam engellemek için basitleştirilmiş filtreleri kullanır."
+				"name": "CyberPurify DNS filtresi",
+				"description": "Temel olarak, birkaç filtreyi birleştirir (CyberPurify Temel filtresi, Sosyal medya filtresi, Takip Engelleme filtresi, Mobil Reklam filtresi, EasyList filtresi ve EasyPrivacy filtresi) ve DNS ile daha iyi filtreleme ile reklam engellemek için basitleştirilmiş filtreleri kullanır."
 			},
 			"uk": {
-				"name": "DNS-фільтр AdGuard",
-				"description": "Фільтр складається з декількох інших фільтрів (Основного фільтра AdGuard, фільтра соціальних мереж, фільтра захисту від стеження, фільтра мобільної реклами, EasyList та EasyPrivacy) і спрощений таким чином, щоб вдосконалити сумісність з блокуванням реклами на рівні DNS."
+				"name": "DNS-фільтр CyberPurify",
+				"description": "Фільтр складається з декількох інших фільтрів (Основного фільтра CyberPurify, фільтра соціальних мереж, фільтра захисту від стеження, фільтра мобільної реклами, EasyList та EasyPrivacy) і спрощений таким чином, щоб вдосконалити сумісність з блокуванням реклами на рівні DNS."
 			},
 			"vi": {
 				"name": "Bộ lọc tên miền đơn giản",
 				"description": "Bộ lọc được tạo từ nhiều bộ lọc khác nhau (Bộ lọc tiếng Anh, phương tiện mạng xã hội, phần mềm gián điệp, quảng cáo di động, EasyList và EasyPrivacy) và được đơn giản hoá để tương thích tốt hơn với việc chặn quảng cáo ở mức DNS."
 			},
 			"zh": {
-				"name": "AdGuard DNS 过滤器",
-				"description": "此过滤器由其他几个过滤器（AdGuard 基础过滤器、社交媒体过滤器、防跟踪保护过滤器、移动广告过滤器、EasyList 和 EasyPrivacy）组成，并经过简化，以便更好地与 DNS 级别的广告拦截兼容。"
+				"name": "CyberPurify DNS 过滤器",
+				"description": "此过滤器由其他几个过滤器（CyberPurify 基础过滤器、社交媒体过滤器、防跟踪保护过滤器、移动广告过滤器、EasyList 和 EasyPrivacy）组成，并经过简化，以便更好地与 DNS 级别的广告拦截兼容。"
 			},
 			"zh_TW": {
-				"name": "AdGuard DNS 過濾器",
-				"description": "由幾個其它的過濾器（AdGuard 基本過濾器、社群媒體過濾器、追蹤防護過濾器、行動廣告過濾器、EasyList 和 EasyPrivacy）所組成之過濾器，並被特別地簡化為與 DNS 層級的廣告封鎖更好地相容。"
+				"name": "CyberPurify DNS 過濾器",
+				"description": "由幾個其它的過濾器（CyberPurify 基本過濾器、社群媒體過濾器、追蹤防護過濾器、行動廣告過濾器、EasyList 和 EasyPrivacy）所組成之過濾器，並被特別地簡化為與 DNS 層級的廣告封鎖更好地相容。"
 			}
 		},
 		"16": {
 			"ar": {
-				"name": "فلترفرنسي AdGuard",
+				"name": "فلترفرنسي CyberPurify",
 				"description": "قائمة التصفية الفرنسية+ ادجوارد  قائمة التصفية التي تزيل الإعلانات تحديدًا على مواقع الويب باللغة الفرنسية"
 			},
 			"be": {
 				"name": "Французскі фільтр",
-				"description": "Liste FR + Французскі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на французскай мове."
+				"description": "Liste FR + Французскі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на французскай мове."
 			},
 			"bg": {
-				"name": "AdGuard French filter",
-				"description": "Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in the French language."
+				"name": "CyberPurify French filter",
+				"description": "Liste FR + CyberPurify French filter. Filter list that specifically removes ads on websites in the French language."
 			},
 			"ca": {
-				"name": "AdGuard French filter",
-				"description": "Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in the French language."
+				"name": "CyberPurify French filter",
+				"description": "Liste FR + CyberPurify French filter. Filter list that specifically removes ads on websites in the French language."
 			},
 			"da": {
-				"name": "AdGuard Fransk filter",
-				"description": "Liste FR + AdGuard Fransk filter. Filter liste som specifikt fjerner reklamer på fransksprogede websider."
+				"name": "CyberPurify Fransk filter",
+				"description": "Liste FR + CyberPurify Fransk filter. Filter liste som specifikt fjerner reklamer på fransksprogede websider."
 			},
 			"de": {
-				"name": "AdGuard Französischer Filter",
-				"description": "Liste FR + französischer AdGuard-Filter. Filter, der speziell Anzeigen auf französischen Webseiten blockiert."
+				"name": "CyberPurify Französischer Filter",
+				"description": "Liste FR + französischer CyberPurify-Filter. Filter, der speziell Anzeigen auf französischen Webseiten blockiert."
 			},
 			"en": {
-				"name": "AdGuard French filter",
-				"description": "Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in the French language."
+				"name": "CyberPurify French filter",
+				"description": "Liste FR + CyberPurify French filter. Filter list that specifically removes ads on websites in the French language."
 			},
 			"es": {
 				"name": "Filtro para francés",
@@ -10487,126 +10487,126 @@
 				"description": "Liste FR + Filtro para francés. Lista de filtros que elimina específicamente los anuncios en sitios web en idioma francés."
 			},
 			"fa": {
-				"name": "فیلتر فرانسوی AdGuard",
-				"description": "Liste FR + فیلتر فرانسوی AdGuard. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های فرانسوی زبان است."
+				"name": "فیلتر فرانسوی CyberPurify",
+				"description": "Liste FR + فیلتر فرانسوی CyberPurify. این لیست فیلترها،مخصوص حذف تبلیغات وبسایت های فرانسوی زبان است."
 			},
 			"fi": {
-				"name": "AdGuardin ranskankielen suodatin",
-				"description": "Liste FR + AdGuardin ranskankielinen suodatin, joka tehostaa mainosten estoa erityisesti raskankielisillä sivustoilla."
+				"name": "CyberPurifyin ranskankielen suodatin",
+				"description": "Liste FR + CyberPurifyin ranskankielinen suodatin, joka tehostaa mainosten estoa erityisesti raskankielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard Français",
-				"description": "Liste FR + filtre AdGuard Français. Liste de filtres qui bloquent les publicités sur les sites avec du contenu en Français."
+				"name": "Filtre CyberPurify Français",
+				"description": "Liste FR + filtre CyberPurify Français. Liste de filtres qui bloquent les publicités sur les sites avec du contenu en Français."
 			},
 			"he": {
-				"name": "מסנן צרפתי של AdGuard",
-				"description": "Liste FR + מסנן צרפתי של AdGuard. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הצרפתית"
+				"name": "מסנן צרפתי של CyberPurify",
+				"description": "Liste FR + מסנן צרפתי של CyberPurify. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הצרפתית"
 			},
 			"hr": {
-				"name": "AdGuard Francuski filtar",
-				"description": "Liste FR + AdGuard Francuski filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na francuskom jeziku."
+				"name": "CyberPurify Francuski filtar",
+				"description": "Liste FR + CyberPurify Francuski filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na francuskom jeziku."
 			},
 			"hu": {
 				"name": "Francia szűrő",
-				"description": "Liste FR + AdGuard French suűrő.Szűrő ami engedélyezi a reklámok tiltását francia weboldalakon."
+				"description": "Liste FR + CyberPurify French suűrő.Szűrő ami engedélyezi a reklámok tiltását francia weboldalakon."
 			},
 			"id": {
-				"name": "Penyaring AdGuard Prancis",
-				"description": "Penyaring AdGuard Prancis + Liste FR. Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Prancis."
+				"name": "Penyaring CyberPurify Prancis",
+				"description": "Penyaring CyberPurify Prancis + Liste FR. Daftar penyaring yang secara khusus menghapus iklan di situs web dalam bahasa Prancis."
 			},
 			"it": {
 				"name": "Filtro francese",
-				"description": "Lista FR + Filtro francese di Adguard. Filtro che rimuove specificatamente annunci sui siti web in lingua francese."
+				"description": "Lista FR + Filtro francese di CyberPurify. Filtro che rimuove specificatamente annunci sui siti web in lingua francese."
 			},
 			"ja": {
-				"name": "AdGuard フランス語フィルタ",
-				"description": "Liste FRとAdGuardフランス語フィルタを合わせたフィルタです。フランス語のウェブ広告を除去するフィルタリストになります。"
+				"name": "CyberPurify フランス語フィルタ",
+				"description": "Liste FRとCyberPurifyフランス語フィルタを合わせたフィルタです。フランス語のウェブ広告を除去するフィルタリストになります。"
 			},
 			"ko": {
-				"name": "AdGuard 프랑스어 필터",
-				"description": "Liste FR과 AdGuard 프랑스어 필터를 합쳐 만든 필터. 특히 프랑스어 웹사이트에서의 광고 삭제를 위한 필터 리스트입니다."
+				"name": "CyberPurify 프랑스어 필터",
+				"description": "Liste FR과 CyberPurify 프랑스어 필터를 합쳐 만든 필터. 특히 프랑스어 웹사이트에서의 광고 삭제를 위한 필터 리스트입니다."
 			},
 			"nl": {
 				"name": "Frans filter",
-				"description": "Liste FR + AdGuard Frans filter. Filter dat websites in de Franse taal filtert."
+				"description": "Liste FR + CyberPurify Frans filter. Filter dat websites in de Franse taal filtert."
 			},
 			"no": {
-				"name": "AdGuards franske filter",
-				"description": "Liste FR + AdGuards franske filter. Filterliste som spesifikt fjerner annonser på franske nettsider."
+				"name": "CyberPurifys franske filter",
+				"description": "Liste FR + CyberPurifys franske filter. Filterliste som spesifikt fjerner annonser på franske nettsider."
 			},
 			"pl": {
-				"name": "Francuski filtr AdGuard",
-				"description": "Liste FR + francuski filtr AdGuard. Filtry, które umożliwiają blokowanie reklam na francuskich stronach internetowych."
+				"name": "Francuski filtr CyberPurify",
+				"description": "Liste FR + francuski filtr CyberPurify. Filtry, które umożliwiają blokowanie reklam na francuskich stronach internetowych."
 			},
 			"pt": {
-				"name": "Filtro Francês do AdGuard",
-				"description": "Lista FR + filtro Francês do Adguard. Lista de filtros que remove especificamente anúncios em sites de língua francesa."
+				"name": "Filtro Francês do CyberPurify",
+				"description": "Lista FR + filtro Francês do CyberPurify. Lista de filtros que remove especificamente anúncios em sites de língua francesa."
 			},
 			"pt_BR": {
-				"name": "Filtro Francês do AdGuard",
-				"description": "Lista FR + Filtro Francês do AdGuard. Filtros que permite a remoção de anúncios em sites com conteúdo em francês."
+				"name": "Filtro Francês do CyberPurify",
+				"description": "Lista FR + Filtro Francês do CyberPurify. Filtros que permite a remoção de anúncios em sites com conteúdo em francês."
 			},
 			"pt_PT": {
-				"name": "Filtro Francês do AdGuard",
-				"description": "Lista FR + filtro Francês do Adguard. Lista de filtros que remove especificamente anúncios em sites de língua francesa."
+				"name": "Filtro Francês do CyberPurify",
+				"description": "Lista FR + filtro Francês do CyberPurify. Lista de filtros que remove especificamente anúncios em sites de língua francesa."
 			},
 			"ru": {
 				"name": "Французский фильтр",
-				"description": "Liste FR + Французский фильтр AdGuard. Фильтр, позволяющий блокировать рекламу на сайтах на французском языке."
+				"description": "Liste FR + Французский фильтр CyberPurify. Фильтр, позволяющий блокировать рекламу на сайтах на французском языке."
 			},
 			"sk": {
-				"name": "AdGuard francúzsky filter",
-				"description": "Liste FR + AdGuard francúzsky filter. Filter, ktorý odstraňuje reklamu na stránkach vo francúzštine."
+				"name": "CyberPurify francúzsky filter",
+				"description": "Liste FR + CyberPurify francúzsky filter. Filter, ktorý odstraňuje reklamu na stránkach vo francúzštine."
 			},
 			"sl": {
-				"name": "AdGuard Francoski filter",
-				"description": "Liste FR + AdGuard Francoski filter. Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v francoščini."
+				"name": "CyberPurify Francoski filter",
+				"description": "Liste FR + CyberPurify Francoski filter. Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v francoščini."
 			},
 			"sr": {
-				"name": "AdGuard francuski filter",
-				"description": "EasyList francuski + AdGuard francuski filter. Lista filtera koja posebno uklanja reklame sa sajtova na francuskom jeziku."
+				"name": "CyberPurify francuski filter",
+				"description": "EasyList francuski + CyberPurify francuski filter. Lista filtera koja posebno uklanja reklame sa sajtova na francuskom jeziku."
 			},
 			"sv": {
-				"name": "AdGuards franska filter",
-				"description": "Lista FR + AdGuards franskfilter. Filterlista inriktat på att avlägsna reklam på franskspråkiga webbplatser."
+				"name": "CyberPurifys franska filter",
+				"description": "Lista FR + CyberPurifys franskfilter. Filterlista inriktat på att avlägsna reklam på franskspråkiga webbplatser."
 			},
 			"tr": {
-				"name": "AdGuard Fransızca filtresi",
-				"description": "Liste FR + AdGuard Fransızca filtresi. Fransızca sitelerde reklamları engelleyen filtresi."
+				"name": "CyberPurify Fransızca filtresi",
+				"description": "Liste FR + CyberPurify Fransızca filtresi. Fransızca sitelerde reklamları engelleyen filtresi."
 			},
 			"uk": {
-				"name": "Французький фільтр AdGuard",
-				"description": "Liste FR + Французький фільтр Adguard. Фільтр, призначений спеціально для вилучення реклами на вебсайтах французькою мовою."
+				"name": "Французький фільтр CyberPurify",
+				"description": "Liste FR + Французький фільтр CyberPurify. Фільтр, призначений спеціально для вилучення реклами на вебсайтах французькою мовою."
 			},
 			"vi": {
 				"name": "Bộ lọc tiếng Pháp",
-				"description": "Bộ lọc EasyList + Adguard tiếng Pháp. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Pháp."
+				"description": "Bộ lọc EasyList + CyberPurify tiếng Pháp. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các website với nội dung tiếng Pháp."
 			},
 			"zh": {
-				"name": "AdGuard 法语过滤器",
-				"description": "Liste FR + AdGuard 法语过滤器。此过滤器专门移除法语网站上的广告。"
+				"name": "CyberPurify 法语过滤器",
+				"description": "Liste FR + CyberPurify 法语过滤器。此过滤器专门移除法语网站上的广告。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 法文過濾器",
-				"description": "Liste FR + AdGuard 法文過濾器。特別地移除於法語網站上的廣告之過濾清單。"
+				"name": "CyberPurify 法文過濾器",
+				"description": "Liste FR + CyberPurify 法文過濾器。特別地移除於法語網站上的廣告之過濾清單。"
 			}
 		},
 		"224": {
 			"be": {
 				"name": "Кітайскі фільтр",
-				"description": "EasyList China + Кітайскі фільтр AdGuard. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на кітайскай мове."
+				"description": "EasyList China + Кітайскі фільтр CyberPurify. Фільтр, што дазваляе прыбраць рэкламу з сайтаў на кітайскай мове."
 			},
 			"da": {
-				"name": "AdGuard Kinesisk filter",
-				"description": "EasyList China + AdGuard Kinesisk filter. Filterliste som specifikt fjerner annoncer på kinesisksprogede websteder."
+				"name": "CyberPurify Kinesisk filter",
+				"description": "EasyList China + CyberPurify Kinesisk filter. Filterliste som specifikt fjerner annoncer på kinesisksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard Chinesischer Filter",
-				"description": "EasyList China + AdGuard Chinesischer Filter. Filterliste, die spezifisch Werbeanzeigen auf chinesischsprachigen Webseiten sperrt."
+				"name": "CyberPurify Chinesischer Filter",
+				"description": "EasyList China + CyberPurify Chinesischer Filter. Filterliste, die spezifisch Werbeanzeigen auf chinesischsprachigen Webseiten sperrt."
 			},
 			"en": {
-				"name": "AdGuard Chinese filter",
-				"description": "EasyList China + AdGuard Chinese filter. Filter list that specifically removes ads on websites in Chinese language."
+				"name": "CyberPurify Chinese filter",
+				"description": "EasyList China + CyberPurify Chinese filter. Filter list that specifically removes ads on websites in Chinese language."
 			},
 			"es": {
 				"name": "Filtro para chino",
@@ -10617,92 +10617,92 @@
 				"description": "EasyList China + Filtro para chino. Lista de filtros que elimina específicamente los anuncios en sitios web en idioma chino."
 			},
 			"fi": {
-				"name": "AdGuardin kiinankielinen suodatin",
-				"description": "EasyList kiina + AdGuardin kiinaninkielen suodatin, joka tehostaa mainosten estoa erityisesti kiinankielisillä sivustoilla."
+				"name": "CyberPurifyin kiinankielinen suodatin",
+				"description": "EasyList kiina + CyberPurifyin kiinaninkielen suodatin, joka tehostaa mainosten estoa erityisesti kiinankielisillä sivustoilla."
 			},
 			"fr": {
-				"name": "Filtre AdGuard chinois",
-				"description": "EasyList China + Filtre AdGuard chinois. Liste de filtres qui supprime spécifiquement les annonces sur les sites Web en chinois."
+				"name": "Filtre CyberPurify chinois",
+				"description": "EasyList China + Filtre CyberPurify chinois. Liste de filtres qui supprime spécifiquement les annonces sur les sites Web en chinois."
 			},
 			"he": {
-				"name": "מסנן סיני של AdGuard",
-				"description": "EasyList סין + מסנן סיני של AdGuard. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הסינית"
+				"name": "מסנן סיני של CyberPurify",
+				"description": "EasyList סין + מסנן סיני של CyberPurify. רשימת מסננים שמסירה במפורש פרסומות באתרים בשפה הסינית"
 			},
 			"hr": {
-				"name": "AdGuard Kineski filtar",
-				"description": "EasyList China + AdGuard Kineski filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na kineskom jeziku."
+				"name": "CyberPurify Kineski filtar",
+				"description": "EasyList China + CyberPurify Kineski filtar. Popis filtara posebno dizajniranih za blokiranje oglasa na kineskom jeziku."
 			},
 			"hu": {
-				"name": "AdGuard Kínai szűrő",
-				"description": "EasyList China + AdGuard Chinese filter. Szűrőlista, ami eltávolítja a hirdetéseket a kínai webhelyekről."
+				"name": "CyberPurify Kínai szűrő",
+				"description": "EasyList China + CyberPurify Chinese filter. Szűrőlista, ami eltávolítja a hirdetéseket a kínai webhelyekről."
 			},
 			"id": {
-				"name": "Penyaring AdGuard China",
-				"description": "EasyList China + Penyaring AdGuard China. Daftar penyaring yang aman khusus membuang iklan pada situs dalam Bahasa China."
+				"name": "Penyaring CyberPurify China",
+				"description": "EasyList China + Penyaring CyberPurify China. Daftar penyaring yang aman khusus membuang iklan pada situs dalam Bahasa China."
 			},
 			"it": {
-				"name": "Filtro Cinese AdGuard",
-				"description": "EasyList China + Filtro Cinese AdGuard. La lista di filtri per la rimozione specifica di annunci su siti web in lingua Cinese."
+				"name": "Filtro Cinese CyberPurify",
+				"description": "EasyList China + Filtro Cinese CyberPurify. La lista di filtri per la rimozione specifica di annunci su siti web in lingua Cinese."
 			},
 			"ja": {
-				"name": "AdGuard中国語フィルタ",
-				"description": "EasyList China + AdGuard中国語フィルター。中国語のウェブサイトに掲載されている広告を除去するフィルタリストです。"
+				"name": "CyberPurify中国語フィルタ",
+				"description": "EasyList China + CyberPurify中国語フィルター。中国語のウェブサイトに掲載されている広告を除去するフィルタリストです。"
 			},
 			"ko": {
-				"name": "AdGuard 중국어 필터",
-				"description": "EasyList China + AdGuard 중국어 필터. 중국어 웹사이트에서의 광고 차단을 위한 필터 리스트입니다."
+				"name": "CyberPurify 중국어 필터",
+				"description": "EasyList China + CyberPurify 중국어 필터. 중국어 웹사이트에서의 광고 차단을 위한 필터 리스트입니다."
 			},
 			"nl": {
-				"name": "AdGuard Chinees filter",
-				"description": "EasyList China + AdGuard Chinees filter. Filterlijst dat het blokkeren van advertenties op specifieke websites in de Chinese taal mogelijk maakt."
+				"name": "CyberPurify Chinees filter",
+				"description": "EasyList China + CyberPurify Chinees filter. Filterlijst dat het blokkeren van advertenties op specifieke websites in de Chinese taal mogelijk maakt."
 			},
 			"no": {
-				"name": "AdGuards kinesiske filter",
-				"description": "EasyList China + AdGuards kinesiske filter. Filterliste som spesifikt fjerner reklamer på kinesiskspråklige nettsteder."
+				"name": "CyberPurifys kinesiske filter",
+				"description": "EasyList China + CyberPurifys kinesiske filter. Filterliste som spesifikt fjerner reklamer på kinesiskspråklige nettsteder."
 			},
 			"pl": {
-				"name": "Chiński filtr AdGuard",
-				"description": "EasyList China + chiński filtr AdGuard. Filtry, które umożliwiają blokowanie reklam na stronach internetowych zawierających treść po chińsku."
+				"name": "Chiński filtr CyberPurify",
+				"description": "EasyList China + chiński filtr CyberPurify. Filtry, które umożliwiają blokowanie reklam na stronach internetowych zawierających treść po chińsku."
 			},
 			"pt_BR": {
-				"name": "Filtro chinês do AdGuard",
-				"description": "EasyList China + Filtro chinês do AdGuard. Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Chinês."
+				"name": "Filtro chinês do CyberPurify",
+				"description": "EasyList China + Filtro chinês do CyberPurify. Filtro que permite o bloqueio de anúncios em sites com o conteúdo em Chinês."
 			},
 			"ru": {
 				"name": "Китайский фильтр",
-				"description": "EasyList China + Китайский фильтр AdGuard. Фильтр, позволяющий блокировать рекламу на сайтах на китайском языке."
+				"description": "EasyList China + Китайский фильтр CyberPurify. Фильтр, позволяющий блокировать рекламу на сайтах на китайском языке."
 			},
 			"sk": {
-				"name": "AdGuard čínsky filter",
-				"description": "EasyList Dutch + AdGuard čínsky filter. Filter, ktorý umožňuje blokovať reklamy na stránkach v čínštine."
+				"name": "CyberPurify čínsky filter",
+				"description": "EasyList Dutch + CyberPurify čínsky filter. Filter, ktorý umožňuje blokovať reklamy na stránkach v čínštine."
 			},
 			"sl": {
-				"name": "AdGuard Kitajski filter",
-				"description": "EasyList China + AdGuard Kitajski filter. Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v kitajščini."
+				"name": "CyberPurify Kitajski filter",
+				"description": "EasyList China + CyberPurify Kitajski filter. Seznam filtrov, ki posebej odstrani oglase na spletnih straneh v kitajščini."
 			},
 			"sr": {
-				"name": "AdGuard kineski filter",
-				"description": "EasyList kineski + AdGuard kineski filter. Lista filtera koja posebno uklanja reklame sa sajtova na kineskom jeziku."
+				"name": "CyberPurify kineski filter",
+				"description": "EasyList kineski + CyberPurify kineski filter. Lista filtera koja posebno uklanja reklame sa sajtova na kineskom jeziku."
 			},
 			"tr": {
-				"name": "AdGuard Çince filtresi",
-				"description": "EasyList Çin + AdGuard Çince filtresi. Özellikle Çince sitelerde reklamları engelleyen filtre."
+				"name": "CyberPurify Çince filtresi",
+				"description": "EasyList Çin + CyberPurify Çince filtresi. Özellikle Çince sitelerde reklamları engelleyen filtre."
 			},
 			"uk": {
-				"name": "Китайський фільтр AdGuard",
-				"description": "EasyList China + Китайський фільтр AdGuard. Фільтр, призначений спеціально для вилучення реклами на вебсайтах китайською мовою."
+				"name": "Китайський фільтр CyberPurify",
+				"description": "EasyList China + Китайський фільтр CyberPurify. Фільтр, призначений спеціально для вилучення реклами на вебсайтах китайською мовою."
 			},
 			"vi": {
-				"name": "Bộ lọc AdGuard tiếng Trung Quốc",
-				"description": "EasyList Trung Quốc + Bộ lọc AdGuard tiếng Trung Quốc. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các trang mạng với nội dung tiếng Trung Quốc."
+				"name": "Bộ lọc CyberPurify tiếng Trung Quốc",
+				"description": "EasyList Trung Quốc + Bộ lọc CyberPurify tiếng Trung Quốc. Bộ lọc kích hoạt loại bỏ quảng cáo khỏi các trang mạng với nội dung tiếng Trung Quốc."
 			},
 			"zh": {
-				"name": "AdGuard 中文过滤器",
-				"description": "EasyList China + AdGuard 中文过滤器。此过滤器专门移除中文网站上的广告。"
+				"name": "CyberPurify 中文过滤器",
+				"description": "EasyList China + CyberPurify 中文过滤器。此过滤器专门移除中文网站上的广告。"
 			},
 			"zh_TW": {
-				"name": "AdGuard 中文過濾器",
-				"description": "EasyList China + AdGuard 中文過濾器。特別地移除於漢語網站上的廣告之過濾清單。"
+				"name": "CyberPurify 中文過濾器",
+				"description": "EasyList China + CyberPurify 中文過濾器。特別地移除於漢語網站上的廣告之過濾清單。"
 			}
 		}
 	}

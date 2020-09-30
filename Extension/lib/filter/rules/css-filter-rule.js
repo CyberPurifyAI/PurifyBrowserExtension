@@ -1,21 +1,21 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   /**
@@ -132,7 +132,7 @@
 
       if (isElemhideRule) {
         // prevent using elemhide rules (##) as css (#$#)
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1624
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1624
         if (
           /{.+}/.test(cssContent) ||
           stringUtils.hasUnquotedSubstring(cssContent, "{") ||
@@ -145,7 +145,7 @@
 
       if (!isInjectRule) {
         // We need to validate pseudo-classes
-        // https://github.com/AdguardTeam/AdguardForAndroid/issues/701
+        // https://github.com/PurifyTeam/PurifyForAndroid/issues/701
         const pseudoClass = parsePseudoClass(cssContent);
         if (pseudoClass !== null) {
           if (
@@ -164,20 +164,20 @@
           );
         }
         // discard css inject rules containing "url"
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1196
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1196
         if (/url\(.*\)/gi.test(cssContent)) {
           throw new Error(`Css injection rule with 'url' was omitted: ${rule}`);
         }
 
         // Prohibit "\" character in CSS injection rules
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1444
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1444
         if (cssContent.indexOf("\\") > -1 && !isExtendedCss) {
           throw new Error(`Css injection rule with '\\' was omitted: ${rule}`);
         }
       }
 
       // Extended CSS selectors support
-      // https://github.com/AdguardTeam/ExtendedCss
+      // https://github.com/PurifyTeam/ExtendedCss
       for (var i = 0; i < CssFilterRule.EXTENDED_CSS_MARKERS.length; i++) {
         if (cssContent.indexOf(CssFilterRule.EXTENDED_CSS_MARKERS[i]) >= 0) {
           isExtendedCss = true;
@@ -338,4 +338,4 @@
   ];
 
   api.CssFilterRule = CssFilterRule;
-})(adguard, purify.rules);
+})(purify, purify.rules);

@@ -100,7 +100,7 @@ QUnit.test("Generic rule", (assert) => {
 });
 
 QUnit.test("Generic domain specific", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   // Domain specific rule
   const ruleText = "||cdn.innity.net^$domain=sharejunction.com";
@@ -186,7 +186,7 @@ QUnit.test("Url blocking rule without domain", (assert) => {
 });
 
 QUnit.test("Url blocking rule", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const ruleText =
     "||test.ru/^$domain=~nigma.ru|google.com,third-party,match-case,popup";
@@ -227,7 +227,7 @@ QUnit.test("Url blocking rule", (assert) => {
 });
 
 QUnit.test("Content-specific URL blocking", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   let mask = "||test.ru/$script";
   let rule = new purify.rules.UrlFilterRule(mask);
@@ -496,7 +496,7 @@ QUnit.test("Ping specific request is blocked", (assert) => {
 });
 
 QUnit.test("UrlFilter class tests", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const rule = new purify.rules.UrlFilterRule(
     "||test.ru/^$domain=~nigma.ru|google.com,third-party,match-case"
@@ -566,7 +566,7 @@ QUnit.test("Regexp characters escaping", (assert) => {
 });
 
 QUnit.test("Simple regexp rule", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const mask = "/^https?/";
   const rule = new purify.rules.UrlFilterRule(mask);
@@ -576,7 +576,7 @@ QUnit.test("Simple regexp rule", (assert) => {
 });
 
 QUnit.test("Regexp rule", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const mask = "/news/\\d+/$domain=~nigma.ru|lenta.ru";
   const rule = new purify.rules.UrlFilterRule(mask);
@@ -607,7 +607,7 @@ QUnit.test("Regexp rule", (assert) => {
 });
 
 QUnit.test("Complex regexp rule", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const mask =
     "/^https?\\:\\/\\/(?!(connect\\.facebook\\.net|ajax\\.cloudflare\\.com|www\\.google-analytics\\.com|ajax\\.googleapis\\.com|fbstatic-a\\.akamaihd\\.net|stats\\.g\\.doubleclick\\.net|api-secure\\.solvemedia\\.com|api\\.solvemedia\\.com|sb\\.scorecardresearch\\.com|www\\.google\\.com)\\/)/$script,third-party,xmlhttprequest,domain=mediafire.com";
@@ -657,7 +657,7 @@ QUnit.test("Complex regexp rule", (assert) => {
 });
 
 QUnit.test("Test UrlFilterRule Matching Everything", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   let rule = new purify.rules.UrlFilterRule("*$domain=example.org");
   assert.ok(rule.isFiltered("http://test.com", true, RequestTypes.SUBDOCUMENT));
@@ -1039,7 +1039,7 @@ QUnit.test("testReplaceModifierVast", (assert) => {
 QUnit.test("testReplaceRegexpRule", (assert) => {
   purify.prefs.features.responseContentFilteringSupported = true;
 
-  // https://github.com/AdguardTeam/AdguardForAndroid/issues/1027
+  // https://github.com/PurifyTeam/PurifyForAndroid/issues/1027
   const input = "http://test.ru/hello/bug/test";
   const expected = "http://test.ru/bug/bug/test";
   const ruleText = "/.*/$replace=/hello/bug/,domain=example.org";
@@ -1260,7 +1260,7 @@ QUnit.test("Invalid $domain options throw exception", (assert) => {
 });
 
 QUnit.test("Non-basic $first-party modifier", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const ruleText = "||example.org$first-party";
   const rule = new purify.rules.UrlFilterRule(ruleText);
@@ -1278,7 +1278,7 @@ QUnit.test("Non-basic $first-party modifier", (assert) => {
 });
 
 QUnit.test('Non-basic "$xhr" modifier', (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const ruleText = "||example.org$xhr";
   const rule = new purify.rules.UrlFilterRule(ruleText);
@@ -1292,7 +1292,7 @@ QUnit.test('Non-basic "$xhr" modifier', (assert) => {
 });
 
 QUnit.test('Non-basic "$popunder" modifier', (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
   const ruleText = "||example.org$popunder";
   const rule = new purify.rules.UrlFilterRule(ruleText);
   assert.ok(rule.isBlockPopups());
@@ -1307,7 +1307,7 @@ QUnit.test('Non-basic "$popunder" modifier', (assert) => {
 });
 
 QUnit.test('Non-basic "$1p" modifier', (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const ruleText = "||example.org$1p";
   const rule = new purify.rules.UrlFilterRule(ruleText);
@@ -1325,7 +1325,7 @@ QUnit.test('Non-basic "$1p" modifier', (assert) => {
 });
 
 QUnit.test('Non-basic "$3p" modifier', (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const ruleText = "||test.ru/$domain=google.com,3p";
   const rule = new purify.rules.UrlFilterRule(ruleText);
@@ -1342,7 +1342,7 @@ QUnit.test('Non-basic "$3p" modifier', (assert) => {
 });
 
 QUnit.test('Non-basic "$css" modifier', (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const rule = new purify.rules.UrlFilterRule("||example.org^$css");
   assert.ok(rule.checkContentType(RequestTypes.STYLESHEET));
@@ -1356,7 +1356,7 @@ QUnit.test('Non-basic "$css" modifier', (assert) => {
 });
 
 QUnit.test('Non-basic "$frame" modifier', (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const rule = new purify.rules.UrlFilterRule("||example.org^$frame");
   assert.ok(rule.checkContentType(RequestTypes.SUBDOCUMENT));
@@ -1367,7 +1367,7 @@ QUnit.test('Non-basic "$frame" modifier', (assert) => {
 });
 
 QUnit.test("$document modifier", (assert) => {
-  const { RequestTypes } = adguard;
+  const { RequestTypes } = purify;
 
   const rule = new purify.rules.UrlFilterRule("||example.org^$document");
   assert.ok(rule.checkContentType(RequestTypes.DOCUMENT));

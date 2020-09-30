@@ -1,7 +1,7 @@
 /* global contentPage, i18n, moment, ace, CheckboxUtils */
 
 // Update default date format for zh-cn
-// https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1442
+// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1442
 moment.updateLocale("zh-cn", {
   longDateFormat: {
     LLL: "YYYY年M月D日 HH:mm",
@@ -433,8 +433,8 @@ const WhiteListFilter = function (options) {
   editor.setShowPrintMargin(false);
 
   editor.$blockScrolling = Infinity;
-  const AdguardMode = ace.require("ace/mode/adguard").Mode;
-  editor.session.setMode(new AdguardMode());
+  const PurifyMode = ace.require("ace/mode/purify").Mode;
+  editor.session.setMode(new PurifyMode());
 
   const saveIndicatorElement = document.querySelector(
     "#whiteListRulesSaveIndicator"
@@ -560,8 +560,8 @@ const UserFilter = function () {
   handleEditorResize(editor, editorId);
 
   editor.$blockScrolling = Infinity;
-  const AdguardMode = ace.require("ace/mode/adguard").Mode;
-  editor.session.setMode(new AdguardMode());
+  const PurifyMode = ace.require("ace/mode/purify").Mode;
+  editor.session.setMode(new PurifyMode());
 
   const saveIndicatorElement = document.querySelector(
     "#userRulesSaveIndicator"
@@ -1583,8 +1583,8 @@ const Settings = function () {
   );
   checkboxes.push(
     new Checkbox(
-      "#showInfoAboutAdguardFullVersion",
-      userSettings.names.DISABLE_SHOW_ADGUARD_PROMO_INFO,
+      "#showInfoAboutPurifyFullVersion",
+      userSettings.names.DISABLE_SHOW_PURIFY_PROMO_INFO,
       {
         negate: true,
       }
@@ -2237,7 +2237,7 @@ const waitStorageInit = (purify) => {
 
 backgroundPagePromise
   .then((page) => {
-    waitStorageInit(page.adguard);
+    waitStorageInit(page.purify);
   })
   .catch((e) => {
     console.log(e.message);

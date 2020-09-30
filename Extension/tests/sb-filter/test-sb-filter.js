@@ -24,11 +24,11 @@ QUnit.test("Process response", (assert) => {
 
   // eslint-disable-next-line max-len
   const sbList = purify.safebrowsing.processSbResponse(
-    "adguard-phishing-shavar:37654:B8DC93970348F0A3E6856C32AC5C04D5655E5EE17D4169EC51A2102FB6D5E12A\nadguard-malware-shavar:35176:AE617C8343E1C79E27515B3F6D6D26413FCE47AE32A73488F9D033B4D2A46B3D\nadguard-phishing-shavar:35071:AE617C8343E1C79E27515B3F6D6D26413FCE47AE32A73488F9D033B4D2A46B3D",
+    "purify-phishing-shavar:37654:B8DC93970348F0A3E6856C32AC5C04D5655E5EE17D4169EC51A2102FB6D5E12A\npurify-malware-shavar:35176:AE617C8343E1C79E27515B3F6D6D26413FCE47AE32A73488F9D033B4D2A46B3D\npurify-phishing-shavar:35071:AE617C8343E1C79E27515B3F6D6D26413FCE47AE32A73488F9D033B4D2A46B3D",
     hashes
   );
 
-  assert.equal("adguard-phishing-shavar", sbList);
+  assert.equal("purify-phishing-shavar", sbList);
 });
 
 QUnit.test("Test cache", (assert) => {

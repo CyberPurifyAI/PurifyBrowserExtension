@@ -357,7 +357,7 @@ purify.ui = (function (purify) {
     return purify.getURL(`pages/${page}`);
   }
 
-  const isAdguardTab = (tab) => {
+  const isPurifyTab = (tab) => {
     const { url } = tab;
     const parsedUrl = new URL(url);
     const schemeUrl = purify.app.getUrlScheme();
@@ -368,7 +368,7 @@ purify.ui = (function (purify) {
     purify.tabs.getActive((tab) => {
       purify.tabs.sendMessage(tab.tabId, {
         type: "show-alert-popup",
-        isAdguardTab: isAdguardTab(tab),
+        isPurifyTab: isPurifyTab(tab),
         title,
         text,
       });
@@ -429,7 +429,7 @@ purify.ui = (function (purify) {
       ),
       offer: purify.i18n.getMessage("options_popup_version_update_offer"),
       offerButtonHref:
-        "https://cyberpurify.com/forward.html?action=learn_about_adguard&from=version_popup&app=browser_extension",
+        "https://cyberpurify.com/forward.html?action=learn_about_purify&from=version_popup&app=browser_extension",
       offerButtonText: purify.i18n.getMessage(
         "options_popup_version_update_offer_button_text"
       ),
@@ -439,7 +439,7 @@ purify.ui = (function (purify) {
     };
 
     purify.tabs.getActive((tab) => {
-      message.isAdguardTab = isAdguardTab(tab);
+      message.isPurifyTab = isPurifyTab(tab);
       purify.tabs.sendMessage(tab.tabId, message);
     });
   }
@@ -609,7 +609,7 @@ purify.ui = (function (purify) {
 
   /**
    * Opens site complaint report tab
-   * https://github.com/AdguardTeam/ReportsWebApp#pre-filling-the-app-with-query-parameters
+   * https://github.com/PurifyTeam/ReportsWebApp#pre-filling-the-app-with-query-parameters
    * @param url
    */
   const openAbuseTab = function (url) {

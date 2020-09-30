@@ -1,12 +1,12 @@
 /* global chrome */
 
-let adguard;
+let purify;
 
-const getAdguard = () =>
+const getPurify = () =>
   new Promise((resolve) => {
     const api = window.browser || chrome;
     api.runtime.getBackgroundPage((bgPage) => {
-      resolve(bgPage.adguard);
+      resolve(bgPage.purify);
     });
   });
 
@@ -20,7 +20,7 @@ const handleProceedAnyway = (url, rule) => {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  adguard = await getAdguard();
+  purify = await getPurify();
 
   const urlParams = new URLSearchParams(document.location.search);
   const blockRule = urlParams.get("rule");

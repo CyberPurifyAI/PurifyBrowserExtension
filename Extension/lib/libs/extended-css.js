@@ -1,6 +1,6 @@
 /*! extended-css - v1.2.12 - Tue Aug 04 2020
- * https://github.com/AdguardTeam/ExtendedCss
- * Copyright (c) 2020 AdGuard ; Licensed LGPL-3.0
+ * https://github.com/PurifyTeam/ExtendedCss
+ * Copyright (c) 2020 CyberPurify ; Licensed LGPL-3.0
  */
 var ExtendedCss = (function () {
   "use strict";
@@ -109,7 +109,7 @@ var ExtendedCss = (function () {
   }
 
   /**
-   * Copyright 2016 Adguard Software Ltd
+   * Copyright 2016 Purify Software Ltd
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -281,7 +281,7 @@ var ExtendedCss = (function () {
   /**
    * Creates an object implementing Location interface from a url.
    * An alternative to URL.
-   * https://github.com/AdguardTeam/FingerprintingBlocker/blob/master/src/shared/url.ts#L64
+   * https://github.com/PurifyTeam/FingerprintingBlocker/blob/master/src/shared/url.ts#L64
    */
 
   utils.createLocation = function (href) {
@@ -707,7 +707,7 @@ var ExtendedCss = (function () {
   };
 
   /**
-   * Copyright 2016 Adguard Software Ltd
+   * Copyright 2016 Purify Software Ltd
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -729,7 +729,7 @@ var ExtendedCss = (function () {
    */
   var cssUtils = (function () {
     /**
-     * Regex that matches AdGuard's backward compatible syntaxes.
+     * Regex that matches CyberPurify's backward compatible syntaxes.
      */
     var reAttrFallback = /\[-(?:ext|abp)-([a-z-_]+)=(["'])((?:(?=(\\?))\4.)*?)\2\]/g;
     /**
@@ -787,7 +787,7 @@ var ExtendedCss = (function () {
   })();
 
   /*!
-   * Sizzle CSS Selector Engine v2.3.4-pre-adguard
+   * Sizzle CSS Selector Engine v2.3.4-pre-purify
    * https://sizzlejs.com/
    *
    * Copyright JS Foundation and other contributors
@@ -798,10 +798,10 @@ var ExtendedCss = (function () {
    */
 
   /**
-   * Version of Sizzle patched by AdGuard in order to be used in the ExtendedCss module.
-   * https://github.com/AdguardTeam/sizzle-extcss
+   * Version of Sizzle patched by CyberPurify in order to be used in the ExtendedCss module.
+   * https://github.com/PurifyTeam/sizzle-extcss
    *
-   * Look for [AdGuard Patch] and ADGUARD_EXTCSS markers to find out what exactly was changed by us.
+   * Look for [CyberPurify Patch] and PURIFY_EXTCSS markers to find out what exactly was changed by us.
    *
    * Global changes:
    * 1. Added additional parameters to the "Sizzle.tokenize" method so that it can be used for stylesheets parsing and validation.
@@ -809,7 +809,7 @@ var ExtendedCss = (function () {
    * 3. Fix the nonnativeSelectorCache caching -- there was no value corresponding to a key.
    * 4. Added Sizzle.compile call to the `:has` pseudo definition.
    *
-   * Changes that are applied to the ADGUARD_EXTCSS build only:
+   * Changes that are applied to the PURIFY_EXTCSS build only:
    * 1. Do not expose Sizzle to the global scope. Initialize it lazily via initializeSizzle().
    * 2. Removed :contains pseudo declaration -- its syntax is changed and declared outside of Sizzle.
    * 3. Removed declarations for the following non-standard pseudo classes:
@@ -820,7 +820,7 @@ var ExtendedCss = (function () {
   var Sizzle;
   /**
    * Initializes Sizzle object.
-   * In the case of AdGuard ExtendedCss we want to avoid initializing Sizzle right away
+   * In the case of CyberPurify ExtendedCss we want to avoid initializing Sizzle right away
    * and exposing it to the global scope.
    */
 
@@ -1175,7 +1175,7 @@ var ExtendedCss = (function () {
                     );
                     return results;
                   } catch (qsaError) {
-                    // [AdGuard Path]: Fix the cache value
+                    // [CyberPurify Path]: Fix the cache value
                     nonnativeSelectorCache(selector, true);
                   } finally {
                     if (nid === expando) {
@@ -1819,7 +1819,7 @@ var ExtendedCss = (function () {
                 return ret;
               }
             } catch (e) {
-              // [AdGuard Path]: Fix the cache value
+              // [CyberPurify Path]: Fix the cache value
               nonnativeSelectorCache(expr, true);
             }
           }
@@ -2398,9 +2398,9 @@ var ExtendedCss = (function () {
         setFilters.prototype = Expr.filters = Expr.pseudos;
         Expr.setFilters = new setFilters();
         /**
-         * [AdGuard Patch]:
+         * [CyberPurify Patch]:
          * Sorts the tokens in order to mitigate the performance issues caused by matching slow pseudos first:
-         * https://github.com/AdguardTeam/ExtendedCss/issues/55#issuecomment-364058745
+         * https://github.com/PurifyTeam/ExtendedCss/issues/55#issuecomment-364058745
          */
 
         var sortTokenGroups = (function () {
@@ -2546,7 +2546,7 @@ var ExtendedCss = (function () {
           return sortTokenGroups;
         })();
         /**
-         * [AdGuard Patch]:
+         * [CyberPurify Patch]:
          * Removes trailing spaces from the tokens list
          *
          * @param {*} tokens An array of Sizzle tokens to post-process
@@ -2566,7 +2566,7 @@ var ExtendedCss = (function () {
           }
         }
         /**
-         * [AdGuard Patch]:
+         * [CyberPurify Patch]:
          * An object with the information about selectors and their token representation
          * @typedef {{selectorText: string, groups: Array}} SelectorData
          * @property {string} selectorText A CSS selector text
@@ -2574,7 +2574,7 @@ var ExtendedCss = (function () {
          */
 
         /**
-         * [AdGuard Patch]:
+         * [CyberPurify Patch]:
          * This method processes parsed token groups, divides them into a number of selectors
          * and makes sure that each selector's tokens are cached properly in Sizzle.
          *
@@ -2610,7 +2610,7 @@ var ExtendedCss = (function () {
           return selectors;
         }
         /**
-         * [AdGuard Patch]:
+         * [CyberPurify Patch]:
          * Add an additional argument for Sizzle.tokenize which indicates that it
          * should not throw on invalid tokens, and instead should return tokens
          * that it has produced so far.
@@ -2713,7 +2713,7 @@ var ExtendedCss = (function () {
 
           if (tolerant) {
             /**
-             * [AdGuard Patch]:
+             * [CyberPurify Patch]:
              * In tolerant mode we return a special object that constists of
              * an array of parsed selectors (and their tokens) and a "nextIndex" field
              * that points to an index after which we're not able to parse selectors farther.
@@ -2725,10 +2725,10 @@ var ExtendedCss = (function () {
               nextIndex: nextIndex,
             };
           }
-          /** [AdGuard Patch]: Sorting tokens */
+          /** [CyberPurify Patch]: Sorting tokens */
 
           var sortedGroups = sortTokenGroups(groups);
-          /** [AdGuard Patch]: Change the way tokens are cached */
+          /** [CyberPurify Patch]: Change the way tokens are cached */
 
           var tokensCacheItem = {
             groups: groups,
@@ -3365,7 +3365,7 @@ var ExtendedCss = (function () {
             }
           });
         } // EXPOSE
-        // Do not expose Sizzle to the global scope in the case of AdGuard ExtendedCss build
+        // Do not expose Sizzle to the global scope in the case of CyberPurify ExtendedCss build
 
         return Sizzle; // EXPOSE
       })(window); //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -3375,7 +3375,7 @@ var ExtendedCss = (function () {
   }
 
   /**
-   * Copyright 2016 Adguard Software Ltd
+   * Copyright 2016 Purify Software Ltd
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -3566,7 +3566,7 @@ var ExtendedCss = (function () {
   })(window);
 
   /**
-   * Copyright 2016 Adguard Software Ltd
+   * Copyright 2016 Purify Software Ltd
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -3584,11 +3584,11 @@ var ExtendedCss = (function () {
    * Extended selector factory module, for creating extended selector classes.
    *
    * Extended selection capabilities description:
-   * https://github.com/AdguardTeam/ExtendedCss/blob/master/README.md
+   * https://github.com/PurifyTeam/ExtendedCss/blob/master/README.md
    */
 
   var ExtendedSelectorFactory = (function () {
-    // while addind new markers, AdGuard extension code also should be corrected:
+    // while addind new markers, CyberPurify extension code also should be corrected:
     // 'CssFilterRule.SUPPORTED_PSEUDO_CLASSES' and 'CssFilterRule.EXTENDED_CSS_MARKERS'
     // at Extension/lib/filter/rules/css-filter-rule.js
     var PSEUDO_EXTENSIONS_MARKERS = [
@@ -3803,7 +3803,7 @@ var ExtendedCss = (function () {
 
       if (typeof tokens === "undefined") {
         this.selectorText = cssUtils.normalize(selectorText); // Passing `returnUnsorted` in order to receive tokens in the order that's valid for the browser
-        // In Sizzle internally, the tokens are re-sorted: https://github.com/AdguardTeam/ExtendedCss/issues/55
+        // In Sizzle internally, the tokens are re-sorted: https://github.com/PurifyTeam/ExtendedCss/issues/55
 
         this.tokens = Sizzle.tokenize(this.selectorText, false, {
           returnUnsorted: true,
@@ -4454,7 +4454,7 @@ var ExtendedCss = (function () {
   })();
 
   /**
-   * Copyright 2016 Adguard Software Ltd
+   * Copyright 2016 Purify Software Ltd
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -5078,7 +5078,7 @@ var ExtendedCss = (function () {
     function applyRules() {
       var elementsIndex = []; // some rules could make call - selector.querySelectorAll() temporarily to change node id attribute
       // this caused MutationObserver to call recursively
-      // https://github.com/AdguardTeam/ExtendedCss/issues/81
+      // https://github.com/PurifyTeam/ExtendedCss/issues/81
 
       stopObserve();
       rules.forEach(function (rule) {

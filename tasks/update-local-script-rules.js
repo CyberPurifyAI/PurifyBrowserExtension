@@ -10,7 +10,7 @@ import fs from "fs";
 import gulp from "gulp";
 import {
   FILTERS_DEST,
-  LAST_ADGUARD_FILTER_ID,
+  LAST_PURIFY_FILTER_ID,
   LOCAL_SCRIPT_RULES_COMMENT,
 } from "./consts";
 
@@ -38,7 +38,7 @@ const updateLocalScriptRules = (browser, done) => {
     rules: [],
   };
 
-  for (let i = 1; i <= LAST_ADGUARD_FILTER_ID; i += 1) {
+  for (let i = 1; i <= LAST_PURIFY_FILTER_ID; i += 1) {
     const filters = fs.readFileSync(`${folder}/filter_${i}.txt`).toString();
     const lines = filters.split("\n");
 

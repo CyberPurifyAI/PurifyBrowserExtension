@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /* global contentPage, WeakSet */
@@ -51,7 +51,7 @@ function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
           if (
             !event.data ||
             !event.data.direction ||
-            event.data.direction !== "to-page-script@adguard"
+            event.data.direction !== "to-page-script@purify"
           ) {
             return;
           }
@@ -89,7 +89,7 @@ function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
 
           const message = {
             requestId: requestId,
-            direction: "from-page-script@adguard",
+            direction: "from-page-script@purify",
             elementUrl: url,
             documentUrl: document.URL,
             requestType: requestType,
@@ -252,7 +252,7 @@ function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
 
     /**
      * RTCPeerConnection wrapper implementation.
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/588
+     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/588
      *
      * Based on:
      * https://github.com/adblockplus/adblockpluschrome/commit/af0585137be19011eace1cf68bf61eed2e6db974
@@ -481,7 +481,7 @@ const initPageMessageListener = function () {
       !(
         event.source === window &&
         event.data.direction &&
-        event.data.direction === "from-page-script@adguard" &&
+        event.data.direction === "from-page-script@purify" &&
         event.data.elementUrl &&
         event.data.documentUrl
       )
@@ -503,7 +503,7 @@ const initPageMessageListener = function () {
       }
 
       const message = {
-        direction: "to-page-script@adguard",
+        direction: "to-page-script@purify",
         elementUrl: event.data.elementUrl,
         documentUrl: event.data.documentUrl,
         requestType: event.data.requestType,

@@ -1,6 +1,6 @@
 /**
  * Cookie filtering module
- * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/961
+ * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
  *
  * Modifies Cookie/Set-Cookie headers.
  *

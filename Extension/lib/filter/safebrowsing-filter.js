@@ -5,7 +5,7 @@
  *
  * http://cyberpurify.com/en/how-malware-blocked.html#extension
  */
-purify.safebrowsing = (function (adguard, global) {
+purify.safebrowsing = (function (purify, global) {
   // Lazy initialized safebrowsing cache
   const safebrowsingCache = {
     get cache() {
@@ -339,4 +339,4 @@ purify.safebrowsing = (function (adguard, global) {
     createHashesMap,
     processSbResponse,
   };
-})(adguard, window);
+})(purify, window);

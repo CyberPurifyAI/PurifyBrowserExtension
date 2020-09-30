@@ -110,7 +110,7 @@ yarn sample-api
 This will create a build directory with unpacked sample extension for chromium browsers:
 
 ```
-build/dev/adguard-api
+build/dev/purify-api
 ```
 
 <a id="dev-linter"></a>

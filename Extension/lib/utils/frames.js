@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -171,23 +171,23 @@ purify.frames = (function (purify) {
    * Returns true if tab is in white list
    *
    * @param tab Tab
-   * @returns true if Adguard for Windows/Android/Mac is detected and tab in white list
+   * @returns true if Purify for Windows/Android/Mac is detected and tab in white list
    */
-  const isTabAdguardWhiteListed = function (tab) {
-    return purify.tabs.getTabMetadata(tab.tabId, "adguardDocumentWhiteListed");
+  const isTabPurifyWhiteListed = function (tab) {
+    return purify.tabs.getTabMetadata(tab.tabId, "purifyDocumentWhiteListed");
   };
 
   /**
    * @param tab   Tab
-   * @returns Adguard whitelist rule in user filter associated with this tab
+   * @returns Purify whitelist rule in user filter associated with this tab
    */
-  const getTabAdguardUserWhiteListRule = function (tab) {
-    const adguardUserWhiteListed = purify.tabs.getTabMetadata(
+  const getTabPurifyUserWhiteListRule = function (tab) {
+    const purifyUserWhiteListed = purify.tabs.getTabMetadata(
       tab.tabId,
-      "adguardUserWhiteListed"
+      "purifyUserWhiteListed"
     );
-    if (adguardUserWhiteListed) {
-      return purify.tabs.getTabMetadata(tab.tabId, "adguardWhiteListRule");
+    if (purifyUserWhiteListed) {
+      return purify.tabs.getTabMetadata(tab.tabId, "purifyWhiteListRule");
     }
     return null;
   };
@@ -267,7 +267,7 @@ purify.frames = (function (purify) {
     let canAddRemoveRule = false;
     let frameRule;
 
-    const adguardProductName = "";
+    const purifyProductName = "";
 
     const totalBlocked = purify.pageStats.getTotalBlocked() || 0;
     const totalBlockedTab = purify.tabs.getTabMetadata(tabId, "blocked") || 0;
@@ -301,7 +301,7 @@ purify.frames = (function (purify) {
       userWhiteListed,
       canAddRemoveRule,
       frameRule,
-      adguardProductName,
+      purifyProductName,
       totalBlockedTab,
       totalBlocked,
     };
@@ -369,8 +369,8 @@ purify.frames = (function (purify) {
     isTabWhiteListed,
     isTabWhiteListedForSafebrowsing,
     isTabProtectionDisabled,
-    isTabAdguardWhiteListed,
-    getTabAdguardUserWhiteListRule,
+    isTabPurifyWhiteListed,
+    getTabPurifyUserWhiteListRule,
     getFrameWhiteListRule,
     reloadFrameData,
     recordFrameReferrerHeader,

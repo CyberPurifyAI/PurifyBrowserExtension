@@ -1,21 +1,21 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   /**
@@ -359,12 +359,12 @@
       let hostToCheck = documentHost;
       // if document host is null, get host from url
       // thus we can find rules and check them using domain restriction later
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1474
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1474
       if (hostToCheck === null) {
         hostToCheck = purify.utils.url.getHost(url);
       } else if (requestType === purify.RequestTypes.DOCUMENT) {
         // In case DOCUMENT request type look up rules for request url host
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1534
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1534
         rules = this.domainsLookupTable.lookupRules(
           purify.utils.url.getHost(url)
         );
@@ -421,7 +421,7 @@
 
       // if document host is null, get host from url
       // thus we can find rules and check this rules using domain restriction later
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1474
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1474
       if (documentHost === null) {
         const urlHost = purify.utils.url.getHost(url);
         rules = this.domainsLookupTable.lookupRules(urlHost);
@@ -454,4 +454,4 @@
   };
 
   api.UrlFilterRuleLookupTable = UrlFilterRuleLookupTable;
-})(adguard, purify.rules);
+})(purify, purify.rules);

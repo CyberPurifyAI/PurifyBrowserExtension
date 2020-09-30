@@ -1,9 +1,3 @@
-/**
- Special css classes for dark devtools theme support.
- Document body will be marked with '-theme-with-dark-background' class.
- https://github.com/AdguardTeam/AdguardBrowserExtension/issues/739
- */
-
 body.-theme-with-dark-background {
   color: rgb(213, 213, 213);
 }

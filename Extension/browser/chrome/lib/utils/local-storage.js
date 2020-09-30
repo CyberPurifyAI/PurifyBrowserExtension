@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /* global browser */
@@ -21,7 +21,7 @@
  * Local storage implementation for chromium-based browsers
  */
 purify.localStorageImpl = (function () {
-  var ADGUARD_SETTINGS_PROP = "adguard-settings";
+  var PURIFY_SETTINGS_PROP = "purify-settings";
   var values = null;
 
   function checkError(ex) {
@@ -95,7 +95,7 @@ purify.localStorageImpl = (function () {
 
   /**
    * Migrates key-value pair from local storage to storage.local
-   * Part of task https://github.com/AdguardTeam/AdguardBrowserExtension/issues/681
+   * Part of task https://github.com/PurifyTeam/PurifyBrowserExtension/issues/681
    * @param key Key to migrate
    */
   function migrateKeyValue(key) {
@@ -126,7 +126,7 @@ purify.localStorageImpl = (function () {
       return;
     }
     values[key] = value;
-    write(ADGUARD_SETTINGS_PROP, values, checkError);
+    write(PURIFY_SETTINGS_PROP, values, checkError);
   };
 
   var removeItem = function (key) {
@@ -136,7 +136,7 @@ purify.localStorageImpl = (function () {
     delete values[key];
     // Remove from localStorage too, as a part of migration process
     localStorage.removeItem(key);
-    write(ADGUARD_SETTINGS_PROP, values, checkError);
+    write(PURIFY_SETTINGS_PROP, values, checkError);
   };
 
   var hasItem = function (key) {
@@ -152,7 +152,7 @@ purify.localStorageImpl = (function () {
 
   /**
    * We can't use localStorage object anymore and we've decided to store all data into storage.local
-   * localStorage is affected by cleaning tools: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/681
+   * localStorage is affected by cleaning tools: https://github.com/PurifyTeam/PurifyBrowserExtension/issues/681
    * storage.local has async nature and we have to preload all key-values pairs into memory on extension startup
    *
    * @param callback
@@ -163,7 +163,7 @@ purify.localStorageImpl = (function () {
       callback();
       return;
     }
-    read(ADGUARD_SETTINGS_PROP, function (ex, items) {
+    read(PURIFY_SETTINGS_PROP, function (ex, items) {
       if (ex) {
         checkError(ex);
       }

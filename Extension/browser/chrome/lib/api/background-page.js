@@ -1,6 +1,6 @@
 const browser = window.browser || chrome;
 
-(function (adguard, browser) {
+(function (purify, browser) {
   "use strict";
 
   purify.runtime = (function () {
@@ -177,7 +177,7 @@ const browser = window.browser || chrome;
 
     /**
      * Use `OTHER` type as a fallback
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/777
+     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/777
      */
     if (!(requestType in purify.RequestTypes)) {
       requestType = purify.RequestTypes.OTHER;
@@ -294,8 +294,8 @@ const browser = window.browser || chrome;
       let requestFilter = {};
       /**
        * Sometimes extraHeaders option of onBeforeSendHeaders handler is blocking network
-       * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1634
-       * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1644
+       * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1634
+       * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1644
        * https://bugs.chromium.org/p/chromium/issues/detail?id=938560
        * https://bugs.chromium.org/p/chromium/issues/detail?id=1075905
        * This issue was fixed in the Canary v85.0.4178.0 and would be fixed
@@ -502,7 +502,7 @@ const browser = window.browser || chrome;
      * If referrer of request contains full url of extension,
      * then this request is considered as extension's own request
      * (e.g. request for filter downloading)
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1437
+     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1437
      * @param referrerUrl
      * @returns {boolean}
      */
@@ -653,4 +653,4 @@ const browser = window.browser || chrome;
   };
 
   purify.contextMenus = browser.contextMenus;
-})(adguard, browser);
+})(purify, browser);

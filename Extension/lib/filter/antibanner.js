@@ -604,7 +604,7 @@ purify.antiBannerService = (function (purify) {
       }
 
       if (newRequestFilter.rulesCount === 0 && !reloadedRules) {
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/205
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/205
         purify.console.info(
           "No rules have been found - checking filter updates"
         );
@@ -699,7 +699,7 @@ purify.antiBannerService = (function (purify) {
       }
 
       // User filter should be the last
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/117
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/117
       const userFilterId = purify.utils.filters.USER_FILTER_ID;
       const userRules = rulesFilterMap[userFilterId];
       const startIndex = 0;
@@ -734,7 +734,7 @@ purify.antiBannerService = (function (purify) {
       }
 
       // User filter should be the last
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/117
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/117
       const userRules = rulesFilterMap[purify.utils.filters.USER_FILTER_ID];
       addRules(
         purify.utils.filters.USER_FILTER_ID,
@@ -1339,7 +1339,7 @@ purify.antiBannerService = (function (purify) {
 purify.requestFilter = (function (purify) {
   "use strict";
 
-  const { antiBannerService } = adguard;
+  const { antiBannerService } = purify;
 
   function getRequestFilter() {
     return antiBannerService.getRequestFilter();
@@ -1638,7 +1638,7 @@ purify.filters = (function (purify) {
    */
   const ENABLED_FILTERS_SKIP_TIMEOUT = 5 * 60 * 1000;
 
-  const { antiBannerService } = adguard;
+  const { antiBannerService } = purify;
 
   const start = function (options, callback) {
     antiBannerService.start(options, callback);

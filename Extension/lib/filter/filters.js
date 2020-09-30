@@ -99,7 +99,7 @@
     this.cspFilter = new purify.rules.CspFilter([], this.badFilterRules);
 
     // Filter that applies cookie rules
-    // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/961
+    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
     this.cookieFilter = new purify.rules.CookieFilter();
 
     // Filter that applies stealth rules

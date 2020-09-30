@@ -1,9 +1,9 @@
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   /**
    * Filter for cookie filter rules
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/961
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
    */
   api.CookieFilter = function (rules) {
     const cookieWhiteFilter = new api.UrlFilterRuleLookupTable();
@@ -146,4 +146,4 @@
       findCookieRules,
     };
   };
-})(adguard, purify.rules);
+})(purify, purify.rules);

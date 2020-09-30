@@ -239,7 +239,7 @@
         break;
       case "getSelectorsAndScripts": {
         let urlForSelectors;
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1498
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1498
         // when document url for iframe is about:blank then we use tab url
         if (
           !purify.utils.url.isHttpOrWsRequest(message.documentUrl) &&
@@ -359,7 +359,7 @@
             options: {
               showStatsSupported: true,
               isFirefoxBrowser: purify.utils.browser.isFirefoxBrowser(),
-              showInfoAboutFullVersion: purify.settings.isShowInfoAboutAdguardFullVersion(),
+              showInfoAboutFullVersion: purify.settings.isShowInfoAboutPurifyFullVersion(),
               isMacOs: purify.utils.browser.isMacOs(),
               isEdgeBrowser:
                 purify.utils.browser.isEdgeBrowser() ||
@@ -367,7 +367,7 @@
               notification: purify.notifications.getCurrentNotification(
                 frameInfo
               ),
-              isDisableShowAdguardPromoInfo: purify.settings.isDisableShowAdguardPromoInfo(),
+              isDisableShowPurifyPromoInfo: purify.settings.isDisableShowPurifyPromoInfo(),
             },
           });
         });
@@ -412,7 +412,7 @@
         purify.sync.settingsProvider.applySettingsBackup(message.json);
         break;
       case "disableGetPremiumNotification":
-        purify.settings.disableShowAdguardPromoInfo();
+        purify.settings.disableShowPurifyPromoInfo();
         break;
       default:
         // Unhandled message

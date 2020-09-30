@@ -1,19 +1,19 @@
-# AdGuard API
+# Purify API
 
 **Document version: 0.9**
 
-This document is a draft of AdGuard's API.
+This document is a draft of Purify's API.
 
-## Including AdGuard files into extension manifest
+## Including Purify files into extension manifest
 
-Here is what should be done for AdGuard API to work.
+Here is what should be done for Purify API to work.
 
-#### 1. Add AdGuard's content script to the manifest:
+#### 1. Add Purify's content script to the manifest:
 
 ```
     {
       "all_frames": true,
-      "js": ["adguard/adguard-content.js"],
+      "js": ["purify/purify-content.js"],
       "matches": [
         "http://*/*",
         "https://*/*"
@@ -23,24 +23,24 @@ Here is what should be done for AdGuard API to work.
     }
 ```
 
-#### 2. Add AdGuard's script to the background page:
+#### 2. Add Purify's script to the background page:
 
 ```
-<script type="text/javascript" src="adguard/adguard-api.js"></script>
+<script type="text/javascript" src="purify/purify-api.js"></script>
 ```
 
 ## API methods
 
-AdGuard API is exposed through a global javascript object: `adguardApi`.
+Purify API is exposed through a global javascript object: `purifyApi`.
 
-### `adguardApi.start`
+### `purifyApi.start`
 
-Initializes AdGuard and starts it immediately.
+Initializes Purify and starts it immediately.
 
 #### Syntax
 
 ```javascript
-adguardApi.start(
+purifyApi.start(
   configuration, // object, mandatory
   callback // function, optional
 );
@@ -72,21 +72,21 @@ An array of filters identifiers. You can look for possible filters identifiers i
 
 `whitelist` (optional)
 
-An array of domains, for which AdGuard won't work.
+An array of domains, for which Purify won't work.
 
 `blacklist` (optional)
 
-This property completely changes AdGuard behavior. If it is defined, Adguard will work for domains from the `blacklist` only. All other domains will be ignored. If `blacklist` is defined, `whitelist` will be ignored.
+This property completely changes Purify behavior. If it is defined, Purify will work for domains from the `blacklist` only. All other domains will be ignored. If `blacklist` is defined, `whitelist` will be ignored.
 
 `rules` (optional)
 
 An array of custom filtering rules. Here is an [article](https://cyberpurify.com/en/filterrules.html) describing filtering rules syntax.
 
-These custom rules might be created by a user via AdGuard Assistant UI.
+These custom rules might be created by a user via Purify Assistant UI.
 
 `filtersMetadataUrl` (mandatory)
 
-An absolute path to a file, containing filters metadata. Once started, AdGuard will periodically check filters updates by downloading this file.
+An absolute path to a file, containing filters metadata. Once started, Purify will periodically check filters updates by downloading this file.
 
 **Example:**
 
@@ -109,32 +109,32 @@ https://filters.adtidy.org/extension/chromium/2.txt
 
 > **Please note, that we do not allow using `filters.adtidy.org` other than for testing purposes**. You have to use your own server for storing filters files. You can (and actually should) to use `filters.adtidy.org` for updating files on your side periodically.
 
-### `adguardApi.stop`
+### `purifyApi.stop`
 
-Completely stops AdGuard.
+Completely stops CyberPurify.
 
 #### Syntax
 
 ```javascript
-adguardApi.stop(
+purifyApi.stop(
   callback // function, optional
 );
 ```
 
-### `adguardApi.configure`
+### `purifyApi.configure`
 
-This method modifies AdGuard configuration. Please note, that Adguard must be already started.
+This method modifies Purify configuration. Please note, that Purify must be already started.
 
 #### Syntax
 
 ```javascript
-adguardApi.configure(
+purifyApi.configure(
   configuration, // object, mandatory
   callback // function, optional
 );
 ```
 
-### `adguardApi.onRequestBlocked`
+### `purifyApi.onRequestBlocked`
 
 This object allows adding and removing listeners for request blocking events.
 
@@ -142,11 +142,11 @@ This object allows adding and removing listeners for request blocking events.
 
 ```javascript
 // Registers an event listener
-adguardApi.onRequestBlocked.addListener(
+purifyApi.onRequestBlocked.addListener(
   callback // function, mandatory
 );
 // Removes specified event listener
-adguardApi.onRequestBlocked.removeListener(
+purifyApi.onRequestBlocked.removeListener(
   callback // function, mandatory
 );
 ```
@@ -183,26 +183,26 @@ Request mime type. Possible values are listed below.
 - `WEBSOCKET`
 - `OTHER`
 
-### `adguardApi.openAssistant`
+### `purifyApi.openAssistant`
 
-This method opens the AdGuard assistant UI in the specified tab. You should also add a listener for messages with type `assistant-create-rule` for rules, which are created by the Adguard assistant.
+This method opens the Purify assistant UI in the specified tab. You should also add a listener for messages with type `assistant-create-rule` for rules, which are created by the Purify assistant.
 
 #### Syntax
 
 ```javascript
-adguardApi.openAssistant(
+purifyApi.openAssistant(
   tabId // number, mandatory
 );
 ```
 
-### `adguardApi.closeAssistant`
+### `purifyApi.closeAssistant`
 
-This method closes AdGuard assistant in the specified tab.
+This method closes Purify assistant in the specified tab.
 
 #### Syntax
 
 ```javascript
-adguardApi.closeAssistant(
+purifyApi.closeAssistant(
   tabId // number, mandatory
 );
 ```
@@ -215,7 +215,7 @@ var configuration = {
   // English, Social and Spyware filters
   filters: [2, 3, 4],
 
-  // Adguard is disabled on www.example.com
+  // Purify is disabled on www.example.com
   whitelist: ["www.example.com"],
 
   // Array with custom filtering rules
@@ -234,36 +234,36 @@ var configuration = {
 var onBlocked = function (details) {
   console.log(details);
 };
-adguardApi.onRequestBlocked.addListener(onBlocked);
+purifyApi.onRequestBlocked.addListener(onBlocked);
 
-// Add event listener for rules created by Adguard Assistant
+// Add event listener for rules created by Purify Assistant
 chrome.runtime.onMessage.addListener(function (message) {
   if (message.type === "assistant-create-rule") {
     console.log(
-      "Rule " + message.ruleText + " was created by Adguard Assistant"
+      "Rule " + message.ruleText + " was created by Purify Assistant"
     );
     configuration.rules.push(message.ruleText);
-    adguardApi.configure(configuration, function () {
-      console.log("Finished Adguard API re-configuration");
+    purifyApi.configure(configuration, function () {
+      console.log("Finished Purify API re-configuration");
     });
   }
 });
 
-adguardApi.start(configuration, function () {
-  console.log("Finished Adguard API initialization.");
+purifyApi.start(configuration, function () {
+  console.log("Finished Purify API initialization.");
 
-  // Now we want to disable Adguard on www.google.com
+  // Now we want to disable Purify on www.google.com
   configuration.whitelist.push("www.google.com");
-  adguardApi.configure(configuration, function () {
-    console.log("Finished Adguard API re-configuration");
+  purifyApi.configure(configuration, function () {
+    console.log("Finished Purify API re-configuration");
   });
 });
 
-// Disable Adguard in 1 minute
+// Disable Purify in 1 minute
 setTimeout(function () {
-  adguardApi.onRequestBlocked.removeListener(onBlocked);
-  adguardApi.stop(function () {
-    console.log("Adguard API has been disabled.");
+  purifyApi.onRequestBlocked.removeListener(onBlocked);
+  purifyApi.stop(function () {
+    console.log("Purify API has been disabled.");
   });
 }, 60 * 1000);
 ```

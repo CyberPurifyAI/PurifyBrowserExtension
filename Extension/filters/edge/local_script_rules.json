@@ -31,15 +31,15 @@
         },
         {
             "domains": "<any>",
-            "script": "var AG_abortOnPropertyWrite=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeSet:function(){b&&console.warn(\"AdGuard aborted property write: \"+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if(\"string\"===typeof e&&-1!==e.indexOf(c))return b&&console.warn(\"AdGuard has caught window.onerror: \"+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};"
+            "script": "var AG_abortOnPropertyWrite=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeSet:function(){b&&console.warn(\"CyberPurify aborted property write: \"+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if(\"string\"===typeof e&&-1!==e.indexOf(c))return b&&console.warn(\"CyberPurify has caught window.onerror: \"+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};"
         },
         {
             "domains": "<any>",
-            "script": "var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn(\"AdGuard aborted property read: \"+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if(\"string\"===typeof e&&-1!==e.indexOf(c))return b&&console.warn(\"AdGuard has caught window.onerror: \"+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};"
+            "script": "var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn(\"CyberPurify aborted property read: \"+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if(\"string\"===typeof e&&-1!==e.indexOf(c))return b&&console.warn(\"CyberPurify has caught window.onerror: \"+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};"
         },
         {
             "domains": "<any>",
-            "script": "var AG_abortInlineScript=function(g,b,c){var d=function(){if(\"currentScript\"in document)return document.currentScript;var a=document.getElementsByTagName(\"script\");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&\"\"===a.src&&g.test(a.textContent))throw c&&console.warn(\"AdGuard aborted execution of an inline script\"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if(\"string\"===typeof a&&-1!==a.indexOf(e))return c&&console.warn(\"AdGuard has caught window.onerror: \"+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};"
+            "script": "var AG_abortInlineScript=function(g,b,c){var d=function(){if(\"currentScript\"in document)return document.currentScript;var a=document.getElementsByTagName(\"script\");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&\"\"===a.src&&g.test(a.textContent))throw c&&console.warn(\"CyberPurify aborted execution of an inline script\"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if(\"string\"===typeof a&&-1!==a.indexOf(e))return c&&console.warn(\"CyberPurify has caught window.onerror: \"+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};"
         },
         {
             "domains": "<any>",
@@ -875,7 +875,7 @@
         },
         {
             "domains": "eltern.de,bikeradar.com,vg247.com,evo.co.uk,southwalesargus.co.uk,swindonadvertiser.co.uk,theargus.co.uk,theboltonnews.co.uk,thetelegraphandargus.co.uk,eveningtimes.co.uk,dailyecho.co.uk,oxfordmail.co.uk,southwalesargus.co.uk,huffingtonpost.co.uk,radiotimes.com,huffingtonpost.com,gamesradar.com,giga.de,gamona.de,erdbeerlounge.de",
-            "script": "(function(o){function a(a){return{get:function(){return a},set:b}}function b(){}function c(){throw\"Adguard: stopped a script execution.\";}var d={},e=a(function(a){a(!1)}),f={},g=EventTarget.prototype.addEventListener;o(d,{spid_control_callback:a(b),content_control_callback:a(b),vid_control_callback:a(b)});o(f,{config:a(d),_setSpKey:{get:c,set:c},checkState:e,isAdBlocking:e,getSafeUri:a(function(a){return a}),pageChange:a(b),setupSmartBeacons:a(b)});Object.defineProperty(window,\"_sp_\",a(f));EventTarget.prototype.addEventListener=function(a){\"sp.blocking\"!=a&&\"sp.not_blocking\"!=a&&g.apply(this,arguments)}})(Object.defineProperties);"
+            "script": "(function(o){function a(a){return{get:function(){return a},set:b}}function b(){}function c(){throw\"CyberPurify: stopped a script execution.\";}var d={},e=a(function(a){a(!1)}),f={},g=EventTarget.prototype.addEventListener;o(d,{spid_control_callback:a(b),content_control_callback:a(b),vid_control_callback:a(b)});o(f,{config:a(d),_setSpKey:{get:c,set:c},checkState:e,isAdBlocking:e,getSafeUri:a(function(a){return a}),pageChange:a(b),setupSmartBeacons:a(b)});Object.defineProperty(window,\"_sp_\",a(f));EventTarget.prototype.addEventListener=function(a){\"sp.blocking\"!=a&&\"sp.not_blocking\"!=a&&g.apply(this,arguments)}})(Object.defineProperties);"
         },
         {
             "domains": "pocketnow.com,geektime.co.il",
@@ -2055,7 +2055,7 @@
         },
         {
             "domains": "last.fm",
-            "script": "(function(b,c){setTimeout=function(){var a=arguments[0];if(\"function\"==typeof a&&/^function [A-Za-z]{1,2}\\(\\)\\s*\\{([A-Za-z])\\|\\|\\(\\1=!0,[\\s\\S]{1,13}\\(\\)\\)\\}$/.test(c.call(a)))throw\"Adguard stopped a script execution.\";return b.apply(window,arguments)}})(setTimeout,Function.prototype.toString);"
+            "script": "(function(b,c){setTimeout=function(){var a=arguments[0];if(\"function\"==typeof a&&/^function [A-Za-z]{1,2}\\(\\)\\s*\\{([A-Za-z])\\|\\|\\(\\1=!0,[\\s\\S]{1,13}\\(\\)\\)\\}$/.test(c.call(a)))throw\"CyberPurify stopped a script execution.\";return b.apply(window,arguments)}})(setTimeout,Function.prototype.toString);"
         },
         {
             "domains": "hentaihaven.org",
@@ -2975,7 +2975,7 @@
         },
         {
             "domains": "niezalezna.pl",
-            "script": "Object.defineProperty(window,'adonisHash',{get:function(){},set:function(){throw'Adguard: stopped a script execution.'}});"
+            "script": "Object.defineProperty(window,'adonisHash',{get:function(){},set:function(){throw'CyberPurify: stopped a script execution.'}});"
         },
         {
             "domains": "anyfiles.pl",
@@ -3195,7 +3195,7 @@
         },
         {
             "domains": "hdonline.vn",
-            "script": "AG_defineProperty('HDOCONFIG.HDOADChecker.Adguard', {value: false});"
+            "script": "AG_defineProperty('HDOCONFIG.HDOADChecker.CyberPurify', {value: false});"
         },
         {
             "domains": "tuoi69.com",
@@ -5875,11 +5875,11 @@
         },
         {
             "domains": "brobible.com,mensfitness.com,mashable.com,teamliquid.net,britannica.com,gsmarena.com,phonearena.com,nydailynews.com,champion.gg,collegehumor.com,dorkly.com,drudgereport.com,investopedia.com,merriam-webster.com,topix.com,androidcentral.com",
-            "script": "Object.defineProperty(window,'adonisConnType',{get:function(){},set:function(){throw'Adguard: stopped a script execution.'}});"
+            "script": "Object.defineProperty(window,'adonisConnType',{get:function(){},set:function(){throw'CyberPurify: stopped a script execution.'}});"
         },
         {
             "domains": "gosunoob.com,royalroadl.com,healthline.com,trakt.tv,uproxx.com,wuxiaworld.com,boredpanda.com,liquipedia.net,allkpop.com,windowscentral.com,androidcentral.com,slickdeals.net,xda-developers.com,probuilds.net",
-            "script": "Object.defineProperty(window,'adonisHash',{get:function(){},set:function(){throw'Adguard: stopped a script execution.'}});"
+            "script": "Object.defineProperty(window,'adonisHash',{get:function(){},set:function(){throw'CyberPurify: stopped a script execution.'}});"
         },
         {
             "domains": "israelnationalnews.com",
@@ -7143,7 +7143,7 @@
         },
         {
             "domains": "bludv.com",
-            "script": "Object.defineProperty(window,'bsaAQyLSuO',{get:function(){},set:function(){throw\"Adguard: stopped a script execution.\"}});"
+            "script": "Object.defineProperty(window,'bsaAQyLSuO',{get:function(){},set:function(){throw\"CyberPurify: stopped a script execution.\"}});"
         },
         {
             "domains": "minhaconexao.com.br",
@@ -8091,7 +8091,7 @@
         },
         {
             "domains": "bento.de,nba.com,weather.com,pcgamer.com,eurogamer.pt,stern.de,brigitte.de,moviefone.com,20min.ch,yeovilexpress.co.uk,witneygazette.co.uk,windsorobserver.co.uk,wilmslowguardian.co.uk,wharfedaleobserver.co.uk,wearvalleyadvertiser.co.uk,wandsworthguardian.co.uk,tivysideadvertiser.co.uk,thisisthewestcountry.co.uk,thevillager.co.uk,thetottenhamindependent.co.uk,thescottishfarmer.co.uk,tewkesburyadmag.co.uk,southwestfarmer.co.uk,southwalesguardian.co.uk,southendstandard.co.uk,smallholder.co.uk,sloughobserver.co.uk,romseyadvertiser.co.uk,redditchadvertiser.co.uk,prestwichandwhitefieldguide.co.uk,penarthtimes.co.uk,northyorkshireadvertiser.co.uk,milfordmercury.co.uk,middlewichguardian.co.uk,messengernewspapers.co.uk,malverngazette.co.uk,ludlowadvertiser.co.uk,leighjournal.co.uk,knutsfordguardian.co.uk,ilkleygazette.co.uk,hillingdontimes.co.uk,heraldseries.co.uk,helensburghadvertiser.co.uk,harwichandmanningtreestandard.co.uk,harrowtimes.co.uk,halesowennews.co.uk,gazetteherald.co.uk,freepressseries.co.uk,troontimes.com,epsomguardian.co.uk,ealingtimes.co.uk,durhamadvertiser.co.uk,dumbartonreporter.co.uk,dudleynews.co.uk,droitwichadvertiser.co.uk,peeblesshirenews.com,creweguardian.co.uk,cravenherald.co.uk,cotswoldjocravenherald.co.uk,urnal.co.uk,consettstanleyadvertiser.co.uk,chorleycitizen.co.uk,chesterlestreetadvertiser.co.uk,chelmsfordweeklynews.co.uk,chardandilminsternews.co.uk,campaignseries.co.uk,burnhamandhighbridgeweeklynews.co.uk,brentwoodlive.co.uk,braintreeandwithamtimes.co.uk,bracknellnews.co.uk,borehamwoodtimes.co.uk,basildonstandard.co.uk,barryanddistrictnews.co.uk,banburycake.co.uk,aol.co.uk,andoveradvertiser.co.uk,irvinetimes.com,impartialreporter.com,cumnockchronicle.com,centralfifetimes.com,carrickherald.com,bicesteradvertiser.net,barrheadnews.com,ayradvertiser.com,alloaadvertiser.com",
-            "script": "(function(o){function a(a){return{get:function(){return a},set:b}}function b(){}function c(){throw\"Adguard: stopped a script execution.\";}var d={},e=a(function(a){a(!1)}),f={},g=EventTarget.prototype.addEventListener;o(d,{spid_control_callback:a(b),content_control_callback:a(b),vid_control_callback:a(b)});o(f,{config:a(d),_setSpKey:{get:c,set:c},checkState:e,isAdBlocking:e,getSafeUri:a(function(a){return a}),pageChange:a(b),setupSmartBeacons:a(b)});Object.defineProperty(window,\"_sp_\",a(f));EventTarget.prototype.addEventListener=function(a){\"sp.blocking\"!=a&&\"sp.not_blocking\"!=a&&g.apply(this,arguments)}})(Object.defineProperties);"
+            "script": "(function(o){function a(a){return{get:function(){return a},set:b}}function b(){}function c(){throw\"CyberPurify: stopped a script execution.\";}var d={},e=a(function(a){a(!1)}),f={},g=EventTarget.prototype.addEventListener;o(d,{spid_control_callback:a(b),content_control_callback:a(b),vid_control_callback:a(b)});o(f,{config:a(d),_setSpKey:{get:c,set:c},checkState:e,isAdBlocking:e,getSafeUri:a(function(a){return a}),pageChange:a(b),setupSmartBeacons:a(b)});Object.defineProperty(window,\"_sp_\",a(f));EventTarget.prototype.addEventListener=function(a){\"sp.blocking\"!=a&&\"sp.not_blocking\"!=a&&g.apply(this,arguments)}})(Object.defineProperties);"
         },
         {
             "domains": "spiegel.de",

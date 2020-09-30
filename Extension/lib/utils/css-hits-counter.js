@@ -13,11 +13,11 @@ const CssHitsCounter = (function () {
   const CSS_HITS_BATCH_SIZE = 25;
 
   /**
-   * In order to find elements hidden by AdGuard we look for a `:content` pseudo-class
+   * In order to find elements hidden by CyberPurify we look for a `:content` pseudo-class
    * with values starting with this prefix. Filter information will be
    * encoded in this value as well.
    */
-  const CONTENT_ATTR_PREFIX = "adguard";
+  const CONTENT_ATTR_PREFIX = "purify";
 
   /**
    * We delay countAllCssHits function if it was called too frequently from mutationObserver
@@ -138,7 +138,7 @@ const CssHitsCounter = (function () {
     filterIdAndRuleText = filterIdAndRuleText.substring(
       CONTENT_ATTR_PREFIX.length
     );
-    // Attribute 'content' in css looks like: {content: 'adguard{filterId};{ruleText}'}
+    // Attribute 'content' in css looks like: {content: 'purify{filterId};{ruleText}'}
     const index = filterIdAndRuleText.indexOf(";");
     if (index < 0) {
       return null;
@@ -161,7 +161,7 @@ const CssHitsCounter = (function () {
   };
 
   /**
-   * Function checks if elements style content attribute contains data injected with AdGuard
+   * Function checks if elements style content attribute contains data injected with CyberPurify
    * @param {Node} element
    * @returns {({filterId: Number, ruleText: String} | null)}
    */
@@ -207,7 +207,7 @@ const CssHitsCounter = (function () {
    * Main calculation function.
    * 1. Select sub collection from elements.
    * 2. For each element from sub collection: retrieve calculated css 'content'
-   * attribute and if it contains 'adguard'
+   * attribute and if it contains 'purify'
    * marker then retrieve rule text and filter identifier.
    * 3. Start next task with some delay.
    *
@@ -363,7 +363,7 @@ const CssHitsCounter = (function () {
         }
         /**
          * don't remove child elements of probe elements
-         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1096
+         * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1096
          */
         removeElements(probeElements);
         startObserver(observer);
@@ -439,7 +439,7 @@ const CssHitsCounter = (function () {
   const init = function (callback) {
     if (typeof callback !== "function") {
       throw new Error(
-        'AdGuard Extension: "callback" parameter is not a function'
+        'CyberPurify Extension: "callback" parameter is not a function'
       );
     }
     onCssHitsFoundCallback = callback;

@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -31,9 +31,9 @@ purify.settings = (function (purify) {
   const settings = {
     DISABLE_DETECT_FILTERS: "detect-filters-disabled",
     DISABLE_SHOW_PAGE_STATS: "disable-show-page-statistic",
-    DISABLE_SHOW_ADGUARD_PROMO_INFO: "show-info-about-adguard-disabled",
+    DISABLE_SHOW_PURIFY_PROMO_INFO: "show-info-about-purify-disabled",
     DISABLE_SAFEBROWSING: "safebrowsing-disabled",
-    DISABLE_FILTERING: "adguard-disabled",
+    DISABLE_FILTERING: "purify-disabled",
     DISABLE_COLLECT_HITS: "hits-count-disabled",
     DISABLE_SHOW_CONTEXT_MENU: "context-menu-disabled",
     USE_OPTIMIZED_FILTERS: "use-optimized-filters",
@@ -72,7 +72,7 @@ purify.settings = (function (purify) {
             defaults[settings[name]] = false;
           }
         }
-        defaults[settings.DISABLE_SHOW_ADGUARD_PROMO_INFO] =
+        defaults[settings.DISABLE_SHOW_PURIFY_PROMO_INFO] =
           (!purify.utils.browser.isWindowsOs() &&
             !purify.utils.browser.isMacOs()) ||
           purify.utils.browser.isEdgeBrowser();
@@ -199,12 +199,12 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_SHOW_PAGE_STATS, !enabled, options);
   };
 
-  const isShowInfoAboutAdguardFullVersion = function () {
-    return !getProperty(settings.DISABLE_SHOW_ADGUARD_PROMO_INFO);
+  const isShowInfoAboutPurifyFullVersion = function () {
+    return !getProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO);
   };
 
-  const changeShowInfoAboutAdguardFullVersion = function (show, options) {
-    setProperty(settings.DISABLE_SHOW_ADGUARD_PROMO_INFO, !show, options);
+  const changeShowInfoAboutPurifyFullVersion = function (show, options) {
+    setProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO, !show, options);
   };
 
   const isShowAppUpdatedNotification = function () {
@@ -284,12 +284,12 @@ purify.settings = (function (purify) {
     return getProperty(settings.BLOCK_WEBRTC);
   };
 
-  const disableShowAdguardPromoInfo = function () {
-    setProperty(settings.DISABLE_SHOW_ADGUARD_PROMO_INFO, true);
+  const disableShowPurifyPromoInfo = function () {
+    setProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO, true);
   };
 
-  const isDisableShowAdguardPromoInfo = function () {
-    return getProperty(settings.DISABLE_SHOW_ADGUARD_PROMO_INFO);
+  const isDisableShowPurifyPromoInfo = function () {
+    return getProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO);
   };
 
   const api = {};
@@ -313,8 +313,8 @@ purify.settings = (function (purify) {
   api.changeAutodetectFilters = changeAutodetectFilters;
   api.showPageStatistic = showPageStatistic;
   api.changeShowPageStatistic = changeShowPageStatistic;
-  api.isShowInfoAboutAdguardFullVersion = isShowInfoAboutAdguardFullVersion;
-  api.changeShowInfoAboutAdguardFullVersion = changeShowInfoAboutAdguardFullVersion;
+  api.isShowInfoAboutPurifyFullVersion = isShowInfoAboutPurifyFullVersion;
+  api.changeShowInfoAboutPurifyFullVersion = changeShowInfoAboutPurifyFullVersion;
   api.isShowAppUpdatedNotification = isShowAppUpdatedNotification;
   api.changeShowAppUpdatedNotification = changeShowAppUpdatedNotification;
   api.changeEnableSafebrowsing = changeEnableSafebrowsing;
@@ -330,8 +330,8 @@ purify.settings = (function (purify) {
   api.getFiltersUpdatePeriod = getFiltersUpdatePeriod;
   api.setFiltersUpdatePeriod = setFiltersUpdatePeriod;
   api.isWebRTCDisabled = isWebRTCDisabled;
-  api.disableShowAdguardPromoInfo = disableShowAdguardPromoInfo;
-  api.isDisableShowAdguardPromoInfo = isDisableShowAdguardPromoInfo;
+  api.disableShowPurifyPromoInfo = disableShowPurifyPromoInfo;
+  api.isDisableShowPurifyPromoInfo = isDisableShowPurifyPromoInfo;
   api.DEFAULT_FILTERS_UPDATE_PERIOD = DEFAULT_FILTERS_UPDATE_PERIOD;
 
   return api;

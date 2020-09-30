@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 (function (api, global) {
@@ -86,7 +86,7 @@
 
       host = portIndex === -1 ? host : host.substring(0, portIndex);
 
-      // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1586
+      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1586
       const lastChar = host.charAt(host.length - 1);
       if (lastChar === ".") {
         host = host.slice(0, -1);
@@ -255,7 +255,7 @@
 
       return function (domainNameToCheck, domainName) {
         // Checks if domain name from rule is tld wildcard
-        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/571
+        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/571
         if (isWildcardDomain(domainName)) {
           return matchAsWildcard(domainName, domainNameToCheck);
         }
@@ -309,7 +309,7 @@
   var RE_BAD_CHARACTERS = /([^0-9a-f:])/i;
   var RE_BAD_ADDRESS = /([0-9a-f]{5,}|:{3,}|[^:]:$|^:[^:]$)/i;
 
-  // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1010
+  // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1010
   var RESERVED_DOMAINS = api.publicSuffixes;
 
   api.url = UrlUtils;

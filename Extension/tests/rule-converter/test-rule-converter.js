@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
-/* global QUnit, adguard */
+/* global QUnit, purify */
 
-QUnit.test("Test scriptlet adguard rule", (assert) => {
+QUnit.test("Test scriptlet purify rule", (assert) => {
   const rule = "example.org#%#//scriptlet('abort-on-property-read', 'I10C')";
   const exp = "example.org#%#//scriptlet('abort-on-property-read', 'I10C')";
   const res = purify.rules.ruleConverter.convertRule(rule);
   assert.equal(res, exp);
 });
 
-QUnit.test("Test scriptlet adguard rule exception", (assert) => {
+QUnit.test("Test scriptlet purify rule exception", (assert) => {
   const rule = "example.org#@%#//scriptlet('abort-on-property-read', 'I10C')";
   const exp = "example.org#@%#//scriptlet('abort-on-property-read', 'I10C')";
   const res = purify.rules.ruleConverter.convertRule(rule);
@@ -65,7 +65,7 @@ QUnit.test("Test converter scriptlet multiple abp rule", (assert) => {
   assert.equal(res[1], exp2);
 });
 
-QUnit.test("Test converter css adguard rule", (assert) => {
+QUnit.test("Test converter css purify rule", (assert) => {
   const rule = "firmgoogle.com#$#.pub_300x250 {display:block!important;}";
   const exp = "firmgoogle.com#$#.pub_300x250 {display:block!important;}";
   const res = purify.rules.ruleConverter.convertRule(rule);
@@ -76,7 +76,7 @@ QUnit.test("Test converter css adguard rule", (assert) => {
     "the issue of this test that adg css rule and abp snippet rule has the same mask, but different content"
   );
 
-  // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1412
+  // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1412
   const whitelistCssRule = "example.com#@$#h1 { display: none!important; }";
   const expected = "example.com#@$#h1 { display: none!important; }";
   const actual = purify.rules.ruleConverter.convertRule(whitelistCssRule);

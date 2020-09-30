@@ -1,9 +1,9 @@
 /**
- * Build sample-extension with the AdGuard API, which can be included to another extension.
+ * Build sample-extension with the CyberPurify API, which can be included to another extension.
  * 1. Copying assistant scripts
  * 2. Copying sample-extension directory
  * 3. Concat scripts from `document_start` and `document_end` params getting from manifest.json
- * 4. Concat all scripts from `API_SCRIPTS` files and save in 'adguard-api.js'
+ * 4. Concat all scripts from `API_SCRIPTS` files and save in 'purify-api.js'
  * 5. Copying filters files
  * 6. Updating version of an extension in manifest
  * 7. Creating zip archive of an extension
@@ -28,7 +28,7 @@ const API_SCRIPTS = [
   "Extension/lib/libs/crypto-js/md5.js",
   "Extension/lib/filter/rules/scriptlets/redirects.js",
   "Extension/lib/filter/rules/scriptlets/scriptlets.js",
-  // Adguard Global and preExtension/ferences
+  // Purify Global and preExtension/ferences
   "Extension/lib/purify.js",
   "Extension/browser/webkit/lib/prefs.js",
   // Utils libraries
@@ -102,17 +102,17 @@ const paths = {
   sample: path.join("Extension/api/sample-extension/**/*"),
   locales: path.join(`${LOCALES_DIR}**/*`),
   sourceManifest: path.join("Extension/api/chrome/manifest.json"),
-  contentScriptsStartFile: path.join("adguard/adguard-content.js"),
+  contentScriptsStartFile: path.join("purify/purify-content.js"),
   filters: [
     path.join("Extension/filters/chromium/filters_i18n.json"),
     path.join("Extension/filters/chromium/filters.json"),
   ],
   redirects: [path.join("Extension/lib/filter/rules/scriptlets/redirects.yml")],
-  dest: path.join(BUILD_DIR, BRANCH, "adguard-api"),
+  dest: path.join(BUILD_DIR, BRANCH, "purify-api"),
 };
 
 const dest = {
-  adguard: path.join(paths.dest, "adguard"),
+  purify: path.join(paths.dest, "purify"),
   inner: path.join(paths.dest, "**/*"),
   buildDir: path.join(BUILD_DIR, BRANCH),
   manifest: path.join(paths.dest, "manifest.json"),
@@ -122,22 +122,22 @@ const dest = {
 const sampleApi = () => gulp.src(paths.sample).pipe(gulp.dest(paths.dest));
 
 //  copy filters
-const copyFilters = () => gulp.src(paths.filters).pipe(gulp.dest(dest.adguard));
+const copyFilters = () => gulp.src(paths.filters).pipe(gulp.dest(dest.purify));
 
 // copy redirects sources
 const copyRedirects = () =>
-  gulp.src(paths.redirects).pipe(gulp.dest(dest.adguard));
+  gulp.src(paths.redirects).pipe(gulp.dest(dest.purify));
 
 const apiConcat = () =>
   gulp
     .src(API_SCRIPTS)
-    .pipe(concatFiles("adguard-api.js"))
-    .pipe(gulp.dest(dest.adguard));
+    .pipe(concatFiles("purify-api.js"))
+    .pipe(gulp.dest(dest.purify));
 
 /**
  * Concat scripts from `document_start` and `document_end` params getting from manifest.json
- * Scripts from 'document_start' param concatenates in adguard-content.js script.
- * Scripts from 'document_end' param concatenates in adguard-assistant.js script.
+ * Scripts from 'document_start' param concatenates in purify-content.js script.
+ * Scripts from 'document_end' param concatenates in purify-assistant.js script.
  *
  * @param runAt   'document_start' or 'document_start' param
  * @param srcFileName   name of concatenate file to save
@@ -166,10 +166,10 @@ const concat = (runAt, srcFileName) => {
   return gulp
     .src(files)
     .pipe(concatFiles(srcFileName))
-    .pipe(gulp.dest(dest.adguard));
+    .pipe(gulp.dest(dest.purify));
 };
 
-const concatStartFiles = () => concat("document_start", "adguard-content.js");
+const concatStartFiles = () => concat("document_start", "purify-content.js");
 
 const updateManifest = (done) => {
   const manifest = JSON.parse(fs.readFileSync(dest.manifest));
@@ -186,10 +186,10 @@ const createArchive = (done) => {
   return (
     gulp
       .src(dest.inner)
-      .pipe(zip(`adguard-api-${BRANCH}.zip`))
+      .pipe(zip(`purify-api-${BRANCH}.zip`))
       .pipe(gulp.dest(dest.buildDir))
-      // adguard-api.zip artifact
-      .pipe(rename("adguard-api.zip"))
+      // purify-api.zip artifact
+      .pipe(rename("purify-api.zip"))
       .pipe(gulp.dest(BUILD_DIR))
   );
 };

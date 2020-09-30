@@ -905,7 +905,7 @@
           advancedButton: "المتقدمة",
           moreInfoButton: "معلومات اكثر",
           pageTitle: "تم رفض الوصول",
-          safeHeaderTitle: "الوصول إلى هذه الصفحة AdGuard لقد حظر",
+          safeHeaderTitle: "الوصول إلى هذه الصفحة CyberPurify لقد حظر",
           safeContentTitle:
             "تم الإبلاغ عن صفحة الويب هذه كصفحة ضارة وتم حظرها بناءً على تفضيلات الأمان",
           parentalHeaderTitle: "الرقابة الابويه",
@@ -915,7 +915,7 @@
             "أنت تحاول الوصول إلى موقع ويب مدرج بواسطة ادجوارد باعتباره غير مناسب للأطفال. إذا كنت شخصًا بالغًا ، يمكنك إيقاف التحكم الأبوي في الإعدادات أو إضافة هذا الموقع إلى القائمة البيضاء.",
           blockedContentTitle:
             "الوصول إلى هذا الموقع قم بإضافته إلى الاستثناءات{site}تم حظرطلب من خلال قاعدة الفلترإذا كنت ترغب في الوصول إلى هذا الموقع",
-          ruleHeaderTitle: "AdGuardتم حظره بواسطة",
+          ruleHeaderTitle: "CyberPurifyتم حظره بواسطة",
           ruleContentTitle:
             "لقد منع ادجوارد هذه الصفحة من التحميل بسبب قاعدة الفلتر التالية",
           btnGoBack: "الرجوع للخلف",
@@ -958,7 +958,7 @@
           advancedButton: "Pokročilé",
           moreInfoButton: "Více informací",
           pageTitle: "Přístup odepřen",
-          safeHeaderTitle: "AdGuard zablokoval přístup na tuto stránku",
+          safeHeaderTitle: "CyberPurify zablokoval přístup na tuto stránku",
           safeContentTitle:
             "Webová stránka byla ohlášena jako škodlivá a na základě Vašich bezpečnostních nastavení byla zablokována.",
           parentalHeaderTitle: "Rodičovská kontrola",
@@ -966,12 +966,12 @@
             "Tuto stránku jsme zablokovali kvůli omezením rodičovského filtru.",
           parentalDescOne: "Máte na to věk? Zadejte heslo",
           parentalDnsDescTwo:
-            "Pokoušíte navštívit stránku, kterou AdGuard eviduje jako nevhodnou pro děti. Pokud jste dospělý/á, můžete v nastavení vypnout rodičovskou kontrolu nebo tuto stránku přidat na seznam povolených.",
+            "Pokoušíte navštívit stránku, kterou CyberPurify eviduje jako nevhodnou pro děti. Pokud jste dospělý/á, můžete v nastavení vypnout rodičovskou kontrolu nebo tuto stránku přidat na seznam povolených.",
           blockedContentTitle:
             "Přístup na {site} byl zablokován pravidlem filtru. Chcete-li tuto stránku zobrazit, přidejte ji mezi výjimky.",
-          ruleHeaderTitle: "Blokováno programem AdGuard",
+          ruleHeaderTitle: "Blokováno programem CyberPurify",
           ruleContentTitle:
-            "AdGuard zabránil načtení této stránky kvůli následujícímu pravidlu filtru",
+            "CyberPurify zabránil načtení této stránky kvůli následujícímu pravidlu filtru",
           btnGoBack: "Zpět",
           btnFeedback: "Odeslat zpětnou vazbu",
           btnProceed: "Přesto pokračovat",
@@ -986,7 +986,7 @@
           suggestion2:
             "Zkontrolujte webovou adresu a ujistěte se, že jste ji zadali správně.",
           suggestion3:
-            "Zkontrolujte nastavení brány firewall. Všechna připojení by měla být pro AdGuard povolena.",
+            "Zkontrolujte nastavení brány firewall. Všechna připojení by měla být pro CyberPurify povolena.",
           suggestion4:
             "Zkontrolujte nastavení serveru proxy, pokud jej používáte.",
           showDetails: "Zobrazit podrobnosti",
@@ -1013,7 +1013,7 @@
           advancedButton: "Avanceret",
           moreInfoButton: "Mere information",
           pageTitle: "Adgang nægtet",
-          safeHeaderTitle: "AdGuard har blokeret adgangen til denne side",
+          safeHeaderTitle: "CyberPurify har blokeret adgangen til denne side",
           safeContentTitle:
             "Denne hjemmeside er blevet rapporteret som en malware side og er derfor blevet blokeret baseret på dine sikkerhedspræferencer.",
           parentalHeaderTitle: "Forældrekontrol",
@@ -1021,12 +1021,12 @@
             "Vi blokerede denne side på grund af forældrefilter restriktionerne.",
           parentalDescOne: "Er du gammel nok? Indtast adgangskoden",
           parentalDnsDescTwo:
-            "Du forsøger at nå en hjemmeside, der er noteret af AdGuard som upassende for børn. Hvis du er voksen, kan du slukke forældrekontrol i indstillingerne eller tilføje denne hjemmeside til whitelisten.",
+            "Du forsøger at nå en hjemmeside, der er noteret af CyberPurify som upassende for børn. Hvis du er voksen, kan du slukke forældrekontrol i indstillingerne eller tilføje denne hjemmeside til whitelisten.",
           blockedContentTitle:
             "Forespørgslen til {site} blev blokeret af en filterregel. Hvis du ønsker adgang til denne side, skal du tilføje den til undtagelser.",
-          ruleHeaderTitle: "Blokeret af AdGuard",
+          ruleHeaderTitle: "Blokeret af CyberPurify",
           ruleContentTitle:
-            "AdGuard har forhindret denne side i at blive indlæst på grund af følgende filterregel",
+            "CyberPurify har forhindret denne side i at blive indlæst på grund af følgende filterregel",
           btnGoBack: "Gå tilbage",
           btnFeedback: "Send feedback",
           btnProceed: "Fortsæt alligevel",
@@ -1041,7 +1041,7 @@
           suggestion2:
             "Tjek webadressen for at være sikker på, at du har indtastet den rigtigt.",
           suggestion3:
-            "Tjek dine firewall indstillinger. Alle forbindelser skal være tilladte for AdGuard.",
+            "Tjek dine firewall indstillinger. Alle forbindelser skal være tilladte for CyberPurify.",
           suggestion4:
             "Tjek dine proxy indstillinger, hvis du bruger en proxyserver.",
           showDetails: "Vis detaljer",
@@ -1069,7 +1069,7 @@
           moreInfoButton: "Mehr Informationen",
           pageTitle: "Zugriff verweigert",
           safeHeaderTitle:
-            "AdGuard hat den Zugriff auf diese Webseite blockiert",
+            "CyberPurify hat den Zugriff auf diese Webseite blockiert",
           safeContentTitle:
             "Diese Webseite wurde als bösartig gemeldet und wurde aufgrund Ihrer Sicherheitseinstellungen blockiert.",
           parentalHeaderTitle: "Kindersicherung",
@@ -1077,12 +1077,12 @@
             "Wir haben diese Seite aufgrund der Einschränkungen des Kinderschutz-Filters blockiert.",
           parentalDescOne: "Sind Sie alt genung? Geben Sie das Passwort ein.",
           parentalDnsDescTwo:
-            "Sie versuchen, eine Webseite zu erreichen, die von AdGuard als ungeeignet für Kinder eingestuft wurde. Wenn Sie ein Erwachsener sind, können Sie die Kindersicherung in den Einstellungen deaktivieren oder diese Webseite zur Whitelist hinzufügen.",
+            "Sie versuchen, eine Webseite zu erreichen, die von CyberPurify als ungeeignet für Kinder eingestuft wurde. Wenn Sie ein Erwachsener sind, können Sie die Kindersicherung in den Einstellungen deaktivieren oder diese Webseite zur Whitelist hinzufügen.",
           blockedContentTitle:
             "Die Anfrage an {site} wurde von einer Filter-Regel blockiert. Wenn Sie diese Seite besuchen möchten, fügen Sie diese bitte zu den Ausnahmen hinzu.",
-          ruleHeaderTitle: "Blockiert durch AdGuard",
+          ruleHeaderTitle: "Blockiert durch CyberPurify",
           ruleContentTitle:
-            "AdGuard hat das Laden dieser Seite aufgrund folgender Filterregel verhindert",
+            "CyberPurify hat das Laden dieser Seite aufgrund folgender Filterregel verhindert",
           btnGoBack: "Zurück",
           btnFeedback: "Feedback senden",
           btnProceed: "Trotzdem fortfahren\n",
@@ -1097,7 +1097,7 @@
           suggestion2:
             "Prüfen Sie bitte die Adresse der Webseite, um sicherzustellen, dass Sie diese korrekt eingegeben haben.",
           suggestion3:
-            "Prüfen Sie bitte Ihre Firewall-Einstellungen. Alle Verbindungen sollten für AdGuard erlaubt sein.",
+            "Prüfen Sie bitte Ihre Firewall-Einstellungen. Alle Verbindungen sollten für CyberPurify erlaubt sein.",
           suggestion4:
             "Prüfen Sie bitte Ihre Proxy-Einstellungen, wenn Sie einen Proxy-Server verwenden.",
           showDetails: "Details anzeigen",
@@ -1124,7 +1124,7 @@
           advancedButton: "Advanced",
           moreInfoButton: "More information",
           pageTitle: "Access denied",
-          safeHeaderTitle: "AdGuard has blocked access to this page",
+          safeHeaderTitle: "CyberPurify has blocked access to this page",
           safeContentTitle:
             "This web page has been reported as a malware page and has been blocked based on your security preferences.",
           parentalHeaderTitle: "Parental control",
@@ -1132,12 +1132,12 @@
             "We blocked this page because of parental filter restrictions.",
           parentalDescOne: "Are you old enough? Enter the password",
           parentalDnsDescTwo:
-            "You're trying to reach a website listed by AdGuard as inappropriate for kids. If you’re an adult then you can switch off parental control in the settings or add this website to the whitelist.",
+            "You're trying to reach a website listed by CyberPurify as inappropriate for kids. If you’re an adult then you can switch off parental control in the settings or add this website to the whitelist.",
           blockedContentTitle:
             "Request to {site} was blocked by a filter rule. If you want to access this site, add it to exceptions.",
-          ruleHeaderTitle: "Blocked by AdGuard",
+          ruleHeaderTitle: "Blocked by CyberPurify",
           ruleContentTitle:
-            "AdGuard has prevented this page from loading due to the following filter rule",
+            "CyberPurify has prevented this page from loading due to the following filter rule",
           btnGoBack: "Go back",
           btnFeedback: "Send feedback",
           btnProceed: "Proceed anyway",
@@ -1152,7 +1152,7 @@
           suggestion2:
             "Check the web page address to make sure you have entered it correctly.",
           suggestion3:
-            "Check your firewall settings. All connections should be allowed for AdGuard.",
+            "Check your firewall settings. All connections should be allowed for CyberPurify.",
           suggestion4: "Check your proxy settings if you use proxy server.",
           showDetails: "Show details",
           wrongPassword: "Wrong password",
@@ -1178,7 +1178,7 @@
           advancedButton: "Avanzado",
           moreInfoButton: "Más información",
           pageTitle: "Acceso denegado",
-          safeHeaderTitle: "AdGuard ha bloqueado el acceso a esta página",
+          safeHeaderTitle: "CyberPurify ha bloqueado el acceso a esta página",
           safeContentTitle:
             "Esta página web ha sido reportada como una página de malware y ha sido bloqueada en base a sus preferencias de seguridad.",
           parentalHeaderTitle: "Control parental",
@@ -1186,12 +1186,12 @@
             "Hemos bloqueado esta página debido a las restricciones de los filtros parentales.",
           parentalDescOne: "¿Tienes la edad suficiente? Ingrese la contraseña",
           parentalDnsDescTwo:
-            "Está tratando de llegar a un sitio web listado por AdGuard como inapropiado para niños. Si es un adulto, puede desactivar el control parental en la configuración o añadir este sitio web a la lista blanca.",
+            "Está tratando de llegar a un sitio web listado por CyberPurify como inapropiado para niños. Si es un adulto, puede desactivar el control parental en la configuración o añadir este sitio web a la lista blanca.",
           blockedContentTitle:
             "La petición a {site} fue bloqueada por una regla de filtro. Si desea acceder a este sitio, añádalo a las excepciones.",
-          ruleHeaderTitle: "Bloqueado por AdGuard",
+          ruleHeaderTitle: "Bloqueado por CyberPurify",
           ruleContentTitle:
-            "AdGuard ha impedido que esta página se cargue debido a la siguiente regla de filtro",
+            "CyberPurify ha impedido que esta página se cargue debido a la siguiente regla de filtro",
           btnGoBack: "Regresar",
           btnFeedback: "Enviar comentarios",
           btnProceed: "Proceder de todos modos",
@@ -1206,7 +1206,7 @@
           suggestion2:
             "Compruebe la dirección de la página web para asegurarse de que la ha introducido correctamente.\n",
           suggestion3:
-            "Compruebe la configuración de su cortafuegos. Todas las conexiones deben ser permitidas para AdGuard.\n",
+            "Compruebe la configuración de su cortafuegos. Todas las conexiones deben ser permitidas para CyberPurify.\n",
           suggestion4:
             "Compruebe la configuración del proxy si utiliza un servidor proxy.",
           showDetails: "Mostrar detalles",
@@ -1233,7 +1233,7 @@
           advancedButton: "پيشرفته",
           moreInfoButton: "اطلاعات بیشتر",
           pageTitle: "دسترسی رد شد",
-          safeHeaderTitle: "AdGuard دسترسی به این صفحه را مسدود کرده است",
+          safeHeaderTitle: "CyberPurify دسترسی به این صفحه را مسدود کرده است",
           safeContentTitle:
             "این صفحه وب بعنوان صفحه بدافزاز گزارش شده و بر طبق اولویت های امنیتی شما مسدود شده است.",
           parentalHeaderTitle: "نظارت والدین",
@@ -1242,12 +1242,12 @@
           parentalDescOne:
             "آیا به اندازه کافی سن تان زیاد است؟ رمزعبور را وارد کنید",
           parentalDnsDescTwo:
-            "AdGuard دسترسی شما را بدلیل اینکه این محتوا مناسب کودکان نیست محدود کرده است. اگر شما یک انسان بالغ هستید میتوانید نظارت والدین را در قسمت تنظیمات غیرفعال کرده یا این سایت را در لیست سفید قرار دهید.",
+            "CyberPurify دسترسی شما را بدلیل اینکه این محتوا مناسب کودکان نیست محدود کرده است. اگر شما یک انسان بالغ هستید میتوانید نظارت والدین را در قسمت تنظیمات غیرفعال کرده یا این سایت را در لیست سفید قرار دهید.",
           blockedContentTitle:
             "درخواست به {site} با مدل دستور فیلتر مسدود شده است. اگر میخواهید به این سایت دسترسی داشته باشید آن را به استثناء ها اضافه کنید.",
-          ruleHeaderTitle: "با AdGuard مسدود شده است",
+          ruleHeaderTitle: "با CyberPurify مسدود شده است",
           ruleContentTitle:
-            "AdGuard از دسترسی به این صفحه به علت دستور فیلتر زیر جلوگیری کرد",
+            "CyberPurify از دسترسی به این صفحه به علت دستور فیلتر زیر جلوگیری کرد",
           btnGoBack: "برگرد",
           btnFeedback: "اِرسال بازخورد",
           btnProceed: "بهر حال ادامه بده",
@@ -1262,7 +1262,7 @@
           suggestion2:
             "آدرس وب را بررسی کنید و مطمئن شوید به درستی تایپ شده است.",
           suggestion3:
-            "تنظیمات فایروال خود را چک کنید. AdGuard باید اجازه دسترسی به همه اتصالات را داشته باشد.",
+            "تنظیمات فایروال خود را چک کنید. CyberPurify باید اجازه دسترسی به همه اتصالات را داشته باشد.",
           suggestion4:
             "اگر از پراکسی سرور استفاده می کنید،تنظیمات پراکسی را امتحان کنید.",
           showDetails: "نمایش جزئیات",
@@ -1289,7 +1289,7 @@
           advancedButton: "Lisäasetukset",
           moreInfoButton: "Lisätiedot",
           pageTitle: "Pääsy estetty",
-          safeHeaderTitle: "AdGuard on estänyt pääsyn tälle sivulle",
+          safeHeaderTitle: "CyberPurify on estänyt pääsyn tälle sivulle",
           safeContentTitle:
             "Tämä sivusto on ilmoitettu olevan haittaohjelmasivusto ja se on estetty sinun turvallisuusasetusten perusteella.",
           parentalHeaderTitle: "Lapsilukko",
@@ -1297,12 +1297,12 @@
             "Estimme tämän sivun lapsilukon suodatusrajoituksien takia.",
           parentalDescOne: "Oletko riittävän vanha? Syötä salasana",
           parentalDnsDescTwo:
-            "Yrität tavoitella verkkosivustoa, jonka AdGuard on luetteloinut sopimattomaksi lapsille. Jos olet aikuinen, voit poistaa lapsilukon käytöstä asetuksista tai lisätä tämän verkkosivuston sallittuun luetteloon.",
+            "Yrität tavoitella verkkosivustoa, jonka CyberPurify on luetteloinut sopimattomaksi lapsille. Jos olet aikuinen, voit poistaa lapsilukon käytöstä asetuksista tai lisätä tämän verkkosivuston sallittuun luetteloon.",
           blockedContentTitle:
             "Suodatussääntö esti pyynnön sivustoon {site}. Jos haluat päästä tälle sivustolle, lisää se poikkeuksiin.",
-          ruleHeaderTitle: "Estetty AdGuardilla",
+          ruleHeaderTitle: "Estetty CyberPurifyilla",
           ruleContentTitle:
-            "AdGuard esti tätä sivustoa lataamasta seuraavan suodatinsäännön takia",
+            "CyberPurify esti tätä sivustoa lataamasta seuraavan suodatinsäännön takia",
           btnGoBack: "Palaa takaisin",
           btnFeedback: "Lähetä palaute",
           btnProceed: "Jatka silti",
@@ -1317,7 +1317,7 @@
           suggestion2:
             "Tarkista että olet kirjoittanut verkko-osoiteen oikein.",
           suggestion3:
-            "Tarkista palomuurin asetukset. Kaikki yhteydet tulisi sallia AdGuardille.",
+            "Tarkista palomuurin asetukset. Kaikki yhteydet tulisi sallia CyberPurifyille.",
           suggestion4:
             "Tarkista välityspalvelinasetukset jos käytät välityspalvelinta.",
           showDetails: "Näytä tiedot",
@@ -1344,7 +1344,7 @@
           advancedButton: "Autres actions",
           moreInfoButton: "Plus d'information",
           pageTitle: "Accès refusé",
-          safeHeaderTitle: "AdGuard a bloqué l'accès à cette page",
+          safeHeaderTitle: "CyberPurify a bloqué l'accès à cette page",
           safeContentTitle:
             "Cette page web a été signalée comme page malicieuse et a été bloquée selon vos préférences de sécurité.",
           parentalHeaderTitle: "Contrôle parental",
@@ -1352,12 +1352,12 @@
             "Nous avons bloqué cette page à cause des restrictions du contrôle parental.",
           parentalDescOne: "Entrez le mot de passe si vous êtes majeur",
           parentalDnsDescTwo:
-            "Vous essayez d'atteindre un site web classé par AdGuard comme inapproprié pour les enfants. Si vous êtes un adulte, alors vous pouvez désactiver le contrôle parental dans les paramètres ou bien ajouter ce site web à la liste blanche.",
+            "Vous essayez d'atteindre un site web classé par CyberPurify comme inapproprié pour les enfants. Si vous êtes un adulte, alors vous pouvez désactiver le contrôle parental dans les paramètres ou bien ajouter ce site web à la liste blanche.",
           blockedContentTitle:
             "La requête vers {site} a été bloquée par une règle de filtrage. Si vous voulez accéder à ce site, ajoutez-le aux exceptions.",
-          ruleHeaderTitle: "Bloqué par AdGuard",
+          ruleHeaderTitle: "Bloqué par CyberPurify",
           ruleContentTitle:
-            "AdGuard n'a pas autorisé le chargement de cette page en raison de la régle de filtrage suivante",
+            "CyberPurify n'a pas autorisé le chargement de cette page en raison de la régle de filtrage suivante",
           btnGoBack: "Retour",
           btnFeedback: "Envoyer un commentaire",
           btnProceed: "Forçage de procédure",
@@ -1372,7 +1372,7 @@
           suggestion2:
             "Vérifiez l'adresse de la page web pour vous assurer que vous l'avez entré correctement.",
           suggestion3:
-            "Vérifiez les paramètres de votre pare-feu. Toutes les connexions devraient être permises pour AdGuard.",
+            "Vérifiez les paramètres de votre pare-feu. Toutes les connexions devraient être permises pour CyberPurify.",
           suggestion4:
             "Vérifiez les paramètres de votre proxy si vous utilisez un serveur proxy.",
           showDetails: "Montrer les détails",
@@ -1399,7 +1399,7 @@
           advancedButton: "Lanjutan",
           moreInfoButton: "Informasi lebih lanjut",
           pageTitle: "Akses ditolak",
-          safeHeaderTitle: "AdGuard telah memblokir akses ke halaman ini",
+          safeHeaderTitle: "CyberPurify telah memblokir akses ke halaman ini",
           safeContentTitle:
             "Halaman situs diketahui sebagai halaman malware dan telah diblokir berdasarkan preferensi keamanan Anda.",
           parentalHeaderTitle: "Kontrol orang tua",
@@ -1407,12 +1407,12 @@
             "Kami memblokir halaman ini karena pembatasan penyaring orangtua.",
           parentalDescOne: "Apakah Anda cukup umur? Masukkan kata sandi",
           parentalDnsDescTwo:
-            "Anda akan menjangkau situs yang terdaftar oleh AdGuard sebagai tindakan tidak pantas untuk anak. Jika anda seorang dewasa maka Anda dapat mematikan parental orang tua di pengaturan atau menambah situs ini kedalam daftar putih.",
+            "Anda akan menjangkau situs yang terdaftar oleh CyberPurify sebagai tindakan tidak pantas untuk anak. Jika anda seorang dewasa maka Anda dapat mematikan parental orang tua di pengaturan atau menambah situs ini kedalam daftar putih.",
           blockedContentTitle:
             "Permintaan ke {site} telah diblokir oleh aturan penyaring. Jika Anda ingin mengakses situs ini, tambahkan ini ke pengecualian.",
-          ruleHeaderTitle: "Diblokir oleh AdGuard",
+          ruleHeaderTitle: "Diblokir oleh CyberPurify",
           ruleContentTitle:
-            "AdGuard menolak memuat halaman ini dikarenakan aturan penyaring berikut",
+            "CyberPurify menolak memuat halaman ini dikarenakan aturan penyaring berikut",
           btnGoBack: "Kembali",
           btnFeedback: "Kirim umpan balik",
           btnProceed: "Tetap lanjutkan",
@@ -1427,7 +1427,7 @@
           suggestion2:
             "Periksa halaman situs dan pastikan Anda memasukkannya dengan benar.",
           suggestion3:
-            "Periksa pengaturan firewall Anda. Semua koneksi harus sebaiknya diperbolehkan untuk AdGuard.",
+            "Periksa pengaturan firewall Anda. Semua koneksi harus sebaiknya diperbolehkan untuk CyberPurify.",
           suggestion4:
             "Periksa pengaturan proksi Anda jika menggunakan server proksi.",
           showDetails: "Tampikan rincian",
@@ -1678,7 +1678,7 @@
           advancedButton: "Avanzato",
           moreInfoButton: "Maggiori informazioni",
           pageTitle: "Accesso negato",
-          safeHeaderTitle: "AdGuard ha bloccato l'accesso a questa pagina",
+          safeHeaderTitle: "CyberPurify ha bloccato l'accesso a questa pagina",
           safeContentTitle:
             "Questa pagina web è stata segnalata come pagina malware ed è stata bloccata secondo le tue preferenze di sicurezza.",
           parentalHeaderTitle: "Filtro Famiglia",
@@ -1686,12 +1686,12 @@
             "Abbiamo bloccato questa pagina a causa delle restrizioni del filtro famiglia.",
           parentalDescOne: "Sei abbastanza grande? Inserisci la password",
           parentalDnsDescTwo:
-            "Stai cercando di raggiungere un sito internet elencato da AdGuard come non appropriato per i bambini. Se sei un adulto puoi disabilitare il filtro famiglia nelle impostazioni o aggiungere questo sito alla whitelist.",
+            "Stai cercando di raggiungere un sito internet elencato da CyberPurify come non appropriato per i bambini. Se sei un adulto puoi disabilitare il filtro famiglia nelle impostazioni o aggiungere questo sito alla whitelist.",
           blockedContentTitle:
             "La richiesta verso {site} è stata bloccata da un filtro. Se vuoi accedere al sito, aggiungilo alle eccezioni.",
-          ruleHeaderTitle: "Bloccato da AdGuard",
+          ruleHeaderTitle: "Bloccato da CyberPurify",
           ruleContentTitle:
-            "AdGuard ha bloccato il caricamento di questa pagina per il seguente filtro",
+            "CyberPurify ha bloccato il caricamento di questa pagina per il seguente filtro",
           btnGoBack: "Torna indietro",
           btnFeedback: "Invia feedback",
           btnProceed: "Procedi comunque",
@@ -1706,7 +1706,7 @@
           suggestion2:
             "Controlla l'indirizzo della pagina web per assicurarti che lo hai inserito correttamente.",
           suggestion3:
-            "Controlla le impostazioni del firewall. Tutte le connessioni dovrebbero essere permesse per AdGuard.",
+            "Controlla le impostazioni del firewall. Tutte le connessioni dovrebbero essere permesse per CyberPurify.",
           suggestion4:
             "Controlla le impostazioni del proxy se usi un server proxy.",
           showDetails: "Mostra dettagli",
@@ -1733,7 +1733,7 @@
           advancedButton: "高度な設定",
           moreInfoButton: "詳細",
           pageTitle: "アクセス拒否",
-          safeHeaderTitle: "AdGuardはこのページへのアクセスをブロックしました",
+          safeHeaderTitle: "CyberPurifyはこのページへのアクセスをブロックしました",
           safeContentTitle:
             "このページはマルウェアのページとして報告されています。セキュリティの設定に基づいてブロックされました。",
           parentalHeaderTitle: "ペアレンタルコントロール",
@@ -1741,12 +1741,12 @@
             "このページはペアレンタルコントロールによってブロックされました。",
           parentalDescOne: "大人の方はパスワードを入力してください。",
           parentalDnsDescTwo:
-            "子どもに不適切なウェブサイトとしてAdGuardに登録されているサイトにアクセスしようとしています。設定を行った保護者の方は設定からペアレンタルコントロールをオフにするか、このウェブサイトをホワイトリストに追加することができます。",
+            "子どもに不適切なウェブサイトとしてCyberPurifyに登録されているサイトにアクセスしようとしています。設定を行った保護者の方は設定からペアレンタルコントロールをオフにするか、このウェブサイトをホワイトリストに追加することができます。",
           blockedContentTitle:
             "{site}へのリクエストはフィルタルールによってブロックされました。サイトにアクセスしたい場合は例外に追加してください。",
-          ruleHeaderTitle: "AdGuardによってブロックされました",
+          ruleHeaderTitle: "CyberPurifyによってブロックされました",
           ruleContentTitle:
-            "AdGuardは以下のフィルタリング・ルールに従って、このページの読み込みを防止しました。",
+            "CyberPurifyは以下のフィルタリング・ルールに従って、このページの読み込みを防止しました。",
           btnGoBack: "戻る",
           btnFeedback: "フィードバックを送る",
           btnProceed: "そのまま続行する",
@@ -1761,7 +1761,7 @@
           suggestion2:
             "Webページのアドレスが正しく入力してあるかを確認してください。",
           suggestion3:
-            "ファイアウォールの設定を確認してください。 AdGuard接続のすべてが許可されている必要があります。",
+            "ファイアウォールの設定を確認してください。 CyberPurify接続のすべてが許可されている必要があります。",
           suggestion4:
             "プロキシサーバーを使用している場合は、プロキシ設定を確認してください。",
           showDetails: "詳細を表示",
@@ -1788,7 +1788,7 @@
           advancedButton: "고급 설정",
           moreInfoButton: "추가 정보",
           pageTitle: "접근 거부됨",
-          safeHeaderTitle: "AdGuard가 이 페이지 접근을 차단하였습니다.",
+          safeHeaderTitle: "CyberPurify가 이 페이지 접근을 차단하였습니다.",
           safeContentTitle:
             "이 웹 페이지는 악성 페이지로 보고되어, 설정하신 보안 설정에 따라 차단되었습니다.",
           parentalHeaderTitle: "자녀 보호",
@@ -1796,12 +1796,12 @@
             "이 페이지는 자녀 보호 필터 제한으로 차단되었습니다.",
           parentalDescOne: "자녀 보호 모드를 해제하려면 비밀번호를 입력하세요.",
           parentalDnsDescTwo:
-            "지금 AdGuard에서 지정한 어린이들에게 부적절한 웹 사이트에 접속하려고 합니다. 성인인 경우 설정에서 자녀 보호를 해제하거나 이 웹 사이트를 화이트리스트에 추가할 수 있습니다.",
+            "지금 CyberPurify에서 지정한 어린이들에게 부적절한 웹 사이트에 접속하려고 합니다. 성인인 경우 설정에서 자녀 보호를 해제하거나 이 웹 사이트를 화이트리스트에 추가할 수 있습니다.",
           blockedContentTitle:
             "{site} 페이지는 필터 규칙에 의해 차단 되었습니다. 이 사이트에 접근하고 싶다면 예외 항목에 추가 하세요.",
-          ruleHeaderTitle: "AdGuard에 의해 차단됨",
+          ruleHeaderTitle: "CyberPurify에 의해 차단됨",
           ruleContentTitle:
-            "다음 필터 규칙으로 인해 AdGuard에서 이 페이지를 로드하지 못했습니다.",
+            "다음 필터 규칙으로 인해 CyberPurify에서 이 페이지를 로드하지 못했습니다.",
           btnGoBack: "뒤로가기",
           btnFeedback: "피드백 전송",
           btnProceed: "그래도 계속하기",
@@ -1815,7 +1815,7 @@
             "잠시 후 이 웹 페이지를 <a href='(var.PageUrl)'>새로고침</a>하세요.",
           suggestion2: "웹 페이지 주소를 올바르게 입력했는지 확인하세요.",
           suggestion3:
-            "방화벽 설정을 확인하세요. AdGuard의 모든 연결은 허용되어 있어야 합니다.",
+            "방화벽 설정을 확인하세요. CyberPurify의 모든 연결은 허용되어 있어야 합니다.",
           suggestion4: "프록시 서버를 사용 하시면 프록시 설정을 확인 하세요.",
           showDetails: "자세히 보기",
           wrongPassword: "비밀번호가 맞지 않습니다.",
@@ -1841,7 +1841,7 @@
           advancedButton: "Papildomai",
           moreInfoButton: "Daugiau informacijos",
           pageTitle: "Prieiga neleidžiama",
-          safeHeaderTitle: "AdGuard užblokavo prieigą prie šio puslapio",
+          safeHeaderTitle: "CyberPurify užblokavo prieigą prie šio puslapio",
           safeContentTitle:
             "Šis tinklalapis buvo pažymėtas kaip kenkėjiškų programų puslapis ir buvo užblokuotas atsižvelgiant į jūsų saugos nuostatas.",
           parentalHeaderTitle: "Tėvų kontrolė",
@@ -1849,12 +1849,12 @@
             "Užblokavome šį puslapį dėl tėvų kontrolės filtrų apribojimų.",
           parentalDescOne: "Ar esate suaugęs? Įveskite slaptažodį",
           parentalDnsDescTwo:
-            "Bandote pasiekti svetainę, kurią AdGuard laiko kaip netinkamą vaikams. Jei esate suaugęs, nustatymuose galite išjungti tėvų kontrolę arba įtraukti šią svetainę į baltąjį sąrašą.",
+            "Bandote pasiekti svetainę, kurią CyberPurify laiko kaip netinkamą vaikams. Jei esate suaugęs, nustatymuose galite išjungti tėvų kontrolę arba įtraukti šią svetainę į baltąjį sąrašą.",
           blockedContentTitle:
             "Užklausą į {site} buvo užblokuota filtravimo taisyklės. Jei norite pasiekti šią svetainę, pridėkite ją prie išimčių.",
-          ruleHeaderTitle: "Užblokavo AdGuard",
+          ruleHeaderTitle: "Užblokavo CyberPurify",
           ruleContentTitle:
-            "AdGuard neleido įkelti šio puslapio dėl šios filtravimo taisyklės",
+            "CyberPurify neleido įkelti šio puslapio dėl šios filtravimo taisyklės",
           btnGoBack: "Grįžti",
           btnFeedback: "Grįžtamasis ryšys",
           btnProceed: "Tęsti vis tiek",
@@ -1869,7 +1869,7 @@
           suggestion2:
             "Patikrinkite svetainės adresą, kad įsitikintumėte, jog jį teisingai įvedėte.",
           suggestion3:
-            "Patikrinkite užkardos nustatymus. Visos jungtys turi būti leidžiamos AdGuard.",
+            "Patikrinkite užkardos nustatymus. Visos jungtys turi būti leidžiamos CyberPurify.",
           suggestion4:
             "Patikrinkite savo proxy nustatymus, jei jūs naudojate proxy serverį.",
           showDetails: "Rodyti išsamią informaciją",
@@ -1896,7 +1896,7 @@
           advancedButton: "Zaawansowane",
           moreInfoButton: "Więcej informacji",
           pageTitle: "Odmowa dostępu",
-          safeHeaderTitle: "AdGuard zablokował dostęp do tej strony",
+          safeHeaderTitle: "CyberPurify zablokował dostęp do tej strony",
           safeContentTitle:
             "Ta strona internetowa została zgłoszona jako strona ze złośliwym oprogramowaniem i została zablokowana na podstawie Twoich preferencji zabezpieczeń.",
           parentalHeaderTitle: "Kontrola rodzicielska",
@@ -1904,12 +1904,12 @@
             "Zablokowaliśmy stronę z powodu ograniczeń filtra rodzicielskiego.",
           parentalDescOne: "Jesteś wystarczająco dorosły? Podaj hasło",
           parentalDnsDescTwo:
-            "Próbujesz dotrzeć do witryny oznaczonej przez AdGuard jako nieodpowiednia dla dzieci. Jeśli jesteś dorosły, możesz wyłączyć kontrolę rodzicielską w ustawieniach lub dodać tę witrynę do białej listy.",
+            "Próbujesz dotrzeć do witryny oznaczonej przez CyberPurify jako nieodpowiednia dla dzieci. Jeśli jesteś dorosły, możesz wyłączyć kontrolę rodzicielską w ustawieniach lub dodać tę witrynę do białej listy.",
           blockedContentTitle:
             "Żądanie {site} zostało zablokowane przez regułę filtrowania. Jeśli chcesz uzyskać dostęp do tej witryny, dodaj ją do wyjątków.",
-          ruleHeaderTitle: "Zablokowana przez AdGuard",
+          ruleHeaderTitle: "Zablokowana przez CyberPurify",
           ruleContentTitle:
-            "AdGuard uniemożliwił załadowanie tej strony z powodu następującej reguły filtrowania",
+            "CyberPurify uniemożliwił załadowanie tej strony z powodu następującej reguły filtrowania",
           btnGoBack: "Wróć",
           btnFeedback: "Wyślij opinię",
           btnProceed: "Mimo wszystko kontynuuj",
@@ -1924,7 +1924,7 @@
           suggestion2:
             "Sprawdź adres strony internetowej, aby upewnić się, że został wpisany prawidłowo.",
           suggestion3:
-            "Sprawdź ustawienia zapory sieciowej. Wszystkie połączenia programu AdGuard powinny być dozwolone.",
+            "Sprawdź ustawienia zapory sieciowej. Wszystkie połączenia programu CyberPurify powinny być dozwolone.",
           suggestion4:
             "Jeśli korzystasz z serwera proxy, sprawdź jego ustawienia.",
           showDetails: "Pokaż szczegóły",
@@ -1951,7 +1951,7 @@
           advancedButton: "Avançado",
           moreInfoButton: "Mais informações",
           pageTitle: "Acesso negado",
-          safeHeaderTitle: "AdGuard bloqueou o acesso a esta página",
+          safeHeaderTitle: "CyberPurify bloqueou o acesso a esta página",
           safeContentTitle:
             "Este site foi classificado como uma página de malware e foi bloqueada com base em suas preferências de segurança.",
           parentalHeaderTitle: "Controle parental",
@@ -1959,12 +1959,12 @@
             "Bloqueamos esta página por causa das restrições de filtros do controle parental.",
           parentalDescOne: "Você tem idade suficiente? Digite a senha",
           parentalDnsDescTwo:
-            "Você está tentando acessar um site listado pelo AdGuard como impróprio para crianças. Se você é um adulto, você pode desativar o controle parental nas configurações ou adicionar esse site na lista branca.",
+            "Você está tentando acessar um site listado pelo CyberPurify como impróprio para crianças. Se você é um adulto, você pode desativar o controle parental nas configurações ou adicionar esse site na lista branca.",
           blockedContentTitle:
             "Solicitação para {site} foi bloqueada pelo filtro de usuário. Se você quiser acessar este site, adicione na lista de exceções.",
-          ruleHeaderTitle: "Bloqueado pelo AdGuard",
+          ruleHeaderTitle: "Bloqueado pelo CyberPurify",
           ruleContentTitle:
-            "O AdGuard impediu o carregamento dessa página devido à seguinte regra de filtro",
+            "O CyberPurify impediu o carregamento dessa página devido à seguinte regra de filtro",
           btnGoBack: "Voltar",
           btnFeedback: "Enviar Feedback",
           btnProceed: "Continuar mesmo assim",
@@ -1979,7 +1979,7 @@
           suggestion2:
             "Verifique o endereço da página e certifique de que você digitou corretamente.",
           suggestion3:
-            "Verifique suas configurações de firewall. Todas conexões devem estar permitidas para o AdGuard.",
+            "Verifique suas configurações de firewall. Todas conexões devem estar permitidas para o CyberPurify.",
           suggestion4:
             "Se você estiver usando um servidor proxy, verifique suas configurações.",
           showDetails: "Mostrar detalhes",
@@ -2006,7 +2006,7 @@
           advancedButton: "Avançado",
           moreInfoButton: "Mais informações",
           pageTitle: "Acesso negado",
-          safeHeaderTitle: "AdGuard bloqueou o acesso a esta página",
+          safeHeaderTitle: "CyberPurify bloqueou o acesso a esta página",
           safeContentTitle:
             "Este site foi classificado como uma página de malware e foi bloqueada com base em suas preferências de segurança.",
           parentalHeaderTitle: "Controle parental",
@@ -2014,12 +2014,12 @@
             "Bloqueamos esta página por causa das restrições de filtros do controle parental.",
           parentalDescOne: "Você tem idade suficiente? Digite a senha",
           parentalDnsDescTwo:
-            "Você está tentando acessar um site listado pelo AdGuard como impróprio para crianças. Se você é um adulto, você pode desativar o controle parental nas configurações ou adicionar esse site na lista branca.",
+            "Você está tentando acessar um site listado pelo CyberPurify como impróprio para crianças. Se você é um adulto, você pode desativar o controle parental nas configurações ou adicionar esse site na lista branca.",
           blockedContentTitle:
             "Solicitação para {site} foi bloqueada pelo filtro de usuário. Se você quiser acessar este site, adicione na lista de exceções.",
-          ruleHeaderTitle: "Bloqueado pelo AdGuard",
+          ruleHeaderTitle: "Bloqueado pelo CyberPurify",
           ruleContentTitle:
-            "O AdGuard impediu o carregamento dessa página devido à seguinte regra de filtro",
+            "O CyberPurify impediu o carregamento dessa página devido à seguinte regra de filtro",
           btnGoBack: "Voltar",
           btnFeedback: "Enviar Feedback",
           btnProceed: "Continuar mesmo assim",
@@ -2034,7 +2034,7 @@
           suggestion2:
             "Verifique o endereço da página e certifique de que você digitou corretamente.",
           suggestion3:
-            "Verifique suas configurações de firewall. Todas conexões devem estar permitidas para o AdGuard.",
+            "Verifique suas configurações de firewall. Todas conexões devem estar permitidas para o CyberPurify.",
           suggestion4:
             "Se você estiver usando um servidor proxy, verifique suas configurações.",
           showDetails: "Mostrar detalhes",
@@ -2061,7 +2061,7 @@
           advancedButton: "Дополнительно",
           moreInfoButton: "Подробная информация",
           pageTitle: "Доступ заблокирован",
-          safeHeaderTitle: "AdGuard заблокировал доступ к этой странице",
+          safeHeaderTitle: "CyberPurify заблокировал доступ к этой странице",
           safeContentTitle:
             "Данная страница может содержать вредоносное ПО. Она была заблокирована в соответствии с вашими настройками безопасности.",
           parentalHeaderTitle: "Родительский контроль",
@@ -2069,12 +2069,12 @@
             "Данная страница была заблокирована из-за ограничений фильтра Родительского контроля.",
           parentalDescOne: "Введите пароль, если вы совершеннолетний.",
           parentalDnsDescTwo:
-            "Вы пытаетесь получить доступ к сайту, который AdGuard считает неподходящим для детей. Если вы взрослый человек, вы можете отключить Родительский контроль в настройках AdGuard или внести сайт в белый список.",
+            "Вы пытаетесь получить доступ к сайту, который CyberPurify считает неподходящим для детей. Если вы взрослый человек, вы можете отключить Родительский контроль в настройках CyberPurify или внести сайт в белый список.",
           blockedContentTitle:
             "Запрос к {site} был заблокирован правилом фильтрации. Если вы хотите получить доступ к этому сайту, добавьте его в исключения.",
-          ruleHeaderTitle: "Запрос заблокирован AdGuard",
+          ruleHeaderTitle: "Запрос заблокирован CyberPurify",
           ruleContentTitle:
-            "AdGuard предотвратил загрузку этой страницы в соответствии со следующим правилом фильтрации",
+            "CyberPurify предотвратил загрузку этой страницы в соответствии со следующим правилом фильтрации",
           btnGoBack: "Назад",
           btnFeedback: "Отправить отзыв",
           btnProceed: "Все равно продолжить",
@@ -2088,7 +2088,7 @@
             "Попробуйте <a href='(var.PageUrl)'>обновить</a> страницу позже.",
           suggestion2: "Проверьте, правильно ли вы ввели адрес страницы.",
           suggestion3:
-            "Проверьте настройки брэндмауэра. Для AdGuard должны быть разрешены все соединения.",
+            "Проверьте настройки брэндмауэра. Для CyberPurify должны быть разрешены все соединения.",
           suggestion4:
             "Проверьте настройки прокси-сервера, если вы используете его для доступа в интернет.",
           showDetails: "Подробнее",
@@ -2115,7 +2115,7 @@
           advancedButton: "Pokročilé",
           moreInfoButton: "Viac informácií",
           pageTitle: "Prístup bol zamietnutý",
-          safeHeaderTitle: "AdGuard zablokoval prístup k tejto stránke",
+          safeHeaderTitle: "CyberPurify zablokoval prístup k tejto stránke",
           safeContentTitle:
             "Táto stránka bola nahlásená ako stránka so škodlivým kódom a bola zablokovaná na základe Vašich bezpečnostných nastavení",
           parentalHeaderTitle: "Rodičovská kontrola",
@@ -2123,12 +2123,12 @@
             "Túto stránku sme zablokovali kvôli obmedzeniam rodičovského filtra.",
           parentalDescOne: "Ste plnoletý? Zadajte heslo",
           parentalDnsDescTwo:
-            "Pokúšate sa navštíviť stránku, ktorú AdGuard eviduje ako nevhodnú pre deti. Ak ste dospelý/á, môžete v nastaveniach vypnúť rodičovskú kontrolu alebo túto stránku pridať na bielu listinu.",
+            "Pokúšate sa navštíviť stránku, ktorú CyberPurify eviduje ako nevhodnú pre deti. Ak ste dospelý/á, môžete v nastaveniach vypnúť rodičovskú kontrolu alebo túto stránku pridať na bielu listinu.",
           blockedContentTitle:
             "Prístup na {site} bol zablokovaný filtračným pravidlom. Ak chcete túto stránku zobraziť, pridajte ju medzi výnimky.",
-          ruleHeaderTitle: "Blokované AdGuardom",
+          ruleHeaderTitle: "Blokované CyberPurifyom",
           ruleContentTitle:
-            "AdGuard zabránil načítaniu tejto stránky kvôli nasledujúcemu filtračnému pravidlu",
+            "CyberPurify zabránil načítaniu tejto stránky kvôli nasledujúcemu filtračnému pravidlu",
           btnGoBack: "Naspäť",
           btnFeedback: "Poslať spätnú väzbu",
           btnProceed: "Aj tak pokračovať",
@@ -2143,7 +2143,7 @@
           suggestion2:
             "Skontrolujte webovú adresu a uistite sa, že ste ju zadali správne.",
           suggestion3:
-            "Skontrolujte Vaše nastavenia firewall. Všetky spojenia pre AdGuard musia byť povolené.",
+            "Skontrolujte Vaše nastavenia firewall. Všetky spojenia pre CyberPurify musia byť povolené.",
           suggestion4:
             "Ak používate proxy server, skontrolujte nastavenia Vášho proxy.",
           showDetails: "Zobraziť podrobnosti",
@@ -2170,7 +2170,7 @@
           advancedButton: "Napredno",
           moreInfoButton: "Več informacij",
           pageTitle: "Dostop zavrnjen",
-          safeHeaderTitle: "AdGuard je onemogočil dostop do te strani",
+          safeHeaderTitle: "CyberPurify je onemogočil dostop do te strani",
           safeContentTitle:
             "Ta spletna stran je bila prijavljena kot stran s slonamernimi programi in je bila onemogočena glede na vaše varnostne nastavitve.",
           parentalHeaderTitle: "Starševski nadzor",
@@ -2178,12 +2178,12 @@
             "To stran smo onemogočili zaradi omejitev Starševskega filtra.",
           parentalDescOne: "Ste dovolj stari? Vnesite geslo",
           parentalDnsDescTwo:
-            "Poskušate doseči spletno stran, ki ga je AdGuard navedel kot neprimerno za otroke. Če ste odrasli, lahko v nastavitvah izklopite Starševski nadzor ali dodate to spletno stran na seznam dovoljenih.",
+            "Poskušate doseči spletno stran, ki ga je CyberPurify navedel kot neprimerno za otroke. Če ste odrasli, lahko v nastavitvah izklopite Starševski nadzor ali dodate to spletno stran na seznam dovoljenih.",
           blockedContentTitle:
             "Zahteva za {site} je onemogočena s pravilom filtra. Če želite dostopati do te strani, jo dodajte izjemam.",
-          ruleHeaderTitle: "Onemogočeno z AdGuardom",
+          ruleHeaderTitle: "Onemogočeno z CyberPurifyom",
           ruleContentTitle:
-            "AdGuard je preprečil nalaganje te strani zaradi naslednjega pravila filtriranja",
+            "CyberPurify je preprečil nalaganje te strani zaradi naslednjega pravila filtriranja",
           btnGoBack: "Pojdi nazaj",
           btnFeedback: "Pošlji povratne informacije",
           btnProceed: "Vseeno nadaljuj",
@@ -2198,7 +2198,7 @@
           suggestion2:
             "Preverite naslov spletne strani in se prepričajte, da ste ga pravilno vnesli.",
           suggestion3:
-            "Preverite svoje nastavitve požarnega zidu. Vse povezave je treba dovoliti za AdGuard.",
+            "Preverite svoje nastavitve požarnega zidu. Vse povezave je treba dovoliti za CyberPurify.",
           suggestion4:
             "Preverite nastavitve Proxy strežnika, če ga uporabljate.",
           showDetails: "Prikaži podrobnosti",
@@ -2246,7 +2246,7 @@
           suggestion2:
             "Proverite adresu web-stranice da bi ste bili sigurni da je uneta korektno.",
           suggestion3:
-            "Proverite podešavanja Vašeg vatrenog zida. Sve konekcije za AdGuard treba dozvoliti.",
+            "Proverite podešavanja Vašeg vatrenog zida. Sve konekcije za CyberPurify treba dozvoliti.",
           suggestion4:
             "Proverite podešavanja proxy-a ako koristite proxy server.",
           showDetails: "Prikaži detalje",
@@ -2272,7 +2272,7 @@
           advancedButton: "Avancerat",
           moreInfoButton: "Ytterligare information",
           pageTitle: "Nekad åtkomst",
-          safeHeaderTitle: "Sidans åtkomst har blockerats av AdGuard",
+          safeHeaderTitle: "Sidans åtkomst har blockerats av CyberPurify",
           safeContentTitle:
             "Webbsidan har rapporterats som skadlig och blockeras utifrån dina säkerhetsinställningar.",
           parentalHeaderTitle: "Föräldrakontroll",
@@ -2280,12 +2280,12 @@
             "Sidan blockerades på grund av restriktioner i föräldrafiltret",
           parentalDescOne: "Är du tillräckligt gammal? Skriv in lösenordet",
           parentalDnsDescTwo:
-            "Du försöker nå en webbplats som av AdGuard listas som olämplig för barn. Om du är en vuxen person kan du koppla bort föräldraskyddet under Inställningar eller lägga till webbplatsen i vitlistan.",
+            "Du försöker nå en webbplats som av CyberPurify listas som olämplig för barn. Om du är en vuxen person kan du koppla bort föräldraskyddet under Inställningar eller lägga till webbplatsen i vitlistan.",
           blockedContentTitle:
             "Åtkomst till {site} blockerades av filterregler. Om du vill ha åtkomst till sidan kan du lägga till den till undantag.",
-          ruleHeaderTitle: "Blockerat av AdGuard",
+          ruleHeaderTitle: "Blockerat av CyberPurify",
           ruleContentTitle:
-            "AdGuard har förhindrat inläsning av sidan till följd av följande filterregel:",
+            "CyberPurify har förhindrat inläsning av sidan till följd av följande filterregel:",
           btnGoBack: "Återgå",
           btnFeedback: "Skicka kommentar",
           btnProceed: "Fortsätt ändå",
@@ -2299,7 +2299,7 @@
             "Prova att <a href='(var.PageUrl)'>ladda</a> sidan senare.",
           suggestion2: "Kontrollera att du skrivit in korrekt webbadress.",
           suggestion3:
-            "Kontrollera dina brandväggsinställningar. Alla anslutningar skall tillåtas för AdGuard.",
+            "Kontrollera dina brandväggsinställningar. Alla anslutningar skall tillåtas för CyberPurify.",
           suggestion4:
             "Kontrollera dina proxyinställningarna om du använder proxyserver.",
           showDetails: "Visa detaljer",
@@ -2326,7 +2326,7 @@
           advancedButton: "Gelişmiş",
           moreInfoButton: "Daha fazla bilgi",
           pageTitle: "Erişim engellendi",
-          safeHeaderTitle: "AdGuard bu sayfaya erişimi engelledi",
+          safeHeaderTitle: "CyberPurify bu sayfaya erişimi engelledi",
           safeContentTitle:
             "Bu site kötü amaçlı yazılım içeren bir site olarak rapor edildi ve güvenlik tercihlerinize göre engellendi.",
           parentalHeaderTitle: "Ebeveyn kontrolü",
@@ -2334,12 +2334,12 @@
             "Bu sayfayı ebeveyn filtresi kısıtlamaları nedeniyle engelledik.",
           parentalDescOne: "Yeterli yaşa sahip misin? Lütfen şifreyi girin",
           parentalDnsDescTwo:
-            "AdGuard tarafından çocuklar için uygun olmayan bir web sitesine ulaşmaya çalışıyorsunuz. Yetişkin iseniz ayarlarda ebeveyn kontrolünü kapatabilir veya bu web sitesini beyaz listeye ekleyebilirsiniz.",
+            "CyberPurify tarafından çocuklar için uygun olmayan bir web sitesine ulaşmaya çalışıyorsunuz. Yetişkin iseniz ayarlarda ebeveyn kontrolünü kapatabilir veya bu web sitesini beyaz listeye ekleyebilirsiniz.",
           blockedContentTitle:
             "{site} isteği, bir filtre kuralı tarafından engellendi. Bu siteye erişmek istiyorsanız, istisnalara ekleyin.",
-          ruleHeaderTitle: "AdGuard tarafından engellendi",
+          ruleHeaderTitle: "CyberPurify tarafından engellendi",
           ruleContentTitle:
-            "AdGuard, aşağıdaki filtre kuralı nedeniyle bu sayfanın yüklenmesini engelledi",
+            "CyberPurify, aşağıdaki filtre kuralı nedeniyle bu sayfanın yüklenmesini engelledi",
           btnGoBack: "Geri git",
           btnFeedback: "Geribildirim gönder",
           btnProceed: "Yine de devam et",
@@ -2353,7 +2353,7 @@
             "Bu web sayfasını daha sonra <a href='(var.PageUrl)'> yeniden yüklemeyi</a> deneyin.",
           suggestion2: "Web sayfasının adresini doğru girdiğinizden emin olun",
           suggestion3:
-            "Güvenlik duvarı ayarlarınızı kontrol edin. AdGuard için tüm bağlantılara izin verilmelidir.",
+            "Güvenlik duvarı ayarlarınızı kontrol edin. CyberPurify için tüm bağlantılara izin verilmelidir.",
           suggestion4:
             "Eğer bir proxy sunucusu kullanıyorsanız proxy ayarlarınızı kontol edin.",
           showDetails: "Detayları göster",
@@ -2380,7 +2380,7 @@
           advancedButton: "Додатково",
           moreInfoButton: "Докладніша інформація",
           pageTitle: "Доступ заборонено",
-          safeHeaderTitle: "AdGuard заблокував доступ до цієї сторінки",
+          safeHeaderTitle: "CyberPurify заблокував доступ до цієї сторінки",
           safeContentTitle:
             "Ця веб-сторінка відома, як зловмисна і була заблокована згідно з вашими налаштуваннями безпеки.",
           parentalHeaderTitle: "Батьківський контроль",
@@ -2388,12 +2388,12 @@
             "Цю сторінку заблоковано у зв'язку з обмеженнями батьківського контролю.",
           parentalDescOne: "Якщо ви повнолітні, введіть пароль",
           parentalDnsDescTwo:
-            "Ви намагаєтесь отримати доступ до веб-сайту, який в AdGuard позначений неприйнятним для дітей. Якщо ви повнолітні, ви можете вимкнути батьківський контроль в налаштуваннях, або додати цей веб-сайт до білого списку.",
+            "Ви намагаєтесь отримати доступ до веб-сайту, який в CyberPurify позначений неприйнятним для дітей. Якщо ви повнолітні, ви можете вимкнути батьківський контроль в налаштуваннях, або додати цей веб-сайт до білого списку.",
           blockedContentTitle:
             "Запит до {site} було заблоковано правилом фільтру. Якщо ви хочете отримати доступ до цього сайту, додайте його до винятків.",
-          ruleHeaderTitle: "Заблоковано AdGuard",
+          ruleHeaderTitle: "Заблоковано CyberPurify",
           ruleContentTitle:
-            "AdGuard не дозволив цій сторінці завантажитись, у зв'язку з таким правилом фільтру",
+            "CyberPurify не дозволив цій сторінці завантажитись, у зв'язку з таким правилом фільтру",
           btnGoBack: "Назад",
           btnFeedback: "Надіслати відгук",
           btnProceed: "Продовжити в будь-якому разі",
@@ -2407,7 +2407,7 @@
             "Спробуйте <a href='(var.PageUrl)'>перезавантажити</a> цю сторінку пізніше.",
           suggestion2: "Перевірте правильність введення адреси веб-сторінки.",
           suggestion3:
-            "Перевірте налаштування мережевого екрану. Слід дозволити всі з'єднання для AdGuard.",
+            "Перевірте налаштування мережевого екрану. Слід дозволити всі з'єднання для CyberPurify.",
           suggestion4:
             "Перевірте ваші налаштування проксі-сервера, якщо ви його використовуєте.",
           showDetails: "Показати деталі",
@@ -2434,18 +2434,18 @@
           advancedButton: "高级设置",
           moreInfoButton: "更多信息",
           pageTitle: "拒绝访问",
-          safeHeaderTitle: "AdGuard 已阻止访问此网页",
+          safeHeaderTitle: "CyberPurify 已阻止访问此网页",
           safeContentTitle:
             "位于 <strong>(var.Host)</strong> 的网页已报告为恶意网站，根据您的安全设置，我们拦截了与此网站的连接。",
           parentalHeaderTitle: "家长控制",
           parentalContentTitle: "由于家长控制过滤器的限制，我们拦截了此网站。",
           parentalDescOne: "您的年龄是否满足使用要求？请输入密码",
           parentalDnsDescTwo:
-            "您正在尝试访问在 AdGuard 家长控制中被列为不适合儿童访问的网站。如果你是成年人，你可以在 AdGuard 设置中关闭家长控制模块，或将此站点移至白名单中。",
+            "您正在尝试访问在 CyberPurify 家长控制中被列为不适合儿童访问的网站。如果你是成年人，你可以在 CyberPurify 设置中关闭家长控制模块，或将此站点移至白名单中。",
           blockedContentTitle:
             "过滤规则已拦截了访问 {site}的请求。如果您要访问此网站，请将其添加到排除列表。",
-          ruleHeaderTitle: "被 AdGuard 拦截",
-          ruleContentTitle: "根据以下过滤规则， Adguard 已停止加载该网页。",
+          ruleHeaderTitle: "被 CyberPurify 拦截",
+          ruleContentTitle: "根据以下过滤规则， Purify 已停止加载该网页。",
           btnGoBack: "返回",
           btnFeedback: "发送反馈",
           btnProceed: "依然继续访问",
@@ -2459,7 +2459,7 @@
             "您可以稍后再 <a href='(var.PageUrl)'> 重新加载</a> 此网页。",
           suggestion2: "请确保您输入的网页地址是正确的。",
           suggestion3:
-            "请检查防火墙设置，有关 AdGuard 的全部连接都应当被允许。",
+            "请检查防火墙设置，有关 CyberPurify 的全部连接都应当被允许。",
           suggestion4: "如果您正在使用代理服务，请检查相关的代理配置。",
           showDetails: "显示详细信息",
           wrongPassword: "密码错误",
@@ -2484,18 +2484,18 @@
           advancedButton: "進階的",
           moreInfoButton: "更多的資訊",
           pageTitle: "拒絕存取",
-          safeHeaderTitle: "AdGuard 已封鎖至該頁面之存取",
+          safeHeaderTitle: "CyberPurify 已封鎖至該頁面之存取",
           safeContentTitle:
             "該網頁已被報告為惡意軟體頁面，且根據您的安全性偏好設定，已被封鎖。",
           parentalHeaderTitle: "家長監控",
           parentalContentTitle: "由於父母的過濾器限制，我們已封鎖該頁面。",
           parentalDescOne: "您夠大了嗎？輸入該密碼",
           parentalDnsDescTwo:
-            "您正在嘗試觸及被 AdGuard 列為對孩子不合適的網站。如果您是成年人，那麼您可在設定中關掉家長監控或增加該網站至白名單。",
+            "您正在嘗試觸及被 CyberPurify 列為對孩子不合適的網站。如果您是成年人，那麼您可在設定中關掉家長監控或增加該網站至白名單。",
           blockedContentTitle:
             "至 {site} 之請求已被過濾器規則封鎖。如果您想要存取該網站，增加它至例外。",
-          ruleHeaderTitle: "被 AdGuard 封鎖",
-          ruleContentTitle: "由於下面的過濾器規則，AdGuard 已防止該頁面載入",
+          ruleHeaderTitle: "被 CyberPurify 封鎖",
+          ruleContentTitle: "由於下面的過濾器規則，CyberPurify 已防止該頁面載入",
           btnGoBack: "返回",
           btnFeedback: "傳送回饋意見",
           btnProceed: "無論如何繼續",
@@ -2507,7 +2507,7 @@
           suggestionsHeader: "這是一些建議",
           suggestion1: "稍後嘗試<a href='(var.PageUrl)'>重新載入</a>該網頁。",
           suggestion2: "檢查該網頁網址以確定您已正確地輸入它。",
-          suggestion3: "檢查您的防火牆設定。所有的連線應被允許用於 AdGuard。",
+          suggestion3: "檢查您的防火牆設定。所有的連線應被允許用於 CyberPurify。",
           suggestion4: "如果您使用代理伺服器，檢查您的代理設定。",
           showDetails: "顯示細節",
           wrongPassword: "錯誤的密碼",

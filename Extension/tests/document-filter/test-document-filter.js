@@ -3,7 +3,7 @@
 const { test } = QUnit;
 const {
   rules: { documentFilterService },
-} = adguard;
+} = purify;
 
 // Mocks extension api;
 purify.getURL = (url) => url;

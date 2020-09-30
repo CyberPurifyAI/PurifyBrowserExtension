@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "Adguard API",
-  "short_name": "Adguard API",
-  "author": "Adguard Software Ltd",
+  "name": "CyperPurify API",
+  "short_name": "CyperPurify API",
+  "author": "CyperPurify Software Ltd",
   "version": "${version}",
-  "description": "Adguard API application",
+  "description": "CyperPurify API application",
   "background": {
     "page": "background.html",
     "persistent": true
@@ -15,25 +15,31 @@
       "js": [
         "lib/utils/element-collapser.js",
         "lib/libs/extended-css.js",
-        "lib/content-script/adguard-content.js",
+        "lib/content-script/purify-content.js",
         "lib/content-script/common-script.js",
         "lib/content-script/content-script.js",
         "lib/content-script/wrappers.js",
         "lib/content-script/preload.js"
       ],
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
       "match_about_blank": true,
       "run_at": "document_start"
     },
     {
       "all_frames": false,
       "js": [
-        "lib/content-script/adguard-content.js",
+        "lib/content-script/purify-content.js",
         "lib/content-script/common-script.js",
         "lib/content-script/content-script.js",
         "lib/content-script/i18n-helper.js"
       ],
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
       "run_at": "document_end"
     }
   ],

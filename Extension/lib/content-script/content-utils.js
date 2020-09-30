@@ -1,18 +1,18 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /* global contentPage, HTMLDocument */
@@ -73,14 +73,14 @@
   };
 
   /**
-   * If isAdguardTab we append div, else we append iframe
+   * If isPurifyTab we append div, else we append iframe
    * @param target
    * @param html
-   * @param isAdguardTab
+   * @param isPurifyTab
    * @returns {HTMLElement}
    */
-  const appendAlertElement = (target, html, isAdguardTab) => {
-    if (isAdguardTab) {
+  const appendAlertElement = (target, html, isPurifyTab) => {
+    if (isPurifyTab) {
       return appendDiv(target, html);
     }
     return appendIframe(target, html);
@@ -95,7 +95,7 @@
   const genAlertHtml = (title, text) => {
     let descBlock = "";
     if (text && text.length > 0) {
-      descBlock = `<div class="adguard-popup-alert__desc">
+      descBlock = `<div class="purify-popup-alert__desc">
                             ${text}
                         </div>`;
     }
@@ -107,12 +107,12 @@
 
     let titleBlock = "";
     if (title && title.length > 0) {
-      titleBlock = `<div class="adguard-popup-alert__title">
+      titleBlock = `<div class="purify-popup-alert__title">
                             ${title}
                         </div>`;
     }
 
-    return `<div class="adguard-popup-alert">
+    return `<div class="purify-popup-alert">
                     ${titleBlock}
                     ${descBlock}
                 </div>`;
@@ -125,7 +125,7 @@
    * @param message Message text
    */
   function showAlertPopup(message) {
-    const { text, title, isAdguardTab } = message;
+    const { text, title, isPurifyTab } = message;
 
     if (!title && !text) {
       return;
@@ -159,9 +159,9 @@
         const alertElement = appendAlertElement(
           document.body,
           alertDivHtml,
-          isAdguardTab
+          isPurifyTab
         );
-        alertElement.classList.add("adguard-alert-iframe");
+        alertElement.classList.add("purify-alert-iframe");
         setTimeout(() => {
           if (alertElement && alertElement.parentNode) {
             alertElement.parentNode.removeChild(alertElement);
@@ -193,32 +193,32 @@
       offerButtonHref,
       offerButtonText,
       disableNotificationText,
-      isAdguardTab,
+      isPurifyTab,
     } = message;
 
     const updateIframeHtml = `<head></head>
                             <body>
-                            <div id="adguard-new-version-popup" class="adguard-update-popup adguard-update-popup--active">
-                                <div id="adguard-new-version-popup-close" class="adguard-update-popup__close close-iframe"></div>
-                                <div class="adguard-update-popup__logo"></div>
-                                <div class="adguard-update-popup__title">
+                            <div id="purify-new-version-popup" class="purify-update-popup purify-update-popup--active">
+                                <div id="purify-new-version-popup-close" class="purify-update-popup__close close-iframe"></div>
+                                <div class="purify-update-popup__logo"></div>
+                                <div class="purify-update-popup__title">
                                     ${title}
                                 </div>
-                                <div class="adguard-update-popup__desc">
+                                <div class="purify-update-popup__desc">
                                     ${description}
                                 </div>
-                                <div class="adguard-update-popup__links">
-                                    <a href="${changelogHref}" class="adguard-update-popup__link close-iframe" target="_blank">
+                                <div class="purify-update-popup__links">
+                                    <a href="${changelogHref}" class="purify-update-popup__link close-iframe" target="_blank">
                                         ${changelogText}
                                     </a>
-                                    <a href="#" class="adguard-update-popup__link adguard-update-popup__link--disable close-iframe disable-notifications">
+                                    <a href="#" class="purify-update-popup__link purify-update-popup__link--disable close-iframe disable-notifications">
                                         ${disableNotificationText}
                                     </a>
                                 </div>
-                                <div class="adguard-update-popup__offer">
+                                <div class="purify-update-popup__offer">
                                     ${offer}
                                 </div>
-                                <a href="${offerButtonHref}" class="adguard-update-popup__btn close-iframe" target="_blank">
+                                <a href="${offerButtonHref}" class="purify-update-popup__btn close-iframe" target="_blank">
                                     ${offerButtonText}
                                 </a>
                             </div>
@@ -257,9 +257,9 @@
         return;
       }
 
-      if (document.body && !isAdguardTab) {
+      if (document.body && !isPurifyTab) {
         const iframe = appendIframe(document.body, updateIframeHtml);
-        iframe.classList.add("adguard-update-iframe");
+        iframe.classList.add("purify-update-iframe");
         const isListening = handleCloseIframe(iframe);
         if (!isListening) {
           iframe.addEventListener("load", () => {

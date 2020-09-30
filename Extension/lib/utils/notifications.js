@@ -12,7 +12,7 @@ purify.notifications = (function (purify) {
     id: "newYear2020",
     locales: {
       en: {
-        title: "AdGuard wishes you happy holidays",
+        title: "CyberPurify wishes you happy holidays",
         btn: "Get your present",
       },
     },

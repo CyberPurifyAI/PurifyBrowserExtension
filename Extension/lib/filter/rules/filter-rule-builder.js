@@ -1,21 +1,21 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   /**
@@ -59,7 +59,7 @@
   /**
    * Checks if rule length is less than minimum rule length.
    * Rules with length less than 4 are ignored
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1600
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1600
    * @param ruleText
    * @returns {boolean}
    */
@@ -138,7 +138,7 @@
           api.ScriptFilterRule.RULE_MARKER_FIRST_CHAR
         )
       ) {
-        if (api.ScriptletRule.isAdguardScriptletRule(ruleText)) {
+        if (api.ScriptletRule.isPurifyScriptletRule(ruleText)) {
           return new api.ScriptletRule(ruleText, filterId);
         }
 
@@ -159,7 +159,7 @@
   };
 
   /**
-   * Convert rules to AdGuard syntax and create rule
+   * Convert rules to CyberPurify syntax and create rule
    *
    * @param {string} ruleText Rule text
    * @param {number} filterId Filter identifier
@@ -201,4 +201,4 @@
   };
 
   api.builder = { createRule };
-})(adguard, purify.rules);
+})(purify, purify.rules);

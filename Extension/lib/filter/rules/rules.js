@@ -1,5 +1,5 @@
 /**
- * Namespace for adguard rules classes and utils
+ * Namespace for purify rules classes and utils
  */
 purify.rules = (function () {
   "use strict";

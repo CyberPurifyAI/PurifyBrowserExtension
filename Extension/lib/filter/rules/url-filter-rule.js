@@ -1,21 +1,21 @@
 /**
- * This file is part of Adguard Browser Extension (https://github.com/AdguardTeam/AdguardBrowserExtension).
+ * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
  *
- * Adguard Browser Extension is free software: you can redistribute it and/or modify
+ * Purify Browser Extension is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Adguard Browser Extension is distributed in the hope that it will be useful,
+ * Purify Browser Extension is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard, api) {
+(function (purify, api) {
   "use strict";
 
   const ESCAPE_CHARACTER = "\\";
@@ -160,7 +160,7 @@
 
     if (reText.indexOf("?") !== -1) {
       // Do not mess with complex expressions which use lookahead
-      // And with those using ? special character: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/978
+      // And with those using ? special character: https://github.com/PurifyTeam/PurifyBrowserExtension/issues/978
       return null;
     }
 
@@ -215,7 +215,7 @@
 
     let parseOptions = true;
     /**
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/517
+     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/517
      * regexp rule may contain dollar sign which also is options delimiter
      */
     // Added check for replacement rule, because maybe problem with rules for example /.*/$replace=/hello/bug/
@@ -285,7 +285,7 @@
    */
   function validateCspRule(rule) {
     /**
-     * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/685
+     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/685
      * CSP directive may be empty in case of whitelist rule, it means to disable all $csp rules matching the whitelist rule
      */
     if (!rule.whiteListRule && !rule.cspDirective) {
@@ -294,7 +294,7 @@
 
     if (rule.cspDirective) {
       /**
-       * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/685#issue-228287090
+       * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/685#issue-228287090
        * Forbids report-to and report-uri directives
        */
       const cspDirective = rule.cspDirective.toLowerCase();
@@ -308,7 +308,7 @@
    * Represents a $replace modifier value.
    * <p/>
    * Learn more about this modifier syntax here:
-   * https://github.com/AdguardTeam/AdguardForWindows/issues/591
+   * https://github.com/PurifyTeam/PurifyForWindows/issues/591
    */
   function ReplaceOption(option) {
     if (!option) {
@@ -363,7 +363,7 @@
    * Represents a $cookie modifier option value.
    *
    * Learn more about it here:
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/961
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
    *
    * @param {string} option Option string value
    * @see {@link CookieOption}
@@ -551,7 +551,7 @@
   /**
    * $replace modifier.
    * Learn more about this modifier syntax here:
-   * https://github.com/AdguardTeam/AdguardForWindows/issues/591
+   * https://github.com/PurifyTeam/PurifyForWindows/issues/591
    *
    * @return Parsed $replace modifier
    */
@@ -562,7 +562,7 @@
   /**
    * $redirect modifier
    * Learn more about this modifier syntax here:
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1367
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1367
    *
    * @returns parsed $redirect modifier
    */
@@ -813,9 +813,9 @@
   };
 
   /**
-   * Does not inject adguard javascript to page
+   * Does not inject purify javascript to page
    *
-   * @return If true - we do not inject adguard js to page matching this rule
+   * @return If true - we do not inject purify js to page matching this rule
    */
   UrlFilterRule.prototype.isJsInject = function () {
     return this.isOptionEnabled(UrlFilterRule.options.JSINJECT);
@@ -1270,7 +1270,7 @@
    * $cookie options that can be used in the cookie rule.
    *
    * See here for the details:
-   * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/961
+   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
    */
   UrlFilterRule.cookieOptions = {
     MAX_AGE: "maxAge",
@@ -1298,12 +1298,12 @@
     THIRD_PARTY: 1 << 1,
 
     /**
-     * If this option is enabled, Adguard won't apply generic CSS rules to the web page.
+     * If this option is enabled, Purify won't apply generic CSS rules to the web page.
      */
     GENERICHIDE: 1 << 2,
 
     /**
-     * If this option is enabled, Adguard won't apply generic UrlFilter rules to the web page.
+     * If this option is enabled, Purify won't apply generic UrlFilter rules to the web page.
      */
     GENERICBLOCK: 1 << 3,
 
@@ -1311,7 +1311,7 @@
      * it makes sense to use this parameter for exceptions only.
      * It prohibits the injection of javascript code to web pages.
      * Javascript code is added for blocking banners by size and for
-     * the proper operation of Adguard Assistant
+     * the proper operation of Purify Assistant
      */
     JSINJECT: 1 << 4,
 
@@ -1334,7 +1334,7 @@
 
     /**
      * For any address matching a&nbsp;blocking rule with this option
-     * Adguard will try to&nbsp;automatically close the browser tab.
+     * Purify will try to&nbsp;automatically close the browser tab.
      */
     BLOCK_POPUPS: 1 << 7,
 
@@ -1422,4 +1422,4 @@
   };
 
   api.UrlFilterRule = UrlFilterRule;
-})(adguard, purify.rules);
+})(purify, purify.rules);
