@@ -20,7 +20,7 @@
 /**
  * Simple logger with log levels
  */
-adguard.console = (function () {
+purify.console = (function () {
   // Redefine if you need it
   const CURRENT_LEVEL = "INFO";
 

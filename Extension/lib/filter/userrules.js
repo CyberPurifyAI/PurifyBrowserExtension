@@ -18,7 +18,7 @@
 /**
  * Class for manage user rules
  */
-adguard.userrules = (function (adguard) {
+purify.userrules = (function (purify) {
   "use strict";
 
   /**
@@ -26,7 +26,7 @@ adguard.userrules = (function (adguard) {
    * @returns {*}
    */
   function getAntiBannerService() {
-    return adguard.antiBannerService;
+    return purify.antiBannerService;
   }
 
   /**
@@ -69,8 +69,8 @@ adguard.userrules = (function (adguard) {
    * @param callback Callback function
    */
   const getUserRulesText = function (callback) {
-    adguard.rulesStorage.read(
-      adguard.utils.filters.USER_FILTER_ID,
+    purify.rulesStorage.read(
+      purify.utils.filters.USER_FILTER_ID,
       (rulesText) => {
         const content = (rulesText || []).join("\n");
         callback(content);
@@ -82,9 +82,9 @@ adguard.userrules = (function (adguard) {
     if (frameInfo.frameRule) {
       if (
         frameInfo.frameRule.filterId ===
-        adguard.utils.filters.WHITE_LIST_FILTER_ID
+        purify.utils.filters.WHITE_LIST_FILTER_ID
       ) {
-        adguard.whitelist.unWhiteListUrl(frameInfo.url);
+        purify.whitelist.unWhiteListUrl(frameInfo.url);
       } else {
         removeRule(frameInfo.frameRule.ruleText);
       }
@@ -100,4 +100,4 @@ adguard.userrules = (function (adguard) {
     // TODO: fix
     unWhiteListFrame,
   };
-})(adguard);
+})(purify);

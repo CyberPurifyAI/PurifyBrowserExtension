@@ -15,11 +15,11 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard) {
+(function (purify) {
   "use strict";
 
-  adguard.windowsImpl =
-    adguard.windowsImpl ||
+  purify.windowsImpl =
+    purify.windowsImpl ||
     function () {
       function noOpFunc() {
         throw new Error("Not implemented");
@@ -41,7 +41,7 @@
       };
     };
 
-  adguard.windows = (function (windowsImpl) {
+  purify.windows = (function (windowsImpl) {
     // eslint-disable-next-line no-unused-vars
     const AdguardWin = {
       windowId: 1,
@@ -56,8 +56,8 @@
       adguardWindows[adguardWin.windowId] = adguardWin;
     });
 
-    const onCreatedChannel = adguard.utils.channels.newChannel();
-    const onRemovedChannel = adguard.utils.channels.newChannel();
+    const onCreatedChannel = purify.utils.channels.newChannel();
+    const onRemovedChannel = purify.utils.channels.newChannel();
 
     windowsImpl.onCreated.addListener((adguardWin) => {
       adguardWindows[adguardWin.windowId] = adguardWin;
@@ -92,10 +92,10 @@
       create,
       getLastFocused, // callback (adguardWin)
     };
-  })(adguard.windowsImpl);
+  })(purify.windowsImpl);
 
-  adguard.tabsImpl =
-    adguard.tabsImpl ||
+  purify.tabsImpl =
+    purify.tabsImpl ||
     (function () {
       function noOpFunc() {
         throw new Error("Not implemented");
@@ -123,7 +123,7 @@
       };
     })();
 
-  adguard.tabs = (function (tabsImpl) {
+  purify.tabs = (function (tabsImpl) {
     // eslint-disable-next-line no-unused-vars
     const AdguardTab = {
       tabId: 1,
@@ -148,16 +148,16 @@
 
     // Fired when a tab is created. Note that the tab's URL may not be set at the time
     // this event fired, but you can listen to onUpdated events to be notified when a URL is set.
-    const onCreatedChannel = adguard.utils.channels.newChannel();
+    const onCreatedChannel = purify.utils.channels.newChannel();
 
     // Fired when a tab is closed.
-    const onRemovedChannel = adguard.utils.channels.newChannel();
+    const onRemovedChannel = purify.utils.channels.newChannel();
 
     // Fired when a tab is updated.
-    const onUpdatedChannel = adguard.utils.channels.newChannel();
+    const onUpdatedChannel = purify.utils.channels.newChannel();
 
     // Fires when the active tab in a window changes.
-    const onActivatedChannel = adguard.utils.channels.newChannel();
+    const onActivatedChannel = purify.utils.channels.newChannel();
 
     /**
      * Saves tab to collection and notify listeners
@@ -421,5 +421,5 @@
       executeScriptCode,
       executeScriptFile,
     };
-  })(adguard.tabsImpl);
-})(adguard);
+  })(purify.tabsImpl);
+})(purify);

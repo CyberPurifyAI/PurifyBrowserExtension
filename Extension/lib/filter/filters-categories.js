@@ -18,14 +18,14 @@
 /**
  * Filter categories service
  */
-adguard.categories = (function (adguard) {
+purify.categories = (function (purify) {
   "use strict";
 
   /**
    * @returns {Array.<*>} filters
    */
   var getFilters = function () {
-    var result = adguard.subscriptions.getFilters().filter(function (f) {
+    var result = purify.subscriptions.getFilters().filter(function (f) {
       return !f.removed;
     });
 
@@ -47,7 +47,7 @@ adguard.categories = (function (adguard) {
    * Constructs filters metadata for options.html page
    */
   var getFiltersMetadata = function () {
-    var groupsMeta = adguard.subscriptions.getGroups();
+    var groupsMeta = purify.subscriptions.getGroups();
     var filters = getFilters();
 
     var categories = [];
@@ -91,12 +91,12 @@ adguard.categories = (function (adguard) {
    * @param {number} groupId
    */
   const enableFiltersGroup = function (groupId) {
-    const group = adguard.subscriptions.getGroup(groupId);
+    const group = purify.subscriptions.getGroup(groupId);
     if (group && typeof group.enabled === "undefined") {
       const recommendedFiltersIds = getRecommendedFilterIdsByGroupId(groupId);
-      adguard.filters.addAndEnableFilters(recommendedFiltersIds);
+      purify.filters.addAndEnableFilters(recommendedFiltersIds);
     }
-    adguard.filters.enableGroup(groupId);
+    purify.filters.enableGroup(groupId);
   };
 
   /**
@@ -104,7 +104,7 @@ adguard.categories = (function (adguard) {
    * @param {number} groupId
    */
   const disableFiltersGroup = function (groupId) {
-    adguard.filters.disableGroup(groupId);
+    purify.filters.disableGroup(groupId);
   };
 
   return {
@@ -112,4 +112,4 @@ adguard.categories = (function (adguard) {
     enableFiltersGroup: enableFiltersGroup,
     disableFiltersGroup: disableFiltersGroup,
   };
-})(adguard);
+})(purify);

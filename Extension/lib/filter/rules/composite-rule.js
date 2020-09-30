@@ -40,4 +40,4 @@
    * @static ScriptletRule
    */
   api.CompositeRule = CompositeRule;
-})(adguard.rules);
+})(purify.rules);

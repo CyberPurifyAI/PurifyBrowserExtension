@@ -5,14 +5,14 @@
  *
  * http://cyberpurify.com/en/how-malware-blocked.html#extension
  */
-adguard.safebrowsing = (function (adguard, global) {
+purify.safebrowsing = (function (adguard, global) {
   // Lazy initialized safebrowsing cache
   const safebrowsingCache = {
     get cache() {
-      return adguard.lazyGet(
+      return purify.lazyGet(
         safebrowsingCache,
         "cache",
-        () => new adguard.utils.LruCache("sb-lru-cache")
+        () => new purify.utils.LruCache("sb-lru-cache")
       );
     },
   };
@@ -70,7 +70,7 @@ adguard.safebrowsing = (function (adguard, global) {
 
       return result;
     } catch (ex) {
-      adguard.console.error("Error parse safebrowsing response, cause {0}", ex);
+      purify.console.error("Error parse safebrowsing response, cause {0}", ex);
     }
     return null;
   }
@@ -90,7 +90,7 @@ adguard.safebrowsing = (function (adguard, global) {
    * @private
    */
   function resumeSafebrowsing() {
-    adguard.localStorage.removeItem(suspendedFromProperty);
+    purify.localStorage.removeItem(suspendedFromProperty);
   }
 
   /**
@@ -98,7 +98,7 @@ adguard.safebrowsing = (function (adguard, global) {
    * @private
    */
   function suspendSafebrowsing() {
-    adguard.localStorage.setItem(suspendedFromProperty, Date.now());
+    purify.localStorage.setItem(suspendedFromProperty, Date.now());
   }
 
   /**
@@ -158,7 +158,7 @@ adguard.safebrowsing = (function (adguard, global) {
    */
   function extractHosts(host) {
     const hosts = [];
-    if (adguard.utils.url.isIpv4(host) || adguard.utils.url.isIpv6(host)) {
+    if (purify.utils.url.isIpv4(host) || purify.utils.url.isIpv6(host)) {
       hosts.push(host);
       return hosts;
     }
@@ -168,7 +168,7 @@ adguard.safebrowsing = (function (adguard, global) {
       hosts.push(host);
     } else {
       for (let i = 0; i <= parts.length - 2; i += 1) {
-        hosts.push(adguard.utils.strings.join(parts, ".", i, parts.length));
+        hosts.push(purify.utils.strings.join(parts, ".", i, parts.length));
       }
     }
 
@@ -185,13 +185,13 @@ adguard.safebrowsing = (function (adguard, global) {
    */
   const getErrorPageURL = function (requestUrl, referrerUrl, sbList) {
     const listName = sbList || "malware";
-    const isMalware = adguard.utils.strings.contains(listName, "malware");
+    const isMalware = purify.utils.strings.contains(listName, "malware");
     let url = "pages/blocking-pages/safebrowsing.html";
     url += `?malware=${isMalware}`;
-    url += `&host=${encodeURIComponent(adguard.utils.url.getHost(requestUrl))}`;
+    url += `&host=${encodeURIComponent(purify.utils.url.getHost(requestUrl))}`;
     url += `&url=${encodeURIComponent(requestUrl)}`;
     url += `&ref=${encodeURIComponent(referrerUrl)}`;
-    return adguard.getURL(url);
+    return purify.getURL(url);
   };
 
   /**
@@ -201,7 +201,7 @@ adguard.safebrowsing = (function (adguard, global) {
    * @param lookupUrlCallback Called on successful check
    */
   const lookupUrlWithCallback = function (requestUrl, lookupUrlCallback) {
-    const host = adguard.utils.url.getHost(requestUrl);
+    const host = purify.utils.url.getHost(requestUrl);
     if (!host) {
       return;
     }
@@ -221,7 +221,7 @@ adguard.safebrowsing = (function (adguard, global) {
     // check safebrowsing is active
     const now = Date.now();
     const suspendedFrom =
-      adguard.localStorage.getItem(suspendedFromProperty) - 0;
+      purify.localStorage.getItem(suspendedFromProperty) - 0;
     if (suspendedFrom && now - suspendedFrom < SUSPEND_TTL) {
       return;
     }
@@ -241,13 +241,13 @@ adguard.safebrowsing = (function (adguard, global) {
       safebrowsingCache.cache.saveValue(createHash(host), SB_WHITE_LIST);
       lookupUrlCallback(createResponse(SB_WHITE_LIST));
     } else {
-      adguard.backend.lookupSafebrowsing(
+      purify.backend.lookupSafebrowsing(
         shortHashes,
         (response) => {
           if (response.status >= 500) {
             // Error on server side, suspend request
             // eslint-disable-next-line max-len
-            adguard.console.error(
+            purify.console.error(
               "Error response status {0} received from safebrowsing lookup server.",
               response.status
             );
@@ -271,7 +271,7 @@ adguard.safebrowsing = (function (adguard, global) {
           lookupUrlCallback(createResponse(sbList));
         },
         () => {
-          adguard.console.error(
+          purify.console.error(
             "Error response from safebrowsing lookup server for {0}",
             host
           );
@@ -294,18 +294,18 @@ adguard.safebrowsing = (function (adguard, global) {
     referrerUrl,
     safebrowsingCallback
   ) {
-    if (!adguard.settings.safebrowsingInfoEnabled()) {
+    if (!purify.settings.safebrowsingInfoEnabled()) {
       return;
     }
 
-    adguard.console.debug("Checking safebrowsing filter for {0}", requestUrl);
+    purify.console.debug("Checking safebrowsing filter for {0}", requestUrl);
 
     const callback = function (sbList) {
       if (!sbList) {
-        adguard.console.debug("No safebrowsing rule found");
+        purify.console.debug("No safebrowsing rule found");
         return;
       }
-      adguard.console.debug(
+      purify.console.debug(
         "Following safebrowsing filter has been fired: {0}",
         sbList
       );
@@ -322,7 +322,7 @@ adguard.safebrowsing = (function (adguard, global) {
    * @param url URL
    */
   const addToSafebrowsingTrusted = function (url) {
-    const host = adguard.utils.url.getHost(url);
+    const host = purify.utils.url.getHost(url);
     if (!host) {
       return;
     }

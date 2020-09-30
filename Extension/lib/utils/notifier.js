@@ -18,7 +18,7 @@
 /**
  * Simple mediator
  */
-adguard.listeners = (function () {
+purify.listeners = (function () {
   var EventNotifierTypesMap = {
     ADD_RULES: "event.add.rules",
     REMOVE_RULE: "event.remove.rule",
@@ -119,7 +119,7 @@ adguard.listeners = (function () {
           var listener = this.listenersMap[listenerId];
           listener.apply(listener, arguments);
         } catch (ex) {
-          adguard.console.error(
+          purify.console.error(
             "Error invoking listener for {0} cause: {1}",
             event,
             ex

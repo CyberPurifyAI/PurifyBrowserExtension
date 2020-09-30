@@ -16,7 +16,7 @@ const fillBlockRule = (blockRule) => {
 };
 
 const handleProceedAnyway = (url, rule) => {
-  adguard.rules.documentFilterService.addToTrusted(url, rule);
+  purify.rules.documentFilterService.addToTrusted(url, rule);
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

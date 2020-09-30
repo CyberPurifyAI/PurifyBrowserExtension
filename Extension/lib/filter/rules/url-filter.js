@@ -83,4 +83,4 @@
   };
 
   api.UrlFilter = UrlFilter;
-})(adguard.rules);
+})(purify.rules);

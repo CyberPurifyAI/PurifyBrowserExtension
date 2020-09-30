@@ -251,11 +251,11 @@
         },
         {
             "domains": "auto.ru,avito.ru,baby.ru,businessman.ru,dni.ru,e1.ru,echo.msk.ru,fb.ru,forexpf.ru,gismeteo.by,gismeteo.kz,gismeteo.md,gismeteo.ru,gorodrabot.ru,infoniac.ru,it-tehnik.ru,kakprosto.ru,kinopoisk.ru,liveinternet.ru,mathb-ege.sdamgia.ru,mk.ru,nkj.ru,ohotniki.ru,oko-planet.su,otzovik.com,razlozhi.ru,sdamgia.ru,syl.ru,vz.ru",
-            "script": "AG_removeCookie('/blcrm|bltsr|engineering/');"
+            "script": "AG_removeCookie('/blcrm|bltsr|telecommunications/');"
         },
         {
             "domains": "~passport.yandex.ru,~zen.yandex.ru,yandex.md,yandex.by,yandex.com,yandex.com.tr,yandex.fr,yandex.kz,yandex.ru,yandex.ua",
-            "script": "AG_removeCookie('/blcrm|bltsr|engineering/');"
+            "script": "AG_removeCookie('/blcrm|bltsr|telecommunications/');"
         },
         {
             "domains": "avtovzglyad.ru",
@@ -1467,7 +1467,7 @@
         },
         {
             "domains": "solvetube.site,getintopc.com",
-            "script": "AG_onLoad(function(){if(location.pathname.includes(\"/wait-for-resource/\")||location.pathname.includes(\"/video-guide-for-setup-installation/\")||location.pathname.includes(\"/file-will-start-automatically\")){var e=function(a){for(var b=\"\",c=0;c<a;c++)b+=\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\".charAt(Math.floor(62*Math.random()));return b},f=function(a,b){a=Math.ceil(a);b=Math.floor(b);return Math.floor(Math.random()*(b-a+1))+a},d=new MutationObserver(function(){var a=document.querySelector(\"ins.adsbygoogle[data-ad-client]\");if(a)var b=a.getAttribute(\"data-ad-client\");a=document.querySelectorAll('iframe[id^=\"aswift_\"]:not([src]), iframe[id^=\"google_ads_iframe_\"]:not([src])');0<a.length&&(a.forEach(function(c){c.setAttribute(\"src\",\"https://googleads.g.doubleclick.net/pagead/ads?client=\"+b+\"&output=html&h=90&slotname=\"+e(f(1E3,1500)))}),d.disconnect())});d.observe(document,{childList:!0,subtree:!0});setTimeout(function(){d.disconnect()},5E3)}});"
+            "script": "AG_onLoad(function(){if(location.pathname.includes(\"/wait-for-resource/\")||location.pathname.includes(\"/video-guide-for-setup-installation/\")||location.pathname.includes(\"/file-will-start-automatically\")){var e=function(a){for(var b=\"\",c=0;c<a;c++)b+=\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\".charAt(Math.floor(62*Math.random()));return b};f=function(a,b){a=Math.ceil(a);b=Math.floor(b);return Math.floor(Math.random()*(b-a+1))+a};d=new MutationObserver(function(){var a=document.querySelector(\"ins.adsbygoogle[data-ad-client]\"); if(a)var b=a.getAttribute(\"data-ad-client\");if(a=document.querySelector(\"ins.adsbygoogle[data-ad-slot]\"))var c=a.getAttribute(\"data-ad-slot\");a=document.querySelectorAll('iframe[id^=\"aswift_\"]:not([src]), iframe[id^=\"google_ads_iframe_\"]:not([src])');0<a.length&&(a.forEach(function(g){g.setAttribute(\"src\",\"https://googleads.g.doubleclick.net/pagead/ads?client=\"+b+\"&output=html&h=90&slotname=\"+c+\"&adk=\"+e(f(9,10))+\"&adf=\"+e(f(10,11))+\"&w=\"+e(f(1E3,1500)))}),d.disconnect())});d.observe(document,{childList:!0, subtree:!0});setTimeout(function(){d.disconnect()},5E3)}});"
         },
         {
             "domains": "freecoursesonline.me",
@@ -2816,6 +2816,10 @@
         {
             "domains": "kinoseans.pl",
             "script": "AG_setConstant('count', '0');"
+        },
+        {
+            "domains": "autokult.pl",
+            "script": "!function(){(new MutationObserver(function(){document.querySelectorAll('[class]:not([style*=\"display: none\"])').forEach(function(a){Object.keys(a).forEach(function(b){b.match(/^isAdv$/)&&(a.style=\"display: none !important;\")})})})).observe(document,{childList:!0,subtree:!0})}();"
         },
         {
             "domains": "~pilot.wp.pl,wp.pl",
@@ -8368,6 +8372,10 @@
         {
             "domains": "howwindows.ru",
             "script": "window.canRunAds = true;"
+        },
+        {
+            "domains": "mediathekviewweb.de",
+            "script": "(function() { try { if ('undefined' != typeof localStorage) { localStorage.setItem('allowCookies', 'false') } } catch (ex) {} })();"
         },
         {
             "domains": "gdpr-consent-tool.privacymanager.io",

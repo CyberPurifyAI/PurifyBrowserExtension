@@ -17,14 +17,14 @@
 
 /* global adguardContent */
 
-(function (adguard) {
+(function (purify) {
   "use strict";
 
-  window.i18n = adguard.i18n;
+  window.i18n = purify.18n;
 
   window.popupPage = {
-    sendMessage: adguard.runtimeImpl.sendMessage,
-    onMessage: adguard.runtimeImpl.onMessage,
+    sendMessage: purify.untimeImpl.sendMessage,
+    onMessage: purify.untimeImpl.onMessage,
     closePopup() {
       window.close();
     },

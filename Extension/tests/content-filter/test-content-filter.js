@@ -14,7 +14,7 @@ function createDOMFromHTML(html) {
 QUnit.test("testContentFilterRule", function (assert) {
   var ruleText =
     '~nigma.ru,google.com$$div[id="ad_text"][tag-content="teas""ernet"][max-length="500"][min-length="50"][wildcard="*.adriver.*"][parent-search-level="15"][parent-elements="td,table"]';
-  var rule = new adguard.rules.ContentFilterRule(ruleText);
+  var rule = new purify.rules.ContentFilterRule(ruleText);
 
   assert.equal("div", rule.tagName);
   assert.ok(rule.getRestrictedDomains().indexOf("nigma.ru") >= 0);
@@ -36,7 +36,7 @@ QUnit.test("testContentFilterRule", function (assert) {
 QUnit.test("testContentFilterWildcardRuleWork", function (assert) {
   var ruleText =
     '~nigma.ru,google.com$$div[id="ad_text"][wildcard="*teasernet*tararar*"]';
-  var rule = new adguard.rules.ContentFilterRule(ruleText);
+  var rule = new purify.rules.ContentFilterRule(ruleText);
 
   var html =
     '<html><body><div id="ad_text">tratata teasernet\n \ntararar</div></body></html>';
@@ -48,7 +48,7 @@ QUnit.test("testContentFilterWildcardRuleWork", function (assert) {
 
 QUnit.test("testContentFilterWildcardRuleEscapedCharacter", function (assert) {
   var ruleText = 'test.com$$div[wildcard="*Test*[123]{123}*"]';
-  var rule = new adguard.rules.ContentFilterRule(ruleText);
+  var rule = new purify.rules.ContentFilterRule(ruleText);
 
   var html = "<html><body><div>Testtest [123]{123}</div></body></html>";
   var doc = createDOMFromHTML(html);
@@ -60,7 +60,7 @@ QUnit.test("testContentFilterWildcardRuleEscapedCharacter", function (assert) {
 QUnit.test("testContentFilterRuleWork", function (assert) {
   var ruleText =
     '~nigma.ru,google.com$$div[id="ad_text"][tag-content="teasernet"]';
-  var rule = new adguard.rules.ContentFilterRule(ruleText);
+  var rule = new purify.rules.ContentFilterRule(ruleText);
 
   var html =
     '<html><body><div id="ad_text">tratata teasernet tararar</div></body></html>';
@@ -71,14 +71,14 @@ QUnit.test("testContentFilterRuleWork", function (assert) {
 });
 
 QUnit.test("testContentFilter", function (assert) {
-  var rule = new adguard.rules.ContentFilterRule(
+  var rule = new purify.rules.ContentFilterRule(
     '~nigma.ru,google.com$$div[id="ad_text"][tag-content="teasernet"]'
   );
-  var rule1 = new adguard.rules.ContentFilterRule(
+  var rule1 = new purify.rules.ContentFilterRule(
     'google.com$$div[class="ad_block"'
   );
 
-  var filter = new adguard.rules.ContentFilter([rule, rule1]);
+  var filter = new purify.rules.ContentFilter([rule, rule1]);
 
   var html =
     '<html><body><div id="ad_text">tratata teasernet tararar</div></body></html>';
@@ -92,10 +92,10 @@ QUnit.test("testContentFilter", function (assert) {
 
 QUnit.test("testContentRuleExceptions", function (assert) {
   var elementsFilter = 'script[tag-content="test"]';
-  var rule = new adguard.rules.ContentFilterRule(
+  var rule = new purify.rules.ContentFilterRule(
     "google.com,yandex.ru$$" + elementsFilter
   );
-  var exceptionRule = new adguard.rules.ContentFilterRule(
+  var exceptionRule = new purify.rules.ContentFilterRule(
     "yandex.ru$@$" + elementsFilter
   );
 
@@ -103,7 +103,7 @@ QUnit.test("testContentRuleExceptions", function (assert) {
   var doc = createDOMFromHTML(html);
   var element = doc.getElementsByTagName("script")[0];
 
-  var contentFilter = new adguard.rules.ContentFilter();
+  var contentFilter = new purify.rules.ContentFilter();
   contentFilter.addRule(rule);
   assert.ok(
     contentFilter.getMatchedElements(doc, "yandex.ru").indexOf(element) >= 0
@@ -122,7 +122,7 @@ QUnit.test("testContentRuleExceptions", function (assert) {
 });
 
 QUnit.test("testWildcardShortcut", function (assert) {
-  var Wildcard = adguard.rules.Wildcard;
+  var Wildcard = purify.rules.Wildcard;
 
   assert.equal("tarara", new Wildcard("*tarara*trtr*tr??").shortcut);
   assert.equal("this is it", new Wildcard("this is it*trtr*tr??").shortcut);
@@ -146,7 +146,7 @@ QUnit.test("testWildcardShortcut", function (assert) {
 QUnit.test("Test wildcard domains in the content rules", function (assert) {
   var ruleText =
     '~nigma.ru,~youtube.*,google.*$$div[id="ad_text"][tag-content="teasernet"]';
-  var rule = new adguard.rules.ContentFilterRule(ruleText);
+  var rule = new purify.rules.ContentFilterRule(ruleText);
 
   assert.ok(rule !== null);
   assert.equal("google.*", rule.getPermittedDomains()[0]);

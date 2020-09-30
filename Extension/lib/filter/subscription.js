@@ -5,7 +5,7 @@
  * For now we just store filters metadata in an XML file within the extension.
  * In future we'll add an opportunity to update metadata along with filter rules update.
  */
-adguard.subscriptions = (function (adguard) {
+purify.subscriptions = (function (purify) {
   "use strict";
 
   /**
@@ -292,7 +292,7 @@ adguard.subscriptions = (function (adguard) {
    * @returns {Array}
    */
   const loadCustomFilters = () => {
-    const customFilters = adguard.localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
+    const customFilters = purify.localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
     return customFilters ? JSON.parse(customFilters) : [];
   };
 
@@ -315,7 +315,7 @@ adguard.subscriptions = (function (adguard) {
     if (!found) {
       updatedCustomFilters.push(filter);
     }
-    adguard.localStorage.setItem(
+    purify.localStorage.setItem(
       CUSTOM_FILTERS_JSON_KEY,
       JSON.stringify(updatedCustomFilters)
     );
@@ -334,7 +334,7 @@ adguard.subscriptions = (function (adguard) {
       }
       return true;
     });
-    adguard.localStorage.setItem(
+    purify.localStorage.setItem(
       CUSTOM_FILTERS_JSON_KEY,
       JSON.stringify(updatedCustomFilters)
     );
@@ -349,7 +349,7 @@ adguard.subscriptions = (function (adguard) {
    */
   function didFilterUpdate(newVersion, newChecksum, oldFilter) {
     if (newVersion) {
-      return !adguard.utils.browser.isGreaterOrEqualsVersion(
+      return !purify.utils.browser.isGreaterOrEqualsVersion(
         oldFilter.version,
         newVersion
       );
@@ -409,7 +409,7 @@ adguard.subscriptions = (function (adguard) {
    */
   const updateCustomFilter = function (url, options, callback) {
     const { title, trusted } = options;
-    adguard.backend.loadFilterRulesBySubscriptionUrl(
+    purify.backend.loadFilterRulesBySubscriptionUrl(
       url,
       (rules) => {
         const filterId = addFilterId();
@@ -480,12 +480,12 @@ adguard.subscriptions = (function (adguard) {
 
         updateCustomFilterInfo(filter, { lastCheckTime: Date.now() });
 
-        adguard.listeners.notifyListeners(
-          adguard.listeners.SUCCESS_DOWNLOAD_FILTER,
+        purify.listeners.notifyListeners(
+          purify.listeners.SUCCESS_DOWNLOAD_FILTER,
           filter
         );
-        adguard.listeners.notifyListeners(
-          adguard.listeners.UPDATE_FILTER_RULES,
+        purify.listeners.notifyListeners(
+          purify.listeners.UPDATE_FILTER_RULES,
           filter,
           rules
         );
@@ -493,7 +493,7 @@ adguard.subscriptions = (function (adguard) {
         callback(filter.filterId);
       },
       (cause) => {
-        adguard.console.error(
+        purify.console.error(
           `Error download filter by url ${url}, cause: ${cause || ""}`
         );
         callback();
@@ -504,7 +504,7 @@ adguard.subscriptions = (function (adguard) {
   const getCustomFilterInfo = (url, options, callback) => {
     const { title } = options;
 
-    adguard.backend.loadFilterRulesBySubscriptionUrl(
+    purify.backend.loadFilterRulesBySubscriptionUrl(
       url,
       (rules) => {
         const parsedData = parseFilterDataFromHeader(rules);
@@ -528,7 +528,7 @@ adguard.subscriptions = (function (adguard) {
 
         if (filter) {
           callback({
-            error: adguard.i18n.getMessage(
+            error: purify.i18n.getMessage(
               "options_antibanner_custom_filter_already_exists"
             ),
           });
@@ -557,7 +557,7 @@ adguard.subscriptions = (function (adguard) {
         callback({ filter });
       },
       (cause) => {
-        adguard.console.error(
+        purify.console.error(
           `Error download filter by url ${url}, cause: ${cause || ""}`
         );
         callback();
@@ -570,7 +570,7 @@ adguard.subscriptions = (function (adguard) {
    * @returns {Promise} returns promise
    */
   async function loadMetadata() {
-    const metadata = await adguard.backend.loadLocalFiltersMetadata();
+    const metadata = await purify.backend.loadLocalFiltersMetadata();
     tags = [];
     groups = [];
     groupsMap = {};
@@ -595,7 +595,7 @@ adguard.subscriptions = (function (adguard) {
 
     const customFiltersGroup = new SubscriptionGroup(
       CUSTOM_FILTERS_GROUP_ID,
-      adguard.i18n.getMessage("options_antibanner_custom_group"),
+      purify.i18n.getMessage("options_antibanner_custom_group"),
       CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER
     );
     groups.push(customFiltersGroup);
@@ -613,7 +613,7 @@ adguard.subscriptions = (function (adguard) {
 
     groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
-    adguard.console.info("Filters metadata loaded");
+    purify.console.info("Filters metadata loaded");
   }
 
   /**
@@ -626,9 +626,9 @@ adguard.subscriptions = (function (adguard) {
     const { tagId } = tag;
     const localizations = i18nMetadata[tagId];
     if (localizations) {
-      const locale = adguard.utils.i18n.normalize(
+      const locale = purify.utils.i18n.normalize(
         localizations,
-        adguard.app.getLocale()
+        purify.app.getLocale()
       );
       const localization = localizations[locale];
       if (localization) {
@@ -648,9 +648,9 @@ adguard.subscriptions = (function (adguard) {
     const { filterId } = filter;
     const localizations = i18nMetadata[filterId];
     if (localizations) {
-      const locale = adguard.utils.i18n.normalize(
+      const locale = purify.utils.i18n.normalize(
         localizations,
-        adguard.app.getLocale()
+        purify.app.getLocale()
       );
       const localization = localizations[locale];
       if (localization) {
@@ -670,9 +670,9 @@ adguard.subscriptions = (function (adguard) {
     const { groupId } = group;
     const localizations = i18nMetadata[groupId];
     if (localizations) {
-      const locale = adguard.utils.i18n.normalize(
+      const locale = purify.utils.i18n.normalize(
         localizations,
-        adguard.app.getLocale()
+        purify.app.getLocale()
       );
       const localization = localizations[locale];
       if (localization) {
@@ -686,7 +686,7 @@ adguard.subscriptions = (function (adguard) {
    * @return {Promise} returns promise
    */
   async function loadMetadataI18n() {
-    const i18nMetadata = await adguard.backend.loadLocalFiltersI18Metadata();
+    const i18nMetadata = await purify.backend.loadLocalFiltersI18Metadata();
     const tagsI18n = i18nMetadata.tags;
     const filtersI18n = i18nMetadata.filters;
     const groupsI18n = i18nMetadata.groups;
@@ -703,7 +703,7 @@ adguard.subscriptions = (function (adguard) {
       applyGroupLocalization(groups[k], groupsI18n);
     }
 
-    adguard.console.info("Filters i18n metadata loaded");
+    purify.console.info("Filters i18n metadata loaded");
   }
 
   /**
@@ -712,11 +712,11 @@ adguard.subscriptions = (function (adguard) {
    * @private
    */
   async function loadLocalScriptRules() {
-    const localScriptRulesService = adguard.rules.LocalScriptRulesService;
+    const localScriptRulesService = purify.rules.LocalScriptRulesService;
     if (typeof localScriptRulesService !== "undefined") {
-      const json = await adguard.backend.loadLocalScriptRules();
+      const json = await purify.backend.loadLocalScriptRules();
       localScriptRulesService.setLocalScriptRules(json);
-      adguard.console.info("Filters local script rules loaded");
+      purify.console.info("Filters local script rules loaded");
     }
   }
 
@@ -726,11 +726,11 @@ adguard.subscriptions = (function (adguard) {
    * @private
    */
   async function loadRedirectSources() {
-    const redirectSourcesService = adguard.rules.RedirectFilterService;
+    const redirectSourcesService = purify.rules.RedirectFilterService;
     if (typeof redirectSourcesService !== "undefined") {
-      const txt = await adguard.backend.loadRedirectSources();
+      const txt = await purify.backend.loadRedirectSources();
       redirectSourcesService.setRedirectSources(txt);
-      adguard.console.info("Filters redirect sources loaded");
+      purify.console.info("Filters redirect sources loaded");
     }
   }
 
@@ -745,7 +745,7 @@ adguard.subscriptions = (function (adguard) {
       await loadLocalScriptRules();
       await loadRedirectSources();
     } catch (e) {
-      adguard.console.error(`Error loading metadata, cause: ${e.message}`);
+      purify.console.error(`Error loading metadata, cause: ${e.message}`);
     }
   };
 
@@ -817,7 +817,7 @@ adguard.subscriptions = (function (adguard) {
       const filter = filters[i];
       const { languages } = filter;
       if (languages && languages.length > 0) {
-        const language = adguard.utils.i18n.normalize(languages, locale);
+        const language = purify.utils.i18n.normalize(languages, locale);
         if (language) {
           filterIds.push(filter.filterId);
         }
@@ -830,12 +830,12 @@ adguard.subscriptions = (function (adguard) {
     // Get language-specific filters by user locale
     let filterIds = [];
 
-    let localeFilterIds = getFilterIdsForLanguage(adguard.app.getLocale());
+    let localeFilterIds = getFilterIdsForLanguage(purify.app.getLocale());
     filterIds = filterIds.concat(localeFilterIds);
 
     // Get language-specific filters by navigator languages
     // Get the 2 most commonly used languages
-    const languages = adguard.utils.browser.getNavigatorLanguages(2);
+    const languages = purify.utils.browser.getNavigatorLanguages(2);
     for (let i = 0; i < languages.length; i += 1) {
       localeFilterIds = getFilterIdsForLanguage(languages[i]);
       filterIds = filterIds.concat(localeFilterIds);
@@ -851,9 +851,9 @@ adguard.subscriptions = (function (adguard) {
   };
 
   // Add event listener to persist filter metadata to local storage
-  adguard.listeners.addListener((event, payload) => {
+  purify.listeners.addListener((event, payload) => {
     switch (event) {
-      case adguard.listeners.FILTER_ADD_REMOVE:
+      case purify.listeners.FILTER_ADD_REMOVE:
         if (payload && payload.removed) {
           removeCustomFilter(payload);
           removeCustomFilterFromStorage(payload);
@@ -881,4 +881,4 @@ adguard.subscriptions = (function (adguard) {
     getLangSuitableFilters,
     CUSTOM_FILTERS_START_ID,
   };
-})(adguard);
+})(purify);

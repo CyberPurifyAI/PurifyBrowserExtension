@@ -34,7 +34,7 @@
 
       const redirectSource = redirects.getRedirect(title);
       if (!redirectSource) {
-        adguard.console.debug(
+        purify.console.debug(
           `There is no redirect source with title: "${title}"`
         );
         return null;
@@ -60,4 +60,4 @@
       buildRedirectUrl,
     };
   })();
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

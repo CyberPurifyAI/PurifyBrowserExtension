@@ -1,7 +1,7 @@
 /**
  * Helper methods for parsing and extracting browser cookies from headers (both Set-Cookie and Cookie).
  *
- * This API is exposed via adguard.utils.cookie:
+ * This API is exposed via purify.utils.cookie:
  *
  * - parseCookie    Parses "Cookie" header value and returns all the cookie key-pairs
  * - parseSetCookie Parses "Set-Cookie" header value and returns the key-pairs
@@ -9,7 +9,7 @@
  *
  * Heavily inspired by https://github.com/nfriedly/set-cookie-parser and https://github.com/jshttp/cookie
  */
-(function (adguard) {
+(function (purify) {
   /**
    * RegExp to match field-content in RFC 7230 sec 3.2
    *
@@ -45,7 +45,7 @@
    * @public
    */
   function parseCookie(cookieValue) {
-    if (adguard.utils.strings.isEmpty(cookieValue)) {
+    if (purify.utils.strings.isEmpty(cookieValue)) {
       return null;
     }
 
@@ -84,13 +84,13 @@
    * @public
    */
   function parseSetCookie(setCookieValue) {
-    if (adguard.utils.strings.isEmpty(setCookieValue)) {
+    if (purify.utils.strings.isEmpty(setCookieValue)) {
       return null;
     }
 
     const parts = setCookieValue
       .split(";")
-      .filter((s) => !adguard.utils.strings.isEmpty(s));
+      .filter((s) => !purify.utils.strings.isEmpty(s));
     const nameValuePart = parts.shift();
     const nameValue = nameValuePart.split("=");
     const name = nameValue.shift();
@@ -175,7 +175,7 @@
     if (cookie.secure) {
       setCookieValue += "; Secure";
     }
-    if (!adguard.utils.strings.isEmpty(cookie.sameSite)) {
+    if (!purify.utils.strings.isEmpty(cookie.sameSite)) {
       const sameSite = cookie.sameSite.toLowerCase();
 
       switch (sameSite) {
@@ -203,9 +203,9 @@
   }
 
   // EXPOSE
-  adguard.utils.cookie = {
+  purify.utils.cookie = {
     parseCookie,
     parseSetCookie,
     serialize,
   };
-})(adguard);
+})(purify);

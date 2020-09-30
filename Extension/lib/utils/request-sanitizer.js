@@ -21,7 +21,7 @@
  * Request sanitizer helper
  * Removes track-able data from extension initiated requests
  */
-(function (adguard) {
+(function (purify) {
   /**
    * On before send headers listener
    *
@@ -31,7 +31,7 @@
   const safeFilter = (req) => {
     const { requestHeaders, initiator, tabId, originUrl } = req;
 
-    if (tabId !== adguard.BACKGROUND_TAB_ID) {
+    if (tabId !== purify.BACKGROUND_TAB_ID) {
       return;
     }
 
@@ -39,8 +39,8 @@
 
     // Chrome provides "initiator" and firefox "originUrl"
     const origin = initiator || originUrl;
-    if (adguard.app.isOwnRequest(origin)) {
-      requestHeadersModified = adguard.utils.browser.removeHeader(
+    if (purify.app.isOwnRequest(origin)) {
+      requestHeadersModified = purify.utils.browser.removeHeader(
         requestHeaders,
         "Cookie"
       );
@@ -69,7 +69,7 @@
     safeFilter,
     {
       urls: ["<all_urls>"],
-      tabId: adguard.BACKGROUND_TAB_ID,
+      tabId: purify.BACKGROUND_TAB_ID,
     },
     onBeforeSendHeadersExtraInfoSpec
   );

@@ -1,7 +1,7 @@
-adguard.webRequestService = (function (adguard) {
+purify.webRequestService = (function (purify) {
   "use strict";
 
-  const onRequestBlockedChannel = adguard.utils.channels.newChannel();
+  const onRequestBlockedChannel = purify.utils.channels.newChannel();
 
   /**
    * Checks if we can collect hit stats for this tab:
@@ -11,13 +11,13 @@ adguard.webRequestService = (function (adguard) {
    */
   const canCollectHitStatsForTab = function (tab) {
     if (!tab) {
-      return adguard.settings.collectHitsCount();
+      return purify.settings.collectHitsCount();
     }
 
     return (
       tab &&
-      adguard.settings.collectHitsCount() &&
-      !adguard.frames.isIncognitoTab(tab)
+      purify.settings.collectHitsCount() &&
+      !purify.frames.isIncognitoTab(tab)
     );
   };
 
@@ -31,12 +31,12 @@ adguard.webRequestService = (function (adguard) {
   const recordRuleHit = function (tab, requestRule, requestUrl) {
     if (
       requestRule &&
-      !adguard.utils.filters.isUserFilterRule(requestRule) &&
-      !adguard.utils.filters.isWhiteListFilterRule(requestRule) &&
+      !purify.utils.filters.isUserFilterRule(requestRule) &&
+      !purify.utils.filters.isWhiteListFilterRule(requestRule) &&
       canCollectHitStatsForTab(tab)
     ) {
-      const domain = adguard.frames.getFrameDomain(tab);
-      adguard.hitStats.addRuleHit(
+      const domain = purify.frames.getFrameDomain(tab);
+      purify.hitStats.addRuleHit(
         domain,
         requestRule.ruleText,
         requestRule.filterId,
@@ -78,28 +78,28 @@ adguard.webRequestService = (function (adguard) {
       return result;
     }
 
-    if (!adguard.requestFilter.isReady()) {
+    if (!purify.requestFilter.isReady()) {
       result.requestFilterReady = false;
       return result;
     }
 
-    if (adguard.frames.isTabProtectionDisabled(tab)) {
+    if (purify.frames.isTabProtectionDisabled(tab)) {
       return result;
     }
 
     // Looking for the whitelist rule
-    let whitelistRule = adguard.frames.getFrameWhiteListRule(tab);
+    let whitelistRule = purify.frames.getFrameWhiteListRule(tab);
     if (!whitelistRule) {
       // Check whitelist for current frame
-      const mainFrameUrl = adguard.frames.getMainFrameUrl(tab);
-      whitelistRule = adguard.requestFilter.findWhiteListRule(
+      const mainFrameUrl = purify.frames.getMainFrameUrl(tab);
+      whitelistRule = purify.requestFilter.findWhiteListRule(
         documentUrl,
         mainFrameUrl,
-        adguard.RequestTypes.DOCUMENT
+        purify.RequestTypes.DOCUMENT
       );
     }
 
-    const { CssFilter } = adguard.rules;
+    const { CssFilter } = purify.rules;
 
     // Check what exactly is disabled by this rule
     const elemHideFlag = whitelistRule && whitelistRule.isElemhide();
@@ -111,7 +111,7 @@ adguard.webRequestService = (function (adguard) {
       typeof retrieveScripts === "undefined"
     ) {
       // Build up default flags.
-      const { canUseInsertCSSAndExecuteScript } = adguard.prefs.features;
+      const { canUseInsertCSSAndExecuteScript } = purify.prefs.features;
       // If tabs.executeScript is unavailable, retrieve JS rules now.
       retrieveScripts = !canUseInsertCSSAndExecuteScript;
       if (!elemHideFlag) {
@@ -135,13 +135,13 @@ adguard.webRequestService = (function (adguard) {
 
     // It's important to check this after the recordRuleHit call
     // as otherwise we will never record $document rules hit for domain
-    if (adguard.frames.isTabWhiteListed(tab)) {
+    if (purify.frames.isTabWhiteListed(tab)) {
       return result;
     }
 
     if (retrieveSelectors) {
-      result.collapseAllElements = adguard.requestFilter.shouldCollapseAllElements();
-      result.selectors = adguard.requestFilter.getSelectorsForUrl(
+      result.collapseAllElements = purify.requestFilter.shouldCollapseAllElements();
+      result.selectors = purify.requestFilter.getSelectorsForUrl(
         documentUrl,
         cssFilterOptions
       );
@@ -151,7 +151,7 @@ adguard.webRequestService = (function (adguard) {
       const jsInjectFlag = whitelistRule && whitelistRule.isJsInject();
       if (!jsInjectFlag) {
         // JS rules aren't disabled, returning them
-        result.scripts = adguard.requestFilter.getScriptsStringForUrl(
+        result.scripts = purify.requestFilter.getScriptsStringForUrl(
           documentUrl,
           tab
         );
@@ -160,7 +160,7 @@ adguard.webRequestService = (function (adguard) {
     // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1337
     result.collectRulesHits = elemHideFlag
       ? false
-      : adguard.webRequestService.isCollectingCosmeticRulesHits(tab);
+      : purify.webRequestService.isCollectingCosmeticRulesHits(tab);
 
     return result;
   };
@@ -199,7 +199,7 @@ adguard.webRequestService = (function (adguard) {
       requestRule
     );
 
-    adguard.requestContextStorage.recordEmulated(
+    purify.requestContextStorage.recordEmulated(
       requestUrl,
       referrerUrl,
       requestType,
@@ -312,11 +312,11 @@ adguard.webRequestService = (function (adguard) {
   ) {
     if (isRequestBlockedByRule(requestRule)) {
       const isDocumentLevel =
-        requestType === adguard.RequestTypes.DOCUMENT ||
-        requestType === adguard.RequestTypes.SUBDOCUMENT;
+        requestType === purify.RequestTypes.DOCUMENT ||
+        requestType === purify.RequestTypes.SUBDOCUMENT;
 
       if (isDocumentLevel && requestRule.isDocumentRule()) {
-        const documentBlockedPage = adguard.rules.documentFilterService.getDocumentBlockPageUrl(
+        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
           requestUrl,
           requestRule.ruleText
         );
@@ -329,7 +329,7 @@ adguard.webRequestService = (function (adguard) {
       }
 
       // Don't block main_frame request
-      if (requestType !== adguard.RequestTypes.DOCUMENT) {
+      if (requestType !== purify.RequestTypes.DOCUMENT) {
         return { cancel: true };
       }
       // check if request rule is blocked by rule and is redirect rule
@@ -355,7 +355,7 @@ adguard.webRequestService = (function (adguard) {
    * @returns {*}         rule or null
    */
   var getRuleForRequest = function (tab, requestUrl, referrerUrl, requestType) {
-    if (adguard.frames.isTabProtectionDisabled(tab)) {
+    if (purify.frames.isTabProtectionDisabled(tab)) {
       // don't process request
       return null;
     }
@@ -366,10 +366,10 @@ adguard.webRequestService = (function (adguard) {
      * url will match with user whitelist rule
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1032
      */
-    if (tab.tabId === adguard.BACKGROUND_TAB_ID) {
-      whitelistRule = adguard.whitelist.findWhiteListRule(referrerUrl);
+    if (tab.tabId === purify.BACKGROUND_TAB_ID) {
+      whitelistRule = purify.whitelist.findWhiteListRule(referrerUrl);
     } else {
-      whitelistRule = adguard.frames.getFrameWhiteListRule(tab);
+      whitelistRule = purify.frames.getFrameWhiteListRule(tab);
     }
 
     if (whitelistRule && whitelistRule.isDocumentWhiteList()) {
@@ -379,14 +379,14 @@ adguard.webRequestService = (function (adguard) {
     }
     if (!whitelistRule) {
       // If whitelist rule is not found for the main frame, we check it for referrer
-      whitelistRule = adguard.requestFilter.findWhiteListRule(
+      whitelistRule = purify.requestFilter.findWhiteListRule(
         requestUrl,
         referrerUrl,
-        adguard.RequestTypes.DOCUMENT
+        purify.RequestTypes.DOCUMENT
       );
     }
 
-    return adguard.requestFilter.findRuleForRequest(
+    return purify.requestFilter.findRuleForRequest(
       requestUrl,
       referrerUrl,
       requestType,
@@ -401,21 +401,21 @@ adguard.webRequestService = (function (adguard) {
    * @returns collection of content rules or null
    */
   const getContentRules = function (tab, documentUrl) {
-    if (adguard.frames.shouldStopRequestProcess(tab)) {
+    if (purify.frames.shouldStopRequestProcess(tab)) {
       // don't process request
       return null;
     }
 
-    const whitelistRule = adguard.requestFilter.findWhiteListRule(
+    const whitelistRule = purify.requestFilter.findWhiteListRule(
       documentUrl,
       documentUrl,
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
     if (whitelistRule && whitelistRule.isContent()) {
       return null;
     }
 
-    return adguard.requestFilter.getContentRulesForUrl(documentUrl);
+    return purify.requestFilter.getContentRulesForUrl(documentUrl);
   };
 
   /**
@@ -427,22 +427,22 @@ adguard.webRequestService = (function (adguard) {
    * @returns {Array}     Collection of rules or null
    */
   const getCspRules = function (tab, requestUrl, referrerUrl, requestType) {
-    if (adguard.frames.shouldStopRequestProcess(tab)) {
+    if (purify.frames.shouldStopRequestProcess(tab)) {
       // don't process request
       return null;
     }
 
     // @@||example.org^$document or @@||example.org^$urlblock — disables all the $csp rules on all the pages matching the rule pattern.
-    const whitelistRule = adguard.requestFilter.findWhiteListRule(
+    const whitelistRule = purify.requestFilter.findWhiteListRule(
       requestUrl,
       referrerUrl,
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
     if (whitelistRule && whitelistRule.isUrlBlock()) {
       return null;
     }
 
-    return adguard.requestFilter.getCspRules(
+    return purify.requestFilter.getCspRules(
       requestUrl,
       referrerUrl,
       requestType
@@ -458,15 +458,15 @@ adguard.webRequestService = (function (adguard) {
    * @returns {Array}     Collection of rules or null
    */
   const getCookieRules = (tab, requestUrl, referrerUrl, requestType) => {
-    if (adguard.frames.shouldStopRequestProcess(tab)) {
+    if (purify.frames.shouldStopRequestProcess(tab)) {
       // Don't process request
       return null;
     }
 
-    const whitelistRule = adguard.requestFilter.findWhiteListRule(
+    const whitelistRule = purify.requestFilter.findWhiteListRule(
       requestUrl,
       referrerUrl,
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
     if (whitelistRule && whitelistRule.isDocumentWhiteList()) {
       // $cookie rules are not affected by regular exception rules (@@) unless it's a $document exception.
@@ -474,7 +474,7 @@ adguard.webRequestService = (function (adguard) {
     }
 
     // Get all $cookie rules matching the specified request
-    return adguard.requestFilter.getCookieRules(
+    return purify.requestFilter.getCookieRules(
       requestUrl,
       referrerUrl,
       requestType
@@ -490,22 +490,22 @@ adguard.webRequestService = (function (adguard) {
    * @returns {*} Collection of rules or null
    */
   const getReplaceRules = (tab, requestUrl, referrerUrl, requestType) => {
-    if (adguard.frames.shouldStopRequestProcess(tab)) {
+    if (purify.frames.shouldStopRequestProcess(tab)) {
       // don't process request
       return null;
     }
 
-    const whitelistRule = adguard.requestFilter.findWhiteListRule(
+    const whitelistRule = purify.requestFilter.findWhiteListRule(
       requestUrl,
       referrerUrl,
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
 
     if (whitelistRule && whitelistRule.isContent()) {
       return null;
     }
 
-    return adguard.requestFilter.getReplaceRules(
+    return purify.requestFilter.getReplaceRules(
       requestUrl,
       referrerUrl,
       requestType
@@ -531,10 +531,10 @@ adguard.webRequestService = (function (adguard) {
     requestType
   ) {
     // add page view to stats
-    if (requestType === adguard.RequestTypes.DOCUMENT) {
-      const domain = adguard.frames.getFrameDomain(tab);
+    if (requestType === purify.RequestTypes.DOCUMENT) {
+      const domain = purify.frames.getFrameDomain(tab);
       if (canCollectHitStatsForTab(tab)) {
-        adguard.hitStats.addDomainView(domain);
+        purify.hitStats.addDomainView(domain);
       }
     }
   };
@@ -564,7 +564,7 @@ adguard.webRequestService = (function (adguard) {
       // Url blocking rules are not applicable to the main_frame
       if (
         isRequestBlockingRule &&
-        requestType === adguard.RequestTypes.DOCUMENT
+        requestType === purify.RequestTypes.DOCUMENT
       ) {
         // except rules with $document and $popup modifiers
         if (!requestRule.isDocumentRule() && !isPopupBlockingRule) {
@@ -578,8 +578,8 @@ adguard.webRequestService = (function (adguard) {
       }
 
       if (requestRule) {
-        adguard.listeners.notifyListenersAsync(
-          adguard.listeners.ADS_BLOCKED,
+        purify.listeners.notifyListenersAsync(
+          purify.listeners.ADS_BLOCKED,
           requestRule,
           tab,
           1
@@ -605,11 +605,11 @@ adguard.webRequestService = (function (adguard) {
      * :before and :after
      * Due to this we can't use cssHitsCounter for edge browser
      */
-    if (adguard.utils.browser.isEdgeBrowser()) {
+    if (purify.utils.browser.isEdgeBrowser()) {
       return false;
     }
 
-    return canCollectHitStatsForTab(tab) || adguard.filteringLog.isOpen();
+    return canCollectHitStatsForTab(tab) || purify.filteringLog.isOpen();
   };
 
   // EXPOSE
@@ -632,4 +632,4 @@ adguard.webRequestService = (function (adguard) {
     onRequestBlocked: onRequestBlockedChannel,
     isCollectingCosmeticRulesHits,
   };
-})(adguard);
+})(purify);

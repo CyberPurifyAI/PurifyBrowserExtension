@@ -19,7 +19,7 @@
  * Service that manages extension version information and handles
  * extension update. For instance we may need to change storage schema on update.
  */
-adguard.applicationUpdateService = (function (adguard) {
+purify.applicationUpdateService = (function (purify) {
   /**
    * File storage adapter
    * @Deprecated Used now only to upgrade from versions older than v2.3.5
@@ -97,7 +97,7 @@ adguard.applicationUpdateService = (function (adguard) {
    * @private
    */
   function executeMethods(methods) {
-    const mainDfd = new adguard.utils.Promise();
+    const mainDfd = new purify.utils.Promise();
 
     var executeNextMethod = function () {
       if (methods.length === 0) {
@@ -122,16 +122,16 @@ adguard.applicationUpdateService = (function (adguard) {
    * @private
    */
   function onUpdateChromiumStorage() {
-    adguard.console.info("Call update to version 2.3.5");
+    purify.console.info("Call update to version 2.3.5");
 
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
 
-    const filterId = adguard.utils.filters.USER_FILTER_ID;
+    const filterId = purify.utils.filters.USER_FILTER_ID;
     const filePath = `filterrules_${filterId}.txt`;
 
     FileStorage.readFromFile(filePath, (e, rules) => {
       if (e) {
-        adguard.console.error(
+        purify.console.error(
           "Error while reading rules from file {0} cause: {1}",
           filePath,
           e
@@ -140,7 +140,7 @@ adguard.applicationUpdateService = (function (adguard) {
       }
 
       const onTransferCompleted = function () {
-        adguard.console.info(
+        purify.console.info(
           "Rules have been transferred to local storage for filter {0}",
           filterId
         );
@@ -148,19 +148,19 @@ adguard.applicationUpdateService = (function (adguard) {
         FileStorage.removeFile(
           filePath,
           () => {
-            adguard.console.info("File removed for filter {0}", filterId);
+            purify.console.info("File removed for filter {0}", filterId);
           },
           () => {
-            adguard.console.error("File remove error for filter {0}", filterId);
+            purify.console.error("File remove error for filter {0}", filterId);
           }
         );
       };
 
       if (rules) {
-        adguard.console.info(`Found rules:${rules.length}`);
+        purify.console.info(`Found rules:${rules.length}`);
       }
 
-      adguard.rulesStorage.write(filterId, rules, onTransferCompleted);
+      purify.rulesStorage.write(filterId, rules, onTransferCompleted);
     });
 
     dfd.resolve();
@@ -172,7 +172,7 @@ adguard.applicationUpdateService = (function (adguard) {
    * Version > 2.7.3
    */
   function onUpdateFirefoxWebExtRulesStorage() {
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
 
     function writeFilterRules(keys, items) {
       if (keys.length === 0) {
@@ -181,8 +181,8 @@ adguard.applicationUpdateService = (function (adguard) {
         const key = keys.shift();
         const lines = items[key] || [];
         const linesLength = lines.length;
-        adguard.rulesStorageImpl.write(key, lines, () => {
-          adguard.console.info(
+        purify.rulesStorageImpl.write(key, lines, () => {
+          purify.console.info(
             'Adguard filter "{0}" has been migrated. Rules: {1}',
             key,
             linesLength
@@ -194,7 +194,7 @@ adguard.applicationUpdateService = (function (adguard) {
     }
 
     function migrate() {
-      adguard.console.info(
+      purify.console.info(
         "Call update to use indexedDB instead of storage.local for Firefox browser"
       );
 
@@ -210,7 +210,7 @@ adguard.applicationUpdateService = (function (adguard) {
       });
     }
 
-    if (adguard.rulesStorageImpl.isIndexedDB) {
+    if (purify.rulesStorageImpl.isIndexedDB) {
       // Switch implementation to indexedDB
       migrate();
     } else {
@@ -227,15 +227,15 @@ adguard.applicationUpdateService = (function (adguard) {
    * See https://github.com/AdguardTeam/AdguardBrowserExtension/issues/566
    */
   function onUpdateEdgeRulesStorage() {
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
 
-    const fixProperty = `edge-storage-local-fix-build${adguard.utils.browser.EDGE_CREATORS_UPDATE}`;
-    if (adguard.localStorage.getItem(fixProperty)) {
+    const fixProperty = `edge-storage-local-fix-build${purify.utils.browser.EDGE_CREATORS_UPDATE}`;
+    if (purify.localStorage.getItem(fixProperty)) {
       dfd.resolve();
       return dfd;
     }
 
-    adguard.console.info("Call update to use storage.local for Edge browser");
+    purify.console.info("Call update to use storage.local for Edge browser");
 
     const keys = [];
     for (const key in localStorage) {
@@ -249,7 +249,7 @@ adguard.applicationUpdateService = (function (adguard) {
 
     function writeFilterRules() {
       if (keys.length === 0) {
-        adguard.localStorage.setItem(fixProperty, true);
+        purify.localStorage.setItem(fixProperty, true);
         dfd.resolve();
       } else {
         const key = keys.shift();
@@ -258,7 +258,7 @@ adguard.applicationUpdateService = (function (adguard) {
         if (value) {
           lines = value.split(/[\r\n]+/);
         }
-        adguard.rulesStorageImpl.write(key, lines, () => {
+        purify.rulesStorageImpl.write(key, lines, () => {
           localStorage.removeItem(key);
           writeFilterRules();
         });
@@ -271,23 +271,23 @@ adguard.applicationUpdateService = (function (adguard) {
   }
 
   function handleUndefinedGroupStatuses() {
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
 
-    const filters = adguard.subscriptions.getFilters();
+    const filters = purify.subscriptions.getFilters();
 
-    const filtersState = adguard.filtersState.getFiltersState();
+    const filtersState = purify.filtersState.getFiltersState();
 
     const enabledFilters = filters.filter((filter) => {
       const { filterId } = filter;
       return !!(filtersState[filterId] && filtersState[filterId].enabled);
     });
 
-    const groupState = adguard.filtersState.getGroupsState();
+    const groupState = purify.filtersState.getGroupsState();
 
     enabledFilters.forEach((filter) => {
       const { groupId } = filter;
       if (typeof groupState[groupId] === "undefined") {
-        adguard.filters.enableGroup(filter.groupId);
+        purify.filters.enableGroup(filter.groupId);
       }
     });
 
@@ -297,14 +297,14 @@ adguard.applicationUpdateService = (function (adguard) {
   }
 
   function handleDefaultUpdatePeriodSetting() {
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
     const previousDefaultValue = 48 * 60 * 60 * 1000;
 
-    const currentUpdatePeriod = adguard.settings.getFiltersUpdatePeriod();
+    const currentUpdatePeriod = purify.settings.getFiltersUpdatePeriod();
 
     if (currentUpdatePeriod === previousDefaultValue) {
-      adguard.settings.setFiltersUpdatePeriod(
-        adguard.settings.DEFAULT_FILTERS_UPDATE_PERIOD
+      purify.settings.setFiltersUpdatePeriod(
+        purify.settings.DEFAULT_FILTERS_UPDATE_PERIOD
       );
     }
 
@@ -318,10 +318,10 @@ adguard.applicationUpdateService = (function (adguard) {
    * @returns {Promise<any>}
    */
   function handleObsoleteFiltersRemoval() {
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
 
-    const filtersStateInfo = adguard.filtersState.getFiltersState();
-    const allFiltersMetadata = adguard.subscriptions.getFilters();
+    const filtersStateInfo = purify.filtersState.getFiltersState();
+    const allFiltersMetadata = purify.subscriptions.getFilters();
 
     const installedFiltersIds = Object.keys(filtersStateInfo).map((filterId) =>
       Number.parseInt(filterId, 10)
@@ -336,14 +336,14 @@ adguard.applicationUpdateService = (function (adguard) {
     });
 
     filtersIdsToRemove.forEach((filterId) =>
-      adguard.filtersState.removeFilter(filterId)
+      purify.filtersState.removeFilter(filterId)
     );
 
     const removePromises = filtersIdsToRemove.map(
       (filterId) =>
         new Promise((resolve) => {
-          adguard.rulesStorage.remove(filterId, () => {
-            adguard.console.info(
+          purify.rulesStorage.remove(filterId, () => {
+            purify.console.info(
               `Filter with id: ${filterId} removed from the storage`
             );
             resolve();
@@ -365,9 +365,9 @@ adguard.applicationUpdateService = (function (adguard) {
    * @param callback Run info callback with passed object {{isFirstRun: boolean, isUpdate: (boolean|*), currentVersion: (Prefs.version|*), prevVersion: *}}
    */
   const getRunInfo = function (callback) {
-    const prevVersion = adguard.utils.browser.getAppVersion();
-    const currentVersion = adguard.app.getVersion();
-    adguard.utils.browser.setAppVersion(currentVersion);
+    const prevVersion = purify.utils.browser.getAppVersion();
+    const currentVersion = purify.app.getVersion();
+    purify.utils.browser.setAppVersion(currentVersion);
 
     const isFirstRun = currentVersion !== prevVersion && !prevVersion;
     const isUpdate = !!(currentVersion !== prevVersion && prevVersion);
@@ -388,28 +388,28 @@ adguard.applicationUpdateService = (function (adguard) {
   const onUpdate = function (runInfo, callback) {
     const methods = [];
     if (
-      adguard.utils.browser.isGreaterVersion("2.3.5", runInfo.prevVersion) &&
-      adguard.utils.browser.isChromium()
+      purify.utils.browser.isGreaterVersion("2.3.5", runInfo.prevVersion) &&
+      purify.utils.browser.isChromium()
     ) {
       methods.push(onUpdateChromiumStorage);
     }
     if (
-      adguard.utils.browser.isEdgeBrowser() &&
-      !adguard.utils.browser.isEdgeBeforeCreatorsUpdate()
+      purify.utils.browser.isEdgeBrowser() &&
+      !purify.utils.browser.isEdgeBeforeCreatorsUpdate()
     ) {
       methods.push(onUpdateEdgeRulesStorage);
     }
     if (
-      adguard.utils.browser.isGreaterVersion("2.7.4", runInfo.prevVersion) &&
-      adguard.utils.browser.isFirefoxBrowser() &&
+      purify.utils.browser.isGreaterVersion("2.7.4", runInfo.prevVersion) &&
+      purify.utils.browser.isFirefoxBrowser() &&
       typeof browser !== "undefined"
     ) {
       methods.push(onUpdateFirefoxWebExtRulesStorage);
     }
-    if (adguard.utils.browser.isGreaterVersion("3.0.3", runInfo.prevVersion)) {
+    if (purify.utils.browser.isGreaterVersion("3.0.3", runInfo.prevVersion)) {
       methods.push(handleUndefinedGroupStatuses);
     }
-    if (adguard.utils.browser.isGreaterVersion("3.3.5", runInfo.prevVersion)) {
+    if (purify.utils.browser.isGreaterVersion("3.3.5", runInfo.prevVersion)) {
       methods.push(handleDefaultUpdatePeriodSetting);
     }
 
@@ -424,4 +424,4 @@ adguard.applicationUpdateService = (function (adguard) {
     getRunInfo,
     onUpdate,
   };
-})(adguard);
+})(purify);

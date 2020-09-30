@@ -1,7 +1,7 @@
 /**
  * Namespace for adguard rules classes and utils
  */
-adguard.rules = (function () {
+purify.rules = (function () {
   "use strict";
 
   return {};

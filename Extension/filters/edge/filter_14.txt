@@ -1,8 +1,8 @@
-! Checksum: VDYgDr4iLhMdcZEAq2Poow
+! Checksum: m/au5rmiMbgtNEUgZk4QGQ
 ! Title: AdGuard Annoyances filter
 ! Description: Blocks irritating elements on web pages including cookie notices, third-party widgets and in-page pop-ups.
-! Version: 2.0.59.41
-! TimeUpdated: 2020-09-29T00:30:31+03:00
+! Version: 2.0.59.48
+! TimeUpdated: 2020-09-29T19:33:13+03:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1561,6 +1561,7 @@ bournemouthecho.co.uk,eveningtimes.co.uk,greenocktelegraph.co.uk,heraldscotland.
 ! ##.subscribe
 infobus.eu,atorus.ru,castorama.ru,guzellikbulvari.com,marieclaire.ua,mvs.gov.ua,gadgets.ndtv.com,oneplus.com,tickets.ua,woman.ru,elle.ru,marieclaire.ru,europaplus.ru,krossovki.com,belretail.by,thecollegefix.com,femmie.ru,prostofinovo.ru,mauijim.com,netpeak.net,wday.ru,buhgalteria.ru,ellegirl.ru,gameslog.ru,gizmag.com,healthhacks.ru,klerk.ru,menshealth.com,rbc.ru,snce.ru,turizm.ru,wegame.com.ua##.subscribe
 !
+hipertextual.com##.mrf-newsletter
 astro-world.ru##.theiaStickySidebar > aside.penci_popular_news_widget + aside.widget
 ria.ru##.article__aggr
 wisn.com##iframe[src^="https://d2cmvbq7sxx33j.cloudfront.net/email/prod_coronavirus_iframe_section.html"]
@@ -4010,7 +4011,6 @@ mirror.co.uk#@#div[id^="div-gpt-ad"]
 @@||google-analytics.com/analytics.js$domain=webupd8.org
 olegon.ru#%#AG_onLoad(function() { window.deta = function() {}; });
 eurabota.com##.abtop
-@@||fjhsjkfhwqeirusdfjkh.azureedge.net/ads/ads.js
 ||senmanga.com/img/block_
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=gamereactor.de|gamereactor.dk|gamereactor.fr|gamereactor.es
 @@||s8-tvn24.cdntvn.pl/js/_compressed/_adv/advert.js
@@ -6516,6 +6516,7 @@ slate.com#@#.ad-container
 !#######################################################
 !######### General URL blocking rules ##################
 !#######################################################
+||consent-notice.magix.com^$third-party
 /js/avia-snippet-cookieconsent.js
 ||cmp.md-nx.com^$third-party
 ||appconsent.io^$third-party
@@ -6908,15 +6909,18 @@ ioccasion.fr,watchgeneration.fr,macg.co,igen.fr,wordreference.com,letsrun.com,le
 ! ###sliding-popup
 jneurosci.org,medrxiv.org,novartis.com.tr,royal.uk,transcom.com,netcologne.de,belltower.news,bigfm.de,click.ro,demokrata.hu,emma.de,gysev.hu,humanite.fr,ikgastarten.nl,la7.it,london.gov.uk,mavcsoport.hu,mcdonalds.at,mcdonalds.it,mises.org,mnm.hu,musescore.com,nbcsports.com,pnas.org###sliding-popup
 ! Sourcepoint cookie consent
-theguardian.com#$#div[id^="sp_message_container_"] { display: none!important; }
+theguardian.com##div[id^="sp_message_"]
 techadvisor.co.uk,forum.notebookreview.com,computerworld.com,skysports.com#$#div[id^="sp_message_"] { display: none !important; }
 techadvisor.co.uk,forum.notebookreview.com,computerworld.com,skysports.com#$#div[class^="sp_veil"] { display: none !important; }
 techadvisor.co.uk,forum.notebookreview.com,computerworld.com,skysports.com#$#body { overflow: visible !important; }
-ekstrabladet.dk,focus.de,demorgen.be,volkskrant.nl,trouw.nl,parool.nl,theguardian.com,techadvisor.co.uk,forum.notebookreview.com,computerworld.com,skysports.com#$#html.sp-message-open { overflow: visible !important; position: static !important; }
+ekstrabladet.dk,focus.de,demorgen.be,volkskrant.nl,trouw.nl,parool.nl,techadvisor.co.uk,forum.notebookreview.com,computerworld.com,skysports.com#$#html.sp-message-open { overflow: visible !important; position: static !important; }
 !
 /wrapperMessagingWithoutDetection.js$script,domain=the-sun.com|thescottishsun.co.uk|thesun.co.uk|thesun.ie
 !
 !
+nebenan.de###main > .c-layout > .c-layout-wrap + article[class^="index-module_root__"]
+wehkamp.nl###header > aside.bg-light.full-width.full-height.z-higher.position-fixed.is-opaque
+rapidtables.com##body > #banner
 webqc.org###cookie-consent-dialog
 ovh.es,ovhtelecom.fr,ovh.de,ovhcloud.com,ovh.com###tc-privacy-wrapper
 ovh.es,ovhtelecom.fr,ovh.de,ovhcloud.com,ovh.com###tc_priv_CustomOverlay
@@ -8911,7 +8915,7 @@ almamarket.pl###claw
 shopping.rakuten.com###cnilBanner
 codemasters.com,dirt4game.com###codemasters_cookies
 kondis.no###coiConsentBanner
-isbank.com.tr###cokieCover
+maximiles.com.tr,isbank.com.tr###cokieCover
 stadtfeste-in-deutschland.de###cono
 antarestech.com,nperf.com,notebookinfo.de,telefuel.com,alarabiya.net,dijnet.hu###consent
 youtube.com###consent-bump
@@ -11159,6 +11163,7 @@ bmwfaq.org#?#.Notices[-ext-has='a[href="//www.bmwfaq.org/help/cookies"]']
 !
 ! JS rules
 !
+mediathekviewweb.de#%#(function() { try { if ('undefined' != typeof localStorage) { localStorage.setItem('allowCookies', 'false') } } catch (ex) {} })();
 gdpr-consent-tool.privacymanager.io#%#AG_onLoad(function(){var c=/^https?:\/\/(www\.)?(omroepwest\.nl)\//.test(document.referrer);if(window.self!==window.top&&c){var a=new MutationObserver(function(){var b=document.querySelector("a.accept-all");b&&(a.disconnect(),b.click())});a.observe(document,{childList:!0,subtree:!0});setTimeout(function(){a.disconnect()},1E4)}});
 vandenhoeck-ruprecht-verlage.com#%#document.cookie = "mnd-cookie-accepted-wwwvandenhoeckruprechtverlagecom1=1; path=/;";
 reuters.com#%#AG_onLoad(function() { var a=new MutationObserver(function() {var a=document.getElementById("_evidon-banner-acceptbutton");if(a) {a.click();a.disconnect()}});a.observe(document,{childList:!0,subtree:!0});});
@@ -11456,6 +11461,8 @@ ziekenhuis.nl#%#AG_onLoad(function() { setTimeout(function() {var check = docume
 !######### White list. Fixing filtering errors #########
 !#######################################################
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/64601
+mediathekviewweb.de#@##cookieModal
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64568
 @@||gdpr-wrapper.privacymanager.io/gdpr/$domain=omroepwest.nl
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64545
@@ -12723,6 +12730,7 @@ amp-reddit-com.cdn.ampproject.org##.AppSelectorModal__body
 reddit.com#$#.XPromoPopup { display: none!important; }
 reddit.com#$#body.scroll-disabled { overflow: visible!important; position: static!important; }
 !
+maximiles.com.tr##div[id^="App_Market_Maximiles_"]
 app.slack.com##.p-download_modal
 app.slack.com##.p-ia__workspace_banner
 foursquare.com##.appButton
@@ -18405,6 +18413,7 @@ newsweek.com##iframe[src="http://sns.europe.newsweek.com/newsletter?popup=1"]
 !######### JS tweaks ##########
 !##############################
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/64764
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64698
 cpmlink.net#%#AG_onLoad(function() { var el = document.querySelector('#continue > a[href]#btn-main'); if(el) { window.location = el.href; } });
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64619

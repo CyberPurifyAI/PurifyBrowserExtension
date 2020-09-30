@@ -1,9 +1,9 @@
 /**
- * `adguard.localStorageImpl` implementation contains chrome API, so we can't use it in tests.
- *  As the decision, we write implementation for `adguard.localStorageImpl`
+ * `purify.localStorageImpl` implementation contains chrome API, so we can't use it in tests.
+ *  As the decision, we write implementation for `purify.localStorageImpl`
  *  using wingow.localStorage
  */
-adguard.localStorageImpl = (function () {
+purify.localStorageImpl = (function () {
   const getItem = function (key) {
     return localStorage.getItem(key);
   };

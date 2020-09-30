@@ -9,7 +9,7 @@ var adguard = (function () {
    * var Object = {
    *
    *      get someProperty(){
-   *          return adguard.lazyGet(Object, 'someProperty', function() {
+   *          return purify.lazyGet(Object, 'someProperty', function() {
    *              return calculateSomeProperty();
    *          });
    *      }

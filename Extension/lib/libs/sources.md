@@ -53,7 +53,7 @@
 - Raw files:
   _ https://raw.githubusercontent.com/ajaxorg/ace-builds/v1.4.1/src-noconflict/ace.js
   _ https://raw.githubusercontent.com/ajaxorg/ace-builds/v1.4.1/src-noconflict/ext-searchbox.js
-  `mode-adguard.js` was build by us with embedded js, css, csp and text highlight rules
+  `mode-purify.js` was build by us with embedded js, css, csp and text highlight rules
 
 ## Not quite third-party
 

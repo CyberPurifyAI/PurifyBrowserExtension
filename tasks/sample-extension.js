@@ -29,7 +29,7 @@ const API_SCRIPTS = [
   "Extension/lib/filter/rules/scriptlets/redirects.js",
   "Extension/lib/filter/rules/scriptlets/scriptlets.js",
   // Adguard Global and preExtension/ferences
-  "Extension/lib/adguard.js",
+  "Extension/lib/purify.js",
   "Extension/browser/webkit/lib/prefs.js",
   // Utils libraries
   "Extension/lib/utils/common.js",

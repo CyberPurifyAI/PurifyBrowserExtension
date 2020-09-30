@@ -83,7 +83,7 @@
     }
 
     try {
-      const StringUtils = adguard.utils.strings;
+      const StringUtils = purify.utils.strings;
 
       if (StringUtils.startWith(ruleText, api.FilterRule.COMMENT)) {
         return null;
@@ -113,8 +113,8 @@
         )
       ) {
         const responseContentFilteringSupported =
-          adguard.prefs.features &&
-          adguard.prefs.features.responseContentFilteringSupported;
+          purify.prefs.features &&
+          purify.prefs.features.responseContentFilteringSupported;
         if (!responseContentFilteringSupported) {
           return null;
         }
@@ -147,7 +147,7 @@
 
       return new api.UrlFilterRule(ruleText, filterId);
     } catch (ex) {
-      adguard.console.debug(
+      purify.console.debug(
         "Cannot create rule from filter {0}: {1}, cause {2}",
         filterId || 0,
         ruleText,
@@ -172,7 +172,7 @@
     try {
       conversionResult = api.ruleConverter.convertRule(ruleText);
     } catch (ex) {
-      adguard.console.debug(
+      purify.console.debug(
         "Cannot convert rule from filter {0}: {1}, cause {2}",
         filterId || 0,
         ruleText,
@@ -201,4 +201,4 @@
   };
 
   api.builder = { createRule };
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

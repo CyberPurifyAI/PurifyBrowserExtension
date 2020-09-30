@@ -23,7 +23,7 @@
       if (!values) {
         return;
       }
-      adguard.utils.collections.removeRule(values, value);
+      purify.utils.collections.removeRule(values, value);
       if (values.length === 0) {
         delete this.map[key];
         this.size--;
@@ -85,7 +85,7 @@
      * @param rule Rule to remove
      */
     removeRule: function (rule) {
-      adguard.utils.collections.removeRule(this.contentRules, rule);
+      purify.utils.collections.removeRule(this.contentRules, rule);
       this.exceptionRulesMap.remove(rule.elementsFilter, rule);
       this.rollbackExceptionRule(rule);
       this.dirty = true;
@@ -230,4 +230,4 @@
   };
 
   api.ContentFilter = ContentFilter;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

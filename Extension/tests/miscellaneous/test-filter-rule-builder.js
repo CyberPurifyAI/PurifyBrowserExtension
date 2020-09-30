@@ -1,16 +1,16 @@
 QUnit.test("Build Rules", (assert) => {
-  const scriptFilter = new adguard.rules.ScriptFilter();
+  const scriptFilter = new purify.rules.ScriptFilter();
 
   const ruleText =
     'www.example.org#%#//scriptlet("set-constant", "test", "true")';
-  const rule = new adguard.rules.ScriptletRule(ruleText);
+  const rule = new purify.rules.ScriptletRule(ruleText);
   scriptFilter.addRule(rule);
 
   assert.equal(scriptFilter.getRules().length, 1, "Rule has been added");
 
   const whiteRuleText =
     'example.org#@%#//scriptlet("set-constant", "test", "true")';
-  const whiteRule = new adguard.rules.ScriptletRule(whiteRuleText);
+  const whiteRule = new purify.rules.ScriptletRule(whiteRuleText);
   scriptFilter.addRule(whiteRule);
 
   assert.equal(
@@ -24,45 +24,45 @@ QUnit.test("Build Rules", (assert) => {
 });
 
 QUnit.test("Build Rules", (assert) => {
-  let rule = adguard.rules.builder.createRule("example.com", 0);
+  let rule = purify.rules.builder.createRule("example.com", 0);
   assert.ok(rule);
-  assert.ok(rule instanceof adguard.rules.UrlFilterRule);
+  assert.ok(rule instanceof purify.rules.UrlFilterRule);
 
-  rule = adguard.rules.builder.createRule("example.com$important", 0);
+  rule = purify.rules.builder.createRule("example.com$important", 0);
   assert.ok(rule);
-  assert.ok(rule instanceof adguard.rules.UrlFilterRule);
+  assert.ok(rule instanceof purify.rules.UrlFilterRule);
 
-  adguard.prefs.features.responseContentFilteringSupported = true;
+  purify.prefs.features.responseContentFilteringSupported = true;
 
-  rule = adguard.rules.builder.createRule(
+  rule = purify.rules.builder.createRule(
     'example.org$$script[data-src="banner"]',
     0
   );
   assert.ok(rule);
-  assert.ok(rule instanceof adguard.rules.ContentFilterRule);
+  assert.ok(rule instanceof purify.rules.ContentFilterRule);
 
-  rule = adguard.rules.builder.createRule(
+  rule = purify.rules.builder.createRule(
     "example.org#%#window.__gaq = undefined;",
     0
   );
   assert.ok(rule);
-  assert.ok(rule instanceof adguard.rules.ScriptFilterRule);
+  assert.ok(rule instanceof purify.rules.ScriptFilterRule);
 
-  rule = adguard.rules.builder.createRule(
+  rule = purify.rules.builder.createRule(
     "example.org#%#window.__gaq = undefined;",
     0,
     false
   );
   assert.notOk(rule);
 
-  rule = adguard.rules.builder.createRule(
+  rule = purify.rules.builder.createRule(
     "||example.org^$replace=/example/trusted/gi",
     0,
     false
   );
   assert.notOk(rule);
 
-  rule = adguard.rules.builder.createRule(
+  rule = purify.rules.builder.createRule(
     "||example.org^$replace=/example/trusted/gi",
     0
   );
@@ -70,29 +70,29 @@ QUnit.test("Build Rules", (assert) => {
 });
 
 QUnit.test("Unsupported rules", (assert) => {
-  const rule = adguard.rules.builder.createRule(
+  const rule = purify.rules.builder.createRule(
     "#$#body { background: black }",
     0
   );
   assert.ok(rule);
-  assert.ok(rule instanceof adguard.rules.CssFilterRule);
+  assert.ok(rule instanceof purify.rules.CssFilterRule);
 });
 
 QUnit.test("Invalid Style Syntax", (assert) => {
   const ruleText = "yandex.ru##body:style()";
   assert.throws(() => {
-    adguard.rules.ruleConverter.convertRule(ruleText);
+    purify.rules.ruleConverter.convertRule(ruleText);
   }, new Error("Empty :style pseudo class: body:style()"));
 });
 
 // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1600
 QUnit.test("Too short rules are ignored", (assert) => {
   let ruleText = "adg";
-  let rule = adguard.rules.builder.createRule(ruleText, 0);
+  let rule = purify.rules.builder.createRule(ruleText, 0);
   assert.notOk(rule);
 
   ruleText = "||example.org^$image";
-  rule = adguard.rules.builder.createRule(ruleText, 0);
+  rule = purify.rules.builder.createRule(ruleText, 0);
   assert.ok(rule);
   assert.equal(rule.ruleText, ruleText);
 });

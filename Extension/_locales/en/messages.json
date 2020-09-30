@@ -24,10 +24,10 @@
     "message": "The file extension should be .json"
   },
   "popup_sfk_for_ios": {
-    "message": "SFK for iOS"
+    "message": "CyberPurify for iOS"
   },
   "popup_sfk_for_android": {
-    "message": "SFK for Android"
+    "message": "CyberPurify for Android"
   },
   "options_filters_filter_version": {
     "message": "version:"
@@ -48,7 +48,7 @@
     "message": "Miscellaneous"
   },
   "popup_sfk_footer_title": {
-    "message": "Get SFK for your mobile"
+    "message": "Get CyberPurify for your mobile"
   },
   "options_popup_new_filter_subscription": {
     "message": "New filter subscription"
@@ -105,7 +105,7 @@
     "message": "Subscribe"
   },
   "name": {
-    "message": "SFK"
+    "message": "CyberPurify"
   },
   "sync_provider_browser_storage": {
     "message": "Browser storage"
@@ -336,19 +336,19 @@
     "message": "Dec"
   },
   "thankyou_want_full_protection": {
-    "message": "Want to&nbsp;try full protection? Download SFK for Windows!"
+    "message": "Want to&nbsp;try full protection? Download CyberPurify for Windows!"
   },
   "thankyou_want_full_protection_mac": {
-    "message": "Want to&nbsp;try full protection? Download SFK for Mac!"
+    "message": "Want to&nbsp;try full protection? Download CyberPurify for Mac!"
   },
   "thankyou_compare_full_title": {
-    "message": "SFK for Windows"
+    "message": "CyberPurify for Windows"
   },
   "thankyou_compare_full_title_mac": {
-    "message": "SFK for Mac"
+    "message": "CyberPurify for Mac"
   },
   "sync_provider_sfk": {
-    "message": "SFK"
+    "message": "CyberPurify"
   },
   "sync_provider_dropbox": {
     "message": "Dropbox"
@@ -369,7 +369,7 @@
     "message": "were updated."
   },
   "options_popup_version_update_title": {
-    "message": "SFK extension has been updated to version $1"
+    "message": "CyberPurify extension has been updated to version $1"
   },
   "options_popup_version_update_description_minor": {
     "message": "This version contains mostly bugfixes and minor improvements."
@@ -381,7 +381,7 @@
     "message": "What's new in this version?"
   },
   "options_popup_version_update_offer": {
-    "message": "Did you know that SFK capabilities are not limited to this browser?"
+    "message": "Did you know that CyberPurify capabilities are not limited to this browser?"
   },
   "options_popup_version_update_offer_button_text": {
     "message": "LEARN MORE"
@@ -393,10 +393,10 @@
     "message": "Check website security"
   },
   "popup_open_settings": {
-    "message": "SFK settings"
+    "message": "CyberPurify settings"
   },
   "popup_site_protection_disabled": {
-    "message": "SFK protection is paused"
+    "message": "CyberPurify protection is paused"
   },
   "popup_block_site_ads_android": {
     "message": "Block ads on the website"
@@ -432,19 +432,19 @@
     "message": "Protected by $1"
   },
   "context_site_filtering_disabled": {
-    "message": "SFK cannot run on this domain"
+    "message": "CyberPurify cannot run on this domain"
   },
   "context_disable_protection": {
-    "message": "Pause SFK protection"
+    "message": "Pause CyberPurify protection"
   },
   "context_enable_protection": {
-    "message": "Resume SFK protection"
+    "message": "Resume CyberPurify protection"
   },
   "context_site_protection_disabled": {
-    "message": "SFK protection is paused"
+    "message": "CyberPurify protection is paused"
   },
   "context_open_settings": {
-    "message": "SFK settings..."
+    "message": "CyberPurify settings..."
   },
   "context_open_log": {
     "message": "Filtering log..."
@@ -495,7 +495,7 @@
     "message": "Did you know?"
   },
   "filter_download_sb_sites": {
-    "message": "SFK phishing and malware database contains<br/>more than 1&nbsp;million websites."
+    "message": "CyberPurify phishing and malware database contains<br/>more than 1&nbsp;million websites."
   },
   "filter_download_rules": {
     "message": "On&nbsp;average we&nbsp;add more than 100&nbsp;ad filter rules every week."
@@ -609,7 +609,7 @@
     "message": "Open in a new tab"
   },
   "options_settings": {
-    "message": "SFK Settings"
+    "message": "CyberPurify Settings"
   },
   "options_general_settings": {
     "message": "General"
@@ -618,7 +618,7 @@
     "message": "Allow search ads and the self-promotion of websites"
   },
   "options_show_blocked_ads_count": {
-    "message": "Indicate the number of&nbsp;blocked ads on&nbsp;the SFK extension icon"
+    "message": "Indicate the number of&nbsp;blocked ads on&nbsp;the CyberPurify extension icon"
   },
   "options_enable_autodetect_filter": {
     "message": "Activate the most appropriate filters automatically"
@@ -648,7 +648,7 @@
     "message": "Import"
   },
   "options_whitelist_description": {
-    "message": "SFK does not filter websites from the Whitelist."
+    "message": "CyberPurify does not filter websites from the Whitelist."
   },
   "options_whitelist_inverse": {
     "message": "Invert the Whitelist"
@@ -678,10 +678,10 @@
     "message": "Official Website"
   },
   "options_discuss": {
-    "message": "Discuss SFK"
+    "message": "Discuss CyberPurify"
   },
   "options_do_you_like": {
-    "message": "Do&nbsp;you like SFK?"
+    "message": "Do&nbsp;you like CyberPurify?"
   },
   "options_footer_like_us": {
     "message": "Rate&nbsp;it!"
@@ -690,7 +690,7 @@
     "message": "Miscellaneous"
   },
   "options_show_sfk_full_version": {
-    "message": "Show information on the&nbsp;SFK full version"
+    "message": "Show information on the&nbsp;CyberPurify full version"
   },
   "options_show_app_updated_notification": {
     "message": "Notify about extension updates"
@@ -708,7 +708,7 @@
     "message": "Send statistics of ad&nbsp;filters usage"
   },
   "options_show_context_menu": {
-    "message": "Add SFK item to the&nbsp;browser's context menu"
+    "message": "Add CyberPurify item to the&nbsp;browser's context menu"
   },
   "options_use_optimized_filters": {
     "message": "Use optimized filters"
@@ -768,7 +768,7 @@
     "message": "Remove tracking parameters"
   },
   "options_strip_tracking_params_desc": {
-    "message": "Comma-separated list of tracking parameters which SFK will remove from pages' addresses."
+    "message": "Comma-separated list of tracking parameters which CyberPurify will remove from pages' addresses."
   },
   "options_cookies_title": {
     "message": "Cookies"
@@ -816,7 +816,7 @@
     "message": "Protection switch"
   },
   "short_name": {
-    "message": "SFK"
+    "message": "CyberPurify"
   },
   "options_about": {
     "message": "About"

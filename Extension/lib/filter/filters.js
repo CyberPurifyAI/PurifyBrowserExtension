@@ -1,4 +1,4 @@
-(function (adguard) {
+(function (purify) {
   "use strict";
 
   /**
@@ -77,45 +77,45 @@
 
     // Filter that applies URL blocking rules
     // Basic rules: https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#basic-rules
-    this.urlBlockingFilter = new adguard.rules.UrlFilter(
+    this.urlBlockingFilter = new purify.rules.UrlFilter(
       [],
       this.badFilterRules
     );
 
     // Filter that applies whitelist rules
     // Exception rules: https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#exceptions-modifiers
-    this.urlWhiteFilter = new adguard.rules.UrlFilter([], this.badFilterRules);
+    this.urlWhiteFilter = new purify.rules.UrlFilter([], this.badFilterRules);
 
     // Filter that applies CSS rules
     // https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#cosmetic-rules
-    this.cssFilter = new adguard.rules.CssFilter();
+    this.cssFilter = new purify.rules.CssFilter();
 
     // Filter that applies JS rules
     // https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#javascript-rules
-    this.scriptFilter = new adguard.rules.ScriptFilter();
+    this.scriptFilter = new purify.rules.ScriptFilter();
 
     // Filter that applies CSP rules
     // https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#csp-modifier
-    this.cspFilter = new adguard.rules.CspFilter([], this.badFilterRules);
+    this.cspFilter = new purify.rules.CspFilter([], this.badFilterRules);
 
     // Filter that applies cookie rules
     // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/961
-    this.cookieFilter = new adguard.rules.CookieFilter();
+    this.cookieFilter = new purify.rules.CookieFilter();
 
     // Filter that applies stealth rules
     // https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#stealth-modifier
-    this.stealthFilter = new adguard.rules.UrlFilter([], this.badFilterRules);
+    this.stealthFilter = new purify.rules.UrlFilter([], this.badFilterRules);
 
     // Filter that applies replace rules
     // https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#replace-modifier
-    this.replaceFilter = new adguard.rules.ReplaceFilter(
+    this.replaceFilter = new purify.rules.ReplaceFilter(
       [],
       this.badFilterRules
     );
 
     // Filter that applies HTML filtering rules
     // https://kb.cyberpurify.com/en/general/how-to-create-your-own-ad-filters#html-filtering-rules
-    this.contentFilter = new adguard.rules.ContentFilter();
+    this.contentFilter = new purify.rules.ContentFilter();
 
     // Rules count (includes all types of rules)
     this.rulesCount = 0;
@@ -154,13 +154,13 @@
      */
     addRule(rule) {
       if (rule === null || !rule.ruleText) {
-        adguard.console.error("FilterRule must not be null");
+        purify.console.error("FilterRule must not be null");
         return;
       }
 
-      if (rule instanceof adguard.rules.UrlFilterRule) {
+      if (rule instanceof purify.rules.UrlFilterRule) {
         if (typeof rule.isIgnored === "function" && rule.isIgnored()) {
-          adguard.console.debug(
+          purify.console.debug(
             `FilterRule with $extension modifier was omitted. Rule text: "${rule.ruleText}"`
           );
           return;
@@ -180,15 +180,15 @@
         } else {
           this.urlBlockingFilter.addRule(rule);
         }
-      } else if (rule instanceof adguard.rules.CssFilterRule) {
+      } else if (rule instanceof purify.rules.CssFilterRule) {
         this.cssFilter.addRule(rule);
-      } else if (rule instanceof adguard.rules.ScriptFilterRule) {
+      } else if (rule instanceof purify.rules.ScriptFilterRule) {
         this.scriptFilter.addRule(rule);
-      } else if (rule instanceof adguard.rules.ScriptletRule) {
+      } else if (rule instanceof purify.rules.ScriptletRule) {
         this.scriptFilter.addRule(rule);
-      } else if (rule instanceof adguard.rules.CompositeRule) {
+      } else if (rule instanceof purify.rules.CompositeRule) {
         rule.rules.forEach(this.addRule.bind(this));
-      } else if (rule instanceof adguard.rules.ContentFilterRule) {
+      } else if (rule instanceof purify.rules.ContentFilterRule) {
         this.contentFilter.addRule(rule);
       }
 
@@ -205,10 +205,10 @@
      */
     removeRule(rule) {
       if (rule === null) {
-        adguard.console.error("FilterRule must not be null");
+        purify.console.error("FilterRule must not be null");
         return;
       }
-      if (rule instanceof adguard.rules.UrlFilterRule) {
+      if (rule instanceof purify.rules.UrlFilterRule) {
         if (rule.isCspRule()) {
           this.cspFilter.removeRule(rule);
         } else if (rule.isCookieRule()) {
@@ -222,15 +222,15 @@
         } else {
           this.urlBlockingFilter.removeRule(rule);
         }
-      } else if (rule instanceof adguard.rules.CssFilterRule) {
+      } else if (rule instanceof purify.rules.CssFilterRule) {
         this.cssFilter.removeRule(rule);
-      } else if (rule instanceof adguard.rules.ScriptFilterRule) {
+      } else if (rule instanceof purify.rules.ScriptFilterRule) {
         this.scriptFilter.removeRule(rule);
-      } else if (rule instanceof adguard.rules.ScriptletRule) {
+      } else if (rule instanceof purify.rules.ScriptletRule) {
         this.scriptFilter.removeRule(rule);
-      } else if (rule instanceof adguard.rules.CompositeRule) {
+      } else if (rule instanceof purify.rules.CompositeRule) {
         rule.rules.forEach(this.removeRule.bind(this));
-      } else if (rule instanceof adguard.rules.ContentFilterRule) {
+      } else if (rule instanceof purify.rules.ContentFilterRule) {
         this.contentFilter.removeRule(rule);
       }
       this.rulesCount -= 1;
@@ -279,15 +279,15 @@
      * @returns {SelectorsData} CSS and ExtCss data for the webpage
      */
     getSelectorsForUrl(url, options) {
-      const domain = adguard.utils.url.getHost(url);
+      const domain = purify.utils.url.getHost(url);
 
-      const { CSS_INJECTION_ONLY } = adguard.rules.CssFilter;
+      const { CSS_INJECTION_ONLY } = purify.rules.CssFilter;
       const cssInjectionOnly =
         (options & CSS_INJECTION_ONLY) === CSS_INJECTION_ONLY;
 
       if (
         !cssInjectionOnly &&
-        adguard.webRequestService.isCollectingCosmeticRulesHits()
+        purify.webRequestService.isCollectingCosmeticRulesHits()
       ) {
         /**
          * If user has enabled "Send statistics for ad filters usage" option we
@@ -308,13 +308,13 @@
      * @returns {{scriptSource: string, rule: string}[]} Javascript for the specified URL
      */
     getScriptsForUrl(url, debug) {
-      const domain = adguard.utils.url.getHost(url);
+      const domain = purify.utils.url.getHost(url);
       const config = {
         debug,
         domainName: domain,
         engine: "extension",
         version:
-          adguard.app && adguard.app.getVersion && adguard.app.getVersion(),
+          purify.app && purify.app.getVersion && purify.app.getVersion(),
       };
       return this.scriptFilter.buildScript(domain, config);
     },
@@ -328,11 +328,11 @@
      * @returns {string} Script to be applied
      */
     getScriptsStringForUrl(url, tab) {
-      const debug = adguard.filteringLog && adguard.filteringLog.isOpen();
+      const debug = purify.filteringLog && purify.filteringLog.isOpen();
       const scriptRules = this.getScriptsForUrl(url, debug);
 
-      const isFirefox = adguard.utils.browser.isFirefoxBrowser();
-      const isOpera = adguard.utils.browser.isOperaBrowser();
+      const isFirefox = purify.utils.browser.isFirefoxBrowser();
+      const isOpera = purify.utils.browser.isOperaBrowser();
 
       const selectedScriptRules = scriptRules.filter((scriptRule) => {
         if (scriptRule.scriptSource === "local") {
@@ -361,16 +361,16 @@
       });
 
       if (debug) {
-        const domainName = adguard.utils.url.getHost(url);
+        const domainName = purify.utils.url.getHost(url);
         scriptRules.forEach((scriptRule) => {
           if (
-            scriptRule.rule instanceof adguard.rules.ScriptletRule ||
+            scriptRule.rule instanceof purify.rules.ScriptletRule ||
             scriptRule.rule.isDomainSpecific(domainName)
           ) {
-            adguard.filteringLog.addScriptInjectionEvent(
+            purify.filteringLog.addScriptInjectionEvent(
               tab,
               url,
-              adguard.RequestTypes.DOCUMENT,
+              purify.RequestTypes.DOCUMENT,
               scriptRule.rule
             );
           }
@@ -401,8 +401,8 @@
      * @returns Filter rule found or null
      */
     findWhiteListRule(requestUrl, referrer, requestType) {
-      const refHost = adguard.utils.url.getHost(referrer);
-      const thirdParty = adguard.utils.url.isThirdPartyRequest(
+      const refHost = purify.utils.url.getHost(referrer);
+      const thirdParty = purify.utils.url.isThirdPartyRequest(
         requestUrl,
         referrer
       );
@@ -443,8 +443,8 @@
      * @returns Filter rule found or null
      */
     findStealthWhiteListRule(requestUrl, referrer, requestType) {
-      const refHost = adguard.utils.url.getHost(referrer);
-      const thirdParty = adguard.utils.url.isThirdPartyRequest(
+      const refHost = purify.utils.url.getHost(referrer);
+      const thirdParty = purify.utils.url.isThirdPartyRequest(
         requestUrl,
         referrer
       );
@@ -487,8 +487,8 @@
       requestType,
       documentWhitelistRule
     ) {
-      const documentHost = adguard.utils.url.getHost(documentUrl);
-      const thirdParty = adguard.utils.url.isThirdPartyRequest(
+      const documentHost = purify.utils.url.getHost(documentUrl);
+      const thirdParty = purify.utils.url.isThirdPartyRequest(
         requestUrl,
         documentUrl
       );
@@ -526,7 +526,7 @@
      * @returns Collection of content rules
      */
     getContentRulesForUrl(documentUrl) {
-      const documentHost = adguard.utils.url.getHost(documentUrl);
+      const documentHost = purify.utils.url.getHost(documentUrl);
       return this.contentFilter.getRulesForDomain(documentHost);
     },
 
@@ -548,8 +548,8 @@
      * @returns Collection of CSP rules for applying to the request or null
      */
     findCspRules(requestUrl, documentUrl, requestType) {
-      const documentHost = adguard.utils.url.getHost(documentUrl);
-      const thirdParty = adguard.utils.url.isThirdPartyRequest(
+      const documentHost = purify.utils.url.getHost(documentUrl);
+      const thirdParty = purify.utils.url.isThirdPartyRequest(
         requestUrl,
         documentUrl
       );
@@ -562,8 +562,8 @@
     },
 
     findReplaceRules(requestUrl, documentUrl, requestType) {
-      const documentHost = adguard.utils.url.getHost(documentUrl);
-      const thirdParty = adguard.utils.url.isThirdPartyRequest(
+      const documentHost = purify.utils.url.getHost(documentUrl);
+      const thirdParty = purify.utils.url.isThirdPartyRequest(
         requestUrl,
         documentUrl
       );
@@ -585,8 +585,8 @@
      * @returns             Matching rules
      */
     findCookieRules(requestUrl, documentUrl, requestType) {
-      const documentHost = adguard.utils.url.getHost(documentUrl);
-      const thirdParty = adguard.utils.url.isThirdPartyRequest(
+      const documentHost = purify.utils.url.getHost(documentUrl);
+      const thirdParty = purify.utils.url.isThirdPartyRequest(
         requestUrl,
         documentUrl
       );
@@ -670,7 +670,7 @@
       thirdParty,
       documentWhiteListRule
     ) {
-      adguard.console.debug(
+      purify.console.debug(
         "Filtering http request for url: {0}, document: {1}, requestType: {2}",
         requestUrl,
         documentHost,
@@ -716,7 +716,7 @@
           !ruleForRequest ||
           !ruleForRequest.isImportant)
       ) {
-        adguard.console.debug(
+        purify.console.debug(
           "White list rule found {0} for url: {1} document: {2}, requestType: {3}",
           urlWhiteListRule.ruleText,
           requestUrl,
@@ -727,7 +727,7 @@
       }
 
       if (!genericRulesAllowed || !urlRulesAllowed) {
-        adguard.console.debug(
+        purify.console.debug(
           "White list rule {0} found for document: {1}",
           documentWhiteListRule.ruleText,
           documentHost
@@ -740,7 +740,7 @@
       }
 
       if (ruleForRequest) {
-        adguard.console.debug(
+        purify.console.debug(
           "Black list rule {0} found for url: {1}, document: {2}, requestType: {3}",
           ruleForRequest.ruleText,
           requestUrl,
@@ -753,5 +753,5 @@
     },
   };
 
-  adguard.RequestFilter = RequestFilter;
-})(adguard);
+  purify.RequestFilter = RequestFilter;
+})(purify);

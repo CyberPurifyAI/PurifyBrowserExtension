@@ -1,8 +1,8 @@
-! Checksum: qfzldGMHtnRvXdEpYCPrJw
+! Checksum: uWuFELijW3ALTM4+0uw5Og
 ! Title: AdGuard Social Media filter
 ! Description: Filter for social media widgets such as 'Like' and 'Share' buttons and more.
-! Version: 2.0.30.82
-! TimeUpdated: 2020-09-28T22:31:34+03:00
+! Version: 2.0.30.86
+! TimeUpdated: 2020-09-29T19:34:18+03:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1003,6 +1003,11 @@ gruppal.com,somaaktuel.com,filmizleten.com,medyagazeteleri.com,kentvizyonhaber.c
 ||platform.twitter.com/widgets.js$domain=kevinpurcell.org|015.by|airkule.com|altyazi.net|anilibria.tv|asyaspor21.tv|bartinolay.com|bedava-film.com|belaruspartisan.by|belgeselciyiz.com|belsat.eu|brauer-bund.de|btcnewz.com|businessturkeytoday.com|cj3z.com|corgit.xyz|creatorlabs.net|cwbaltimore.com|daemon-hentai.com|der-postillon.com|desimartini.com|discoverskills.com|discoverychannel.com.tr|dizilara.org|dizitube.net|dizivay.com|efelerhaber.com|egeyonhaber.com|elazigyenihaber.com|ellegirl.ru|erkekadam.org|erzurumajans.com|eurolab.ua|filmakinesi.net|filmold.com|fontanka.ru|forums.flyer.co.uk|fox38corpuschristi.com|fox47.com|foxkansas.com|foxrichmond.com|gazetaby.com|gercekizmir.com|gidavitrini.com.tr|halklailiskiler.com.tr|hizlifilmizlehd.com|inforesist.org|jetvis.ru|karsolay.com|kbsi23.com|kdsm17.com|kg-portal.ru|kinopoisk.userecho.com|kp.ua|losst.ru|magazinekibi.com|manisamanset.gen.tr|mforos.com|mogilev.online|muchohentai.com|multifilemirror.com|mvs.gov.ua|mywebtimes.com|news-journalonline.com|nk.org.ua|noticierodigital.com|ntp-servers.net|obltv.ru|orbita.dn.ua|pctip.ru|podrobnosti.ua|ppt.ru|proglang.su|queenbet4.tv|raleighcw.com|real-vin.com|rmj.ru|rusvesna.su|sanatatak.com|seirsanduk.us|simdifilmizle.com|sonkaleizmir.com|sp-mobile-blog.com|star64.tv|tomiks33.ru|torrentbe.net|torrentrg.org|tqm.com.ua|tribundergi.com|tva.in.ua|utofiles.com|wcti12.com|womanel.com.ua|wpgh53.com|wtto21.com|wutv29.com|xn----8sbcm1bmcar0m.xn--p1ai
 kevinpurcell.org,015.by,airkule.com,altyazi.net,anilibria.tv,asyaspor21.tv,bartinolay.com,bedava-film.com,belaruspartisan.by,belgeselciyiz.com,belsat.eu,brauer-bund.de,btcnewz.com,businessturkeytoday.com,cj3z.com,corgit.xyz,creatorlabs.net,cwbaltimore.com,daemon-hentai.com,der-postillon.com,desimartini.com,discoverskills.com,discoverychannel.com.tr,dizilara.org,dizitube.net,dizivay.com,efelerhaber.com,egeyonhaber.com,elazigyenihaber.com,ellegirl.ru,erkekadam.org,erzurumajans.com,eurolab.ua,filmakinesi.net,filmold.com,fontanka.ru,forums.flyer.co.uk,fox38corpuschristi.com,fox47.com,foxkansas.com,foxrichmond.com,gazetaby.com,gercekizmir.com,gidavitrini.com.tr,halklailiskiler.com.tr,hizlifilmizlehd.com,inforesist.org,jetvis.ru,karsolay.com,kbsi23.com,kdsm17.com,kg-portal.ru,kinopoisk.userecho.com,kp.ua,losst.ru,magazinekibi.com,manisamanset.gen.tr,mforos.com,mogilev.online,muchohentai.com,multifilemirror.com,mvs.gov.ua,mywebtimes.com,news-journalonline.com,nk.org.ua,noticierodigital.com,ntp-servers.net,obltv.ru,orbita.dn.ua,pctip.ru,podrobnosti.ua,ppt.ru,proglang.su,queenbet4.tv,raleighcw.com,real-vin.com,rmj.ru,rusvesna.su,sanatatak.com,seirsanduk.us,simdifilmizle.com,sonkaleizmir.com,sp-mobile-blog.com,star64.tv,tomiks33.ru,torrentbe.net,torrentrg.org,tqm.com.ua,tribundergi.com,tva.in.ua,utofiles.com,wcti12.com,womanel.com.ua,wpgh53.com,wtto21.com,wutv29.com,xn----8sbcm1bmcar0m.xn--p1ai##.twitter-timeline
 !
+theins.ru###articleTopShares
+theins.ru###articleContainer > div[class]:last-child > div > ul > li
+hipertextual.com##a[onclick^="shareButton("]
+apnews.com##.SocialShare > a
+gotvach.bg##.socialNetwork
 forbes.hu##.article-share-widget
 epochtimes.com.ua###share_below_article
 wisn.com##.js-share-dialog-opener
@@ -1543,7 +1548,7 @@ haberkibris.com##.sharethis-sticky-share-buttons
 webcartop.jp##.sns-wrapper
 lrytas.lt##.socialMsngr
 wykop.pl##.dropdown > div .social-list > li > .social-share
-kotaku.com.au##.meta__social
+lemonde.fr,kotaku.com.au##.meta__social
 tele1.com.tr##.mvp-post-soc-list > li.whatsappalt
 tele1.com.tr##.yenisocial > li:not(.google-news-follow)
 mumsnet.com##.social-sharing-icons
@@ -7928,6 +7933,8 @@ neokur.com#$#.jquery-modal.blocker { display: none!important; }
 ! #Social locker#
 ! #End Social locker
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/64578
+gazetaby.info#@#.social-wrapper
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64610
 us.hola.com#@#.social-nav
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64260

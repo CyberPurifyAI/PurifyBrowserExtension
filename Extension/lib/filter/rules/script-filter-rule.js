@@ -31,7 +31,7 @@
    * Note: LocalScriptRulesService may be undefined, in this case, we mark all rules as remote.
    */
   function getScriptSource(filterId, ruleText) {
-    return filterId === adguard.utils.filters.USER_FILTER_ID ||
+    return filterId === purify.utils.filters.USER_FILTER_ID ||
       (api.LocalScriptRulesService &&
         api.LocalScriptRulesService.isLocal(ruleText))
       ? "local"
@@ -46,7 +46,7 @@
     api.FilterRule.call(this, rule, filterId);
 
     this.script = null;
-    this.whiteListRule = adguard.utils.strings.contains(
+    this.whiteListRule = purify.utils.strings.contains(
       rule,
       api.FilterRule.MASK_SCRIPT_EXCEPTION_RULE
     );
@@ -100,4 +100,4 @@
   ];
 
   api.ScriptFilterRule = ScriptFilterRule;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

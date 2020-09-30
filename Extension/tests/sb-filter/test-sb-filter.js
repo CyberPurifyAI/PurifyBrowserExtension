@@ -1,11 +1,11 @@
 QUnit.test("Calculate hash", (assert) => {
-  const host = adguard.utils.url.getHost("http://test.yandex.ru/someurl.html");
-  const hosts = adguard.safebrowsing.extractHosts(host);
+  const host = purify.utils.url.getHost("http://test.yandex.ru/someurl.html");
+  const hosts = purify.safebrowsing.extractHosts(host);
 
   assert.equal("test.yandex.ru", hosts[0]);
   assert.equal("yandex.ru", hosts[1]);
 
-  const hashes = adguard.safebrowsing.createHashesMap(hosts);
+  const hashes = purify.safebrowsing.createHashesMap(hosts);
 
   assert.equal(
     "test.yandex.ru",
@@ -18,12 +18,12 @@ QUnit.test("Calculate hash", (assert) => {
 });
 
 QUnit.test("Process response", (assert) => {
-  const host = adguard.utils.url.getHost("http://theballoonboss.com");
-  const hosts = adguard.safebrowsing.extractHosts(host);
-  const hashes = adguard.safebrowsing.createHashesMap(hosts);
+  const host = purify.utils.url.getHost("http://theballoonboss.com");
+  const hosts = purify.safebrowsing.extractHosts(host);
+  const hashes = purify.safebrowsing.createHashesMap(hosts);
 
   // eslint-disable-next-line max-len
-  const sbList = adguard.safebrowsing.processSbResponse(
+  const sbList = purify.safebrowsing.processSbResponse(
     "adguard-phishing-shavar:37654:B8DC93970348F0A3E6856C32AC5C04D5655E5EE17D4169EC51A2102FB6D5E12A\nadguard-malware-shavar:35176:AE617C8343E1C79E27515B3F6D6D26413FCE47AE32A73488F9D033B4D2A46B3D\nadguard-phishing-shavar:35071:AE617C8343E1C79E27515B3F6D6D26413FCE47AE32A73488F9D033B4D2A46B3D",
     hashes
   );
@@ -34,7 +34,7 @@ QUnit.test("Process response", (assert) => {
 QUnit.test("Test cache", (assert) => {
   let counter = 0;
   // Mock backend request
-  adguard.backend.lookupSafebrowsing = (shortHashes, successCallback) => {
+  purify.backend.lookupSafebrowsing = (shortHashes, successCallback) => {
     counter += 1;
 
     successCallback({
@@ -45,11 +45,11 @@ QUnit.test("Test cache", (assert) => {
   const done = assert.async();
 
   const testUrl = "http://google.com";
-  adguard.safebrowsing.lookupUrlWithCallback(testUrl, (response) => {
+  purify.safebrowsing.lookupUrlWithCallback(testUrl, (response) => {
     assert.ok(!response);
     assert.equal(counter, 1);
 
-    adguard.safebrowsing.lookupUrlWithCallback(testUrl, (response) => {
+    purify.safebrowsing.lookupUrlWithCallback(testUrl, (response) => {
       assert.ok(!response);
       // Check there was only one request to backend
       assert.equal(counter, 1);
@@ -64,7 +64,7 @@ QUnit.test("Test requests cache", (assert) => {
   let hashesChecked = [];
 
   // Mock backend request
-  adguard.backend.lookupSafebrowsing = (shortHashes, successCallback) => {
+  purify.backend.lookupSafebrowsing = (shortHashes, successCallback) => {
     counter += 1;
     hashesChecked = shortHashes;
 
@@ -78,7 +78,7 @@ QUnit.test("Test requests cache", (assert) => {
   const testUrlOne = "http://google.co.jp";
   const testUrlTwo = "http://yahoo.co.jp";
   const testUrlThree = "http://co.jp";
-  adguard.safebrowsing.lookupUrlWithCallback(testUrlOne, (response) => {
+  purify.safebrowsing.lookupUrlWithCallback(testUrlOne, (response) => {
     assert.ok(!response);
     assert.equal(counter, 1);
     assert.equal(hashesChecked.length, 2);
@@ -87,7 +87,7 @@ QUnit.test("Test requests cache", (assert) => {
 
     hashesChecked = [];
 
-    adguard.safebrowsing.lookupUrlWithCallback(testUrlTwo, (response) => {
+    purify.safebrowsing.lookupUrlWithCallback(testUrlTwo, (response) => {
       assert.ok(!response);
       // One new hash added
       assert.equal(counter, 2);
@@ -96,7 +96,7 @@ QUnit.test("Test requests cache", (assert) => {
 
       hashesChecked = [];
 
-      adguard.safebrowsing.lookupUrlWithCallback(testUrlThree, (response) => {
+      purify.safebrowsing.lookupUrlWithCallback(testUrlThree, (response) => {
         assert.ok(!response);
         // All hashes have been checked already - so there was no request to backend
         assert.equal(counter, 2);

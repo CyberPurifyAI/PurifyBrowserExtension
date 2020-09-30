@@ -16,7 +16,7 @@
  */
 
 (function (adguard, api) {
-  const stringUtils = adguard.utils.strings;
+  const stringUtils = purify.utils.strings;
 
   /**
    * AdGuard scriptlet rule mask
@@ -250,4 +250,4 @@
    * @static ScriptletRule
    */
   api.ScriptletRule = ScriptletRule;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

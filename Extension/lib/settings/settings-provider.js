@@ -32,7 +32,7 @@
    * @returns {Array}
    */
   const collectEnabledFilterIds = () => {
-    const enabledFilters = adguard.filters.getEnabledFilters();
+    const enabledFilters = purify.filters.getEnabledFilters();
     return enabledFilters
       .filter((filter) => !filter.customUrl)
       .map((filter) => filter.filterId);
@@ -43,7 +43,7 @@
    * @returns {CustomFilterInitial} - returns data enough to import custom filter
    */
   const collectCustomFiltersData = () => {
-    const customFilters = adguard.subscriptions.getCustomFilters();
+    const customFilters = purify.subscriptions.getCustomFilters();
     return customFilters.map((filter) => ({
       customUrl: filter.customUrl,
       enabled: filter.enabled,
@@ -53,7 +53,7 @@
   };
 
   const collectEnabledGroupIds = () => {
-    const groups = adguard.subscriptions.getGroups();
+    const groups = purify.subscriptions.getGroups();
     return groups
       .filter((group) => group.enabled)
       .map((group) => group.groupId);
@@ -69,12 +69,12 @@
     const customFiltersData = collectCustomFiltersData();
 
     // Collect whitelist/blacklist domains and whitelist mode
-    const whiteListDomains = adguard.whitelist.getWhiteListedDomains() || [];
-    const blockListDomains = adguard.whitelist.getBlockListedDomains() || [];
-    const defaultWhiteListMode = !!adguard.whitelist.isDefaultMode();
+    const whiteListDomains = purify.whitelist.getWhiteListedDomains() || [];
+    const blockListDomains = purify.whitelist.getBlockListedDomains() || [];
+    const defaultWhiteListMode = !!purify.whitelist.isDefaultMode();
 
     // Collect user rules
-    adguard.userrules.getUserRulesText((content) => {
+    purify.userrules.getUserRulesText((content) => {
       const section = {
         filters: {
           "enabled-groups": enabledGroupIds,
@@ -105,17 +105,17 @@
     // TODO update self search settings on filter status change
     const allowAcceptableAds =
       enabledFilterIds.indexOf(
-        adguard.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID
+        purify.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID
       ) >= 0;
 
     const section = {
       "general-settings": {
-        "app-language": adguard.app.getLocale(),
+        "app-language": purify.app.getLocale(),
         "allow-acceptable-ads": allowAcceptableAds,
-        "show-blocked-ads-count": adguard.settings.showPageStatistic(),
-        "autodetect-filters": adguard.settings.isAutodetectFilters(),
-        "safebrowsing-enabled": adguard.settings.safebrowsingInfoEnabled(),
-        "filters-update-period": adguard.settings.getFiltersUpdatePeriod(),
+        "show-blocked-ads-count": purify.settings.showPageStatistic(),
+        "autodetect-filters": purify.settings.isAutodetectFilters(),
+        "safebrowsing-enabled": purify.settings.safebrowsingInfoEnabled(),
+        "filters-update-period": purify.settings.getFiltersUpdatePeriod(),
       },
     };
 
@@ -129,11 +129,11 @@
   const loadExtensionSpecificSettingsSection = function (callback) {
     const section = {
       "extension-specific-settings": {
-        "use-optimized-filters": adguard.settings.isUseOptimizedFiltersEnabled(),
-        "collect-hits-count": adguard.settings.collectHitsCount(),
-        "show-context-menu": adguard.settings.showContextMenu(),
-        "show-info-about-adguard": adguard.settings.isShowInfoAboutAdguardFullVersion(),
-        "show-app-updated-info": adguard.settings.isShowAppUpdatedNotification(),
+        "use-optimized-filters": purify.settings.isUseOptimizedFiltersEnabled(),
+        "collect-hits-count": purify.settings.collectHitsCount(),
+        "show-context-menu": purify.settings.showContextMenu(),
+        "show-info-about-adguard": purify.settings.isShowInfoAboutAdguardFullVersion(),
+        "show-app-updated-info": purify.settings.isShowAppUpdatedNotification(),
       },
     };
 
@@ -148,21 +148,21 @@
   const applyGeneralSettingsSection = function (section, callback) {
     const set = section["general-settings"];
 
-    adguard.settings.changeShowPageStatistic(!!set["show-blocked-ads-count"]);
-    adguard.settings.changeAutodetectFilters(!!set["autodetect-filters"]);
-    adguard.settings.changeEnableSafebrowsing(!!set["safebrowsing-enabled"]);
-    adguard.settings.setFiltersUpdatePeriod(set["filters-update-period"]);
+    purify.settings.changeShowPageStatistic(!!set["show-blocked-ads-count"]);
+    purify.settings.changeAutodetectFilters(!!set["autodetect-filters"]);
+    purify.settings.changeEnableSafebrowsing(!!set["safebrowsing-enabled"]);
+    purify.settings.setFiltersUpdatePeriod(set["filters-update-period"]);
 
     if (set["allow-acceptable-ads"]) {
-      adguard.filters.addAndEnableFilters(
-        [adguard.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID],
+      purify.filters.addAndEnableFilters(
+        [purify.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID],
         () => {
           callback(true);
         }
       );
     } else {
-      adguard.filters.disableFilters([
-        adguard.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID,
+      purify.filters.disableFilters([
+        purify.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID,
       ]);
       callback(true);
     }
@@ -176,15 +176,15 @@
   const applyExtensionSpecificSettingsSection = function (section, callback) {
     const set = section["extension-specific-settings"];
 
-    adguard.settings.changeUseOptimizedFiltersEnabled(
+    purify.settings.changeUseOptimizedFiltersEnabled(
       !!set["use-optimized-filters"]
     );
-    adguard.settings.changeCollectHitsCount(!!set["collect-hits-count"]);
-    adguard.settings.changeShowContextMenu(!!set["show-context-menu"]);
-    adguard.settings.changeShowInfoAboutAdguardFullVersion(
+    purify.settings.changeCollectHitsCount(!!set["collect-hits-count"]);
+    purify.settings.changeShowContextMenu(!!set["show-context-menu"]);
+    purify.settings.changeShowInfoAboutAdguardFullVersion(
       !!set["show-info-about-adguard"]
     );
-    adguard.settings.changeShowAppUpdatedNotification(
+    purify.settings.changeShowAppUpdatedNotification(
       !!set["show-app-updated-info"]
     );
 
@@ -211,7 +211,7 @@
 
     return new Promise((resolve, reject) => {
       const options = { title, trusted };
-      adguard.filters.loadCustomFilter(
+      purify.filters.loadCustomFilter(
         customUrl,
         options,
         (filter) => {
@@ -230,7 +230,7 @@
         promiseAcc.then((acc) =>
           addCustomFilter(customFilterInitial)
             .then((customFilter) => {
-              adguard.console.info(
+              purify.console.info(
                 `Settings sync: Was added custom filter: ${customFilter.customUrl}`
               );
               return [...acc, { error: null, filter: customFilter }];
@@ -238,7 +238,7 @@
             .catch(() => {
               const { customUrl } = customFilterInitial;
               const message = `Settings sync: Some error happened while downloading: ${customUrl}`;
-              adguard.console.info(message);
+              purify.console.info(message);
               return [...acc, { error: message }];
             })
         ),
@@ -250,9 +250,9 @@
    */
   const removeCustomFilters = (filterIds) => {
     filterIds.forEach((filterId) => {
-      adguard.filters.removeFilter(filterId);
+      purify.filters.removeFilter(filterId);
     });
-    adguard.console.info(
+    purify.console.info(
       `Settings sync: Next filters were removed: ${filterIds}`
     );
   };
@@ -277,7 +277,7 @@
    * @returns {Promise<any>} Promise object which represents array with filters
    */
   const syncCustomFilters = (customFiltersInitials) => {
-    const presentCustomFilters = adguard.subscriptions.getCustomFilters();
+    const presentCustomFilters = purify.subscriptions.getCustomFilters();
 
     const enrichedFiltersInitials = customFiltersInitials.map((filterToAdd) => {
       presentCustomFilters.forEach((existingFilter) => {
@@ -317,7 +317,7 @@
         const addedCustomFiltersIds = addedCustomFiltersWithoutError.map(
           (f) => f.filterId
         );
-        adguard.console.info(
+        purify.console.info(
           `Settings sync: Were added custom filters: ${addedCustomFiltersIds}`
         );
 
@@ -333,14 +333,14 @@
    */
   const syncEnabledFilters = (filterIds) =>
     new Promise((resolve) => {
-      adguard.filters.addAndEnableFilters(filterIds, () => {
-        const enabledFilters = adguard.filters.getEnabledFilters();
+      purify.filters.addAndEnableFilters(filterIds, () => {
+        const enabledFilters = purify.filters.getEnabledFilters();
         const filtersToDisable = enabledFilters
           .filter(
             (enabledFilter) => !filterIds.includes(enabledFilter.filterId)
           )
           .map((filter) => filter.filterId);
-        adguard.filters.disableFilters(filtersToDisable);
+        purify.filters.disableFilters(filtersToDisable);
         resolve();
       });
     });
@@ -351,21 +351,21 @@
    */
   const syncEnabledGroups = (enabledGroups) => {
     enabledGroups.forEach((groupId) => {
-      adguard.filters.enableGroup(groupId);
+      purify.filters.enableGroup(groupId);
     });
-    adguard.console.info(
+    purify.console.info(
       `Settings sync: Next groups were enabled: ${enabledGroups}`
     );
 
     // disable groups not listed in the imported list
-    const groups = adguard.subscriptions.getGroups();
+    const groups = purify.subscriptions.getGroups();
 
     const groupIdsToDisable = groups
       .map((group) => group.groupId)
       .filter((groupId) => !enabledGroups.includes(groupId));
 
     groupIdsToDisable.forEach((groupId) => {
-      adguard.filters.disableGroup(groupId);
+      purify.filters.disableGroup(groupId);
     });
   };
 
@@ -380,7 +380,7 @@
     const blacklistDomains = whiteListSection["inverted-domains"] || [];
 
     // Apply whitelist/blacklist domains and whitelist mode
-    adguard.whitelist.configure(
+    purify.whitelist.configure(
       whitelistDomains,
       blacklistDomains,
       !whiteListSection.inverted
@@ -390,7 +390,7 @@
     const userRules = userFilterSection.rules || "";
 
     // Apply user rules
-    adguard.userrules.updateUserRulesText(userRules);
+    purify.userrules.updateUserRulesText(userRules);
 
     // Apply custom filters
     const customFiltersData = section.filters["custom-filters"] || [];
@@ -429,7 +429,7 @@
         callback(true);
       })
       .catch((err) => {
-        adguard.console.error(err);
+        purify.console.error(err);
       });
   };
 
@@ -465,13 +465,13 @@
   const applySettingsBackupJson = function (json, cb) {
     function onFinished(success) {
       if (success) {
-        adguard.console.info("Settings import finished successfully");
+        purify.console.info("Settings import finished successfully");
       } else {
-        adguard.console.error("Error importing settings");
+        purify.console.error("Error importing settings");
       }
 
-      adguard.listeners.notifyListeners(
-        adguard.listeners.SETTINGS_UPDATED,
+      purify.listeners.notifyListeners(
+        purify.listeners.SETTINGS_UPDATED,
         success
       );
 
@@ -485,13 +485,13 @@
     try {
       input = JSON.parse(json);
     } catch (ex) {
-      adguard.console.error("Error parsing input json {0}, {1}", json, ex);
+      purify.console.error("Error parsing input json {0}, {1}", json, ex);
       onFinished(false);
       return;
     }
 
     if (!input || input["protocol-version"] !== BACKUP_PROTOCOL_VERSION) {
-      adguard.console.error("Json input is invalid {0}", json);
+      purify.console.error("Json input is invalid {0}", json);
       onFinished(false);
       return;
     }
@@ -527,4 +527,4 @@
      */
     applySettingsBackup: applySettingsBackupJson,
   };
-})(adguard.sync, adguard);
+})(purify.sync, adguard);

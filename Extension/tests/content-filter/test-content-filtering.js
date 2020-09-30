@@ -1,21 +1,21 @@
 /* global QUnit */
 
-adguard.prefs.features.responseContentFilteringSupported = true;
+purify.prefs.features.responseContentFilteringSupported = true;
 
-adguard.webRequestService = adguard.webRequestService || {};
-adguard.webRequestService.getContentRules = function () {
-  return [new adguard.rules.ContentFilterRule("example.org$$p")];
+purify.webRequestService = purify.webRequestService || {};
+purify.webRequestService.getContentRules = function () {
+  return [new purify.rules.ContentFilterRule("example.org$$p")];
 };
-adguard.webRequestService.getRuleForRequest = function () {
+purify.webRequestService.getRuleForRequest = function () {
   return null;
 };
 
-adguard.webRequest = adguard.webRequest || {};
+purify.webRequest = purify.webRequest || {};
 
 var content;
 var singleton;
 
-adguard.webRequest.filterResponseData = function () {
+purify.webRequest.filterResponseData = function () {
   if (singleton) {
     return singleton;
   }
@@ -96,16 +96,16 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   });
   let textDecoderIso8859 = new TextDecoder("windows-1252");
 
-  let filter = adguard.webRequest.filterResponseData(1);
+  let filter = purify.webRequest.filterResponseData(1);
   let received;
   let data;
 
   data = "some data";
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -117,11 +117,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = "utf-8 in header";
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -133,11 +133,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = "Тест windows-1251 in header";
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -149,11 +149,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = "unsupported charset in header - request is skipped";
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -163,11 +163,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.notOk(filter.receive());
 
   data = "no charset in header";
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -179,11 +179,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = 'Тест charset in data <meta charset="UTF-8">';
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -195,11 +195,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = 'Тест charset in data <meta charset="windows-1251">';
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -211,11 +211,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = 'Charset in data <meta charset="windows-1252">';
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -227,11 +227,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = 'Charset in data <meta charset="iso-8859-1">';
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -244,11 +244,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
 
   data =
     'Тест charset in data <meta http-equiv="content-type" content="text/html; charset=windows-1251">';
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",
@@ -260,11 +260,11 @@ QUnit.test("Test content filtering - charsets", function (assert) {
   assert.equal(received, data);
 
   data = 'unsupported charset in data <meta charset="koi8-r">';
-  adguard.contentFiltering.apply(
+  purify.contentFiltering.apply(
     {},
     "http://example.org",
     null,
-    adguard.RequestTypes.DOCUMENT,
+    purify.RequestTypes.DOCUMENT,
     1,
     200,
     "GET",

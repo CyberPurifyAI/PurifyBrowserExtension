@@ -1,6 +1,6 @@
 /* global TextDecoder, TextEncoder, DOMParser */
 
-adguard.contentFiltering = (function (adguard) {
+purify.contentFiltering = (function (purify) {
   var DEFAULT_CHARSET = "utf-8";
   var LATIN_1 = "iso-8859-1";
   var SUPPORTED_CHARSETS = [
@@ -19,11 +19,11 @@ adguard.contentFiltering = (function (adguard) {
    * @constructor
    */
   var ContentFilter = function (requestId, requestType, charset) {
-    this.filter = adguard.webRequest.filterResponseData(requestId);
+    this.filter = purify.webRequest.filterResponseData(requestId);
     this.requestType = requestType;
 
     this.content = "";
-    this.contentDfd = new adguard.utils.Promise();
+    this.contentDfd = new purify.utils.Promise();
 
     this.initEncoders = () => {
       let set = this.charset ? this.charset : DEFAULT_CHARSET;
@@ -55,8 +55,8 @@ adguard.contentFiltering = (function (adguard) {
            * to detect charset from page <meta> tags
            */
           if (
-            this.requestType === adguard.RequestTypes.DOCUMENT ||
-            this.requestType === adguard.RequestTypes.SUBDOCUMENT
+            this.requestType === purify.RequestTypes.DOCUMENT ||
+            this.requestType === purify.RequestTypes.SUBDOCUMENT
           ) {
             charset = this.parseCharset(event.data);
           }
@@ -76,7 +76,7 @@ adguard.contentFiltering = (function (adguard) {
             this.disconnect(event.data);
           }
         } catch (e) {
-          adguard.console.warn(e);
+          purify.console.warn(e);
           // on error we disconnect the filter from the request
           this.disconnect(event.data);
         }
@@ -163,7 +163,7 @@ adguard.contentFiltering = (function (adguard) {
           try {
             content = callback(content);
           } catch (ex) {
-            adguard.console.error(
+            purify.console.error(
               "Error while applying content filter to {0}. Error: {1}",
               requestUrl,
               ex
@@ -172,7 +172,7 @@ adguard.contentFiltering = (function (adguard) {
           contentFilter.write(content);
         },
         function (error) {
-          adguard.console.error(
+          purify.console.error(
             "An error has occurred in content filter for request {0} to {1} - {2}. Error: {3}",
             requestId,
             requestUrl,
@@ -187,7 +187,7 @@ adguard.contentFiltering = (function (adguard) {
 
   var DocumentParser = function () {
     if (typeof DOMParser === "undefined") {
-      adguard.console.info("DOMParser object is not defined");
+      purify.console.info("DOMParser object is not defined");
       this.parse = function () {
         return null;
       };
@@ -239,15 +239,15 @@ adguard.contentFiltering = (function (adguard) {
   var replaceRuleAllowedRequestTypeMask = (function () {
     var mask = 0;
     var replaceRuleAllowedRequestTypes = [
-      adguard.RequestTypes.DOCUMENT,
-      adguard.RequestTypes.SUBDOCUMENT,
-      adguard.RequestTypes.SCRIPT,
-      adguard.RequestTypes.STYLESHEET,
-      adguard.RequestTypes.XMLHTTPREQUEST,
+      purify.RequestTypes.DOCUMENT,
+      purify.RequestTypes.SUBDOCUMENT,
+      purify.RequestTypes.SCRIPT,
+      purify.RequestTypes.STYLESHEET,
+      purify.RequestTypes.XMLHTTPREQUEST,
     ];
     for (var i = 0; i < replaceRuleAllowedRequestTypes.length; i++) {
       var requestType = replaceRuleAllowedRequestTypes[i];
-      mask |= adguard.rules.UrlFilterRule.contentTypes[requestType];
+      mask |= purify.rules.UrlFilterRule.contentTypes[requestType];
     }
     return mask;
   })();
@@ -293,13 +293,13 @@ adguard.contentFiltering = (function (adguard) {
   var shouldApplyReplaceRule = function (requestType, contentType) {
     // In case of .features or .features.responseContentFilteringSupported are not defined
     var responseContentFilteringSupported =
-      adguard.prefs.features &&
-      adguard.prefs.features.responseContentFilteringSupported;
+      purify.prefs.features &&
+      purify.prefs.features.responseContentFilteringSupported;
     if (!responseContentFilteringSupported) {
       return false;
     }
 
-    var requestTypeMask = adguard.rules.UrlFilterRule.contentTypes[requestType];
+    var requestTypeMask = purify.rules.UrlFilterRule.contentTypes[requestType];
     if (
       (requestTypeMask & replaceRuleAllowedRequestTypeMask) ===
       requestTypeMask
@@ -307,7 +307,7 @@ adguard.contentFiltering = (function (adguard) {
       return true;
     }
 
-    if (requestType === adguard.RequestTypes.OTHER && contentType) {
+    if (requestType === purify.RequestTypes.OTHER && contentType) {
       for (var i = 0; i < replaceRuleAllowedContentTypes.length; i++) {
         if (contentType.indexOf(replaceRuleAllowedContentTypes[i]) === 0) {
           return true;
@@ -325,15 +325,15 @@ adguard.contentFiltering = (function (adguard) {
   var shouldApplyContentRules = function (requestType) {
     // In case of .features or .features.responseContentFilteringSupported are not defined
     var responseContentFilteringSupported =
-      adguard.prefs.features &&
-      adguard.prefs.features.responseContentFilteringSupported;
+      purify.prefs.features &&
+      purify.prefs.features.responseContentFilteringSupported;
     if (!responseContentFilteringSupported) {
       return false;
     }
 
     return (
-      requestType === adguard.RequestTypes.DOCUMENT ||
-      requestType === adguard.RequestTypes.SUBDOCUMENT
+      requestType === purify.RequestTypes.DOCUMENT ||
+      requestType === purify.RequestTypes.SUBDOCUMENT
     );
   };
 
@@ -368,10 +368,10 @@ adguard.contentFiltering = (function (adguard) {
           var element = elements[j];
           if (element.parentNode && deleted.indexOf(element) < 0) {
             element.parentNode.removeChild(element);
-            adguard.requestContextStorage.bindContentRule(
+            purify.requestContextStorage.bindContentRule(
               requestId,
               rule,
-              adguard.utils.strings.elementToString(element)
+              purify.utils.strings.elementToString(element)
             );
             deleted.push(element);
           }
@@ -426,7 +426,7 @@ adguard.contentFiltering = (function (adguard) {
     }
 
     if (appliedRules.length > 0) {
-      adguard.requestContextStorage.update(requestId, {
+      purify.requestContextStorage.update(requestId, {
         replaceRules: appliedRules,
       });
     }
@@ -521,7 +521,7 @@ adguard.contentFiltering = (function (adguard) {
     contentType
   ) {
     if (statusCode !== 200) {
-      adguard.console.debug(
+      purify.console.debug(
         "Skipping request to {0} - {1} with status {2}",
         requestUrl,
         requestType,
@@ -531,7 +531,7 @@ adguard.contentFiltering = (function (adguard) {
     }
 
     if (method !== "GET" && method !== "POST") {
-      adguard.console.debug(
+      purify.console.debug(
         "Skipping request to {0} - {1} with method {2}",
         requestUrl,
         requestType,
@@ -543,7 +543,7 @@ adguard.contentFiltering = (function (adguard) {
     var charset = parseCharsetFromHeader(contentType);
     if (charset && SUPPORTED_CHARSETS.indexOf(charset) < 0) {
       // Charset is detected and it is not supported
-      adguard.console.warn(
+      purify.console.warn(
         "Skipping request to {0} - {1} with Content-Type {2}",
         requestUrl,
         requestType,
@@ -556,14 +556,14 @@ adguard.contentFiltering = (function (adguard) {
     let replaceRules = null;
 
     if (shouldApplyContentRules(requestType)) {
-      contentRules = adguard.webRequestService.getContentRules(tab, requestUrl);
+      contentRules = purify.webRequestService.getContentRules(tab, requestUrl);
       if (contentRules && contentRules.length === 0) {
         contentRules = null;
       }
     }
 
     if (shouldApplyReplaceRule(requestType, contentType)) {
-      replaceRules = adguard.webRequestService.getReplaceRules(
+      replaceRules = purify.webRequestService.getReplaceRules(
         tab,
         requestUrl,
         referrerUrl,
@@ -579,7 +579,7 @@ adguard.contentFiltering = (function (adguard) {
     }
 
     // Call this method to prevent removing context on request complete/error event
-    adguard.requestContextStorage.onContentModificationStarted(requestId);
+    purify.requestContextStorage.onContentModificationStarted(requestId);
 
     responseContentHandler.handleResponse(
       requestId,
@@ -599,7 +599,7 @@ adguard.contentFiltering = (function (adguard) {
             content
           );
         } finally {
-          adguard.requestContextStorage.onContentModificationFinished(
+          purify.requestContextStorage.onContentModificationFinished(
             requestId
           );
         }
@@ -610,4 +610,4 @@ adguard.contentFiltering = (function (adguard) {
   return {
     apply: apply,
   };
-})(adguard);
+})(purify);

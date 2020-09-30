@@ -6,9 +6,9 @@ const {
 } = adguard;
 
 // Mocks extension api;
-adguard.getURL = (url) => url;
-adguard.tabs = {};
-adguard.tabs.getActive = () => {};
+purify.getURL = (url) => url;
+purify.tabs = {};
+purify.tabs.getActive = () => {};
 
 test("document filter service returns url for not trusted url", (assert) => {
   const url = "https://example.org/";

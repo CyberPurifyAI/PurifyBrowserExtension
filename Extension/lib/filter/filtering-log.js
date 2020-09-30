@@ -18,22 +18,22 @@
 /**
  * Object for log http requests
  */
-adguard.filteringLog = (function (adguard) {
+purify.filteringLog = (function (purify) {
   "use strict";
 
   const REQUESTS_SIZE_PER_TAB = 1000;
 
-  const backgroundTabId = adguard.BACKGROUND_TAB_ID;
+  const backgroundTabId = purify.BACKGROUND_TAB_ID;
   const backgroundTab = {
     tabId: backgroundTabId,
-    title: adguard.i18n.getMessage("background_tab_title"),
+    title: purify.i18n.getMessage("background_tab_title"),
   };
 
   const tabsInfoMap = Object.create(null);
   let openedFilteringLogsPage = 0;
 
   // Force to add background tab if it's defined
-  if (adguard.prefs.features.hasBackgroundTab) {
+  if (purify.prefs.features.hasBackgroundTab) {
     tabsInfoMap[backgroundTabId] = backgroundTab;
   }
 
@@ -46,7 +46,7 @@ adguard.filteringLog = (function (adguard) {
     tabInfo.tabId = tab.tabId;
     tabInfo.title = tab.title;
     tabInfo.isExtensionTab =
-      tab.url && tab.url.indexOf(adguard.app.getExtensionUrl()) === 0;
+      tab.url && tab.url.indexOf(purify.app.getExtensionUrl()) === 0;
     tabsInfoMap[tab.tabId] = tabInfo;
     return tabInfo;
   }
@@ -64,7 +64,7 @@ adguard.filteringLog = (function (adguard) {
 
     const tabInfo = updateTabInfo(tab);
     if (tabInfo) {
-      adguard.listeners.notifyListeners(adguard.listeners.TAB_ADDED, tabInfo);
+      purify.listeners.notifyListeners(purify.listeners.TAB_ADDED, tabInfo);
     }
   }
 
@@ -80,7 +80,7 @@ adguard.filteringLog = (function (adguard) {
 
     const tabInfo = tabsInfoMap[tabId];
     if (tabInfo) {
-      adguard.listeners.notifyListeners(adguard.listeners.TAB_CLOSE, tabInfo);
+      purify.listeners.notifyListeners(purify.listeners.TAB_CLOSE, tabInfo);
     }
     delete tabsInfoMap[tabId];
   }
@@ -97,13 +97,13 @@ adguard.filteringLog = (function (adguard) {
 
     const tabInfo = updateTabInfo(tab);
     if (tabInfo) {
-      adguard.listeners.notifyListeners(adguard.listeners.TAB_UPDATE, tabInfo);
+      purify.listeners.notifyListeners(purify.listeners.TAB_UPDATE, tabInfo);
     }
   }
 
   const isScriptRule = (rule) =>
-    rule instanceof adguard.rules.ScriptFilterRule ||
-    rule instanceof adguard.rules.ScriptletRule;
+    rule instanceof purify.rules.ScriptFilterRule ||
+    rule instanceof purify.rules.ScriptletRule;
 
   /**
    * Copy some properties from source rule to destination rule
@@ -126,13 +126,13 @@ adguard.filteringLog = (function (adguard) {
     if (sourceRule.documentLevelRule) {
       destinationRule.documentLevelRule = sourceRule.documentLevelRule;
     }
-    if (sourceRule instanceof adguard.rules.ContentFilterRule) {
+    if (sourceRule instanceof purify.rules.ContentFilterRule) {
       destinationRule.contentRule = true;
-    } else if (sourceRule instanceof adguard.rules.CssFilterRule) {
+    } else if (sourceRule instanceof purify.rules.CssFilterRule) {
       destinationRule.cssRule = true;
     } else if (isScriptRule(sourceRule)) {
       destinationRule.scriptRule = true;
-    } else if (sourceRule instanceof adguard.rules.UrlFilterRule) {
+    } else if (sourceRule instanceof purify.rules.UrlFilterRule) {
       destinationRule.whiteListRule = sourceRule.whiteListRule;
       destinationRule.cspRule = sourceRule.isCspRule();
       destinationRule.cspDirective = sourceRule.cspDirective;
@@ -184,8 +184,8 @@ adguard.filteringLog = (function (adguard) {
       tabInfo.filteringEvents.splice(1, 1);
     }
 
-    adguard.listeners.notifyListeners(
-      adguard.listeners.LOG_EVENT_ADDED,
+    purify.listeners.notifyListeners(
+      purify.listeners.LOG_EVENT_ADDED,
       tabInfo,
       filteringEvent
     );
@@ -225,8 +225,8 @@ adguard.filteringLog = (function (adguard) {
       return;
     }
 
-    const requestDomain = adguard.utils.url.getDomainName(requestUrl);
-    const frameDomain = adguard.utils.url.getDomainName(frameUrl);
+    const requestDomain = purify.utils.url.getDomainName(requestUrl);
+    const frameDomain = purify.utils.url.getDomainName(frameUrl);
 
     const filteringEvent = {
       eventId,
@@ -235,7 +235,7 @@ adguard.filteringLog = (function (adguard) {
       frameUrl,
       frameDomain,
       requestType,
-      requestThirdParty: adguard.utils.url.isThirdPartyRequest(
+      requestThirdParty: purify.utils.url.isThirdPartyRequest(
         requestUrl,
         frameUrl
       ),
@@ -277,12 +277,12 @@ adguard.filteringLog = (function (adguard) {
       return;
     }
 
-    const frameDomain = adguard.utils.url.getDomainName(frameUrl);
+    const frameDomain = purify.utils.url.getDomainName(frameUrl);
     const filteringEvent = {
       element:
         typeof element === "string"
           ? element
-          : adguard.utils.strings.elementToString(element),
+          : purify.utils.strings.elementToString(element),
       frameUrl,
       frameDomain,
       requestType,
@@ -310,7 +310,7 @@ adguard.filteringLog = (function (adguard) {
     if (!tabInfo) {
       return;
     }
-    const frameDomain = adguard.utils.url.getDomainName(frameUrl);
+    const frameDomain = purify.utils.url.getDomainName(frameUrl);
     const filteringEvent = {
       script: true,
       requestUrl: frameUrl,
@@ -344,8 +344,8 @@ adguard.filteringLog = (function (adguard) {
         const event = events[i];
         if (event.eventId === eventId) {
           addRuleToFilteringEvent(event, requestRule);
-          adguard.listeners.notifyListeners(
-            adguard.listeners.LOG_EVENT_UPDATED,
+          purify.listeners.notifyListeners(
+            purify.listeners.LOG_EVENT_UPDATED,
             tabInfo,
             event
           );
@@ -382,8 +382,8 @@ adguard.filteringLog = (function (adguard) {
         const event = events[i];
         if (event.eventId === eventId) {
           addReplaceRulesToFilteringEvent(event, replaceRules);
-          adguard.listeners.notifyListeners(
-            adguard.listeners.LOG_EVENT_UPDATED,
+          purify.listeners.notifyListeners(
+            purify.listeners.LOG_EVENT_UPDATED,
             tabInfo,
             event
           );
@@ -466,8 +466,8 @@ adguard.filteringLog = (function (adguard) {
         const event = events[i];
         if (event.eventId === eventId) {
           event.stealthActions = actions;
-          adguard.listeners.notifyListeners(
-            adguard.listeners.LOG_EVENT_UPDATED,
+          purify.listeners.notifyListeners(
+            purify.listeners.LOG_EVENT_UPDATED,
             tabInfo,
             event
           );
@@ -485,7 +485,7 @@ adguard.filteringLog = (function (adguard) {
     const tabInfo = tabsInfoMap[tabId];
     if (tabInfo) {
       delete tabInfo.filteringEvents;
-      adguard.listeners.notifyListeners(adguard.listeners.TAB_RESET, tabInfo);
+      purify.listeners.notifyListeners(purify.listeners.TAB_RESET, tabInfo);
     }
   };
 
@@ -494,7 +494,7 @@ adguard.filteringLog = (function (adguard) {
    * @param callback
    */
   const synchronizeOpenTabs = function (callback) {
-    adguard.tabs.getAll((tabs) => {
+    purify.tabs.getAll((tabs) => {
       // As Object.keys() returns strings we convert them to integers,
       // because tabId is integer in extension API
       const tabIdsToRemove = Object.keys(tabsInfoMap).map((id) =>
@@ -565,9 +565,9 @@ adguard.filteringLog = (function (adguard) {
     synchronizeOpenTabs();
 
     // Bind to tab events
-    adguard.tabs.onCreated.addListener(addTab);
-    adguard.tabs.onUpdated.addListener(updateTab);
-    adguard.tabs.onRemoved.addListener((tab) => {
+    purify.tabs.onCreated.addListener(addTab);
+    purify.tabs.onUpdated.addListener(updateTab);
+    purify.tabs.onRemoved.addListener((tab) => {
       removeTabById(tab.tabId);
     });
   };
@@ -590,4 +590,4 @@ adguard.filteringLog = (function (adguard) {
     onOpenFilteringLogPage,
     onCloseFilteringLogPage,
   };
-})(adguard);
+})(purify);

@@ -2,7 +2,7 @@
  * Object that manages user settings.
  * @constructor
  */
-adguard.notifications = (function (adguard) {
+purify.notifications = (function (purify) {
   "use strict";
 
   const VIEWED_NOTIFICATIONS = "viewed-notifications";
@@ -23,14 +23,14 @@ adguard.notifications = (function (adguard) {
     to: "1 January 2020 00:00:00",
     type: "animated",
     get icons() {
-      return adguard.lazyGet(newYearNotification, "icons", () => ({
+      return purify.lazyGet(newYearNotification, "icons", () => ({
         ICON_GREEN: {
-          19: adguard.getURL("icons/green-19-ny.png"),
-          38: adguard.getURL("icons/green-38-ny.png"),
+          19: purify.getURL("icons/green-19-ny.png"),
+          38: purify.getURL("icons/green-38-ny.png"),
         },
         ICON_GRAY: {
-          19: adguard.getURL("icons/gray-19-ny.png"),
-          38: adguard.getURL("icons/gray-38-ny.png"),
+          19: purify.getURL("icons/gray-19-ny.png"),
+          38: purify.getURL("icons/gray-38-ny.png"),
         },
       }));
     },
@@ -60,10 +60,10 @@ adguard.notifications = (function (adguard) {
    * If it was not shown yet, initialized with the current time.
    */
   const getLastNotificationTime = function () {
-    let lastTime = adguard.localStorage.getItem(LAST_NOTIFICATION_TIME) || 0;
+    let lastTime = purify.localStorage.getItem(LAST_NOTIFICATION_TIME) || 0;
     if (lastTime === 0) {
       lastTime = new Date().getTime();
-      adguard.localStorage.setItem(LAST_NOTIFICATION_TIME, lastTime);
+      purify.localStorage.setItem(LAST_NOTIFICATION_TIME, lastTime);
     }
     return lastTime;
   };
@@ -134,12 +134,12 @@ adguard.notifications = (function (adguard) {
 
     if (currentNotification) {
       const viewedNotifications =
-        adguard.localStorage.getItem(VIEWED_NOTIFICATIONS) || [];
+        purify.localStorage.getItem(VIEWED_NOTIFICATIONS) || [];
       const { id } = currentNotification;
       if (!viewedNotifications.includes(id)) {
         viewedNotifications.push(id);
-        adguard.localStorage.setItem(VIEWED_NOTIFICATIONS, viewedNotifications);
-        adguard.tabs.getActive(adguard.ui.updateTabIconAndContextMenu);
+        purify.localStorage.setItem(VIEWED_NOTIFICATIONS, viewedNotifications);
+        purify.tabs.getActive(purify.ui.updateTabIconAndContextMenu);
         currentNotification = null;
       }
     }
@@ -148,7 +148,7 @@ adguard.notifications = (function (adguard) {
   /**
    * Finds out notification for current time and checks if notification wasn't shown yet
    *
-   * @param {*} - (optional) frameInfo from `adguard.frames`
+   * @param {*} - (optional) frameInfo from `purify.frames`
    * @returns {void|Notification} - notification
    */
   const getCurrentNotification = function (frameInfo) {
@@ -169,7 +169,7 @@ adguard.notifications = (function (adguard) {
 
     const notificationsKeys = Object.keys(notifications);
     const viewedNotifications =
-      adguard.localStorage.getItem(VIEWED_NOTIFICATIONS) || [];
+      purify.localStorage.getItem(VIEWED_NOTIFICATIONS) || [];
 
     for (let i = 0; i < notificationsKeys.length; i += 1) {
       const notificationKey = notificationsKeys[i];
@@ -193,4 +193,4 @@ adguard.notifications = (function (adguard) {
     getCurrentNotification,
     setNotificationViewed,
   };
-})(adguard);
+})(purify);

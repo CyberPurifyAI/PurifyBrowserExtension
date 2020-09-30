@@ -4,7 +4,7 @@
  * Chromium windows implementation
  * @type {{onCreated, onRemoved, onUpdated, create, getLastFocused, forEachNative}}
  */
-adguard.windowsImpl = (function (adguard) {
+purify.windowsImpl = (function (purify) {
   "use strict";
 
   function toWindowFromChromeWindow(chromeWin) {
@@ -59,9 +59,9 @@ adguard.windowsImpl = (function (adguard) {
     })();
   }
 
-  var onCreatedChannel = adguard.utils.channels.newChannel();
-  var onRemovedChannel = adguard.utils.channels.newChannel();
-  var onUpdatedChannel = adguard.utils.channels.newChannel();
+  var onCreatedChannel = purify.utils.channels.newChannel();
+  var onRemovedChannel = purify.utils.channels.newChannel();
+  var onUpdatedChannel = purify.utils.channels.newChannel();
 
   // https://developer.chrome.com/extensions/windows#event-onCreated
   // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/windows/onCreated
@@ -112,13 +112,13 @@ adguard.windowsImpl = (function (adguard) {
 
     forEachNative: forEachNative,
   };
-})(adguard);
+})(purify);
 
 /**
  * Chromium tabs implementation
  * @type {{onCreated, onRemoved, onUpdated, onActivated, create, remove, activate, reload, sendMessage, getAll, getActive, fromChromeTab}}
  */
-adguard.tabsImpl = (function (adguard) {
+purify.tabsImpl = (function (purify) {
   "use strict";
 
   /**
@@ -132,7 +132,7 @@ adguard.tabsImpl = (function (adguard) {
   function checkLastError(operation) {
     var ex = browser.runtime.lastError;
     if (ex) {
-      adguard.console.error(
+      purify.console.error(
         "Error while executing operation{1}: {0}",
         ex,
         operation ? " '" + operation + "'" : ""
@@ -153,25 +153,25 @@ adguard.tabsImpl = (function (adguard) {
   }
 
   // https://developer.chrome.com/extensions/tabs#event-onCreated
-  var onCreatedChannel = adguard.utils.channels.newChannel();
+  var onCreatedChannel = purify.utils.channels.newChannel();
   browser.tabs.onCreated.addListener(function (chromeTab) {
     onCreatedChannel.notify(toTabFromChromeTab(chromeTab));
   });
 
   // https://developer.chrome.com/extensions/tabs#event-onCreated
-  var onRemovedChannel = adguard.utils.channels.newChannel();
+  var onRemovedChannel = purify.utils.channels.newChannel();
   browser.tabs.onRemoved.addListener(function (tabId) {
     onRemovedChannel.notify(tabId);
   });
 
-  var onUpdatedChannel = adguard.utils.channels.newChannel();
+  var onUpdatedChannel = purify.utils.channels.newChannel();
   // https://developer.chrome.com/extensions/tabs#event-onUpdated
   browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     onUpdatedChannel.notify(toTabFromChromeTab(tab));
   });
 
   // https://developer.chrome.com/extensions/tabs#event-onActivated
-  var onActivatedChannel = adguard.utils.channels.newChannel();
+  var onActivatedChannel = purify.utils.channels.newChannel();
   browser.tabs.onActivated.addListener(function (activeInfo) {
     onActivatedChannel.notify(activeInfo.tabId);
   });
@@ -216,9 +216,9 @@ adguard.tabsImpl = (function (adguard) {
     if (
       createData.type === "popup" &&
       // Does not work properly in Anniversary builds
-      !adguard.utils.browser.isEdgeBeforeCreatorsUpdate() &&
+      !purify.utils.browser.isEdgeBeforeCreatorsUpdate() &&
       // Isn't supported by Android WebExt
-      !adguard.prefs.mobile
+      !purify.prefs.mobile
     ) {
       // https://developer.chrome.com/extensions/windows#method-create
       // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/windows/create
@@ -245,7 +245,7 @@ adguard.tabsImpl = (function (adguard) {
            * There is only one window whole time
            * Thats why if we try to provide windowId, method fails with error.
            */
-          windowId: !adguard.prefs.mobile ? win.id : undefined,
+          windowId: !purify.prefs.mobile ? win.id : undefined,
           url: url,
           active: active,
         },
@@ -319,7 +319,7 @@ adguard.tabsImpl = (function (adguard) {
 
   var reload = function (tabId, url) {
     if (url) {
-      if (adguard.utils.browser.isEdgeBrowser()) {
+      if (purify.utils.browser.isEdgeBrowser()) {
         /**
          * For security reasons, in Firefox and Edge, this may not be a privileged URL.
          * So passing any of the following URLs will fail, with runtime.lastError being set to an error message:
@@ -426,7 +426,7 @@ adguard.tabsImpl = (function (adguard) {
    * See https://stackoverflow.com/questions/43665470/cannot-call-chrome-tabs-executescript-into-preloaded-tab-is-this-a-bug-in-chr
    */
   const noopCallback = function () {
-    adguard.runtime.lastError;
+    purify.runtime.lastError;
   };
 
   /**
@@ -559,4 +559,4 @@ adguard.tabsImpl = (function (adguard) {
 
     fromChromeTab: toTabFromChromeTab,
   };
-})(adguard);
+})(purify);

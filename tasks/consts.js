@@ -31,21 +31,21 @@ export const LOCAL_SCRIPT_RULES_COMMENT =
   "3. We allow only custom rules got from the User filter (which user creates manually) or from this DEFAULT_SCRIPT_RULES object";
 
 // Firefox extension IDs
-export const FIREFOX_EXTENSION_ID_DEV = "adguardadblockerdev@adguard.com";
-export const FIREFOX_EXTENSION_ID_BETA = "adguardadblockerbeta@adguard.com";
-export const FIREFOX_EXTENSION_ID_RELEASE = "adguardadblocker@adguard.com";
+export const FIREFOX_EXTENSION_ID_DEV = "adguardadblockerdev@purify.com";
+export const FIREFOX_EXTENSION_ID_BETA = "adguardadblockerbeta@purify.com";
+export const FIREFOX_EXTENSION_ID_RELEASE = "adguardadblocker@purify.com";
 
 // Update urls
 export const CHROME_UPDATE_URL =
-  "https://static.adguard.com/extensions/adguardadblocker/beta/update.xml";
+  "https://static.purify.com/extensions/adguardadblocker/beta/update.xml";
 export const FIREFOX_WEBEXT_UPDATE_URL =
-  "https://static.adguard.com/extensions/adguardadblocker/beta/update.json";
+  "https://static.purify.com/extensions/adguardadblocker/beta/update.json";
 
 // Codebase urls
 export const CHROME_CODEBASE_URL =
-  "https://static.adguard.com/extensions/adguardadblocker/beta/chrome.crx";
+  "https://static.purify.com/extensions/adguardadblocker/beta/chrome.crx";
 export const FIREFOX_CODEBASE_URL =
-  "https://static.adguard.com/extensions/adguardadblocker/beta/firefox.xpi";
+  "https://static.purify.com/extensions/adguardadblocker/beta/firefox.xpi";
 
 export const FIREFOX_WEBEXT = "FIREFOX_WEBEXT";
 

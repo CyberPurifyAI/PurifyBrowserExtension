@@ -8,7 +8,7 @@ QUnit.test("Test Ring Buffer", (assert) => {
   const bufferSize = 128;
 
   const key1 = "key1";
-  const ringBuffer = new adguard.utils.RingBuffer(bufferSize);
+  const ringBuffer = new purify.utils.RingBuffer(bufferSize);
   assert.ok(!ringBuffer.pop(key1));
 
   ringBuffer.put(key1, newItem("property"));

@@ -56,8 +56,8 @@
      * @param rule Rule object
      */
     removeRule(rule) {
-      adguard.utils.collections.removeRule(this.scriptRules, rule);
-      adguard.utils.collections.removeRule(this.exceptionsRules, rule);
+      purify.utils.collections.removeRule(this.scriptRules, rule);
+      purify.utils.collections.removeRule(this.exceptionsRules, rule);
       this._rollbackExceptionRule(rule);
     },
 
@@ -160,4 +160,4 @@
   };
 
   api.ScriptFilter = ScriptFilter;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

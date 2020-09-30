@@ -122,21 +122,21 @@
        * CSP rules support only $SUBDOCUMENT and $DOCUMENT request type modifiers.
        * If it presents, we should match this rule when an iframe is loaded.
        * If a main_frame is loaded we should match rules without $SUBDOCUMENT modifier (or with negation $~SUBDOCUMENT)
-       * So if we pass `adguard.RequestTypes.OTHER` we won't match rules with $SUBDOCUMENT modifier, as we expected
+       * So if we pass `purify.RequestTypes.OTHER` we won't match rules with $SUBDOCUMENT modifier, as we expected
        *
        * For example:
        * rule1 = '||$csp'
        * rule2 = '||$csp,subdocument'
        * rule3 = '||$csp,~subdocument'
-       * findCspRules(adguard.RequestTypes.SUBDOCUMENT) = [rule1, rule2];
-       * findCspRules(adguard.RequestTypes.DOCUMENT) = [rule1, rule3];
+       * findCspRules(purify.RequestTypes.SUBDOCUMENT) = [rule1, rule2];
+       * findCspRules(purify.RequestTypes.DOCUMENT) = [rule1, rule3];
        * view test "CSP rules are found correctly"
        */
       if (
-        requestType !== adguard.RequestTypes.DOCUMENT &&
-        requestType !== adguard.RequestTypes.SUBDOCUMENT
+        requestType !== purify.RequestTypes.DOCUMENT &&
+        requestType !== purify.RequestTypes.SUBDOCUMENT
       ) {
-        requestType = adguard.RequestTypes.OTHER;
+        requestType = purify.RequestTypes.OTHER;
       }
 
       var whiteRules = cspWhiteFilter.findRules(
@@ -204,4 +204,4 @@
 
   api.CspFilter.DEFAULT_DIRECTIVE =
     "connect-src http: https:; frame-src http: https:; child-src http: https:";
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

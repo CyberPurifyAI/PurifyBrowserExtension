@@ -146,4 +146,4 @@
       findCookieRules,
     };
   };
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

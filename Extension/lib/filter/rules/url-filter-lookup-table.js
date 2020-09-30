@@ -61,8 +61,8 @@
     }
 
     if (
-      requestType !== adguard.RequestTypes.DOCUMENT &&
-      requestType !== adguard.RequestTypes.SUBDOCUMENT
+      requestType !== purify.RequestTypes.DOCUMENT &&
+      requestType !== purify.RequestTypes.SUBDOCUMENT
     ) {
       return (
         rule.isFiltered(url, thirdParty, requestType) &&
@@ -74,13 +74,13 @@
     if (rule.isAnyUrl()) {
       // if rules dont have domain patterns and have $domain modifier
       // we should check rules with request urls hosts
-      isPermitted = rule.isPermitted(adguard.utils.url.getHost(url));
+      isPermitted = rule.isPermitted(purify.utils.url.getHost(url));
       thirdParty = false;
     } else {
       // for DOCUMENT and SUBDOCUMENT requests
       // rules with request urls hosts are permitted as well
       isPermitted =
-        isPermitted || rule.isPermitted(adguard.utils.url.getHost(url));
+        isPermitted || rule.isPermitted(purify.utils.url.getHost(url));
     }
 
     return rule.isFiltered(url, thirdParty, requestType) && isPermitted;
@@ -145,7 +145,7 @@
   ) {
     let result = null;
 
-    if (requestType === adguard.RequestTypes.DOCUMENT) {
+    if (requestType === purify.RequestTypes.DOCUMENT) {
       // Looking for document level rules
       for (let i = 0; i < rules.length; i += 1) {
         const rule = rules[i];
@@ -289,7 +289,7 @@
     removeRule(rule) {
       this.shortcutsLookupTable.removeRule(rule);
       this.domainsLookupTable.removeRule(rule);
-      adguard.utils.collections.removeRule(this.rulesWithoutShortcuts, rule);
+      purify.utils.collections.removeRule(this.rulesWithoutShortcuts, rule);
     },
 
     /**
@@ -361,12 +361,12 @@
       // thus we can find rules and check them using domain restriction later
       // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1474
       if (hostToCheck === null) {
-        hostToCheck = adguard.utils.url.getHost(url);
-      } else if (requestType === adguard.RequestTypes.DOCUMENT) {
+        hostToCheck = purify.utils.url.getHost(url);
+      } else if (requestType === purify.RequestTypes.DOCUMENT) {
         // In case DOCUMENT request type look up rules for request url host
         // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1534
         rules = this.domainsLookupTable.lookupRules(
-          adguard.utils.url.getHost(url)
+          purify.utils.url.getHost(url)
         );
         matchedRules = this.concatRules(matchedRules, rules);
       }
@@ -423,7 +423,7 @@
       // thus we can find rules and check this rules using domain restriction later
       // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1474
       if (documentHost === null) {
-        const urlHost = adguard.utils.url.getHost(url);
+        const urlHost = purify.utils.url.getHost(url);
         rules = this.domainsLookupTable.lookupRules(urlHost);
         if (rules && rules.length > 0) {
           allRules = allRules.concat(rules);
@@ -454,4 +454,4 @@
   };
 
   api.UrlFilterRuleLookupTable = UrlFilterRuleLookupTable;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

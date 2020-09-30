@@ -20,13 +20,13 @@
 /**
  * Local storage implementation for chromium-based browsers
  */
-adguard.localStorageImpl = (function () {
+purify.localStorageImpl = (function () {
   var ADGUARD_SETTINGS_PROP = "adguard-settings";
   var values = null;
 
   function checkError(ex) {
     if (ex) {
-      adguard.console.error("{0}", ex);
+      purify.console.error("{0}", ex);
     }
   }
 
@@ -35,7 +35,7 @@ adguard.localStorageImpl = (function () {
    * @param callback Callback, fired with parameters (ex, result)
    */
   function createDefaultAsyncHandler(callback) {
-    var dfd = new adguard.utils.Promise();
+    var dfd = new purify.utils.Promise();
     dfd.then(
       function (result) {
         callback(null, result);

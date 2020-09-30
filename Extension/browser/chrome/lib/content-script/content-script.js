@@ -17,13 +17,13 @@
 
 /* global adguardContent */
 
-(function (adguard) {
+(function (purify) {
   "use strict";
 
-  window.i18n = adguard.i18n;
+  window.i18n = purify.i18n;
 
   window.contentPage = {
-    sendMessage: adguard.runtimeImpl.sendMessage,
-    onMessage: adguard.runtimeImpl.onMessage,
+    sendMessage: purify.runtimeImpl.sendMessage,
+    onMessage: purify.runtimeImpl.onMessage,
   };
 })(adguardContent);

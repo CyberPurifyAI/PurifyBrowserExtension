@@ -78,7 +78,7 @@
         }
       }
 
-      var nameEndIndex = adguard.utils.strings.indexOfAny(
+      var nameEndIndex = purify.utils.strings.indexOfAny(
         selector,
         [" ", "\t", ">", "(", "[", ".", "#", ":", "+", "~", '"', "'"],
         nameStartIndex + 1
@@ -127,7 +127,7 @@
         this.loadDomains(domains);
       }
 
-      var stringUtils = adguard.utils.strings;
+      var stringUtils = purify.utils.strings;
       var cssContent = rule.substring(indexOfMask + mask.length);
 
       if (isElemhideRule) {
@@ -338,4 +338,4 @@
   ];
 
   api.CssFilterRule = CssFilterRule;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

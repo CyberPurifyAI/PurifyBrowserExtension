@@ -180,4 +180,4 @@
   })();
 
   api.SimpleRegex = SimpleRegex;
-})(adguard.rules);
+})(purify.rules);

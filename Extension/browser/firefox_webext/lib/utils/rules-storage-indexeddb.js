@@ -26,13 +26,13 @@
  * https://bugzilla.mozilla.org/show_bug.cgi?id=1371255
  * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/892
  */
-adguard.rulesStorageImpl = (function (adguard, initialAPI) {
+purify.ulesStorageImpl = (function (adguard, initialAPI) {
   var STORAGE_NAME = "AdguardRulesStorage";
 
   var database;
 
   function onError(error) {
-    adguard.console.error(
+    purify.onsole.error(
       "Adguard rulesStorage error: {0}",
       error.error || error
     );
@@ -164,4 +164,4 @@ adguard.rulesStorageImpl = (function (adguard, initialAPI) {
   };
 
   return api;
-})(adguard, adguard.rulesStorageImpl || {});
+})(adguard, purify.ulesStorageImpl || {});

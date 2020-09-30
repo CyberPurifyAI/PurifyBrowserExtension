@@ -16,7 +16,7 @@
  */
 
 (function (adguard, api) {
-  const stringUtils = adguard.utils.strings;
+  const stringUtils = purify.utils.strings;
   /**
    * AdGuard scriptlet mask
    */
@@ -480,4 +480,4 @@
   }
 
   api.ruleConverter = { convertRule };
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

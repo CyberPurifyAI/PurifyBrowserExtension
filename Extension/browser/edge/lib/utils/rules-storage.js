@@ -27,9 +27,9 @@
  * See for details: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/566
  */
 
-adguard.rulesStorageImpl = (function (adguard) {
+purify.ulesStorageImpl = (function (purify) {
   // TODO[Edge]: Remove this 'if' condition, when Insider build 15063 will be applied widely.
-  if (adguard.utils.browser.isEdgeBeforeCreatorsUpdate()) {
+  if (purify.tils.browser.isEdgeBeforeCreatorsUpdate()) {
     return (function () {
       var read = function (path, callback) {
         try {
@@ -124,4 +124,4 @@ adguard.rulesStorageImpl = (function (adguard) {
       };
     })();
   }
-})(adguard);
+})(purify);

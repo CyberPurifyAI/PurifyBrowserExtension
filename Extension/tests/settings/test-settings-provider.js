@@ -2,7 +2,7 @@
 
 QUnit.test("exports settings in json", (assert) => {
   const done = assert.async();
-  adguard.sync.settingsProvider.loadSettingsBackup((json) => {
+  purify.sync.settingsProvider.loadSettingsBackup((json) => {
     const settings = JSON.parse(json);
 
     assert.equal(
@@ -22,7 +22,7 @@ QUnit.test("exports settings in json", (assert) => {
 
 QUnit.test("updates settings from json", async (assert) => {
   const done = assert.async();
-  adguard.sync.settingsProvider.applySettingsBackup(
+  purify.sync.settingsProvider.applySettingsBackup(
     settingsJsonStr,
     (success) => {
       assert.ok(success, "should successfully apply");

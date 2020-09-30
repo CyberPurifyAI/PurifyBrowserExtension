@@ -19,7 +19,7 @@
  * Object that manages user settings.
  * @constructor
  */
-adguard.settings = (function (adguard) {
+purify.settings = (function (purify) {
   "use strict";
 
   const DEFAULT_FILTERS_UPDATE_PERIOD = -1;
@@ -57,14 +57,14 @@ adguard.settings = (function (adguard) {
   };
 
   const properties = Object.create(null);
-  const propertyUpdateChannel = adguard.utils.channels.newChannel();
+  const propertyUpdateChannel = purify.utils.channels.newChannel();
 
   /**
    * Lazy default properties
    */
   const defaultProperties = {
     get defaults() {
-      return adguard.lazyGet(this, "defaults", () => {
+      return purify.lazyGet(this, "defaults", () => {
         // Initialize default properties
         const defaults = Object.create(null);
         for (const name in settings) {
@@ -73,13 +73,13 @@ adguard.settings = (function (adguard) {
           }
         }
         defaults[settings.DISABLE_SHOW_ADGUARD_PROMO_INFO] =
-          (!adguard.utils.browser.isWindowsOs() &&
-            !adguard.utils.browser.isMacOs()) ||
-          adguard.utils.browser.isEdgeBrowser();
+          (!purify.utils.browser.isWindowsOs() &&
+            !purify.utils.browser.isMacOs()) ||
+          purify.utils.browser.isEdgeBrowser();
         defaults[settings.DISABLE_SAFEBROWSING] = true;
         defaults[settings.DISABLE_COLLECT_HITS] = true;
         defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
-        defaults[settings.USE_OPTIMIZED_FILTERS] = adguard.prefs.mobile;
+        defaults[settings.USE_OPTIMIZED_FILTERS] = purify.prefs.mobile;
         defaults[settings.DISABLE_DETECT_FILTERS] = false;
         defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
         defaults[
@@ -91,7 +91,7 @@ adguard.settings = (function (adguard) {
         defaults[settings.SEND_DO_NOT_TRACK] = true;
         defaults[
           settings.BLOCK_CHROME_CLIENT_DATA
-        ] = !!adguard.utils.browser.isChromeBrowser();
+        ] = !!purify.utils.browser.isChromeBrowser();
         defaults[settings.BLOCK_WEBRTC] = false;
         defaults[settings.SELF_DESTRUCT_THIRD_PARTY_COOKIES] = true;
         defaults[
@@ -116,17 +116,17 @@ adguard.settings = (function (adguard) {
     /**
      * Don't cache values in case of uninitialized storage
      */
-    if (!adguard.localStorage.isInitialized()) {
+    if (!purify.localStorage.isInitialized()) {
       return defaultProperties.defaults[propertyName];
     }
 
     let propertyValue = null;
 
-    if (adguard.localStorage.hasItem(propertyName)) {
+    if (purify.localStorage.hasItem(propertyName)) {
       try {
-        propertyValue = JSON.parse(adguard.localStorage.getItem(propertyName));
+        propertyValue = JSON.parse(purify.localStorage.getItem(propertyName));
       } catch (ex) {
-        adguard.console.error(
+        purify.console.error(
           "Error get property {0}, cause: {1}",
           propertyName,
           ex
@@ -142,10 +142,10 @@ adguard.settings = (function (adguard) {
   };
 
   const setProperty = (propertyName, propertyValue) => {
-    adguard.localStorage.setItem(propertyName, JSON.stringify(propertyValue));
+    purify.localStorage.setItem(propertyName, JSON.stringify(propertyValue));
     properties[propertyName] = propertyValue;
     propertyUpdateChannel.notify(propertyName, propertyValue);
-    adguard.listeners.notifyListeners(adguard.listeners.SETTING_UPDATED, {
+    purify.listeners.notifyListeners(purify.listeners.SETTING_UPDATED, {
       propertyName,
       propertyValue,
     });
@@ -335,4 +335,4 @@ adguard.settings = (function (adguard) {
   api.DEFAULT_FILTERS_UPDATE_PERIOD = DEFAULT_FILTERS_UPDATE_PERIOD;
 
   return api;
-})(adguard);
+})(purify);

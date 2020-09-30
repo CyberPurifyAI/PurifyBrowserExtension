@@ -43,8 +43,8 @@
       var specialsRegex = new RegExp("[" + specials.join("\\") + "]", "g");
       pattern = pattern.replace(specialsRegex, "\\$&");
 
-      pattern = adguard.utils.strings.replaceAll(pattern, "\\*", "[\\s\\S]*");
-      pattern = adguard.utils.strings.replaceAll(pattern, "\\?", ".");
+      pattern = purify.utils.strings.replaceAll(pattern, "\\*", "[\\s\\S]*");
+      pattern = purify.utils.strings.replaceAll(pattern, "\\?", ".");
       return "^" + pattern + "$";
     }
 
@@ -57,7 +57,7 @@
     function extractShortcut(pattern) {
       var wildcardChars = ["*", "?"];
       var startIndex = 0;
-      var endIndex = adguard.utils.strings.indexOfAny(pattern, wildcardChars);
+      var endIndex = purify.utils.strings.indexOfAny(pattern, wildcardChars);
 
       if (endIndex < 0) {
         return pattern.toLowerCase();
@@ -74,7 +74,7 @@
           break;
         }
 
-        endIndex = adguard.utils.strings.indexOfAny(
+        endIndex = purify.utils.strings.indexOfAny(
           pattern.substring(startIndex),
           wildcardChars
         );
@@ -195,7 +195,7 @@
         quoteStartIndex + 1,
         quoteEndIndex
       );
-      attributeValue = adguard.utils.strings.replaceAll(
+      attributeValue = purify.utils.strings.replaceAll(
         attributeValue,
         '""',
         '"'
@@ -366,4 +366,4 @@
 
   api.ContentFilterRule = ContentFilterRule;
   api.Wildcard = Wildcard;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

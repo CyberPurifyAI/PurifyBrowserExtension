@@ -19,10 +19,10 @@
  * Extension global preferences.
  * (!) Firefox has it's own implementation
  */
-adguard.prefs = (function (adguard) {
+purify.prefs = (function (purify) {
   var Prefs = {
     get mobile() {
-      return adguard.lazyGet(
+      return purify.lazyGet(
         Prefs,
         "mobile",
         () => navigator.userAgent.indexOf("Android") >= 0
@@ -32,7 +32,7 @@ adguard.prefs = (function (adguard) {
     platform: "chromium",
 
     get browser() {
-      return adguard.lazyGet(Prefs, "browser", () => {
+      return purify.lazyGet(Prefs, "browser", () => {
         let browser;
         let { userAgent } = navigator;
         userAgent = userAgent.toLowerCase();
@@ -57,14 +57,14 @@ adguard.prefs = (function (adguard) {
     },
 
     get chromeVersion() {
-      return adguard.lazyGet(Prefs, "chromeVersion", () => {
+      return purify.lazyGet(Prefs, "chromeVersion", () => {
         const match = /\sChrome\/(\d+)\./.exec(navigator.userAgent);
         return match === null ? null : parseInt(match[1]);
       });
     },
 
     get firefoxVersion() {
-      return adguard.lazyGet(Prefs, "firefoxVersion", () => {
+      return purify.lazyGet(Prefs, "firefoxVersion", () => {
         const match = /\sFirefox\/(\d+)\./.exec(navigator.userAgent);
         return match === null ? null : Number.parseInt(match[1], 10);
       });
@@ -75,7 +75,7 @@ adguard.prefs = (function (adguard) {
      * @returns {*}
      */
     get edgeVersion() {
-      return adguard.lazyGet(Prefs, "edgeVersion", function () {
+      return purify.lazyGet(Prefs, "edgeVersion", function () {
         if (this.browser === "Edge") {
           const { userAgent } = navigator;
           const i = userAgent.indexOf("Edge/");
@@ -103,14 +103,14 @@ adguard.prefs = (function (adguard) {
     },
 
     get ICONS() {
-      return adguard.lazyGet(Prefs, "ICONS", () => ({
+      return purify.lazyGet(Prefs, "ICONS", () => ({
         ICON_GREEN: {
-          19: adguard.getURL("icons/green-19.png"),
-          38: adguard.getURL("icons/green-38.png"),
+          19: purify.getURL("icons/green-19.png"),
+          38: purify.getURL("icons/green-38.png"),
         },
         ICON_GRAY: {
-          19: adguard.getURL("icons/gray-19.png"),
-          38: adguard.getURL("icons/gray-38.png"),
+          19: purify.getURL("icons/gray-19.png"),
+          38: purify.getURL("icons/gray-38.png"),
         },
       }));
     },
@@ -160,4 +160,4 @@ adguard.prefs = (function (adguard) {
   })();
 
   return Prefs;
-})(adguard);
+})(purify);

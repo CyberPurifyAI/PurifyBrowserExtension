@@ -1,8 +1,8 @@
-! Checksum: y/MgHWuZI9UWdtaCRvpjdg
+! Checksum: Fug5GEroN9llhYrtZpjSuQ
 ! Title: AdGuard Tracking Protection filter (Optimized)
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.17.20
-! TimeUpdated: 2020-09-28T18:31:32+03:00
+! Version: 2.0.17.23
+! TimeUpdated: 2020-09-29T20:03:30+03:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -6186,6 +6186,7 @@ _tracking.php?b=
 ||ci.phncdn.com/www-static/js/ph-tracking.js$important
 /tnc.js?h=
 ||tags.tiqcdn.com/utag/*/prod/utag.js$domain=radissonhotels.com|post.ch
+||atconnect.npo.nl/h?s=$image
 ||supleks.jp/action/log/
 ||pendo.io/data/ptm.gif
 ||vk.com/rtrg$third-party
@@ -8389,6 +8390,7 @@ link.gmapp*.net$image
 @@||metrics.us.playstation.com/b/ss/
 @@||app.adjust.com^$domain=dawanda.com
 ||rover.ebay.$image,object,script,badfilter
+@@||mc.yandex.ru/metrika/tag.js$domain=lk.gosuslugi.ru
 @@||googletagmanager.com/gtm.js$domain=thecompanion.app
 @@||rtoaster.jp^$script,domain=animate-onlineshop.jp|lexus.jp|peachjohn.co.jp|rtoaster.com|rurubu.jp|shop.hikaritv.net
 @@||googletagmanager.com/gtm.js$domain=sport1.de

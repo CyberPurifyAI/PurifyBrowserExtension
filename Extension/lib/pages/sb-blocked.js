@@ -83,9 +83,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (url && isValid(url)) {
     btnProceed.addEventListener("click", (e) => {
       e.preventDefault();
-      adguard.safebrowsing.addToSafebrowsingTrusted(url);
-      adguard.tabs.getActive((tab) => {
-        adguard.tabs.reload(tab.tabId, url);
+      purify.safebrowsing.addToSafebrowsingTrusted(url);
+      purify.tabs.getActive((tab) => {
+        purify.tabs.reload(tab.tabId, url);
       });
     });
   }

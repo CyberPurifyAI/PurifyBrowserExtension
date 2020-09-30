@@ -160,4 +160,4 @@
       findReplaceRules: findReplaceRules,
     };
   };
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

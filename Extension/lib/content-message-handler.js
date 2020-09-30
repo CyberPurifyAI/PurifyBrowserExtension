@@ -1,7 +1,7 @@
 /**
  *  Initialize Content => BackgroundPage messaging
  */
-(function (adguard) {
+(function (purify) {
   "use strict";
 
   /**
@@ -15,12 +15,12 @@
    * @param sender
    */
   function processAddEventListener(message, sender) {
-    var listenerId = adguard.listeners.addSpecifiedListener(
+    var listenerId = purify.listeners.addSpecifiedListener(
       message.events,
       function () {
         var sender = eventListeners[listenerId];
         if (sender) {
-          adguard.tabs.sendMessage(sender.tab.tabId, {
+          purify.tabs.sendMessage(sender.tab.tabId, {
             type: "notifyListeners",
             args: Array.prototype.slice.call(arguments),
           });
@@ -37,12 +37,12 @@
   function processInitializeFrameScriptRequest() {
     var enabledFilters = Object.create(null);
 
-    var AntiBannerFiltersId = adguard.utils.filters.ids;
+    var AntiBannerFiltersId = purify.utils.filters.ids;
 
     for (var key in AntiBannerFiltersId) {
       if (AntiBannerFiltersId.hasOwnProperty(key)) {
         var filterId = AntiBannerFiltersId[key];
-        var enabled = adguard.filters.isFilterEnabled(filterId);
+        var enabled = purify.filters.isFilterEnabled(filterId);
         if (enabled) {
           enabledFilters[filterId] = true;
         }
@@ -50,23 +50,23 @@
     }
 
     return {
-      userSettings: adguard.settings.getAllSettings(),
+      userSettings: purify.settings.getAllSettings(),
       enabledFilters: enabledFilters,
-      filtersMetadata: adguard.subscriptions.getFilters(),
-      requestFilterInfo: adguard.requestFilter.getRequestFilterInfo(),
+      filtersMetadata: purify.subscriptions.getFilters(),
+      requestFilterInfo: purify.requestFilter.getRequestFilterInfo(),
       environmentOptions: {
-        isMacOs: adguard.utils.browser.isMacOs(),
-        canBlockWebRTC: adguard.stealthService.canBlockWebRTC(),
-        isChrome: adguard.utils.browser.isChromeBrowser(),
+        isMacOs: purify.utils.browser.isMacOs(),
+        canBlockWebRTC: purify.stealthService.canBlockWebRTC(),
+        isChrome: purify.utils.browser.isChromeBrowser(),
         Prefs: {
-          locale: adguard.app.getLocale(),
-          mobile: adguard.prefs.mobile || false,
+          locale: purify.app.getLocale(),
+          mobile: purify.prefs.mobile || false,
         },
-        appVersion: adguard.app.getVersion(),
+        appVersion: purify.app.getVersion(),
       },
       constants: {
-        AntiBannerFiltersId: adguard.utils.filters.ids,
-        EventNotifierTypes: adguard.listeners.events,
+        AntiBannerFiltersId: purify.utils.filters.ids,
+        EventNotifierTypes: purify.listeners.events,
       },
     };
   }
@@ -78,22 +78,22 @@
    * @param stats
    */
   function processSaveCssHitStats(tab, stats) {
-    if (!adguard.webRequestService.isCollectingCosmeticRulesHits(tab)) {
+    if (!purify.webRequestService.isCollectingCosmeticRulesHits(tab)) {
       return;
     }
-    var frameUrl = adguard.frames.getMainFrameUrl(tab);
+    var frameUrl = purify.frames.getMainFrameUrl(tab);
     for (let i = 0; i < stats.length; i += 1) {
       const stat = stats[i];
-      const rule = adguard.rules.builder.createRule(
+      const rule = purify.rules.builder.createRule(
         stat.ruleText,
         stat.filterId
       );
-      adguard.webRequestService.recordRuleHit(tab, rule, frameUrl);
-      adguard.filteringLog.addCosmeticEvent(
+      purify.webRequestService.recordRuleHit(tab, rule, frameUrl);
+      purify.filteringLog.addCosmeticEvent(
         tab,
         stat.element,
         tab.url,
-        adguard.RequestTypes.DOCUMENT,
+        purify.RequestTypes.DOCUMENT,
         rule
       );
     }
@@ -110,47 +110,47 @@
   function handleMessage(message, sender, callback) {
     switch (message.type) {
       case "unWhiteListFrame":
-        adguard.userrules.unWhiteListFrame(message.frameInfo);
+        purify.userrules.unWhiteListFrame(message.frameInfo);
         break;
       case "addEventListener":
         return processAddEventListener(message, sender);
       case "removeListener":
         var listenerId = message.listenerId;
-        adguard.listeners.removeListener(listenerId);
+        purify.listeners.removeListener(listenerId);
         delete eventListeners[listenerId];
         break;
       case "initializeFrameScript":
         return processInitializeFrameScriptRequest();
       case "changeUserSetting":
-        adguard.settings.setProperty(message.key, message.value);
+        purify.settings.setProperty(message.key, message.value);
         break;
       case "checkRequestFilterReady":
-        return { ready: adguard.requestFilter.isReady() };
+        return { ready: purify.requestFilter.isReady() };
       case "addAndEnableFilter":
-        adguard.filters.addAndEnableFilters([message.filterId]);
+        purify.filters.addAndEnableFilters([message.filterId]);
         break;
       case "disableAntiBannerFilter":
         if (message.remove) {
-          adguard.filters.uninstallFilters([message.filterId]);
+          purify.filters.uninstallFilters([message.filterId]);
         } else {
-          adguard.filters.disableFilters([message.filterId]);
+          purify.filters.disableFilters([message.filterId]);
         }
         break;
       case "removeAntiBannerFilter":
-        adguard.filters.removeFilter(message.filterId);
+        purify.filters.removeFilter(message.filterId);
         break;
       case "enableFiltersGroup":
-        adguard.categories.enableFiltersGroup(message.groupId);
+        purify.categories.enableFiltersGroup(message.groupId);
         break;
       case "disableFiltersGroup":
-        adguard.categories.disableFiltersGroup(message.groupId);
+        purify.categories.disableFiltersGroup(message.groupId);
         break;
       case "changeDefaultWhiteListMode":
-        adguard.whitelist.changeDefaultWhiteListMode(message.enabled);
+        purify.whitelist.changeDefaultWhiteListMode(message.enabled);
         break;
       case "getWhiteListDomains": {
-        const whiteListDomains = adguard.whitelist.getWhiteListDomains();
-        const appVersion = adguard.app.getVersion();
+        const whiteListDomains = purify.whitelist.getWhiteListDomains();
+        const appVersion = purify.app.getVersion();
         callback({ content: whiteListDomains.join("\r\n"), appVersion });
         break;
       }
@@ -159,29 +159,29 @@
           .split(/[\r\n]+/)
           .map((string) => string.trim())
           .filter((string) => string.length > 0);
-        adguard.whitelist.updateWhiteListDomains(domains);
+        purify.whitelist.updateWhiteListDomains(domains);
         break;
       }
       case "getUserRules":
-        adguard.userrules.getUserRulesText((content) => {
-          const appVersion = adguard.app.getVersion();
+        purify.userrules.getUserRulesText((content) => {
+          const appVersion = purify.app.getVersion();
           callback({ content, appVersion });
         });
         return true;
       case "saveUserRules":
-        adguard.userrules.updateUserRulesText(message.content);
+        purify.userrules.updateUserRulesText(message.content);
         break;
       case "addUserRule":
-        adguard.userrules.addRules([message.ruleText]);
+        purify.userrules.addRules([message.ruleText]);
         break;
       case "removeUserRule":
-        adguard.userrules.removeRule(message.ruleText);
+        purify.userrules.removeRule(message.ruleText);
         break;
       case "checkAntiBannerFiltersUpdate":
-        adguard.ui.checkFiltersUpdates();
+        purify.ui.checkFiltersUpdates();
         break;
       case "loadCustomFilterInfo":
-        adguard.filters.loadCustomFilterInfo(
+        purify.filters.loadCustomFilterInfo(
           message.url,
           { title: message.title },
           (filter) => {
@@ -194,11 +194,11 @@
         return true;
       case "subscribeToCustomFilter": {
         const { url, title, trusted } = message;
-        adguard.filters.loadCustomFilter(
+        purify.filters.loadCustomFilter(
           url,
           { title, trusted },
           (filter) => {
-            adguard.filters.addAndEnableFilters([filter.filterId], () => {
+            purify.filters.addAndEnableFilters([filter.filterId], () => {
               callback(filter);
             });
           },
@@ -209,40 +209,40 @@
         return true;
       }
       case "getFiltersMetadata":
-        return adguard.categories.getFiltersMetadata();
+        return purify.categories.getFiltersMetadata();
       case "setFiltersUpdatePeriod":
-        adguard.settings.setFiltersUpdatePeriod(message.updatePeriod);
+        purify.settings.setFiltersUpdatePeriod(message.updatePeriod);
         break;
       case "openThankYouPage":
-        adguard.ui.openThankYouPage();
+        purify.ui.openThankYouPage();
         break;
       // case 'openExtensionStore':
-      //     adguard.ui.openExtensionStore();
+      //     purify.ui.openExtensionStore();
       //     break;
       case "openFilteringLog":
-        adguard.ui.openFilteringLog(message.tabId);
+        purify.ui.openFilteringLog(message.tabId);
         break;
       case "openExportRulesTab":
-        adguard.ui.openExportRulesTab(message.hash);
+        purify.ui.openExportRulesTab(message.hash);
         break;
       case "openSafebrowsingTrusted":
-        adguard.safebrowsing.addToSafebrowsingTrusted(message.url);
-        adguard.tabs.getActive(function (tab) {
-          adguard.tabs.reload(tab.tabId, message.url);
+        purify.safebrowsing.addToSafebrowsingTrusted(message.url);
+        purify.tabs.getActive(function (tab) {
+          purify.tabs.reload(tab.tabId, message.url);
         });
         break;
       case "openTab":
-        adguard.ui.openTab(message.url, message.options);
+        purify.ui.openTab(message.url, message.options);
         break;
       case "resetBlockedAdsCount":
-        adguard.frames.resetBlockedAdsCount();
+        purify.frames.resetBlockedAdsCount();
         break;
       case "getSelectorsAndScripts": {
         let urlForSelectors;
         // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1498
         // when document url for iframe is about:blank then we use tab url
         if (
-          !adguard.utils.url.isHttpOrWsRequest(message.documentUrl) &&
+          !purify.utils.url.isHttpOrWsRequest(message.documentUrl) &&
           sender.frameId !== 0
         ) {
           urlForSelectors = sender.tab.url;
@@ -250,14 +250,14 @@
           urlForSelectors = message.documentUrl;
         }
         return (
-          adguard.webRequestService.processGetSelectorsAndScripts(
+          purify.webRequestService.processGetSelectorsAndScripts(
             sender.tab,
             urlForSelectors
           ) || {}
         );
       }
       case "checkPageScriptWrapperRequest":
-        var block = adguard.webRequestService.checkPageScriptWrapperRequest(
+        var block = purify.webRequestService.checkPageScriptWrapperRequest(
           sender.tab,
           message.elementUrl,
           message.documentUrl,
@@ -265,7 +265,7 @@
         );
         return { block: block, requestId: message.requestId };
       case "processShouldCollapse":
-        var collapse = adguard.webRequestService.processShouldCollapse(
+        var collapse = purify.webRequestService.processShouldCollapse(
           sender.tab,
           message.elementUrl,
           message.documentUrl,
@@ -273,45 +273,45 @@
         );
         return { collapse: collapse, requestId: message.requestId };
       case "processShouldCollapseMany":
-        var requests = adguard.webRequestService.processShouldCollapseMany(
+        var requests = purify.webRequestService.processShouldCollapseMany(
           sender.tab,
           message.documentUrl,
           message.requests
         );
         return { requests: requests };
       case "onOpenFilteringLogPage":
-        adguard.filteringLog.onOpenFilteringLogPage();
+        purify.filteringLog.onOpenFilteringLogPage();
         break;
       case "onCloseFilteringLogPage":
-        adguard.filteringLog.onCloseFilteringLogPage();
+        purify.filteringLog.onCloseFilteringLogPage();
         break;
       case "reloadTabById":
         if (!message.preserveLogEnabled) {
-          adguard.filteringLog.clearEventsByTabId(message.tabId);
+          purify.filteringLog.clearEventsByTabId(message.tabId);
         }
-        adguard.tabs.reload(message.tabId);
+        purify.tabs.reload(message.tabId);
         break;
       case "clearEventsByTabId":
-        adguard.filteringLog.clearEventsByTabId(message.tabId);
+        purify.filteringLog.clearEventsByTabId(message.tabId);
         break;
       case "getTabFrameInfoById":
         if (message.tabId) {
-          var frameInfo = adguard.frames.getFrameInfo({ tabId: message.tabId });
+          var frameInfo = purify.frames.getFrameInfo({ tabId: message.tabId });
           return { frameInfo: frameInfo };
         } else {
-          adguard.tabs.getActive(function (tab) {
-            var frameInfo = adguard.frames.getFrameInfo(tab);
+          purify.tabs.getActive(function (tab) {
+            var frameInfo = purify.frames.getFrameInfo(tab);
             callback({ frameInfo: frameInfo });
           });
           return true; // Async
         }
       case "getFilteringInfoByTabId":
-        var filteringInfo = adguard.filteringLog.getFilteringInfoByTabId(
+        var filteringInfo = purify.filteringLog.getFilteringInfoByTabId(
           message.tabId
         );
         return { filteringInfo: filteringInfo };
       case "synchronizeOpenTabs":
-        adguard.filteringLog.synchronizeOpenTabs(function (tabs) {
+        purify.filteringLog.synchronizeOpenTabs(function (tabs) {
           callback({ tabs: tabs });
         });
         return true; // Async
@@ -322,76 +322,76 @@
           title,
           url,
         };
-        adguard.ui.openSettingsTab("antibanner0", hashOptions);
+        purify.ui.openSettingsTab("antibanner0", hashOptions);
         break;
       }
       case "showAlertMessagePopup":
-        adguard.ui.showAlertMessagePopup(message.title, message.text);
+        purify.ui.showAlertMessagePopup(message.title, message.text);
         break;
       // Popup methods
       case "addWhiteListDomainPopup":
-        adguard.tabs.getActive(function (tab) {
-          adguard.ui.whiteListTab(tab);
+        purify.tabs.getActive(function (tab) {
+          purify.ui.whiteListTab(tab);
         });
         break;
       case "removeWhiteListDomainPopup":
-        adguard.tabs.getActive(function (tab) {
-          adguard.ui.unWhiteListTab(tab);
+        purify.tabs.getActive(function (tab) {
+          purify.ui.unWhiteListTab(tab);
         });
         break;
       case "changeApplicationFilteringDisabled":
-        adguard.ui.changeApplicationFilteringDisabled(message.disabled);
+        purify.ui.changeApplicationFilteringDisabled(message.disabled);
         break;
       case "openSiteReportTab":
-        adguard.ui.openSiteReportTab(message.url);
+        purify.ui.openSiteReportTab(message.url);
         break;
       case "openAbuseTab":
-        adguard.ui.openAbuseTab(message.url);
+        purify.ui.openAbuseTab(message.url);
         break;
       case "openSettingsTab":
-        adguard.ui.openSettingsTab();
+        purify.ui.openSettingsTab();
         break;
       case "getTabInfoForPopup":
-        adguard.tabs.getActive((tab) => {
-          const frameInfo = adguard.frames.getFrameInfo(tab);
+        purify.tabs.getActive((tab) => {
+          const frameInfo = purify.frames.getFrameInfo(tab);
           callback({
             frameInfo,
             options: {
               showStatsSupported: true,
-              isFirefoxBrowser: adguard.utils.browser.isFirefoxBrowser(),
-              showInfoAboutFullVersion: adguard.settings.isShowInfoAboutAdguardFullVersion(),
-              isMacOs: adguard.utils.browser.isMacOs(),
+              isFirefoxBrowser: purify.utils.browser.isFirefoxBrowser(),
+              showInfoAboutFullVersion: purify.settings.isShowInfoAboutAdguardFullVersion(),
+              isMacOs: purify.utils.browser.isMacOs(),
               isEdgeBrowser:
-                adguard.utils.browser.isEdgeBrowser() ||
-                adguard.utils.browser.isEdgeChromiumBrowser(),
-              notification: adguard.notifications.getCurrentNotification(
+                purify.utils.browser.isEdgeBrowser() ||
+                purify.utils.browser.isEdgeChromiumBrowser(),
+              notification: purify.notifications.getCurrentNotification(
                 frameInfo
               ),
-              isDisableShowAdguardPromoInfo: adguard.settings.isDisableShowAdguardPromoInfo(),
+              isDisableShowAdguardPromoInfo: purify.settings.isDisableShowAdguardPromoInfo(),
             },
           });
         });
         return true; // Async
       case "setNotificationViewed":
-        adguard.notifications.setNotificationViewed(message.withDelay);
+        purify.notifications.setNotificationViewed(message.withDelay);
         break;
       case "getStatisticsData":
         // There can't be data till localstorage is initialized
-        if (!adguard.localStorage.isInitialized()) {
+        if (!purify.localStorage.isInitialized()) {
           return {};
         }
         callback({
-          stats: adguard.pageStats.getStatisticsData(),
+          stats: purify.pageStats.getStatisticsData(),
         });
         return true;
       case "resizePanelPopup":
-        adguard.browserAction.resize(message.width, message.height);
+        purify.browserAction.resize(message.width, message.height);
         break;
       case "closePanelPopup":
-        adguard.browserAction.close();
+        purify.browserAction.close();
         break;
       case "sendFeedback":
-        adguard.backend.sendUrlReport(
+        purify.backend.sendUrlReport(
           message.url,
           message.topic,
           message.comment
@@ -401,18 +401,18 @@
         processSaveCssHitStats(sender.tab, message.stats);
         break;
       case "loadSettingsJson": {
-        const appVersion = adguard.app.getVersion();
+        const appVersion = purify.app.getVersion();
         const settingsCb = (json) => {
           callback({ content: json, appVersion });
         };
-        adguard.sync.settingsProvider.loadSettingsBackup(settingsCb);
+        purify.sync.settingsProvider.loadSettingsBackup(settingsCb);
         return true; // Async
       }
       case "applySettingsJson":
-        adguard.sync.settingsProvider.applySettingsBackup(message.json);
+        purify.sync.settingsProvider.applySettingsBackup(message.json);
         break;
       case "disableGetPremiumNotification":
-        adguard.settings.disableShowAdguardPromoInfo();
+        purify.settings.disableShowAdguardPromoInfo();
         break;
       default:
         // Unhandled message
@@ -421,11 +421,11 @@
   }
 
   // Add event listener from content-script messages
-  adguard.runtime.onMessage.addListener(handleMessage);
+  purify.runtime.onMessage.addListener(handleMessage);
 
   /**
    * There is no messaging in Safari popover context,
    * so we have to expose this method to keep the message-like style that is used in other browsers for communication between popup and background page.
    */
-  adguard.runtime.onMessageHandler = handleMessage;
-})(adguard);
+  purify.runtime.onMessageHandler = handleMessage;
+})(purify);

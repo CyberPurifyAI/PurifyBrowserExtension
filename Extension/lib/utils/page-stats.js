@@ -18,7 +18,7 @@
 /**
  * Global stats
  */
-adguard.pageStats = (function (adguard) {
+purify.pageStats = (function (purify) {
   "use strict";
 
   const MAX_HOURS_HISTORY = 24;
@@ -27,8 +27,8 @@ adguard.pageStats = (function (adguard) {
 
   const TOTAL_GROUP = {
     groupId: "total",
-    groupName: adguard.i18n
-      ? adguard.i18n.getMessage("popup_statistics_total")
+    groupName: purify.i18n
+      ? purify.i18n.getMessage("popup_statistics_total")
       : "Total",
   };
 
@@ -42,15 +42,15 @@ adguard.pageStats = (function (adguard) {
      * @private
      */
     get stats() {
-      return adguard.lazyGet(pageStatsHolder, "stats", () => {
+      return purify.lazyGet(pageStatsHolder, "stats", () => {
         let stats;
         try {
-          const json = adguard.localStorage.getItem(pageStatisticProperty);
+          const json = purify.localStorage.getItem(pageStatisticProperty);
           if (json) {
             stats = JSON.parse(json);
           }
         } catch (ex) {
-          adguard.console.error(
+          purify.console.error(
             "Error retrieve page statistic from storage, cause {0}",
             ex
           );
@@ -59,16 +59,16 @@ adguard.pageStats = (function (adguard) {
       });
     },
 
-    save: adguard.utils.concurrent.throttle(function () {
-      adguard.localStorage.setItem(
+    save: purify.utils.concurrent.throttle(function () {
+      purify.localStorage.setItem(
         pageStatisticProperty,
         JSON.stringify(this.stats)
       );
-    }, adguard.prefs.statsSaveInterval),
+    }, purify.prefs.statsSaveInterval),
 
     clear: function () {
-      adguard.localStorage.removeItem(pageStatisticProperty);
-      adguard.lazyGetClear(pageStatsHolder, "stats");
+      purify.localStorage.removeItem(pageStatisticProperty);
+      purify.lazyGetClear(pageStatsHolder, "stats");
     },
   };
 
@@ -124,12 +124,12 @@ adguard.pageStats = (function (adguard) {
       return blockedGroup;
     }
 
-    const filter = adguard.subscriptions.getFilter(filterId);
+    const filter = purify.subscriptions.getFilter(filterId);
     if (!filter) {
       return undefined;
     }
 
-    const group = adguard.subscriptions.getGroup(filter.groupId);
+    const group = purify.subscriptions.getGroup(filter.groupId);
     if (!group) {
       return undefined;
     }
@@ -193,7 +193,7 @@ adguard.pageStats = (function (adguard) {
     const result = current;
 
     if (
-      adguard.utils.dates.isSameHour(now, currentDate) &&
+      purify.utils.dates.isSameHour(now, currentDate) &&
       result.hours.length > 0
     ) {
       result.hours[result.hours.length - 1] = updateStatsDataItem(
@@ -202,7 +202,7 @@ adguard.pageStats = (function (adguard) {
         result.hours[result.hours.length - 1]
       );
     } else {
-      let diffHours = adguard.utils.dates.getDifferenceInHours(
+      let diffHours = purify.utils.dates.getDifferenceInHours(
         now,
         currentDate
       );
@@ -219,7 +219,7 @@ adguard.pageStats = (function (adguard) {
     }
 
     if (
-      adguard.utils.dates.isSameDay(now, currentDate) &&
+      purify.utils.dates.isSameDay(now, currentDate) &&
       result.days.length > 0
     ) {
       result.days[result.days.length - 1] = updateStatsDataItem(
@@ -228,7 +228,7 @@ adguard.pageStats = (function (adguard) {
         result.days[result.days.length - 1]
       );
     } else {
-      let diffDays = adguard.utils.dates.getDifferenceInDays(now, currentDate);
+      let diffDays = purify.utils.dates.getDifferenceInDays(now, currentDate);
 
       while (diffDays >= 2) {
         result.days.push(createStatsDataItem(null, 0));
@@ -242,7 +242,7 @@ adguard.pageStats = (function (adguard) {
     }
 
     if (
-      adguard.utils.dates.isSameMonth(now, currentDate) &&
+      purify.utils.dates.isSameMonth(now, currentDate) &&
       result.months.length > 0
     ) {
       result.months[result.months.length - 1] = updateStatsDataItem(
@@ -251,7 +251,7 @@ adguard.pageStats = (function (adguard) {
         result.months[result.months.length - 1]
       );
     } else {
-      let diffMonths = adguard.utils.dates.getDifferenceInMonths(
+      let diffMonths = purify.utils.dates.getDifferenceInMonths(
         now,
         currentDate
       );
@@ -313,7 +313,7 @@ adguard.pageStats = (function (adguard) {
   };
 
   const getBlockedGroups = () => {
-    const groups = adguard.subscriptions.getGroups().map((group) => {
+    const groups = purify.subscriptions.getGroups().map((group) => {
       return {
         groupId: group.groupId,
         groupName: group.groupName,
@@ -362,4 +362,4 @@ adguard.pageStats = (function (adguard) {
     getTotalBlocked: getTotalBlocked,
     getStatisticsData: getStatisticsData,
   };
-})(adguard);
+})(purify);

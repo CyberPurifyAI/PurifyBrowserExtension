@@ -1,8 +1,8 @@
 QUnit.test("Test parse Set-Cookie invalid", function (assert) {
-  let cookie = adguard.utils.cookie.parseSetCookie(null);
+  let cookie = purify.utils.cookie.parseSetCookie(null);
   assert.notOk(cookie);
 
-  cookie = adguard.utils.cookie.parseSetCookie("empty");
+  cookie = purify.utils.cookie.parseSetCookie("empty");
   assert.ok(cookie);
   assert.equal(cookie.name, "empty");
   assert.notOk(cookie.value);
@@ -11,7 +11,7 @@ QUnit.test("Test parse Set-Cookie invalid", function (assert) {
 QUnit.test("Test parse Set-Cookie complicated", function (assert) {
   const setCookieValue =
     "user_session=wBDJ5-apskjfjkas124192--e5; path=/; expires=Tue, 06 Nov 2018 12:57:11 -0000; secure; HttpOnly";
-  const cookie = adguard.utils.cookie.parseSetCookie(setCookieValue);
+  const cookie = purify.utils.cookie.parseSetCookie(setCookieValue);
 
   assert.ok(cookie);
   assert.equal(cookie.name, "user_session");
@@ -25,7 +25,7 @@ QUnit.test("Test parse Set-Cookie complicated", function (assert) {
 
 QUnit.test("Test parse Set-Cookie Parser simple", function (assert) {
   const setCookieValue = "value=123";
-  const cookie = adguard.utils.cookie.parseSetCookie(setCookieValue);
+  const cookie = purify.utils.cookie.parseSetCookie(setCookieValue);
 
   assert.ok(cookie);
   assert.equal(cookie.name, "value");
@@ -38,7 +38,7 @@ QUnit.test("Test parse Set-Cookie Parser simple", function (assert) {
 
 QUnit.test("Test Cookie header invalid", function (assert) {
   const cookieValue = "value";
-  const cookies = adguard.utils.cookie.parseCookie(cookieValue);
+  const cookies = purify.utils.cookie.parseCookie(cookieValue);
 
   assert.ok(Array.isArray(cookies));
   assert.equal(cookies.length, 0);
@@ -46,7 +46,7 @@ QUnit.test("Test Cookie header invalid", function (assert) {
 
 QUnit.test("Test Cookie header empty", function (assert) {
   const cookieValue = "value=";
-  const cookies = adguard.utils.cookie.parseCookie(cookieValue);
+  const cookies = purify.utils.cookie.parseCookie(cookieValue);
 
   assert.ok(Array.isArray(cookies));
   assert.equal(cookies.length, 1);
@@ -56,7 +56,7 @@ QUnit.test("Test Cookie header empty", function (assert) {
 
 QUnit.test("Test Cookie header simple", function (assert) {
   const cookieValue = "value=123";
-  const cookies = adguard.utils.cookie.parseCookie(cookieValue);
+  const cookies = purify.utils.cookie.parseCookie(cookieValue);
 
   assert.ok(Array.isArray(cookies));
   assert.equal(cookies.length, 1);
@@ -67,7 +67,7 @@ QUnit.test("Test Cookie header simple", function (assert) {
 QUnit.test("Test Cookie header complicated", function (assert) {
   const cookieValue =
     "_octo=GH1.1.635223982.1507661197; logged_in=yes; dotcom_user=ameshkov; user_session=wBDJ5-apskjfjkas124192-e5; __Host-user_session_same_site=wBDJ5-apskjfjkas124192-e5; _ga=GA1.2.1719384528.1507661197; tz=Europe%2FMoscow; has_recent_activity=1; _gh_sess=VWo3R1VsRWxp";
-  const cookies = adguard.utils.cookie.parseCookie(cookieValue);
+  const cookies = purify.utils.cookie.parseCookie(cookieValue);
 
   assert.ok(Array.isArray(cookies));
   assert.equal(cookies.length, 9);
@@ -84,7 +84,7 @@ QUnit.test("Test serialize invalid cookie", function (assert) {
   };
 
   try {
-    let setCookieValue = adguard.utils.cookie.serialize(cookie);
+    let setCookieValue = purify.utils.cookie.serialize(cookie);
     assert.ok(false, "Error is not thrown");
   } catch (ex) {
     assert.ok(ex instanceof TypeError);
@@ -97,7 +97,7 @@ QUnit.test("Test serialize simple cookie", function (assert) {
     value: "GH1.1.635223982.1507661197",
   };
 
-  let setCookieValue = adguard.utils.cookie.serialize(cookie);
+  let setCookieValue = purify.utils.cookie.serialize(cookie);
   assert.equal(setCookieValue, "_octo=GH1.1.635223982.1507661197");
 });
 
@@ -111,7 +111,7 @@ QUnit.test("Test serialize complicated cookie", function (assert) {
     httpOnly: true,
   };
 
-  let setCookieValue = adguard.utils.cookie.serialize(cookie);
+  let setCookieValue = purify.utils.cookie.serialize(cookie);
   assert.equal(
     setCookieValue,
     "_octo=GH1.1.635223982.1507661197; Path=/; Expires=Tue, 23 Oct 2018 13:40:11 GMT; HttpOnly; Secure"

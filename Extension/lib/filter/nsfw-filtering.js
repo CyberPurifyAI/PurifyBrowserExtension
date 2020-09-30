@@ -1,7 +1,7 @@
 /**
  * nsfw filter
  */
-adguard.nsfwFiltering = (function (adguard) {
+purify.nsfwFiltering = (function (purify) {
   "use strict";
 
   const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
@@ -12,7 +12,7 @@ adguard.nsfwFiltering = (function (adguard) {
   let nsfwInstance = null;
 
   const initialize = async function () {
-    adguard.console.info("Initializing NSFW Model");
+    purify.console.info("Initializing NSFW Model");
     nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
   };
 
@@ -38,7 +38,7 @@ adguard.nsfwFiltering = (function (adguard) {
     const { result, className, probability } = handlePredictions([prediction]);
 
     if (result) {
-      // adguard.console.info(`IMG ${className} - ${probability} - ${requestUrl}`);
+      // purify.console.info(`IMG ${className} - ${probability} - ${requestUrl}`);
       return result;
     }
 
@@ -49,7 +49,7 @@ adguard.nsfwFiltering = (function (adguard) {
         const { result, className, probability } = handlePredictions(
           predictionGIF
         );
-        // adguard.console.info(
+        // purify.console.info(
         //   `GIF ${className} - ${probability} - ${requestUrl}`
         // );
         return result;
@@ -111,4 +111,4 @@ adguard.nsfwFiltering = (function (adguard) {
     handlePredictions,
     getNSFWStatus,
   };
-})(adguard);
+})(purify);

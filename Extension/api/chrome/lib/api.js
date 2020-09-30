@@ -94,13 +94,13 @@
 
     var domains;
     if (configuration.blacklist) {
-      adguard.whitelist.changeDefaultWhiteListMode(false);
+      purify.whitelist.changeDefaultWhiteListMode(false);
       domains = configuration.blacklist;
     } else {
-      adguard.whitelist.changeDefaultWhiteListMode(true);
+      purify.whitelist.changeDefaultWhiteListMode(true);
       domains = configuration.whitelist;
     }
-    adguard.whitelist.updateWhiteListDomains(domains || []);
+    purify.whitelist.updateWhiteListDomains(domains || []);
   }
 
   /**
@@ -117,9 +117,9 @@
     var filterIds = (configuration.filters || []).slice(0);
     for (var i = filterIds.length - 1; i >= 0; i--) {
       var filterId = filterIds[i];
-      var filter = adguard.subscriptions.getFilter(filterId);
+      var filter = purify.subscriptions.getFilter(filterId);
       if (!filter) {
-        adguard.console.error(
+        purify.console.error(
           "Filter with id {0} not found. Skip it...",
           filterId
         );
@@ -127,18 +127,18 @@
       }
     }
 
-    adguard.filters.addAndEnableFilters(filterIds, function () {
-      var enabledFilters = adguard.filters.getEnabledFilters();
+    purify.filters.addAndEnableFilters(filterIds, function () {
+      var enabledFilters = purify.filters.getEnabledFilters();
       for (var i = 0; i < enabledFilters.length; i++) {
         var filter = enabledFilters[i];
         if (filterIds.indexOf(filter.filterId) < 0) {
-          adguard.filters.disableFilters([filter.filterId]);
+          purify.filters.disableFilters([filter.filterId]);
         }
       }
 
-      var listernerId = adguard.listeners.addListener(function (event) {
-        if (event === adguard.listeners.REQUEST_FILTER_UPDATED) {
-          adguard.listeners.removeListener(listernerId);
+      var listernerId = purify.listeners.addListener(function (event) {
+        if (event === purify.listeners.REQUEST_FILTER_UPDATED) {
+          purify.listeners.removeListener(listernerId);
           callback();
         }
       });
@@ -155,7 +155,7 @@
     }
 
     var content = (configuration.rules || []).join("\r\n");
-    adguard.userrules.updateUserRulesText(content);
+    purify.userrules.updateUserRulesText(content);
   }
 
   /**
@@ -170,7 +170,7 @@
     ) {
       return;
     }
-    adguard.backend.configure({
+    purify.backend.configure({
       filtersMetadataUrl: configuration.filtersMetadataUrl,
       filterRulesUrl: configuration.filterRulesUrl,
     });
@@ -190,9 +190,9 @@
     // Force apply all configuration fields
     configuration.force = true;
 
-    adguard.rulesStorage.init(function () {
-      adguard.localStorage.init(function () {
-        adguard.filters.start({}, function () {
+    purify.rulesStorage.init(function () {
+      purify.localStorage.init(function () {
+        purify.filters.start({}, function () {
           configure(configuration, callback);
         });
       });
@@ -204,7 +204,7 @@
    * @param callback Callback function
    */
   var stop = function (callback) {
-    adguard.filters.stop(callback || noOpFunc);
+    purify.filters.stop(callback || noOpFunc);
   };
 
   /**
@@ -213,7 +213,7 @@
    * @param callback
    */
   var configure = function (configuration, callback) {
-    if (!adguard.filters.isInitialized()) {
+    if (!purify.filters.isInitialized()) {
       throw new Error("Applications is not initialized. Use 'start' method.");
     }
     validateConfiguration(configuration);
@@ -226,7 +226,7 @@
     configureFilters(configuration, callback);
   };
 
-  adguard.backend.configure({
+  purify.backend.configure({
     localFiltersFolder: "adguard",
     redirectSourcesFolder: "adguard",
     localFilterIds: [],
@@ -245,11 +245,11 @@
      *      tabId: ...,
      *      requestUrl: "...",
      *      referrerUrl: "...",
-     *      requestType: "...", see adguard.RequestTypes
+     *      requestType: "...", see purify.RequestTypes
      *      rule: "..." // Rule text
      *      filterId: ... // Filter identifier
      *   };
      */
-    onRequestBlocked: adguard.webRequestService.onRequestBlocked,
+    onRequestBlocked: purify.webRequestService.onRequestBlocked,
   };
 })(adguard, window);

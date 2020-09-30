@@ -1,4 +1,4 @@
-adguard.subscriptions = {};
+purify.subscriptions = {};
 
 const groupsMap = {
   1: { groupId: 1, groupName: "Explicit Content", displayNumber: 1 },
@@ -11,12 +11,12 @@ const groupsMap = {
   0: { groupId: 0, groupName: "Custom", displayNumber: 99 },
 };
 
-adguard.subscriptions.getGroups = () =>
+purify.subscriptions.getGroups = () =>
   Object.keys(groupsMap).map((key) => {
     return groupsMap[key];
   });
 
-adguard.subscriptions.getGroup = (groupId) => {
+purify.subscriptions.getGroup = (groupId) => {
   return groupsMap[groupId];
 };
 
@@ -28,7 +28,7 @@ const filtersMap = {
   5: { filterId: 5, groupId: 5 },
 };
 
-adguard.subscriptions.getFilter = (filterId) => {
+purify.subscriptions.getFilter = (filterId) => {
   return filtersMap[filterId];
 };
 
@@ -45,7 +45,7 @@ const getLastData = (arr, shift = 0) => {
 };
 
 /**
- * adguard.pageStats.getStatisticsData();
+ * purify.pageStats.getStatisticsData();
  *      {
             today: stats.data.hours,
             lastWeek: stats.data.days.slice(-7),
@@ -59,14 +59,14 @@ const getLastData = (arr, shift = 0) => {
 QUnit.test("Test Page Stats", function (assert) {
   var done = assert.async();
 
-  adguard.localStorage.init(function () {
+  purify.localStorage.init(function () {
     // test that data is empty
-    adguard.pageStats.resetStats();
+    purify.pageStats.resetStats();
 
     const now = new Date(2019, 0);
     now.setHours(0, 0, 0, 0);
 
-    let data = adguard.pageStats.getStatisticsData(now);
+    let data = purify.pageStats.getStatisticsData(now);
 
     const nonEmptyTodayData = getNonEmptyData(data.today);
     assert.equal(nonEmptyTodayData.length, 0);
@@ -84,16 +84,16 @@ QUnit.test("Test Page Stats", function (assert) {
     assert.equal(nonEmptyOverallData.length, 0);
 
     // test total blocked
-    let totalBlocked = adguard.pageStats.getTotalBlocked();
+    let totalBlocked = purify.pageStats.getTotalBlocked();
     assert.equal(totalBlocked, 0);
-    adguard.pageStats.updateTotalBlocked(24);
-    totalBlocked = adguard.pageStats.getTotalBlocked();
+    purify.pageStats.updateTotalBlocked(24);
+    totalBlocked = purify.pageStats.getTotalBlocked();
     assert.equal(totalBlocked, 24);
 
     // test adding first filter data
-    const firstFilter = adguard.subscriptions.getFilter(1);
-    adguard.pageStats.updateStats(firstFilter.filterId, 10, now);
-    data = adguard.pageStats.getStatisticsData();
+    const firstFilter = purify.subscriptions.getFilter(1);
+    purify.pageStats.updateStats(firstFilter.filterId, 10, now);
+    data = purify.pageStats.getStatisticsData();
     assert.ok(data);
     assert.equal(data.today.length, 24);
     assert.equal(getLastData(data.today)[firstFilter.groupId], 10);
@@ -110,9 +110,9 @@ QUnit.test("Test Page Stats", function (assert) {
     assert.equal(data.lastYear.length, 3);
 
     // Test adding second filter data
-    const secondFilter = adguard.subscriptions.getFilter(2);
-    adguard.pageStats.updateStats(secondFilter.filterId, 100, now);
-    data = adguard.pageStats.getStatisticsData();
+    const secondFilter = purify.subscriptions.getFilter(2);
+    purify.pageStats.updateStats(secondFilter.filterId, 100, now);
+    data = purify.pageStats.getStatisticsData();
     assert.ok(data);
 
     assert.equal(data.today.length, 24);
@@ -133,8 +133,8 @@ QUnit.test("Test Page Stats", function (assert) {
     assert.equal(data.lastYear.length, 3);
 
     // Test that filter data correctly sums
-    adguard.pageStats.updateStats(firstFilter.filterId, 10, now);
-    data = adguard.pageStats.getStatisticsData();
+    purify.pageStats.updateStats(firstFilter.filterId, 10, now);
+    data = purify.pageStats.getStatisticsData();
     assert.ok(data);
     assert.equal(data.today.length, 24);
     assert.equal(getLastData(data.today)[firstFilter.groupId], 20);
@@ -154,13 +154,13 @@ QUnit.test("Test Page Stats", function (assert) {
     assert.equal(data.lastYear.length, 3);
 
     // Test data is correctly added after 3 hours passed
-    const fourthFilter = adguard.subscriptions.getFilter(4);
+    const fourthFilter = purify.subscriptions.getFilter(4);
     const hoursShift = 3;
     const hoursShiftTime = new Date(
       now.getTime() + hoursShift * 60 * 60 * 1000
     );
-    adguard.pageStats.updateStats(fourthFilter.filterId, 1000, hoursShiftTime);
-    data = adguard.pageStats.getStatisticsData();
+    purify.pageStats.updateStats(fourthFilter.filterId, 1000, hoursShiftTime);
+    data = purify.pageStats.getStatisticsData();
     assert.ok(data);
     assert.equal(data.today.length, 24);
     assert.equal(getLastData(data.today, hoursShift)[firstFilter.groupId], 20);
@@ -185,13 +185,13 @@ QUnit.test("Test Page Stats", function (assert) {
     assert.equal(data.lastYear.length, 3);
 
     // Test data is correctly added after 4 days passed
-    const fifthFilter = adguard.subscriptions.getFilter(5);
+    const fifthFilter = purify.subscriptions.getFilter(5);
     const daysShift = 4;
     const daysShiftTime = new Date(
       hoursShiftTime.getTime() + daysShift * 24 * 60 * 60 * 1000
     );
-    adguard.pageStats.updateStats(fifthFilter.filterId, 10000, daysShiftTime);
-    data = adguard.pageStats.getStatisticsData();
+    purify.pageStats.updateStats(fifthFilter.filterId, 10000, daysShiftTime);
+    data = purify.pageStats.getStatisticsData();
     assert.ok(data);
     assert.equal(data.today.length, 24);
     assert.equal(getLastData(data.today)[fifthFilter.groupId], 10000);
@@ -226,8 +226,8 @@ QUnit.test("Test Page Stats", function (assert) {
     const monthsShiftTime = new Date(
       daysShiftTime.getTime() + monthsShift * 30 * 24 * 60 * 60 * 1000
     );
-    adguard.pageStats.updateStats(secondFilter.filterId, 200, monthsShiftTime);
-    data = adguard.pageStats.getStatisticsData();
+    purify.pageStats.updateStats(secondFilter.filterId, 200, monthsShiftTime);
+    data = purify.pageStats.getStatisticsData();
     assert.ok(data);
     assert.equal(data.today.length, 24);
     assert.equal(getLastData(data.today)[secondFilter.groupId], 200);

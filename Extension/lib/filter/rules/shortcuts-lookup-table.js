@@ -153,7 +153,7 @@
         this.lookupTable.set(shortcutHash, rule);
       } else {
         const obj = this.lookupTable.get(shortcutHash);
-        if (adguard.utils.collections.isArray(obj)) {
+        if (purify.utils.collections.isArray(obj)) {
           // That is popular shortcut, more than one rule
           obj.push(rule);
         } else {
@@ -180,8 +180,8 @@
 
         if (this.lookupTable.has(shortcutHash)) {
           const obj = this.lookupTable.get(shortcutHash);
-          if (adguard.utils.collections.isArray(obj)) {
-            adguard.utils.collections.removeRule(obj, rule);
+          if (purify.utils.collections.isArray(obj)) {
+            purify.utils.collections.removeRule(obj, rule);
             if (obj.length === 0) {
               this.lookupTable.delete(shortcutHash);
             }
@@ -214,7 +214,7 @@
         const value = this.lookupTable.get(hash);
 
         if (value) {
-          if (adguard.utils.collections.isArray(value)) {
+          if (purify.utils.collections.isArray(value)) {
             if (result === null) {
               result = [];
             }
@@ -244,7 +244,7 @@
       const result = [];
       this.lookupTable.forEach((value) => {
         if (value) {
-          if (adguard.utils.collections.isArray(value)) {
+          if (purify.utils.collections.isArray(value)) {
             result = result.concat(value);
           } else {
             result.push(value);
@@ -256,4 +256,4 @@
   };
 
   api.ShortcutsLookupTable = ShortcutsLookupTable;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

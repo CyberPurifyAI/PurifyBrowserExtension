@@ -1,13 +1,13 @@
 /**
  * Creating service that manages our filter rules.
  */
-adguard.antiBannerService = (function (adguard) {
+purify.antiBannerService = (function (purify) {
   // Add synthetic user filter
-  const userFilter = { filterId: adguard.utils.filters.USER_FILTER_ID };
+  const userFilter = { filterId: purify.utils.filters.USER_FILTER_ID };
 
   // Request filter contains all filter rules
   // This class does the actual filtering (checking URLs, constructing CSS/JS to inject, etc)
-  let requestFilter = new adguard.RequestFilter();
+  let requestFilter = new purify.RequestFilter();
 
   // Service is not initialized yet
   let requestFilterInitTime = 0;
@@ -19,7 +19,7 @@ adguard.antiBannerService = (function (adguard) {
   let applicationInitialized = false;
 
   // Get filters update period
-  let filtersUpdatePeriod = adguard.settings.getFiltersUpdatePeriod();
+  let filtersUpdatePeriod = purify.settings.getFiltersUpdatePeriod();
 
   /**
    * Delay before doing first filters update check -- 5 minutes
@@ -39,9 +39,9 @@ adguard.antiBannerService = (function (adguard) {
    * @type {Array}
    */
   const UPDATE_REQUEST_FILTER_EVENTS = [
-    adguard.listeners.UPDATE_FILTER_RULES,
-    adguard.listeners.FILTER_ENABLE_DISABLE,
-    adguard.listeners.FILTER_GROUP_ENABLE_DISABLE,
+    purify.listeners.UPDATE_FILTER_RULES,
+    purify.listeners.FILTER_ENABLE_DISABLE,
+    purify.listeners.FILTER_GROUP_ENABLE_DISABLE,
   ];
 
   const isUpdateRequestFilterEvent = (el) =>
@@ -52,9 +52,9 @@ adguard.antiBannerService = (function (adguard) {
    * @type {Array}
    */
   const SAVE_FILTER_RULES_TO_STORAGE_EVENTS = [
-    adguard.listeners.UPDATE_FILTER_RULES,
-    adguard.listeners.ADD_RULES,
-    adguard.listeners.REMOVE_RULE,
+    purify.listeners.UPDATE_FILTER_RULES,
+    purify.listeners.ADD_RULES,
+    purify.listeners.REMOVE_RULE,
   ];
 
   const isSaveRulesToStorageEvent = function (el) {
@@ -76,8 +76,8 @@ adguard.antiBannerService = (function (adguard) {
      */
     const notifyApplicationUpdated = function (runInfo) {
       setTimeout(() => {
-        adguard.listeners.notifyListeners(
-          adguard.listeners.APPLICATION_UPDATED,
+        purify.listeners.notifyListeners(
+          purify.listeners.APPLICATION_UPDATED,
           runInfo
         );
       }, APP_UPDATED_NOTIFICATION_DELAY);
@@ -115,7 +115,7 @@ adguard.antiBannerService = (function (adguard) {
         }
       } else if (runInfo.isUpdate) {
         // Updating storage schema on extension update (if needed)
-        adguard.applicationUpdateService.onUpdate(runInfo, initRequestFilter);
+        purify.applicationUpdateService.onUpdate(runInfo, initRequestFilter);
         // Show updated version popup
         notifyApplicationUpdated(runInfo);
       } else {
@@ -129,9 +129,9 @@ adguard.antiBannerService = (function (adguard) {
     /**
      * Init extension common info.
      */
-    adguard.applicationUpdateService.getRunInfo(async (runInfo) => {
+    purify.applicationUpdateService.getRunInfo(async (runInfo) => {
       // Load subscription from the storage
-      await adguard.subscriptions.init();
+      await purify.subscriptions.init();
       onSubscriptionLoaded(runInfo);
     });
   }
@@ -162,9 +162,9 @@ adguard.antiBannerService = (function (adguard) {
    */
   const stop = function () {
     applicationRunning = false;
-    requestFilter = new adguard.RequestFilter();
-    adguard.listeners.notifyListeners(
-      adguard.listeners.REQUEST_FILTER_UPDATED,
+    requestFilter = new purify.RequestFilter();
+    purify.listeners.notifyListeners(
+      purify.listeners.REQUEST_FILTER_UPDATED,
       getRequestFilterInfo()
     );
   };
@@ -200,8 +200,8 @@ adguard.antiBannerService = (function (adguard) {
     const onFilterLoaded = (success) => {
       if (success) {
         filter.installed = true;
-        adguard.listeners.notifyListeners(
-          adguard.listeners.FILTER_ADD_REMOVE,
+        purify.listeners.notifyListeners(
+          purify.listeners.FILTER_ADD_REMOVE,
           filter
         );
       }
@@ -261,7 +261,7 @@ adguard.antiBannerService = (function (adguard) {
   function selectFilterIdsToUpdate(forceUpdate, filtersToUpdate) {
     const filterIds = [];
     const customFilterIds = [];
-    const filters = filtersToUpdate || adguard.subscriptions.getFilters();
+    const filters = filtersToUpdate || purify.subscriptions.getFilters();
 
     const needUpdate = (filter) => {
       const { lastCheckTime } = filter;
@@ -273,7 +273,7 @@ adguard.antiBannerService = (function (adguard) {
 
       expires = normalizeExpires(expires);
       if (
-        filtersUpdatePeriod === adguard.settings.DEFAULT_FILTERS_UPDATE_PERIOD
+        filtersUpdatePeriod === purify.settings.DEFAULT_FILTERS_UPDATE_PERIOD
       ) {
         return lastCheckTime + expires <= Date.now();
       }
@@ -283,7 +283,7 @@ adguard.antiBannerService = (function (adguard) {
 
     for (let i = 0; i < filters.length; i += 1) {
       const filter = filters[i];
-      const group = adguard.subscriptions.getGroup(filter.groupId);
+      const group = purify.subscriptions.getGroup(filter.groupId);
       if (filter.installed && filter.enabled && group.enabled) {
         if (forceUpdate || needUpdate(filter)) {
           if (filter.customUrl) {
@@ -325,7 +325,7 @@ adguard.antiBannerService = (function (adguard) {
       return;
     }
 
-    adguard.console.info("Start checking filters updates");
+    purify.console.info("Start checking filters updates");
 
     // Select filters for update
     const toUpdate = selectFilterIdsToUpdate(forceUpdate, filters);
@@ -336,18 +336,18 @@ adguard.antiBannerService = (function (adguard) {
       filterIdsToUpdate.length + customFilterIdsToUpdate.length;
     if (totalToUpdate === 0) {
       successCallback([]);
-      adguard.console.info("There is no filters to update");
+      purify.console.info("There is no filters to update");
       return;
     }
 
-    adguard.console.info("Checking updates for {0} filters", totalToUpdate);
+    purify.console.info("Checking updates for {0} filters", totalToUpdate);
 
     // Load filters with changed version
     const loadFiltersFromBackendCallback = (filterMetadataList) => {
       loadFiltersFromBackend(filterMetadataList, (success, filterIds) => {
         if (success) {
           const filters = filterIds
-            .map(adguard.subscriptions.getFilter)
+            .map(purify.subscriptions.getFilter)
             .filter((f) => f);
 
           updateCustomFilters(customFilterIdsToUpdate, (customFilters) => {
@@ -370,18 +370,18 @@ adguard.antiBannerService = (function (adguard) {
         const filterMetadataListToUpdate = [];
         for (let i = 0; i < filterMetadataList.length; i += 1) {
           const filterMetadata = filterMetadataList[i];
-          const filter = adguard.subscriptions.getFilter(
+          const filter = purify.subscriptions.getFilter(
             filterMetadata.filterId
           );
           if (
             filter &&
             filterMetadata.version &&
-            adguard.utils.browser.isGreaterVersion(
+            purify.utils.browser.isGreaterVersion(
               filterMetadata.version,
               filter.version
             )
           ) {
-            adguard.console.info(
+            purify.console.info(
               `Updating filter ${filter.filterId} to version ${filterMetadata.version}`
             );
             filterMetadataListToUpdate.push(filterMetadata);
@@ -415,14 +415,14 @@ adguard.antiBannerService = (function (adguard) {
     const promises = customFilterIds.map(
       (filterId) =>
         new Promise((resolve) => {
-          const filter = adguard.subscriptions.getFilter(filterId);
+          const filter = purify.subscriptions.getFilter(filterId);
           const onUpdate = (updatedFilterId) => {
             if (updatedFilterId) {
               return resolve(filter);
             }
             return resolve();
           };
-          adguard.subscriptions.updateCustomFilter(
+          purify.subscriptions.updateCustomFilter(
             filter.customUrl,
             {},
             onUpdate
@@ -436,7 +436,7 @@ adguard.antiBannerService = (function (adguard) {
         const filterIdsString = updatedFilters
           .map((f) => f.filterId)
           .join(", ");
-        adguard.console.info(
+        purify.console.info(
           `Updated custom filters with ids: ${filterIdsString}`
         );
       }
@@ -451,7 +451,7 @@ adguard.antiBannerService = (function (adguard) {
   function resetFiltersVersion() {
     const RESET_VERSION = "0.0.0.0";
 
-    const filters = adguard.subscriptions.getFilters();
+    const filters = purify.subscriptions.getFilters();
     for (let i = 0; i < filters.length; i += 1) {
       const filter = filters[i];
       filter.version = RESET_VERSION;
@@ -460,14 +460,14 @@ adguard.antiBannerService = (function (adguard) {
 
   /**
    * Updates groups state info
-   * Loads state info from the storage and then updates adguard.subscription.groups properly
+   * Loads state info from the storage and then updates purify.subscription.groups properly
    * @private
    */
   function loadGroupsStateInfo() {
     // Load filters state from the storage
-    const groupsStateInfo = adguard.filtersState.getGroupsState();
+    const groupsStateInfo = purify.filtersState.getGroupsState();
 
-    const groups = adguard.subscriptions.getGroups();
+    const groups = purify.subscriptions.getGroups();
 
     for (let i = 0; i < groups.length; i += 1) {
       const group = groups[i];
@@ -481,17 +481,17 @@ adguard.antiBannerService = (function (adguard) {
 
   /**
    * Updates filters version and state info.
-   * Loads this data from the storage and then updates adguard.subscription.filters property
+   * Loads this data from the storage and then updates purify.subscription.filters property
    *
    * @private
    */
   function loadFiltersVersionAndStateInfo() {
     // Load filters metadata from the storage
-    const filtersVersionInfo = adguard.filtersState.getFiltersVersion();
+    const filtersVersionInfo = purify.filtersState.getFiltersVersion();
     // Load filters state from the storage
-    const filtersStateInfo = adguard.filtersState.getFiltersState();
+    const filtersStateInfo = purify.filtersState.getFiltersState();
 
-    const filters = adguard.subscriptions.getFilters();
+    const filters = purify.subscriptions.getFilters();
 
     for (let i = 0; i < filters.length; i += 1) {
       const filter = filters[i];
@@ -527,21 +527,21 @@ adguard.antiBannerService = (function (adguard) {
     // that't why we create filter rules using chunks of the specified length
     // Request filter creation is rather slow operation so we should
     // use setTimeout calls to give UI thread some time.
-    const async = adguard.requestFilter.isReady();
+    const async = purify.requestFilter.isReady();
     const asyncStep = 1000;
-    adguard.console.info(
+    purify.console.info(
       "Starting request filter initialization. Async={0}",
       async
     );
 
     // Empty request filter
-    const newRequestFilter = new adguard.RequestFilter();
+    const newRequestFilter = new purify.RequestFilter();
 
     if (requestFilterInitTime === 0) {
       // Setting the time of request filter very first initialization
       requestFilterInitTime = new Date().getTime();
-      adguard.listeners.notifyListeners(
-        adguard.listeners.APPLICATION_INITIALIZED
+      purify.listeners.notifyListeners(
+        purify.listeners.APPLICATION_INITIALIZED
       );
     }
 
@@ -560,7 +560,7 @@ adguard.antiBannerService = (function (adguard) {
       }
 
       // User filter is enabled by default, but it may not contain any rules
-      const userFilterId = adguard.utils.filters.USER_FILTER_ID;
+      const userFilterId = purify.utils.filters.USER_FILTER_ID;
       if (
         enabledFilterIds.length === 1 &&
         enabledFilterIds[0] == userFilterId
@@ -586,11 +586,11 @@ adguard.antiBannerService = (function (adguard) {
         callback();
       }
 
-      adguard.listeners.notifyListeners(
-        adguard.listeners.REQUEST_FILTER_UPDATED,
+      purify.listeners.notifyListeners(
+        purify.listeners.REQUEST_FILTER_UPDATED,
         getRequestFilterInfo()
       );
-      adguard.console.info(
+      purify.console.info(
         "Finished request filter initialization in {0} ms. Rules count: {1}",
         new Date().getTime() - start,
         newRequestFilter.rulesCount
@@ -605,13 +605,13 @@ adguard.antiBannerService = (function (adguard) {
 
       if (newRequestFilter.rulesCount === 0 && !reloadedRules) {
         // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/205
-        adguard.console.info(
+        purify.console.info(
           "No rules have been found - checking filter updates"
         );
         reloadAntiBannerFilters();
         reloadedRules = true;
       } else if (newRequestFilter.rulesCount > 0 && reloadedRules) {
-        adguard.console.info("Filters reloaded, deleting reloadRules flag");
+        purify.console.info("Filters reloaded, deleting reloadRules flag");
         reloadedRules = false;
       }
     };
@@ -629,7 +629,7 @@ adguard.antiBannerService = (function (adguard) {
         return;
       }
 
-      const isTrustedFilter = adguard.subscriptions.isTrustedFilter(filterId);
+      const isTrustedFilter = purify.subscriptions.isTrustedFilter(filterId);
 
       for (let i = startIdx; i < rulesTexts.length && i < endIdx; i += 1) {
         const ruleText = rulesTexts[i];
@@ -638,7 +638,7 @@ adguard.antiBannerService = (function (adguard) {
           continue;
         }
         uniqueRules[ruleText] = true;
-        const rule = adguard.rules.builder.createRule(
+        const rule = purify.rules.builder.createRule(
           ruleText,
           filterId,
           isTrustedFilter
@@ -682,7 +682,7 @@ adguard.antiBannerService = (function (adguard) {
         // jshint ignore:line
         // To number
         filterId -= 0;
-        if (filterId !== adguard.utils.filters.USER_FILTER_ID) {
+        if (filterId !== purify.utils.filters.USER_FILTER_ID) {
           const rulesTexts = rulesFilterMap[filterId];
 
           for (let i = 0; i < rulesTexts.length; i += asyncStep) {
@@ -700,7 +700,7 @@ adguard.antiBannerService = (function (adguard) {
 
       // User filter should be the last
       // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/117
-      const userFilterId = adguard.utils.filters.USER_FILTER_ID;
+      const userFilterId = purify.utils.filters.USER_FILTER_ID;
       const userRules = rulesFilterMap[userFilterId];
       const startIndex = 0;
       const endIndex = userRules.length;
@@ -727,7 +727,7 @@ adguard.antiBannerService = (function (adguard) {
         // jshint ignore:line
         // To number
         filterId -= 0;
-        if (filterId != adguard.utils.filters.USER_FILTER_ID) {
+        if (filterId != purify.utils.filters.USER_FILTER_ID) {
           const rulesTexts = rulesFilterMap[filterId];
           addRules(filterId, rulesTexts, 0, rulesTexts.length);
         }
@@ -735,9 +735,9 @@ adguard.antiBannerService = (function (adguard) {
 
       // User filter should be the last
       // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/117
-      const userRules = rulesFilterMap[adguard.utils.filters.USER_FILTER_ID];
+      const userRules = rulesFilterMap[purify.utils.filters.USER_FILTER_ID];
       addRules(
-        adguard.utils.filters.USER_FILTER_ID,
+        purify.utils.filters.USER_FILTER_ID,
         userRules,
         0,
         userRules.length
@@ -767,7 +767,7 @@ adguard.antiBannerService = (function (adguard) {
     }
 
     const start = new Date().getTime();
-    adguard.console.info("Starting loading filter rules from the storage");
+    purify.console.info("Starting loading filter rules from the storage");
 
     // Prepare map for filter rules
     // Map key is filter ID
@@ -778,7 +778,7 @@ adguard.antiBannerService = (function (adguard) {
      * STEP 2: Called when all filter rules have been loaded from storage
      */
     const loadAllFilterRulesDone = function () {
-      adguard.console.info(
+      purify.console.info(
         "Finished loading filter rules from the storage in {0} ms",
         new Date().getTime() - start
       );
@@ -794,7 +794,7 @@ adguard.antiBannerService = (function (adguard) {
      */
     const loadFilterRulesFromStorage = (filterId, rulesFilterMap) =>
       new Promise((resolve) => {
-        adguard.rulesStorage.read(filterId, (rulesText) => {
+        purify.rulesStorage.read(filterId, (rulesText) => {
           if (rulesText) {
             rulesFilterMap[filterId] = rulesText;
           }
@@ -807,10 +807,10 @@ adguard.antiBannerService = (function (adguard) {
      */
     const loadFilterRules = function () {
       const promises = [];
-      const filters = adguard.subscriptions.getFilters();
+      const filters = purify.subscriptions.getFilters();
       for (let i = 0; i < filters.length; i += 1) {
         const filter = filters[i];
-        const group = adguard.subscriptions.getGroup(filter.groupId);
+        const group = purify.subscriptions.getGroup(filter.groupId);
         if (filter.enabled && group.enabled) {
           promises.push(
             loadFilterRulesFromStorage(filter.filterId, rulesFilterMap)
@@ -820,7 +820,7 @@ adguard.antiBannerService = (function (adguard) {
       // get user filter rules from storage
       promises.push(
         loadFilterRulesFromStorage(
-          adguard.utils.filters.USER_FILTER_ID,
+          purify.utils.filters.USER_FILTER_ID,
           rulesFilterMap
         )
       );
@@ -896,11 +896,11 @@ adguard.antiBannerService = (function (adguard) {
 
       if (needCreateRequestFilter) {
         // Rules will be added to request filter lazy, listeners will be notified about REQUEST_FILTER_UPDATED later
-        adguard.utils.Promise.all(dfds).then(createRequestFilter);
+        purify.utils.Promise.all(dfds).then(createRequestFilter);
       } else {
         // Rules are already in request filter, notify listeners
-        adguard.listeners.notifyListeners(
-          adguard.listeners.REQUEST_FILTER_UPDATED,
+        purify.listeners.notifyListeners(
+          purify.listeners.REQUEST_FILTER_UPDATED,
           getRequestFilterInfo()
         );
       }
@@ -932,12 +932,12 @@ adguard.antiBannerService = (function (adguard) {
       );
     };
 
-    adguard.listeners.addListener((event, filter, rules) => {
+    purify.listeners.addListener((event, filter, rules) => {
       switch (event) {
-        case adguard.listeners.ADD_RULES:
-        case adguard.listeners.REMOVE_RULE:
-        case adguard.listeners.UPDATE_FILTER_RULES:
-        case adguard.listeners.FILTER_ENABLE_DISABLE:
+        case purify.listeners.ADD_RULES:
+        case purify.listeners.REMOVE_RULE:
+        case purify.listeners.UPDATE_FILTER_RULES:
+        case purify.listeners.FILTER_ENABLE_DISABLE:
           processFilterEvent(event, filter, rules);
           break;
         default:
@@ -945,9 +945,9 @@ adguard.antiBannerService = (function (adguard) {
       }
     });
 
-    adguard.listeners.addListener((event, group) => {
+    purify.listeners.addListener((event, group) => {
       switch (event) {
-        case adguard.listeners.FILTER_GROUP_ENABLE_DISABLE:
+        case purify.listeners.FILTER_GROUP_ENABLE_DISABLE:
           processGroupEvent(event, group);
           break;
         default:
@@ -964,9 +964,9 @@ adguard.antiBannerService = (function (adguard) {
    * @private
    */
   function processSaveFilterRulesToStorageEvents(filterId, events) {
-    const dfd = new adguard.utils.Promise();
+    const dfd = new purify.utils.Promise();
 
-    adguard.rulesStorage.read(filterId, (loadedRulesText) => {
+    purify.rulesStorage.read(filterId, (loadedRulesText) => {
       for (let i = 0; i < events.length; i += 1) {
         if (!loadedRulesText) {
           loadedRulesText = [];
@@ -977,26 +977,26 @@ adguard.antiBannerService = (function (adguard) {
         const eventRules = event.rules;
 
         switch (eventType) {
-          case adguard.listeners.ADD_RULES:
+          case purify.listeners.ADD_RULES:
             loadedRulesText = loadedRulesText.concat(eventRules);
-            adguard.console.debug(
+            purify.console.debug(
               "Add {0} rules to filter {1}",
               eventRules.length,
               filterId
             );
             break;
-          case adguard.listeners.REMOVE_RULE:
+          case purify.listeners.REMOVE_RULE:
             var actionRule = eventRules[0];
-            adguard.utils.collections.removeAll(loadedRulesText, actionRule);
-            adguard.console.debug(
+            purify.utils.collections.removeAll(loadedRulesText, actionRule);
+            purify.console.debug(
               "Remove {0} rule from filter {1}",
               actionRule,
               filterId
             );
             break;
-          case adguard.listeners.UPDATE_FILTER_RULES:
+          case purify.listeners.UPDATE_FILTER_RULES:
             loadedRulesText = eventRules;
-            adguard.console.debug(
+            purify.console.debug(
               "Update filter {0} rules count to {1}",
               filterId,
               eventRules.length
@@ -1005,16 +1005,16 @@ adguard.antiBannerService = (function (adguard) {
         }
       }
 
-      adguard.console.debug(
+      purify.console.debug(
         "Save {0} rules to filter {1}",
         loadedRulesText.length,
         filterId
       );
-      adguard.rulesStorage.write(filterId, loadedRulesText, () => {
+      purify.rulesStorage.write(filterId, loadedRulesText, () => {
         dfd.resolve();
-        if (filterId === adguard.utils.filters.USER_FILTER_ID) {
-          adguard.listeners.notifyListeners(
-            adguard.listeners.UPDATE_USER_FILTER_RULES,
+        if (filterId === purify.utils.filters.USER_FILTER_ID) {
+          purify.listeners.notifyListeners(
+            purify.listeners.UPDATE_USER_FILTER_RULES,
             getRequestFilterInfo()
           );
         }
@@ -1030,20 +1030,20 @@ adguard.antiBannerService = (function (adguard) {
    */
   function subscribeToFiltersChangeEvents() {
     // on USE_OPTIMIZED_FILTERS setting change we need to reload filters
-    const onUsedOptimizedFiltersChange = adguard.utils.concurrent.debounce(
+    const onUsedOptimizedFiltersChange = purify.utils.concurrent.debounce(
       reloadAntiBannerFilters,
       RELOAD_FILTERS_DEBOUNCE_PERIOD
     );
 
-    adguard.settings.onUpdated.addListener((setting) => {
-      if (setting === adguard.settings.USE_OPTIMIZED_FILTERS) {
+    purify.settings.onUpdated.addListener((setting) => {
+      if (setting === purify.settings.USE_OPTIMIZED_FILTERS) {
         onUsedOptimizedFiltersChange();
         return;
       }
-      if (setting === adguard.settings.DISABLE_COLLECT_HITS) {
+      if (setting === purify.settings.DISABLE_COLLECT_HITS) {
         getRequestFilter().cssFilter.dirty = true;
       }
-      if (setting === adguard.settings.FILTERS_UPDATE_PERIOD) {
+      if (setting === purify.settings.FILTERS_UPDATE_PERIOD) {
         scheduleFiltersUpdate();
       }
     });
@@ -1066,7 +1066,7 @@ adguard.antiBannerService = (function (adguard) {
       try {
         checkAntiBannerFiltersUpdate();
       } catch (ex) {
-        adguard.console.error("Error update filters, cause {0}", ex);
+        purify.console.error("Error update filters, cause {0}", ex);
       }
       scheduleUpdate();
     }, checkTimeout);
@@ -1079,7 +1079,7 @@ adguard.antiBannerService = (function (adguard) {
    * @private
    */
   function scheduleFiltersUpdate(isFirstRun) {
-    filtersUpdatePeriod = adguard.settings.getFiltersUpdatePeriod();
+    filtersUpdatePeriod = purify.settings.getFiltersUpdatePeriod();
     // First run delay
     if (isFirstRun) {
       setTimeout(
@@ -1096,11 +1096,11 @@ adguard.antiBannerService = (function (adguard) {
    * Throws exception if filter not found.
    *
    * @param filterId Filter identifier
-   * @returns {*} Filter got from adguard.subscriptions.getFilter
+   * @returns {*} Filter got from purify.subscriptions.getFilter
    * @private
    */
   function getFilterById(filterId) {
-    const filter = adguard.subscriptions.getFilter(filterId);
+    const filter = purify.subscriptions.getFilter(filterId);
     if (!filter) {
       throw new Error(`Filter with id: ${filterId} not found`);
     }
@@ -1149,13 +1149,13 @@ adguard.antiBannerService = (function (adguard) {
     const filter = getFilterById(filterMetadata.filterId);
 
     filter._isDownloading = true;
-    adguard.listeners.notifyListeners(
-      adguard.listeners.START_DOWNLOAD_FILTER,
+    purify.listeners.notifyListeners(
+      purify.listeners.START_DOWNLOAD_FILTER,
       filter
     );
 
     const successCallback = (filterRules) => {
-      adguard.console.info(
+      purify.console.info(
         "Retrieved response from server for filter {0}, rules count: {1}",
         filter.filterId,
         filterRules.length
@@ -1169,12 +1169,12 @@ adguard.antiBannerService = (function (adguard) {
       filter.loaded = true;
       filter.expires = filterMetadata.expires;
       // notify listeners
-      adguard.listeners.notifyListeners(
-        adguard.listeners.SUCCESS_DOWNLOAD_FILTER,
+      purify.listeners.notifyListeners(
+        purify.listeners.SUCCESS_DOWNLOAD_FILTER,
         filter
       );
-      adguard.listeners.notifyListeners(
-        adguard.listeners.UPDATE_FILTER_RULES,
+      purify.listeners.notifyListeners(
+        purify.listeners.UPDATE_FILTER_RULES,
         filter,
         filterRules
       );
@@ -1182,24 +1182,24 @@ adguard.antiBannerService = (function (adguard) {
     };
 
     const errorCallback = (cause) => {
-      adguard.console.error(
+      purify.console.error(
         "Error retrieving response from the server for filter {0}, cause: {1}:",
         filter.filterId,
         cause || ""
       );
       delete filter._isDownloading;
-      adguard.listeners.notifyListeners(
-        adguard.listeners.ERROR_DOWNLOAD_FILTER,
+      purify.listeners.notifyListeners(
+        purify.listeners.ERROR_DOWNLOAD_FILTER,
         filter
       );
       callback(false);
     };
 
-    adguard.backend
+    purify.backend
       .loadFilterRules(
         filter.filterId,
         forceRemote,
-        adguard.settings.isUseOptimizedFiltersEnabled()
+        purify.settings.isUseOptimizedFiltersEnabled()
       )
       .then(successCallback, errorCallback);
   }
@@ -1218,7 +1218,7 @@ adguard.antiBannerService = (function (adguard) {
     }
 
     const loadSuccess = (filterMetadataList) => {
-      adguard.console.debug(
+      purify.console.debug(
         "Retrieved response from server for {0} filters, result: {1} metadata",
         filterIds.length,
         filterMetadataList.length
@@ -1227,7 +1227,7 @@ adguard.antiBannerService = (function (adguard) {
     };
 
     const loadError = (request, cause) => {
-      adguard.console.error(
+      purify.console.error(
         "Error retrieved response from server for filters {0}, cause: {1} {2}",
         filterIds,
         request.statusText,
@@ -1236,7 +1236,7 @@ adguard.antiBannerService = (function (adguard) {
       callback(false);
     };
 
-    adguard.backend.loadFiltersMetadata(filterIds, loadSuccess, loadError);
+    purify.backend.loadFiltersMetadata(filterIds, loadSuccess, loadError);
   }
 
   /**
@@ -1255,9 +1255,9 @@ adguard.antiBannerService = (function (adguard) {
   const addUserFilterRules = function (rulesText) {
     const rules = [];
     for (let i = 0; i < rulesText.length; i += 1) {
-      const rule = adguard.rules.builder.createRule(
+      const rule = purify.rules.builder.createRule(
         rulesText[i],
-        adguard.utils.filters.USER_FILTER_ID
+        purify.utils.filters.USER_FILTER_ID
       );
       if (rule !== null) {
         rules.push(rule);
@@ -1265,13 +1265,13 @@ adguard.antiBannerService = (function (adguard) {
     }
     requestFilter.addRules(rules);
 
-    adguard.listeners.notifyListeners(
-      adguard.listeners.ADD_RULES,
+    purify.listeners.notifyListeners(
+      purify.listeners.ADD_RULES,
       userFilter,
       rulesText
     );
-    adguard.listeners.notifyListeners(
-      adguard.listeners.UPDATE_USER_FILTER_RULES,
+    purify.listeners.notifyListeners(
+      purify.listeners.UPDATE_USER_FILTER_RULES,
       getRequestFilterInfo()
     );
 
@@ -1283,13 +1283,13 @@ adguard.antiBannerService = (function (adguard) {
    * @param rulesText Rules text
    */
   const updateUserFilterRules = function (rulesText) {
-    adguard.listeners.notifyListeners(
-      adguard.listeners.UPDATE_FILTER_RULES,
+    purify.listeners.notifyListeners(
+      purify.listeners.UPDATE_FILTER_RULES,
       userFilter,
       rulesText
     );
-    adguard.listeners.notifyListeners(
-      adguard.listeners.UPDATE_USER_FILTER_RULES,
+    purify.listeners.notifyListeners(
+      purify.listeners.UPDATE_USER_FILTER_RULES,
       getRequestFilterInfo()
     );
   };
@@ -1299,15 +1299,15 @@ adguard.antiBannerService = (function (adguard) {
    * @param ruleText
    */
   const removeUserFilterRule = function (ruleText) {
-    const rule = adguard.rules.builder.createRule(
+    const rule = purify.rules.builder.createRule(
       ruleText,
-      adguard.utils.filters.USER_FILTER_ID
+      purify.utils.filters.USER_FILTER_ID
     );
     if (rule !== null) {
       requestFilter.removeRule(rule);
     }
-    adguard.listeners.notifyListeners(
-      adguard.listeners.REMOVE_RULE,
+    purify.listeners.notifyListeners(
+      purify.listeners.REMOVE_RULE,
       userFilter,
       [ruleText]
     );
@@ -1331,12 +1331,12 @@ adguard.antiBannerService = (function (adguard) {
 
     checkAntiBannerFiltersUpdate,
   };
-})(adguard);
+})(purify);
 
 /**
  * Api for filtering and elements hiding.
  */
-adguard.requestFilter = (function (adguard) {
+purify.requestFilter = (function (purify) {
   "use strict";
 
   const { antiBannerService } = adguard;
@@ -1480,13 +1480,13 @@ adguard.requestFilter = (function (adguard) {
     findStealthWhiteListRule,
     getRequestFilterInfo,
   };
-})(adguard);
+})(purify);
 
 /**
  * Helper class for working with filters metadata storage (local storage)
  * //TODO: Duplicated in filters-storage.js
  */
-adguard.filtersState = (function (adguard) {
+purify.filtersState = (function (purify) {
   const FILTERS_STATE_PROP = "filters-state";
   const FILTERS_VERSION_PROP = "filters-version";
   const GROUPS_STATE_PROP = "groups-state";
@@ -1498,12 +1498,12 @@ adguard.filtersState = (function (adguard) {
   const getFiltersVersion = function () {
     let filters = Object.create(null);
     try {
-      const json = adguard.localStorage.getItem(FILTERS_VERSION_PROP);
+      const json = purify.localStorage.getItem(FILTERS_VERSION_PROP);
       if (json) {
         filters = JSON.parse(json);
       }
     } catch (ex) {
-      adguard.console.error(
+      purify.console.error(
         "Error retrieve filters version info, cause {0}",
         ex
       );
@@ -1518,12 +1518,12 @@ adguard.filtersState = (function (adguard) {
   const getFiltersState = function () {
     let filters = Object.create(null);
     try {
-      const json = adguard.localStorage.getItem(FILTERS_STATE_PROP);
+      const json = purify.localStorage.getItem(FILTERS_STATE_PROP);
       if (json) {
         filters = JSON.parse(json);
       }
     } catch (ex) {
-      adguard.console.error("Error retrieve filters state info, cause {0}", ex);
+      purify.console.error("Error retrieve filters state info, cause {0}", ex);
     }
     return filters;
   };
@@ -1535,12 +1535,12 @@ adguard.filtersState = (function (adguard) {
   const getGroupsState = function () {
     let groups = Object.create(null);
     try {
-      const json = adguard.localStorage.getItem(GROUPS_STATE_PROP);
+      const json = purify.localStorage.getItem(GROUPS_STATE_PROP);
       if (json) {
         groups = JSON.parse(json);
       }
     } catch (e) {
-      adguard.console.error("Error retrieve groups state info, cause {0}", e);
+      purify.console.error("Error retrieve groups state info, cause {0}", e);
     }
     return groups;
   };
@@ -1559,7 +1559,7 @@ adguard.filtersState = (function (adguard) {
       expires: filter.expires,
     };
 
-    adguard.localStorage.setItem(FILTERS_VERSION_PROP, JSON.stringify(filters));
+    purify.localStorage.setItem(FILTERS_VERSION_PROP, JSON.stringify(filters));
   };
 
   /**
@@ -1574,13 +1574,13 @@ adguard.filtersState = (function (adguard) {
       enabled: filter.enabled,
       installed: filter.installed,
     };
-    adguard.localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
+    purify.localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
   };
 
   const removeFilter = (filterId) => {
     const filters = getFiltersState();
     delete filters[filterId];
-    adguard.localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
+    purify.localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
   };
 
   /**
@@ -1593,21 +1593,21 @@ adguard.filtersState = (function (adguard) {
     groups[group.groupId] = {
       enabled: group.enabled,
     };
-    adguard.localStorage.setItem(GROUPS_STATE_PROP, JSON.stringify(groups));
+    purify.localStorage.setItem(GROUPS_STATE_PROP, JSON.stringify(groups));
   };
 
   // Add event listener to persist filter metadata to local storage
-  adguard.listeners.addListener((event, payload) => {
+  purify.listeners.addListener((event, payload) => {
     switch (event) {
-      case adguard.listeners.SUCCESS_DOWNLOAD_FILTER:
+      case purify.listeners.SUCCESS_DOWNLOAD_FILTER:
         updateFilterState(payload);
         updateFilterVersion(payload);
         break;
-      case adguard.listeners.FILTER_ADD_REMOVE:
-      case adguard.listeners.FILTER_ENABLE_DISABLE:
+      case purify.listeners.FILTER_ADD_REMOVE:
+      case purify.listeners.FILTER_ENABLE_DISABLE:
         updateFilterState(payload);
         break;
-      case adguard.listeners.FILTER_GROUP_ENABLE_DISABLE:
+      case purify.listeners.FILTER_GROUP_ENABLE_DISABLE:
         updateGroupState(payload);
         break;
       default:
@@ -1624,13 +1624,13 @@ adguard.filtersState = (function (adguard) {
     updateFilterState,
     removeFilter,
   };
-})(adguard);
+})(purify);
 
 /**
  * Class for manage filters state (enable, disable, add, remove, check updates)
  * Also includes method for initializing
  */
-adguard.filters = (function (adguard) {
+purify.filters = (function (purify) {
   "use strict";
 
   /**
@@ -1664,13 +1664,13 @@ adguard.filters = (function (adguard) {
   const offerFilters = (callback) => {
     // These filters are enabled by default
     const filterIds = [
-      adguard.utils.filters.ENGLISH_FILTER_ID,
-      adguard.utils.filters.SEARCH_AND_SELF_PROMO_FILTER_ID,
+      purify.utils.filters.ENGLISH_FILTER_ID,
+      purify.utils.filters.SEARCH_AND_SELF_PROMO_FILTER_ID,
     ];
-    if (adguard.prefs.mobile) {
-      filterIds.push(adguard.utils.filters.MOBILE_ADS_FILTER_ID);
+    if (purify.prefs.mobile) {
+      filterIds.push(purify.utils.filters.MOBILE_ADS_FILTER_ID);
     }
-    filterIds.concat(adguard.subscriptions.getLangSuitableFilters());
+    filterIds.concat(purify.subscriptions.getLangSuitableFilters());
     callback(filterIds);
   };
 
@@ -1681,11 +1681,11 @@ adguard.filters = (function (adguard) {
    * @returns {Array} List of enabled filters
    */
   const getEnabledFilters = () =>
-    adguard.subscriptions.getFilters().filter((f) => f.installed && f.enabled);
+    purify.subscriptions.getFilters().filter((f) => f.installed && f.enabled);
 
   const getEnabledFiltersFromEnabledGroups = () => {
-    const filters = adguard.subscriptions.getFilters();
-    const enabledGroupsIds = adguard.subscriptions
+    const filters = purify.subscriptions.getFilters();
+    const enabledGroupsIds = purify.subscriptions
       .getGroups()
       .filter((g) => g.enabled)
       .map((g) => g.groupId);
@@ -1701,7 +1701,7 @@ adguard.filters = (function (adguard) {
    * @returns {*} true if enabled
    */
   const isFilterEnabled = function (filterId) {
-    const filter = adguard.subscriptions.getFilter(filterId);
+    const filter = purify.subscriptions.getFilter(filterId);
     return filter && filter.enabled;
   };
 
@@ -1712,7 +1712,7 @@ adguard.filters = (function (adguard) {
    * @returns {*} true if installed
    */
   const isFilterInstalled = function (filterId) {
-    const filter = adguard.subscriptions.getFilter(filterId);
+    const filter = purify.subscriptions.getFilter(filterId);
     return filter && filter.installed;
   };
 
@@ -1754,13 +1754,13 @@ adguard.filters = (function (adguard) {
    * @param {number} groupId filter group identifier
    */
   const enableGroup = function (groupId) {
-    const group = adguard.subscriptions.getGroup(groupId);
+    const group = purify.subscriptions.getGroup(groupId);
     if (!group || group.enabled) {
       return;
     }
     group.enabled = true;
-    adguard.listeners.notifyListeners(
-      adguard.listeners.FILTER_GROUP_ENABLE_DISABLE,
+    purify.listeners.notifyListeners(
+      purify.listeners.FILTER_GROUP_ENABLE_DISABLE,
       group
     );
   };
@@ -1770,13 +1770,13 @@ adguard.filters = (function (adguard) {
    * @param {number} groupId filter group identifier
    */
   const disableGroup = function (groupId) {
-    const group = adguard.subscriptions.getGroup(groupId);
+    const group = purify.subscriptions.getGroup(groupId);
     if (!group || !group.enabled) {
       return;
     }
     group.enabled = false;
-    adguard.listeners.notifyListeners(
-      adguard.listeners.FILTER_GROUP_ENABLE_DISABLE,
+    purify.listeners.notifyListeners(
+      purify.listeners.FILTER_GROUP_ENABLE_DISABLE,
       group
     );
   };
@@ -1789,7 +1789,7 @@ adguard.filters = (function (adguard) {
    * @returns {boolean} true if filter was enabled successfully
    */
   const enableFilter = (filterId, options) => {
-    const filter = adguard.subscriptions.getFilter(filterId);
+    const filter = purify.subscriptions.getFilter(filterId);
     if (!filter || filter.enabled || !filter.installed) {
       return false;
     }
@@ -1800,13 +1800,13 @@ adguard.filters = (function (adguard) {
     const { groupId } = filter;
     const forceGroupEnable = options && options.forceGroupEnable;
     if (
-      !adguard.subscriptions.groupHasEnabledStatus(groupId) ||
+      !purify.subscriptions.groupHasEnabledStatus(groupId) ||
       forceGroupEnable
     ) {
       enableGroup(groupId);
     }
-    adguard.listeners.notifyListeners(
-      adguard.listeners.FILTER_ENABLE_DISABLE,
+    purify.listeners.notifyListeners(
+      purify.listeners.FILTER_ENABLE_DISABLE,
       filter
     );
     return true;
@@ -1828,7 +1828,7 @@ adguard.filters = (function (adguard) {
       return;
     }
 
-    filterIds = adguard.utils.collections.removeDuplicates(filterIds.slice(0));
+    filterIds = purify.utils.collections.removeDuplicates(filterIds.slice(0));
     const loadNextFilter = () => {
       if (filterIds.length === 0) {
         callback(enabledFilters);
@@ -1838,7 +1838,7 @@ adguard.filters = (function (adguard) {
           if (success) {
             const changed = enableFilter(filterId, options);
             if (changed) {
-              const filter = adguard.subscriptions.getFilter(filterId);
+              const filter = purify.subscriptions.getFilter(filterId);
               enabledFilters.push(filter);
             }
           }
@@ -1858,16 +1858,16 @@ adguard.filters = (function (adguard) {
    */
   const disableFilters = function (filterIds) {
     // Copy array to prevent parameter mutation
-    filterIds = adguard.utils.collections.removeDuplicates(filterIds.slice(0));
+    filterIds = purify.utils.collections.removeDuplicates(filterIds.slice(0));
     for (let i = 0; i < filterIds.length; i += 1) {
       const filterId = filterIds[i];
-      const filter = adguard.subscriptions.getFilter(filterId);
+      const filter = purify.subscriptions.getFilter(filterId);
       if (!filter || !filter.enabled || !filter.installed) {
         continue;
       }
       filter.enabled = false;
-      adguard.listeners.notifyListeners(
-        adguard.listeners.FILTER_ENABLE_DISABLE,
+      purify.listeners.notifyListeners(
+        purify.listeners.FILTER_ENABLE_DISABLE,
         filter
       );
     }
@@ -1881,25 +1881,25 @@ adguard.filters = (function (adguard) {
    */
   const uninstallFilters = function (filterIds) {
     // Copy array to prevent parameter mutation
-    filterIds = adguard.utils.collections.removeDuplicates(filterIds.slice(0));
+    filterIds = purify.utils.collections.removeDuplicates(filterIds.slice(0));
 
     for (let i = 0; i < filterIds.length; i += 1) {
       const filterId = filterIds[i];
-      const filter = adguard.subscriptions.getFilter(filterId);
+      const filter = purify.subscriptions.getFilter(filterId);
       if (!filter || !filter.installed) {
         continue;
       }
 
-      adguard.console.debug("Uninstall filter {0}", filter.filterId);
+      purify.console.debug("Uninstall filter {0}", filter.filterId);
 
       filter.enabled = false;
       filter.installed = false;
-      adguard.listeners.notifyListeners(
-        adguard.listeners.FILTER_ENABLE_DISABLE,
+      purify.listeners.notifyListeners(
+        purify.listeners.FILTER_ENABLE_DISABLE,
         filter
       );
-      adguard.listeners.notifyListeners(
-        adguard.listeners.FILTER_ADD_REMOVE,
+      purify.listeners.notifyListeners(
+        purify.listeners.FILTER_ADD_REMOVE,
         filter
       );
     }
@@ -1911,30 +1911,30 @@ adguard.filters = (function (adguard) {
    * @param {Number} filterId Filter identifier
    */
   const removeFilter = function (filterId) {
-    const filter = adguard.subscriptions.getFilter(filterId);
+    const filter = purify.subscriptions.getFilter(filterId);
     if (!filter || filter.removed) {
       return;
     }
 
     if (!filter.customUrl) {
-      adguard.console.error(
+      purify.console.error(
         "Filter {0} is not custom and could not be removed",
         filter.filterId
       );
       return;
     }
 
-    adguard.console.debug("Remove filter {0}", filter.filterId);
+    purify.console.debug("Remove filter {0}", filter.filterId);
 
     filter.enabled = false;
     filter.installed = false;
     filter.removed = true;
-    adguard.listeners.notifyListeners(
-      adguard.listeners.FILTER_ENABLE_DISABLE,
+    purify.listeners.notifyListeners(
+      purify.listeners.FILTER_ENABLE_DISABLE,
       filter
     );
-    adguard.listeners.notifyListeners(
-      adguard.listeners.FILTER_ADD_REMOVE,
+    purify.listeners.notifyListeners(
+      purify.listeners.FILTER_ADD_REMOVE,
       filter
     );
   };
@@ -1955,18 +1955,18 @@ adguard.filters = (function (adguard) {
     successCallback,
     errorCallback
   ) {
-    adguard.console.info("Downloading custom filter from {0}", url);
+    purify.console.info("Downloading custom filter from {0}", url);
 
     if (!url) {
       errorCallback();
       return;
     }
 
-    adguard.subscriptions.updateCustomFilter(url, options, (filterId) => {
+    purify.subscriptions.updateCustomFilter(url, options, (filterId) => {
       if (filterId) {
-        adguard.console.info("Custom filter downloaded");
+        purify.console.info("Custom filter downloaded");
 
-        const filter = adguard.subscriptions.getFilter(filterId);
+        const filter = purify.subscriptions.getFilter(filterId);
         // In case filter is loaded again and was removed before
         delete filter.removed;
         successCallback(filter);
@@ -1982,16 +1982,16 @@ adguard.filters = (function (adguard) {
     successCallback,
     errorCallback
   ) => {
-    adguard.console.info(`Downloading custom filter info from ${url}`);
+    purify.console.info(`Downloading custom filter info from ${url}`);
     if (!url) {
       errorCallback();
       return;
     }
 
-    adguard.subscriptions.getCustomFilterInfo(url, options, (result = {}) => {
+    purify.subscriptions.getCustomFilterInfo(url, options, (result = {}) => {
       const { error, filter } = result;
       if (filter) {
-        adguard.console.info("Custom filter data downloaded");
+        purify.console.info("Custom filter data downloaded");
         successCallback(filter);
         return;
       }
@@ -2025,4 +2025,4 @@ adguard.filters = (function (adguard) {
     loadCustomFilterInfo,
     getEnabledFiltersFromEnabledGroups,
   };
-})(adguard);
+})(purify);

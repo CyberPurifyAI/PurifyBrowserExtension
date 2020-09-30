@@ -15,7 +15,7 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function (adguard) {
+(function (purify) {
   /**
    * Cache with maxCacheSize stored in local storage, which automatically clears expired values
    *
@@ -33,30 +33,30 @@
     function getCacheFromLocalStorage() {
       let data = Object.create(null);
       try {
-        const json = adguard.localStorage.getItem(storagePropertyName);
+        const json = purify.localStorage.getItem(storagePropertyName);
         if (json) {
           data = JSON.parse(json);
         }
       } catch (ex) {
         // ignore
-        adguard.console.error(
+        purify.console.error(
           "Error read from {0} cache, cause: {1}",
           storagePropertyName,
           ex
         );
-        adguard.localStorage.removeItem(storagePropertyName);
+        purify.localStorage.removeItem(storagePropertyName);
       }
       return data;
     }
 
     function saveCacheToLocalStorage() {
       try {
-        adguard.localStorage.setItem(
+        purify.localStorage.setItem(
           storagePropertyName,
           JSON.stringify(cache)
         );
       } catch (ex) {
-        adguard.console.error(
+        purify.console.error(
           "Error save to {0} cache, cause: {1}",
           storagePropertyName,
           ex
@@ -135,5 +135,5 @@
     };
   }
 
-  adguard.utils.ExpiringCache = ExpiringCache;
-})(adguard);
+  purify.utils.ExpiringCache = ExpiringCache;
+})(purify);

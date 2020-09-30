@@ -1,4 +1,4 @@
-var CssFilter = adguard.rules.CssFilter;
+var CssFilter = purify.rules.CssFilter;
 
 var genericHide =
   CssFilter.RETRIEVE_TRADITIONAL_CSS +
@@ -6,21 +6,21 @@ var genericHide =
   CssFilter.GENERIC_HIDE_APPLIED;
 
 QUnit.test("Extended Css Build CssHits", function (assert) {
-  var rule = new adguard.rules.CssFilterRule("adguard.com##.sponsored", 1);
-  var genericRule = new adguard.rules.CssFilterRule("##.banner", 2);
-  var extendedCssRule = new adguard.rules.CssFilterRule(
-    "adguard.com##.sponsored[-ext-contains=test]",
+  var rule = new purify.rules.CssFilterRule("purify.com##.sponsored", 1);
+  var genericRule = new purify.rules.CssFilterRule("##.banner", 2);
+  var extendedCssRule = new purify.rules.CssFilterRule(
+    "purify.com##.sponsored[-ext-contains=test]",
     1
   );
-  var ruleWithContentAttribute = new adguard.rules.CssFilterRule(
-    "adguard.com#$#.background {content: 'test'}",
+  var ruleWithContentAttribute = new purify.rules.CssFilterRule(
+    "purify.com#$#.background {content: 'test'}",
     1
   );
-  var ruleWithContentInSelector = new adguard.rules.CssFilterRule(
-    "adguard.com#$#.bgcontent {display: none}",
+  var ruleWithContentInSelector = new purify.rules.CssFilterRule(
+    "purify.com#$#.bgcontent {display: none}",
     1
   );
-  var filter = new adguard.rules.CssFilter([
+  var filter = new purify.rules.CssFilter([
     rule,
     genericRule,
     extendedCssRule,
@@ -28,7 +28,7 @@ QUnit.test("Extended Css Build CssHits", function (assert) {
     ruleWithContentInSelector,
   ]);
 
-  var selectors = filter.buildCssHits("adguard.com");
+  var selectors = filter.buildCssHits("purify.com");
   var css = selectors.css;
   var extendedCss = selectors.extendedCss;
   var commonCss = filter.buildCssHits(null).css;
@@ -44,21 +44,21 @@ QUnit.test("Extended Css Build CssHits", function (assert) {
   );
   assert.equal(
     css[1].trim(),
-    ".bgcontent {display: none; content: 'adguard1%3Badguard.com%23%24%23.bgcontent%20%7Bdisplay%3A%20none%7D' !important;}"
+    ".bgcontent {display: none; content: 'adguard1%3Bpurify.com%23%24%23.bgcontent%20%7Bdisplay%3A%20none%7D' !important;}"
   );
   // adguard mark is not inserted in the rules with content attribute
   assert.equal(css[2].trim(), ".background {content: 'test'}");
   assert.equal(
     css[3].trim(),
-    ".sponsored { display: none!important; content: 'adguard1%3Badguard.com%23%23.sponsored' !important;}"
+    ".sponsored { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored' !important;}"
   );
   assert.equal(extendedCss.length, 1);
   assert.equal(
     extendedCss[0].trim(),
-    ".sponsored[-ext-contains=test] { display: none!important; content: 'adguard1%3Badguard.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
+    ".sponsored[-ext-contains=test] { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
   );
 
-  selectors = filter.buildCssHits("adguard.com", genericHide);
+  selectors = filter.buildCssHits("purify.com", genericHide);
   css = selectors.css;
   extendedCss = selectors.extendedCss;
   commonCss = filter.buildCssHits(null).css;
@@ -70,18 +70,18 @@ QUnit.test("Extended Css Build CssHits", function (assert) {
   assert.equal(css.length, 3);
   assert.equal(
     css[0].trim(),
-    ".bgcontent {display: none; content: 'adguard1%3Badguard.com%23%24%23.bgcontent%20%7Bdisplay%3A%20none%7D' !important;}"
+    ".bgcontent {display: none; content: 'adguard1%3Bpurify.com%23%24%23.bgcontent%20%7Bdisplay%3A%20none%7D' !important;}"
   );
   // adguard mark is not inserted in the rules with content attribute
   assert.equal(css[1].trim(), ".background {content: 'test'}");
   assert.equal(
     css[2].trim(),
-    ".sponsored { display: none!important; content: 'adguard1%3Badguard.com%23%23.sponsored' !important;}"
+    ".sponsored { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored' !important;}"
   );
   assert.equal(extendedCss.length, 1);
   assert.equal(
     extendedCss[0].trim(),
-    ".sponsored[-ext-contains=test] { display: none!important; content: 'adguard1%3Badguard.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
+    ".sponsored[-ext-contains=test] { display: none!important; content: 'adguard1%3Bpurify.com%23%23.sponsored%5B-ext-contains%3Dtest%5D' !important;}"
   );
 });
 
@@ -91,14 +91,14 @@ QUnit.test("Parsing of Extended Css rule with parenthesis", function (assert) {
     '<div class="withParenthesis" style="background: rgb(0, 0, 0)">element with parenthesis</div>';
   document.body.insertAdjacentHTML("beforeend", elementWithParenthesisHtml);
 
-  var extendedCssRuleWithParenthesis = new adguard.rules.CssFilterRule(
-    "adguard.com#$#.withParenthesis:matches-css(background: rgb(0, 0, 0)) { display: none!important;}",
+  var extendedCssRuleWithParenthesis = new purify.rules.CssFilterRule(
+    "purify.com#$#.withParenthesis:matches-css(background: rgb(0, 0, 0)) { display: none!important;}",
     1
   );
 
-  var filter = new adguard.rules.CssFilter([extendedCssRuleWithParenthesis]);
+  var filter = new purify.rules.CssFilter([extendedCssRuleWithParenthesis]);
 
-  var selectors = filter.buildCssHits("adguard.com");
+  var selectors = filter.buildCssHits("purify.com");
   var extendedCss = selectors.extendedCss;
   // Apply extended css rules
   new ExtendedCss({ styleSheet: extendedCss.join("\n") }).apply();
@@ -114,21 +114,21 @@ QUnit.test("Parsing of Extended Css rule with parenthesis", function (assert) {
 });
 
 QUnit.test("Count css hits", function (assert) {
-  var rule = new adguard.rules.CssFilterRule("adguard.com##.sponsored", 1);
-  var genericRule = new adguard.rules.CssFilterRule("adguard.com##.banner", 2);
-  var extendedCssRule = new adguard.rules.CssFilterRule(
-    'adguard.com##.ads[-ext-contains="ads"]',
+  var rule = new purify.rules.CssFilterRule("purify.com##.sponsored", 1);
+  var genericRule = new purify.rules.CssFilterRule("purify.com##.banner", 2);
+  var extendedCssRule = new purify.rules.CssFilterRule(
+    'purify.com##.ads[-ext-contains="ads"]',
     1
   );
-  var ruleWithContentAttribute = new adguard.rules.CssFilterRule(
-    "adguard.com#$#.background {content: 'test'}",
+  var ruleWithContentAttribute = new purify.rules.CssFilterRule(
+    "purify.com#$#.background {content: 'test'}",
     1
   );
-  var ruleWithContentInSelector = new adguard.rules.CssFilterRule(
-    "adguard.com#$#.bgcontent {display: none}",
+  var ruleWithContentInSelector = new purify.rules.CssFilterRule(
+    "purify.com#$#.bgcontent {display: none}",
     1
   );
-  var filter = new adguard.rules.CssFilter([
+  var filter = new purify.rules.CssFilter([
     rule,
     genericRule,
     extendedCssRule,
@@ -136,7 +136,7 @@ QUnit.test("Count css hits", function (assert) {
     ruleWithContentInSelector,
   ]);
 
-  var selectors = filter.buildCssHits("adguard.com");
+  var selectors = filter.buildCssHits("purify.com");
 
   var css = selectors.css;
 
@@ -157,17 +157,17 @@ QUnit.test("Count css hits", function (assert) {
     result.sort(function (s1, s2) {
       return s1.ruleText < s2.ruleText ? -1 : 1;
     });
-    assert.equal(result[0].ruleText, 'adguard.com##.ads[-ext-contains="ads"]');
+    assert.equal(result[0].ruleText, 'purify.com##.ads[-ext-contains="ads"]');
     assert.equal(result[0].filterId, 1);
-    assert.equal(result[1].ruleText, "adguard.com##.banner");
+    assert.equal(result[1].ruleText, "purify.com##.banner");
     assert.equal(result[1].filterId, 2);
-    assert.equal(result[2].ruleText, "adguard.com##.sponsored");
+    assert.equal(result[2].ruleText, "purify.com##.sponsored");
     assert.equal(result[2].filterId, 1);
-    assert.equal(result[3].ruleText, "adguard.com##.sponsored");
+    assert.equal(result[3].ruleText, "purify.com##.sponsored");
     assert.equal(result[3].filterId, 1);
     assert.equal(
       result[4].ruleText,
-      "adguard.com#$#.bgcontent {display: none}"
+      "purify.com#$#.bgcontent {display: none}"
     );
     assert.equal(result[4].filterId, 1);
     CssHitsCounter.stop();
@@ -178,20 +178,20 @@ QUnit.test("Count css hits", function (assert) {
 
 QUnit.test("Count css hits affected by extended css", function (assert) {
   const extendedCssRule = {
-    text: 'adguard.com##.extended[-ext-contains="ads"]',
+    text: 'purify.com##.extended[-ext-contains="ads"]',
     filterId: 1,
   };
 
   const rules = [
-    new adguard.rules.CssFilterRule(
+    new purify.rules.CssFilterRule(
       extendedCssRule.text,
       extendedCssRule.filterId
     ),
   ];
 
-  const filter = new adguard.rules.CssFilter(rules);
+  const filter = new purify.rules.CssFilter(rules);
 
-  const selectors = filter.buildCssHits("adguard.com");
+  const selectors = filter.buildCssHits("purify.com");
 
   const done = assert.async();
 
@@ -216,47 +216,47 @@ QUnit.test("Count css hits affected by extended css", function (assert) {
 QUnit.test("Save css hits", function (assert) {
   var result = [];
   result.push({
-    ruleText: 'adguard.com##.ads[-ext-contains="ads"]',
+    ruleText: 'purify.com##.ads[-ext-contains="ads"]',
     filterId: 1,
   });
   result.push({
-    ruleText: "adguard.com##.banner",
+    ruleText: "purify.com##.banner",
     filterId: 2,
   });
   result.push({
-    ruleText: "adguard.com##.sponsored",
+    ruleText: "purify.com##.sponsored",
     filterId: 1,
   });
   result.push({
-    ruleText: "adguard.com##.sponsored",
+    ruleText: "purify.com##.sponsored",
     filterId: 1,
   });
 
   window.localStorage.clear();
 
-  adguard.hitStats.addDomainView("adguard.com");
+  purify.hitStats.addDomainView("purify.com");
 
   for (var i = 0; i < result.length; i++) {
     var stat = result[i];
-    adguard.hitStats.addRuleHit("adguard.com", stat.ruleText, stat.filterId);
+    purify.hitStats.addRuleHit("purify.com", stat.ruleText, stat.filterId);
   }
 
-  var stats = adguard.hitStats.getStats();
+  var stats = purify.hitStats.getStats();
   assert.equal(stats.views, 1);
-  assert.ok(!!stats.domains["adguard.com"]);
-  assert.equal(stats.domains["adguard.com"].views, 1);
+  assert.ok(!!stats.domains["purify.com"]);
+  assert.equal(stats.domains["purify.com"].views, 1);
   assert.equal(
-    stats.domains["adguard.com"].rules["1"][
-      'adguard.com##.ads[-ext-contains="ads"]'
+    stats.domains["purify.com"].rules["1"][
+      'purify.com##.ads[-ext-contains="ads"]'
     ].h,
     1
   );
   assert.equal(
-    stats.domains["adguard.com"].rules["1"]["adguard.com##.sponsored"].h,
+    stats.domains["purify.com"].rules["1"]["purify.com##.sponsored"].h,
     2
   );
   assert.equal(
-    stats.domains["adguard.com"].rules["2"]["adguard.com##.banner"].h,
+    stats.domains["purify.com"].rules["2"]["purify.com##.banner"].h,
     1
   );
 });

@@ -3,7 +3,7 @@
  *
  * This service is used to auto-enable language-specific filters.
  */
-(function (adguard) {
+(function (purify) {
   var browsingLanguages = [];
 
   var SUCCESS_HIT_COUNT = 3;
@@ -80,14 +80,14 @@
 
     const onSuccess = (enabledFilters) => {
       if (enabledFilters.length > 0) {
-        adguard.listeners.notifyListeners(
-          adguard.listeners.ENABLE_FILTER_SHOW_POPUP,
+        purify.listeners.notifyListeners(
+          purify.listeners.ENABLE_FILTER_SHOW_POPUP,
           enabledFilters
         );
       }
     };
 
-    adguard.filters.addAndEnableFilters(filterIds, onSuccess, {
+    purify.filters.addAndEnableFilters(filterIds, onSuccess, {
       forceGroupEnable: true,
     });
   }
@@ -122,7 +122,7 @@
     });
 
     if (history.length >= SUCCESS_HIT_COUNT) {
-      var filterIds = adguard.subscriptions.getFilterIdsForLanguage(language);
+      var filterIds = purify.subscriptions.getFilterIdsForLanguage(language);
       onFilterDetectedByLocale(filterIds);
     }
   }
@@ -134,20 +134,20 @@
    */
   function detectTabLanguage(tab, url) {
     if (
-      !adguard.settings.isAutodetectFilters() ||
-      adguard.settings.isFilteringDisabled()
+      !purify.settings.isAutodetectFilters() ||
+      purify.settings.isFilteringDisabled()
     ) {
       return;
     }
 
     // Check language only for http://... tabs
-    if (!adguard.utils.url.isHttpRequest(url)) {
+    if (!purify.utils.url.isHttpRequest(url)) {
       return;
     }
 
     // tabs.detectLanguage doesn't work in Opera
     // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/997
-    if (!adguard.utils.browser.isOperaBrowser()) {
+    if (!purify.utils.browser.isOperaBrowser()) {
       /* global browser */
       if (
         tab.tabId &&
@@ -169,7 +169,7 @@
     // Detecting language by top-level domain if extension API language detection is unavailable
     // Ignore hostnames which length is less or equal to 8
     // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1354
-    const host = adguard.utils.url.getHost(url);
+    const host = purify.utils.url.getHost(url);
     if (host && host.length > 8) {
       const parts = host ? host.split(".") : [];
       const tld = parts[parts.length - 1];
@@ -179,9 +179,9 @@
   }
 
   // Locale detect
-  adguard.tabs.onUpdated.addListener((tab) => {
+  purify.tabs.onUpdated.addListener((tab) => {
     if (tab.status === "complete") {
       detectTabLanguage(tab, tab.url);
     }
   });
-})(adguard);
+})(purify);

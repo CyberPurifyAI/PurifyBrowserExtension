@@ -1,8 +1,8 @@
-! Checksum: x5iF9lxxJ6bbJ2Uk+DCJjg
+! Checksum: LEnSr50EZEHvZgpLHxXaQA
 ! Title: AdGuard Dutch filter (Optimized)
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.0.93
-! TimeUpdated: 2020-09-28T15:31:58+03:00
+! Version: 2.0.0.94
+! TimeUpdated: 2020-09-29T20:03:58+03:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -1351,6 +1351,7 @@ klusidee.nl#?#tr.table-row[-ext-has=".td-ad"]
 omroepbrabant.nl#$#.ad-banner-container { position: absolute!important; left: -3000px!important; }
 handbalstartpunt.nl#$##advertentie-top { height: 0!important; }
 omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -4000px!important; }
+nos.nl##.teletekst__banner
 buienradar.nl###adholderContainerHeader
 trouw.nl,parool.nl##.ad--section
 nnieuws.be##.banner-silver

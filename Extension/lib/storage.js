@@ -18,8 +18,8 @@
 /**
  * localStorage interface. Implementation depends on browser
  */
-adguard.localStorageImpl =
-  adguard.localStorageImpl ||
+purify.localStorageImpl =
+  purify.localStorageImpl ||
   (function () {
     function notImplemented() {
       throw new Error("Not implemented");
@@ -36,7 +36,7 @@ adguard.localStorageImpl =
 /**
  * This class manages local storage
  */
-adguard.localStorage = (function (adguard, impl) {
+purify.localStorage = (function (adguard, impl) {
   const getItem = function (key) {
     return impl.getItem(key);
   };
@@ -45,7 +45,7 @@ adguard.localStorage = (function (adguard, impl) {
     try {
       impl.setItem(key, value);
     } catch (ex) {
-      adguard.console.error(
+      purify.console.error(
         `Error while saving item ${key} to the localStorage: ${ex}`
       );
     }
@@ -83,13 +83,13 @@ adguard.localStorage = (function (adguard, impl) {
     init,
     isInitialized,
   };
-})(adguard, adguard.localStorageImpl);
+})(adguard, purify.localStorageImpl);
 
 /**
  * Rules storage interface. Implementation depends on browser
  */
-adguard.rulesStorageImpl =
-  adguard.rulesStorageImpl ||
+purify.rulesStorageImpl =
+  purify.rulesStorageImpl ||
   (function () {
     function notImplemented() {
       throw new Error("Not implemented");
@@ -104,7 +104,7 @@ adguard.rulesStorageImpl =
 /**
  * This class manages storage for filters.
  */
-adguard.rulesStorage = (function (adguard, impl) {
+purify.rulesStorage = (function (adguard, impl) {
   function getFilePath(filterId) {
     return `filterrules_${filterId}.txt`;
   }
@@ -119,7 +119,7 @@ adguard.rulesStorage = (function (adguard, impl) {
     const filePath = getFilePath(filterId);
     impl.read(filePath, (e, rules) => {
       if (e) {
-        adguard.console.error(
+        purify.console.error(
           `Error while reading rules from file ${filePath} cause: ${e}`
         );
       }
@@ -138,7 +138,7 @@ adguard.rulesStorage = (function (adguard, impl) {
     const filePath = getFilePath(filterId);
     impl.write(filePath, filterRules, (e) => {
       if (e) {
-        adguard.console.error(
+        purify.console.error(
           `Error writing filters to file ${filePath}. Cause: ${e}`
         );
       }
@@ -155,7 +155,7 @@ adguard.rulesStorage = (function (adguard, impl) {
     const filePath = getFilePath(filterId);
     impl.remove(filePath, (e) => {
       if (e) {
-        adguard.console.error(`Error removing filter ${filePath}. Cause: ${e}`);
+        purify.console.error(`Error removing filter ${filePath}. Cause: ${e}`);
       }
       callback();
     });
@@ -185,4 +185,4 @@ adguard.rulesStorage = (function (adguard, impl) {
     remove,
     init,
   };
-})(adguard, adguard.rulesStorageImpl);
+})(adguard, purify.rulesStorageImpl);

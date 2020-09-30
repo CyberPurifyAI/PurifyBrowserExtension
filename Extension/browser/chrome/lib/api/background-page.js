@@ -3,15 +3,15 @@ const browser = window.browser || chrome;
 (function (adguard, browser) {
   "use strict";
 
-  adguard.runtime = (function () {
+  purify.runtime = (function () {
     const onMessage = {
       addListener(callback) {
         // https://developer.chrome.com/extensions/runtime#event-onMessage
-        adguard.runtimeImpl.onMessage.addListener(
+        purify.runtimeImpl.onMessage.addListener(
           (message, sender, sendResponse) => {
             const senderOverride = Object.create(null);
             if (sender.tab) {
-              senderOverride.tab = adguard.tabsImpl.fromChromeTab(sender.tab);
+              senderOverride.tab = purify.tabsImpl.fromChromeTab(sender.tab);
             }
             if (typeof sender.frameId !== "undefined") {
               senderOverride.frameId = sender.frameId;
@@ -56,7 +56,7 @@ const browser = window.browser || chrome;
    */
   function shouldSkipRequest(details) {
     return (
-      details.tabId === adguard.BACKGROUND_TAB_ID &&
+      details.tabId === purify.BACKGROUND_TAB_ID &&
       details.url.indexOf(extensionScheme) === 0
     );
   }
@@ -73,10 +73,10 @@ const browser = window.browser || chrome;
   function parseRequestTypeFromUrl(url) {
     linkHelper.href = url;
     const path = linkHelper.pathname;
-    let requestType = adguard.utils.browser.parseContentTypeFromUrlPath(path);
+    let requestType = purify.utils.browser.parseContentTypeFromUrlPath(path);
     if (requestType === null) {
       // https://code.google.com/p/chromium/issues/detail?id=410382
-      requestType = adguard.RequestTypes.OBJECT;
+      requestType = purify.RequestTypes.OBJECT;
     }
     return requestType;
   }
@@ -101,7 +101,7 @@ const browser = window.browser || chrome;
    * @property {String} method - standard HTTP method
    * @property {Number} frameId - ID of current frame. Frame IDs are unique within a tab.
    * @property {Number} requestFrameId - ID of frame where request is executed
-   * @property {Number} requestType - request type {@link adguard.RequestTypes}
+   * @property {Number} requestType - request type {@link purify.RequestTypes}
    * @property {HttpHeaders} [requestHeaders] - the HTTP request headers
    * @property {HttpHeaders} [responseHeaders] - the HTTP response headers
    * @property {String} redirectUrl - new URL in onBeforeRedirect event
@@ -148,13 +148,13 @@ const browser = window.browser || chrome;
     switch (details.type) {
       case "main_frame":
         frameId = 0;
-        requestType = adguard.RequestTypes.DOCUMENT;
+        requestType = purify.RequestTypes.DOCUMENT;
         break;
       case "sub_frame":
         frameId = details.frameId;
         // for sub_frame use parentFrameId as id of frame that wraps this frame
         requestFrameId = details.parentFrameId;
-        requestType = adguard.RequestTypes.SUBDOCUMENT;
+        requestType = purify.RequestTypes.SUBDOCUMENT;
         break;
       default:
         requestFrameId = details.frameId;
@@ -168,10 +168,10 @@ const browser = window.browser || chrome;
     }
 
     if (requestType === "IMAGESET") {
-      requestType = adguard.RequestTypes.IMAGE;
+      requestType = purify.RequestTypes.IMAGE;
     }
 
-    if (requestType === adguard.RequestTypes.OTHER) {
+    if (requestType === purify.RequestTypes.OTHER) {
       requestType = parseRequestTypeFromUrl(details.url);
     }
 
@@ -179,8 +179,8 @@ const browser = window.browser || chrome;
      * Use `OTHER` type as a fallback
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/777
      */
-    if (!(requestType in adguard.RequestTypes)) {
-      requestType = adguard.RequestTypes.OTHER;
+    if (!(requestType in purify.RequestTypes)) {
+      requestType = purify.RequestTypes.OTHER;
     }
 
     requestDetails.frameId = frameId;
@@ -195,7 +195,7 @@ const browser = window.browser || chrome;
       requestDetails.responseHeaders = details.responseHeaders;
     }
 
-    if (details.tabId === adguard.BACKGROUND_TAB_ID) {
+    if (details.tabId === purify.BACKGROUND_TAB_ID) {
       // In case of background request, its details contains referrer url
       // Chrome uses `initiator`: https://developer.chrome.com/extensions/webRequest#event-onBeforeRequest
       // FF uses `originUrl`: https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/webRequest/onBeforeRequest#Additional_objects
@@ -304,8 +304,8 @@ const browser = window.browser || chrome;
        * 'stylesheet', 'script', 'media'
        */
       if (
-        adguard.prefs.browser === "Chrome" &&
-        adguard.prefs.chromeVersion < 85
+        purify.prefs.browser === "Chrome" &&
+        purify.prefs.chromeVersion < 85
       ) {
         const allTypes = [
           "main_frame",
@@ -451,14 +451,14 @@ const browser = window.browser || chrome;
    * Gets URL of a file that belongs to our extension
    * https://developer.chrome.com/apps/runtime#method-getURL
    */
-  adguard.getURL = browser.runtime.getURL;
+  purify.getURL = browser.runtime.getURL;
 
-  adguard.backgroundPage = {};
-  adguard.backgroundPage.getWindow = function () {
+  purify.backgroundPage = {};
+  purify.backgroundPage.getWindow = function () {
     return browser.extension.getBackgroundPage();
   };
 
-  adguard.app = {
+  purify.app = {
     /**
      * Extension ID
      */
@@ -471,7 +471,7 @@ const browser = window.browser || chrome;
      * @returns "chrome-extension" for Chrome," ms-browser-extension" for Edge
      */
     getUrlScheme() {
-      const url = adguard.getURL("test.html");
+      const url = purify.getURL("test.html");
       const index = url.indexOf("://");
       return url.substring(0, index);
     },
@@ -494,7 +494,7 @@ const browser = window.browser || chrome;
      * Returns extension's full url
      */
     getExtensionUrl() {
-      const url = adguard.getURL("");
+      const url = purify.getURL("");
       return url.substring(0, url.length - 1);
     },
 
@@ -511,7 +511,7 @@ const browser = window.browser || chrome;
     },
   };
 
-  adguard.webRequest = {
+  purify.webRequest = {
     onBeforeRequest,
     handlerBehaviorChanged: browser.webRequest.handlerBehaviorChanged,
     onCompleted,
@@ -536,7 +536,7 @@ const browser = window.browser || chrome;
       }
 
       browser.webNavigation.onCreatedNavigationTarget.addListener((details) => {
-        if (details.tabId === adguard.BACKGROUND_TAB_ID) {
+        if (details.tabId === purify.BACKGROUND_TAB_ID) {
           return;
         }
 
@@ -563,8 +563,8 @@ const browser = window.browser || chrome;
           // makes webNavigation.onCommitted details similar to webRequestDetails
           details.requestType =
             details.frameId === 0
-              ? adguard.RequestTypes.DOCUMENT
-              : adguard.RequestTypes.SUBDOCUMENT;
+              ? purify.RequestTypes.DOCUMENT
+              : purify.RequestTypes.SUBDOCUMENT;
           details.tab = { tabId: details.tabId };
           details.requestUrl = details.url;
           callback(details);
@@ -584,7 +584,7 @@ const browser = window.browser || chrome;
   };
 
   // https://developer.chrome.com/extensions/webNavigation
-  adguard.webNavigation = {
+  purify.webNavigation = {
     onCreatedNavigationTarget,
     onCommitted,
     onDOMContentLoaded: browser.webNavigation.onDOMContentLoaded,
@@ -595,11 +595,11 @@ const browser = window.browser || chrome;
   if (!browserActionSupported && browser.browserAction.onClicked) {
     // Open settings menu
     browser.browserAction.onClicked.addListener(() => {
-      adguard.ui.openSettingsTab();
+      purify.ui.openSettingsTab();
     });
   }
 
-  adguard.browserAction = {
+  purify.browserAction = {
     /* eslint-disable-next-line no-unused-vars */
     setBrowserAction(tab, icon, badge, badgeColor, title) {
       if (!browserActionSupported) {
@@ -652,5 +652,5 @@ const browser = window.browser || chrome;
     },
   };
 
-  adguard.contextMenus = browser.contextMenus;
+  purify.contextMenus = browser.contextMenus;
 })(adguard, browser);

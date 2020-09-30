@@ -4,7 +4,7 @@
  * Each request has a context with unique key: requestId
  * Context contains information about this request: id, url, referrer, type, applied rules, original and modified headers
  *
- * This API is exposed via adguard.requestContextStorage:
+ * This API is exposed via purify.requestContextStorage:
  *
  * - get - Get context by key
  * - record - Initialize context for request (uses in onBeforeRequest)
@@ -15,7 +15,7 @@
  * - onRequestCompleted - Finishes request processing on request complete/error event.
  * - onContentModificationFinished - After content modification and applying all rules (replace and content)
  */
-(function (adguard) {
+(function (purify) {
   /**
    * @typedef {object} RequestContext
    * @property {string} requestId - Request identifier
@@ -123,10 +123,10 @@
 
     // Clears filtering log. If contexts map already contains this requests that means that we caught redirect
     if (
-      requestType === adguard.RequestTypes.DOCUMENT &&
+      requestType === purify.RequestTypes.DOCUMENT &&
       !contexts.has(requestId)
     ) {
-      adguard.filteringLog.clearEventsByTabId(tab.tabId);
+      purify.filteringLog.clearEventsByTabId(tab.tabId);
     }
 
     const context = {
@@ -142,7 +142,7 @@
     };
     contexts.set(requestId, context);
 
-    adguard.filteringLog.addHttpRequestEvent(
+    purify.filteringLog.addHttpRequestEvent(
       tab,
       requestUrl,
       referrerUrl,
@@ -168,14 +168,14 @@
     tab,
     requestRule
   ) => {
-    adguard.filteringLog.addHttpRequestEvent(
+    purify.filteringLog.addHttpRequestEvent(
       tab,
       requestUrl,
       referrerUrl,
       requestType,
       requestRule
     );
-    adguard.webRequestService.recordRuleHit(tab, requestRule, requestUrl);
+    purify.webRequestService.recordRuleHit(tab, requestRule, requestUrl);
   };
 
   /**
@@ -202,7 +202,7 @@
       context.requestRule = update.requestRule;
       // Some requests may execute for a long time, that's why we update filtering log when
       // we get a request rule
-      adguard.filteringLog.bindRuleToHttpRequestEvent(
+      purify.filteringLog.bindRuleToHttpRequestEvent(
         context.tab,
         context.requestRule,
         context.eventId
@@ -294,7 +294,7 @@
       const stealthActions = context.stealthActions;
 
       if (requestRule) {
-        adguard.filteringLog.bindRuleToHttpRequestEvent(
+        purify.filteringLog.bindRuleToHttpRequestEvent(
           tab,
           requestRule,
           context.eventId
@@ -304,11 +304,11 @@
 
       if (cspRules) {
         for (let cspRule of cspRules) {
-          adguard.filteringLog.addHttpRequestEvent(
+          purify.filteringLog.addHttpRequestEvent(
             tab,
             requestUrl,
             referrerUrl,
-            adguard.RequestTypes.CSP,
+            purify.RequestTypes.CSP,
             cspRule
           );
         }
@@ -316,7 +316,7 @@
       }
 
       if (stealthActions) {
-        adguard.filteringLog.bindStealthActionsToHttpRequestEvent(
+        purify.filteringLog.bindStealthActionsToHttpRequestEvent(
           tab,
           stealthActions,
           context.eventId
@@ -331,7 +331,7 @@
       const contentRules = context.contentRules;
 
       if (replaceRules) {
-        adguard.filteringLog.bindReplaceRulesToHttpRequestEvent(
+        purify.filteringLog.bindReplaceRulesToHttpRequestEvent(
           tab,
           replaceRules,
           context.eventId
@@ -343,7 +343,7 @@
         for (let contentRule of contentRules) {
           const elements = context.elements.get(contentRule) || [];
           for (let element of elements) {
-            adguard.filteringLog.addCosmeticEvent(
+            purify.filteringLog.addCosmeticEvent(
               tab,
               element,
               requestUrl,
@@ -358,7 +358,7 @@
     }
 
     for (let i = 0; i < ruleHitsRecords.length; i += 1) {
-      adguard.webRequestService.recordRuleHit(
+      purify.webRequestService.recordRuleHit(
         tab,
         ruleHitsRecords[i],
         requestUrl
@@ -404,7 +404,7 @@
   };
 
   // Expose
-  adguard.requestContextStorage = {
+  purify.requestContextStorage = {
     get,
     record,
     recordEmulated,
@@ -414,4 +414,4 @@
     onContentModificationStarted,
     onContentModificationFinished,
   };
-})(adguard);
+})(purify);

@@ -38,13 +38,13 @@
       }
 
       // In case of one domain
-      return adguard.utils.strings.replaceAll(
+      return purify.utils.strings.replaceAll(
         ruleText,
         domain,
-        adguard.utils.url.toPunyCode(domain)
+        purify.utils.url.toPunyCode(domain)
       );
     } catch (ex) {
-      adguard.console.error(
+      purify.console.error(
         "Error getAsciiDomainRule from {0}, cause {1}",
         ruleText,
         ex
@@ -76,7 +76,7 @@
 
       for (i = 0; i < startsWith.length; i++) {
         const start = startsWith[i];
-        if (adguard.utils.strings.startWith(ruleText, start)) {
+        if (purify.utils.strings.startWith(ruleText, start)) {
           startIndex = start.length;
           break;
         }
@@ -110,7 +110,7 @@
         ? ruleText.substring(startIndex)
         : ruleText.substring(startIndex, symbolIndex);
     } catch (ex) {
-      adguard.console.error(
+      purify.console.error(
         "Error parsing domain from {0}, cause {1}",
         ruleText,
         ex
@@ -203,7 +203,7 @@
     let startIndex = 0;
 
     if (
-      adguard.utils.strings.startWith(
+      purify.utils.strings.startWith(
         urlRuleText,
         api.FilterRule.MASK_WHITE_LIST
       )
@@ -221,15 +221,15 @@
     // Added check for replacement rule, because maybe problem with rules for example /.*/$replace=/hello/bug/
 
     if (
-      adguard.utils.strings.startWith(
+      purify.utils.strings.startWith(
         urlRuleText,
         api.UrlFilterRule.MASK_REGEX_RULE
       ) &&
-      adguard.utils.strings.endsWith(
+      purify.utils.strings.endsWith(
         urlRuleText,
         api.UrlFilterRule.MASK_REGEX_RULE
       ) &&
-      !adguard.utils.strings.contains(
+      !purify.utils.strings.contains(
         urlRuleText,
         `${api.UrlFilterRule.REPLACE_OPTION}=`
       )
@@ -317,7 +317,7 @@
       };
     }
 
-    const parts = adguard.utils.strings.splitByDelimiterWithEscapeCharacter(
+    const parts = purify.utils.strings.splitByDelimiterWithEscapeCharacter(
       option,
       "/",
       ESCAPE_CHARACTER,
@@ -346,7 +346,7 @@
 
   function RedirectOption(option) {
     const getRedirectUrl = () =>
-      adguard.rules.RedirectFilterService.buildRedirectUrl(option);
+      purify.rules.RedirectFilterService.buildRedirectUrl(option);
     return { getRedirectUrl, redirectTitle: option };
   }
 
@@ -383,8 +383,8 @@
     const parts = this.option.split(/;/);
     const cookieName = parts[0];
     if (
-      adguard.utils.strings.startWith(cookieName, "/") &&
-      adguard.utils.strings.endsWith(cookieName, "/")
+      purify.utils.strings.startWith(cookieName, "/") &&
+      purify.utils.strings.endsWith(cookieName, "/")
     ) {
       const pattern = cookieName.substring(1, cookieName.length - 1);
 
@@ -484,11 +484,11 @@
     const { urlRuleText } = parseResult;
 
     this.isRegexRule =
-      (adguard.utils.strings.startWith(
+      (purify.utils.strings.startWith(
         urlRuleText,
         UrlFilterRule.MASK_REGEX_RULE
       ) &&
-        adguard.utils.strings.endsWith(
+        purify.utils.strings.endsWith(
           urlRuleText,
           UrlFilterRule.MASK_REGEX_RULE
         )) ||
@@ -604,7 +604,7 @@
         delete this.urlRegExpSource;
       } catch (ex) {
         // malformed regexp
-        adguard.console.error("Error create regexp from {0}", urlRegExpSource);
+        purify.console.error("Error create regexp from {0}", urlRegExpSource);
         this.wrongUrlRegExp = true;
         return null;
       }
@@ -655,7 +655,7 @@
    *
    * @param requestUrl            Request url
    * @param thirdParty            true if request is third-party
-   * @param requestType           Request type (one of adguard.RequestTypes)
+   * @param requestType           Request type (one of purify.RequestTypes)
    * @return {boolean} true if request url matches this rule
    */
   UrlFilterRule.prototype.isFiltered = function (
@@ -967,7 +967,7 @@
    * @returns {{optionName: string, optionValue: string}[]}
    */
   const extractOptionsAndValues = (options) => {
-    const optionsParts = adguard.utils.strings.splitByDelimiterWithEscapeCharacter(
+    const optionsParts = purify.utils.strings.splitByDelimiterWithEscapeCharacter(
       options,
       api.FilterRule.COMA_DELIMITER,
       ESCAPE_CHARACTER,
@@ -1072,7 +1072,7 @@
           break;
         case UrlFilterRule.REDIRECT_OPTION: {
           // In case if redirect source doesn't exists, throw error;
-          const redirectSource = adguard.rules.RedirectFilterService.hasRedirect(
+          const redirectSource = purify.rules.RedirectFilterService.hasRedirect(
             optionValue
           );
           if (!redirectSource) {
@@ -1085,8 +1085,8 @@
         case UrlFilterRule.REPLACE_OPTION:
           // In case of .features or .features.responseContentFilteringSupported are not defined
           const responseContentFilteringSupported =
-            adguard.prefs.features &&
-            adguard.prefs.features.responseContentFilteringSupported;
+            purify.prefs.features &&
+            purify.prefs.features.responseContentFilteringSupported;
           if (!responseContentFilteringSupported) {
             throw new Error("Unknown option: REPLACE");
           }
@@ -1422,4 +1422,4 @@
   };
 
   api.UrlFilterRule = UrlFilterRule;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

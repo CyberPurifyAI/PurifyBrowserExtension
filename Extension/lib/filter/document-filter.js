@@ -24,10 +24,10 @@
 
   const trustedCache = {
     get cache() {
-      return adguard.lazyGet(
+      return purify.lazyGet(
         trustedCache,
         "cache",
-        () => new adguard.utils.ExpiringCache("document-block-cache")
+        () => new purify.utils.ExpiringCache("document-block-cache")
       );
     },
   };
@@ -61,7 +61,7 @@
         return null;
       }
 
-      let blockingUrl = adguard.getURL(DOCUMENT_BLOCKED_URL);
+      let blockingUrl = purify.getURL(DOCUMENT_BLOCKED_URL);
 
       blockingUrl += `?url=${encodeURIComponent(url)}`;
       blockingUrl += `&rule=${encodeURIComponent(ruleText)}`;
@@ -80,8 +80,8 @@
       }
       trustedCache.cache.saveValue(host, { host }, Date.now() + TRUSTED_TTL_MS);
       // Reloads ad-blocked page with trusted url
-      adguard.tabs.getActive((tab) => {
-        adguard.tabs.reload(tab.tabId, url);
+      purify.tabs.getActive((tab) => {
+        purify.tabs.reload(tab.tabId, url);
       });
     };
 
@@ -91,15 +91,15 @@
      * @param url
      */
     const showDocumentBlockPage = (tabId, url) => {
-      const incognitoTab = adguard.frames.isIncognitoTab({ tabId });
+      const incognitoTab = purify.frames.isIncognitoTab({ tabId });
       // Chrome doesn't allow to show extension pages in incognito mode
-      if (adguard.utils.browser.isChromium() && incognitoTab) {
+      if (purify.utils.browser.isChromium() && incognitoTab) {
         // Closing tab before opening a new one may lead to browser crash (Chromium)
-        adguard.ui.openTab(url, {}, () => {
-          adguard.tabs.remove(tabId);
+        purify.ui.openTab(url, {}, () => {
+          purify.tabs.remove(tabId);
         });
       } else {
-        adguard.tabs.updateUrl(tabId, url);
+        purify.tabs.updateUrl(tabId, url);
       }
     };
 
@@ -111,4 +111,4 @@
   }
 
   api.documentFilterService = documentFilterService();
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

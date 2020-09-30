@@ -15,17 +15,17 @@
  * along with Adguard Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-adguard.whitelist = (function (adguard) {
+purify.whitelist = (function (purify) {
   var WHITE_LIST_DOMAINS_LS_PROP = "white-list-domains";
   var BLOCK_LIST_DOMAINS_LS_PROP = "block-list-domains";
 
-  var allowAllWhiteListRule = new adguard.rules.UrlFilterRule(
+  var allowAllWhiteListRule = new purify.rules.UrlFilterRule(
     "@@whitelist-all$document",
-    adguard.utils.filters.WHITE_LIST_FILTER_ID
+    purify.utils.filters.WHITE_LIST_FILTER_ID
   );
 
-  var whiteListFilter = new adguard.rules.UrlFilter();
-  var blockListFilter = new adguard.rules.UrlFilter();
+  var whiteListFilter = new purify.rules.UrlFilter();
+  var blockListFilter = new purify.rules.UrlFilter();
 
   /**
    * Whitelist filter may not have been initialized yet
@@ -53,7 +53,7 @@ adguard.whitelist = (function (adguard) {
    * In inverted model filtration is disabled for all sites
    */
   function isDefaultWhiteListMode() {
-    return adguard.settings.isDefaultWhiteListMode();
+    return purify.settings.isDefaultWhiteListMode();
   }
 
   /**
@@ -61,8 +61,8 @@ adguard.whitelist = (function (adguard) {
    */
   var whiteListDomainsHolder = {
     get domains() {
-      return adguard.lazyGet(whiteListDomainsHolder, "domains", function () {
-        whiteListFilter = new adguard.rules.UrlFilter();
+      return purify.lazyGet(whiteListDomainsHolder, "domains", function () {
+        whiteListFilter = new purify.rules.UrlFilter();
         // Reading from local storage
         var domains = getDomainsFromLocalStorage(WHITE_LIST_DOMAINS_LS_PROP);
         for (var i = 0; i < domains.length; i++) {
@@ -82,8 +82,8 @@ adguard.whitelist = (function (adguard) {
   };
   var blockListDomainsHolder = {
     get domains() {
-      return adguard.lazyGet(blockListDomainsHolder, "domains", function () {
-        blockListFilter = new adguard.rules.UrlFilter();
+      return purify.lazyGet(blockListDomainsHolder, "domains", function () {
+        blockListFilter = new purify.rules.UrlFilter();
         // Reading from local storage
         var domains = getDomainsFromLocalStorage(BLOCK_LIST_DOMAINS_LS_PROP);
         for (var i = 0; i < domains.length; i++) {
@@ -103,8 +103,8 @@ adguard.whitelist = (function (adguard) {
   };
 
   function notifyWhiteListUpdated() {
-    adguard.listeners.notifyListeners(
-      adguard.listeners.UPDATE_WHITELIST_FILTER_RULES
+    purify.listeners.notifyListeners(
+      purify.listeners.UPDATE_WHITELIST_FILTER_RULES
     );
   }
 
@@ -115,12 +115,12 @@ adguard.whitelist = (function (adguard) {
    * @private
    */
   function createWhiteListRule(domain) {
-    if (adguard.utils.strings.isEmpty(domain)) {
+    if (purify.utils.strings.isEmpty(domain)) {
       return null;
     }
-    return adguard.rules.builder.createRule(
+    return purify.rules.builder.createRule(
       "@@//" + domain + "$document",
-      adguard.utils.filters.WHITE_LIST_FILTER_ID
+      purify.utils.filters.WHITE_LIST_FILTER_ID
     );
   }
 
@@ -148,12 +148,12 @@ adguard.whitelist = (function (adguard) {
       return;
     }
     if (isDefaultWhiteListMode()) {
-      adguard.utils.collections.removeAll(
+      purify.utils.collections.removeAll(
         whiteListDomainsHolder.domains,
         domain
       );
     } else {
-      adguard.utils.collections.removeAll(
+      purify.utils.collections.removeAll(
         blockListDomainsHolder.domains,
         domain
       );
@@ -182,11 +182,11 @@ adguard.whitelist = (function (adguard) {
    * Save domains to local storage
    */
   function saveDomainsToLocalStorage() {
-    adguard.localStorage.setItem(
+    purify.localStorage.setItem(
       WHITE_LIST_DOMAINS_LS_PROP,
       JSON.stringify(whiteListDomainsHolder.domains)
     );
-    adguard.localStorage.setItem(
+    purify.localStorage.setItem(
       BLOCK_LIST_DOMAINS_LS_PROP,
       JSON.stringify(blockListDomainsHolder.domains)
     );
@@ -200,12 +200,12 @@ adguard.whitelist = (function (adguard) {
   function getDomainsFromLocalStorage(prop) {
     var domains = [];
     try {
-      var json = adguard.localStorage.getItem(prop);
+      var json = purify.localStorage.getItem(prop);
       if (json) {
         domains = JSON.parse(json);
       }
     } catch (ex) {
-      adguard.console.error(
+      purify.console.error(
         "Error retrieve whitelist domains {0}, cause {1}",
         prop,
         ex
@@ -240,20 +240,20 @@ adguard.whitelist = (function (adguard) {
       return null;
     }
 
-    var host = adguard.utils.url.getHost(url);
+    var host = purify.utils.url.getHost(url);
 
     if (isDefaultWhiteListMode()) {
       return getWhiteListFilter().isFiltered(
         url,
         host,
-        adguard.RequestTypes.DOCUMENT,
+        purify.RequestTypes.DOCUMENT,
         false
       );
     } else {
       var rule = getBlockListFilter().isFiltered(
         url,
         host,
-        adguard.RequestTypes.DOCUMENT,
+        purify.RequestTypes.DOCUMENT,
         false
       );
       if (rule) {
@@ -270,7 +270,7 @@ adguard.whitelist = (function (adguard) {
    * @param defaultMode
    */
   var changeDefaultWhiteListMode = function (defaultMode) {
-    adguard.settings.changeDefaultWhiteListMode(defaultMode);
+    purify.settings.changeDefaultWhiteListMode(defaultMode);
     notifyWhiteListUpdated();
   };
 
@@ -279,7 +279,7 @@ adguard.whitelist = (function (adguard) {
    * @param url
    */
   var whiteListUrl = function (url) {
-    var domain = adguard.utils.url.getHost(url);
+    var domain = purify.utils.url.getHost(url);
     if (isDefaultWhiteListMode()) {
       addToWhiteList(domain);
     } else {
@@ -292,7 +292,7 @@ adguard.whitelist = (function (adguard) {
    * @param url
    */
   var unWhiteListUrl = function (url) {
-    var domain = adguard.utils.url.getHost(url);
+    var domain = purify.utils.url.getHost(url);
     if (isDefaultWhiteListMode()) {
       removeFromWhiteList(domain);
     } else {
@@ -358,18 +358,18 @@ adguard.whitelist = (function (adguard) {
    * Clear whitelisted only
    */
   var clearWhiteListed = function () {
-    adguard.localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
-    adguard.lazyGetClear(whiteListDomainsHolder, "domains");
-    whiteListFilter = new adguard.rules.UrlFilter();
+    purify.localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
+    purify.lazyGetClear(whiteListDomainsHolder, "domains");
+    whiteListFilter = new purify.rules.UrlFilter();
   };
 
   /**
    * Clear blocklisted only
    */
   var clearBlockListed = function () {
-    adguard.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
-    adguard.lazyGetClear(blockListDomainsHolder, "domains");
-    blockListFilter = new adguard.rules.UrlFilter();
+    purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
+    purify.lazyGetClear(blockListDomainsHolder, "domains");
+    blockListFilter = new purify.rules.UrlFilter();
   };
 
   /**
@@ -383,7 +383,7 @@ adguard.whitelist = (function (adguard) {
     clearBlockListed();
     addWhiteListed(whitelist || []);
     addBlockListed(blocklist || []);
-    adguard.settings.changeDefaultWhiteListMode(whiteListMode);
+    purify.settings.changeDefaultWhiteListMode(whiteListMode);
     notifyWhiteListUpdated();
   };
 
@@ -430,8 +430,8 @@ adguard.whitelist = (function (adguard) {
      * To prevent it we should clear cached values
      * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/933
      */
-    adguard.lazyGetClear(whiteListDomainsHolder, "domains");
-    adguard.lazyGetClear(blockListDomainsHolder, "domains");
+    purify.lazyGetClear(whiteListDomainsHolder, "domains");
+    purify.lazyGetClear(blockListDomainsHolder, "domains");
   };
 
   return {
@@ -454,4 +454,4 @@ adguard.whitelist = (function (adguard) {
     isDefaultMode: isDefaultWhiteListMode,
     changeDefaultWhiteListMode: changeDefaultWhiteListMode,
   };
-})(adguard);
+})(purify);

@@ -76,7 +76,7 @@
         var domainName = permittedDomains[i];
         var rules = this.lookupTable[domainName];
         if (rules) {
-          adguard.utils.collections.removeRule(rules, rule);
+          purify.utils.collections.removeRule(rules, rule);
           if (rules.length === 0) {
             delete this.lookupTable[domainName];
           }
@@ -136,7 +136,7 @@
         // jshint ignore:line
         var value = this.lookupTable[r];
         if (value) {
-          if (adguard.utils.collections.isArray(value)) {
+          if (purify.utils.collections.isArray(value)) {
             result = result.concat(value);
           } else {
             result.push(value);
@@ -144,9 +144,9 @@
         }
       }
 
-      return adguard.utils.collections.removeDuplicates(result);
+      return purify.utils.collections.removeDuplicates(result);
     },
   };
 
   api.DomainsLookupTable = DomainsLookupTable;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

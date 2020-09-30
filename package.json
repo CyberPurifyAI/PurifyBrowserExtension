@@ -1,7 +1,7 @@
 {
-  "name": "sfk-browser-extension",
-  "version": "0.1.1",
-  "description": "SFK Browser Extension",
+  "name": "purify-browser-extension",
+  "version": "0.2.0",
+  "description": "Purify Browser Extension",
   "scripts": {
     "watch": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildWatch --require babel-register --gulpfile tasks",
     "dev": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildDev --require babel-register --gulpfile tasks",
@@ -29,9 +29,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:cyberapply/SFKBrowserExtension.git"
+    "url": "ssh://git@github.com:cyberpurify/PurifyBrowserExtension.git"
   },
-  "author": "cyberapply@cyberapply.com",
+  "author": "cyberpurify@cyberpurify.com",
   "license": "MIT",
   "devDependencies": {
     "axios": "^0.19.0",

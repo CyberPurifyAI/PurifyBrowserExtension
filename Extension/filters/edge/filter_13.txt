@@ -1,8 +1,8 @@
-! Checksum: 2lo5UMF3Lv0aUrFFskh8Yg
+! Checksum: qzekcrf6a8UHP+l9jjwevA
 ! Title: AdGuard Turkish filter
 ! Description: Filter list that specifically removes ads on websites in Turkish language.
-! Version: 2.0.19.95
-! TimeUpdated: 2020-09-28T18:30:20+03:00
+! Version: 2.0.19.99
+! TimeUpdated: 2020-09-29T20:02:22+03:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -784,6 +784,7 @@ vizyonfilmizle.tv#$?#.fancybox-overlay-fixed[-ext-has="> div"] { display: none!i
 vizyonfilmizle.tv#$?#.fancybox-lock body[-ext-has="> div"] { overflow: visible!important; }
 vizyonfilmizle.tv#$?#html[-ext-has="> body"] { overflow: visible!important; }
 !
+dizi1.plusm#$?#.rek-0 { remove: true; }
 wmaraci.com#?#table[align="center"][cellspacing="1"]:has(> tbody > tr > td > a[rel="sponsored"])
 wmaraci.com#?#table[align="center"][cellspacing="1"]:has(> tbody > tr > td > a[title*="Reklam"])
 filmkovasi.net#?##content > div[class]:has(> div[class] > a[href][target="_blank"] > img.bekle-kovasi)
@@ -2155,6 +2156,7 @@ sinemapol.org#$##video { display: block!important; }
 !
 ! Removing branded background
 !
+dizi1.plus#$#body { background-image: none!important; }
 izlemac37.net#$#body { background-image: none!important; }
 hdfilmcehennemi.net#$#body { background-image: none!important; }
 hdfilmcehennemi.net#$#body { background-color: #000!important; }
@@ -2332,6 +2334,10 @@ rhaajans.com,nazillipost.com,spor264.com.tr,geyvelim.com,haberrtv.com.tr,hbrcald
 ! ##.ad
 mshowto.org,macizlee1.com,macizlee.ne,dunyaatlasi.com,ensonhaber.com,gayrimenkulhaber.com,internethaber.com,gercekgundem.com,cevapla.tv,cinemadran.com,ranini.tv,oggito.com,kocaeligazetesi.com.tr,rumma.org,kitaptansanattan.com,macizlee3.com,aydindenge.com.tr,gecmisgazete.com##.ad
 !
+/frmtr.com\/images\/w\d.gif/$domain=frmtr.com
+3dmadmax.com##a[href^="https://tr.rdrtr.com/"][target="_blank"] > picture
+||video.twimg.com/ext_tw_video/*.ts$domain=dizi1.plus
+||short-url.link/*.html$subdocument
 buynorxviagraonline.com###HTML10
 masaji-188.com##body > a[href][rel="nofollow"]
 ||masaji-188.com/trgoals/bet-mar-pop.js
@@ -3004,7 +3010,7 @@ diziwatch.com##.bolumcontent > div[class] > a[target="_blank"][rel="nofollow"]
 ||cdn.diziwatch.com/video/baysansli.mp4
 fullhdfilmcidayi.com,720-pizleme.com,fullhdfilmizlebaba.com,evrenselfilmlerim.net###adStarter
 dizilove.com###videos > a[target="_blank"] > img
-roketdizi1.com,dizimov.net,ranzhuai.top,dizirun.com,dizigang.com##.rek-wrap
+dizi1.plus,roketdizi1.com,dizimov.net,ranzhuai.top,dizirun.com,dizigang.com##.rek-wrap
 ultrayerlifilmizle.com##.ad > a[href][target="_blank"]
 ||mazdagaraj.com/data/banner/
 iyinet.com##.p-body-inner > center > a[target="_blank"]:not([href^="https://iyinet.com/"]) > img
@@ -3110,7 +3116,7 @@ kimkimdir.net.tr##.single-kablonet
 ||realizle.site/*.mp4$domain=realfilmizle.com
 netfilmtvizle.com##center > a[href][target="_blank"] > img[alt="poker oyna"]
 ||film-dizi.com/wp-content/uploads/*.mp4
-dizigang.com,dizirun.com##.rek-0
+dizi1.plus,dizigang.com,dizirun.com##.rek-0
 ||dizirun.com/meritads/
 sirketlerligi.com##.bannerzone
 ||hdfilmcehennem.com/reklams/

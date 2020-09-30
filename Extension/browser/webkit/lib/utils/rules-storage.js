@@ -18,10 +18,10 @@
 /**
  * Filter rules storage implementation
  */
-adguard.rulesStorageImpl = (function (adguard) {
+purify.rulesStorageImpl = (function (purify) {
   var read = function (path, callback) {
     try {
-      var value = adguard.localStorageImpl.getItem(path);
+      var value = purify.localStorageImpl.getItem(path);
       var lines = [];
       if (value) {
         lines = value.split(/[\r\n]+/);
@@ -35,7 +35,7 @@ adguard.rulesStorageImpl = (function (adguard) {
   var write = function (path, data, callback) {
     var value = data.join("\n");
     try {
-      adguard.localStorageImpl.setItem(path, value);
+      purify.localStorageImpl.setItem(path, value);
       callback();
     } catch (ex) {
       callback(ex);
@@ -43,7 +43,7 @@ adguard.rulesStorageImpl = (function (adguard) {
   };
 
   var remove = function (path, successCallback) {
-    adguard.localStorageImpl.removeItem(path);
+    purify.localStorageImpl.removeItem(path);
     successCallback();
   };
 
@@ -52,4 +52,4 @@ adguard.rulesStorageImpl = (function (adguard) {
     read: read,
     remove: remove,
   };
-})(adguard);
+})(purify);

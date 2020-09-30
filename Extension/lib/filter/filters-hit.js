@@ -22,7 +22,7 @@
  *
  * @constructor
  */
-adguard.hitStats = (function (adguard) {
+purify.hitStats = (function (purify) {
   "use strict";
 
   var MAX_PAGE_VIEWS_COUNT = 20;
@@ -36,7 +36,7 @@ adguard.hitStats = (function (adguard) {
    */
   var hitStatsHolder = {
     get hitStats() {
-      return adguard.lazyGet(hitStatsHolder, "hitStats", getHitCountStats);
+      return purify.lazyGet(hitStatsHolder, "hitStats", getHitCountStats);
     },
   };
 
@@ -45,14 +45,14 @@ adguard.hitStats = (function (adguard) {
    * @returns {null}
    */
   function getHitCountStats() {
-    var json = adguard.localStorage.getItem(HITS_COUNT_PROP);
+    var json = purify.localStorage.getItem(HITS_COUNT_PROP);
     var stats = Object.create(null);
     try {
       if (json) {
         stats = JSON.parse(json);
       }
     } catch (ex) {
-      adguard.console.error(
+      purify.console.error(
         "Error retrieve hit count statistic, cause {0}",
         ex
       );
@@ -68,8 +68,8 @@ adguard.hitStats = (function (adguard) {
     if (overallViews < MAX_PAGE_VIEWS_COUNT) {
       return;
     }
-    var enabledFilters = adguard.filters.getEnabledFilters();
-    adguard.backend.sendHitStats(
+    var enabledFilters = purify.filters.getEnabledFilters();
+    purify.backend.sendHitStats(
       JSON.stringify(hitStatsHolder.hitStats),
       enabledFilters
     );
@@ -87,9 +87,9 @@ adguard.hitStats = (function (adguard) {
     }
     throttleTimeoutId = setTimeout(function () {
       try {
-        adguard.localStorage.setItem(HITS_COUNT_PROP, JSON.stringify(stats));
+        purify.localStorage.setItem(HITS_COUNT_PROP, JSON.stringify(stats));
       } catch (ex) {
-        adguard.console.error(
+        purify.console.error(
           "Error save hit count statistic to storage, cause {0}",
           ex
         );
@@ -162,7 +162,7 @@ adguard.hitStats = (function (adguard) {
     }
 
     if (requestUrl) {
-      var requestDomain = adguard.utils.url.getDomainName(requestUrl);
+      var requestDomain = purify.utils.url.getDomainName(requestUrl);
       // Domain hits
       var domainHits = ruleInfo[requestDomain] || 0;
       ruleInfo[requestDomain] = domainHits + 1;
@@ -179,8 +179,8 @@ adguard.hitStats = (function (adguard) {
    * Cleanup stats
    */
   function cleanup() {
-    adguard.localStorage.removeItem(HITS_COUNT_PROP);
-    adguard.lazyGetClear(hitStatsHolder, "hitStats");
+    purify.localStorage.removeItem(HITS_COUNT_PROP);
+    purify.lazyGetClear(hitStatsHolder, "hitStats");
   }
 
   /**
@@ -193,10 +193,10 @@ adguard.hitStats = (function (adguard) {
   /**
    * Cleanup stats on property disabled
    */
-  adguard.settings.onUpdated.addListener(function (setting) {
+  purify.settings.onUpdated.addListener(function (setting) {
     if (
-      setting === adguard.settings.DISABLE_COLLECT_HITS &&
-      !adguard.settings.collectHitsCount()
+      setting === purify.settings.DISABLE_COLLECT_HITS &&
+      !purify.settings.collectHitsCount()
     ) {
       cleanup();
     }
@@ -208,4 +208,4 @@ adguard.hitStats = (function (adguard) {
     cleanup: cleanup,
     getStats: getStats,
   };
-})(adguard);
+})(purify);

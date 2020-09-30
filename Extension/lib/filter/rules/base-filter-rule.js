@@ -35,7 +35,7 @@
      * @param domains List of domains. Examples: "example.com|test.com" or "example.com,test.com"
      */
     loadDomains(domains) {
-      if (adguard.utils.strings.isEmpty(domains)) {
+      if (purify.utils.strings.isEmpty(domains)) {
         return;
       }
 
@@ -51,17 +51,17 @@
           // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1242
           throw `Error load $domain options from "${domains}", because after split one of them is empty`;
         }
-        if (adguard.utils.strings.startWith(domain, "~")) {
-          domainName = adguard.utils.url.toPunyCode(domain.substring(1).trim());
-          if (!adguard.utils.strings.isEmpty(domainName)) {
+        if (purify.utils.strings.startWith(domain, "~")) {
+          domainName = purify.utils.url.toPunyCode(domain.substring(1).trim());
+          if (!purify.utils.strings.isEmpty(domainName)) {
             if (restrictedDomains === null) {
               restrictedDomains = [];
             }
             restrictedDomains.push(domainName);
           }
         } else {
-          domainName = adguard.utils.url.toPunyCode(domain.trim());
-          if (!adguard.utils.strings.isEmpty(domainName)) {
+          domainName = purify.utils.url.toPunyCode(domain.trim());
+          if (!purify.utils.strings.isEmpty(domainName)) {
             if (permittedDomains === null) {
               permittedDomains = [];
             }
@@ -160,7 +160,7 @@
       }
       const restrictedDomains = this.getRestrictedDomains();
       if (restrictedDomains) {
-        return adguard.utils.url.isDomainOrSubDomainOfAny(
+        return purify.utils.url.isDomainOrSubDomainOfAny(
           domainName,
           restrictedDomains
         );
@@ -185,7 +185,7 @@
 
       const permittedDomains = this.getPermittedDomains();
       if (permittedDomains) {
-        return adguard.utils.url.isDomainOrSubDomainOfAny(
+        return purify.utils.url.isDomainOrSubDomainOfAny(
           domainName,
           permittedDomains
         );
@@ -206,7 +206,7 @@
       const permitted = this.getPermittedDomains() || [];
       const restricted = this.getRestrictedDomains() || [];
 
-      return adguard.utils.url.isDomainOrSubDomainOfAny(domainName, [
+      return purify.utils.url.isDomainOrSubDomainOfAny(domainName, [
         ...permitted,
         ...restricted,
       ]);
@@ -222,7 +222,7 @@
         return;
       }
       let restrictedDomains = this.getRestrictedDomains();
-      restrictedDomains = adguard.utils.collections.removeDuplicates(
+      restrictedDomains = purify.utils.collections.removeDuplicates(
         (restrictedDomains || []).concat(domains)
       );
       this.setRestrictedDomains(restrictedDomains);
@@ -237,14 +237,14 @@
       if (domains) {
         const restrictedDomains = this.getRestrictedDomains();
         for (let i = 0; i < domains.length; i++) {
-          adguard.utils.collections.remove(restrictedDomains, domains[i]);
+          purify.utils.collections.remove(restrictedDomains, domains[i]);
         }
         this.setRestrictedDomains(restrictedDomains);
       }
     },
   };
 
-  var stringUtils = adguard.utils.strings;
+  var stringUtils = purify.utils.strings;
 
   /**
    * Finds CSS rule marker in the rule text
@@ -308,4 +308,4 @@
   FilterRule.NOT_MARK = "~";
 
   api.FilterRule = FilterRule;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

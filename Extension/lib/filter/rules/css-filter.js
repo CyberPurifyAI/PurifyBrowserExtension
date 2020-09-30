@@ -574,7 +574,7 @@
       // remove closing brace
       var ruleTextWithoutCloseBrace = ruleText.slice(0, -1).trim();
       // check semicolon
-      var ruleTextWithSemicolon = adguard.utils.strings.endsWith(
+      var ruleTextWithSemicolon = purify.utils.strings.endsWith(
         ruleTextWithoutCloseBrace,
         ";"
       )
@@ -653,4 +653,4 @@
   };
 
   api.CssFilter = CssFilter;
-})(adguard, adguard.rules);
+})(adguard, purify.rules);

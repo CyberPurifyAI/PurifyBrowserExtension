@@ -35,9 +35,9 @@
       ? self.browser
       : self.chrome;
 
-  adguard.i18n = browserApi.i18n;
+  purify.i18n = browserApi.i18n;
 
-  adguard.runtimeImpl = (function () {
+  purify.runtimeImpl = (function () {
     const onMessage = (function () {
       if (browserApi.runtime && browserApi.runtime.onMessage) {
         // Chromium, Edge, Firefox WebExtensions

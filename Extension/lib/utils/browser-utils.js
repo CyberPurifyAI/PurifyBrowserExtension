@@ -47,7 +47,7 @@
   // noinspection UnnecessaryLocalVariableJS
   const Utils = {
     getClientId() {
-      let clientId = adguard.localStorage.getItem("client-id");
+      let clientId = purify.localStorage.getItem("client-id");
       if (!clientId) {
         const result = [];
         const suffix = Date.now() % 1e8;
@@ -58,7 +58,7 @@
           result.push(symbol);
         }
         clientId = result.join("") + suffix;
-        adguard.localStorage.setItem("client-id", clientId);
+        purify.localStorage.setItem("client-id", clientId);
       }
 
       return clientId;
@@ -103,39 +103,39 @@
      * @returns Extension version
      */
     getAppVersion() {
-      return adguard.localStorage.getItem("app-version");
+      return purify.localStorage.getItem("app-version");
     },
 
     setAppVersion(version) {
-      adguard.localStorage.setItem("app-version", version);
+      purify.localStorage.setItem("app-version", version);
     },
 
     isYaBrowser() {
-      return adguard.prefs.browser === "YaBrowser";
+      return purify.prefs.browser === "YaBrowser";
     },
 
     isOperaBrowser() {
-      return adguard.prefs.browser === "Opera";
+      return purify.prefs.browser === "Opera";
     },
 
     isEdgeBrowser() {
-      return adguard.prefs.browser === "Edge";
+      return purify.prefs.browser === "Edge";
     },
 
     isEdgeChromiumBrowser() {
-      return adguard.prefs.browser === "EdgeChromium";
+      return purify.prefs.browser === "EdgeChromium";
     },
 
     isFirefoxBrowser() {
-      return adguard.prefs.browser === "Firefox";
+      return purify.prefs.browser === "Firefox";
     },
 
     isChromeBrowser() {
-      return adguard.prefs.browser === "Chrome";
+      return purify.prefs.browser === "Chrome";
     },
 
     isChromium() {
-      return adguard.prefs.platform === "chromium";
+      return purify.prefs.platform === "chromium";
     },
 
     isWindowsOs() {
@@ -217,11 +217,11 @@
 
     getSafebrowsingBackUrl(tab) {
       // https://code.google.com/p/chromium/issues/detail?id=11854
-      const previousUrl = adguard.tabs.getTabMetadata(tab.tabId, "previousUrl");
+      const previousUrl = purify.tabs.getTabMetadata(tab.tabId, "previousUrl");
       if (previousUrl && previousUrl.indexOf("http") === 0) {
         return previousUrl;
       }
-      const referrerUrl = adguard.tabs.getTabMetadata(tab.tabId, "referrerUrl");
+      const referrerUrl = purify.tabs.getTabMetadata(tab.tabId, "referrerUrl");
       if (referrerUrl && referrerUrl.indexOf("http") === 0) {
         return referrerUrl;
       }
@@ -232,7 +232,7 @@
     /**
      * Parse content type from path
      * @param path Path
-     * @returns {*} content type (adguard.RequestTypes.*) or null
+     * @returns {*} content type (purify.RequestTypes.*) or null
      */
     parseContentTypeFromUrlPath(path) {
       let ext = path.slice(-6);
@@ -245,16 +245,16 @@
 
       ext = `${ext.slice(pos)}.`;
       if (objectContentTypes.indexOf(ext) !== -1) {
-        return adguard.RequestTypes.OBJECT;
+        return purify.RequestTypes.OBJECT;
       }
       if (mediaContentTypes.indexOf(ext) !== -1) {
-        return adguard.RequestTypes.MEDIA;
+        return purify.RequestTypes.MEDIA;
       }
       if (fontContentTypes.indexOf(ext) !== -1) {
-        return adguard.RequestTypes.FONT;
+        return purify.RequestTypes.FONT;
       }
       if (imageContentTypes.indexOf(ext) !== -1) {
-        return adguard.RequestTypes.IMAGE;
+        return purify.RequestTypes.IMAGE;
       }
 
       return null;
@@ -268,7 +268,7 @@
     getNavigatorLanguages(limit) {
       let languages = [];
       // https://developer.mozilla.org/ru/docs/Web/API/NavigatorLanguage/languages
-      if (adguard.utils.collections.isArray(navigator.languages)) {
+      if (purify.utils.collections.isArray(navigator.languages)) {
         languages = navigator.languages.slice(0, limit);
       } else if (navigator.language) {
         languages.push(navigator.language); // .language is first in .languages
@@ -289,7 +289,7 @@
     isEdgeBeforeCreatorsUpdate() {
       return (
         this.isEdgeBrowser() &&
-        adguard.prefs.edgeVersion.build < this.EDGE_CREATORS_UPDATE
+        purify.prefs.edgeVersion.build < this.EDGE_CREATORS_UPDATE
       );
     },
 
@@ -298,9 +298,9 @@
      */
     getExtensionParams() {
       const clientId = encodeURIComponent(this.getClientId());
-      const locale = encodeURIComponent(adguard.app.getLocale());
-      const version = encodeURIComponent(adguard.app.getVersion());
-      const id = encodeURIComponent(adguard.app.getId());
+      const locale = encodeURIComponent(purify.app.getLocale());
+      const version = encodeURIComponent(purify.app.getVersion());
+      const id = encodeURIComponent(purify.app.getId());
       const params = [];
       params.push(`v=${version}`);
       params.push(`cid=${clientId}`);
@@ -362,4 +362,4 @@
   };
 
   api.browser = Utils;
-})(adguard, adguard.utils);
+})(adguard, purify.utils);

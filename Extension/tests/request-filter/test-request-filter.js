@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* global QUnit, adguard */
 
-adguard.webRequestService = adguard.webRequestService || {
+purify.webRequestService = purify.webRequestService || {
   isCollectingCosmeticRulesHits: () => false,
 };
 
@@ -9,15 +9,15 @@ QUnit.test("General", (assert) => {
   const url = "https://test.com/";
   const referrer = "example.org";
 
-  const rule = new adguard.rules.UrlFilterRule("||test.com^");
+  const rule = new purify.rules.UrlFilterRule("||test.com^");
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRule(rule);
 
   const result = requestFilter.findRuleForRequest(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.ok(result != null);
   assert.equal(result.ruleText, rule.ruleText);
@@ -29,16 +29,16 @@ QUnit.test("Whitelist rules selecting", (assert) => {
   const url = "https://test.com/";
   const referrer = "http://example.org";
 
-  const rule = new adguard.rules.UrlFilterRule("||test.com^");
-  const whitelist = new adguard.rules.UrlFilterRule("@@||test.com^");
-  const documentRule = new adguard.rules.UrlFilterRule(
+  const rule = new purify.rules.UrlFilterRule("||test.com^");
+  const whitelist = new purify.rules.UrlFilterRule("@@||test.com^");
+  const documentRule = new purify.rules.UrlFilterRule(
     "@@||test.com^$document"
   );
-  const genericHideRule = new adguard.rules.UrlFilterRule(
+  const genericHideRule = new purify.rules.UrlFilterRule(
     "@@||test.com^$generichide"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRule(rule);
 
   let result;
@@ -103,12 +103,12 @@ QUnit.test("Important modifier rules", (assert) => {
   const url = "https://test.com/";
   const referrer = "http://example.org";
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
-  const rule = new adguard.rules.UrlFilterRule("||test.com^");
-  const whitelist = new adguard.rules.UrlFilterRule("@@||test.com^");
-  const important = new adguard.rules.UrlFilterRule("||test.com^$important");
-  const documentRule = new adguard.rules.UrlFilterRule(
+  const rule = new purify.rules.UrlFilterRule("||test.com^");
+  const whitelist = new purify.rules.UrlFilterRule("@@||test.com^");
+  const important = new purify.rules.UrlFilterRule("||test.com^$important");
+  const documentRule = new purify.rules.UrlFilterRule(
     "@@||example.org^$document"
   );
 
@@ -159,9 +159,9 @@ QUnit.test("Important modifier rules", (assert) => {
 });
 
 QUnit.test("CSP rules", (assert) => {
-  let requestFilter = new adguard.RequestFilter();
+  let requestFilter = new purify.RequestFilter();
 
-  const cspRule = new adguard.rules.UrlFilterRule(
+  const cspRule = new purify.rules.UrlFilterRule(
     "||xpanama.net^$third-party,csp=connect-src 'none',domain=~example.org|merriam-webster.com"
   );
   requestFilter.addRule(cspRule);
@@ -169,7 +169,7 @@ QUnit.test("CSP rules", (assert) => {
   let rules = requestFilter.findCspRules(
     "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
     "https://www.merriam-webster.com/",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, cspRule.ruleText);
@@ -177,33 +177,33 @@ QUnit.test("CSP rules", (assert) => {
   rules = requestFilter.findCspRules(
     "https://xpanama.net",
     "https://example.org",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.ok(!rules || rules.length === 0);
 
   // Add matching directive whitelist rule
-  const directiveWhiteListRule = new adguard.rules.UrlFilterRule(
+  const directiveWhiteListRule = new purify.rules.UrlFilterRule(
     "@@||xpanama.net^$csp=connect-src 'none'"
   );
   requestFilter.addRule(directiveWhiteListRule);
   rules = requestFilter.findCspRules(
     "https://xpanama.net",
     "https://www.merriam-webster.com/",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   // Specific whitelist rule should be returned
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, directiveWhiteListRule.ruleText);
 
   // Add global whitelist rule
-  const globalWhiteListRule = new adguard.rules.UrlFilterRule(
+  const globalWhiteListRule = new purify.rules.UrlFilterRule(
     "@@||xpanama.net^$csp"
   );
   requestFilter.addRule(globalWhiteListRule);
   rules = requestFilter.findCspRules(
     "https://xpanama.net",
     "https://www.merriam-webster.com/",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   // Global whitelist rule should be returned
   assert.ok(rules.length === 1);
@@ -212,27 +212,27 @@ QUnit.test("CSP rules", (assert) => {
   requestFilter.removeRule(globalWhiteListRule);
 
   // Add whitelist rule, but with not matched directive
-  const directiveMissWhiteListRule = new adguard.rules.UrlFilterRule(
+  const directiveMissWhiteListRule = new purify.rules.UrlFilterRule(
     "@@||xpanama.net^$csp=frame-src 'none'"
   );
   requestFilter.addRule(directiveMissWhiteListRule);
   rules = requestFilter.findCspRules(
     "https://xpanama.net",
     "https://www.merriam-webster.com/",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, cspRule.ruleText);
 
   // Add CSP rule with duplicated directive
-  const duplicateCspRule = new adguard.rules.UrlFilterRule(
+  const duplicateCspRule = new purify.rules.UrlFilterRule(
     "||xpanama.net^$third-party,csp=connect-src 'none'"
   );
   requestFilter.addRule(duplicateCspRule);
   rules = requestFilter.findCspRules(
     "https://xpanama.net",
     "https://www.merriam-webster.com/",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.ok(rules.length === 1);
   assert.ok(
@@ -241,15 +241,15 @@ QUnit.test("CSP rules", (assert) => {
   );
 
   // Test request type matching
-  requestFilter = new adguard.RequestFilter();
+  requestFilter = new purify.RequestFilter();
 
-  const cspRuleSubDocument = new adguard.rules.UrlFilterRule(
+  const cspRuleSubDocument = new purify.rules.UrlFilterRule(
     "||xpanama.net^$csp=connect-src http:,domain=merriam-webster.com,subdocument"
   );
-  const cspRuleNotSubDocument = new adguard.rules.UrlFilterRule(
+  const cspRuleNotSubDocument = new purify.rules.UrlFilterRule(
     "||xpanama.net^$csp=connect-src 'none',domain=merriam-webster.com,~subdocument"
   );
-  const cspRuleAny = new adguard.rules.UrlFilterRule(
+  const cspRuleAny = new purify.rules.UrlFilterRule(
     "||xpanama.net^$csp=frame-src 'none',domain=merriam-webster.com"
   );
   requestFilter.addRule(cspRuleSubDocument);
@@ -260,7 +260,7 @@ QUnit.test("CSP rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     ) || [];
   assert.ok(rules.length === 2);
   assert.ok(
@@ -276,7 +276,7 @@ QUnit.test("CSP rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     ) || [];
   assert.ok(rules.length === 2);
   assert.ok(
@@ -291,51 +291,51 @@ QUnit.test("CSP rules", (assert) => {
 
 QUnit.test("Test CSP invalid rules", (assert) => {
   // Invalid csp rules
-  let invalidRule = adguard.rules.builder.createRule(
+  let invalidRule = purify.rules.builder.createRule(
     "||$csp=report-uri /csp-violation-report-endpoint/",
     1
   );
   assert.ok(!invalidRule);
 
-  invalidRule = adguard.rules.builder.createRule(
+  invalidRule = purify.rules.builder.createRule(
     "||$csp=report-to /csp-violation-report-endpoint/",
     1
   );
   assert.ok(!invalidRule);
 
-  let correctRule = adguard.rules.builder.createRule(
+  let correctRule = purify.rules.builder.createRule(
     "||$csp=frame-src 'none',subdocument",
     1
   );
   assert.ok(correctRule);
 
-  correctRule = adguard.rules.builder.createRule(
+  correctRule = purify.rules.builder.createRule(
     "||$csp=frame-src 'none',~subdocument",
     1
   );
   assert.ok(correctRule);
 
-  correctRule = adguard.rules.builder.createRule("||$csp=frame-src 'none'", 1);
+  correctRule = purify.rules.builder.createRule("||$csp=frame-src 'none'", 1);
   assert.ok(correctRule);
 });
 
 QUnit.test("Test CSP important rules", (assert) => {
   // Test important rules
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
-  const globalWhiteListRule = new adguard.rules.UrlFilterRule(
+  const globalWhiteListRule = new purify.rules.UrlFilterRule(
     "@@||xpanama.net^$csp,domain=merriam-webster.com"
   );
-  const directiveWhiteListRule = new adguard.rules.UrlFilterRule(
+  const directiveWhiteListRule = new purify.rules.UrlFilterRule(
     "@@||xpanama.net^$csp=frame-src 'none',domain=merriam-webster.com"
   );
-  const importantDirectiveWhiteListRule = new adguard.rules.UrlFilterRule(
+  const importantDirectiveWhiteListRule = new purify.rules.UrlFilterRule(
     "@@||xpanama.net^$csp=frame-src 'none',domain=merriam-webster.com,important"
   );
-  const defaultCspRule = new adguard.rules.UrlFilterRule(
+  const defaultCspRule = new purify.rules.UrlFilterRule(
     "||xpanama.net^$csp=frame-src 'none',domain=merriam-webster.com"
   );
-  const importantCspRule = new adguard.rules.UrlFilterRule(
+  const importantCspRule = new purify.rules.UrlFilterRule(
     "||xpanama.net^$csp=frame-src 'none',domain=merriam-webster.com,important"
   );
   requestFilter.addRule(importantDirectiveWhiteListRule);
@@ -348,7 +348,7 @@ QUnit.test("Test CSP important rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     ) || [];
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, globalWhiteListRule.ruleText);
@@ -358,7 +358,7 @@ QUnit.test("Test CSP important rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     ) || [];
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, importantDirectiveWhiteListRule.ruleText);
@@ -368,7 +368,7 @@ QUnit.test("Test CSP important rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     ) || [];
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, importantCspRule.ruleText);
@@ -378,7 +378,7 @@ QUnit.test("Test CSP important rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     ) || [];
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, directiveWhiteListRule.ruleText);
@@ -388,16 +388,16 @@ QUnit.test("Test CSP important rules", (assert) => {
     requestFilter.findCspRules(
       "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
       "https://www.merriam-webster.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     ) || [];
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, defaultCspRule.ruleText);
 });
 
 QUnit.test("Cookie rules", (assert) => {
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
-  const cookieRule = new adguard.rules.UrlFilterRule(
+  const cookieRule = new purify.rules.UrlFilterRule(
     "||xpanama.net^$third-party,cookie=c_user,domain=~example.org|merriam-webster.com"
   );
   requestFilter.addRule(cookieRule);
@@ -405,7 +405,7 @@ QUnit.test("Cookie rules", (assert) => {
   const rules = requestFilter.findCookieRules(
     "https://nop.xpanama.net/if.html?adflag=1&cb=kq4iOggNyP",
     "https://www.merriam-webster.com/",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.ok(rules.length === 1);
   assert.equal(rules[0].ruleText, cookieRule.ruleText);
@@ -433,15 +433,15 @@ QUnit.test("Redirect rules", (assert) => {
           contentType: ${jsContentType}
           content: ${noopJsContent}`;
 
-  adguard.rules.RedirectFilterService.setRedirectSources(rawYaml);
-  const requestFilter = new adguard.RequestFilter();
+  purify.rules.RedirectFilterService.setRedirectSources(rawYaml);
+  const requestFilter = new purify.RequestFilter();
 
   // Test rules creation
-  let redirectRule = new adguard.rules.UrlFilterRule(
+  let redirectRule = new purify.rules.UrlFilterRule(
     "example.org/ads.js$script,redirect=noopjs",
     0
   );
-  const blockRedirectRule = new adguard.rules.UrlFilterRule(
+  const blockRedirectRule = new purify.rules.UrlFilterRule(
     "||example.org/*.png$image,redirect=1x1-transparent.gif",
     0
   );
@@ -449,18 +449,18 @@ QUnit.test("Redirect rules", (assert) => {
   const rule = requestFilter.findRuleForRequest(
     "http://example.org/ads.js",
     "http://example.org/",
-    adguard.RequestTypes.SCRIPT
+    purify.RequestTypes.SCRIPT
   );
   assert.equal(rule.getRedirect().redirectTitle, "noopjs");
   const imgRule = requestFilter.findRuleForRequest(
     "http://example.org/ad.png",
     "http://example.org/",
-    adguard.RequestTypes.IMAGE
+    purify.RequestTypes.IMAGE
   );
   assert.equal(imgRule.getRedirect().redirectTitle, "1x1-transparent.gif");
 
   // Test that rule correct url has been build
-  const validRule = new adguard.rules.UrlFilterRule(
+  const validRule = new purify.rules.UrlFilterRule(
     `example.org/ads.js$script,redirect=${validTitle}`,
     0
   );
@@ -478,7 +478,7 @@ QUnit.test("Redirect rules", (assert) => {
   // Test that rules with invalid redirect option throw error
   assert.throws(
     () => {
-      const invalidRule = new adguard.rules.UrlFilterRule(
+      const invalidRule = new purify.rules.UrlFilterRule(
         `example.org/ads.js$script,redirect=${invalidTitle}`,
         0
       );
@@ -489,16 +489,16 @@ QUnit.test("Redirect rules", (assert) => {
   );
 
   // Test that redirect rules has higher priority than basic rules
-  redirectRule = new adguard.rules.UrlFilterRule(
+  redirectRule = new purify.rules.UrlFilterRule(
     "||8s8.eu^*fa.js$script,redirect=noopjs"
   );
-  const basicRule = new adguard.rules.UrlFilterRule("||8s8.eu^*fa.js$script");
+  const basicRule = new purify.rules.UrlFilterRule("||8s8.eu^*fa.js$script");
 
   assert.ok(
     redirectRule.isFiltered(
       "http://8s8.eu/bla-fa.js",
       true,
-      adguard.RequestTypes.SCRIPT
+      purify.RequestTypes.SCRIPT
     )
   );
   // assert.ok(redirectRule.isPermitted('test.com'));
@@ -506,19 +506,19 @@ QUnit.test("Redirect rules", (assert) => {
     basicRule.isFiltered(
       "http://8s8.eu/bla-fa.js",
       true,
-      adguard.RequestTypes.SCRIPT
+      purify.RequestTypes.SCRIPT
     )
   );
   // assert.ok(basicRule.isPermitted('http://example.com'));
 
-  const urlFilter = new adguard.rules.UrlFilter();
+  const urlFilter = new purify.rules.UrlFilter();
   urlFilter.addRule(basicRule);
   urlFilter.addRule(redirectRule);
 
   const result = urlFilter.isFiltered(
     "http://8s8.eu/bla-fa.js",
     "test.com",
-    adguard.RequestTypes.SCRIPT,
+    purify.RequestTypes.SCRIPT,
     true
   );
   assert.ok(result !== null);
@@ -529,21 +529,21 @@ QUnit.test("Redirect rules", (assert) => {
 QUnit.test("$object subrequest modifier should be unknown", (assert) => {
   assert.throws(() => {
     // eslint-disable-next-line no-unused-vars
-    const rule = new adguard.rules.UrlFilterRule(
+    const rule = new purify.rules.UrlFilterRule(
       "example.org/blockrequest$object-subrequest"
     );
   }, "Unknown option: OBJECT-SUBREQUEST");
 });
 
 QUnit.test("BadFilter option", (assert) => {
-  const rule = new adguard.rules.UrlFilterRule("https:*_ad_");
-  const ruleTwo = new adguard.rules.UrlFilterRule("https:*_da_");
-  const ruleThree = new adguard.rules.UrlFilterRule("https:*_ad_$match-case");
-  const badFilterRule = new adguard.rules.UrlFilterRule(
+  const rule = new purify.rules.UrlFilterRule("https:*_ad_");
+  const ruleTwo = new purify.rules.UrlFilterRule("https:*_da_");
+  const ruleThree = new purify.rules.UrlFilterRule("https:*_ad_$match-case");
+  const badFilterRule = new purify.rules.UrlFilterRule(
     "https:*_ad_$badfilter"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
   requestFilter.addRule(rule);
   requestFilter.addRule(ruleTwo);
@@ -552,14 +552,14 @@ QUnit.test("BadFilter option", (assert) => {
     requestFilter.findRuleForRequest(
       "https://google.com/_ad_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://google.com/_da_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -570,14 +570,14 @@ QUnit.test("BadFilter option", (assert) => {
     requestFilter.findRuleForRequest(
       "https://google.com/_ad_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://google.com/_da_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -588,14 +588,14 @@ QUnit.test("BadFilter option", (assert) => {
     requestFilter.findRuleForRequest(
       "https://google.com/_ad_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://google.com/_da_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -606,14 +606,14 @@ QUnit.test("BadFilter option", (assert) => {
     requestFilter.findRuleForRequest(
       "https://google.com/_ad_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://google.com/_da_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -623,14 +623,14 @@ QUnit.test("BadFilter option", (assert) => {
     requestFilter.findRuleForRequest(
       "https://google.com/_ad_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://google.com/_da_agency",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 });
@@ -639,20 +639,20 @@ QUnit.test("BadFilter option whitelist", (assert) => {
   const url = "https://test.com/";
   const referrer = "http://example.org";
 
-  const rule = new adguard.rules.UrlFilterRule("||test.com^");
-  const whitelist = new adguard.rules.UrlFilterRule("@@||test.com^");
-  const badFilterRule = new adguard.rules.UrlFilterRule(
+  const rule = new purify.rules.UrlFilterRule("||test.com^");
+  const whitelist = new purify.rules.UrlFilterRule("@@||test.com^");
+  const badFilterRule = new purify.rules.UrlFilterRule(
     "@@||test.com^$badfilter"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
   requestFilter.addRule(rule);
 
   let result = requestFilter.findRuleForRequest(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.ok(result);
   assert.equal(result.ruleText, rule.ruleText);
@@ -662,7 +662,7 @@ QUnit.test("BadFilter option whitelist", (assert) => {
   result = requestFilter.findWhiteListRule(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.ok(result);
   assert.equal(result.ruleText, whitelist.ruleText);
@@ -670,7 +670,7 @@ QUnit.test("BadFilter option whitelist", (assert) => {
   result = requestFilter.findRuleForRequest(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.ok(result);
   assert.equal(result.ruleText, whitelist.ruleText);
@@ -680,27 +680,27 @@ QUnit.test("BadFilter option whitelist", (assert) => {
   result = requestFilter.findWhiteListRule(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.notOk(result);
 
   result = requestFilter.findRuleForRequest(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.ok(result);
   assert.equal(result.ruleText, rule.ruleText);
 });
 
 QUnit.test("BadFilter multi-options", (assert) => {
-  const rule = new adguard.rules.UrlFilterRule("||example.org^$object");
-  const ruleTwo = new adguard.rules.UrlFilterRule("||example.org^");
-  let badFilterRule = new adguard.rules.UrlFilterRule(
+  const rule = new purify.rules.UrlFilterRule("||example.org^$object");
+  const ruleTwo = new purify.rules.UrlFilterRule("||example.org^");
+  let badFilterRule = new purify.rules.UrlFilterRule(
     "||example.org^$badfilter,object"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
   requestFilter.addRule(rule);
   requestFilter.addRule(ruleTwo);
@@ -709,14 +709,14 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -725,14 +725,14 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.strictEqual(
@@ -740,7 +740,7 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.strictEqual(
@@ -748,7 +748,7 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -758,18 +758,18 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
-  badFilterRule = new adguard.rules.UrlFilterRule(
+  badFilterRule = new purify.rules.UrlFilterRule(
     "||example.org^$object,badfilter"
   );
 
@@ -779,14 +779,14 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
   assert.strictEqual(
@@ -794,7 +794,7 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.strictEqual(
@@ -802,7 +802,7 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 
@@ -812,28 +812,28 @@ QUnit.test("BadFilter multi-options", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.OBJECT
+      purify.RequestTypes.OBJECT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     )
   );
 });
 
 QUnit.test("BadFilter doesn stop looking for other rules", (assert) => {
-  const rule = new adguard.rules.UrlFilterRule("||example.org^$third-party");
-  const ruleTwo = new adguard.rules.UrlFilterRule(
+  const rule = new purify.rules.UrlFilterRule("||example.org^$third-party");
+  const ruleTwo = new purify.rules.UrlFilterRule(
     "||example.org^$xmlhttprequest"
   );
-  let badFilterRule = new adguard.rules.UrlFilterRule(
+  let badFilterRule = new purify.rules.UrlFilterRule(
     "||example.org^$third-party,badfilter"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
   requestFilter.addRule(rule);
   requestFilter.addRule(ruleTwo);
@@ -841,14 +841,14 @@ QUnit.test("BadFilter doesn stop looking for other rules", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "https://third-party.com",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.XMLHTTPREQUEST
+      purify.RequestTypes.XMLHTTPREQUEST
     )
   );
 
@@ -858,14 +858,14 @@ QUnit.test("BadFilter doesn stop looking for other rules", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "https://third-party.com",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.XMLHTTPREQUEST
+      purify.RequestTypes.XMLHTTPREQUEST
     )
   );
 
@@ -875,18 +875,18 @@ QUnit.test("BadFilter doesn stop looking for other rules", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "https://third-party.com",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.XMLHTTPREQUEST
+      purify.RequestTypes.XMLHTTPREQUEST
     )
   );
 
-  badFilterRule = new adguard.rules.UrlFilterRule(
+  badFilterRule = new purify.rules.UrlFilterRule(
     "||example.org^$xmlhttprequest,badfilter"
   );
 
@@ -896,14 +896,14 @@ QUnit.test("BadFilter doesn stop looking for other rules", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "https://third-party.com",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     )
   );
   assert.notOk(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.XMLHTTPREQUEST
+      purify.RequestTypes.XMLHTTPREQUEST
     )
   );
 
@@ -913,14 +913,14 @@ QUnit.test("BadFilter doesn stop looking for other rules", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "https://third-party.com",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     )
   );
   assert.ok(
     requestFilter.findRuleForRequest(
       "https://example.org",
       "",
-      adguard.RequestTypes.XMLHTTPREQUEST
+      purify.RequestTypes.XMLHTTPREQUEST
     )
   );
 });
@@ -931,12 +931,12 @@ QUnit.test("Replace filters", (assert) => {
     "||example.org^$replace=/test1/test2/g",
   ];
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
-  adguard.prefs.features.responseContentFilteringSupported = true;
+  purify.prefs.features.responseContentFilteringSupported = true;
 
   const urlFilterRules = rules.map(
-    (rule) => new adguard.rules.UrlFilterRule(rule)
+    (rule) => new purify.rules.UrlFilterRule(rule)
   );
 
   requestFilter.addRules(urlFilterRules);
@@ -944,7 +944,7 @@ QUnit.test("Replace filters", (assert) => {
   const replaceRules = requestFilter.findReplaceRules(
     "https://example.org",
     "",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
 
   assert.ok(replaceRules);
@@ -962,12 +962,12 @@ QUnit.test(
       "@@||example.org^$replace=/test1/test2/g",
     ];
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
 
-    adguard.prefs.features.responseContentFilteringSupported = true;
+    purify.prefs.features.responseContentFilteringSupported = true;
 
     const urlFilterRules = rules.map(
-      (rule) => new adguard.rules.UrlFilterRule(rule)
+      (rule) => new purify.rules.UrlFilterRule(rule)
     );
 
     requestFilter.addRules(urlFilterRules);
@@ -975,7 +975,7 @@ QUnit.test(
     const replaceRules = requestFilter.findReplaceRules(
       "https://example.org",
       "",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
 
     assert.ok(replaceRules);
@@ -984,17 +984,17 @@ QUnit.test(
 );
 
 QUnit.test("whitelist rules with $stealth modifier", (assert) => {
-  const stealthRule = new adguard.rules.UrlFilterRule(
+  const stealthRule = new purify.rules.UrlFilterRule(
     "@@||example.org^$stealth"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRule(stealthRule);
 
   const result = requestFilter.findStealthWhiteListRule(
     "https://example.org/test.js",
     "https://example.org",
-    adguard.RequestTypes.SCRIPT
+    purify.RequestTypes.SCRIPT
   );
 
   assert.ok(result);
@@ -1004,7 +1004,7 @@ QUnit.test("whitelist rules with $stealth modifier", (assert) => {
   const thirdPartResult = requestFilter.findStealthWhiteListRule(
     "https://other-example.org/test.js",
     "https://example.org",
-    adguard.RequestTypes.SCRIPT
+    purify.RequestTypes.SCRIPT
   );
 
   assert.ok(thirdPartResult);
@@ -1013,23 +1013,23 @@ QUnit.test("whitelist rules with $stealth modifier", (assert) => {
 });
 
 QUnit.test("whitelist rules with $stealth and $script modifier", (assert) => {
-  const stealthRule = new adguard.rules.UrlFilterRule(
+  const stealthRule = new purify.rules.UrlFilterRule(
     "@@||example.org^$script,stealth"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRule(stealthRule);
 
   const notScriptRuleResult = requestFilter.findStealthWhiteListRule(
     "https://example.org/test.jpg",
     "https://example.org",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
 
   const scriptRuleResult = requestFilter.findStealthWhiteListRule(
     "https://example.org/test.js",
     "https://example.org",
-    adguard.RequestTypes.SCRIPT
+    purify.RequestTypes.SCRIPT
   );
 
   assert.notOk(notScriptRuleResult);
@@ -1039,23 +1039,23 @@ QUnit.test("whitelist rules with $stealth and $script modifier", (assert) => {
 });
 
 QUnit.test("whitelist rules with $stealth and $domain modifiers", (assert) => {
-  const stealthRule = new adguard.rules.UrlFilterRule(
+  const stealthRule = new purify.rules.UrlFilterRule(
     "@@||hdslb.com^$domain=bilibili.com,stealth"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRule(stealthRule);
 
   const thirdPartyRule = requestFilter.findStealthWhiteListRule(
     "https://hdslb.com/test.js",
     "https://bilibili.com",
-    adguard.RequestTypes.SCRIPT
+    purify.RequestTypes.SCRIPT
   );
 
   const ruleForDifferentDomain = requestFilter.findStealthWhiteListRule(
     "https://mail.com/test.js",
     "https://bilibili.com",
-    adguard.RequestTypes.SCRIPT
+    purify.RequestTypes.SCRIPT
   );
 
   assert.ok(thirdPartyRule);
@@ -1067,23 +1067,23 @@ QUnit.test("whitelist rules with $stealth and $domain modifiers", (assert) => {
 QUnit.test(
   "whitelist rules with $stealth and $third-party modifier",
   (assert) => {
-    const stealthRule = new adguard.rules.UrlFilterRule(
+    const stealthRule = new purify.rules.UrlFilterRule(
       "@@||example.org^$stealth,third-party"
     );
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
     requestFilter.addRule(stealthRule);
 
     const result = requestFilter.findStealthWhiteListRule(
       "https://example.org/test",
       "https://example.org",
-      adguard.RequestTypes.SCRIPT
+      purify.RequestTypes.SCRIPT
     );
 
     const thirdPartyResult = requestFilter.findStealthWhiteListRule(
       "https://third-party.org/test",
       "https://example.org",
-      adguard.RequestTypes.SCRIPT
+      purify.RequestTypes.SCRIPT
     );
 
     assert.notOk(result);
@@ -1102,12 +1102,12 @@ QUnit.test(
       "@@||example.org^$replace",
     ];
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
 
-    adguard.prefs.features.responseContentFilteringSupported = true;
+    purify.prefs.features.responseContentFilteringSupported = true;
 
     const urlFilterRules = rules.map(
-      (rule) => new adguard.rules.UrlFilterRule(rule)
+      (rule) => new purify.rules.UrlFilterRule(rule)
     );
 
     requestFilter.addRules(urlFilterRules);
@@ -1115,7 +1115,7 @@ QUnit.test(
     const replaceRules = requestFilter.findReplaceRules(
       "https://example.org",
       "",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
 
     assert.ok(replaceRules);
@@ -1132,12 +1132,12 @@ QUnit.test("replace rules with $badfilter modifier", (assert) => {
     "||example.org^$replace=/test/test1/g,badfilter",
   ];
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
-  adguard.prefs.features.responseContentFilteringSupported = true;
+  purify.prefs.features.responseContentFilteringSupported = true;
 
   const urlFilterRules = rules.map(
-    (rule) => new adguard.rules.UrlFilterRule(rule)
+    (rule) => new purify.rules.UrlFilterRule(rule)
   );
 
   requestFilter.addRules(urlFilterRules);
@@ -1145,7 +1145,7 @@ QUnit.test("replace rules with $badfilter modifier", (assert) => {
   const replaceRules = requestFilter.findReplaceRules(
     "https://example.org",
     "",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
 
   assert.ok(replaceRules);
@@ -1155,32 +1155,32 @@ QUnit.test("replace rules with $badfilter modifier", (assert) => {
 });
 
 QUnit.test("stealth rules with $badfilter modifier", (assert) => {
-  const whiteListRule = new adguard.rules.UrlFilterRule(
+  const whiteListRule = new purify.rules.UrlFilterRule(
     "@@||example.org^$stealth"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
   requestFilter.addRule(whiteListRule);
 
   let result = requestFilter.findStealthWhiteListRule(
     "https://example.org",
     "https://example.org",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
 
   assert.ok(result);
   assert.equal(result.ruleText, whiteListRule.ruleText);
   assert.ok(result.whiteListRule);
 
-  const badFilterRule = new adguard.rules.UrlFilterRule(
+  const badFilterRule = new purify.rules.UrlFilterRule(
     "@@||example.org^$stealth,badfilter"
   );
   requestFilter.addRule(badFilterRule);
   result = requestFilter.findStealthWhiteListRule(
     "https://example.org",
     "https://example.org",
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
 
   assert.notOk(result);
@@ -1190,8 +1190,8 @@ QUnit.test("stealth rules with $badfilter modifier", (assert) => {
 QUnit.test(
   "$csp rules created with $all modifier should be unblocked with $badfilter modifier",
   (assert) => {
-    const requestFilter = new adguard.RequestFilter();
-    const blockingCompositeRule = adguard.rules.builder.createRule(
+    const requestFilter = new purify.RequestFilter();
+    const blockingCompositeRule = purify.rules.builder.createRule(
       "||example.org^$all",
       0
     );
@@ -1201,18 +1201,18 @@ QUnit.test(
     let result = requestFilter.findCspRules(
       "https://example.org",
       "https://example.org",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
     assert.equal(result.length, 2);
 
-    const whitelistCompositeRule = adguard.rules.builder.createRule(
+    const whitelistCompositeRule = purify.rules.builder.createRule(
       "||example.org^$all,badfilter"
     );
     requestFilter.addRule(whitelistCompositeRule);
     result = requestFilter.findCspRules(
       "https://example.org",
       "https://example.org",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
     assert.equal(result.length, 0);
   }
@@ -1228,10 +1228,10 @@ QUnit.test(
       "||example.org/badcode.js",
     ];
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
 
     const urlFilterRules = rules.map(
-      (rule) => new adguard.rules.UrlFilterRule(rule)
+      (rule) => new purify.rules.UrlFilterRule(rule)
     );
 
     requestFilter.addRules(urlFilterRules);
@@ -1245,11 +1245,11 @@ QUnit.test(
 QUnit.test("requestFilter.findRuleForRequest performance", (assert) => {
   // eslint-disable-next-line no-undef
   const rules = filtersFromTxt; // variable filtersFromTxt is from 'test_filter.js'
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   for (let i = 0; i < rules.length; i += 1) {
-    const rule = adguard.rules.builder.createRule(
+    const rule = purify.rules.builder.createRule(
       rules[i],
-      adguard.utils.filters.USER_FILTER_ID
+      purify.utils.filters.USER_FILTER_ID
     );
     if (rule) {
       requestFilter.addRule(rule);
@@ -1265,7 +1265,7 @@ QUnit.test("requestFilter.findRuleForRequest performance", (assert) => {
     requestFilter.findRuleForRequest(
       url,
       referrer,
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     );
   }
 
@@ -1286,9 +1286,9 @@ QUnit.test("requestFilter.findRuleForRequest performance", (assert) => {
 });
 
 QUnit.test("$document modifier", (assert) => {
-  const rule = new adguard.rules.UrlFilterRule("||example.org^$document");
+  const rule = new purify.rules.UrlFilterRule("||example.org^$document");
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
 
   requestFilter.addRule(rule);
 
@@ -1296,7 +1296,7 @@ QUnit.test("$document modifier", (assert) => {
     requestFilter.findRuleForRequest(
       "https://example.org",
       "https://example.org",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     )
   );
 });
@@ -1312,22 +1312,22 @@ QUnit.test("redirect rules are removed with $badfilter modifier", (assert) => {
         - blank-text
       contentType: text/plain
       content: ''`;
-  adguard.rules.RedirectFilterService.setRedirectSources(rawYaml);
-  const requestFilter = new adguard.RequestFilter();
-  const rule = adguard.rules.builder.createRule(ruleText, 1);
+  purify.rules.RedirectFilterService.setRedirectSources(rawYaml);
+  const requestFilter = new purify.RequestFilter();
+  const rule = purify.rules.builder.createRule(ruleText, 1);
   requestFilter.addRule(rule);
   let result = requestFilter.findRuleForRequest(
     "https://example.org/favicon.ico",
     "https://example.org",
-    adguard.RequestTypes.IMAGE
+    purify.RequestTypes.IMAGE
   );
   assert.ok(result, "rule should be found");
-  const badfilterRule = adguard.rules.builder.createRule(badfilterRuleText, 1);
+  const badfilterRule = purify.rules.builder.createRule(badfilterRuleText, 1);
   requestFilter.addRule(badfilterRule);
   result = requestFilter.findRuleForRequest(
     "https://example.org/favicon.ico",
     "https://example.org",
-    adguard.RequestTypes.IMAGE
+    purify.RequestTypes.IMAGE
   );
   assert.notOk(result, "rule should be blocked by badfilter rule");
 });
@@ -1336,20 +1336,20 @@ QUnit.test("domain restriction semantic", (assert) => {
   const url = "https://example.org/";
   const referrer = null;
 
-  const cspRule = new adguard.rules.UrlFilterRule(
+  const cspRule = new purify.rules.UrlFilterRule(
     "$domain=example.org,csp=script-src 'none'"
   );
-  const cookieRule = new adguard.rules.UrlFilterRule(
+  const cookieRule = new purify.rules.UrlFilterRule(
     "$cookie=test,domain=example.org"
   );
 
-  const requestFilter = new adguard.RequestFilter();
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRules([cspRule, cookieRule]);
 
   const cspResultDocument = requestFilter.findCspRules(
     url,
     referrer,
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.equal(cspResultDocument.length, 1);
   assert.equal(cspResultDocument[0].ruleText, cspRule.ruleText);
@@ -1357,7 +1357,7 @@ QUnit.test("domain restriction semantic", (assert) => {
   const cspResultSubDocument = requestFilter.findCspRules(
     url,
     referrer,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.equal(cspResultSubDocument.length, 1);
   assert.equal(cspResultSubDocument[0].ruleText, cspRule.ruleText);
@@ -1365,7 +1365,7 @@ QUnit.test("domain restriction semantic", (assert) => {
   const cookieResult = requestFilter.findCookieRules(
     url,
     referrer,
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.equal(cookieResult.length, 1);
   assert.equal(cookieResult[0].ruleText, cookieRule.ruleText);
@@ -1377,22 +1377,22 @@ QUnit.test("CSP rules are found correctly", (assert) => {
    * rule1 = '||$csp'
    * rule2 = '||$csp,subdocument'
    * rule3 = '||$csp,~subdocument'
-   * findCspRules(adguard.RequestTypes.SUBDOCUMENT) = [rule1, rule2];
-   * findCspRules(adguard.RequestTypes.DOCUMENT) = [rule1, rule3];
+   * findCspRules(purify.RequestTypes.SUBDOCUMENT) = [rule1, rule2];
+   * findCspRules(purify.RequestTypes.DOCUMENT) = [rule1, rule3];
    */
   const ruleText1 = "||example.org^$csp=default-src 'none'";
   const ruleText2 = "||example.org^$csp=script-src 'none',subdocument";
   const ruleText3 = "||example.org^$csp=connect-src 'none',~subdocument";
   const url = "https://example.org/blabla";
-  const rule1 = new adguard.rules.UrlFilterRule(ruleText1);
-  const rule2 = new adguard.rules.UrlFilterRule(ruleText2);
-  const rule3 = new adguard.rules.UrlFilterRule(ruleText3);
-  const requestFilter = new adguard.RequestFilter();
+  const rule1 = new purify.rules.UrlFilterRule(ruleText1);
+  const rule2 = new purify.rules.UrlFilterRule(ruleText2);
+  const rule3 = new purify.rules.UrlFilterRule(ruleText3);
+  const requestFilter = new purify.RequestFilter();
   requestFilter.addRules([rule1, rule2, rule3]);
   const search1 = requestFilter.findCspRules(
     url,
     null,
-    adguard.RequestTypes.SUBDOCUMENT
+    purify.RequestTypes.SUBDOCUMENT
   );
   assert.ok(search1.includes(rule1));
   assert.ok(search1.includes(rule2));
@@ -1400,7 +1400,7 @@ QUnit.test("CSP rules are found correctly", (assert) => {
   const search2 = requestFilter.findCspRules(
     url,
     null,
-    adguard.RequestTypes.DOCUMENT
+    purify.RequestTypes.DOCUMENT
   );
   assert.ok(search2.includes(rule1));
   assert.notOk(search2.includes(rule2));
@@ -1412,11 +1412,11 @@ QUnit.test(
   'Request filter finds rules for domains with "." in the end',
   (assert) => {
     const selector = "body";
-    const cssRule = new adguard.rules.CssFilterRule(
+    const cssRule = new purify.rules.CssFilterRule(
       `benchmark.pl##${selector}`
     );
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
     requestFilter.addRules([cssRule]);
     const {
       css: [firstCss],
@@ -1426,13 +1426,13 @@ QUnit.test(
     );
 
     const urlRuleText = "||cdn.benchmark.pl^$domain=benchmark.pl";
-    const urlRule = new adguard.rules.UrlFilterRule(urlRuleText);
+    const urlRule = new purify.rules.UrlFilterRule(urlRuleText);
     requestFilter.addRules([urlRule]);
 
     const rule = requestFilter.findRuleForRequest(
       "http://cdn.benchmark.pl/assets/css/mainPage.min.css",
       "http://www.benchmark.pl./",
-      adguard.RequestTypes.STYLESHEET
+      purify.RequestTypes.STYLESHEET
     );
     assert.equal(rule.ruleText, urlRuleText);
   }
@@ -1443,16 +1443,16 @@ QUnit.test(
   'In case request has "DOCUMENT" type - $domain modifier will match as well request URL hostname',
   (assert) => {
     const urlRuleText = "|http://$third-party,domain=example.org";
-    const urlRule = new adguard.rules.UrlFilterRule(urlRuleText);
+    const urlRule = new purify.rules.UrlFilterRule(urlRuleText);
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
     requestFilter.addRules([urlRule]);
 
     // Will match document url host
     let rule = requestFilter.findRuleForRequest(
       "http://check.com/url",
       "http://www.example.org/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
 
     assert.equal(rule.ruleText, urlRuleText);
@@ -1461,7 +1461,7 @@ QUnit.test(
     rule = requestFilter.findRuleForRequest(
       "http://www.example.org/url",
       "http://test.com/",
-      adguard.RequestTypes.DOCUMENT
+      purify.RequestTypes.DOCUMENT
     );
 
     assert.equal(rule.ruleText, urlRuleText);
@@ -1470,7 +1470,7 @@ QUnit.test(
     rule = requestFilter.findRuleForRequest(
       "http://check.com/url",
       "http://test.com/",
-      adguard.RequestTypes.SUBDOCUMENT
+      purify.RequestTypes.SUBDOCUMENT
     );
 
     assert.notOk(rule);
@@ -1479,7 +1479,7 @@ QUnit.test(
     rule = requestFilter.findRuleForRequest(
       "http://check.com/url",
       "http://test.com/",
-      adguard.RequestTypes.IMAGE
+      purify.RequestTypes.IMAGE
     );
 
     assert.notOk(rule);
@@ -1491,17 +1491,17 @@ QUnit.test(
   (assert) => {
     const validScriptletRuleText =
       'example.org#%#//scriptlet("adjust-setTimeout", "example", "400")';
-    const validScriptletRule = new adguard.rules.ScriptletRule(
+    const validScriptletRule = new purify.rules.ScriptletRule(
       validScriptletRuleText
     );
 
     const invalidScriptletRuleText =
       'example.org#%#//scriptlet("adjust-setTimeout-invalid", "example", "400")';
-    const invalidScriptletRule = new adguard.rules.ScriptletRule(
+    const invalidScriptletRule = new purify.rules.ScriptletRule(
       invalidScriptletRuleText
     );
 
-    const requestFilter = new adguard.RequestFilter();
+    const requestFilter = new purify.RequestFilter();
     requestFilter.addRules([validScriptletRule, invalidScriptletRule]);
 
     const scripts = requestFilter.getScriptsForUrl("https://example.org", true);

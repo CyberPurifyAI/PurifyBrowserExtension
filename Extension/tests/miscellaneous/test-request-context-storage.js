@@ -1,17 +1,17 @@
 /* global QUnit */
 
-adguard.filteringLog.bindRuleToHttpRequestEvent = () => {};
+purify.filteringLog.bindRuleToHttpRequestEvent = () => {};
 
 QUnit.test("Test Record/Remove", function (assert) {
   const requestId = "1";
   const requestUrl = "http://example.org/image.png";
   const referrerUrl = "https://example.org";
-  const requestType = adguard.RequestTypes.DOCUMENT;
+  const requestType = purify.RequestTypes.DOCUMENT;
   const tab = { tabId: 1 };
 
-  assert.notOk(adguard.requestContextStorage.get(requestId));
+  assert.notOk(purify.requestContextStorage.get(requestId));
 
-  adguard.requestContextStorage.record(
+  purify.requestContextStorage.record(
     requestId,
     requestUrl,
     referrerUrl,
@@ -20,7 +20,7 @@ QUnit.test("Test Record/Remove", function (assert) {
     tab
   );
 
-  let context = adguard.requestContextStorage.get(requestId);
+  let context = purify.requestContextStorage.get(requestId);
   assert.ok(context);
   assert.equal(requestId, context.requestId);
   assert.equal(requestUrl, context.requestUrl);
@@ -31,8 +31,8 @@ QUnit.test("Test Record/Remove", function (assert) {
   assert.ok(context.requestState, 2);
   assert.ok(context.contentModifyingState, 1);
 
-  adguard.requestContextStorage.onRequestCompleted(requestId);
-  context = adguard.requestContextStorage.get(requestId);
+  purify.requestContextStorage.onRequestCompleted(requestId);
+  context = purify.requestContextStorage.get(requestId);
   assert.notOk(context);
 });
 
@@ -40,10 +40,10 @@ QUnit.test("Test Content modification", function (assert) {
   const requestId = "1";
   const requestUrl = "http://example.org/image.png";
   const referrerUrl = "https://example.org";
-  const requestType = adguard.RequestTypes.DOCUMENT;
+  const requestType = purify.RequestTypes.DOCUMENT;
   const tab = { tabId: 1 };
 
-  adguard.requestContextStorage.record(
+  purify.requestContextStorage.record(
     requestId,
     requestUrl,
     referrerUrl,
@@ -51,12 +51,12 @@ QUnit.test("Test Content modification", function (assert) {
     requestType,
     tab
   );
-  adguard.requestContextStorage.onRequestCompleted(requestId);
+  purify.requestContextStorage.onRequestCompleted(requestId);
 
-  let context = adguard.requestContextStorage.get(requestId);
+  let context = purify.requestContextStorage.get(requestId);
   assert.notOk(context);
 
-  adguard.requestContextStorage.record(
+  purify.requestContextStorage.record(
     requestId,
     requestUrl,
     referrerUrl,
@@ -64,15 +64,15 @@ QUnit.test("Test Content modification", function (assert) {
     requestType,
     tab
   );
-  adguard.requestContextStorage.onContentModificationStarted(requestId);
-  adguard.requestContextStorage.onRequestCompleted(requestId);
+  purify.requestContextStorage.onContentModificationStarted(requestId);
+  purify.requestContextStorage.onRequestCompleted(requestId);
 
-  context = adguard.requestContextStorage.get(requestId);
+  context = purify.requestContextStorage.get(requestId);
   assert.ok(context);
 
-  adguard.requestContextStorage.onContentModificationFinished(requestId);
+  purify.requestContextStorage.onContentModificationFinished(requestId);
 
-  context = adguard.requestContextStorage.get(requestId);
+  context = purify.requestContextStorage.get(requestId);
   assert.notOk(context);
 });
 
@@ -80,10 +80,10 @@ QUnit.test("Test Modify headers", function (assert) {
   const requestId = "1";
   const requestUrl = "http://example.org/image.png";
   const referrerUrl = "https://example.org";
-  const requestType = adguard.RequestTypes.DOCUMENT;
+  const requestType = purify.RequestTypes.DOCUMENT;
   const tab = { tabId: 1 };
 
-  adguard.requestContextStorage.record(
+  purify.requestContextStorage.record(
     requestId,
     requestUrl,
     referrerUrl,
@@ -93,16 +93,16 @@ QUnit.test("Test Modify headers", function (assert) {
   );
 
   // allow null values
-  adguard.requestContextStorage.update(requestId, { requestHeaders: null });
-  adguard.requestContextStorage.update(requestId, { responseHeaders: null });
+  purify.requestContextStorage.update(requestId, { requestHeaders: null });
+  purify.requestContextStorage.update(requestId, { responseHeaders: null });
 
   const requestHeaders = [{ name: "header-1", value: "value-1" }];
   const responseHeaders = [{ name: "header-2", value: "value-2" }];
 
-  adguard.requestContextStorage.update(requestId, { requestHeaders });
-  adguard.requestContextStorage.update(requestId, { responseHeaders });
+  purify.requestContextStorage.update(requestId, { requestHeaders });
+  purify.requestContextStorage.update(requestId, { responseHeaders });
 
-  const context = adguard.requestContextStorage.get(requestId);
+  const context = purify.requestContextStorage.get(requestId);
   assert.equal(1, context.requestHeaders.length);
   assert.equal(1, context.responseHeaders.length);
 
@@ -117,7 +117,7 @@ QUnit.test("Test Modify headers", function (assert) {
       value: "value-3",
     },
   ];
-  adguard.requestContextStorage.update(requestId, { modifiedRequestHeaders });
+  purify.requestContextStorage.update(requestId, { modifiedRequestHeaders });
 
   assert.equal(1, context.requestHeaders.length);
   assert.equal("header-1", context.requestHeaders[0].name);
@@ -142,7 +142,7 @@ QUnit.test("Test Modify headers", function (assert) {
       value: "value-4",
     },
   ];
-  adguard.requestContextStorage.update(requestId, { modifiedResponseHeaders });
+  purify.requestContextStorage.update(requestId, { modifiedResponseHeaders });
 
   assert.equal(1, context.responseHeaders.length);
   assert.equal("header-2", context.responseHeaders[0].name);
@@ -161,7 +161,7 @@ QUnit.test("Test Update", function (assert) {
   const requestId = "1";
   const requestUrl = "http://example.org/image.png";
   const referrerUrl = "https://example.org";
-  const requestType = adguard.RequestTypes.DOCUMENT;
+  const requestType = purify.RequestTypes.DOCUMENT;
   const tab = { tabId: 1 };
 
   const requestRule = { filterId: 1, ruleText: "text" };
@@ -175,7 +175,7 @@ QUnit.test("Test Update", function (assert) {
   const contentRule2 = { filterId: 1, ruleText: "text" };
   const elementHtml2 = "<script></script>";
 
-  adguard.requestContextStorage.record(
+  purify.requestContextStorage.record(
     requestId,
     requestUrl,
     referrerUrl,
@@ -184,23 +184,23 @@ QUnit.test("Test Update", function (assert) {
     tab
   );
 
-  adguard.requestContextStorage.update(requestId, { requestRule });
-  adguard.requestContextStorage.update(requestId, {
+  purify.requestContextStorage.update(requestId, { requestRule });
+  purify.requestContextStorage.update(requestId, {
     replaceRules: [replaceRule1],
   });
-  adguard.requestContextStorage.update(requestId, { cspRules });
-  adguard.requestContextStorage.bindContentRule(
+  purify.requestContextStorage.update(requestId, { cspRules });
+  purify.requestContextStorage.bindContentRule(
     requestId,
     contentRule1,
     elementHtml1
   );
-  adguard.requestContextStorage.bindContentRule(
+  purify.requestContextStorage.bindContentRule(
     requestId,
     contentRule2,
     elementHtml2
   );
 
-  const context = adguard.requestContextStorage.get(requestId);
+  const context = purify.requestContextStorage.get(requestId);
   assert.ok(context);
   assert.equal(requestRule, context.requestRule);
   assert.equal(replaceRule1, context.replaceRules[0]);

@@ -2224,11 +2224,11 @@ const backgroundPagePromise = new Promise((resolve, reject) => {
   });
 });
 
-const waitStorageInit = (adguard) => {
+const waitStorageInit = (purify) => {
   const timeoutMs = 500;
-  if (!adguard.localStorage.isInitialized()) {
+  if (!purify.localStorage.isInitialized()) {
     setTimeout(() => {
-      waitStorageInit(adguard);
+      waitStorageInit(purify);
     }, timeoutMs);
     return;
   }

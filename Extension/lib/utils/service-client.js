@@ -16,7 +16,7 @@
  */
 
 /* global FilterDownloader */
-adguard.backend = (function (adguard) {
+purify.backend = (function (purify) {
   "use strict";
 
   /**
@@ -40,14 +40,14 @@ adguard.backend = (function (adguard) {
 
     // Url for load filters metadata and rules
     get filtersUrl() {
-      return adguard.lazyGet(this, "filtersUrl", () => {
-        if (adguard.utils.browser.isFirefoxBrowser()) {
+      return purify.lazyGet(this, "filtersUrl", () => {
+        if (purify.utils.browser.isFirefoxBrowser()) {
           return "https://filters.adtidy.org/extension/firefox";
         }
-        if (adguard.utils.browser.isEdgeBrowser()) {
+        if (purify.utils.browser.isEdgeBrowser()) {
           return "https://filters.adtidy.org/extension/edge";
         }
-        if (adguard.utils.browser.isOperaBrowser()) {
+        if (purify.utils.browser.isOperaBrowser()) {
           return "https://filters.adtidy.org/extension/opera";
         }
         return "https://filters.adtidy.org/extension/chromium";
@@ -66,7 +66,7 @@ adguard.backend = (function (adguard) {
 
     // URL for checking filter updates
     get filtersMetadataUrl() {
-      const params = adguard.utils.browser.getExtensionParams();
+      const params = purify.utils.browser.getExtensionParams();
       return `${this.filtersUrl}/filters.js?${params.join("&")}`;
     },
 
@@ -112,11 +112,11 @@ adguard.backend = (function (adguard) {
    */
   const FilterCompilerConditionsConstants = {
     adguard: true,
-    adguard_ext_chromium: adguard.utils.browser.isChromium(),
-    adguard_ext_firefox: adguard.utils.browser.isFirefoxBrowser(),
-    adguard_ext_edge: adguard.utils.browser.isEdgeBrowser(),
+    adguard_ext_chromium: purify.utils.browser.isChromium(),
+    adguard_ext_firefox: purify.utils.browser.isFirefoxBrowser(),
+    adguard_ext_edge: purify.utils.browser.isEdgeBrowser(),
     adguard_ext_safari: false,
-    adguard_ext_opera: adguard.utils.browser.isOperaBrowser(),
+    adguard_ext_opera: purify.utils.browser.isOperaBrowser(),
   };
 
   /**
@@ -176,7 +176,7 @@ adguard.backend = (function (adguard) {
     const url = useOptimizedFilters
       ? settings.optimizedFilterRulesUrl
       : settings.filterRulesUrl;
-    return adguard.utils.strings.replaceAll(url, "{filter_id}", filterId);
+    return purify.utils.strings.replaceAll(url, "{filter_id}", filterId);
   }
 
   /**
@@ -195,7 +195,7 @@ adguard.backend = (function (adguard) {
     try {
       return JSON.parse(text);
     } catch (ex) {
-      adguard.console.error("Error parse json {0}", ex);
+      purify.console.error("Error parse json {0}", ex);
       return null;
     }
   }
@@ -222,14 +222,14 @@ adguard.backend = (function (adguard) {
         }
         const filterMetadataList = [];
         for (let i = 0; i < filterIds.length; i += 1) {
-          const filter = adguard.utils.collections.find(
+          const filter = purify.utils.collections.find(
             metadata.filters,
             "filterId",
             filterIds[i]
           );
           if (filter) {
             filterMetadataList.push(
-              adguard.subscriptions.createSubscriptionFilterFromJSON(filter)
+              purify.subscriptions.createSubscriptionFilterFromJSON(filter)
             );
           }
         }
@@ -261,11 +261,11 @@ adguard.backend = (function (adguard) {
     if (forceRemote || settings.localFilterIds.indexOf(filterId) < 0) {
       url = getUrlForDownloadFilterRules(filterId, useOptimizedFilters);
     } else {
-      url = adguard.getURL(
+      url = purify.getURL(
         `${settings.localFiltersFolder}/filter_${filterId}.txt`
       );
       if (useOptimizedFilters) {
-        url = adguard.getURL(
+        url = purify.getURL(
           `${settings.localFiltersFolder}/filter_mobile_${filterId}.txt`
         );
       }
@@ -328,7 +328,7 @@ adguard.backend = (function (adguard) {
    */
   const loadLocalFiltersMetadata = () =>
     new Promise((resolve, reject) => {
-      const url = adguard.getURL(`${settings.localFiltersFolder}/filters.json`);
+      const url = purify.getURL(`${settings.localFiltersFolder}/filters.json`);
       const success = function (response) {
         if (response && response.responseText) {
           const metadata = parseJson(response.responseText);
@@ -357,7 +357,7 @@ adguard.backend = (function (adguard) {
    */
   const loadLocalFiltersI18Metadata = () =>
     new Promise((resolve, reject) => {
-      const url = adguard.getURL(
+      const url = purify.getURL(
         `${settings.localFiltersFolder}/filters_i18n.json`
       );
       const success = function (response) {
@@ -388,7 +388,7 @@ adguard.backend = (function (adguard) {
    */
   const loadLocalScriptRules = () =>
     new Promise((resolve, reject) => {
-      const url = adguard.getURL(
+      const url = purify.getURL(
         `${settings.localFiltersFolder}/local_script_rules.json`
       );
 
@@ -420,7 +420,7 @@ adguard.backend = (function (adguard) {
    */
   const loadRedirectSources = () =>
     new Promise((resolve, reject) => {
-      const url = `${adguard.getURL(
+      const url = `${purify.getURL(
         settings.redirectSourcesFolder
       )}/redirects.yml`;
 
@@ -495,8 +495,8 @@ adguard.backend = (function (adguard) {
    */
   const sendHitStats = function (stats, enabledFilters) {
     let params = `stats=${encodeURIComponent(stats)}`;
-    params += `&v=${encodeURIComponent(adguard.app.getVersion())}`;
-    params += `&b=${encodeURIComponent(adguard.prefs.browser)}`;
+    params += `&v=${encodeURIComponent(purify.app.getVersion())}`;
+    params += `&b=${encodeURIComponent(purify.prefs.browser)}`;
     if (enabledFilters) {
       for (let i = 0; i < enabledFilters.length; i++) {
         const filter = enabledFilters[i];
@@ -542,7 +542,7 @@ adguard.backend = (function (adguard) {
         callback(headers);
       },
       (request) => {
-        adguard.console.error(
+        purify.console.error(
           "Error retrieved response from {0}, cause: {1}",
           url,
           request.statusText
@@ -627,4 +627,4 @@ adguard.backend = (function (adguard) {
 
     configure,
   };
-})(adguard);
+})(purify);

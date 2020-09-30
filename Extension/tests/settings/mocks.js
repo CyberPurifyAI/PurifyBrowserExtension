@@ -1,5 +1,5 @@
-(function (adguard) {
-  adguard.filters = {
+(function (purify) {
+  purify.filters = {
     getEnabledFilters: () => [
       { filterId: 1 },
       {
@@ -16,11 +16,11 @@
     disableGroup: () => {},
   };
 
-  adguard.app = {
+  purify.app = {
     getLocale: () => "en-GB",
   };
 
-  adguard.subscriptions = {};
+  purify.subscriptions = {};
 
   const groupsMap = {
     1: { groupId: 1, groupName: "Explicit Content", displayNumber: 1 },
@@ -33,10 +33,10 @@
     0: { groupId: 0, groupName: "Custom", displayNumber: 99 },
   };
 
-  adguard.subscriptions.getGroups = () =>
+  purify.subscriptions.getGroups = () =>
     Object.keys(groupsMap).map((key) => groupsMap[key]);
 
-  adguard.subscriptions.getGroup = (groupId) => groupsMap[groupId];
+  purify.subscriptions.getGroup = (groupId) => groupsMap[groupId];
 
   const filtersMap = {
     1: { filterId: 1, groupId: 1 },
@@ -51,20 +51,20 @@
     },
   };
 
-  adguard.subscriptions.getFilter = (filterId) => filtersMap[filterId];
+  purify.subscriptions.getFilter = (filterId) => filtersMap[filterId];
 
-  adguard.subscriptions.getCustomFilters = () =>
+  purify.subscriptions.getCustomFilters = () =>
     Object.values(filtersMap).filter((f) => f.customUrl);
 
-  adguard.whitelist = {
+  purify.whitelist = {
     getWhiteListedDomains: () => {},
     getBlockListedDomains: () => {},
-    isDefaultMode: () => adguard.settings.isDefaultWhiteListMode(),
+    isDefaultMode: () => purify.settings.isDefaultWhiteListMode(),
     configure: () => {},
   };
 
-  adguard.userrules = {
+  purify.userrules = {
     getUserRulesText: (cb) => cb(""),
     updateUserRulesText: () => {},
   };
-})(adguard);
+})(purify);

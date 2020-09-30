@@ -313,4 +313,4 @@
   var RESERVED_DOMAINS = api.publicSuffixes;
 
   api.url = UrlUtils;
-})(adguard.utils, window);
+})(purify.utils, window);

@@ -62,4 +62,4 @@
     setLocalScriptRules,
     isLocal,
   };
-})(adguard.rules);
+})(purify.rules);

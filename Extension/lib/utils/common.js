@@ -18,7 +18,7 @@
 /**
  * Request types enumeration
  */
-adguard.RequestTypes = {
+purify.RequestTypes = {
   /**
    * Document that is loaded for a top-level frame
    */
@@ -47,17 +47,17 @@ adguard.RequestTypes = {
 /**
  * Background tab id in browsers is defined as -1
  */
-adguard.BACKGROUND_TAB_ID = -1;
+purify.BACKGROUND_TAB_ID = -1;
 
 /**
  * Main frame id is equal to 0
  */
-adguard.MAIN_FRAME_ID = 0;
+purify.MAIN_FRAME_ID = 0;
 
 /**
  * Utilities namespace
  */
-adguard.utils = (function () {
+purify.utils = (function () {
   return {
     strings: null, // StringUtils
     dates: null, // DateUtils
@@ -204,7 +204,7 @@ adguard.utils = (function () {
     ) {
       const parts = [];
 
-      if (adguard.utils.strings.isEmpty(str)) {
+      if (purify.utils.strings.isEmpty(str)) {
         return parts;
       }
 
@@ -314,7 +314,7 @@ adguard.utils = (function () {
   };
 
   api.strings = StringUtils;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Util class for dates
@@ -346,7 +346,7 @@ adguard.utils = (function () {
   };
 
   api.dates = DateUtils;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Util class for work with collections
@@ -447,7 +447,7 @@ adguard.utils = (function () {
   };
 
   api.collections = CollectionUtils;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Util class for support timeout, retry operations, debounce
@@ -537,7 +537,7 @@ adguard.utils = (function () {
   };
 
   api.concurrent = ConcurrentUtils;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Util class for detect filter type. Includes various filter identifiers
@@ -579,7 +579,7 @@ adguard.utils = (function () {
   }
 
   api.filters = FilterUtils;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Simple time measurement utils
@@ -605,7 +605,7 @@ adguard.utils = (function () {
   };
 
   api.StopWatch = StopWatch;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Simple publish-subscribe implementation
@@ -703,7 +703,7 @@ adguard.utils = (function () {
   })();
 
   api.channels = EventChannels;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Promises wrapper
@@ -754,7 +754,7 @@ adguard.utils = (function () {
   };
 
   api.Promise = Promise;
-})(adguard.utils, window);
+})(purify.utils, window);
 
 /**
  * We collect here all workarounds and ugly hacks:)
@@ -779,7 +779,7 @@ adguard.utils = (function () {
   };
 
   api.workaround = WorkaroundUtils;
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Simple i18n utils
@@ -830,17 +830,17 @@ adguard.utils = (function () {
       return null;
     },
   };
-})(adguard.utils);
+})(purify.utils);
 
 /**
  * Unload handler. When extension is unload then 'fireUnload' is invoked.
  * You can add own handler with method 'when'
  * @type {{when, fireUnload}}
  */
-adguard.unload = (function (adguard) {
+purify.unload = (function (purify) {
   "use strict";
 
-  const unloadChannel = adguard.utils.channels.newChannel();
+  const unloadChannel = purify.utils.channels.newChannel();
 
   const when = function (callback) {
     if (typeof callback !== "function") {
@@ -865,14 +865,14 @@ adguard.unload = (function (adguard) {
     when,
     fireUnload,
   };
-})(adguard);
+})(purify);
 
 /**
  * Utility class for saving and retrieving some item by key;
  * It's bounded with some capacity.
  * Details are stored in some ring buffer. For each key corresponding item are retrieved in LIFO order.
  */
-adguard.utils.RingBuffer = function (size) {
+purify.utils.RingBuffer = function (size) {
   // jshint ignore:line
   if (typeof Map === "undefined") {
     throw new Error("Unable to create RingBuffer");
