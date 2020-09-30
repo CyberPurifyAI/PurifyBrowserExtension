@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-filter-rule-builder.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 QUnit.test("Build Rules", (assert) => {
   const scriptFilter = new purify.rules.ScriptFilter();
 

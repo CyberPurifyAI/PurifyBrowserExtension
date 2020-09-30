@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension purify-content.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /**
  * Global object for content scripts.

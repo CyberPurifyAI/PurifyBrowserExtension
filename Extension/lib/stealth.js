@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension stealth.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /* global purify */
 
@@ -229,10 +234,7 @@ purify.stealthService = (function (purify) {
     if (blockChromeClientData) {
       purify.console.debug("Remove X-Client-Data header");
       if (
-        purify.utils.browser.removeHeader(
-          requestHeaders,
-          HEADERS.X_CLIENT_DATA
-        )
+        purify.utils.browser.removeHeader(requestHeaders, HEADERS.X_CLIENT_DATA)
       ) {
         stealthActions |= STEALTH_ACTIONS.BLOCK_CHROME_CLIENT_DATA;
       }
@@ -413,9 +415,7 @@ purify.stealthService = (function (purify) {
       }
     };
 
-    const webRTCDisabled = getStealthSettingValue(
-      purify.settings.BLOCK_WEBRTC
-    );
+    const webRTCDisabled = getStealthSettingValue(purify.settings.BLOCK_WEBRTC);
 
     // Deprecated since Chrome 48
     if (

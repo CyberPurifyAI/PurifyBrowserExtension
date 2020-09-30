@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-cookie.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 QUnit.test("Test parse Set-Cookie invalid", function (assert) {
   let cookie = purify.utils.cookie.parseSetCookie(null);
   assert.notOk(cookie);

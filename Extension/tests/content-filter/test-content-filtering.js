@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-content-filtering.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 /* global QUnit */
 
 purify.prefs.features.responseContentFilteringSupported = true;

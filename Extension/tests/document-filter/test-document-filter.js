@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-document-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 /* global QUnit */
 
 const { test } = QUnit;

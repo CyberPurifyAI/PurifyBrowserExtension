@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension background-page.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 const browser = window.browser || chrome;
 
 (function (purify, browser) {

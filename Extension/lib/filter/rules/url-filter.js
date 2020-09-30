@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension url-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 (function (api) {
   "use strict";

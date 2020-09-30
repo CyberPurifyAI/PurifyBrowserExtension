@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension update-service.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /**
  * Service that manages extension version information and handles

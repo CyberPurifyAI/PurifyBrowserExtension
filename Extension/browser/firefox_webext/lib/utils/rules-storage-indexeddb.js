@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension rules-storage-indexeddb.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /* global IDBDatabase, indexedDB */
 
@@ -17,10 +22,7 @@ purify.ulesStorageImpl = (function (purify, initialAPI) {
   var database;
 
   function onError(error) {
-    purify.onsole.error(
-      "Purify rulesStorage error: {0}",
-      error.error || error
-    );
+    purify.onsole.error("Purify rulesStorage error: {0}", error.error || error);
   }
 
   /**

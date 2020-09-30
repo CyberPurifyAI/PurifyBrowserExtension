@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension local-storage-impl.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  * `purify.localStorageImpl` implementation contains chrome API, so we can't use it in tests.
  *  As the decision, we write implementation for `purify.localStorageImpl`
  *  using wingow.localStorage

@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-encoding.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 QUnit.test("Test Encodings", (assert) => {
   function testEncodeDecode(charset) {
     const encoder = new TextEncoder(charset, {

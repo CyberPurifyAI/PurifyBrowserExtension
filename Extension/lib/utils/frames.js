@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension frames.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /**
  * Object that contains info about every browser tab.
@@ -302,8 +307,7 @@ purify.frames = (function (purify) {
   const updateBlockedAdsCount = function (tab, blocked) {
     purify.pageStats.updateTotalBlocked(blocked);
 
-    blocked =
-      (purify.tabs.getTabMetadata(tab.tabId, "blocked") || 0) + blocked;
+    blocked = (purify.tabs.getTabMetadata(tab.tabId, "blocked") || 0) + blocked;
     purify.tabs.updateTabMetadata(tab.tabId, { blocked });
 
     return blocked;

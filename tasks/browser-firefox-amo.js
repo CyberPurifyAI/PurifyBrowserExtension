@@ -28,7 +28,7 @@ import {
 import { version } from "./parse-package";
 import { updateLocalesMSGName, preprocessAll } from "./helpers";
 import copyCommonFiles from "./copy-common";
-import copyExternal from "./copy-external";
+// import copyExternal from "./copy-external";
 
 // set current type of build
 const BRANCH = process.env.NODE_ENV || "";
@@ -133,7 +133,7 @@ const createWebExt = (done) => {
 };
 
 export default gulp.series(
-  copyExternal,
+  // copyExternal,
   copyCommon,
   copyFilters,
   firefoxWebext,

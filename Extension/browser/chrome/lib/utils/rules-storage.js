@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension rules-storage.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  * Filter rules storage implementation
  */
 purify.rulesStorageImpl = (function () {

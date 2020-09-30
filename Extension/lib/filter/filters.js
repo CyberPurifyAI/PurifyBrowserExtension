@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension filters.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 (function (purify) {
   "use strict";
 
@@ -313,8 +320,7 @@
         debug,
         domainName: domain,
         engine: "extension",
-        version:
-          purify.app && purify.app.getVersion && purify.app.getVersion(),
+        version: purify.app && purify.app.getVersion && purify.app.getVersion(),
       };
       return this.scriptFilter.buildScript(domain, config);
     },

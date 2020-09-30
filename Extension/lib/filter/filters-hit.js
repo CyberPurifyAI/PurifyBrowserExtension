@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension filters-hit.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /**
  * This object is used to store and track ad filters usage stats.
@@ -37,10 +42,7 @@ purify.hitStats = (function (purify) {
         stats = JSON.parse(json);
       }
     } catch (ex) {
-      purify.console.error(
-        "Error retrieve hit count statistic, cause {0}",
-        ex
-      );
+      purify.console.error("Error retrieve hit count statistic, cause {0}", ex);
     }
     return stats;
   }

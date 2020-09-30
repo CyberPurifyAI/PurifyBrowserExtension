@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension devtools-rules-constructor.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  * DevTools rules constructor helper
  */
 var DevToolsRulesConstructor = (function () {

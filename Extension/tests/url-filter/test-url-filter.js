@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-url-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 /* global QUnit */
 
 QUnit.test("Punycode rules", (assert) => {
@@ -484,11 +491,7 @@ QUnit.test("Ping specific request is blocked", (assert) => {
     rule.isFiltered("http://example.org/", false, purify.RequestTypes.SCRIPT)
   );
   assert.notOk(
-    rule.isFiltered(
-      "http://example.org/",
-      false,
-      purify.RequestTypes.WEBSOCKET
-    )
+    rule.isFiltered("http://example.org/", false, purify.RequestTypes.WEBSOCKET)
   );
   assert.notOk(
     rule.isFiltered("http://example.org/", false, purify.RequestTypes.OTHER)
@@ -882,9 +885,8 @@ QUnit.test("Regexp rules shortcuts", (assert) => {
     "com/common/flashplayer"
   );
   assert.equal(
-    new purify.rules.UrlFilterRule(
-      "/ulightbox/$domain=hdkinomax.com|tvfru.net"
-    ).shortcut,
+    new purify.rules.UrlFilterRule("/ulightbox/$domain=hdkinomax.com|tvfru.net")
+      .shortcut,
     "ulightbox"
   );
   assert.equal(
@@ -1091,9 +1093,7 @@ QUnit.test("BadFilter option", (assert) => {
   assert.ok(badFilterRule.badFilter);
   assert.equal(badFilterRule.badFilter, "https:*_ad_");
 
-  badFilterRule = new purify.rules.UrlFilterRule(
-    "https:*_ad_$badfilter,image"
-  );
+  badFilterRule = new purify.rules.UrlFilterRule("https:*_ad_$badfilter,image");
 
   assert.ok(badFilterRule);
   assert.ok(badFilterRule.isBadFilter());

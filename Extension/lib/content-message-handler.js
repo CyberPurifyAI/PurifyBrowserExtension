@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension content-message-handler.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  *  Initialize Content => BackgroundPage messaging
  */
 (function (purify) {

@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension app.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 /******/ (function (modules) {
   // webpackBootstrap
   /******/ // The module cache
@@ -1733,7 +1740,8 @@
           advancedButton: "高度な設定",
           moreInfoButton: "詳細",
           pageTitle: "アクセス拒否",
-          safeHeaderTitle: "CyberPurifyはこのページへのアクセスをブロックしました",
+          safeHeaderTitle:
+            "CyberPurifyはこのページへのアクセスをブロックしました",
           safeContentTitle:
             "このページはマルウェアのページとして報告されています。セキュリティの設定に基づいてブロックされました。",
           parentalHeaderTitle: "ペアレンタルコントロール",
@@ -2495,7 +2503,8 @@
           blockedContentTitle:
             "至 {site} 之請求已被過濾器規則封鎖。如果您想要存取該網站，增加它至例外。",
           ruleHeaderTitle: "被 CyberPurify 封鎖",
-          ruleContentTitle: "由於下面的過濾器規則，CyberPurify 已防止該頁面載入",
+          ruleContentTitle:
+            "由於下面的過濾器規則，CyberPurify 已防止該頁面載入",
           btnGoBack: "返回",
           btnFeedback: "傳送回饋意見",
           btnProceed: "無論如何繼續",
@@ -2507,7 +2516,8 @@
           suggestionsHeader: "這是一些建議",
           suggestion1: "稍後嘗試<a href='(var.PageUrl)'>重新載入</a>該網頁。",
           suggestion2: "檢查該網頁網址以確定您已正確地輸入它。",
-          suggestion3: "檢查您的防火牆設定。所有的連線應被允許用於 CyberPurify。",
+          suggestion3:
+            "檢查您的防火牆設定。所有的連線應被允許用於 CyberPurify。",
           suggestion4: "如果您使用代理伺服器，檢查您的代理設定。",
           showDetails: "顯示細節",
           wrongPassword: "錯誤的密碼",

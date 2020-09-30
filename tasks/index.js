@@ -15,8 +15,29 @@ import clean from "./clean-build-dir";
 import updatePublicSuffixList from "./update-public-suffix-list";
 import renewLocales from "./renew-locales";
 import updateBuildInfo from "./update-build-info";
+import appendLisence from "./append-lisence";
+import eventStream from "event-stream";
 
-gulp.task("watch", function () {
+// add Lisence
+export const addLisence = () => {
+  const srcJs = "Extension/**/*.js";
+  const srcCss = "Extension/**/*.css";
+
+  gulp.task("addLisence", () => {
+    return eventStream.merge(
+      gulp
+        .src(srcJs, { base: "./" })
+        .pipe(appendLisence())
+        .pipe(gulp.dest("./")),
+      gulp
+        .src(srcCss, { base: "./" })
+        .pipe(appendLisence())
+        .pipe(gulp.dest("./"))
+    );
+  });
+};
+
+gulp.task("watch", () => {
   gulp.watch("./Extension/browser/**/*.js", buildDev);
   gulp.watch("./Extension/pages/**/*.html", buildDev);
   gulp.watch("./Extension/pages/**/*.css", buildDev);

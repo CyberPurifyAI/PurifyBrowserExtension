@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-css-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 const { CssFilter } = purify.rules;
 
 const genericHide =
@@ -193,9 +200,7 @@ QUnit.test("Css GenericHide Exception Rules", (assert) => {
   const genericTwo = new purify.rules.CssFilterRule(
     "~google.com,~yahoo.com###generic"
   );
-  const nonGeneric = new purify.rules.CssFilterRule(
-    "purify.com##.non-generic"
-  );
+  const nonGeneric = new purify.rules.CssFilterRule("purify.com##.non-generic");
   const injectRule = new purify.rules.CssFilterRule(
     "purify.com#$#body { background-color: #111!important; }"
   );

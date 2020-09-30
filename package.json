@@ -15,7 +15,8 @@
     "resources": "gulp downloadResources --require babel-register --gulpfile tasks",
     "rebuild-locales": "gulp rebuildLocales --require babel-register --gulpfile tasks",
     "increment": "yarn version --patch --no-git-tag-version",
-    "lint": "npx prettier --write Extension/**/*.{js,html,json} tasks/**/*.js"
+    "lint": "npx prettier --write Extension/**/*.{js,html,json} tasks/**/*.js",
+    "lisence": "NODE_NO_WARNINGS=1 gulp addLisence --require babel-register --gulpfile tasks"
   },
   "babel": {
     "presets": [
@@ -44,6 +45,7 @@
     "checksum": "^0.1.1",
     "crx": "^5.0.1",
     "del": "^4.1.0",
+    "event-stream": "^4.0.1",
     "form-data": "^2.5.0",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
@@ -52,6 +54,7 @@
     "gulp-hash-creator": "^0.2.0",
     "gulp-modify-file": "^1.0.1",
     "gulp-rename": "^2.0.0",
+    "gulp-tap": "^2.0.0",
     "gulp-zip": "^4.1.0",
     "lodash": "^4.17.11",
     "node-qunit-puppeteer": "^1.0.6",

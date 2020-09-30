@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension ui-service.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 purify.ui = (function (purify) {
   // jshint ignore:line
   const browserActionTitle = purify.i18n.getMessage("name");
@@ -563,14 +570,12 @@ purify.ui = (function (purify) {
       {
         queryKey: "third_party_cookies",
         settingKey: purify.settings.SELF_DESTRUCT_THIRD_PARTY_COOKIES,
-        settingValueKey:
-          purify.settings.SELF_DESTRUCT_THIRD_PARTY_COOKIES_TIME,
+        settingValueKey: purify.settings.SELF_DESTRUCT_THIRD_PARTY_COOKIES_TIME,
       },
       {
         queryKey: "first_party_cookies",
         settingKey: purify.settings.SELF_DESTRUCT_FIRST_PARTY_COOKIES,
-        settingValueKey:
-          purify.settings.SELF_DESTRUCT_FIRST_PARTY_COOKIES_TIME,
+        settingValueKey: purify.settings.SELF_DESTRUCT_FIRST_PARTY_COOKIES_TIME,
       },
       {
         queryKey: "strip_url",
@@ -829,9 +834,7 @@ purify.ui = (function (purify) {
       }
     }
 
-    url = purify.utils.strings.contains(url, "://")
-      ? url
-      : purify.getURL(url);
+    url = purify.utils.strings.contains(url, "://") ? url : purify.getURL(url);
     purify.tabs.getAll((tabs) => {
       // try to find between opened tabs
       if (activateSameTab) {

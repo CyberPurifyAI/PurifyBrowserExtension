@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-css-hits.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 var CssFilter = purify.rules.CssFilter;
 
 var genericHide =
@@ -165,10 +172,7 @@ QUnit.test("Count css hits", function (assert) {
     assert.equal(result[2].filterId, 1);
     assert.equal(result[3].ruleText, "purify.com##.sponsored");
     assert.equal(result[3].filterId, 1);
-    assert.equal(
-      result[4].ruleText,
-      "purify.com#$#.bgcontent {display: none}"
-    );
+    assert.equal(result[4].ruleText, "purify.com#$#.bgcontent {display: none}");
     assert.equal(result[4].filterId, 1);
     CssHitsCounter.stop();
     done();

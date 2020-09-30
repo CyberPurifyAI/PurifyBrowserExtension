@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension locale-detect.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  * Initialize LocaleDetectService.
  *
  * This service is used to auto-enable language-specific filters.

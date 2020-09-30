@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension expiring-cache.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 (function (purify) {
   /**
@@ -36,10 +41,7 @@
 
     function saveCacheToLocalStorage() {
       try {
-        purify.localStorage.setItem(
-          storagePropertyName,
-          JSON.stringify(cache)
-        );
+        purify.localStorage.setItem(storagePropertyName, JSON.stringify(cache));
       } catch (ex) {
         purify.console.error(
           "Error save to {0} cache, cause: {1}",

@@ -1,3 +1,9 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension csp-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 (function (purify, api) {
   "use strict";

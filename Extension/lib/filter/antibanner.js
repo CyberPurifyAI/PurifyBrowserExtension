@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension antibanner.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  * Creating service that manages our filter rules.
  */
 purify.antiBannerService = (function (purify) {
@@ -1306,11 +1313,9 @@ purify.antiBannerService = (function (purify) {
     if (rule !== null) {
       requestFilter.removeRule(rule);
     }
-    purify.listeners.notifyListeners(
-      purify.listeners.REMOVE_RULE,
-      userFilter,
-      [ruleText]
-    );
+    purify.listeners.notifyListeners(purify.listeners.REMOVE_RULE, userFilter, [
+      ruleText,
+    ]);
   };
 
   return {

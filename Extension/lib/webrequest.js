@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension webrequest.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 (function (purify) {
   "use strict";
 
@@ -860,8 +867,7 @@
         }
         const { frameId } = details;
         const url = details.requestUrl;
-        const cssFilterOption =
-          purify.rules.CssFilter.RETRIEVE_TRADITIONAL_CSS;
+        const cssFilterOption = purify.rules.CssFilter.RETRIEVE_TRADITIONAL_CSS;
         const retrieveScripts = true;
         const result = purify.webRequestService.processGetSelectorsAndScripts(
           { tabId },
@@ -898,11 +904,7 @@
         }
         const injection = injections.get(tabId, frameId);
         if (injection && injection.jsScriptText) {
-          purify.tabs.executeScriptCode(
-            tabId,
-            frameId,
-            injection.jsScriptText
-          );
+          purify.tabs.executeScriptCode(tabId, frameId, injection.jsScriptText);
         }
       }
 
@@ -979,11 +981,7 @@
         }
 
         if (injection.jsScriptText) {
-          purify.tabs.executeScriptCode(
-            tabId,
-            frameId,
-            injection.jsScriptText
-          );
+          purify.tabs.executeScriptCode(tabId, frameId, injection.jsScriptText);
         }
         if (injection.cssText) {
           purify.tabs.insertCssCode(tabId, frameId, injection.cssText);

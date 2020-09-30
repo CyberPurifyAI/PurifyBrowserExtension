@@ -1,3 +1,9 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension filter-download.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /* global Nanobar, contentPage */
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-sb-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 QUnit.test("Calculate hash", (assert) => {
   const host = purify.utils.url.getHost("http://test.yandex.ru/someurl.html");
   const hosts = purify.safebrowsing.extractHosts(host);

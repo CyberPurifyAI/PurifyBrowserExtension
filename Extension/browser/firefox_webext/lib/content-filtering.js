@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension content-filtering.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 /* global TextDecoder, TextEncoder, DOMParser */
 
 purify.contentFiltering = (function (purify) {
@@ -599,9 +606,7 @@ purify.contentFiltering = (function (purify) {
             content
           );
         } finally {
-          purify.requestContextStorage.onContentModificationFinished(
-            requestId
-          );
+          purify.requestContextStorage.onContentModificationFinished(requestId);
         }
       }
     );

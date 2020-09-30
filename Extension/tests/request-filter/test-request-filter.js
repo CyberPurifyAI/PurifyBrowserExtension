@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-request-filter.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 /* eslint-disable max-len */
 /* global QUnit, purify */
 
@@ -31,9 +38,7 @@ QUnit.test("Whitelist rules selecting", (assert) => {
 
   const rule = new purify.rules.UrlFilterRule("||test.com^");
   const whitelist = new purify.rules.UrlFilterRule("@@||test.com^");
-  const documentRule = new purify.rules.UrlFilterRule(
-    "@@||test.com^$document"
-  );
+  const documentRule = new purify.rules.UrlFilterRule("@@||test.com^$document");
   const genericHideRule = new purify.rules.UrlFilterRule(
     "@@||test.com^$generichide"
   );
@@ -539,9 +544,7 @@ QUnit.test("BadFilter option", (assert) => {
   const rule = new purify.rules.UrlFilterRule("https:*_ad_");
   const ruleTwo = new purify.rules.UrlFilterRule("https:*_da_");
   const ruleThree = new purify.rules.UrlFilterRule("https:*_ad_$match-case");
-  const badFilterRule = new purify.rules.UrlFilterRule(
-    "https:*_ad_$badfilter"
-  );
+  const badFilterRule = new purify.rules.UrlFilterRule("https:*_ad_$badfilter");
 
   const requestFilter = new purify.RequestFilter();
 
@@ -1412,9 +1415,7 @@ QUnit.test(
   'Request filter finds rules for domains with "." in the end',
   (assert) => {
     const selector = "body";
-    const cssRule = new purify.rules.CssFilterRule(
-      `benchmark.pl##${selector}`
-    );
+    const cssRule = new purify.rules.CssFilterRule(`benchmark.pl##${selector}`);
 
     const requestFilter = new purify.RequestFilter();
     requestFilter.addRules([cssRule]);

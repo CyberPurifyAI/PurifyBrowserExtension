@@ -1,4 +1,9 @@
-
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension page-stats.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 /**
  * Global stats
@@ -187,10 +192,7 @@ purify.pageStats = (function (purify) {
         result.hours[result.hours.length - 1]
       );
     } else {
-      let diffHours = purify.utils.dates.getDifferenceInHours(
-        now,
-        currentDate
-      );
+      let diffHours = purify.utils.dates.getDifferenceInHours(now, currentDate);
 
       while (diffHours >= 2) {
         result.hours.push(createStatsDataItem(null, 0));

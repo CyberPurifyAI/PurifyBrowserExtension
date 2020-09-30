@@ -1,3 +1,10 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension test-rule-constructor.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
 QUnit.test("Rules Constructor for Assistant", function (assert) {
   var element = document.getElementById("test-div");
   var elementHref = document.getElementsByClassName("a-test-class")[0];

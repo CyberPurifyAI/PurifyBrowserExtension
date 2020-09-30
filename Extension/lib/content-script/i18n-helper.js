@@ -1,3 +1,9 @@
+/**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension i18n-helper.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
 
 const I18nHelper = {
   // eslint-disable-line

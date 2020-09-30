@@ -1,4 +1,11 @@
 /**
+ * ----------------------------------------------------------------------------------
+ * PurifyBrowserExtension cookie.js
+ * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * ----------------------------------------------------------------------------------
+ */
+
+/**
  * Helper methods for parsing and extracting browser cookies from headers (both Set-Cookie and Cookie).
  *
  * This API is exposed via purify.utils.cookie:
