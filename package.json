@@ -1,0 +1,64 @@
+{
+  "name": "sfk-browser-extension",
+  "version": "0.1.1",
+  "description": "SFK Browser Extension",
+  "scripts": {
+    "watch": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildWatch --require babel-register --gulpfile tasks",
+    "dev": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildDev --require babel-register --gulpfile tasks",
+    "beta": "NODE_ENV=beta gulp buildBeta --require babel-register --gulpfile tasks",
+    "release": "NODE_ENV=release gulp buildRelease --require babel-register --gulpfile tasks",
+    "sample-api": "NODE_ENV=dev gulp buildSampleApi --require babel-register --gulpfile tasks",
+    "test": "gulp runTests --require babel-register --gulpfile tasks",
+    "locales-download": "gulp updateLocalesStream --require babel-register --gulpfile tasks",
+    "locales-upload": "gulp uploadLocalesStream --require babel-register --gulpfile tasks",
+    "build-update": "gulp buildUpdatesFilesStream --require babel-register --gulpfile tasks",
+    "resources": "gulp downloadResources --require babel-register --gulpfile tasks",
+    "rebuild-locales": "gulp rebuildLocales --require babel-register --gulpfile tasks",
+    "increment": "yarn version --patch --no-git-tag-version",
+    "lint": "npx prettier --write Extension/**/*.{js,html,json} tasks/**/*.js"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "transform-runtime",
+      "transform-object-rest-spread"
+    ],
+    "babelrc": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:cyberapply/SFKBrowserExtension.git"
+  },
+  "author": "cyberapply@cyberapply.com",
+  "license": "MIT",
+  "devDependencies": {
+    "axios": "^0.19.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-runtime": "^6.26.0",
+    "checksum": "^0.1.1",
+    "crx": "^5.0.1",
+    "del": "^4.1.0",
+    "form-data": "^2.5.0",
+    "gulp": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-download2": "^1.0.2",
+    "gulp-file": "^0.4.0",
+    "gulp-hash-creator": "^0.2.0",
+    "gulp-modify-file": "^1.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-zip": "^4.1.0",
+    "lodash": "^4.17.11",
+    "node-qunit-puppeteer": "^1.0.6",
+    "preprocess": "^3.1.0",
+    "punycode": "^2.1.0",
+    "qunit": "^2.6.0",
+    "scriptlets": "https://github.com/AdguardTeam/Scriptlets.git#v1.3.2",
+    "web-ext": "^2.6.0"
+  }
+}
