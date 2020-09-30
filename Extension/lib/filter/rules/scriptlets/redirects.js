@@ -1,6 +1,5 @@
-
 /**
- * AdGuard Scriptlets
+ * CyberPurify Scriptlets
  * Version 1.3.2
  */
 

@@ -1,6 +1,6 @@
 
 /**
- * AdGuard Scriptlets
+ * CyberPurify Scriptlets
  * Version 1.3.2
  */
 
@@ -453,7 +453,6 @@
 
     /**
      * Checks if the stackTrace contains stackRegexp
-     * // https://github.com/AdguardTeam/Scriptlets/issues/82
      * @param {string} stackRegexp - stack regexp
      * @param {string} stackTrace - script error stack trace
      * @returns {boolean}
@@ -698,7 +697,7 @@
       return state;
     }
     /**
-     * AdGuard scriptlet rule mask
+     * CyberPurify scriptlet rule mask
      */
 
 
@@ -1446,7 +1445,6 @@
         } else if (replacement.indexOf('=') > -1) {
           // We should return noopFunc instead of window.open
           // but with some property if website checks it (examples 5, 6)
-          // https://github.com/AdguardTeam/Scriptlets/issues/71
           var isProp = startsWith(replacement, '{') && endsWith(replacement, '}');
 
           if (isProp) {
@@ -1564,7 +1562,6 @@
         var content = scriptEl.textContent; // We are using Node.prototype.textContent property descriptor
         // to get the real script content
         // even when document.currentScript.textContent is replaced.
-        // https://github.com/AdguardTeam/Scriptlets/issues/57#issuecomment-593638991
 
         try {
           var textContentGetter = Object.getOwnPropertyDescriptor(Node.prototype, 'textContent').get;
@@ -1586,7 +1583,6 @@
         // (for instance, document.body before the HTML body was loaded).
         // In this case we're checking whether the base element exists or not
         // and if not, we simply exit without overriding anything.
-        // e.g. https://github.com/AdguardTeam/Scriptlets/issues/57#issuecomment-575841092
 
         if (base instanceof Object === false && base === null) {
           var props = property.split('.');
@@ -1934,7 +1930,6 @@
       function addEventListenerWrapper(eventName, callback) {
         // The scriptlet might cause a website broke
         // if the website uses test addEventListener with callback = null
-        // https://github.com/AdguardTeam/Scriptlets/issues/76
         var funcToCheck = callback;
 
         if (callback && typeof callback === 'function') {
@@ -2124,7 +2119,6 @@
       function addEventListenerWrapper(eventName, callback) {
         hit(source); // The scriptlet might cause a website broke
         // if the website uses test addEventListener with callback = null
-        // https://github.com/AdguardTeam/Scriptlets/issues/76
 
         var callbackToLog = callback;
 
@@ -2236,7 +2230,7 @@
 
     function noeval(source) {
       window.eval = function evalWrapper(s) {
-        hit(source, "AdGuard has prevented eval:\n".concat(s));
+        hit(source, "CyberPurify has prevented eval:\n".concat(s));
       }.bind();
     }
     noeval.names = ['noeval', // aliases are needed for matching the related scriptlet converted into our syntax
@@ -3832,12 +3826,12 @@
     var ABP_SCRIPTLET_MASK = '#$#';
     var ABP_SCRIPTLET_EXCEPTION_MASK = '#@$#';
     /**
-     * AdGuard CSS rule mask
+     * CyberPurify CSS rule mask
      */
 
     var ADG_CSS_MASK_REG = /#@?\$#.+?\s*\{.*\}\s*$/g;
     /**
-     * Checks if the `rule` is AdGuard scriptlet rule
+     * Checks if the `rule` is CyberPurify scriptlet rule
      * @param {string} rule - rule text
      */
 
@@ -3964,7 +3958,7 @@
       return [el.adg, el.ubo];
     }));
     /**
-     * Needed for AdGuard redirect names validation where KEYS = **valid** AdGuard redirect names
+     * Needed for CyberPurify redirect names validation where KEYS = **valid** CyberPurify redirect names
      * 'adgToUboCompatibility' is still needed for ADG -> UBO converting
      */
 
@@ -4014,7 +4008,7 @@
       return substringAfter(redirectNamePart, marker);
     };
     /**
-     * Checks if the `rule` is AdGuard redirect rule.
+     * Checks if the `rule` is CyberPurify redirect rule.
      * Discards comments and JS rules and checks if the `rule` has 'redirect' modifier.
      * @param {string} rule - rule text
      */
@@ -4048,7 +4042,7 @@
       return false;
     };
     /**
-    * Checks if the `rule` is **valid** AdGuard redirect resource rule
+    * Checks if the `rule` is **valid** CyberPurify redirect resource rule
     * @param {string} rule - rule text
     * @returns {boolean}
     */
@@ -4058,8 +4052,8 @@
       return isRedirectRuleByType(rule, 'VALID_ADG');
     };
     /**
-    * Checks if the AdGuard redirect `rule` has Ubo analog. Needed for Adg->Ubo conversion
-    * @param {string} rule - AdGuard rule text
+    * Checks if the CyberPurify redirect `rule` has Ubo analog. Needed for Adg->Ubo conversion
+    * @param {string} rule - CyberPurify rule text
     * @returns {boolean} - true if the rule can be converted to Ubo
     */
 
@@ -4068,9 +4062,9 @@
       return isAdgRedirectRule(rule) && isRedirectRuleByType(rule, 'ADG');
     };
     /**
-    * Checks if the Ubo redirect `rule` has AdGuard analog. Needed for Ubo->Adg conversion
+    * Checks if the Ubo redirect `rule` has CyberPurify analog. Needed for Ubo->Adg conversion
     * @param {string} rule - Ubo rule text
-    * @returns {boolean} - true if the rule can be converted to AdGuard
+    * @returns {boolean} - true if the rule can be converted to CyberPurify
     */
 
 
@@ -4078,9 +4072,9 @@
       return isRedirectRuleByType(rule, 'UBO');
     };
     /**
-    * Checks if the Abp redirect `rule` has AdGuard analog. Needed for Abp->Adg conversion
+    * Checks if the Abp redirect `rule` has CyberPurify analog. Needed for Abp->Adg conversion
     * @param {string} rule - Abp rule text
-    * @returns {boolean} - true if the rule can be converted to AdGuard
+    * @returns {boolean} - true if the rule can be converted to CyberPurify
     */
 
 
@@ -4151,14 +4145,14 @@
     var toArray = _toArray;
 
     /**
-     * AdGuard scriptlet rule
+     * CyberPurify scriptlet rule
      */
 
-    var ADGUARD_SCRIPTLET_MASK_REG = /#@?%#\/\/scriptlet\(.+\)/; // eslint-disable-next-line no-template-curly-in-string
+    var CYBERPURIFY_SCRIPTLET_MASK_REG = /#@?%#\/\/scriptlet\(.+\)/; // eslint-disable-next-line no-template-curly-in-string
 
-    var ADGUARD_SCRIPTLET_TEMPLATE = '${domains}#%#//scriptlet(${args})'; // eslint-disable-next-line no-template-curly-in-string
+    var CYBERPURIFY_SCRIPTLET_TEMPLATE = '${domains}#%#//scriptlet(${args})'; // eslint-disable-next-line no-template-curly-in-string
 
-    var ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE = '${domains}#@%#//scriptlet(${args})';
+    var CYBERPURIFY_SCRIPTLET_EXCEPTION_TEMPLATE = '${domains}#@%#//scriptlet(${args})';
     /**
      * uBlock scriptlet rule mask
      */
@@ -4195,9 +4189,9 @@
       }, str);
     };
     /**
-     * Converts string of UBO scriptlet rule to AdGuard scritlet rule
+     * Converts string of UBO scriptlet rule to CyberPurify scritlet rule
      * @param {string} rule - UBO scriptlet rule
-     * @returns {Array} - array with one AdGuard scriptlet rule
+     * @returns {Array} - array with one CyberPurify scriptlet rule
      */
 
 
@@ -4207,9 +4201,9 @@
       var template;
 
       if (mask.indexOf('@') > -1) {
-        template = ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE;
+        template = CYBERPURIFY_SCRIPTLET_EXCEPTION_TEMPLATE;
       } else {
-        template = ADGUARD_SCRIPTLET_TEMPLATE;
+        template = CYBERPURIFY_SCRIPTLET_TEMPLATE;
       }
 
       var args = getStringInBraces(rule).split(/, /g).map(function (arg, index) {
@@ -4237,16 +4231,16 @@
       return [adgRule];
     };
     /**
-     * Convert string of ABP snippet rule to AdGuard scritlet rule
+     * Convert string of ABP snippet rule to CyberPurify scritlet rule
      * @param {string} rule - ABP snippet rule
-     * @returns {Array} - array of AdGuard scriptlet rules -
+     * @returns {Array} - array of CyberPurify scriptlet rules -
      * one or few items depends on Abp-rule
      */
 
     var convertAbpSnippetToAdg = function convertAbpSnippetToAdg(rule) {
       var SEMICOLON_DIVIDER = /;(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
       var mask = rule.indexOf(validator.ABP_SCRIPTLET_MASK) > -1 ? validator.ABP_SCRIPTLET_MASK : validator.ABP_SCRIPTLET_EXCEPTION_MASK;
-      var template = mask === validator.ABP_SCRIPTLET_MASK ? ADGUARD_SCRIPTLET_TEMPLATE : ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE;
+      var template = mask === validator.ABP_SCRIPTLET_MASK ? CYBERPURIFY_SCRIPTLET_TEMPLATE : CYBERPURIFY_SCRIPTLET_EXCEPTION_TEMPLATE;
       var domains = substringBefore(rule, mask);
       var args = substringAfter(rule, mask);
       return args.split(SEMICOLON_DIVIDER).map(function (args) {
@@ -4265,9 +4259,9 @@
       });
     };
     /**
-     * Converts scriptlet rule to AdGuard one
+     * Converts scriptlet rule to CyberPurify one
      * @param {string} rule
-     * @returns {Array} - array of AdGuard scriptlet rules -
+     * @returns {Array} - array of CyberPurify scriptlet rules -
      * one item for Adg and Ubo or few items for Abp
      */
 
@@ -4285,8 +4279,8 @@
       return result;
     };
     /**
-     * Converts UBO scriptlet rule to AdGuard one
-     * @param {string} rule - AdGuard scriptlet rule
+     * Converts UBO scriptlet rule to CyberPurify one
+     * @param {string} rule - CyberPurify scriptlet rule
      * @returns {string} - UBO scriptlet rule
      */
 
@@ -4322,7 +4316,7 @@
           });
 
           if (uboAlias) {
-            var mask = rule.match(ADGUARD_SCRIPTLET_MASK_REG)[0];
+            var mask = rule.match(CYBERPURIFY_SCRIPTLET_MASK_REG)[0];
             var template;
 
             if (mask.indexOf('@') > -1) {
@@ -4331,7 +4325,7 @@
               template = UBO_SCRIPTLET_TEMPLATE;
             }
 
-            var domains = getBeforeRegExp(rule, ADGUARD_SCRIPTLET_MASK_REG);
+            var domains = getBeforeRegExp(rule, CYBERPURIFY_SCRIPTLET_MASK_REG);
             var uboName = uboAlias.replace(UBO_ALIAS_NAME_MARKER, '') // '.js' in the Ubo scriptlet name can be omitted
             // https://github.com/gorhill/uBlock/wiki/Resources-Library#general-purpose-scriptlets
             .replace('.js', '');
@@ -4349,7 +4343,7 @@
     };
     /**
      * Validates any scriptlet rule
-     * @param {string} input - can be Adguard or Ubo or Abp scriptlet rule
+     * @param {string} input - can be CyberPurify or Ubo or Abp scriptlet rule
      */
 
     var isValidScriptletRule = function isValidScriptletRule(input) {
@@ -4412,7 +4406,7 @@
       return "".concat(firstPartOfRule, "$").concat(adgModifiers);
     };
     /**
-     * Converts redirect rule to AdGuard one
+     * Converts redirect rule to CyberPurify one
      * @param {string} rule
      * @returns {string}
      */
@@ -4735,7 +4729,6 @@
             setTimeout(data.eventCallback, 1);
           }
         };
-      } // https://github.com/AdguardTeam/Scriptlets/issues/81
 
 
       if (google_optimize instanceof Object && typeof google_optimize.get === 'function') {

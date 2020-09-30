@@ -1,5 +1,5 @@
 #
-#    AdGuard Scriptlets (Redirects Source)
+#    CyberPurify Scriptlets (Redirects Source)
 #    Version 1.3.2
 #
 - title: 1x1-transparent.gif
@@ -778,7 +778,7 @@
               setTimeout(data.eventCallback, 1);
             }
           };
-        } // https://github.com/AdguardTeam/Scriptlets/issues/81
+        } // https://github.com/CyberPurify/Scriptlets/issues/81
 
 
         if (google_optimize instanceof Object && typeof google_optimize.get === 'function') {
@@ -1404,7 +1404,7 @@
     (function(source, args){
     function noeval(source) {
         window.eval = function evalWrapper(s) {
-          hit(source, "AdGuard has prevented eval:\n".concat(s));
+          hit(source, "CyberPurify has prevented eval:\n".concat(s));
         }.bind();
       }
     function hit(source, message) {
