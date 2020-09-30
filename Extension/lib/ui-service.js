@@ -609,7 +609,7 @@ purify.ui = (function (purify) {
 
   /**
    * Opens site complaint report tab
-   * https://github.com/PurifyTeam/ReportsWebApp#pre-filling-the-app-with-query-parameters
+   * https://github.com/CyberPurify/ReportsWebApp#pre-filling-the-app-with-query-parameters
    * @param url
    */
   const openAbuseTab = function (url) {

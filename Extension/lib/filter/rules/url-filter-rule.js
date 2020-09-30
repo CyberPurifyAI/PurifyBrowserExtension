@@ -1,19 +1,4 @@
-/**
- * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
- *
- * Purify Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Purify Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 
 (function (purify, api) {
   "use strict";
@@ -160,7 +145,7 @@
 
     if (reText.indexOf("?") !== -1) {
       // Do not mess with complex expressions which use lookahead
-      // And with those using ? special character: https://github.com/PurifyTeam/PurifyBrowserExtension/issues/978
+      // And with those using ? special character: https://github.com/CyberPurify/PurifyBrowserExtension/issues/978
       return null;
     }
 
@@ -215,7 +200,7 @@
 
     let parseOptions = true;
     /**
-     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/517
+     * https://github.com/CyberPurify/PurifyBrowserExtension/issues/517
      * regexp rule may contain dollar sign which also is options delimiter
      */
     // Added check for replacement rule, because maybe problem with rules for example /.*/$replace=/hello/bug/
@@ -285,7 +270,7 @@
    */
   function validateCspRule(rule) {
     /**
-     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/685
+     * https://github.com/CyberPurify/PurifyBrowserExtension/issues/685
      * CSP directive may be empty in case of whitelist rule, it means to disable all $csp rules matching the whitelist rule
      */
     if (!rule.whiteListRule && !rule.cspDirective) {
@@ -294,7 +279,7 @@
 
     if (rule.cspDirective) {
       /**
-       * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/685#issue-228287090
+       * https://github.com/CyberPurify/PurifyBrowserExtension/issues/685#issue-228287090
        * Forbids report-to and report-uri directives
        */
       const cspDirective = rule.cspDirective.toLowerCase();
@@ -308,7 +293,7 @@
    * Represents a $replace modifier value.
    * <p/>
    * Learn more about this modifier syntax here:
-   * https://github.com/PurifyTeam/PurifyForWindows/issues/591
+   * https://github.com/CyberPurify/PurifyForWindows/issues/591
    */
   function ReplaceOption(option) {
     if (!option) {
@@ -363,7 +348,7 @@
    * Represents a $cookie modifier option value.
    *
    * Learn more about it here:
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/961
    *
    * @param {string} option Option string value
    * @see {@link CookieOption}
@@ -551,7 +536,7 @@
   /**
    * $replace modifier.
    * Learn more about this modifier syntax here:
-   * https://github.com/PurifyTeam/PurifyForWindows/issues/591
+   * https://github.com/CyberPurify/PurifyForWindows/issues/591
    *
    * @return Parsed $replace modifier
    */
@@ -562,7 +547,7 @@
   /**
    * $redirect modifier
    * Learn more about this modifier syntax here:
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1367
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/1367
    *
    * @returns parsed $redirect modifier
    */
@@ -1270,7 +1255,7 @@
    * $cookie options that can be used in the cookie rule.
    *
    * See here for the details:
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/961
    */
   UrlFilterRule.cookieOptions = {
     MAX_AGE: "maxAge",

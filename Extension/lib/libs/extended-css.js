@@ -1,5 +1,5 @@
 /*! extended-css - v1.2.12 - Tue Aug 04 2020
- * https://github.com/PurifyTeam/ExtendedCss
+ * https://github.com/CyberPurify/ExtendedCss
  * Copyright (c) 2020 CyberPurify ; Licensed LGPL-3.0
  */
 var ExtendedCss = (function () {
@@ -281,7 +281,7 @@ var ExtendedCss = (function () {
   /**
    * Creates an object implementing Location interface from a url.
    * An alternative to URL.
-   * https://github.com/PurifyTeam/FingerprintingBlocker/blob/master/src/shared/url.ts#L64
+   * https://github.com/CyberPurify/FingerprintingBlocker/blob/master/src/shared/url.ts#L64
    */
 
   utils.createLocation = function (href) {
@@ -799,7 +799,7 @@ var ExtendedCss = (function () {
 
   /**
    * Version of Sizzle patched by CyberPurify in order to be used in the ExtendedCss module.
-   * https://github.com/PurifyTeam/sizzle-extcss
+   * https://github.com/CyberPurify/sizzle-extcss
    *
    * Look for [CyberPurify Patch] and PURIFY_EXTCSS markers to find out what exactly was changed by us.
    *
@@ -2400,7 +2400,7 @@ var ExtendedCss = (function () {
         /**
          * [CyberPurify Patch]:
          * Sorts the tokens in order to mitigate the performance issues caused by matching slow pseudos first:
-         * https://github.com/PurifyTeam/ExtendedCss/issues/55#issuecomment-364058745
+         * https://github.com/CyberPurify/ExtendedCss/issues/55#issuecomment-364058745
          */
 
         var sortTokenGroups = (function () {
@@ -3584,7 +3584,7 @@ var ExtendedCss = (function () {
    * Extended selector factory module, for creating extended selector classes.
    *
    * Extended selection capabilities description:
-   * https://github.com/PurifyTeam/ExtendedCss/blob/master/README.md
+   * https://github.com/CyberPurify/ExtendedCss/blob/master/README.md
    */
 
   var ExtendedSelectorFactory = (function () {
@@ -3803,7 +3803,7 @@ var ExtendedCss = (function () {
 
       if (typeof tokens === "undefined") {
         this.selectorText = cssUtils.normalize(selectorText); // Passing `returnUnsorted` in order to receive tokens in the order that's valid for the browser
-        // In Sizzle internally, the tokens are re-sorted: https://github.com/PurifyTeam/ExtendedCss/issues/55
+        // In Sizzle internally, the tokens are re-sorted: https://github.com/CyberPurify/ExtendedCss/issues/55
 
         this.tokens = Sizzle.tokenize(this.selectorText, false, {
           returnUnsorted: true,
@@ -5078,7 +5078,7 @@ var ExtendedCss = (function () {
     function applyRules() {
       var elementsIndex = []; // some rules could make call - selector.querySelectorAll() temporarily to change node id attribute
       // this caused MutationObserver to call recursively
-      // https://github.com/PurifyTeam/ExtendedCss/issues/81
+      // https://github.com/CyberPurify/ExtendedCss/issues/81
 
       stopObserve();
       rules.forEach(function (rule) {

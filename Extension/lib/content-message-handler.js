@@ -239,7 +239,7 @@
         break;
       case "getSelectorsAndScripts": {
         let urlForSelectors;
-        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1498
+        // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1498
         // when document url for iframe is about:blank then we use tab url
         if (
           !purify.utils.url.isHttpOrWsRequest(message.documentUrl) &&

@@ -1,19 +1,5 @@
-/**
- * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
- *
- * Purify Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Purify Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
+
+
 /* global contentPage, ExtendedCss, HTMLDocument, XMLDocument, ElementCollapser, CssHitsCounter, purifyContent */
 (function () {
   var requestTypeMap = {
@@ -37,8 +23,8 @@
    * in this case we redefine it.
    *
    * More details:
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/924
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/880
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/924
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/880
    */
   var getContentPage = function () {
     if (typeof contentPage === "undefined") {
@@ -97,7 +83,7 @@
   var isHtml = function () {
     return (
       document instanceof HTMLDocument ||
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/233
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/233
       (document instanceof XMLDocument &&
         document.createElement("div") instanceof HTMLDivElement)
     );
@@ -148,7 +134,7 @@
 
   /**
    * Overrides window.RTCPeerConnection running the function from wrappers.js
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/588
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/588
    */
   /* global injectPageScriptAPI, initPageMessageListener */
   const initRequestWrappers = function () {
@@ -275,7 +261,7 @@
       return;
     }
 
-    // https://github.com/PurifyTeam/ExtendedCss
+    // https://github.com/CyberPurify/ExtendedCss
     window.extcss = new ExtendedCss({
       styleSheet: extendedCss.join("\n"),
       beforeStyleApplied: CssHitsCounter.countAffectedByExtendedCss,
@@ -405,7 +391,7 @@
     }
 
     // truncate too long urls
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1493
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1493
     const MAX_URL_LENGTH = 16 * 1024;
     if (elementUrl.length > MAX_URL_LENGTH) {
       elementUrl = elementUrl.slice(0, MAX_URL_LENGTH);
@@ -564,7 +550,7 @@
 
   /**
    * Called when document become visible.
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/159
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/159
    */
   var onVisibilityChange = function () {
     if (document.hidden === false) {

@@ -76,7 +76,7 @@ QUnit.test("Test converter css purify rule", (assert) => {
     "the issue of this test that adg css rule and abp snippet rule has the same mask, but different content"
   );
 
-  // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1412
+  // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1412
   const whitelistCssRule = "example.com#@$#h1 { display: none!important; }";
   const expected = "example.com#@$#h1 { display: none!important; }";
   const actual = purify.rules.ruleConverter.convertRule(whitelistCssRule);

@@ -146,7 +146,7 @@
     }
 
     // tabs.detectLanguage doesn't work in Opera
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/997
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/997
     if (!purify.utils.browser.isOperaBrowser()) {
       /* global browser */
       if (
@@ -168,7 +168,7 @@
 
     // Detecting language by top-level domain if extension API language detection is unavailable
     // Ignore hostnames which length is less or equal to 8
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1354
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1354
     const host = purify.utils.url.getHost(url);
     if (host && host.length > 8) {
       const parts = host ? host.split(".") : [];

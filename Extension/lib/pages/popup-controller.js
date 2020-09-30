@@ -673,7 +673,7 @@ PopupController.prototype = {
     if (popupFooter && footerDefaultTitle) {
       if (options.isEdgeBrowser) {
         popupFooter.innerHTML = `<div class="popup-footer--edge">© 2009-${new Date().getFullYear()} CyberPurify Software Ltd</div>`;
-        // hide mobile app icons - https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1543
+        // hide mobile app icons - https://github.com/CyberPurify/PurifyBrowserExtension/issues/1543
         const platforms = footerDefault.querySelector(".platforms");
         if (platforms) {
           platforms.style.display = "none";
@@ -941,7 +941,7 @@ PopupController.prototype = {
 (function () {
   /**
    * TODO: check the following EDGE issue
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/551
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/551
    * MS Edge unexpectedly crashes on opening the popup.
    * We do not quite understand the reason for this behavior,
    * but we assume it happens due to code flow execution and changing the DOM.
@@ -951,7 +951,7 @@ PopupController.prototype = {
   const controller = new PopupController();
   controller.afterRender = function () {
     // Add some delay for show popup size properly
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/505
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/505
     const timeout = 10;
     setTimeout(() => {
       controller.resizePopupWindow();

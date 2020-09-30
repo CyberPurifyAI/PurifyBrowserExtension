@@ -525,7 +525,7 @@ QUnit.test("Redirect rules", (assert) => {
   assert.equal(result.ruleText, redirectRule.ruleText);
 });
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1453
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1453
 QUnit.test("$object subrequest modifier should be unknown", (assert) => {
   assert.throws(() => {
     // eslint-disable-next-line no-unused-vars
@@ -1186,7 +1186,7 @@ QUnit.test("stealth rules with $badfilter modifier", (assert) => {
   assert.notOk(result);
 });
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1573
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1573
 QUnit.test(
   "$csp rules created with $all modifier should be unblocked with $badfilter modifier",
   (assert) => {
@@ -1218,7 +1218,7 @@ QUnit.test(
   }
 );
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1122
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1122
 QUnit.test(
   "Rule with extension modifier should be omitted in request filter",
   (assert) => {
@@ -1407,7 +1407,7 @@ QUnit.test("CSP rules are found correctly", (assert) => {
   assert.ok(search2.includes(rule3));
 });
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1586
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1586
 QUnit.test(
   'Request filter finds rules for domains with "." in the end',
   (assert) => {
@@ -1438,7 +1438,7 @@ QUnit.test(
   }
 );
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1534
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1534
 QUnit.test(
   'In case request has "DOCUMENT" type - $domain modifier will match as well request URL hostname',
   (assert) => {

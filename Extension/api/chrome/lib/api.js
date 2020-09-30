@@ -1,16 +1,4 @@
 /**
- * This file is part of Cyber Purify Browser Extension (https://cyberpurify.com).
- *
- * Cyber Purify Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Cyber Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
  * Purify simple api
  * @type {{start, stop, configure}}
  */

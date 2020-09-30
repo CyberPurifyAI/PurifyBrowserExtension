@@ -1,20 +1,3 @@
-/**
- * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
- *
- * Purify Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Purify Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 /* global browser */
 
 /**
@@ -95,7 +78,7 @@ purify.localStorageImpl = (function () {
 
   /**
    * Migrates key-value pair from local storage to storage.local
-   * Part of task https://github.com/PurifyTeam/PurifyBrowserExtension/issues/681
+   * Part of task https://github.com/CyberPurify/PurifyBrowserExtension/issues/681
    * @param key Key to migrate
    */
   function migrateKeyValue(key) {
@@ -152,7 +135,7 @@ purify.localStorageImpl = (function () {
 
   /**
    * We can't use localStorage object anymore and we've decided to store all data into storage.local
-   * localStorage is affected by cleaning tools: https://github.com/PurifyTeam/PurifyBrowserExtension/issues/681
+   * localStorage is affected by cleaning tools: https://github.com/CyberPurify/PurifyBrowserExtension/issues/681
    * storage.local has async nature and we have to preload all key-values pairs into memory on extension startup
    *
    * @param callback

@@ -604,7 +604,7 @@ purify.antiBannerService = (function (purify) {
       }
 
       if (newRequestFilter.rulesCount === 0 && !reloadedRules) {
-        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/205
+        // https://github.com/CyberPurify/PurifyBrowserExtension/issues/205
         purify.console.info(
           "No rules have been found - checking filter updates"
         );
@@ -699,7 +699,7 @@ purify.antiBannerService = (function (purify) {
       }
 
       // User filter should be the last
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/117
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/117
       const userFilterId = purify.utils.filters.USER_FILTER_ID;
       const userRules = rulesFilterMap[userFilterId];
       const startIndex = 0;
@@ -734,7 +734,7 @@ purify.antiBannerService = (function (purify) {
       }
 
       // User filter should be the last
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/117
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/117
       const userRules = rulesFilterMap[purify.utils.filters.USER_FILTER_ID];
       addRules(
         purify.utils.filters.USER_FILTER_ID,

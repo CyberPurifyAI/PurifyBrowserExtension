@@ -363,7 +363,7 @@ const CssHitsCounter = (function () {
         }
         /**
          * don't remove child elements of probe elements
-         * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1096
+         * https://github.com/CyberPurify/PurifyBrowserExtension/issues/1096
          */
         removeElements(probeElements);
         startObserver(observer);

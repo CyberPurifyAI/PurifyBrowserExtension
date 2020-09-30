@@ -85,7 +85,7 @@ QUnit.test("Extended Css Build CssHits", function (assert) {
   );
 });
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1079
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1079
 QUnit.test("Parsing of Extended Css rule with parenthesis", function (assert) {
   var elementWithParenthesisHtml =
     '<div class="withParenthesis" style="background: rgb(0, 0, 0)">element with parenthesis</div>';

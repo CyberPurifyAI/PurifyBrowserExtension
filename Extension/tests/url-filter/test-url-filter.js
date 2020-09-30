@@ -1039,7 +1039,7 @@ QUnit.test("testReplaceModifierVast", (assert) => {
 QUnit.test("testReplaceRegexpRule", (assert) => {
   purify.prefs.features.responseContentFilteringSupported = true;
 
-  // https://github.com/PurifyTeam/PurifyForAndroid/issues/1027
+  // https://github.com/CyberPurify/PurifyForAndroid/issues/1027
   const input = "http://test.ru/hello/bug/test";
   const expected = "http://test.ru/bug/bug/test";
   const ruleText = "/.*/$replace=/hello/bug/,domain=example.org";

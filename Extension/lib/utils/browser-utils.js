@@ -278,8 +278,8 @@
 
     /**
          * Affected issues:
-         * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/602
-         * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/566
+         * https://github.com/CyberPurify/PurifyBrowserExtension/issues/602
+         * https://github.com/CyberPurify/PurifyBrowserExtension/issues/566
          * 'Popup' window
 
          * Creators update is not yet released, so we use Insider build 15063 instead.

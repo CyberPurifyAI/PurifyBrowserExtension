@@ -1009,7 +1009,7 @@ QUnit.test("Test inject rules containing url in the css content", (assert) => {
   }, `Css injection rule with 'url' was omitted: ${ruleText}`);
 });
 
-// https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1444
+// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1444
 QUnit.test("Inject rules with backslash should be omitted", (assert) => {
   let ruleText =
     "example.com#$#body { background: \\75 rl(http://example.org/empty.gif) }";

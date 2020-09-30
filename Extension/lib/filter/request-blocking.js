@@ -157,7 +157,7 @@ purify.webRequestService = (function (purify) {
         );
       }
     }
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1337
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1337
     result.collectRulesHits = elemHideFlag
       ? false
       : purify.webRequestService.isCollectingCosmeticRulesHits(tab);
@@ -364,7 +364,7 @@ purify.webRequestService = (function (purify) {
     /**
      * Background requests will be whitelisted if their referrer
      * url will match with user whitelist rule
-     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1032
+     * https://github.com/CyberPurify/PurifyBrowserExtension/issues/1032
      */
     if (tab.tabId === purify.BACKGROUND_TAB_ID) {
       whitelistRule = purify.whitelist.findWhiteListRule(referrerUrl);

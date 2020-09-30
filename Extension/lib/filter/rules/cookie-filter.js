@@ -3,7 +3,7 @@
 
   /**
    * Filter for cookie filter rules
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/961
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/961
    */
   api.CookieFilter = function (rules) {
     const cookieWhiteFilter = new api.UrlFilterRuleLookupTable();

@@ -1,19 +1,4 @@
-/**
- * This file is part of Purify Browser Extension (https://github.com/PurifyTeam/PurifyBrowserExtension).
- *
- * Purify Browser Extension is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Purify Browser Extension is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Purify Browser Extension.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 
 purify.whitelist = (function (purify) {
   var WHITE_LIST_DOMAINS_LS_PROP = "white-list-domains";
@@ -428,7 +413,7 @@ purify.whitelist = (function (purify) {
     /**
      * Access to whitelist/blacklist domains before the proper initialization of localStorage leads to wrong caching of its values
      * To prevent it we should clear cached values
-     * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/933
+     * https://github.com/CyberPurify/PurifyBrowserExtension/issues/933
      */
     purify.lazyGetClear(whiteListDomainsHolder, "domains");
     purify.lazyGetClear(blockListDomainsHolder, "domains");

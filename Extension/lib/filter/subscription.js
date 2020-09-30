@@ -33,7 +33,7 @@ purify.subscriptions = (function (purify) {
    * @returns timestamp from date string
    */
   function parseTimeUpdated(timeUpdatedString) {
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1272
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1272
     if (Number.isInteger(timeUpdatedString)) {
       return new Date(timeUpdatedString);
     }
@@ -41,7 +41,7 @@ purify.subscriptions = (function (purify) {
     // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
     let timeUpdated = Date.parse(timeUpdatedString);
     if (Number.isNaN(timeUpdated)) {
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/478
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/478
       timeUpdated = Date.parse(
         timeUpdatedString.replace(/\+(\d{2})(\d{2})$/, "+$1:$2")
       );

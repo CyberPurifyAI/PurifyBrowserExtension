@@ -380,7 +380,7 @@ purify.contentFiltering = (function (purify) {
     }
 
     // Add <!DOCTYPE html ... >
-    // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/959
+    // https://github.com/CyberPurify/PurifyBrowserExtension/issues/959
     // XMLSerializer is used to serialize doctype object
     var doctype = doc.doctype
       ? new XMLSerializer().serializeToString(doc.doctype) + "\r\n"
@@ -399,7 +399,7 @@ purify.contentFiltering = (function (purify) {
     let appliedRules = [];
 
     // Sort replace rules alphabetically as noted here
-    // https://github.com/PurifyTeam/CoreLibs/issues/45
+    // https://github.com/CyberPurify/CoreLibs/issues/45
     const sortedReplaceRules = replaceRules.sort((prev, next) => {
       if (prev.ruleText > next.ruleText) {
         return 1;

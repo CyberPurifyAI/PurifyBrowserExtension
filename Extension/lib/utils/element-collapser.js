@@ -5,7 +5,7 @@
  */
 var ElementCollapser = (function () {
   /**
-   * https://github.com/PurifyTeam/PurifyBrowserExtension/issues/1436
+   * https://github.com/CyberPurify/PurifyBrowserExtension/issues/1436
    * Because Edge doesn't support CSS.escape use next function
    */
   var cssEscape =
@@ -116,10 +116,10 @@ var ElementCollapser = (function () {
   var hideBySelectorAndTagName = function (selectorText, tagName) {
     if (tagName === "frame" || tagName === "iframe") {
       // Use specific style for frames due to these issues:
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/346
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/355
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/347
-      // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/733
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/346
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/355
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/347
+      // https://github.com/CyberPurify/PurifyBrowserExtension/issues/733
       hideBySelector(
         selectorText,
         "visibility: hidden!important; height: 0px!important; min-height: 0px!important;"
@@ -173,13 +173,13 @@ var ElementCollapser = (function () {
       if (element.src === elementUrl) {
         // To not to keep track of changing src for elements, we are going to collapse it with a CSS rule
         // But we take element url, cause current source could be already modified
-        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/408
+        // https://github.com/CyberPurify/PurifyBrowserExtension/issues/408
         var srcAttribute = element.getAttribute("src");
         var srcSelector = createSelectorForSrcAttr(srcAttribute, tagName);
         hideBySelectorAndTagName(srcSelector, tagName);
 
         // Remove important priority from the element style
-        // https://github.com/PurifyTeam/PurifyBrowserExtension/issues/733
+        // https://github.com/CyberPurify/PurifyBrowserExtension/issues/733
         clearElStylesPriority(element, [
           "display",
           "visibility",
