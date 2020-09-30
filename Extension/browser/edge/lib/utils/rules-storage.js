@@ -17,9 +17,9 @@
  * See for details: https://github.com/CyberPurify/PurifyBrowserExtension/issues/566
  */
 
-purify.ulesStorageImpl = (function (purify) {
+purify.rulesStorageImpl = (function (purify) {
   // TODO[Edge]: Remove this 'if' condition, when Insider build 15063 will be applied widely.
-  if (purify.tils.browser.isEdgeBeforeCreatorsUpdate()) {
+  if (purify.utils.browser.isEdgeBeforeCreatorsUpdate()) {
     return (function () {
       var read = function (path, callback) {
         try {

@@ -31,21 +31,21 @@ export const LOCAL_SCRIPT_RULES_COMMENT =
   "3. We allow only custom rules got from the User filter (which user creates manually) or from this DEFAULT_SCRIPT_RULES object";
 
 // Firefox extension IDs
-export const FIREFOX_EXTENSION_ID_DEV = "purifyadblockerdev@purify.com";
-export const FIREFOX_EXTENSION_ID_BETA = "purifyadblockerbeta@purify.com";
-export const FIREFOX_EXTENSION_ID_RELEASE = "purifyadblocker@purify.com";
+export const FIREFOX_EXTENSION_ID_DEV = "cyberpurifydev@cyberpurify.com";
+export const FIREFOX_EXTENSION_ID_BETA = "cyberpurifybeta@cyberpurify.com";
+export const FIREFOX_EXTENSION_ID_RELEASE = "cyberpurify@cyberpurify.com";
 
 // Update urls
 export const CHROME_UPDATE_URL =
-  "https://static.purify.com/extensions/purifyadblocker/beta/update.xml";
+  "https://static.cyberpurify.com/extensions/cyberpurify/beta/update.xml";
 export const FIREFOX_WEBEXT_UPDATE_URL =
-  "https://static.purify.com/extensions/purifyadblocker/beta/update.json";
+  "https://static.cyberpurify.com/extensions/cyberpurify/beta/update.json";
 
 // Codebase urls
 export const CHROME_CODEBASE_URL =
-  "https://static.purify.com/extensions/purifyadblocker/beta/chrome.crx";
+  "https://static.cyberpurify.com/extensions/cyberpurify/beta/chrome.crx";
 export const FIREFOX_CODEBASE_URL =
-  "https://static.purify.com/extensions/purifyadblocker/beta/firefox.xpi";
+  "https://static.cyberpurify.com/extensions/cyberpurify/beta/firefox.xpi";
 
 export const FIREFOX_WEBEXT = "FIREFOX_WEBEXT";
 

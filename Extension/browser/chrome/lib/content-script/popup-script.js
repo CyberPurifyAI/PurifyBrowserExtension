@@ -13,8 +13,8 @@
   window.i18n = purify.i18n;
 
   window.popupPage = {
-    sendMessage: purify.untimeImpl.sendMessage,
-    onMessage: purify.untimeImpl.onMessage,
+    sendMessage: purify.runtimeImpl.sendMessage,
+    onMessage: purify.runtimeImpl.onMessage,
     closePopup() {
       window.close();
     },

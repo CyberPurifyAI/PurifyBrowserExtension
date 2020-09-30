@@ -16,13 +16,13 @@
  * https://bugzilla.mozilla.org/show_bug.cgi?id=1371255
  * https://github.com/CyberPurify/PurifyBrowserExtension/issues/892
  */
-purify.ulesStorageImpl = (function (purify, initialAPI) {
+purify.rulesStorageImpl = (function (purify, initialAPI) {
   var STORAGE_NAME = "PurifyRulesStorage";
 
   var database;
 
   function onError(error) {
-    purify.onsole.error("Purify rulesStorage error: {0}", error.error || error);
+    purify.console.error("Purify rulesStorage error: {0}", error.error || error);
   }
 
   /**
@@ -151,4 +151,4 @@ purify.ulesStorageImpl = (function (purify, initialAPI) {
   };
 
   return api;
-})(purify, purify.ulesStorageImpl || {});
+})(purify, purify.rulesStorageImpl || {});
