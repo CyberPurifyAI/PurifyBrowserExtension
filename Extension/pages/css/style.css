@@ -117,7 +117,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background-color: #66b574;
+  background-color: #78d8ff;
   bottom: -12px;
 }
 .settings-sidebar .logo {
@@ -128,7 +128,7 @@
   width: 740px;
 }
 .settings-content a {
-  color: #66b574;
+  color: #78d8ff;
 }
 .settings-content .manage-account-btn {
   color: #ffffff;
@@ -415,7 +415,7 @@ li.active .block-type__desc-title {
   color: #58a273;
 }
 .opts-list li .opt-state__link {
-  color: #66b574;
+  color: #78d8ff;
 }
 .opt-select {
   font-size: 14px;
@@ -486,7 +486,7 @@ li.active .block-type__desc-title {
 
 .toggler.on,
 li.active .toggler {
-  background-color: #62c162;
+  background-color: #78d8ff;
 }
 .toggler.on:before,
 li.active .toggler:before {
@@ -638,7 +638,7 @@ li.active .toggler:before {
   left: 0;
   right: 0;
   height: 4px;
-  background-color: #66b574;
+  background-color: #78d8ff;
   bottom: -5px;
 }
 .btn-inline-arrow {
@@ -648,7 +648,7 @@ li.active .toggler:before {
   font-family: inherit;
   font-size: inherit;
   background-color: transparent;
-  color: #66b574;
+  color: #78d8ff;
   transition: 0.3s ease color;
   position: relative;
 }
@@ -707,8 +707,8 @@ li.active .toggler:before {
 }
 .button--green-bd {
   padding: 0 40px;
-  color: #66b574;
-  box-shadow: inset 0 0 0 1px #66b574;
+  color: #78d8ff;
+  box-shadow: inset 0 0 0 1px #78d8ff;
   display: inline-block;
   text-decoration: none;
   min-width: 175px;
@@ -722,7 +722,7 @@ li.active .toggler:before {
   background-color: rgba(239, 239, 239, 0.5);
 }
 .settings-actions .button--green-bd {
-  color: #66b574;
+  color: #78d8ff;
 }
 .account {
   display: none;
@@ -848,7 +848,7 @@ li.active .toggler:before {
   display: none;
 }
 .settings-checkboxes__checkbox:checked + .settings-checkboxes__label:before {
-  background-color: #66b574;
+  background-color: #78d8ff;
   background-image: url("../images/checked.svg");
   background-repeat: no-repeat;
   background-position: 50%;
@@ -1131,7 +1131,7 @@ li.active .toggler:before {
   border: 0;
   line-height: 22px;
   font-size: 14px;
-  border-bottom: 2px solid #66b574;
+  border-bottom: 2px solid #78d8ff;
   margin-bottom: 22px;
   padding: 7px 8px;
   outline: none;
@@ -1307,7 +1307,7 @@ li.active .toggler:before {
   cursor: pointer;
   margin-right: 20px;
   margin-top: 10px;
-  color: #66b574;
+  color: #78d8ff;
 }
 
 .opt-name__tag:last-child {

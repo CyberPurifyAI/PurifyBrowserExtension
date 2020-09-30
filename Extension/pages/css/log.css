@@ -11,7 +11,7 @@
 }
 .btn {
   font-weight: 400;
-  background-color: #66b574;
+  background-color: #78d8ff;
   color: #fff;
   border: 0;
   padding: 0.713em 1em;
@@ -24,7 +24,7 @@
   cursor: pointer;
 }
 .text-green {
-  color: #66b574;
+  color: #78d8ff;
 }
 .tab-selector-dropdown {
   height: 30px;
@@ -135,7 +135,7 @@
   right: 0;
   height: 3px;
   bottom: -14px;
-  background-color: #66b574;
+  background-color: #78d8ff;
 }
 
 .checkb-wrap {
@@ -163,7 +163,7 @@
   margin-right: 10px;
 }
 .checkb-wrap .checkbox.active {
-  background-color: #66b574;
+  background-color: #78d8ff;
   background-image: url(../images/checked.svg);
 }
 .checkb-wrap .radio,
@@ -175,7 +175,7 @@
   display: none;
 }
 .checkb-wrap > input:checked + label > .checkbox {
-  background-color: #66b574;
+  background-color: #78d8ff;
   background-image: url(../images/checked.svg);
 }
 .checkb-wrap .radio {
@@ -211,7 +211,7 @@
   left: 3px;
   width: 10px;
   height: 10px;
-  background-color: #66b574;
+  background-color: #78d8ff;
   border-radius: 50%;
   transition: 0.3s ease-in-out transform;
 }
@@ -305,7 +305,7 @@
   margin-bottom: 67px;
 }
 .log-empty a {
-  color: #66b574;
+  color: #78d8ff;
   text-decoration: none;
 }
 .log-empty .desc {

@@ -10,11 +10,11 @@
 }
 
 .adg-progress-bar .bar {
-  background: #66b574;
+  background: #78d8ff;
   background: linear-gradient(
     45deg,
     rgba(99, 125, 120, 1) 0%,
     rgba(88, 177, 101, 1) 100%
   );
-  box-shadow: 0 0 10px #66b574, 0 0 5px #66b574;
+  box-shadow: 0 0 10px #78d8ff, 0 0 5px #78d8ff;
 }
