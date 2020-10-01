@@ -23,10 +23,10 @@ purify.nsfwFiltering = (function (purify) {
     nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
   };
 
-  const loadImage = async function (requestUrl) {
+  const loadImage = function (requestUrl) {
     const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
 
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       image.src = requestUrl;
       image.crossOrigin = "anonymous";
       image.onload = () => {
@@ -38,34 +38,56 @@ purify.nsfwFiltering = (function (purify) {
     });
   };
 
-  const predictImage = async function (requestUrl) {
-    const image = await loadImage(requestUrl);
+  const getNSFWStatus = function (requestUrl) {
+    return loadImage(requestUrl)
+      .then((image) => {
+        if (GIF_REGEX.test(requestUrl)) {
+          return nsfwInstance
+            .classifyGif(image)
+            .then((prediction) => {
+              const { result, className, probability } = handlePredictions([
+                prediction,
+              ]);
 
-    const prediction = await nsfwInstance.classify(image, 1);
-    const { result, className, probability } = handlePredictions([prediction]);
+              // purify.console.info(`${className} - ${probability} - ${result}`);
 
-    if (result) {
-      // purify.console.info(`IMG ${className} - ${probability} - ${requestUrl}`);
-      return result;
-    }
+              if (result) {
+                image.src = "";
+                image = null;
+                return Boolean(result);
+              } else {
+                return false;
+              }
+            })
+            .catch((err) => {
+              return true;
+            });
+        } else {
+          return nsfwInstance
+            .classify(image, 1)
+            .then((prediction) => {
+              const { result, className, probability } = handlePredictions([
+                prediction,
+              ]);
 
-    if (GIF_REGEX.test(requestUrl)) {
-      try {
-        const predictionGIF = await nsfwInstance.classifyGif(image);
+              // purify.console.info(`${className} - ${probability} - ${result}`);
 
-        const { result, className, probability } = handlePredictions(
-          predictionGIF
-        );
-        // purify.console.info(
-        //   `GIF ${className} - ${probability} - ${requestUrl}`
-        // );
-        return result;
-      } catch (e) {
-        return false;
-      }
-    }
-
-    return Boolean(result);
+              if (result) {
+                image.src = "";
+                image = null;
+                return Boolean(result);
+              } else {
+                return false;
+              }
+            })
+            .catch((err) => {
+              return true;
+            });
+        }
+      })
+      .catch((err) => {
+        return true;
+      });
   };
 
   const handlePredictions = function (predictions) {
@@ -86,35 +108,9 @@ purify.nsfwFiltering = (function (purify) {
     };
   };
 
-  async function getNSFWStatus(
-    tabId,
-    requestFrameId,
-    requestUrl,
-    referrerUrl,
-    requestType,
-    collapseElement
-  ) {
-    try {
-      const nsfwStatus = await predictImage(requestUrl);
-
-      if (nsfwStatus) {
-        collapseElement(
-          tabId,
-          requestFrameId,
-          requestUrl,
-          referrerUrl,
-          requestType
-        );
-      }
-    } catch (e) {
-      // console.log(e);
-    }
-  }
-
   return {
     initialize,
     loadImage,
-    predictImage,
     handlePredictions,
     getNSFWStatus,
   };

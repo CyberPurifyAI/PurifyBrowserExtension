@@ -34,17 +34,7 @@ export const addLisence = () => {
 };
 
 gulp.task("watch", () => {
-  gulp.watch("./Extension/browser/**/*.js", buildDev);
-  gulp.watch("./Extension/pages/**/*.html", buildDev);
-  gulp.watch("./Extension/pages/**/*.css", buildDev);
-  gulp.watch("./Extension/lib/*.js", buildDev);
-  gulp.watch("./Extension/lib/content-script/*.js", buildDev);
-  gulp.watch("./Extension/lib/filter/*.js", buildDev);
-  gulp.watch("./Extension/lib/libs/*.js", buildDev);
-  gulp.watch("./Extension/lib/pages/*.js", buildDev);
-  gulp.watch("./Extension/lib/settings/*.js", buildDev);
-  gulp.watch("./Extension/lib/tabs/*.js", buildDev);
-  gulp.watch("./Extension/lib/utils/*.js", buildDev);
+  gulp.watch("./Extension/**/*.{js,html,css}", buildDev);
 });
 
 // download filters to repository

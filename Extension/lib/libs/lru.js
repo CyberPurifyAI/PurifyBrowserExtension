@@ -3,9 +3,6 @@
  * recently used items while discarding least recently used items when its limit
  * is reached.
  *
- * Licensed under MIT. Copyright (c) 2010 Rasmus Andersson <http://hunch.se/>
- * See README.md for details.
- *
  * Illustration of the design:
  *
  *       entry             entry             entry             entry

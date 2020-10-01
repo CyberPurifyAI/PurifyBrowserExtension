@@ -1,6 +1,4 @@
 /*! extended-css - v1.2.12 - Tue Aug 04 2020
- * https://github.com/CyberPurify/ExtendedCss
- * Copyright (c) 2020 CyberPurify ; Licensed LGPL-3.0
  */
 var ExtendedCss = (function () {
   "use strict";
@@ -107,22 +105,6 @@ var ExtendedCss = (function () {
       },
     };
   }
-
-  /**
-   * Copyright 2016 Purify Software Ltd
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   */
 
   /* eslint-disable no-console */
   var utils = {};
@@ -707,22 +689,6 @@ var ExtendedCss = (function () {
   };
 
   /**
-   * Copyright 2016 Purify Software Ltd
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   */
-
-  /**
    * Helper class css utils
    *
    * @type {{normalize}}
@@ -785,17 +751,6 @@ var ExtendedCss = (function () {
       normalize: normalize,
     };
   })();
-
-  /*!
-   * Sizzle CSS Selector Engine v2.3.4-pre-purify
-   * https://sizzlejs.com/
-   *
-   * Copyright JS Foundation and other contributors
-   * Released under the MIT license
-   * https://js.foundation/
-   *
-   * Date: 2018-03-20
-   */
 
   /**
    * Version of Sizzle patched by CyberPurify in order to be used in the ExtendedCss module.
@@ -3375,21 +3330,6 @@ var ExtendedCss = (function () {
   }
 
   /**
-   * Copyright 2016 Purify Software Ltd
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   */
-  /**
    * Class that extends Sizzle and adds support for "matches-css" pseudo element.
    */
 
@@ -3565,21 +3505,6 @@ var ExtendedCss = (function () {
     };
   })(window);
 
-  /**
-   * Copyright 2016 Purify Software Ltd
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   */
   /**
    * Extended selector factory module, for creating extended selector classes.
    *
@@ -4453,21 +4378,6 @@ var ExtendedCss = (function () {
     };
   })();
 
-  /**
-   * Copyright 2016 Purify Software Ltd
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   */
   /**
    * A helper class that parses stylesheets containing extended selectors
    * into ExtendedSelector instances and key-value maps of style declarations.

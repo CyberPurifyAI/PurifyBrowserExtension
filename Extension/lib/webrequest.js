@@ -130,6 +130,27 @@
 
     const referrerUrl = getReferrerUrl(requestDetails);
 
+    if (requestType === purify.RequestTypes.IMAGE) {
+      return purify.nsfwFiltering
+        .getNSFWStatus(requestUrl)
+        .then((result) => {
+          if (result) {
+            collapseElement(
+              tabId,
+              requestFrameId,
+              requestUrl,
+              referrerUrl,
+              requestType
+            );
+          }
+
+          return { cancel: result };
+        })
+        .catch((err) => {
+          return { cancel: true };
+        });
+    }
+
     // truncate too long urls
     // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1493
     const MAX_URL_LENGTH = 1024 * 16;
@@ -170,17 +191,6 @@
 
     if (requestRule) {
       purify.requestContextStorage.update(requestId, { requestRule });
-    }
-
-    if (requestType === purify.RequestTypes.IMAGE) {
-      purify.nsfwFiltering.getNSFWStatus(
-        tabId,
-        requestFrameId,
-        requestUrl,
-        referrerUrl,
-        requestType,
-        collapseElement
-      );
     }
 
     const response = purify.webRequestService.getBlockedResponseByRule(
