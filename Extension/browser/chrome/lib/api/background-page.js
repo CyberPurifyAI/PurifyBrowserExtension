@@ -25,6 +25,7 @@ const browser = window.browser || chrome;
             }
             const response = callback(message, senderOverride, sendResponse);
             const async = response === true;
+
             // If async sendResponse will be invoked later
             if (!async) {
               sendResponse(response);

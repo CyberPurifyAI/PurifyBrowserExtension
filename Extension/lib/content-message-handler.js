@@ -421,6 +421,9 @@
       case "disableGetPremiumNotification":
         purify.settings.disableShowPurifyPromoInfo();
         break;
+      case "getImagePredictionRequest":
+        console.log(message, sender);
+        return false;
       default:
         // Unhandled message
         return true;

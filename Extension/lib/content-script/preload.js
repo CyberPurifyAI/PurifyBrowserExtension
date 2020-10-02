@@ -22,6 +22,7 @@
   var collapseRequestId = 1;
   var isFirefox = false;
   var isOpera = false;
+  var MIN_IMAGE_SIZE = 41;
 
   /**
    * Unexpectedly global variable contentPage could become undefined in FF,
@@ -78,6 +79,113 @@
 
     initCollapseEventListeners();
     tryLoadCssAndScripts();
+
+    nsfwDOMWatcher();
+  };
+
+  /**
+   * Watch NSFW Content
+   */
+  const nsfwDOMWatcher = function () {
+    var MutationObserver =
+      window.MutationObserver || window.WebKitMutationObserver;
+
+    if (!MutationObserver) {
+      return;
+    }
+
+    var observer = new MutationObserver(function (mutations) {
+      for (let i = 0; i < mutations.length; i++) {
+        var mutation = mutations[i];
+
+        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+          if (mutation.target.nodeName === "TITLE") {
+            var images = document.getElementsByTagName("img");
+            for (let i = 0; i < images.length; i++) {
+              analyzeImage(images[i], false);
+            }
+          }
+
+          for (let i = 0; i < mutation.addedNodes.length; i++) {
+            if (mutation.addedNodes[i].nodeName === "IMG") {
+              analyzeImage(mutation.addedNodes[i], false);
+            }
+          }
+        } else if (mutation.type === "attributes") {
+          if (mutation.target.nodeName === "IMG") {
+            analyzeImage(mutation.target, mutation.attributeName === "src");
+            mutation.target;
+          }
+        }
+      }
+    });
+
+    observer.observe(document, {
+      characterData: false,
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["src"],
+    });
+  };
+
+  const analyzeImage = function (image, srcAttribute) {
+    if (image.src.length > 0) {
+      if (srcAttribute) {
+        getNSFWImageResult(image);
+      } else if (
+        image._isChecked === undefined &&
+        ((image.width > MIN_IMAGE_SIZE && image.height > MIN_IMAGE_SIZE) ||
+          image.height === 0 ||
+          image.width === 0)
+      ) {
+        getNSFWImageResult(image);
+      }
+    }
+  };
+
+  const getNSFWImageResult = function (image) {
+    image._isChecked = true;
+    hideImage(image);
+    console.log(`Analyze ${image.src}`);
+
+    // const request = new PredictionRequest(image.src);
+
+    var message = {
+      type: "getImagePredictionRequest",
+      requestUrl: image.src,
+    };
+
+    getContentPage().sendMessage(message, (result) => {
+      if (!result) {
+        showImage(image, url);
+      }
+    });
+
+    // const request = new PredictionRequest(image.src);
+    // this.requestToAnalyzeImage(request)
+    //   .then(({ result, url }) => {
+    //     if (result) {
+    //       this.blockedItems++;
+    //     } else {
+    //       showImage(image, url);
+    //     }
+    //   })
+    //   .catch(({ url }) => {
+    //     showImage(image, url);
+    //   });
+  };
+
+  const hideImage = function (image) {
+    image.style.visibility = "hidden";
+    if (image.parentNode?.nodeName === "BODY") image.hidden = true;
+  };
+
+  const showImage = function (image) {
+    if (image.src === url) {
+      image.style.visibility = "visible";
+      if (image.parentNode?.nodeName === "BODY") image.hidden = false;
+    }
   };
 
   /**

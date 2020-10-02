@@ -130,27 +130,6 @@
 
     const referrerUrl = getReferrerUrl(requestDetails);
 
-    if (requestType === purify.RequestTypes.IMAGE) {
-      return purify.nsfwFiltering
-        .getNSFWStatus(requestUrl)
-        .then((result) => {
-          if (result) {
-            collapseElement(
-              tabId,
-              requestFrameId,
-              requestUrl,
-              referrerUrl,
-              requestType
-            );
-          }
-
-          return { cancel: result };
-        })
-        .catch((err) => {
-          return { cancel: true };
-        });
-    }
-
     // truncate too long urls
     // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1493
     const MAX_URL_LENGTH = 1024 * 16;
@@ -231,6 +210,35 @@
         requestType
       );
     }
+
+    // if (requestType === purify.RequestTypes.IMAGE) {
+    //   return purify.nsfwFiltering
+    //     .getNSFWStatus(requestUrl)
+    //     .then((result) => {
+    //       if (result) {
+    //         collapseElement(
+    //           tabId,
+    //           requestFrameId,
+    //           requestUrl,
+    //           referrerUrl,
+    //           requestType
+    //         );
+
+    //         purify.requestContextStorage.update(requestId, {
+    //           responseNSFW: result,
+    //         });
+
+    //         return {
+    //           cancel: result,
+    //         };
+    //       }
+
+    //       return response;
+    //     })
+    //     .catch((err) => {
+    //       return { cancel: true };
+    //     });
+    // }
 
     return response;
   }
@@ -909,9 +917,11 @@
         const { tabId } = tab;
         const { requestType } = details;
         const { frameId } = details;
+
         if (shouldSkipInjection(requestType, tabId)) {
           return;
         }
+
         const injection = injections.get(tabId, frameId);
         if (injection && injection.jsScriptText) {
           purify.tabs.executeScriptCode(tabId, frameId, injection.jsScriptText);

@@ -52,8 +52,6 @@ purify.nsfwFiltering = (function (purify) {
               // purify.console.info(`${className} - ${probability} - ${result}`);
 
               if (result) {
-                image.src = "";
-                image = null;
                 return Boolean(result);
               } else {
                 return false;
@@ -73,8 +71,6 @@ purify.nsfwFiltering = (function (purify) {
               // purify.console.info(`${className} - ${probability} - ${result}`);
 
               if (result) {
-                image.src = "";
-                image = null;
                 return Boolean(result);
               } else {
                 return false;
