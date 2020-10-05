@@ -421,9 +421,40 @@
       case "disableGetPremiumNotification":
         purify.settings.disableShowPurifyPromoInfo();
         break;
-      case "getImagePredictionRequest":
-        console.log(message, sender);
-        return false;
+      case "requestAnalyzeImage":
+        const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+          message.requestUrl
+        );
+        const arrImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+          message.originUrl
+        );
+
+        if (arrImage && arrImage.length > 10) {
+          // console.log(arrImage.length);
+          const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+            message.requestUrl,
+            "Explicit Content"
+          );
+
+          purify.rules.documentFilterService.showDocumentBlockPage(
+            sender.tab.tabId,
+            documentBlockedPage
+          );
+        } else if (cacheValue) {
+          return cacheValue;
+        } else {
+          purify.nsfwFiltering
+            .getPredictImage(
+              message.requestUrl,
+              message.originUrl,
+              sender.tab.tabId
+            )
+            .then((result) => callback(result, message.requestUrl))
+            .catch((err) => callback(false, message.requestUrl));
+        }
+
+        return true;
+
       default:
         // Unhandled message
         return true;

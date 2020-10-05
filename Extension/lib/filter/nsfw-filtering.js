@@ -6,7 +6,7 @@
  */
 
 /**
- * nsfw filter
+ * nsfw filtering
  */
 purify.nsfwFiltering = (function (purify) {
   "use strict";
@@ -19,15 +19,24 @@ purify.nsfwFiltering = (function (purify) {
   let nsfwInstance = null;
 
   const initialize = async function () {
-    purify.console.info("Initializing NSFW Model");
+    purify.console.info("Initializing Predict Image");
     nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
+  };
+
+  const nsfwImageCache = {
+    get cache() {
+      return purify.lazyGet(
+        nsfwImageCache,
+        "cache",
+        () => new purify.utils.LruCache("nsfw-image-cache")
+      );
+    },
   };
 
   const loadImage = function (requestUrl) {
     const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
 
     return new Promise((resolve, reject) => {
-      image.src = requestUrl;
       image.crossOrigin = "anonymous";
       image.onload = () => {
         return resolve(image);
@@ -35,10 +44,18 @@ purify.nsfwFiltering = (function (purify) {
       image.onerror = (err) => {
         return reject(err);
       };
+      image.src = requestUrl;
     });
   };
 
-  const getNSFWStatus = function (requestUrl) {
+  const getPredictImage = function (requestUrl, originUrl) {
+    let urlCache = nsfwImageCache.cache.getValue(originUrl);
+
+    if (typeof urlCache === "undefined") {
+      nsfwImageCache.cache.saveValue(originUrl, []);
+      urlCache = [];
+    }
+
     return loadImage(requestUrl)
       .then((image) => {
         if (GIF_REGEX.test(requestUrl)) {
@@ -49,9 +66,15 @@ purify.nsfwFiltering = (function (purify) {
                 prediction,
               ]);
 
-              // purify.console.info(`${className} - ${probability} - ${result}`);
+              // purify.console.info(
+              //   `${className} - ${probability} - ${result}`
+              // );
 
               if (result) {
+                nsfwImageCache.cache.saveValue(requestUrl, result);
+                urlCache.push(requestUrl);
+                nsfwImageCache.cache.saveValue(originUrl, urlCache);
+
                 return Boolean(result);
               } else {
                 return false;
@@ -68,9 +91,15 @@ purify.nsfwFiltering = (function (purify) {
                 prediction,
               ]);
 
-              // purify.console.info(`${className} - ${probability} - ${result}`);
+              // purify.console.info(
+              //   `${className} - ${probability} - ${result}`
+              // );
 
               if (result) {
+                nsfwImageCache.cache.saveValue(requestUrl, result);
+                urlCache.push(requestUrl);
+                nsfwImageCache.cache.saveValue(originUrl, urlCache);
+
                 return Boolean(result);
               } else {
                 return false;
@@ -106,8 +135,7 @@ purify.nsfwFiltering = (function (purify) {
 
   return {
     initialize,
-    loadImage,
-    handlePredictions,
-    getNSFWStatus,
+    getPredictImage,
+    nsfwImageCache,
   };
 })(purify);

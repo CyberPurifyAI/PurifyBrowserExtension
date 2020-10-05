@@ -213,7 +213,7 @@
 
     // if (requestType === purify.RequestTypes.IMAGE) {
     //   return purify.nsfwFiltering
-    //     .getNSFWStatus(requestUrl)
+    //     .setupQueuePredictImage(requestUrl)
     //     .then((result) => {
     //       if (result) {
     //         collapseElement(
@@ -223,10 +223,6 @@
     //           referrerUrl,
     //           requestType
     //         );
-
-    //         purify.requestContextStorage.update(requestId, {
-    //           responseNSFW: result,
-    //         });
 
     //         return {
     //           cancel: result,

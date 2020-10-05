@@ -80,13 +80,13 @@
     initCollapseEventListeners();
     tryLoadCssAndScripts();
 
-    nsfwDOMWatcher();
+    imageDOMWatcher();
   };
 
   /**
    * Watch NSFW Content
    */
-  const nsfwDOMWatcher = function () {
+  const imageDOMWatcher = function () {
     var MutationObserver =
       window.MutationObserver || window.WebKitMutationObserver;
 
@@ -132,48 +132,42 @@
   const analyzeImage = function (image, srcAttribute) {
     if (image.src.length > 0) {
       if (srcAttribute) {
-        getNSFWImageResult(image);
+        getPredictImageResult(image);
       } else if (
-        image._isChecked === undefined &&
+        image._isPurified === undefined &&
         ((image.width > MIN_IMAGE_SIZE && image.height > MIN_IMAGE_SIZE) ||
           image.height === 0 ||
           image.width === 0)
       ) {
-        getNSFWImageResult(image);
+        getPredictImageResult(image);
       }
     }
   };
 
-  const getNSFWImageResult = function (image) {
-    image._isChecked = true;
+  const getPredictImageResult = function (image) {
+    image._isPurified = true;
     hideImage(image);
-    console.log(`Analyze ${image.src}`);
+    // console.log(`Analyze ${image.src}`);
 
-    // const request = new PredictionRequest(image.src);
-
-    var message = {
-      type: "getImagePredictionRequest",
+    const request = {
+      type: "requestAnalyzeImage",
       requestUrl: image.src,
+      originUrl: window.location.href,
     };
 
-    getContentPage().sendMessage(message, (result) => {
-      if (!result) {
-        showImage(image, url);
+    new Promise((resolve, reject) => {
+      try {
+        getContentPage().sendMessage(request, (response) => {
+          if (!response) {
+            showImage(image, image.src);
+          }
+          resolve(response);
+        });
+      } catch {
+        // showImage(image, image.src);
+        reject(request);
       }
     });
-
-    // const request = new PredictionRequest(image.src);
-    // this.requestToAnalyzeImage(request)
-    //   .then(({ result, url }) => {
-    //     if (result) {
-    //       this.blockedItems++;
-    //     } else {
-    //       showImage(image, url);
-    //     }
-    //   })
-    //   .catch(({ url }) => {
-    //     showImage(image, url);
-    //   });
   };
 
   const hideImage = function (image) {
@@ -181,7 +175,7 @@
     if (image.parentNode?.nodeName === "BODY") image.hidden = true;
   };
 
-  const showImage = function (image) {
+  const showImage = function (image, url) {
     if (image.src === url) {
       image.style.visibility = "visible";
       if (image.parentNode?.nodeName === "BODY") image.hidden = false;
