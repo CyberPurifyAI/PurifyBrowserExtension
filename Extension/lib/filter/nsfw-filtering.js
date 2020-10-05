@@ -52,7 +52,6 @@ purify.nsfwFiltering = (function (purify) {
     let urlCache = nsfwImageCache.cache.getValue(originUrl);
 
     if (typeof urlCache === "undefined") {
-      nsfwImageCache.cache.saveValue(originUrl, []);
       urlCache = [];
     }
 

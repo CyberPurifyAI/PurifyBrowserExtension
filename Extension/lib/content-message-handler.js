@@ -429,8 +429,9 @@
           message.originUrl
         );
 
-        if (arrImage && arrImage.length > 10) {
-          // console.log(arrImage.length);
+        if (!arrImage) {
+          purify.nsfwFiltering.nsfwImageCache.cache.saveValue(originUrl, []);
+        } else if (arrImage.length >= 10) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             message.requestUrl,
             "Explicit Content"
@@ -440,7 +441,9 @@
             sender.tab.tabId,
             documentBlockedPage
           );
-        } else if (cacheValue) {
+        }
+
+        if (cacheValue) {
           return cacheValue;
         } else {
           purify.nsfwFiltering
