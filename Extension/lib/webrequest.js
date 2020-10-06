@@ -235,14 +235,7 @@
 
         return { cancel: true };
       } else {
-        purify.nsfwFiltering
-          .getPredictImage(requestUrl, originUrl)
-          .then((result) => {
-            return response;
-          })
-          .catch((err) => {
-            return { cancel: true };
-          });
+        purify.nsfwFiltering.getPredictImage(requestUrl, originUrl);
       }
     }
 

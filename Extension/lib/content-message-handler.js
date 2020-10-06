@@ -427,34 +427,29 @@
           requestUrl
         );
 
-        const arrImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+        let arrNSFWImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
           message.originUrl
         );
 
-        if (!arrImage) {
+        if (!arrNSFWImage) {
           purify.nsfwFiltering.nsfwImageCache.cache.saveValue(
             message.originUrl,
             []
           );
+          arrNSFWImage = [];
         }
 
-        if (cacheValue) {
-          const arrNSFWImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
-            message.originUrl
+        if (arrNSFWImage.length > 10) {
+          const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+            requestUrl,
+            "Explicit Content"
           );
 
-          if (arrNSFWImage.length > 10) {
-            const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-              requestUrl,
-              "Explicit Content"
-            );
-
-            purify.rules.documentFilterService.showDocumentBlockPage(
-              sender.tab.tabId,
-              documentBlockedPage
-            );
-          }
-
+          purify.rules.documentFilterService.showDocumentBlockPage(
+            sender.tab.tabId,
+            documentBlockedPage
+          );
+        } else if (cacheValue) {
           return callback({ result: cacheValue, requestUrl, err: null });
         } else {
           purify.nsfwFiltering

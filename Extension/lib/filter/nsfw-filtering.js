@@ -65,7 +65,7 @@ purify.nsfwFiltering = (function (purify) {
                 prediction,
               ]);
 
-              purify.console.info(`${className} - ${probability} - ${result}`);
+              // purify.console.info(`${className} - ${probability} - ${result}`);
 
               if (result) {
                 nsfwImageCache.cache.saveValue(requestUrl, result);
@@ -86,7 +86,7 @@ purify.nsfwFiltering = (function (purify) {
                 prediction,
               ]);
 
-              purify.console.info(`${className} - ${probability} - ${result}`);
+              // purify.console.info(`${className} - ${probability} - ${result}`);
 
               if (result) {
                 nsfwImageCache.cache.saveValue(requestUrl, result);
