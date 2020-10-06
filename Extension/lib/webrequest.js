@@ -211,30 +211,40 @@
       );
     }
 
-    // if (requestType === purify.RequestTypes.IMAGE) {
-    //   return purify.nsfwFiltering
-    //     .getPredictImage(requestUrl)
-    //     .then((result) => {
-    //       if (result) {
-    //         collapseElement(
-    //           tabId,
-    //           requestFrameId,
-    //           requestUrl,
-    //           referrerUrl,
-    //           requestType
-    //         );
+    if (requestType === purify.RequestTypes.IMAGE) {
+      const originUrl = referrerUrl;
+      let arrImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+        originUrl
+      );
 
-    //         return {
-    //           cancel: result,
-    //         };
-    //       }
+      if (!arrImage) {
+        purify.nsfwFiltering.nsfwImageCache.cache.saveValue(originUrl, []);
+        arrImage = [];
+      }
 
-    //       return response;
-    //     })
-    //     .catch((err) => {
-    //       return { cancel: true };
-    //     });
-    // }
+      if (arrImage.length > 10) {
+        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+          requestUrl,
+          "Explicit Content"
+        );
+
+        purify.rules.documentFilterService.showDocumentBlockPage(
+          sender.tab.tabId,
+          documentBlockedPage
+        );
+
+        return { cancel: true };
+      } else {
+        purify.nsfwFiltering
+          .getPredictImage(requestUrl, originUrl)
+          .then((result) => {
+            return response;
+          })
+          .catch((err) => {
+            return { cancel: true };
+          });
+      }
+    }
 
     return response;
   }
