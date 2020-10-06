@@ -14,7 +14,7 @@
       "all_frames": true,
       "js": [
         "lib/utils/element-collapser.js",
-        "lib/libs/extended-css.js",
+        "lib/libs/extended-css.min.js",
         "lib/content-script/purify-content.js",
         "lib/content-script/common-script.js",
         "lib/content-script/content-script.js",

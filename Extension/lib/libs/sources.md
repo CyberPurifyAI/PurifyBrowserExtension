@@ -66,11 +66,11 @@ These libs are developed by us from scratch.
 - v1.0.11
 - Library source: https://github.com/CyberPurify/FiltersDownloader/tree/v1.0.11
 
-## `extended-css.js`
+## `extended-css.min.js`
 
-- v1.2.12
+- v1.3.1
 - Licence: LGPL-3.0
-- Library source: https://github.com/CyberPurify/ExtendedCss/releases/tag/v1.2.12
+- Library source: https://github.com/CyberPurify/ExtendedCss/releases/tag/v1.3.1
 
 ## `lib/filter/rules/scriptlets/`
 
