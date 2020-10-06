@@ -445,6 +445,11 @@
             "Explicit Content"
           );
 
+          purify.rules.documentFilterService.showDocumentBlockPage(
+            sender.tab.tabId,
+            documentBlockedPage
+          );
+
           return callback({
             result: cacheValue,
             requestUrl,

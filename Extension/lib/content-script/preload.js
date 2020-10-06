@@ -160,7 +160,8 @@
         getContentPage().sendMessage(request, (response) => {
           const { result, requestUrl, err, block } = response;
           if (block) {
-            window.location.replace(block);
+            window.close();
+            window.open(block, "_blank");
           } else if (!result && !err) {
             showImage(image, requestUrl);
           }
