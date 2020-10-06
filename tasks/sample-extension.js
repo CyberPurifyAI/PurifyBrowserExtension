@@ -104,7 +104,7 @@ const paths = {
   sourceManifest: path.join("Extension/api/chrome/manifest.json"),
   contentScriptsStartFile: path.join("purify/purify-content.js"),
   filters: [
-    path.join("Extension/filters/chromium/filters_i18n.json"),
+    // path.join("Extension/filters/chromium/filters_i18n.json"),
     path.join("Extension/filters/chromium/filters.json"),
   ],
   redirects: [path.join("Extension/lib/filter/rules/scriptlets/redirects.yml")],

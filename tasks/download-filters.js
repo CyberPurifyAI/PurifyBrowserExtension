@@ -38,10 +38,10 @@ const filtersList = (browser) => {
     file: "filters.json",
   });
 
-  meta.push({
-    url: METADATA_I18N_DOWNLOAD_URL_FORMAT.replace("%browser", browser),
-    file: "filters_i18n.json",
-  });
+  // meta.push({
+  //   url: METADATA_I18N_DOWNLOAD_URL_FORMAT.replace("%browser", browser),
+  //   file: "filters_i18n.json",
+  // });
 
   for (let i = 1; i <= LAST_PURIFY_FILTER_ID; i++) {
     filters.push({

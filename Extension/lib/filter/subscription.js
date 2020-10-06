@@ -748,7 +748,7 @@ purify.subscriptions = (function (purify) {
   const init = async function () {
     try {
       await loadMetadata();
-      await loadMetadataI18n();
+      // await loadMetadataI18n();
       await loadLocalScriptRules();
       await loadRedirectSources();
     } catch (e) {
