@@ -454,7 +454,7 @@
             result: cacheValue,
             requestUrl,
             err: null,
-            block: documentBlockedPage,
+            block: true,
           });
         } else if (cacheValue) {
           return callback({

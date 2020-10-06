@@ -160,9 +160,10 @@
         getContentPage().sendMessage(request, (response) => {
           const { result, requestUrl, err, block } = response;
           if (block) {
-            window.close();
-            window.open(block, "_blank");
-          } else if (!result && !err) {
+            hideContent();
+          }
+
+          if (!result && !err) {
             showImage(image, requestUrl);
           }
           resolve(response);
@@ -172,6 +173,10 @@
         reject(request);
       }
     });
+  };
+
+  const hideContent = function () {
+    document.getElementsByTagName("BODY")[0].style.display = "none";
   };
 
   const hideImage = function (image) {
