@@ -443,17 +443,17 @@
             message.originUrl
           );
 
-          // if (arrNSFWImage.length > 10) {
-          //   const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-          //     requestUrl,
-          //     "Explicit Content"
-          //   );
+          if (arrNSFWImage.length > 10) {
+            const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+              requestUrl,
+              "Explicit Content"
+            );
 
-          //   purify.rules.documentFilterService.showDocumentBlockPage(
-          //     sender.tab.tabId,
-          //     documentBlockedPage
-          //   );
-          // }
+            purify.rules.documentFilterService.showDocumentBlockPage(
+              sender.tab.tabId,
+              documentBlockedPage
+            );
+          }
 
           return callback({ result: cacheValue, requestUrl, err: null });
         } else {
