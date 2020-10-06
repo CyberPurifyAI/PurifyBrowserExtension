@@ -425,29 +425,35 @@
         const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
           message.requestUrl
         );
+
         const arrImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
           message.originUrl
         );
 
         if (!arrImage) {
-          console.log(arrImage);
           purify.nsfwFiltering.nsfwImageCache.cache.saveValue(
             message.originUrl,
             []
           );
-        } else if (arrImage.length >= 10) {
-          const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-            message.requestUrl,
-            "Explicit Content"
-          );
-
-          purify.rules.documentFilterService.showDocumentBlockPage(
-            sender.tab.tabId,
-            documentBlockedPage
-          );
         }
 
         if (cacheValue) {
+          const arrNSFWImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+            message.originUrl
+          );
+
+          if (arrNSFWImage.length >= 10) {
+            const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+              message.requestUrl,
+              "Explicit Content"
+            );
+
+            purify.rules.documentFilterService.showDocumentBlockPage(
+              sender.tab.tabId,
+              documentBlockedPage
+            );
+          }
+
           return cacheValue;
         } else {
           purify.nsfwFiltering
