@@ -29,7 +29,6 @@ purify.subscriptions = (function (purify) {
    */
   const CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER = 99;
 
-  let tags = [];
   let groups = [];
   let groupsMap = {};
   let filters = [];
@@ -90,7 +89,6 @@ purify.subscriptions = (function (purify) {
    * @property {array.<string>} languages - filter base languages
    * @property {number} expires - filter update interval
    * @property {String} subscriptionUrl - filter update url
-   * @property {array.<number>} tags - filter tags ids
    * @property {String} [customUrl] - custom filter url
    * @property {Boolean} [trusted] - filter is trusted or not
    */
@@ -112,7 +110,6 @@ purify.subscriptions = (function (purify) {
       languages,
       expires,
       subscriptionUrl,
-      tags,
       customUrl,
       trusted,
       checksum,
@@ -129,7 +126,6 @@ purify.subscriptions = (function (purify) {
     this.languages = languages;
     this.expires = expires;
     this.subscriptionUrl = subscriptionUrl;
-    this.tags = tags;
     // Custom filters data
     if (typeof customUrl !== "undefined") {
       this.customUrl = customUrl;
@@ -183,13 +179,9 @@ purify.subscriptions = (function (purify) {
     const { subscriptionUrl } = filter;
     const { languages } = filter;
     const displayNumber = filter.displayNumber - 0;
-    const { tags } = filter;
     const { customUrl } = filter;
     const { trusted } = filter;
     const { checksum } = filter;
-    if (tags.length === 0) {
-      tags.push(0);
-    }
 
     return new SubscriptionFilter({
       filterId,
@@ -203,7 +195,6 @@ purify.subscriptions = (function (purify) {
       languages,
       expires,
       subscriptionUrl,
-      tags,
       customUrl,
       trusted,
       checksum,
@@ -431,7 +422,6 @@ purify.subscriptions = (function (purify) {
         const subscriptionUrl = url;
         const languages = [];
         const displayNumber = 0;
-        const tags = [0];
 
         let checksum;
         if (!version) {
@@ -461,7 +451,6 @@ purify.subscriptions = (function (purify) {
             languages,
             expires,
             subscriptionUrl,
-            tags,
             customUrl: url,
             checksum,
             trusted,
@@ -525,7 +514,6 @@ purify.subscriptions = (function (purify) {
         const subscriptionUrl = url;
         const languages = [];
         const displayNumber = 0;
-        const tags = [0];
         const rulesCount = rules.filter(
           (rule) => rule.trim().indexOf("!") !== 0
         ).length;
@@ -553,7 +541,6 @@ purify.subscriptions = (function (purify) {
           languages,
           expires,
           subscriptionUrl,
-          tags,
         });
 
         filter.loaded = true;
@@ -578,15 +565,10 @@ purify.subscriptions = (function (purify) {
    */
   async function loadMetadata() {
     const metadata = await purify.backend.loadLocalFiltersMetadata();
-    tags = [];
     groups = [];
     groupsMap = {};
     filters = [];
     filtersMap = {};
-
-    for (let i = 0; i < metadata.tags.length; i += 1) {
-      tags.push(createFilterTagFromJSON(metadata.tags[i]));
-    }
 
     for (let j = 0; j < metadata.filters.length; j += 1) {
       const filter = createSubscriptionFilterFromJSON(metadata.filters[j]);
@@ -692,26 +674,26 @@ purify.subscriptions = (function (purify) {
    * Loads groups and filters localizations
    * @return {Promise} returns promise
    */
-  async function loadMetadataI18n() {
-    const i18nMetadata = await purify.backend.loadLocalFiltersI18Metadata();
-    const tagsI18n = i18nMetadata.tags;
-    const filtersI18n = i18nMetadata.filters;
-    const groupsI18n = i18nMetadata.groups;
+  // async function loadMetadataI18n() {
+  //   const i18nMetadata = await purify.backend.loadLocalFiltersI18Metadata();
+  //   const tagsI18n = i18nMetadata.tags;
+  //   const filtersI18n = i18nMetadata.filters;
+  //   const groupsI18n = i18nMetadata.groups;
 
-    for (let i = 0; i < tags.length; i += 1) {
-      applyFilterTagLocalization(tags[i], tagsI18n);
-    }
+  //   for (let i = 0; i < tags.length; i += 1) {
+  //     applyFilterTagLocalization(tags[i], tagsI18n);
+  //   }
 
-    for (let j = 0; j < filters.length; j += 1) {
-      applyFilterLocalization(filters[j], filtersI18n);
-    }
+  //   for (let j = 0; j < filters.length; j += 1) {
+  //     applyFilterLocalization(filters[j], filtersI18n);
+  //   }
 
-    for (let k = 0; k < groups.length; k += 1) {
-      applyGroupLocalization(groups[k], groupsI18n);
-    }
+  //   for (let k = 0; k < groups.length; k += 1) {
+  //     applyGroupLocalization(groups[k], groupsI18n);
+  //   }
 
-    purify.console.info("Filters i18n metadata loaded");
-  }
+  //   purify.console.info("Filters i18n metadata loaded");
+  // }
 
   /**
    * Loads script rules from local file
@@ -785,9 +767,9 @@ purify.subscriptions = (function (purify) {
   /**
    * @returns Array of Tags metadata
    */
-  const getTags = function () {
-    return tags;
-  };
+  // const getTags = function () {
+  //   return tags;
+  // };
 
   /**
    * @returns Array of Groups metadata
@@ -874,7 +856,7 @@ purify.subscriptions = (function (purify) {
   return {
     init,
     getFilterIdsForLanguage,
-    getTags,
+    // getTags,
     getGroups,
     getGroup,
     groupHasEnabledStatus,
