@@ -31,15 +31,15 @@ purify.initialize = function () {
         purify.console.error(purify.runtime.lastError);
         return;
       }
-      purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
+      // purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
     });
-
-    // tf.enableProdMode();
-    purify.nsfwFiltering.initialize();
 
     purify.whitelist.init();
     purify.filteringLog.init();
     purify.ui.init();
+
+    // tf.enableProdMode();
+    purify.nsfwFiltering.initialize();
 
     /**
      * Start application
