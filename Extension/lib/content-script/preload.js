@@ -158,7 +158,6 @@
     new Promise((resolve, reject) => {
       try {
         getContentPage().sendMessage(request, (response) => {
-          console.log(response, image.src);
           if (!response) {
             showImage(image, image.src);
           }

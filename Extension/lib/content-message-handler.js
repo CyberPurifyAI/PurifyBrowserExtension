@@ -455,13 +455,11 @@
             );
           }
 
-          console.log("case1 " + cacheValue);
           return cacheValue;
         } else {
           purify.nsfwFiltering
             .getPredictImage(requestUrl, message.originUrl, sender.tab.tabId)
             .then((result) => {
-              console.log("case2 " + result);
               return callback(result, requestUrl);
             })
             .catch((err) => callback(true, requestUrl));
