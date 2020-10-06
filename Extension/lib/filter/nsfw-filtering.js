@@ -69,7 +69,8 @@ purify.nsfwFiltering = (function (purify) {
 
               if (result) {
                 urlCache.push(requestUrl);
-                nsfwImageCache.cache.saveValue(originUrl, urlCache);
+                const uniqueArr = urlCache.filter(uniqueArray);
+                nsfwImageCache.cache.saveValue(originUrl, uniqueArr);
               }
 
               return Boolean(result);
@@ -90,7 +91,8 @@ purify.nsfwFiltering = (function (purify) {
 
               if (result) {
                 urlCache.push(requestUrl);
-                nsfwImageCache.cache.saveValue(originUrl, urlCache);
+                const uniqueArr = urlCache.filter(uniqueArray);
+                nsfwImageCache.cache.saveValue(originUrl, uniqueArr);
               }
 
               return Boolean(result);
@@ -105,13 +107,17 @@ purify.nsfwFiltering = (function (purify) {
       });
   };
 
+  const uniqueArray = function (value, index, self) {
+    return self.indexOf(value) === index;
+  };
+
   const handlePredictions = function (predictions) {
     const flattenArr = predictions.flat();
 
     const prediction = flattenArr.find(({ className, probability }) => {
       if (
         (["Hentai", "Porn"].includes(className) && probability > 0.4) ||
-        (["Sexy"].includes(className) && probability > 0.8)
+        (["Sexy"].includes(className) && probability > 0.9)
       ) {
         return { result: true, className, probability };
       }

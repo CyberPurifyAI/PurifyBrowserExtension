@@ -34,7 +34,7 @@ purify.initialize = function () {
       purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
     });
 
-    tf.enableProdMode();
+    // tf.enableProdMode();
     purify.nsfwFiltering.initialize();
 
     purify.whitelist.init();
