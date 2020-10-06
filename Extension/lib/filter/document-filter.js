@@ -82,8 +82,9 @@
      */
     const showDocumentBlockPage = (tabId, url) => {
       const incognitoTab = purify.frames.isIncognitoTab({ tabId });
-      // Chrome doesn't allow to show extension pages in incognito mode
-      if (purify.utils.browser.isChromium() && incognitoTab) {
+      // Chromium browsers do not allow to show extension pages in incognito mode
+      // Firefox allows, but on private pages do not work browser.runtime.getBackgroundPage()
+      if (incognitoTab) {
         // Closing tab before opening a new one may lead to browser crash (Chromium)
         purify.ui.openTab(url, {}, () => {
           purify.tabs.remove(tabId);

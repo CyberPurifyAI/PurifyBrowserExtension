@@ -520,7 +520,7 @@
       (safebrowsingUrl) => {
         // Chrome doesn't allow open extension url in incognito mode
         // So close current tab and open new
-        if (purify.utils.browser.isChromium() && incognitoTab) {
+        if (incognitoTab) {
           // Closing tab before opening a new one may lead to browser crash (Chromium)
           purify.ui.openTab(safebrowsingUrl, {}, () => {
             purify.tabs.remove(tab.tabId);

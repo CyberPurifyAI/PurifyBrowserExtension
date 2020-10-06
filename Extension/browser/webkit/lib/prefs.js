@@ -7,7 +7,6 @@
 
 /**
  * Extension global preferences.
- * (!) Firefox has it's own implementation
  */
 purify.prefs = (function (purify) {
   var Prefs = {
@@ -19,7 +18,11 @@ purify.prefs = (function (purify) {
       );
     },
 
-    platform: "chromium",
+    get platform() {
+      return purify.lazyGet(Prefs, "platform", () =>
+        window.browser ? "firefox" : "chromium"
+      );
+    },
 
     get browser() {
       return purify.lazyGet(Prefs, "browser", () => {
