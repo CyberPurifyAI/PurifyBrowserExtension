@@ -443,26 +443,24 @@
             message.originUrl
           );
 
-          if (arrNSFWImage.length >= 10) {
-            const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-              requestUrl,
-              "Explicit Content"
-            );
+          // if (arrNSFWImage.length > 10) {
+          //   const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+          //     requestUrl,
+          //     "Explicit Content"
+          //   );
 
-            purify.rules.documentFilterService.showDocumentBlockPage(
-              sender.tab.tabId,
-              documentBlockedPage
-            );
-          }
+          //   purify.rules.documentFilterService.showDocumentBlockPage(
+          //     sender.tab.tabId,
+          //     documentBlockedPage
+          //   );
+          // }
 
-          return cacheValue;
+          return callback({ result: cacheValue, requestUrl, err: null });
         } else {
           purify.nsfwFiltering
             .getPredictImage(requestUrl, message.originUrl, sender.tab.tabId)
-            .then((result) => {
-              return callback(result, requestUrl);
-            })
-            .catch((err) => callback(true, requestUrl));
+            .then((result) => callback({ result, requestUrl, err: null }))
+            .catch((err) => callback({ result: false, requestUrl, err }));
         }
 
         return true;

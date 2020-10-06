@@ -33,10 +33,10 @@ purify.nsfwFiltering = (function (purify) {
     },
   };
 
-  const loadImage = async function (requestUrl) {
+  const loadImage = function (requestUrl) {
     const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
 
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       image.crossOrigin = "anonymous";
       image.onload = () => {
         return resolve(image);
@@ -48,46 +48,62 @@ purify.nsfwFiltering = (function (purify) {
     });
   };
 
-  const getPredictImage = async function (requestUrl, originUrl) {
+  const getPredictImage = function (requestUrl, originUrl) {
     let urlCache = nsfwImageCache.cache.getValue(originUrl);
 
     if (typeof urlCache === "undefined") {
       urlCache = [];
     }
 
-    const image = await loadImage(requestUrl);
+    return loadImage(requestUrl)
+      .then((image) => {
+        if (GIF_REGEX.test(requestUrl)) {
+          return nsfwInstance
+            .classifyGif(image)
+            .then((prediction) => {
+              const { result, className, probability } = handlePredictions([
+                prediction,
+              ]);
 
-    const prediction = await model.classify(image, 1);
-    const { result, className, probability } = handlePredictions([prediction]);
-    if (result) {
-      // purify.console.info(`${className} - ${probability} - ${result}`);
-      saveImageCache(requestUrl, originUrl, result);
+              purify.console.info(`${className} - ${probability} - ${result}`);
 
-      return result;
-    } else if (GIF_REGEX.test(url)) {
-      const predictionGIF = await model.classifyGif(image, {
-        topk: 1,
-        fps: 0.1,
+              if (result) {
+                nsfwImageCache.cache.saveValue(requestUrl, result);
+                urlCache.push(requestUrl);
+                nsfwImageCache.cache.saveValue(originUrl, urlCache);
+              }
+
+              return Boolean(result);
+            })
+            .catch((err) => {
+              return true;
+            });
+        } else {
+          return nsfwInstance
+            .classify(image, 1)
+            .then((prediction) => {
+              const { result, className, probability } = handlePredictions([
+                prediction,
+              ]);
+
+              purify.console.info(`${className} - ${probability} - ${result}`);
+
+              if (result) {
+                nsfwImageCache.cache.saveValue(requestUrl, result);
+                urlCache.push(requestUrl);
+                nsfwImageCache.cache.saveValue(originUrl, urlCache);
+              }
+
+              return Boolean(result);
+            })
+            .catch((err) => {
+              return true;
+            });
+        }
+      })
+      .catch((err) => {
+        return true;
       });
-      const { result, className, probability } = handlePredictions(
-        predictionGIF
-      );
-      // purify.console.info(`${className} - ${probability} - ${result}`);
-      saveImageCache(requestUrl, originUrl, result);
-
-      return result;
-    } else {
-      // purify.console.info(`${className} - ${probability} - ${result}`);
-      saveImageCache(requestUrl, originUrl, result);
-
-      return result;
-    }
-  };
-
-  const saveImageCache = function (requestUrl, originUrl, result) {
-    nsfwImageCache.cache.saveValue(requestUrl, result);
-    urlCache.push(requestUrl);
-    nsfwImageCache.cache.saveValue(originUrl, urlCache);
   };
 
   const handlePredictions = function (predictions) {

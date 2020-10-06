@@ -149,22 +149,23 @@
     hideImage(image);
     // console.log(`Analyze ${image.src}`);
 
-    const request = {
-      type: "requestAnalyzeImage",
-      requestUrl: image.src,
-      originUrl: window.location.href,
-    };
-
     new Promise((resolve, reject) => {
+      const request = {
+        type: "requestAnalyzeImage",
+        requestUrl: image.src,
+        originUrl: window.location.href,
+      };
+
       try {
         getContentPage().sendMessage(request, (response) => {
-          if (!response) {
-            showImage(image, image.src);
+          const { result, requestUrl, err } = response;
+          if (!result && !err) {
+            showImage(image, requestUrl);
           }
           resolve(response);
         });
-      } catch {
-        // showImage(image, image.src);
+      } catch (err) {
+        console.log(err);
         reject(request);
       }
     });
