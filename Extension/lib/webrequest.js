@@ -229,7 +229,7 @@
         );
 
         purify.rules.documentFilterService.showDocumentBlockPage(
-          sender.tab.tabId,
+          tabId,
           documentBlockedPage
         );
 

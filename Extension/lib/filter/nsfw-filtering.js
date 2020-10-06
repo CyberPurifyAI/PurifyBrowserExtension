@@ -66,9 +66,9 @@ purify.nsfwFiltering = (function (purify) {
               ]);
 
               // purify.console.info(`${className} - ${probability} - ${result}`);
+              nsfwImageCache.cache.saveValue(requestUrl, result);
 
               if (result) {
-                nsfwImageCache.cache.saveValue(requestUrl, result);
                 urlCache.push(requestUrl);
                 nsfwImageCache.cache.saveValue(originUrl, urlCache);
               }
@@ -87,9 +87,9 @@ purify.nsfwFiltering = (function (purify) {
               ]);
 
               // purify.console.info(`${className} - ${probability} - ${result}`);
+              nsfwImageCache.cache.saveValue(requestUrl, result);
 
               if (result) {
-                nsfwImageCache.cache.saveValue(requestUrl, result);
                 urlCache.push(requestUrl);
                 nsfwImageCache.cache.saveValue(originUrl, urlCache);
               }
