@@ -430,6 +430,7 @@
         );
 
         if (!arrImage) {
+          console.log(arrImage);
           purify.nsfwFiltering.nsfwImageCache.cache.saveValue(
             message.originUrl,
             []
