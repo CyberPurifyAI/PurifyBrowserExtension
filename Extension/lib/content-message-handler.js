@@ -422,8 +422,9 @@
         purify.settings.disableShowPurifyPromoInfo();
         break;
       case "requestAnalyzeImage":
+        const requestUrl = message.requestUrl;
         const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
-          message.requestUrl
+          requestUrl
         );
 
         const arrImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
@@ -444,7 +445,7 @@
 
           if (arrNSFWImage.length >= 10) {
             const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-              message.requestUrl,
+              requestUrl,
               "Explicit Content"
             );
 
@@ -454,16 +455,16 @@
             );
           }
 
+          console.log("case1 " + cacheValue);
           return cacheValue;
         } else {
           purify.nsfwFiltering
-            .getPredictImage(
-              message.requestUrl,
-              message.originUrl,
-              sender.tab.tabId
-            )
-            .then((result) => callback(result, message.requestUrl))
-            .catch((err) => callback(false, message.requestUrl));
+            .getPredictImage(requestUrl, message.originUrl, sender.tab.tabId)
+            .then((result) => {
+              console.log("case2 " + result);
+              return callback(result, requestUrl);
+            })
+            .catch((err) => callback(true, requestUrl));
         }
 
         return true;

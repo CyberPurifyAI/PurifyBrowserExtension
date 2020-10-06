@@ -158,6 +158,7 @@
     new Promise((resolve, reject) => {
       try {
         getContentPage().sendMessage(request, (response) => {
+          console.log(response, image.src);
           if (!response) {
             showImage(image, image.src);
           }
@@ -172,13 +173,17 @@
 
   const hideImage = function (image) {
     image.style.visibility = "hidden";
-    if (image.parentNode?.nodeName === "BODY") image.hidden = true;
+    if (image.parentNode?.nodeName === "BODY") {
+      image.hidden = true;
+    }
   };
 
   const showImage = function (image, url) {
     if (image.src === url) {
       image.style.visibility = "visible";
-      if (image.parentNode?.nodeName === "BODY") image.hidden = false;
+      if (image.parentNode?.nodeName === "BODY") {
+        image.hidden = false;
+      }
     }
   };
 
