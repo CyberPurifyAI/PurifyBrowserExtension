@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------------
  * PurifyBrowserExtension filters-categories.js
- * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * Licensed under MIT (https://github.com/CyberPurify/CyberPurify/blob/main/LICENSE)
  * ----------------------------------------------------------------------------------
  */
 

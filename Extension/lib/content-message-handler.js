@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------------
  * PurifyBrowserExtension content-message-handler.js
- * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * Licensed under MIT (https://github.com/CyberPurify/CyberPurify/blob/main/LICENSE)
  * ----------------------------------------------------------------------------------
  */
 
@@ -454,24 +454,18 @@
             result: cacheValue,
             requestUrl,
             err: null,
-            block: true,
           });
         } else if (cacheValue) {
           return callback({
             result: cacheValue,
             requestUrl,
             err: null,
-            block: false,
           });
         } else {
           purify.nsfwFiltering
             .getPredictImage(requestUrl, message.originUrl, sender.tab.tabId)
-            .then((result) =>
-              callback({ result, requestUrl, err: null, block: false })
-            )
-            .catch((err) =>
-              callback({ result: false, requestUrl, err, block: false })
-            );
+            .then((result) => callback({ result, requestUrl, err: null }))
+            .catch((err) => callback({ result: false, requestUrl, err }));
         }
 
         return true;

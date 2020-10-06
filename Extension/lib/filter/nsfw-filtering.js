@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------------
  * PurifyBrowserExtension nsfw-filtering.js
- * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * Licensed under MIT (https://github.com/CyberPurify/CyberPurify/blob/main/LICENSE)
  * ----------------------------------------------------------------------------------
  */
 
@@ -13,7 +13,6 @@ purify.nsfwFiltering = (function (purify) {
 
   const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
   const IMAGE_SIZE = 224;
-  const FILTER_LIST = ["Hentai", "Porn", "Sexy"];
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
 
   let nsfwInstance = null;
@@ -110,7 +109,12 @@ purify.nsfwFiltering = (function (purify) {
     const flattenArr = predictions.flat();
 
     const prediction = flattenArr.find(({ className, probability }) => {
-      return FILTER_LIST.includes(className) && probability > 0.4;
+      if (
+        (["Hentai", "Porn"].includes(className) && probability > 0.4) ||
+        (["Sexy"].includes(className) && probability > 0.8)
+      ) {
+        return { result: true, className, probability };
+      }
     });
 
     if (prediction !== undefined) {

@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------------
  * PurifyBrowserExtension preload.js
- * Licensed under MIT (https://github.com/cyberpurify/CyberPurify/blob/main/LICENSE)
+ * Licensed under MIT (https://github.com/CyberPurify/CyberPurify/blob/main/LICENSE)
  * ----------------------------------------------------------------------------------
  */
 
@@ -158,10 +158,7 @@
 
       try {
         getContentPage().sendMessage(request, (response) => {
-          const { result, requestUrl, err, block } = response;
-          if (block) {
-            hideContent();
-          }
+          const { result, requestUrl, err } = response;
 
           if (!result && !err) {
             showImage(image, requestUrl);
@@ -173,10 +170,6 @@
         reject(request);
       }
     });
-  };
-
-  const hideContent = function () {
-    document.getElementsByTagName("BODY")[0].style.display = "none";
   };
 
   const hideImage = function (image) {
