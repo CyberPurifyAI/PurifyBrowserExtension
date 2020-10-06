@@ -445,17 +445,28 @@
             "Explicit Content"
           );
 
-          purify.rules.documentFilterService.showDocumentBlockPage(
-            sender.tab.tabId,
-            documentBlockedPage
-          );
+          return callback({
+            result: cacheValue,
+            requestUrl,
+            err: null,
+            block: documentBlockedPage,
+          });
         } else if (cacheValue) {
-          return callback({ result: cacheValue, requestUrl, err: null });
+          return callback({
+            result: cacheValue,
+            requestUrl,
+            err: null,
+            block: false,
+          });
         } else {
           purify.nsfwFiltering
             .getPredictImage(requestUrl, message.originUrl, sender.tab.tabId)
-            .then((result) => callback({ result, requestUrl, err: null }))
-            .catch((err) => callback({ result: false, requestUrl, err }));
+            .then((result) =>
+              callback({ result, requestUrl, err: null, block: false })
+            )
+            .catch((err) =>
+              callback({ result: false, requestUrl, err, block: false })
+            );
         }
 
         return true;

@@ -158,8 +158,10 @@
 
       try {
         getContentPage().sendMessage(request, (response) => {
-          const { result, requestUrl, err } = response;
-          if (!result && !err) {
+          const { result, requestUrl, err, block } = response;
+          if (block) {
+            window.location.replace(block);
+          } else if (!result && !err) {
             showImage(image, requestUrl);
           }
           resolve(response);
