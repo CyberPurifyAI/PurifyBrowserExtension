@@ -213,7 +213,7 @@
 
     // if (requestType === purify.RequestTypes.IMAGE) {
     //   return purify.nsfwFiltering
-    //     .setupQueuePredictImage(requestUrl)
+    //     .getPredictImage(requestUrl)
     //     .then((result) => {
     //       if (result) {
     //         collapseElement(

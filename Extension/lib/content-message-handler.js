@@ -430,7 +430,10 @@
         );
 
         if (!arrImage) {
-          purify.nsfwFiltering.nsfwImageCache.cache.saveValue(originUrl, []);
+          purify.nsfwFiltering.nsfwImageCache.cache.saveValue(
+            message.originUrl,
+            []
+          );
         } else if (arrImage.length >= 10) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             message.requestUrl,
