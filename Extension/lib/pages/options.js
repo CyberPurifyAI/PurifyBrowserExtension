@@ -1956,11 +1956,6 @@ PageController.prototype = {
     //     contentPage.sendMessage({ type: 'openExtensionStore' });
     // });
 
-    document.querySelector("#openLog").addEventListener("click", (e) => {
-      e.preventDefault();
-      contentPage.sendMessage({ type: "openFilteringLog" });
-    });
-
     // const importSettingsBtn = document.querySelector("#importSettingsFile");
     // const importSettingsFileInput = document.querySelector(
     //   "#importSettingsFileInput"

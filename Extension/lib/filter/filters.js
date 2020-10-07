@@ -311,13 +311,11 @@
      * http://cyberpurify.com/en/filterrules.html#javascriptInjection
      *
      * @param url Page URL
-     * @param {boolean} debug enabled or disabled debug
      * @returns {{scriptSource: string, rule: string}[]} Javascript for the specified URL
      */
-    getScriptsForUrl(url, debug) {
+    getScriptsForUrl(url) {
       const domain = purify.utils.url.getHost(url);
       const config = {
-        debug,
         domainName: domain,
         engine: "extension",
         version: purify.app && purify.app.getVersion && purify.app.getVersion(),
@@ -334,8 +332,7 @@
      * @returns {string} Script to be applied
      */
     getScriptsStringForUrl(url, tab) {
-      const debug = purify.filteringLog && purify.filteringLog.isOpen();
-      const scriptRules = this.getScriptsForUrl(url, debug);
+      const scriptRules = this.getScriptsForUrl(url);
 
       const isFirefox = purify.utils.browser.isFirefoxBrowser();
       const isOpera = purify.utils.browser.isOperaBrowser();
@@ -365,23 +362,6 @@
         }
         return false;
       });
-
-      if (debug) {
-        const domainName = purify.utils.url.getHost(url);
-        scriptRules.forEach((scriptRule) => {
-          if (
-            scriptRule.rule instanceof purify.rules.ScriptletRule ||
-            scriptRule.rule.isDomainSpecific(domainName)
-          ) {
-            purify.filteringLog.addScriptInjectionEvent(
-              tab,
-              url,
-              purify.RequestTypes.DOCUMENT,
-              scriptRule.rule
-            );
-          }
-        });
-      }
 
       const scriptsCode = selectedScriptRules
         .map((scriptRule) => scriptRule.script)

@@ -35,7 +35,6 @@ purify.initialize = function () {
     });
 
     purify.whitelist.init();
-    purify.filteringLog.init();
     purify.ui.init();
 
     // tf.enableProdMode();

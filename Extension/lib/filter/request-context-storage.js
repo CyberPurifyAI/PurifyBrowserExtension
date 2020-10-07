@@ -128,14 +128,6 @@
   ) => {
     const eventId = getNextEventId();
 
-    // Clears filtering log. If contexts map already contains this requests that means that we caught redirect
-    if (
-      requestType === purify.RequestTypes.DOCUMENT &&
-      !contexts.has(requestId)
-    ) {
-      purify.filteringLog.clearEventsByTabId(tab.tabId);
-    }
-
     const context = {
       requestId,
       requestUrl,
@@ -148,15 +140,6 @@
       contentModifyingState: States.NONE,
     };
     contexts.set(requestId, context);
-
-    purify.filteringLog.addHttpRequestEvent(
-      tab,
-      requestUrl,
-      referrerUrl,
-      requestType,
-      null,
-      eventId
-    );
   };
 
   /**
@@ -175,13 +158,6 @@
     tab,
     requestRule
   ) => {
-    purify.filteringLog.addHttpRequestEvent(
-      tab,
-      requestUrl,
-      referrerUrl,
-      requestType,
-      requestRule
-    );
     purify.webRequestService.recordRuleHit(tab, requestRule, requestUrl);
   };
 
@@ -207,13 +183,6 @@
     // Updates rules for request
     if ("requestRule" in update) {
       context.requestRule = update.requestRule;
-      // Some requests may execute for a long time, that's why we update filtering log when
-      // we get a request rule
-      purify.filteringLog.bindRuleToHttpRequestEvent(
-        context.tab,
-        context.requestRule,
-        context.eventId
-      );
     }
     if ("replaceRules" in update) {
       context.replaceRules = update.replaceRules;
@@ -301,33 +270,11 @@
       const stealthActions = context.stealthActions;
 
       if (requestRule) {
-        purify.filteringLog.bindRuleToHttpRequestEvent(
-          tab,
-          requestRule,
-          context.eventId
-        );
         ruleHitsRecords.push(requestRule);
       }
 
       if (cspRules) {
-        for (let cspRule of cspRules) {
-          purify.filteringLog.addHttpRequestEvent(
-            tab,
-            requestUrl,
-            referrerUrl,
-            purify.RequestTypes.CSP,
-            cspRule
-          );
-        }
         ruleHitsRecords = ruleHitsRecords.concat(cspRules);
-      }
-
-      if (stealthActions) {
-        purify.filteringLog.bindStealthActionsToHttpRequestEvent(
-          tab,
-          stealthActions,
-          context.eventId
-        );
       }
     }
 
@@ -338,26 +285,11 @@
       const contentRules = context.contentRules;
 
       if (replaceRules) {
-        purify.filteringLog.bindReplaceRulesToHttpRequestEvent(
-          tab,
-          replaceRules,
-          context.eventId
-        );
         ruleHitsRecords.push(replaceRules);
       }
 
       if (contentRules) {
         for (let contentRule of contentRules) {
-          const elements = context.elements.get(contentRule) || [];
-          for (let element of elements) {
-            purify.filteringLog.addCosmeticEvent(
-              tab,
-              element,
-              requestUrl,
-              context.requestType,
-              contentRule
-            );
-          }
           context.elements.delete(contentRule);
         }
         ruleHitsRecords = ruleHitsRecords.concat(contentRules);

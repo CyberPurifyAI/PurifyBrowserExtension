@@ -53,9 +53,6 @@ purify.ui = (function (purify) {
     context_miscellaneous_settings: function () {
       openSettingsTab("miscellaneous-settings");
     },
-    context_open_log: function () {
-      openFilteringLog();
-    },
     context_update_antibanner_filters: function () {
       checkFiltersUpdates();
     },
@@ -653,18 +650,6 @@ purify.ui = (function (purify) {
     );
   };
 
-  var openFilteringLog = function (tabId) {
-    const options = { activateSameTab: true, type: "popup" };
-    if (!tabId) {
-      purify.tabs.getActive((tab) => {
-        const { tabId } = tab;
-        openTab(getPageUrl("log.html") + (tabId ? `#${tabId}` : ""), options);
-      });
-      return;
-    }
-    openTab(getPageUrl("log.html") + (tabId ? `#${tabId}` : ""), options);
-  };
-
   const openThankYouPage = function () {
     const params = purify.utils.browser.getExtensionParams();
     params.push(`_locale=${encodeURIComponent(purify.app.getLocale())}`);
@@ -981,7 +966,6 @@ purify.ui = (function (purify) {
     openExportRulesTab,
     openSettingsTab,
     openSiteReportTab,
-    openFilteringLog,
     openThankYouPage,
     // openExtensionStore,
     openFiltersDownloadPage,

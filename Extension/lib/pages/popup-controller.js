@@ -79,10 +79,6 @@ PopupController.prototype = {
     popupPage.sendMessage({ type: "openSettingsTab" });
   },
 
-  // openFilteringLog(tabId) {
-  //   popupPage.sendMessage({ type: "openFilteringLog", tabId });
-  // },
-
   resetBlockedAdsCount() {
     popupPage.sendMessage({ type: "resetBlockedAdsCount" });
   },
@@ -186,9 +182,6 @@ PopupController.prototype = {
     this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
     // this.actionOpenSiteReport = this._getTemplate(
     //   "action-site-report-template"
-    // );
-    // this.actionOpenFilteringLog = this._getTemplate(
-    //   "action-open-filtering-log-template"
     // );
 
     // Status Text
@@ -651,8 +644,6 @@ PopupController.prototype = {
     const el = document.createElement("div");
     el.classList.add("actions");
 
-    // this._appendTemplate(el, this.actionOpenFilteringLog);
-
     this._appendTemplate(el, this.actionOpenAbuse);
     // this._appendTemplate(el, this.actionOpenSiteReport);
 
@@ -803,11 +794,6 @@ PopupController.prototype = {
     // close popup get premium if user clicked on the link
     this._bindAction(parent, ".popup-get-premium", "click", () => {
       handlePopupGetPremiumClose();
-    });
-    this._bindAction(parent, ".openFilteringLog", "click", (e) => {
-      e.preventDefault();
-      self.openFilteringLog();
-      popupPage.closePopup();
     });
     this._bindAction(parent, ".resetStats", "click", (e) => {
       e.preventDefault();

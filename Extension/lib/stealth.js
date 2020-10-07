@@ -530,13 +530,6 @@ purify.stealthService = (function (purify) {
     );
     if (stealthWhiteListRule) {
       purify.console.debug("Whitelist stealth rule found");
-      purify.filteringLog.addHttpRequestEvent(
-        tab,
-        requestUrl,
-        mainFrameUrl,
-        requestType,
-        stealthWhiteListRule
-      );
       return null;
     }
 
@@ -570,11 +563,6 @@ purify.stealthService = (function (purify) {
     if (result !== requestUrl) {
       purify.console.debug(
         "Stealth stripped tracking parameters for url: " + requestUrl
-      );
-      purify.filteringLog.bindStealthActionsToHttpRequestEvent(
-        tab,
-        STEALTH_ACTIONS.STRIPPED_TRACKING_URL,
-        context.eventId
       );
 
       return result;

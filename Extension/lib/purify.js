@@ -56,12 +56,6 @@ var purify = (function () {
     cleanup: notImplemented,
   };
 
-  const filteringLogModule = {
-    addHttpRequestEvent: notImplemented,
-    clearEventsByTabId: notImplemented,
-    isOpen: notImplemented,
-  };
-
   const safebrowsingModule = {
     checkSafebrowsingFilter: notImplemented,
   };
@@ -79,7 +73,6 @@ var purify = (function () {
      * In case of simple purify API, some modules aren't supported
      */
     hitStats: hitStatsModule,
-    filteringLog: filteringLogModule,
     safebrowsing: safebrowsingModule,
     sync: syncModule,
   };

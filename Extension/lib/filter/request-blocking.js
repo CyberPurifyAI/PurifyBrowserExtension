@@ -616,7 +616,7 @@ purify.webRequestService = (function (purify) {
       return false;
     }
 
-    return canCollectHitStatsForTab(tab) || purify.filteringLog.isOpen();
+    return canCollectHitStatsForTab(tab);
   };
 
   // EXPOSE

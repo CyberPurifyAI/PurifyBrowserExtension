@@ -7,8 +7,6 @@
 
 /* global QUnit */
 
-purify.filteringLog.bindRuleToHttpRequestEvent = () => {};
-
 QUnit.test("Test Record/Remove", function (assert) {
   const requestId = "1";
   const requestUrl = "http://example.org/image.png";

@@ -134,41 +134,6 @@ purify.cookieFiltering = (function (purify) {
   };
 
   /**
-   * Adds cookie rule to filtering log
-   *
-   * @callback AddCookieLogEvent
-   * @param {Object} tab
-   * @param {string} cookieName
-   * @param {string} cookieValue
-   * @param {string} cookieDomain
-   * @param {boolean} cookieThirdParty
-   * @param {Array} rules
-   * @param {boolean} isModifyingCookieRule
-   */
-  const addCookieLogEvent = (
-    tab,
-    cookieName,
-    cookieValue,
-    cookieDomain,
-    cookieThirdParty,
-    rules,
-    isModifyingCookieRule
-  ) => {
-    for (let i = 0; i < rules.length; i += 1) {
-      purify.filteringLog.addCookieEvent(
-        tab,
-        cookieName,
-        cookieValue,
-        cookieDomain,
-        purify.RequestTypes.COOKIE,
-        rules[i],
-        isModifyingCookieRule,
-        cookieThirdParty
-      );
-    }
-  };
-
-  /**
    * Removes cookie
    *
    * @param {string} name Cookie name
@@ -256,7 +221,6 @@ purify.cookieFiltering = (function (purify) {
    * @param {string} url Cookie url
    * @param {boolean} thirdParty
    * @param {object} rule
-   * @param {AddCookieLogEvent} addCookieLogEvent
    * @return {Promise<any[] | never>}
    */
   // eslint-disable-next-line arrow-body-style
@@ -266,7 +230,6 @@ purify.cookieFiltering = (function (purify) {
     url,
     thirdParty,
     rule,
-    addCookieLogEvent
   ) => {
     return apiGetCookies(name, url).then((cookies) => {
       const promises = [];
@@ -276,15 +239,6 @@ purify.cookieFiltering = (function (purify) {
           const promise = apiRemoveCookie(name, url);
           promises.push(promise);
         }
-        addCookieLogEvent(
-          tab,
-          cookie.name,
-          cookie.value,
-          cookie.domain,
-          thirdParty,
-          [rule],
-          false
-        );
       }
       return Promise.all(promises);
     });
@@ -297,7 +251,6 @@ purify.cookieFiltering = (function (purify) {
    * @param {string} name Cookie name
    * @param {string} url Cookie url
    * @param {boolean} thirdParty
-   * @param {AddCookieLogEvent} addCookieLogEvent
    * @param {Array} rules Cookie matching rules
    */
   // eslint-disable-next-line arrow-body-style
@@ -307,7 +260,6 @@ purify.cookieFiltering = (function (purify) {
     url,
     thirdParty,
     rules,
-    addCookieLogEvent
   ) => {
     return apiGetCookies(name, url).then((cookies) => {
       const promises = [];
@@ -318,15 +270,6 @@ purify.cookieFiltering = (function (purify) {
         if (mRules && mRules.length > 0) {
           const promise = apiUpdateCookie(cookie, url);
           promises.push(promise);
-          addCookieLogEvent(
-            tab,
-            cookie.name,
-            cookie.value,
-            cookie.domain,
-            thirdParty,
-            mRules,
-            true
-          );
         }
       }
       return Promise.all(promises);
@@ -527,15 +470,6 @@ purify.cookieFiltering = (function (purify) {
 
     if (rules && rules.length > 0) {
       header.value = purify.utils.cookie.serialize(setCookie);
-      addCookieLogEvent(
-        tab,
-        cookieName,
-        cookieValue,
-        cookieDomain,
-        thirdParty,
-        rules,
-        true
-      );
       return true;
     }
 
@@ -783,15 +717,6 @@ purify.cookieFiltering = (function (purify) {
           setCookieHeaderModified = true;
         }
         processedCookies.push(cookieName);
-        addCookieLogEvent(
-          tab,
-          cookieName,
-          cookieValue,
-          cookieDomain,
-          thirdParty,
-          [bRule],
-          false
-        );
       }
 
       const mRules = findModifyingRules(cookieName, rules);
@@ -883,7 +808,6 @@ purify.cookieFiltering = (function (purify) {
           cookie.url,
           cookie.thirdParty,
           rules[0],
-          addCookieLogEvent
         );
       } else {
         promise = apiModifyCookiesWithRules(
@@ -892,7 +816,6 @@ purify.cookieFiltering = (function (purify) {
           cookie.url,
           cookie.thirdParty,
           rules,
-          addCookieLogEvent
         );
       }
       promises.push(promise);

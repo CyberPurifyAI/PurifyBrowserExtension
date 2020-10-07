@@ -96,13 +96,6 @@
         stat.filterId
       );
       purify.webRequestService.recordRuleHit(tab, rule, frameUrl);
-      purify.filteringLog.addCosmeticEvent(
-        tab,
-        stat.element,
-        tab.url,
-        purify.RequestTypes.DOCUMENT,
-        rule
-      );
     }
   }
 
@@ -226,9 +219,6 @@
       // case 'openExtensionStore':
       //     purify.ui.openExtensionStore();
       //     break;
-      case "openFilteringLog":
-        purify.ui.openFilteringLog(message.tabId);
-        break;
       case "openExportRulesTab":
         purify.ui.openExportRulesTab(message.hash);
         break;
@@ -286,20 +276,8 @@
           message.requests
         );
         return { requests: requests };
-      case "onOpenFilteringLogPage":
-        purify.filteringLog.onOpenFilteringLogPage();
-        break;
-      case "onCloseFilteringLogPage":
-        purify.filteringLog.onCloseFilteringLogPage();
-        break;
       case "reloadTabById":
-        if (!message.preserveLogEnabled) {
-          purify.filteringLog.clearEventsByTabId(message.tabId);
-        }
         purify.tabs.reload(message.tabId);
-        break;
-      case "clearEventsByTabId":
-        purify.filteringLog.clearEventsByTabId(message.tabId);
         break;
       case "getTabFrameInfoById":
         if (message.tabId) {
@@ -312,16 +290,6 @@
           });
           return true; // Async
         }
-      case "getFilteringInfoByTabId":
-        var filteringInfo = purify.filteringLog.getFilteringInfoByTabId(
-          message.tabId
-        );
-        return { filteringInfo: filteringInfo };
-      case "synchronizeOpenTabs":
-        purify.filteringLog.synchronizeOpenTabs(function (tabs) {
-          callback({ tabs: tabs });
-        });
-        return true; // Async
       case "addFilterSubscription": {
         const { url, title } = message;
         const hashOptions = {
