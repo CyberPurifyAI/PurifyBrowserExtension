@@ -56,20 +56,6 @@ QUnit.test("Build Rules", (assert) => {
   assert.ok(rule instanceof purify.rules.ScriptFilterRule);
 
   rule = purify.rules.builder.createRule(
-    "example.org#%#window.__gaq = undefined;",
-    0,
-    false
-  );
-  assert.notOk(rule);
-
-  rule = purify.rules.builder.createRule(
-    "||example.org^$replace=/example/trusted/gi",
-    0,
-    false
-  );
-  assert.notOk(rule);
-
-  rule = purify.rules.builder.createRule(
     "||example.org^$replace=/example/trusted/gi",
     0
   );

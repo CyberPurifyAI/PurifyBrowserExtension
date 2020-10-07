@@ -15,7 +15,6 @@ purify.listeners = (function () {
     UPDATE_FILTER_RULES: "event.update.filter.rules",
     FILTER_GROUP_ENABLE_DISABLE: "filter.group.enable.disable", // enabled or disabled filter group
     FILTER_ENABLE_DISABLE: "event.filter.enable.disable", // Enabled or disabled
-    FILTER_ADD_REMOVE: "event.filter.add.remove", // Added or removed
     ADS_BLOCKED: "event.ads.blocked",
     START_DOWNLOAD_FILTER: "event.start.download.filter",
     SUCCESS_DOWNLOAD_FILTER: "event.success.download.filter",

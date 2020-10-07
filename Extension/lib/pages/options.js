@@ -2133,7 +2133,6 @@ const initPage = function (response) {
     const events = [
       EventNotifierTypes.FILTER_ENABLE_DISABLE,
       EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE,
-      EventNotifierTypes.FILTER_ADD_REMOVE,
       EventNotifierTypes.START_DOWNLOAD_FILTER,
       EventNotifierTypes.SUCCESS_DOWNLOAD_FILTER,
       EventNotifierTypes.ERROR_DOWNLOAD_FILTER,
@@ -2152,14 +2151,6 @@ const initPage = function (response) {
           break;
         case EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE:
           controller.antiBannerFilters.onCategoryStateChanged(options);
-          break;
-        case EventNotifierTypes.FILTER_ADD_REMOVE:
-          // re-render fully only if custom filter was added,
-          // if re-render every time, then filters move inconsistently because of sorting
-          // on first filter enabling, when this event fires
-          if (options && options.customUrl) {
-            controller.antiBannerFilters.render();
-          }
           break;
         case EventNotifierTypes.START_DOWNLOAD_FILTER:
           controller.antiBannerFilters.onFilterDownloadStarted(options);

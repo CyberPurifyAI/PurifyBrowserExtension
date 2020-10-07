@@ -60,10 +60,6 @@ var purify = (function () {
     checkSafebrowsingFilter: notImplemented,
   };
 
-  const syncModule = {
-    settingsProvider: notImplemented(),
-  };
-
   return {
     lazyGet,
     lazyGetClear,
@@ -74,6 +70,5 @@ var purify = (function () {
      */
     hitStats: hitStatsModule,
     safebrowsing: safebrowsingModule,
-    sync: syncModule,
   };
 })();

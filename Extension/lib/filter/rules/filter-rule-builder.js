@@ -22,31 +22,6 @@
   };
 
   /**
-   * Filters untrusted rules from custom filters
-   *
-   * @param ruleText
-   */
-  const isUntrustedRule = function (ruleText) {
-    if (ruleText.includes(api.FilterRule.MASK_SCRIPT_RULE)) {
-      return true;
-    }
-
-    const optionsDelimiterIndex = ruleText.indexOf(
-      api.UrlFilterRule.OPTIONS_DELIMITER
-    );
-    if (optionsDelimiterIndex >= 0) {
-      const replaceOptionIndex = ruleText.indexOf(
-        `${api.UrlFilterRule.REPLACE_OPTION}=`
-      );
-      if (replaceOptionIndex > optionsDelimiterIndex) {
-        return true;
-      }
-    }
-
-    return false;
-  };
-
-  /**
    * Checks if rule length is less than minimum rule length.
    * Rules with length less than 4 are ignored
    * https://github.com/CyberPurify/PurifyBrowserExtension/issues/1600
@@ -63,10 +38,9 @@
    *
    * @param {string} ruleText Rule text
    * @param {number} filterId Filter identifier
-   * @param {boolean} isTrustedFilter - custom filter can be trusted and untrusted, default is true
    * @returns Filter rule object. Either UrlFilterRule or CssFilterRule or ScriptFilterRule.
    */
-  const _createRule = function (ruleText, filterId, isTrustedFilter) {
+  const _createRule = function (ruleText, filterId) {
     ruleText = ruleText ? ruleText.trim() : null;
     if (!ruleText) {
       return null;
@@ -84,10 +58,6 @@
       }
 
       if (!filterUnsupportedRules(ruleText)) {
-        return null;
-      }
-
-      if (!isTrustedFilter && isUntrustedRule(ruleText)) {
         return null;
       }
 
@@ -153,11 +123,10 @@
    *
    * @param {string} ruleText Rule text
    * @param {number} filterId Filter identifier
-   * @param {boolean} isTrustedFilter - custom filter can be trusted and untrusted,
    * default is true
    * @returns Filter rule object. Either UrlFilterRule or CssFilterRule or ScriptFilterRule.
    */
-  const createRule = (ruleText, filterId, isTrustedFilter = true) => {
+  const createRule = (ruleText, filterId) => {
     let conversionResult;
     try {
       conversionResult = api.ruleConverter.convertRule(ruleText);
@@ -174,7 +143,7 @@
     }
     if (Array.isArray(conversionResult)) {
       const rules = conversionResult
-        .map((rt) => _createRule(rt, filterId, isTrustedFilter))
+        .map((rt) => _createRule(rt, filterId))
         .filter((rule) => rule !== null);
       // composite rule shouldn't be with without rules inside it
       if (rules.length === 0) {
@@ -182,7 +151,7 @@
       }
       return new api.CompositeRule(ruleText, rules);
     }
-    const rule = _createRule(conversionResult, filterId, isTrustedFilter);
+    const rule = _createRule(conversionResult, filterId);
     if (rule && conversionResult !== ruleText) {
       rule.ruleText = ruleText;
       rule.convertedRuleText = conversionResult;

@@ -15,7 +15,6 @@ const groupsMap = {
   5: { groupId: 5, groupName: "Security", displayNumber: 5 },
   6: { groupId: 6, groupName: "Other", displayNumber: 6 },
   7: { groupId: 7, groupName: "Language-specific", displayNumber: 7 },
-  0: { groupId: 0, groupName: "Custom", displayNumber: 99 },
 };
 
 purify.subscriptions.getGroups = () =>

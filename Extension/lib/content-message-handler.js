@@ -180,34 +180,6 @@
       case "checkAntiBannerFiltersUpdate":
         purify.ui.checkFiltersUpdates();
         break;
-      case "loadCustomFilterInfo":
-        purify.filters.loadCustomFilterInfo(
-          message.url,
-          { title: message.title },
-          (filter) => {
-            callback({ filter });
-          },
-          (error) => {
-            callback({ error });
-          }
-        );
-        return true;
-      case "subscribeToCustomFilter": {
-        const { url, title, trusted } = message;
-        purify.filters.loadCustomFilter(
-          url,
-          { title, trusted },
-          (filter) => {
-            purify.filters.addAndEnableFilters([filter.filterId], () => {
-              callback(filter);
-            });
-          },
-          () => {
-            callback();
-          }
-        );
-        return true;
-      }
       case "getFiltersMetadata":
         return purify.categories.getFiltersMetadata();
       case "setFiltersUpdatePeriod":
@@ -374,17 +346,6 @@
         break;
       case "saveCssHitStats":
         processSaveCssHitStats(sender.tab, message.stats);
-        break;
-      case "loadSettingsJson": {
-        const appVersion = purify.app.getVersion();
-        const settingsCb = (json) => {
-          callback({ content: json, appVersion });
-        };
-        purify.sync.settingsProvider.loadSettingsBackup(settingsCb);
-        return true; // Async
-      }
-      case "applySettingsJson":
-        purify.sync.settingsProvider.applySettingsBackup(message.json);
         break;
       case "disableGetPremiumNotification":
         purify.settings.disableShowPurifyPromoInfo();

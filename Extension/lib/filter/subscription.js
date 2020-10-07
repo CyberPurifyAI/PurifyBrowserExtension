@@ -15,20 +15,6 @@
 purify.subscriptions = (function (purify) {
   "use strict";
 
-  /**
-   * Custom filters group identifier
-   *
-   * @type {number}
-   */
-  const CUSTOM_FILTERS_GROUP_ID = 0;
-
-  /**
-   * Custom filters group display number
-   *
-   * @type {number}
-   */
-  const CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER = 99;
-
   let groups = [];
   let groupsMap = {};
   let filters = [];
@@ -59,14 +45,6 @@ purify.subscriptions = (function (purify) {
   }
 
   /**
-   * Tag metadata
-   */
-  const FilterTag = function (tagId, keyword) {
-    this.tagId = tagId;
-    this.keyword = keyword;
-  };
-
-  /**
    * Group metadata
    */
   const SubscriptionGroup = function (groupId, groupName, displayNumber) {
@@ -89,7 +67,6 @@ purify.subscriptions = (function (purify) {
    * @property {array.<string>} languages - filter base languages
    * @property {number} expires - filter update interval
    * @property {String} subscriptionUrl - filter update url
-   * @property {String} [customUrl] - custom filter url
    * @property {Boolean} [trusted] - filter is trusted or not
    */
 
@@ -110,7 +87,6 @@ purify.subscriptions = (function (purify) {
       languages,
       expires,
       subscriptionUrl,
-      customUrl,
       trusted,
       checksum,
     } = filterData;
@@ -126,10 +102,7 @@ purify.subscriptions = (function (purify) {
     this.languages = languages;
     this.expires = expires;
     this.subscriptionUrl = subscriptionUrl;
-    // Custom filters data
-    if (typeof customUrl !== "undefined") {
-      this.customUrl = customUrl;
-    }
+
     if (typeof trusted !== "undefined") {
       this.trusted = trusted;
     }
@@ -137,18 +110,6 @@ purify.subscriptions = (function (purify) {
       this.checksum = checksum;
     }
   };
-
-  /**
-   * Create tag from object
-   * @param tag Object
-   * @returns {FilterTag}
-   */
-  function createFilterTagFromJSON(tag) {
-    const tagId = tag.tagId - 0;
-    const { keyword } = tag;
-
-    return new FilterTag(tagId, keyword);
-  }
 
   /**
    * Create group from object
@@ -179,7 +140,6 @@ purify.subscriptions = (function (purify) {
     const { subscriptionUrl } = filter;
     const { languages } = filter;
     const displayNumber = filter.displayNumber - 0;
-    const { customUrl } = filter;
     const { trusted } = filter;
     const { checksum } = filter;
 
@@ -195,7 +155,6 @@ purify.subscriptions = (function (purify) {
       languages,
       expires,
       subscriptionUrl,
-      customUrl,
       trusted,
       checksum,
     });
@@ -269,8 +228,6 @@ purify.subscriptions = (function (purify) {
     };
   };
 
-  const CUSTOM_FILTERS_START_ID = 1000;
-
   const addFilterId = () => {
     let max = 0;
     filters.forEach((f) => {
@@ -279,63 +236,7 @@ purify.subscriptions = (function (purify) {
       }
     });
 
-    return max >= CUSTOM_FILTERS_START_ID ? max + 1 : CUSTOM_FILTERS_START_ID;
-  };
-
-  const CUSTOM_FILTERS_JSON_KEY = "custom_filters";
-
-  /**
-   * Loads custom filters from storage
-   *
-   * @returns {Array}
-   */
-  const loadCustomFilters = () => {
-    const customFilters = purify.localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
-    return customFilters ? JSON.parse(customFilters) : [];
-  };
-
-  /**
-   * Saves custom filter to storage or updates it if filter with same id was found
-   *
-   * @param filter
-   */
-  const saveCustomFilterInStorage = (filter) => {
-    const customFilters = loadCustomFilters();
-    // check if filter exists
-    let found = false;
-    const updatedCustomFilters = customFilters.map((f) => {
-      if (f.filterId === filter.filterId) {
-        found = true;
-        return filter;
-      }
-      return f;
-    });
-    if (!found) {
-      updatedCustomFilters.push(filter);
-    }
-    purify.localStorage.setItem(
-      CUSTOM_FILTERS_JSON_KEY,
-      JSON.stringify(updatedCustomFilters)
-    );
-  };
-
-  /**
-   * Remove custom filter data from storage
-   *
-   * @param filter
-   */
-  const removeCustomFilterFromStorage = (filter) => {
-    const customFilters = loadCustomFilters();
-    const updatedCustomFilters = customFilters.filter((f) => {
-      if (f.filterId === filter.filterId) {
-        return filter.installed;
-      }
-      return true;
-    });
-    purify.localStorage.setItem(
-      CUSTOM_FILTERS_JSON_KEY,
-      JSON.stringify(updatedCustomFilters)
-    );
+    return max;
   };
 
   /**
@@ -357,207 +258,6 @@ purify.subscriptions = (function (purify) {
     }
     return newChecksum !== oldFilter.checksum;
   }
-
-  /**
-   * Count md5 checksum for the filter content
-   * @param {Array<String>} rules
-   * @returns {String} checksum string
-   */
-  const getChecksum = (rules) => {
-    const rulesText = rules.join("\n");
-    return CryptoJS.MD5(rulesText).toString();
-  };
-
-  /**
-   * Updates filter checksum and version in the storage and internal structures
-   * @param filter
-   * @param {object} info
-   */
-  const updateCustomFilterInfo = (filter, info) => {
-    const { checksum, version, timeUpdated, lastCheckTime, expires } = info;
-    // set last checksum and version
-    filter.checksum = checksum || filter.checksum;
-    filter.version = version || filter.version;
-    filter.timeUpdated = timeUpdated || filter.timeUpdated;
-    filter.lastCheckTime = lastCheckTime || filter.lastCheckTime;
-    filter.expires = expires || filter.expires;
-
-    filters = filters.map((f) => {
-      if (f.filterId === filter.filterId) {
-        f.version = version || f.version;
-        f.checksum = checksum || f.checksum;
-        f.timeUpdated = timeUpdated || f.timeUpdated;
-        f.lastCheckTime = lastCheckTime || filter.lastCheckTime;
-        f.expires = expires || filter.expires;
-        return f;
-      }
-      return f;
-    });
-
-    filtersMap[filter.filterId] = filter;
-    saveCustomFilterInStorage(filter);
-  };
-
-  /**
-   * Adds or updates custom filter
-   *
-   * @param url subscriptionUrl
-   * @param options
-   * @param callback
-   */
-  const updateCustomFilter = function (url, options, callback) {
-    const { title, trusted } = options;
-    purify.backend.loadFilterRulesBySubscriptionUrl(
-      url,
-      (rules) => {
-        const filterId = addFilterId();
-        const parsedData = parseFilterDataFromHeader(rules);
-        let { timeUpdated } = parsedData;
-        const { description, homepage, version, expires } = parsedData;
-
-        const name = title;
-
-        timeUpdated = timeUpdated || new Date().toISOString();
-        const groupId = CUSTOM_FILTERS_GROUP_ID;
-        const subscriptionUrl = url;
-        const languages = [];
-        const displayNumber = 0;
-
-        let checksum;
-        if (!version) {
-          checksum = getChecksum(rules);
-        }
-
-        // Check if filter from this url was added before
-        let filter = filters.find((f) => f.customUrl === url);
-
-        let updateFilter = true;
-        if (filter) {
-          if (!didFilterUpdate(version, checksum, filter)) {
-            callback();
-            updateCustomFilterInfo(filter, { lastCheckTime: Date.now() });
-            return;
-          }
-        } else {
-          filter = new SubscriptionFilter({
-            filterId,
-            groupId,
-            name,
-            description,
-            homepage,
-            version,
-            timeUpdated,
-            displayNumber,
-            languages,
-            expires,
-            subscriptionUrl,
-            customUrl: url,
-            checksum,
-            trusted,
-          });
-
-          filter.loaded = true;
-          filters.push(filter);
-          filtersMap[filter.filterId] = filter;
-
-          // Save filter in separate storage
-          saveCustomFilterInStorage(filter);
-          updateFilter = false;
-        }
-
-        if (updateFilter) {
-          updateCustomFilterInfo(filter, {
-            version,
-            checksum,
-            timeUpdated,
-            expires,
-          });
-        }
-
-        updateCustomFilterInfo(filter, { lastCheckTime: Date.now() });
-
-        purify.listeners.notifyListeners(
-          purify.listeners.SUCCESS_DOWNLOAD_FILTER,
-          filter
-        );
-        purify.listeners.notifyListeners(
-          purify.listeners.UPDATE_FILTER_RULES,
-          filter,
-          rules
-        );
-
-        callback(filter.filterId);
-      },
-      (cause) => {
-        purify.console.error(
-          `Error download filter by url ${url}, cause: ${cause || ""}`
-        );
-        callback();
-      }
-    );
-  };
-
-  const getCustomFilterInfo = (url, options, callback) => {
-    const { title } = options;
-
-    purify.backend.loadFilterRulesBySubscriptionUrl(
-      url,
-      (rules) => {
-        const parsedData = parseFilterDataFromHeader(rules);
-        let { name, timeUpdated } = parsedData;
-        const { description, homepage, version, expires } = parsedData;
-
-        name = name || title;
-        timeUpdated = timeUpdated || new Date().toISOString();
-
-        const groupId = CUSTOM_FILTERS_GROUP_ID;
-        const subscriptionUrl = url;
-        const languages = [];
-        const displayNumber = 0;
-        const rulesCount = rules.filter(
-          (rule) => rule.trim().indexOf("!") !== 0
-        ).length;
-
-        // Check if filter from this url was added before
-        let filter = filters.find((f) => f.customUrl === url);
-
-        if (filter) {
-          callback({
-            error: purify.i18n.getMessage(
-              "options_antibanner_custom_filter_already_exists"
-            ),
-          });
-          return;
-        }
-
-        filter = new SubscriptionFilter({
-          groupId,
-          name,
-          description,
-          homepage,
-          version,
-          timeUpdated,
-          displayNumber,
-          languages,
-          expires,
-          subscriptionUrl,
-        });
-
-        filter.loaded = true;
-        // custom filters have special fields
-        filter.customUrl = url;
-        filter.rulesCount = rulesCount;
-
-        callback({ filter });
-      },
-      (cause) => {
-        purify.console.error(
-          `Error download filter by url ${url}, cause: ${cause || ""}`
-        );
-        callback();
-      }
-    );
-  };
 
   /**
    * Load groups and filters metadata
@@ -582,118 +282,12 @@ purify.subscriptions = (function (purify) {
       groupsMap[group.groupId] = group;
     }
 
-    const customFiltersGroup = new SubscriptionGroup(
-      CUSTOM_FILTERS_GROUP_ID,
-      purify.i18n.getMessage("options_antibanner_custom_group"),
-      CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER
-    );
-    groups.push(customFiltersGroup);
-    groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
-
-    // Load custom filters
-    const customFilters = loadCustomFilters();
-    customFilters.forEach((f) => {
-      const customFilter = createSubscriptionFilterFromJSON(f);
-      filters.push(customFilter);
-      filtersMap[customFilter.filterId] = customFilter;
-    });
-
     filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
     groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
     purify.console.info("Filters metadata loaded");
   }
-
-  /**
-   * Localize tag
-   * @param tag
-   * @param i18nMetadata
-   * @private
-   */
-  function applyFilterTagLocalization(tag, i18nMetadata) {
-    const { tagId } = tag;
-    const localizations = i18nMetadata[tagId];
-    if (localizations) {
-      const locale = purify.utils.i18n.normalize(
-        localizations,
-        purify.app.getLocale()
-      );
-      const localization = localizations[locale];
-      if (localization) {
-        tag.name = localization.name;
-        tag.description = localization.description;
-      }
-    }
-  }
-
-  /**
-   * Localize filter
-   * @param filter
-   * @param i18nMetadata
-   * @private
-   */
-  function applyFilterLocalization(filter, i18nMetadata) {
-    const { filterId } = filter;
-    const localizations = i18nMetadata[filterId];
-    if (localizations) {
-      const locale = purify.utils.i18n.normalize(
-        localizations,
-        purify.app.getLocale()
-      );
-      const localization = localizations[locale];
-      if (localization) {
-        filter.name = localization.name;
-        filter.description = localization.description;
-      }
-    }
-  }
-
-  /**
-   * Localize group
-   * @param group
-   * @param i18nMetadata
-   * @private
-   */
-  function applyGroupLocalization(group, i18nMetadata) {
-    const { groupId } = group;
-    const localizations = i18nMetadata[groupId];
-    if (localizations) {
-      const locale = purify.utils.i18n.normalize(
-        localizations,
-        purify.app.getLocale()
-      );
-      const localization = localizations[locale];
-      if (localization) {
-        group.groupName = localization.name;
-      }
-    }
-  }
-
-  /**
-   * Loads groups and filters localizations
-   * @return {Promise} returns promise
-   */
-  // async function loadMetadataI18n() {
-  //   const i18nMetadata = await purify.backend.loadLocalFiltersI18Metadata();
-  //   const tagsI18n = i18nMetadata.tags;
-  //   const filtersI18n = i18nMetadata.filters;
-  //   const groupsI18n = i18nMetadata.groups;
-
-  //   for (let i = 0; i < tags.length; i += 1) {
-  //     applyFilterTagLocalization(tags[i], tagsI18n);
-  //   }
-
-  //   for (let j = 0; j < filters.length; j += 1) {
-  //     applyFilterLocalization(filters[j], filtersI18n);
-  //   }
-
-  //   for (let k = 0; k < groups.length; k += 1) {
-  //     applyGroupLocalization(groups[k], groupsI18n);
-  //   }
-
-  //   purify.console.info("Filters i18n metadata loaded");
-  // }
 
   /**
    * Loads script rules from local file
@@ -745,31 +339,12 @@ purify.subscriptions = (function (purify) {
     return filters;
   };
 
-  const getCustomFilters = function () {
-    return filters.filter((f) => f.customUrl);
-  };
-
   /**
    * Gets filter metadata by filter identifier
    */
   const getFilter = function (filterId) {
     return filtersMap[filterId];
   };
-
-  const isTrustedFilter = (filterId) => {
-    if (filterId < CUSTOM_FILTERS_START_ID) {
-      return true;
-    }
-    const filter = filtersMap[filterId];
-    return !!(filter && filter.trusted && filter.trusted === true);
-  };
-
-  /**
-   * @returns Array of Tags metadata
-   */
-  // const getTags = function () {
-  //   return tags;
-  // };
 
   /**
    * @returns Array of Groups metadata
@@ -832,42 +407,15 @@ purify.subscriptions = (function (purify) {
     return [...new Set(filterIds)];
   };
 
-  const removeCustomFilter = (filter) => {
-    if (filter && filter.filterId) {
-      delete filtersMap[filter.filterId];
-      filters = filters.filter((f) => f.filterId !== filter.filterId);
-    }
-  };
-
-  // Add event listener to persist filter metadata to local storage
-  purify.listeners.addListener((event, payload) => {
-    switch (event) {
-      case purify.listeners.FILTER_ADD_REMOVE:
-        if (payload && payload.removed) {
-          removeCustomFilter(payload);
-          removeCustomFilterFromStorage(payload);
-        }
-        break;
-      default:
-        break;
-    }
-  });
-
   return {
     init,
     getFilterIdsForLanguage,
-    // getTags,
     getGroups,
     getGroup,
     groupHasEnabledStatus,
     getFilters,
-    getCustomFilters,
     getFilter,
-    isTrustedFilter,
     createSubscriptionFilterFromJSON,
-    updateCustomFilter,
-    getCustomFilterInfo,
     getLangSuitableFilters,
-    CUSTOM_FILTERS_START_ID,
   };
 })(purify);

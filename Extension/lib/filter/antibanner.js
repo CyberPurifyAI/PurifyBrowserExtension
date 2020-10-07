@@ -207,10 +207,6 @@ purify.antiBannerService = (function (purify) {
     const onFilterLoaded = (success) => {
       if (success) {
         filter.installed = true;
-        purify.listeners.notifyListeners(
-          purify.listeners.FILTER_ADD_REMOVE,
-          filter
-        );
       }
       callback(success);
     };
@@ -267,7 +263,6 @@ purify.antiBannerService = (function (purify) {
    */
   function selectFilterIdsToUpdate(forceUpdate, filtersToUpdate) {
     const filterIds = [];
-    const customFilterIds = [];
     const filters = filtersToUpdate || purify.subscriptions.getFilters();
 
     const needUpdate = (filter) => {
@@ -293,18 +288,13 @@ purify.antiBannerService = (function (purify) {
       const group = purify.subscriptions.getGroup(filter.groupId);
       if (filter.installed && filter.enabled && group.enabled) {
         if (forceUpdate || needUpdate(filter)) {
-          if (filter.customUrl) {
-            customFilterIds.push(filter.filterId);
-          } else {
-            filterIds.push(filter.filterId);
-          }
+          filterIds.push(filter.filterId);
         }
       }
     }
 
     return {
       filterIds,
-      customFilterIds,
     };
   }
 
@@ -337,10 +327,8 @@ purify.antiBannerService = (function (purify) {
     // Select filters for update
     const toUpdate = selectFilterIdsToUpdate(forceUpdate, filters);
     const filterIdsToUpdate = toUpdate.filterIds;
-    const customFilterIdsToUpdate = toUpdate.customFilterIds;
 
-    const totalToUpdate =
-      filterIdsToUpdate.length + customFilterIdsToUpdate.length;
+    const totalToUpdate = filterIdsToUpdate.length;
     if (totalToUpdate === 0) {
       successCallback([]);
       purify.console.info("There is no filters to update");
@@ -357,9 +345,7 @@ purify.antiBannerService = (function (purify) {
             .map(purify.subscriptions.getFilter)
             .filter((f) => f);
 
-          updateCustomFilters(customFilterIdsToUpdate, (customFilters) => {
-            successCallback(filters.concat(customFilters));
-          });
+          successCallback(filters);
         } else {
           errorCallback();
         }
@@ -406,51 +392,6 @@ purify.antiBannerService = (function (purify) {
     // Retrieve current filters metadata for update
     loadFiltersMetadataFromBackend(filterIdsToUpdate, onLoadFilterMetadataList);
   };
-
-  /**
-   * Update filters with custom urls
-   *
-   * @param customFilterIds
-   * @param callback
-   */
-  function updateCustomFilters(customFilterIds, callback) {
-    if (customFilterIds.length === 0) {
-      callback([]);
-      return;
-    }
-
-    const promises = customFilterIds.map(
-      (filterId) =>
-        new Promise((resolve) => {
-          const filter = purify.subscriptions.getFilter(filterId);
-          const onUpdate = (updatedFilterId) => {
-            if (updatedFilterId) {
-              return resolve(filter);
-            }
-            return resolve();
-          };
-          purify.subscriptions.updateCustomFilter(
-            filter.customUrl,
-            {},
-            onUpdate
-          );
-        })
-    );
-
-    Promise.all(promises).then((filters) => {
-      const updatedFilters = filters.filter((f) => f);
-      if (updatedFilters.length > 0) {
-        const filterIdsString = updatedFilters
-          .map((f) => f.filterId)
-          .join(", ");
-        purify.console.info(
-          `Updated custom filters with ids: ${filterIdsString}`
-        );
-      }
-
-      callback(updatedFilters);
-    });
-  }
 
   /**
    * Resets all filters versions
@@ -636,8 +577,6 @@ purify.antiBannerService = (function (purify) {
         return;
       }
 
-      const isTrustedFilter = purify.subscriptions.isTrustedFilter(filterId);
-
       for (let i = startIdx; i < rulesTexts.length && i < endIdx; i += 1) {
         const ruleText = rulesTexts[i];
         if (ruleText in uniqueRules) {
@@ -645,11 +584,7 @@ purify.antiBannerService = (function (purify) {
           continue;
         }
         uniqueRules[ruleText] = true;
-        const rule = purify.rules.builder.createRule(
-          ruleText,
-          filterId,
-          isTrustedFilter
-        );
+        const rule = purify.rules.builder.createRule(ruleText, filterId);
 
         if (rule !== null) {
           newRequestFilter.addRule(rule);
@@ -1608,7 +1543,6 @@ purify.filtersState = (function (purify) {
         updateFilterState(payload);
         updateFilterVersion(payload);
         break;
-      case purify.listeners.FILTER_ADD_REMOVE:
       case purify.listeners.FILTER_ENABLE_DISABLE:
         updateFilterState(payload);
         break;
@@ -1903,10 +1837,6 @@ purify.filters = (function (purify) {
         purify.listeners.FILTER_ENABLE_DISABLE,
         filter
       );
-      purify.listeners.notifyListeners(
-        purify.listeners.FILTER_ADD_REMOVE,
-        filter
-      );
     }
   };
 
@@ -1921,14 +1851,6 @@ purify.filters = (function (purify) {
       return;
     }
 
-    if (!filter.customUrl) {
-      purify.console.error(
-        "Filter {0} is not custom and could not be removed",
-        filter.filterId
-      );
-      return;
-    }
-
     purify.console.debug("Remove filter {0}", filter.filterId);
 
     filter.enabled = false;
@@ -1938,70 +1860,6 @@ purify.filters = (function (purify) {
       purify.listeners.FILTER_ENABLE_DISABLE,
       filter
     );
-    purify.listeners.notifyListeners(
-      purify.listeners.FILTER_ADD_REMOVE,
-      filter
-    );
-  };
-
-  /**
-   * Loads filter rules from url, then tries to parse header to filter metadata
-   * and adds filter object to subscriptions from it.
-   * These custom filters will have special attribute customUrl, from there it could be downloaded and updated.
-   *
-   * @param url custom url, there rules are
-   * @param options object containing title of custom filter
-   * @param successCallback
-   * @param errorCallback
-   */
-  const loadCustomFilter = function (
-    url,
-    options,
-    successCallback,
-    errorCallback
-  ) {
-    purify.console.info("Downloading custom filter from {0}", url);
-
-    if (!url) {
-      errorCallback();
-      return;
-    }
-
-    purify.subscriptions.updateCustomFilter(url, options, (filterId) => {
-      if (filterId) {
-        purify.console.info("Custom filter downloaded");
-
-        const filter = purify.subscriptions.getFilter(filterId);
-        // In case filter is loaded again and was removed before
-        delete filter.removed;
-        successCallback(filter);
-      } else {
-        errorCallback();
-      }
-    });
-  };
-
-  const loadCustomFilterInfo = (
-    url,
-    options,
-    successCallback,
-    errorCallback
-  ) => {
-    purify.console.info(`Downloading custom filter info from ${url}`);
-    if (!url) {
-      errorCallback();
-      return;
-    }
-
-    purify.subscriptions.getCustomFilterInfo(url, options, (result = {}) => {
-      const { error, filter } = result;
-      if (filter) {
-        purify.console.info("Custom filter data downloaded");
-        successCallback(filter);
-        return;
-      }
-      errorCallback(error);
-    });
   };
 
   return {
@@ -2026,8 +1884,6 @@ purify.filters = (function (purify) {
     enableGroup,
     disableGroup,
 
-    loadCustomFilter,
-    loadCustomFilterInfo,
     getEnabledFiltersFromEnabledGroups,
   };
 })(purify);
