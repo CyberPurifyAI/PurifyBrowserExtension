@@ -24,9 +24,8 @@ function hideNodes(nodes) {
   });
 }
 
-function onAdvancedClicked(advancedButton, moreInfoBtn, goButton) {
+function onAdvancedClicked(advancedButton, moreInfoBtn) {
   moreInfoBtn.style.display = "block";
-  goButton.style.display = "block";
   advancedButton.style.display = "none";
 }
 
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const advancedBtn = document.getElementById("advancedButton");
   const moreInfoBtn = document.getElementById("moreInfoButton");
-  const btnProceed = document.getElementById("btnProceed");
 
   const urlParams = new URLSearchParams(document.location.search);
   const host = urlParams.get("host");
@@ -70,18 +68,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     moreInfoBtn.setAttribute("href", moreInfoUrl);
   }
 
-  if (url && isValid(url)) {
-    btnProceed.addEventListener("click", (e) => {
-      e.preventDefault();
-      purify.safebrowsing.addToSafebrowsingTrusted(url);
-      purify.tabs.getActive((tab) => {
-        purify.tabs.reload(tab.tabId, url);
-      });
-    });
-  }
-
   advancedBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    onAdvancedClicked(advancedBtn, moreInfoBtn, btnProceed);
+    onAdvancedClicked(advancedBtn, moreInfoBtn);
   });
 });

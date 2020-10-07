@@ -322,25 +322,9 @@ purify.safebrowsing = (function (purify, global) {
     lookupUrlWithCallback(requestUrl, callback);
   };
 
-  /**
-   * Temporarily whitelist URL
-   * Adds URL to trusted sites (this URL will be ignored by safebrowsing filter)
-   *
-   * @param url URL
-   */
-  const addToSafebrowsingTrusted = function (url) {
-    const host = purify.utils.url.getHost(url);
-    if (!host) {
-      return;
-    }
-
-    safebrowsingCache.cache.saveValue(createHash(host), SB_WHITE_LIST);
-  };
-
   return {
     checkSafebrowsingFilter,
     lookupUrlWithCallback,
-    addToSafebrowsingTrusted,
     getErrorPageURL,
     extractHosts,
     createHashesMap,
