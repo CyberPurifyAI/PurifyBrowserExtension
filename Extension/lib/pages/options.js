@@ -40,38 +40,6 @@ const Utils = {
     };
   })(),
 
-  importFromFileIntoEditor: function importFromFileIntoEditor(editor) {
-    return function (event) {
-      const fileInput = event.target;
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const oldRules = editor.getValue();
-        const newRules = `${oldRules}\n${e.target.result}`.split("\n");
-        const trimmedRules = newRules.map((rule) => rule.trim());
-        const ruleSet = new Set(trimmedRules);
-        const uniqueRules = Array.from(ruleSet).join("\n");
-        editor.setValue(uniqueRules.trim());
-        fileInput.value = "";
-      };
-      reader.onerror = function (err) {
-        throw new Error(
-          `${i18n.getMessage("options_popup_import_rules_unknown_error")} ${
-            err.message
-          }`
-        );
-      };
-      const file = fileInput.files[0];
-      if (file) {
-        if (file.type !== "text/plain") {
-          throw new Error(
-            i18n.getMessage("options_popup_import_rules_wrong_file_extension")
-          );
-        }
-        reader.readAsText(file, "utf-8");
-      }
-    };
-  },
-
   getExtension: function getExtension(filename) {
     if (!filename) {
       return undefined;
@@ -81,31 +49,6 @@ const Utils = {
       return undefined;
     }
     return parts[parts.length - 1];
-  },
-
-  handleImportSettings(e) {
-    const onFileLoaded = function (content) {
-      contentPage.sendMessage({ type: "applySettingsJson", json: content });
-    };
-
-    const file = e.currentTarget.files[0];
-    if (file) {
-      if (this.getExtension(file.name) !== "json") {
-        throw new Error(
-          i18n.getMessage("options_popup_import_settings_wrong_file_extension")
-        );
-      }
-      const reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = function (evt) {
-        onFileLoaded(evt.target.result);
-      };
-      reader.onerror = function () {
-        throw new Error(
-          i18n.getMessage("options_popup_import_error_file_description")
-        );
-      };
-    }
   },
 
   hoursToMs(hours) {
@@ -453,8 +396,6 @@ const WhiteListFilter = function (options) {
   });
 
   const importWhiteListInput = document.querySelector("#importWhiteListInput");
-  // const importWhiteListBtn = document.querySelector("#whiteListFiltersImport");
-  // const exportWhiteListBtn = document.querySelector("#whiteListFiltersExport");
   const changeDefaultWhiteListModeCheckbox = document.querySelector(
     "#changeDefaultWhiteListMode"
   );
@@ -483,13 +424,6 @@ const WhiteListFilter = function (options) {
   let initialChangeFired = false;
   let whitelistModeToggled = false;
   session.addEventListener("change", (e) => {
-    // Do no let user export empty whitelist rules
-    // if (session.getValue().length > 0) {
-    //   exportWhiteListBtn.classList.remove("disabled");
-    // } else {
-    //   exportWhiteListBtn.classList.add("disabled");
-    // }
-
     if (!initialChangeFired && hasContent) {
       initialChangeFired = true;
       return;
@@ -518,23 +452,6 @@ const WhiteListFilter = function (options) {
     "change",
     changeDefaultWhiteListMode
   );
-
-  // importWhiteListBtn.addEventListener("click", (e) => {
-  //   e.preventDefault();
-  //   importWhiteListInput.click();
-  // });
-
-  // exportWhiteListBtn.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   const WHITELIST_HASH = "wl";
-  //   if (exportWhiteListBtn.classList.contains("disabled")) {
-  //     return;
-  //   }
-  //   contentPage.sendMessage({
-  //     type: "openExportRulesTab",
-  //     hash: WHITELIST_HASH,
-  //   });
-  // });
 
   importWhiteListInput.addEventListener("change", (e) => {
     const handleFileInput = Utils.importFromFileIntoEditor(editor);
@@ -620,50 +537,6 @@ const UserFilter = function () {
     }
     saver.setDirty();
   });
-
-  // const importUserFiltersInput = document.querySelector(
-  //   "#importUserFilterInput"
-  // );
-  // const importUserFiltersBtn = document.querySelector("#userFiltersImport");
-  // const exportUserFiltersBtn = document.querySelector("#userFiltersExport");
-
-  // Do not let to export empty user filter
-  // session.addEventListener("change", () => {
-  //   if (session.getValue().length > 0) {
-  //     exportUserFiltersBtn.classList.remove("disabled");
-  //   } else {
-  //     exportUserFiltersBtn.classList.add("disabled");
-  //   }
-  // });
-
-  // importUserFiltersBtn.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   importUserFiltersInput.click();
-  // });
-
-  // importUserFiltersInput.addEventListener("change", (e) => {
-  //   const handleFileInput = Utils.importFromFileIntoEditor(editor);
-  //   try {
-  //     handleFileInput(e);
-  //   } catch (err) {
-  //     Utils.showPopup(
-  //       i18n.getMessage("options_popup_import_rules_error_title"),
-  //       err.message
-  //     );
-  //   }
-  // });
-
-  // exportUserFiltersBtn.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   const USER_FILTER_HASH = "uf";
-  //   if (exportUserFiltersBtn.classList.contains("disabled")) {
-  //     return;
-  //   }
-  //   contentPage.sendMessage({
-  //     type: "openExportRulesTab",
-  //     hash: USER_FILTER_HASH,
-  //   });
-  // });
 
   return {
     updateUserFilterRules,
@@ -1921,26 +1794,6 @@ PageController.prototype = {
     });
   },
 
-  onSettingsImported(success) {
-    if (success) {
-      Utils.showPopup(i18n.getMessage("options_popup_import_success_title"));
-
-      const self = this;
-      contentPage.sendMessage({ type: "initializeFrameScript" }, (response) => {
-        userSettings = response.userSettings;
-        enabledFilters = response.enabledFilters;
-        requestFilterInfo = response.requestFilterInfo;
-
-        self._render();
-      });
-    } else {
-      Utils.showPopup(
-        i18n.getMessage("options_popup_import_error_title"),
-        i18n.getMessage("options_popup_import_error_description")
-      );
-    }
-  },
-
   _bindEvents() {
     // TODO remove if not necessary
     this.tooManySubscriptionsEl = document.querySelector(
@@ -1954,27 +1807,6 @@ PageController.prototype = {
     // document.querySelector('.openExtensionStore').addEventListener('click', (e) => {
     //     e.preventDefault();
     //     contentPage.sendMessage({ type: 'openExtensionStore' });
-    // });
-
-    // const importSettingsBtn = document.querySelector("#importSettingsFile");
-    // const importSettingsFileInput = document.querySelector(
-    //   "#importSettingsFileInput"
-    // );
-    // importSettingsBtn.addEventListener(
-    //   "click",
-    //   this.importSettingsFile.bind(this)
-    // );
-
-    // importSettingsFileInput.addEventListener("change", (e) => {
-    //   try {
-    //     Utils.handleImportSettings(e);
-    //   } catch (err) {
-    //     Utils.showPopup(
-    //       i18n.getMessage("options_popup_import_error_file_title"),
-    //       err.message
-    //     );
-    //   }
-    //   importSettingsFileInput.value = "";
     // });
   },
 
@@ -2026,14 +1858,6 @@ PageController.prototype = {
     contentPage.sendMessage({ type: "resetBlockedAdsCount" }, () => {
       Utils.showPopup(i18n.getMessage("options_reset_stats_done"));
     });
-  },
-
-  importSettingsFile(e) {
-    e.preventDefault();
-    const importSettingsFileInput = document.querySelector(
-      "#importSettingsFileInput"
-    );
-    importSettingsFileInput.click();
   },
 };
 
@@ -2139,7 +1963,6 @@ const initPage = function (response) {
       EventNotifierTypes.UPDATE_USER_FILTER_RULES,
       EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES,
       EventNotifierTypes.REQUEST_FILTER_UPDATED,
-      EventNotifierTypes.SETTINGS_UPDATED,
       EventNotifierTypes.SETTING_UPDATED,
       EventNotifierTypes.FILTERS_UPDATE_CHECK_READY,
     ];
@@ -2179,9 +2002,6 @@ const initPage = function (response) {
           }
           break;
         }
-        case EventNotifierTypes.SETTINGS_UPDATED:
-          controller.onSettingsImported(options);
-          break;
         case EventNotifierTypes.FILTERS_UPDATE_CHECK_READY: {
           controller.antiBannerFilters.onFiltersUpdateCheckReady();
           break;

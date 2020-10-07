@@ -509,10 +509,6 @@ purify.ui = (function (purify) {
     updateTabContextMenu(tab);
   };
 
-  const openExportRulesTab = function (hash) {
-    openTab(getPageUrl(`${"export.html" + "#"}${hash}`));
-  };
-
   /**
    * Open settings tab with hash parameters or without them
    * @param anchor
@@ -674,9 +670,9 @@ purify.ui = (function (purify) {
     });
   };
 
-  // const openExtensionStore = function () {
-  //   openTab(extensionStoreLink);
-  // };
+  const openExtensionStore = function () {
+    openTab(extensionStoreLink);
+  };
 
   const openFiltersDownloadPage = function () {
     openTab(getPageUrl("filter-download.html"), {
@@ -963,11 +959,10 @@ purify.ui = (function (purify) {
 
   return {
     init,
-    openExportRulesTab,
     openSettingsTab,
     openSiteReportTab,
     openThankYouPage,
-    // openExtensionStore,
+    openExtensionStore,
     openFiltersDownloadPage,
     openAbuseTab,
 

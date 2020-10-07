@@ -20,9 +20,6 @@
   "popup_header_cta_link": {
     "message": "Want to block more?"
   },
-  "options_popup_import_settings_wrong_file_extension": {
-    "message": "The file extension should be .json"
-  },
   "popup_sfk_for_ios": {
     "message": "CyberPurify for iOS"
   },
@@ -206,32 +203,8 @@
   "options_editor_indicator_saved": {
     "message": "Saved"
   },
-  "options_popup_import_success_title": {
-    "message": "Settings imported successfully"
-  },
-  "options_popup_import_error_title": {
-    "message": "Error importing settings"
-  },
   "options_filters_list_search_placeholder": {
     "message": "Enter the search string"
-  },
-  "options_popup_import_error_description": {
-    "message": "Something went wrong"
-  },
-  "options_popup_import_error_file_title": {
-    "message": "Error loading file"
-  },
-  "options_popup_import_rules_error_title": {
-    "message": "Error"
-  },
-  "options_popup_import_rules_unknown_error": {
-    "message": "Unknown error happened while loading rules:"
-  },
-  "options_popup_import_rules_wrong_file_extension": {
-    "message": "The file extension should be .txt"
-  },
-  "options_popup_import_error_file_description": {
-    "message": "Something went wrong"
   },
   "options_popup_trusted_filter_title": {
     "message": "Trusted"
@@ -623,12 +596,6 @@
   "options_enable_autodetect_filter": {
     "message": "Activate the most appropriate filters automatically"
   },
-  "options_export_settings": {
-    "message": "Export settings"
-  },
-  "options_import_settings": {
-    "message": "Import settings"
-  },
   "options_privacy": {
     "message": "Stealth Mode"
   },
@@ -640,12 +607,6 @@
   },
   "options_too_many_filters_selected": {
     "message": "You have selected too many filter subscriptions. It&nbsp;may significantly slow down your web browsing."
-  },
-  "options_userfilter_export": {
-    "message": "Export"
-  },
-  "options_userfilter_import": {
-    "message": "Import"
   },
   "options_whitelist_description": {
     "message": "CyberPurify does not filter websites from the Whitelist."

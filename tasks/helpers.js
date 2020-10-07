@@ -96,7 +96,6 @@ export function preprocessAll(dest, data, done) {
   const filesToPreprocess = [
     path.join(dest, "pages/popup.html"),
     path.join(dest, "pages/filter-download.html"),
-    path.join(dest, "pages/export.html"),
     path.join(dest, "pages/options.html"),
     path.join(dest, "lib/filter/filters.js"),
   ];

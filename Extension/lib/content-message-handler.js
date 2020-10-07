@@ -188,12 +188,9 @@
       case "openThankYouPage":
         purify.ui.openThankYouPage();
         break;
-      // case 'openExtensionStore':
-      //     purify.ui.openExtensionStore();
-      //     break;
-      case "openExportRulesTab":
-        purify.ui.openExportRulesTab(message.hash);
-        break;
+      case 'openExtensionStore':
+          purify.ui.openExtensionStore();
+          break;
       case "openSafebrowsingTrusted":
         purify.safebrowsing.addToSafebrowsingTrusted(message.url);
         purify.tabs.getActive(function (tab) {
