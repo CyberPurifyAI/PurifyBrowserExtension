@@ -1,11 +1,11 @@
 # Third-party libs
 
-## `moment-with-locales.js`
+## `moment-with-locales.min.js`
 
-- v2.22.2
+- v2.29.1
 - Licence: MIT
-- Release: https://github.com/moment/moment/tree/2.24.0
-- Raw file: https://raw.githubusercontent.com/moment/moment/2.22.2/min/moment-with-locales.js
+- Release: https://github.com/moment/moment/tree/2.29.1
+- Raw file: https://raw.githubusercontent.com/moment/moment/2.29.1/min/moment-with-locales.min.js
 
 ## `deferred.js`
 
@@ -29,14 +29,14 @@
 - Raw file: https://raw.githubusercontent.com/ameshkov/text-encoding/ddd20a5064f622b6fd47cdc11834ca8f130cb100/lib/encoding.js
 - `encoding-indexes.js` is **not** a third-party library, but definitions of encodings used by `encoding.js`
 
-## `nanobar.js`
+## `nanobar.min.js`
 
 - v0.4.2
 - Licence: MIT
 - Release: https://github.com/jacoborus/nanobar/tree/v0.4.2
-- Raw file: https://raw.githubusercontent.com/jacoborus/nanobar/v0.4.2/nanobar.js
+- Raw file: https://raw.githubusercontent.com/jacoborus/nanobar/v0.4.2/nanobar.min.js
 
-## `crypto-js/`
+## `crypto-js`
 
 - v3.1.9
 - Licence: MIT
@@ -45,21 +45,15 @@
   - https://raw.githubusercontent.com/brix/crypto-js/3.1.9/core.js
   - https://github.com/brix/crypto-js/blob/3.1.9/md5.js
 
-## `ace/`
+## `ace`
 
-- v1.4.1
+- v1.4.12
 - Licence: BSD-3-Clause
-- Release: https://github.com/ajaxorg/ace-builds/tree/v1.4.1
+- Release: https://github.com/ajaxorg/ace-builds/tree/v1.4.12
 - Raw files:
-  _ https://raw.githubusercontent.com/ajaxorg/ace-builds/v1.4.1/src-noconflict/ace.js
-  _ https://raw.githubusercontent.com/ajaxorg/ace-builds/v1.4.1/src-noconflict/ext-searchbox.js
+  _ https://raw.githubusercontent.com/ajaxorg/ace-builds/v1.4.12/src-noconflict/ace.js
+  _ https://raw.githubusercontent.com/ajaxorg/ace-builds/v1.4.12/src-noconflict/ext-searchbox.js
   `mode-purify.js` was build by us with embedded js, css, csp and text highlight rules
-
-## Not quite third-party
-
-​
-These libs are developed by us from scratch.
-​
 
 ## `filter-downloader.js`
 
@@ -79,13 +73,7 @@ These libs are developed by us from scratch.
 
 ## `lru.js`
 
-- v0.3.3
 - Library source https://raw.githubusercontent.com/rsms/js-lru/master/lru.js
-
-## `tensorflow.js`
-
-- v2.4.0
-- Library source: https://github.com/tensorflow/tfjs
 
 ## `nsfwjs`
 
