@@ -8,7 +8,7 @@
 /**
  * nsfw filtering
  */
-purify.nsfwFiltering = (function (purify) {
+purify.nsfwFiltering = (function (purify, global) {
   "use strict";
 
   const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
@@ -28,6 +28,16 @@ purify.nsfwFiltering = (function (purify) {
         nsfwImageCache,
         "cache",
         () => new purify.utils.LruCache("nsfw-image-cache")
+      );
+    },
+  };
+
+  const nsfwUrlCache = {
+    get cache() {
+      return purify.lazyGet(
+        nsfwUrlCache,
+        "domains",
+        () => new purify.utils.LruCache("nsfw-url-cache", 200)
       );
     },
   };
@@ -52,7 +62,7 @@ purify.nsfwFiltering = (function (purify) {
   };
 
   const getPredictImage = function (requestUrl, originUrl) {
-    let urlCache = nsfwImageCache.cache.getValue(originUrl);
+    let urlCache = nsfwUrlCache.cache.getValue(originUrl);
 
     if (typeof urlCache === "undefined") {
       urlCache = [];
@@ -75,7 +85,7 @@ purify.nsfwFiltering = (function (purify) {
               if (result) {
                 urlCache.push(requestUrl);
                 const uniqueArr = urlCache.filter(uniqueArray);
-                nsfwImageCache.cache.saveValue(originUrl, uniqueArr);
+                nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
               }
 
               return Boolean(result);
@@ -98,7 +108,7 @@ purify.nsfwFiltering = (function (purify) {
               if (result) {
                 urlCache.push(requestUrl);
                 const uniqueArr = urlCache.filter(uniqueArray);
-                nsfwImageCache.cache.saveValue(originUrl, uniqueArr);
+                nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
               }
 
               return Boolean(result);
@@ -144,6 +154,7 @@ purify.nsfwFiltering = (function (purify) {
     initialize,
     getPredictImage,
     nsfwImageCache,
+    nsfwUrlCache,
     createHash,
   };
-})(purify);
+})(purify, window);

@@ -34,6 +34,9 @@ purify.RequestTypes = {
   PING: "PING",
 };
 
+purify.HUB_SUBSCRIBE =
+  "d3M6Ly9jaHJvbWVfZXh0OjNvS2RGWUhnNGoxSlV1WXNHcDkzaXVIMjFjN2ozWFRQQDEwLjE0OC4wLjc6MTU2NzU=";
+
 /**
  * Background tab id in browsers is defined as -1
  */

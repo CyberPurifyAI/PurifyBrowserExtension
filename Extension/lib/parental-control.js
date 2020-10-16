@@ -16,46 +16,88 @@ purify.parentalControl = (function (purify) {
     clientId: "chrome_ext_" + Math.random().toString(16).substr(2, 8),
   };
 
-  const init = async function () {
-    const syncStore = new OptionsSync();
-    const mqttc = mqtt.connect(
-      "ws://chrome_ext:3oKdFYHg4j1JUuYsGp93iuH21c7j3XTP@10.148.0.7:15675",
-      MQTT_CONFIG
-    );
+  const initDevice = function () {
+    browser.storage.sync.get("puid", function (info) {
+      if (Object.keys(info).length === 0 && info.constructor === Object) {
+        const hub = atob(purify.HUB_SUBSCRIBE);
+        const mqttc = mqtt.connect(hub, MQTT_CONFIG);
 
-    mqttc.on("connect", function () {
-      console.log("connected");
-
-      const payload = JSON.stringify({
-        action: "init_device",
-        client_id: MQTT_CONFIG.clientId,
-      });
-
-      mqttc.subscribe("listen_" + MQTT_CONFIG.clientId, function (err) {
-        if (!err) {
-          mqttc.publish("mqtt_proxy", payload, function () {
-            console.log("init_device");
+        mqttc.on("connect", function () {
+          const payload = JSON.stringify({
+            action: "init_device",
+            client_id: MQTT_CONFIG.clientId,
           });
-        }
-      });
-    });
 
-    mqttc.on("message", function (topic, message) {
-      console.log(message.toString());
-      mqttc.end();
-    });
+          mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
+            if (!err) {
+              mqttc.publish("mqtt_proxy", payload);
+            }
+          });
+        });
 
-    mqttc.on("error", (error) => {
-      purify.console.info("error");
-    });
+        mqttc.on("message", function (topic, message) {
+          const payload = JSON.parse(message.toString());
+          browser.storage.sync.set({ puid: payload.puid });
+          mqttc.end();
+        });
 
+        mqttc.on("error", (error) => {
+          purify.console.info("error");
+        });
+      }
+    });
+  };
+
+  const syncParentalControl = function () {
+    const data = purify.nsfwFiltering.nsfwUrlCache.cache.getJSON();
+    purify.nsfwFiltering.nsfwUrlCache.cache.saveValue("https://tinhte.vn", true);
+    console.log(data);
+    // console.log(
+    //   purify.nsfwFiltering.nsfwUrlCache.cache.saveValue("https://tinhte.vn", [
+    //     "test",
+    //     "test",
+    //   ])
+    // );
+    // browser.storage.sync.get("puid", function (info) {
+    //   if (Object.keys(info).length === 0 && info.constructor === Object) {
+    //     const hub = atob(purify.HUB_SUBSCRIBE);
+    //     const mqttc = mqtt.connect(hub, MQTT_CONFIG);
+
+    //     mqttc.on("connect", function () {
+    //       const payload = JSON.stringify({
+    //         action: "record_browser_ext",
+    //         client_id: MQTT_CONFIG.clientId,
+    //         data: {},
+    //       });
+
+    //       mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
+    //         if (!err) {
+    //           mqttc.publish("mqtt_proxy", payload);
+    //         }
+    //       });
+    //     });
+
+    //     mqttc.on("message", function (topic, message) {
+    //       const payload = JSON.parse(message.toString());
+    //       console.log(payload);
+    //       // browser.storage.sync.set({ puid: payload.puid });
+    //       mqttc.end();
+    //     });
+
+    //     mqttc.on("error", (error) => {
+    //       purify.console.info("error");
+    //     });
+    //   }
+    // });
+  };
+
+  const init = async function () {
+    initDevice();
     purify.console.info("Initializing Parental Control");
   };
 
-  const syncNSFW = function () {};
-
   return {
     init,
-    syncNSFW,
+    syncParentalControl,
   };
 })(purify);

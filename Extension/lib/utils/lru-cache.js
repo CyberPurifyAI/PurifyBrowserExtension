@@ -67,6 +67,22 @@
       return cache.get(key);
     }
 
+    function getAllValues() {
+      return cache.values();
+    }
+
+    function getAllKeys() {
+      return cache.keys();
+    }
+
+    function getJSON() {
+      return cache.toJSON();
+    }
+
+    function clear() {
+      return cache.clear();
+    }
+
     const saveValue = function (key, data) {
       if (!key) {
         return;
@@ -87,6 +103,10 @@
     return {
       getValue,
       saveValue,
+      getAllKeys,
+      getAllValues,
+      clear,
+      getJSON,
     };
   }
 

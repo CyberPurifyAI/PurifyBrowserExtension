@@ -350,23 +350,21 @@
       case "requestAnalyzeImage":
         const requestUrl = message.requestUrl;
         const hashUrl = purify.nsfwFiltering.createHash(requestUrl);
-        const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
-          hashUrl
-        );
+        const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(hashUrl);
 
-        let arrNSFWImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+        let arrNSFWUrl = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
           message.originUrl
         );
 
-        if (!arrNSFWImage) {
-          purify.nsfwFiltering.nsfwImageCache.cache.saveValue(
+        if (!arrNSFWUrl) {
+          purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(
             message.originUrl,
             []
           );
-          arrNSFWImage = [];
+          arrNSFWUrl = [];
         }
 
-        if (arrNSFWImage.length > 10) {
+        if (arrNSFWUrl.length > 10) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             requestUrl,
             "Explicit Content"

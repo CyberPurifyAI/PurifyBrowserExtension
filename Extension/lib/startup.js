@@ -38,6 +38,8 @@ purify.initialize = function () {
     purify.whitelist.init();
     purify.ui.init();
 
+    purify.parentalControl.syncParentalControl();
+
     // tf.enableProdMode();
     purify.nsfwFiltering.initialize();
 

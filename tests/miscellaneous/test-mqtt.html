@@ -28,7 +28,7 @@
                 client_id: MQTT_CONFIG.clientId,
             });
 
-            mqttc.subscribe("listen_" + MQTT_CONFIG.clientId, function (err) {
+            mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
                 if (!err) {
                     mqttc.publish("mqtt_proxy", payload, function () {
                         console.log("init_device");

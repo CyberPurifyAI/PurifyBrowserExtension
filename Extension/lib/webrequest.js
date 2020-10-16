@@ -213,12 +213,12 @@
 
     if (requestType === purify.RequestTypes.IMAGE) {
       const originUrl = referrerUrl;
-      let arrImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+      let arrImage = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
         originUrl
       );
 
       if (!arrImage) {
-        purify.nsfwFiltering.nsfwImageCache.cache.saveValue(originUrl, []);
+        purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(originUrl, []);
         arrImage = [];
       }
 
