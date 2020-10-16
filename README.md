@@ -136,6 +136,15 @@ To upload new phrases to crowdin you need the file with phrases `./Extension/_lo
   yarn locales-upload
 ```
 
+### Get all keys from Chrome Storage
+
+```javascript
+chrome.storage.sync.get(null, function (items) {
+  var allKeys = Object.keys(items);
+  console.log(allKeys);
+});
+```
+
 ## Minimum supported browser versions
 
 | Browser                 |      Version      |

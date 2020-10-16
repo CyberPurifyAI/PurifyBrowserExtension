@@ -34,6 +34,7 @@ purify.initialize = function () {
       // purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
     });
 
+    purify.parentalControl.init();
     purify.whitelist.init();
     purify.ui.init();
 

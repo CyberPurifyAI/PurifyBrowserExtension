@@ -79,3 +79,8 @@
 
 - v2.1.0
 - Library source: https://github.com/infinitered/nsfwjs
+
+## `mqtt.js`
+
+- v4.2.1
+- Library source: https://github.com/mqttjs/MQTT.js

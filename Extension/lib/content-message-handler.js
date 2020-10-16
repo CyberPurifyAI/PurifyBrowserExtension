@@ -188,9 +188,9 @@
       case "openThankYouPage":
         purify.ui.openThankYouPage();
         break;
-      case 'openExtensionStore':
-          purify.ui.openExtensionStore();
-          break;
+      case "openExtensionStore":
+        purify.ui.openExtensionStore();
+        break;
       case "openSafebrowsingTrusted":
         purify.safebrowsing.addToSafebrowsingTrusted(message.url);
         purify.tabs.getActive(function (tab) {
@@ -349,8 +349,9 @@
         break;
       case "requestAnalyzeImage":
         const requestUrl = message.requestUrl;
+        const hashUrl = purify.nsfwFiltering.createHash(requestUrl);
         const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
-          requestUrl
+          hashUrl
         );
 
         let arrNSFWImage = purify.nsfwFiltering.nsfwImageCache.cache.getValue(

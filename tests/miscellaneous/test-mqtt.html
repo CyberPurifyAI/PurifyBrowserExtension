@@ -11,42 +11,39 @@
 
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script>
-        // Initialize a mqtt variable globally
-        var mqtt_url = new URL('mqtt://chrome_ext:@10.148.0.7:1883');
-        var auth = (mqtt_url.auth || ':').split(':');
-        var url = "mqtt://" + mqtt_url.host;
-
         //username: auth[0] + ":" + auth[0] if you are on a shared instance
-        var options = {
-            path: '/ws',
-            clientId: 'chrome_ext_' + Math.random().toString(16).substr(2, 8),
-            username: 'chrome_ext',
-            password: '3oKdFYHg4j1JUuYsGp93iuH21c7j3XTP',
+        const MQTT_CONFIG = {
+            path: "/ws",
+            clientId: "chrome_ext_" + Math.random().toString(16).substr(2, 8),
         };
 
         // Create a client connection
-        var client = mqtt.connect("ws://10.148.0.7:15675", options);
+        var mqttc = mqtt.connect("ws://chrome_ext:3oKdFYHg4j1JUuYsGp93iuH21c7j3XTP@10.148.0.7:15675", MQTT_CONFIG);
 
-        client.on('connect', function () {
-
+        mqttc.on("connect", function () {
             console.log("connected");
 
-            //client.subscribe('hello/world', function () {
-            //  client.on('message', function (topic, message, packet) {
-            //    console.log("Received '" + message + "' on '" + topic + "'");
-            //});
-            //});
-
-            // publish a message to a topic
-            var message = JSON.stringify({
-                'device': '1234-1234-1234-1234'
-            })
-
-            // publish a message to a topic
-            client.publish('mqtt_proxy', message, function () {
-                console.log("Message is published");
-                //client.end(); // Close the connection when published
+            const payload = JSON.stringify({
+                action: "init_device",
+                client_id: MQTT_CONFIG.clientId,
             });
+
+            mqttc.subscribe("listen_" + MQTT_CONFIG.clientId, function (err) {
+                if (!err) {
+                    mqttc.publish("mqtt_proxy", payload, function () {
+                        console.log("init_device");
+                    });
+                }
+            });
+        });
+
+        mqttc.on("message", function (topic, message) {
+            console.log(message.toString());
+            mqttc.end();
+        });
+
+        mqttc.on("error", (error) => {
+            purify.console.info("error");
         });
     </script>
 </body>

@@ -47,6 +47,10 @@ purify.nsfwFiltering = (function (purify) {
     });
   };
 
+  const createHash = function (host) {
+    return global.SHA256.hash(`${host}`);
+  };
+
   const getPredictImage = function (requestUrl, originUrl) {
     let urlCache = nsfwImageCache.cache.getValue(originUrl);
 
@@ -65,7 +69,8 @@ purify.nsfwFiltering = (function (purify) {
               ]);
 
               // purify.console.info(`${className} - ${probability} - ${result}`);
-              nsfwImageCache.cache.saveValue(requestUrl, result);
+              const hash = createHash(requestUrl);
+              nsfwImageCache.cache.saveValue(hash, result);
 
               if (result) {
                 urlCache.push(requestUrl);
@@ -87,7 +92,8 @@ purify.nsfwFiltering = (function (purify) {
               ]);
 
               // purify.console.info(`${className} - ${probability} - ${result}`);
-              nsfwImageCache.cache.saveValue(requestUrl, result);
+              const hash = createHash(requestUrl);
+              nsfwImageCache.cache.saveValue(hash, result);
 
               if (result) {
                 urlCache.push(requestUrl);
@@ -138,5 +144,6 @@ purify.nsfwFiltering = (function (purify) {
     initialize,
     getPredictImage,
     nsfwImageCache,
+    createHash,
   };
 })(purify);
