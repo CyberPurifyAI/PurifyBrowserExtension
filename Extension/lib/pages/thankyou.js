@@ -13,20 +13,10 @@ const PageController = (response) => {
     constants: { AntiBannerFiltersId },
   } = response;
 
-  let safebrowsingEnabledCheckbox;
   let trackingFilterEnabledCheckbox;
   let socialFilterEnabledCheckbox;
   let sendStatsCheckbox;
   let allowAcceptableAdsCheckbox;
-
-  const safebrowsingEnabledChange = (e) => {
-    const checkbox = e.currentTarget;
-    contentPage.sendMessage({
-      type: "changeUserSetting",
-      key: userSettings.names.DISABLE_SAFEBROWSING,
-      value: !checkbox.checked,
-    });
-  };
 
   const trackingFilterEnabledChange = (e) => {
     const checkbox = e.currentTarget;
@@ -152,15 +142,11 @@ const PageController = (response) => {
     }
   };
 
-  const renderSafebrowsingSection = (safebrowsingEnabled, collectHitStats) => {
-    updateCheckbox(safebrowsingEnabledCheckbox, safebrowsingEnabled);
+  const renderSafebrowsingSection = (collectHitStats) => {
     updateCheckbox(sendStatsCheckbox, collectHitStats);
   };
 
   const render = () => {
-    const safebrowsingEnabled = !userSettings.values[
-      userSettings.names.DISABLE_SAFEBROWSING
-    ];
     const collectHitsCount = !userSettings.values[
       userSettings.names.DISABLE_COLLECT_HITS
     ];
@@ -171,7 +157,7 @@ const PageController = (response) => {
     const allowAcceptableAdsEnabled =
       AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters;
 
-    renderSafebrowsingSection(safebrowsingEnabled, collectHitsCount);
+    renderSafebrowsingSection(collectHitsCount);
     updateCheckbox(trackingFilterEnabledCheckbox, trackingFilterEnabled);
     updateCheckbox(socialFilterEnabledCheckbox, socialFilterEnabled);
     updateCheckbox(allowAcceptableAdsCheckbox, allowAcceptableAdsEnabled);

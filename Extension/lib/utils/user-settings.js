@@ -19,14 +19,12 @@ purify.settings = (function (purify) {
     "utm_source,utm_medium,utm_term,utm_campaign,utm_content,utm_name,utm_cid,utm_reader,utm_viz_id,utm_pubreferrer,utm_swu,utm_referrer,utm_social,utm_social-type,utm_place,utm_userid,utm_channel,fb_action_ids,fb_action_types,fb_ref,fb_source";
 
   const settings = {
-    DISABLE_DETECT_FILTERS: "detect-filters-disabled",
     DISABLE_SHOW_PAGE_STATS: "disable-show-page-statistic",
     DISABLE_SHOW_PURIFY_PROMO_INFO: "show-info-about-purify-disabled",
     DISABLE_SAFEBROWSING: "safebrowsing-disabled",
     DISABLE_FILTERING: "purify-disabled",
     DISABLE_COLLECT_HITS: "hits-count-disabled",
     DISABLE_SHOW_CONTEXT_MENU: "context-menu-disabled",
-    USE_OPTIMIZED_FILTERS: "use-optimized-filters",
     DEFAULT_WHITE_LIST_MODE: "default-whitelist-mode",
     DISABLE_SHOW_APP_UPDATED_NOTIFICATION: "show-app-updated-disabled",
     FILTERS_UPDATE_PERIOD: "filters-update-period",
@@ -66,11 +64,9 @@ purify.settings = (function (purify) {
           (!purify.utils.browser.isWindowsOs() &&
             !purify.utils.browser.isMacOs()) ||
           purify.utils.browser.isEdgeBrowser();
-        defaults[settings.DISABLE_SAFEBROWSING] = true;
+        defaults[settings.DISABLE_SAFEBROWSING] = false;
         defaults[settings.DISABLE_COLLECT_HITS] = true;
         defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
-        defaults[settings.USE_OPTIMIZED_FILTERS] = purify.prefs.mobile;
-        defaults[settings.DISABLE_DETECT_FILTERS] = false;
         defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
         defaults[
           settings.FILTERS_UPDATE_PERIOD
@@ -173,14 +169,6 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_FILTERING, disabled);
   };
 
-  const isAutodetectFilters = function () {
-    return !getProperty(settings.DISABLE_DETECT_FILTERS);
-  };
-
-  const changeAutodetectFilters = function (enabled, options) {
-    setProperty(settings.DISABLE_DETECT_FILTERS, !enabled, options);
-  };
-
   const showPageStatistic = function () {
     return !getProperty(settings.DISABLE_SHOW_PAGE_STATS);
   };
@@ -205,14 +193,6 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, !show, options);
   };
 
-  const changeEnableSafebrowsing = function (enabled, options) {
-    setProperty(settings.DISABLE_SAFEBROWSING, !enabled, options);
-  };
-
-  const safebrowsingInfoEnabled = function () {
-    return !getProperty(settings.DISABLE_SAFEBROWSING);
-  };
-
   const collectHitsCount = function () {
     return !getProperty(settings.DISABLE_COLLECT_HITS);
   };
@@ -231,14 +211,6 @@ purify.settings = (function (purify) {
 
   const isDefaultWhiteListMode = function () {
     return getProperty(settings.DEFAULT_WHITE_LIST_MODE);
-  };
-
-  const isUseOptimizedFiltersEnabled = function () {
-    return getProperty(settings.USE_OPTIMIZED_FILTERS);
-  };
-
-  const changeUseOptimizedFiltersEnabled = function (enabled, options) {
-    setProperty(settings.USE_OPTIMIZED_FILTERS, !!enabled, options);
   };
 
   const changeDefaultWhiteListMode = function (enabled) {
@@ -299,23 +271,17 @@ purify.settings = (function (purify) {
 
   api.isFilteringDisabled = isFilteringDisabled;
   api.changeFilteringDisabled = changeFilteringDisabled;
-  api.isAutodetectFilters = isAutodetectFilters;
-  api.changeAutodetectFilters = changeAutodetectFilters;
   api.showPageStatistic = showPageStatistic;
   api.changeShowPageStatistic = changeShowPageStatistic;
   api.isShowInfoAboutPurifyFullVersion = isShowInfoAboutPurifyFullVersion;
   api.changeShowInfoAboutPurifyFullVersion = changeShowInfoAboutPurifyFullVersion;
   api.isShowAppUpdatedNotification = isShowAppUpdatedNotification;
   api.changeShowAppUpdatedNotification = changeShowAppUpdatedNotification;
-  api.changeEnableSafebrowsing = changeEnableSafebrowsing;
-  api.safebrowsingInfoEnabled = safebrowsingInfoEnabled;
   api.collectHitsCount = collectHitsCount;
   api.changeCollectHitsCount = changeCollectHitsCount;
   api.showContextMenu = showContextMenu;
   api.changeShowContextMenu = changeShowContextMenu;
   api.isDefaultWhiteListMode = isDefaultWhiteListMode;
-  api.isUseOptimizedFiltersEnabled = isUseOptimizedFiltersEnabled;
-  api.changeUseOptimizedFiltersEnabled = changeUseOptimizedFiltersEnabled;
   api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
   api.getFiltersUpdatePeriod = getFiltersUpdatePeriod;
   api.setFiltersUpdatePeriod = setFiltersUpdatePeriod;

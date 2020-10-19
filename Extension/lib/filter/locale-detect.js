@@ -140,10 +140,7 @@
    * @param url    Page URL
    */
   function detectTabLanguage(tab, url) {
-    if (
-      !purify.settings.isAutodetectFilters() ||
-      purify.settings.isFilteringDisabled()
-    ) {
+    if (purify.settings.isFilteringDisabled()) {
       return;
     }
 

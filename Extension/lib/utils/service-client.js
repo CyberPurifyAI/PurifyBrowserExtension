@@ -53,11 +53,6 @@ purify.backend = (function (purify) {
       return `${this.filtersUrl}/filters/{filter_id}.txt`;
     },
 
-    // URL for downloading optimized AG filters
-    get optimizedFilterRulesUrl() {
-      return `${this.filtersUrl}/filters/{filter_id}_optimized.txt`;
-    },
-
     // URL for checking filter updates
     get filtersMetadataUrl() {
       const params = purify.utils.browser.getExtensionParams();
@@ -163,14 +158,14 @@ purify.backend = (function (purify) {
    * URL for downloading AG filter
    *
    * @param filterId Filter identifier
-   * @param useOptimizedFilters
    * @private
    */
-  function getUrlForDownloadFilterRules(filterId, useOptimizedFilters) {
-    const url = useOptimizedFilters
-      ? settings.optimizedFilterRulesUrl
-      : settings.filterRulesUrl;
-    return purify.utils.strings.replaceAll(url, "{filter_id}", filterId);
+  function getUrlForDownloadFilterRules(filterId) {
+    return purify.utils.strings.replaceAll(
+      settings.filterRulesUrl,
+      "{filter_id}",
+      filterId
+    );
   }
 
   /**
@@ -246,23 +241,17 @@ purify.backend = (function (purify) {
    *
    * @param filterId              Filter identifier
    * @param forceRemote           Force download filter rules from remote server
-   * @param useOptimizedFilters   Download optimized filters flag
    * @returns {Promise<string>}   Downloaded rules
    */
-  const loadFilterRules = (filterId, forceRemote, useOptimizedFilters) => {
+  const loadFilterRules = (filterId, forceRemote) => {
     let url;
 
     if (forceRemote || settings.localFilterIds.indexOf(filterId) < 0) {
-      url = getUrlForDownloadFilterRules(filterId, useOptimizedFilters);
+      url = getUrlForDownloadFilterRules(filterId);
     } else {
       url = purify.getURL(
         `${settings.localFiltersFolder}/filter_${filterId}.txt`
       );
-      if (useOptimizedFilters) {
-        url = purify.getURL(
-          `${settings.localFiltersFolder}/filter_mobile_${filterId}.txt`
-        );
-      }
     }
 
     return FilterDownloader.download(url, FilterCompilerConditionsConstants);

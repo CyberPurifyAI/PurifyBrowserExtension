@@ -32,11 +32,6 @@
         <div class="logo"><img src="images/logo.svg" alt="" /></div>
         <ul class="nav nav-tabs">
           <li>
-            <a href="#" class="nav__item" data-tab="#general-settings">
-              <span i18n="options_general_settings"></span>
-            </a>
-          </li>
-          <li>
             <a href="#" class="nav__item" data-tab="#antibanner">
               <span i18n="options_antibanner"></span>
             </a>
@@ -75,58 +70,6 @@
             </a>
           </li>
         </ul>
-      </div>
-      <div id="general-settings" class="settings-content tab-pane">
-        <div class="page-title" i18n="options_general_settings_title"></div>
-        <div class="settings-body">
-          <div class="subtitle settings-body-subtitle" i18n="options_general_settings"></div>
-          <ul class="opts-list">
-            <li class="active">
-              <div aria-labelledby="allowAcceptableAds" class="opt-desc">
-                <label tabindex="0" for="allowAcceptableAds" class="title" i18n="options_allow_acceptable_ads"></label>
-                <div class="opt-state">
-                  <div class="sp-table-row-info desc">
-                    <a class="opt-state__link" href="#" target="_blank" i18n="options_learn_more"></a>
-                  </div>
-                </div>
-              </div>
-              <div class="opt-state">
-                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="allowAcceptableAds" />
-                </div>
-              </div>
-            </li>
-            <li class="active">
-              <div aria-labelledby="safebrowsingEnabledCheckbox" class="opt-desc">
-                <label tabindex="0" for="safebrowsingEnabledCheckbox" class="title"
-                  i18n="options_safebrowsing_enabled"></label>
-                <div class="opt-state">
-                  <div class="sp-table-row-info desc">
-                    <a class="opt-state__link" href="#" target="_blank" i18n="options_learn_more"></a>
-                  </div>
-                </div>
-              </div>
-              <div class="opt-state">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input"
-                    id="safebrowsingEnabledCheckbox" />
-                </div>
-              </div>
-            </li>
-            <li>
-              <div aria-labelledby="autodetectFiltersCheckbox" class="opt-desc">
-                <label tabindex="0" for="autodetectFiltersCheckbox" class="title"
-                  i18n="options_enable_autodetect_filter"></label>
-              </div>
-              <div class="opt-state">
-                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input"
-                    id="autodetectFiltersCheckbox" />
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
 
       <div id="add-custom-filter-popup" class="option-popup">
@@ -438,22 +381,6 @@
         <div class="page-title" i18n="options_miscellaneous_settings"></div>
         <div class="settings-body">
           <ul class="opts-list">
-            <li>
-              <div aria-labelledby="useOptimizedFilters" class="opt-desc">
-                <label tabindex="0" for="useOptimizedFilters" class="title"
-                  i18n="options_use_optimized_filters"></label>
-                <div class="opt-state">
-                  <div class="opt-state">
-                    <div class="sp-table-row-info desc" i18n="options_use_optimized_filters_desc"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="useOptimizedFilters" />
-                </div>
-              </div>
-            </li>
             <li>
               <div aria-labelledby="enableHitsCount" class="opt-desc">
                 <label tabindex="0" for="enableHitsCount" class="title" i18n="options_collect_hit_stats"></label>

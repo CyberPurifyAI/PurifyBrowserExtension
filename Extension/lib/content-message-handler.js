@@ -188,12 +188,6 @@
       case "openExtensionStore":
         purify.ui.openExtensionStore();
         break;
-      case "openSafebrowsingTrusted":
-        purify.safebrowsing.addToSafebrowsingTrusted(message.url);
-        purify.tabs.getActive(function (tab) {
-          purify.tabs.reload(tab.tabId, message.url);
-        });
-        break;
       case "openTab":
         purify.ui.openTab(message.url, message.options);
         break;

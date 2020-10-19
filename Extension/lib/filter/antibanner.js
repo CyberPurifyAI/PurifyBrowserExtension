@@ -973,17 +973,7 @@ purify.antiBannerService = (function (purify) {
    * @private
    */
   function subscribeToFiltersChangeEvents() {
-    // on USE_OPTIMIZED_FILTERS setting change we need to reload filters
-    const onUsedOptimizedFiltersChange = purify.utils.concurrent.debounce(
-      reloadAntiBannerFilters,
-      RELOAD_FILTERS_DEBOUNCE_PERIOD
-    );
-
     purify.settings.onUpdated.addListener((setting) => {
-      if (setting === purify.settings.USE_OPTIMIZED_FILTERS) {
-        onUsedOptimizedFiltersChange();
-        return;
-      }
       if (setting === purify.settings.DISABLE_COLLECT_HITS) {
         getRequestFilter().cssFilter.dirty = true;
       }
@@ -1140,11 +1130,7 @@ purify.antiBannerService = (function (purify) {
     };
 
     purify.backend
-      .loadFilterRules(
-        filter.filterId,
-        forceRemote,
-        purify.settings.isUseOptimizedFiltersEnabled()
-      )
+      .loadFilterRules(filter.filterId, forceRemote)
       .then(successCallback, errorCallback);
   }
 
