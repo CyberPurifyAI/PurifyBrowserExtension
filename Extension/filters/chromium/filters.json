@@ -23,17 +23,17 @@
   ],
   "filters": [
     {
-      "filterId": 101,
+      "filterId": 21,
       "name": "CyberPurify Explicit Content",
       "description": "Explicit content include nudity, gambling, fakenews.",
       "timeAdded": "2014-06-30T11:56:55+0400",
       "homepage": "https://cyberpurify.com/",
       "expires": 21600,
-      "displayNumber": 3,
+      "displayNumber": 1,
       "groupId": 1,
-      "subscriptionUrl": "https://storage.googleapis.com/cp-tf-state/explicit.txt",
+      "subscriptionUrl": "https://storage.googleapis.com/purify/extension/filters/21.txt?v=0.1.1",
       "trustLevel": "high",
-      "version": "0.0.1",
+      "version": "0.1.1",
       "timeUpdated": "2020-10-15T04:00:14+0300",
       "languages": []
     },
@@ -229,8 +229,7 @@
       "subscriptionUrl": "https://easylist-downloads.adblockplus.org/liste_fr.txt",
       "trustLevel": "low",
       "version": "2.0.74.50",
-      "timeUpdated": "2020-09-30T04:00:30+0300",
-      "languages": []
+      "timeUpdated": "2020-09-30T04:00:30+0300"
     },
     {
       "filterId": 114,

@@ -32,15 +32,19 @@ purify.backend = (function (purify) {
     get filtersUrl() {
       return purify.lazyGet(this, "filtersUrl", () => {
         if (purify.utils.browser.isFirefoxBrowser()) {
-          return "https://filters.adtidy.org/extension/firefox";
+          return "https://storage.googleapis.com/purify/extension";
+          return "https://storage.googleapis.com/purify/extension/firefox";
         }
         if (purify.utils.browser.isEdgeBrowser()) {
-          return "https://filters.adtidy.org/extension/edge";
+          return "https://storage.googleapis.com/purify/extension";
+          return "https://storage.googleapis.com/purify/extension/edge";
         }
         if (purify.utils.browser.isOperaBrowser()) {
-          return "https://filters.adtidy.org/extension/opera";
+          return "https://storage.googleapis.com/purify/extension";
+          return "https://storage.googleapis.com/purify/extension/opera";
         }
-        return "https://filters.adtidy.org/extension/chromium";
+        return "https://storage.googleapis.com/purify/extension";
+        return "https://storage.googleapis.com/purify/extension/chromium";
       });
     },
 
