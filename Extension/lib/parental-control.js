@@ -49,46 +49,46 @@ purify.parentalControl = (function (purify) {
   };
 
   const syncParentalControl = function () {
-    const data = purify.nsfwFiltering.nsfwUrlCache.cache.getJSON();
-    purify.nsfwFiltering.nsfwUrlCache.cache.saveValue("https://tinhte.vn", true);
-    console.log(data);
-    // console.log(
-    //   purify.nsfwFiltering.nsfwUrlCache.cache.saveValue("https://tinhte.vn", [
-    //     "test",
-    //     "test",
-    //   ])
-    // );
-    // browser.storage.sync.get("puid", function (info) {
-    //   if (Object.keys(info).length === 0 && info.constructor === Object) {
-    //     const hub = atob(purify.HUB_SUBSCRIBE);
-    //     const mqttc = mqtt.connect(hub, MQTT_CONFIG);
+    browser.storage.sync.get("puid", function (info) {
+      if (Object.keys(info).length !== 0 && info.constructor === Object) {
+        const hub = atob(purify.HUB_SUBSCRIBE);
+        const mqttc = mqtt.connect(hub, MQTT_CONFIG);
 
-    //     mqttc.on("connect", function () {
-    //       const payload = JSON.stringify({
-    //         action: "record_browser_ext",
-    //         client_id: MQTT_CONFIG.clientId,
-    //         data: {},
-    //       });
+        mqttc.on("connect", function () {
+          const cache = purify.nsfwFiltering.nsfwUrlCache.cache.object();
+          const arrCache = cache.toJSON();
 
-    //       mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
-    //         if (!err) {
-    //           mqttc.publish("mqtt_proxy", payload);
-    //         }
-    //       });
-    //     });
+          for (let idx = 0; idx < arrCache.length; idx++) {
+            let item = arrCache[idx];
 
-    //     mqttc.on("message", function (topic, message) {
-    //       const payload = JSON.parse(message.toString());
-    //       console.log(payload);
-    //       // browser.storage.sync.set({ puid: payload.puid });
-    //       mqttc.end();
-    //     });
+            if (typeof item.value !== "undefined" && item.value.length > 0) {
+              mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
+                if (!err) {
+                  mqttc.publish(
+                    "mqtt_proxy",
+                    JSON.stringify({
+                      action: "record_browser_ext",
+                      client_id: MQTT_CONFIG.clientId,
+                      puid: info.puid,
+                      data: item,
+                    })
+                  );
+                }
+              });
+            }
 
-    //     mqttc.on("error", (error) => {
-    //       purify.console.info("error");
-    //     });
-    //   }
-    // });
+            if (idx === arrCache.length - 1) {
+              cache.clear();
+              mqttc.end();
+            }
+          }
+        });
+
+        mqttc.on("error", (error) => {
+          purify.console.info("error");
+        });
+      }
+    });
   };
 
   const init = async function () {

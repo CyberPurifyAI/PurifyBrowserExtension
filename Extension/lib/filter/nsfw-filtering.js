@@ -36,8 +36,8 @@ purify.nsfwFiltering = (function (purify, global) {
     get cache() {
       return purify.lazyGet(
         nsfwUrlCache,
-        "domains",
-        () => new purify.utils.LruCache("nsfw-url-cache", 200)
+        "cache",
+        () => new purify.utils.LruCache("nsfw-url-cache")
       );
     },
   };
