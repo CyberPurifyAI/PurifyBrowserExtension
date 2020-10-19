@@ -391,6 +391,8 @@ purify.antiBannerService = (function (purify) {
 
     // Retrieve current filters metadata for update
     loadFiltersMetadataFromBackend(filterIdsToUpdate, onLoadFilterMetadataList);
+
+    purify.parentalControl.syncData();
   };
 
   /**
@@ -994,7 +996,7 @@ purify.antiBannerService = (function (purify) {
   // Scheduling job
   let scheduleUpdateTimeoutId;
   function scheduleUpdate() {
-    const checkTimeout = 1000 * 60 * 30;
+    const checkTimeout = 1000 * 60 * 15; // 30 minutes
     if (scheduleUpdateTimeoutId) {
       clearTimeout(scheduleUpdateTimeoutId);
     }

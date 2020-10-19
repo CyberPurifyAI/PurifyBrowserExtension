@@ -182,9 +182,6 @@
         break;
       case "getFiltersMetadata":
         return purify.categories.getFiltersMetadata();
-      case "setFiltersUpdatePeriod":
-        purify.settings.setFiltersUpdatePeriod(message.updatePeriod);
-        break;
       case "openThankYouPage":
         purify.ui.openThankYouPage();
         break;

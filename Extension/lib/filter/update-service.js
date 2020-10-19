@@ -288,7 +288,7 @@ purify.applicationUpdateService = (function (purify) {
 
   function handleDefaultUpdatePeriodSetting() {
     const dfd = new purify.utils.Promise();
-    const previousDefaultValue = 6 * 60 * 60 * 1000; // 6 hours  // Old 48 * 60 * 60 * 1000 = 48 hours
+    const previousDefaultValue = 2 * 60 * 60 * 1000; // 2 hours  // Old 48 * 60 * 60 * 1000 = 48 hours
 
     const currentUpdatePeriod = purify.settings.getFiltersUpdatePeriod();
 

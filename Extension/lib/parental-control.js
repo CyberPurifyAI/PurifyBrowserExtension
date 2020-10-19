@@ -48,7 +48,7 @@ purify.parentalControl = (function (purify) {
     });
   };
 
-  const syncParentalControl = function () {
+  const syncData = function () {
     browser.storage.sync.get("puid", function (info) {
       if (Object.keys(info).length !== 0 && info.constructor === Object) {
         const hub = atob(purify.HUB_SUBSCRIBE);
@@ -78,7 +78,7 @@ purify.parentalControl = (function (purify) {
             }
 
             if (idx === arrCache.length - 1) {
-              cache.clear();
+              // cache.clear();
               mqttc.end();
             }
           }
@@ -98,6 +98,6 @@ purify.parentalControl = (function (purify) {
 
   return {
     init,
-    syncParentalControl,
+    syncData,
   };
 })(purify);

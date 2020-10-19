@@ -1557,30 +1557,6 @@ const Settings = function () {
     handleActiveStealthOptions(!input.checked);
   });
 
-  function setFiltersUpdatePeriod(updatePeriodString) {
-    contentPage.sendMessage(
-      {
-        type: "setFiltersUpdatePeriod",
-        updatePeriod: updatePeriodString,
-      },
-      () => {}
-    );
-  }
-
-  const filtersUpdatePeriodSelect = document.querySelector(
-    "#filtersUpdatePeriodSelect"
-  );
-  if (filtersUpdatePeriodSelect) {
-    filtersUpdatePeriodSelect.addEventListener("change", (e) => {
-      setFiltersUpdatePeriod(e.currentTarget.value);
-      if (filtersUpdatePeriodSelect.value === "0") {
-        filtersUpdatePeriodSelect.parentNode.classList.remove("active");
-      } else {
-        filtersUpdatePeriodSelect.parentNode.classList.add("active");
-      }
-    });
-  }
-
   // set SELF_DESTRUCT_THIRD_PARTY_COOKIES_TIME and SELF_DESTRUCT_FIRST_PARTY_COOKIES_TIME values
   const selectorsMap = {
     thirdParty: {
@@ -1677,42 +1653,6 @@ const Settings = function () {
     },
   ];
 
-  function renderSelectOptions(selectorValue) {
-    const filtersUpdatePeriodSelect = document.querySelector(
-      "#filtersUpdatePeriodSelect"
-    );
-
-    if (!filtersUpdatePeriodSelect) {
-      return;
-    }
-
-    // remove already added options
-    while (filtersUpdatePeriodSelect.firstChild) {
-      filtersUpdatePeriodSelect.removeChild(
-        filtersUpdatePeriodSelect.firstChild
-      );
-    }
-
-    if (selectorValue === 0) {
-      filtersUpdatePeriodSelect.parentNode.classList.remove("active");
-    } else {
-      filtersUpdatePeriodSelect.parentNode.classList.add("active");
-    }
-
-    const optionsSelectHtml = selectOptions
-      .map((selectOption) => {
-        const { name, value } = selectOption;
-        return `<option value="${value}">${name}</option>`;
-      })
-      .join("\n");
-
-    filtersUpdatePeriodSelect.insertAdjacentHTML(
-      "afterbegin",
-      optionsSelectHtml
-    );
-    filtersUpdatePeriodSelect.value = selectorValue;
-  }
-
   function handleActiveStealthOptions(stealthModeDisabled) {
     const miscellaneousOptionsContainer = document.querySelector(
       "#miscellaneous-stealth-options"
@@ -1748,9 +1688,6 @@ const Settings = function () {
       AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters
     );
 
-    const updatePeriod =
-      userSettings.values[userSettings.names.FILTERS_UPDATE_PERIOD];
-    renderSelectOptions(updatePeriod);
     handleActiveStealthOptions(
       userSettings.values[userSettings.names.DISABLE_STEALTH_MODE]
     );
