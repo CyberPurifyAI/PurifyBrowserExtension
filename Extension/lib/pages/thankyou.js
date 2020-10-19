@@ -16,7 +16,6 @@ const PageController = (response) => {
   let trackingFilterEnabledCheckbox;
   let socialFilterEnabledCheckbox;
   let sendStatsCheckbox;
-  let allowAcceptableAdsCheckbox;
 
   const trackingFilterEnabledChange = (e) => {
     const checkbox = e.currentTarget;
@@ -59,22 +58,6 @@ const PageController = (response) => {
     });
   };
 
-  const allowAcceptableAdsChange = (e) => {
-    const checkbox = e.currentTarget;
-    if (checkbox.checked) {
-      contentPage.sendMessage({
-        type: "addAndEnableFilter",
-        filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
-      });
-    } else {
-      contentPage.sendMessage({
-        type: "disableAntiBannerFilter",
-        filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
-        remove: true,
-      });
-    }
-  };
-
   const bindEvents = () => {
     safebrowsingEnabledCheckbox = document.getElementById(
       "safebrowsingEnabledCheckbox"
@@ -89,7 +72,6 @@ const PageController = (response) => {
     sendStatsCheckbox = document.getElementById(
       "sendSafebrowsingStatsCheckbox"
     );
-    allowAcceptableAdsCheckbox = document.getElementById("allowAcceptableAds");
 
     safebrowsingEnabledCheckbox.addEventListener(
       "change",
@@ -107,10 +89,6 @@ const PageController = (response) => {
     if (!navigator.userAgent.includes("Firefox")) {
       sendStatsCheckbox.addEventListener("change", sendStatsCheckboxChange);
     }
-    allowAcceptableAdsCheckbox.addEventListener(
-      "change",
-      allowAcceptableAdsChange
-    );
 
     // const openExtensionStoreBtns = [].slice.call(document.querySelectorAll('.openExtensionStore'));
     // openExtensionStoreBtns.forEach((openExtensionStoreBtn) => {
@@ -154,13 +132,10 @@ const PageController = (response) => {
       AntiBannerFiltersId.TRACKING_FILTER_ID in enabledFilters;
     const socialFilterEnabled =
       AntiBannerFiltersId.SOCIAL_FILTER_ID in enabledFilters;
-    const allowAcceptableAdsEnabled =
-      AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters;
 
     renderSafebrowsingSection(collectHitsCount);
     updateCheckbox(trackingFilterEnabledCheckbox, trackingFilterEnabled);
     updateCheckbox(socialFilterEnabledCheckbox, socialFilterEnabled);
-    updateCheckbox(allowAcceptableAdsCheckbox, allowAcceptableAdsEnabled);
   };
 
   const init = () => {

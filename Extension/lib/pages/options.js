@@ -71,7 +71,6 @@ const Utils = {
 const TopMenu = (function () {
   "use strict";
 
-  const GENERAL_SETTINGS = "#general-settings";
   const ANTIBANNER = "#antibanner";
   const WHITELIST = "#whitelist";
 
@@ -79,14 +78,14 @@ const TopMenu = (function () {
   let onHashUpdatedCallback;
 
   const toggleTab = function () {
-    let tabId = document.location.hash || GENERAL_SETTINGS;
+    let tabId = document.location.hash || ANTIBANNER;
     let tab;
     try {
       tab = document.querySelector(tabId);
     } catch (e) {
       // If hash is not valid selector
-      tabId = GENERAL_SETTINGS;
-      tab = document.querySelector(GENERAL_SETTINGS);
+      tabId = ANTIBANNER;
+      tab = document.querySelector(ANTIBANNER);
     }
 
     if (tabId.indexOf(ANTIBANNER) === 0 && !tab) {
@@ -95,7 +94,7 @@ const TopMenu = (function () {
     }
 
     if (!tab) {
-      tabId = GENERAL_SETTINGS;
+      tabId = ANTIBANNER;
       tab = document.querySelector(tabId);
     }
 
@@ -1316,13 +1315,7 @@ const AntiBannerFilters = function (options) {
       CheckboxUtils.updateCheckbox(checkboxes, enabled);
     }
     if (filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
-      const allowAcceptableAdsCheckbox = document.querySelector(
-        "#allowAcceptableAds"
-      );
-      CheckboxUtils.updateCheckbox(
-        [allowAcceptableAdsCheckbox],
-        filter.enabled
-      );
+      
     }
   }
 
@@ -1462,13 +1455,6 @@ const Settings = function () {
 
   // Privacy settings
   checkboxes.push(
-    new Checkbox(
-      "#disable_stealth_mode",
-      userSettings.names.DISABLE_STEALTH_MODE,
-      { negate: true }
-    )
-  );
-  checkboxes.push(
     new Checkbox("#hide_referrer", userSettings.names.HIDE_REFERRER)
   );
   checkboxes.push(
@@ -1513,29 +1499,6 @@ const Settings = function () {
       userSettings.names.STRIP_TRACKING_PARAMETERS
     )
   );
-
-  const allowAcceptableAdsCheckbox = document.querySelector(
-    "#allowAcceptableAds"
-  );
-  allowAcceptableAdsCheckbox.addEventListener("change", function () {
-    if (this.checked) {
-      contentPage.sendMessage({
-        type: "addAndEnableFilter",
-        filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
-      });
-    } else {
-      contentPage.sendMessage({
-        type: "disableAntiBannerFilter",
-        filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
-      });
-    }
-  });
-
-  const disableStealthMode = document.querySelector("#disable_stealth_mode");
-  disableStealthMode.addEventListener("change", (e) => {
-    const input = e.target;
-    handleActiveStealthOptions(!input.checked);
-  });
 
   // set SELF_DESTRUCT_THIRD_PARTY_COOKIES_TIME and SELF_DESTRUCT_FIRST_PARTY_COOKIES_TIME values
   const selectorsMap = {
@@ -1662,11 +1625,6 @@ const Settings = function () {
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].render();
     }
-
-    CheckboxUtils.updateCheckbox(
-      [allowAcceptableAdsCheckbox],
-      AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters
-    );
 
     handleActiveStealthOptions(
       userSettings.values[userSettings.names.DISABLE_STEALTH_MODE]

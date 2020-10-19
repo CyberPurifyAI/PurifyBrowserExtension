@@ -12,7 +12,7 @@
 purify.settings = (function (purify) {
   "use strict";
 
-  const DEFAULT_FILTERS_UPDATE_PERIOD = -1 // Old -1;
+  const DEFAULT_FILTERS_UPDATE_PERIOD = -1; // Old -1;
   const DEFAULT_FIRST_PARTY_COOKIES_SELF_DESTRUCT_MIN = 4320;
   const DEFAULT_THIRD_PARTY_COOKIES_SELF_DESTRUCT_MIN = 2880;
   const DEFAULT_TRACKING_PARAMETERS =
@@ -71,7 +71,7 @@ purify.settings = (function (purify) {
         defaults[
           settings.FILTERS_UPDATE_PERIOD
         ] = DEFAULT_FILTERS_UPDATE_PERIOD;
-        defaults[settings.DISABLE_STEALTH_MODE] = true;
+        defaults[settings.DISABLE_STEALTH_MODE] = false;
         defaults[settings.HIDE_REFERRER] = true;
         defaults[settings.HIDE_SEARCH_QUERIES] = true;
         defaults[settings.SEND_DO_NOT_TRACK] = true;

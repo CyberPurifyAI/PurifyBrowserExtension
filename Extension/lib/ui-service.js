@@ -35,9 +35,6 @@ purify.ui = (function (purify) {
     context_open_settings: function () {
       openSettingsTab();
     },
-    context_general_settings: function () {
-      openSettingsTab("general-settings");
-    },
     context_antibanner: function () {
       openSettingsTab("antibanner");
     },
