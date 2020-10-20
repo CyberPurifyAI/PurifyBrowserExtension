@@ -301,10 +301,6 @@ purify.safebrowsing = (function (purify, global) {
     referrerUrl,
     safebrowsingCallback
   ) {
-    if (!purify.settings.safebrowsingInfoEnabled()) {
-      return;
-    }
-
     purify.console.debug("Checking safebrowsing filter for {0}", requestUrl);
 
     const callback = function (sbList) {

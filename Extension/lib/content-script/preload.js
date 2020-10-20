@@ -130,15 +130,16 @@
   };
 
   const analyzeImage = function (image, srcAttribute) {
-    if (image.src.length > 0) {
+    if (
+      image.src.length > 0 &&
+      ((image.width > this.MIN_IMAGE_SIZE &&
+        image.height > this.MIN_IMAGE_SIZE) ||
+        image.height === 0 ||
+        image.width === 0)
+    ) {
       if (srcAttribute) {
         getPredictImageResult(image);
-      } else if (
-        image._isPurified === undefined &&
-        ((image.width > MIN_IMAGE_SIZE && image.height > MIN_IMAGE_SIZE) ||
-          image.height === 0 ||
-          image.width === 0)
-      ) {
+      } else if (image._isPurified === undefined) {
         getPredictImageResult(image);
       }
     }
@@ -162,7 +163,12 @@
 
           if (!result && !err) {
             showImage(image, requestUrl);
+          } else {
+            image.style.filter = "blur(100px)";
+            showImage(image, requestUrl);
+            image.dataset.purify = "nsfw";
           }
+
           resolve(response);
         });
       } catch (err) {
@@ -173,18 +179,22 @@
   };
 
   const hideImage = function (image) {
-    image.style.visibility = "hidden";
     if (image.parentNode?.nodeName === "BODY") {
       image.hidden = true;
     }
+
+    image.dataset.purify = "processing";
+    image.style.visibility = "hidden";
   };
 
   const showImage = function (image, url) {
     if (image.src === url) {
-      image.style.visibility = "visible";
       if (image.parentNode?.nodeName === "BODY") {
         image.hidden = false;
       }
+
+      image.dataset.purify = "sfw";
+      image.style.visibility = "visible";
     }
   };
 

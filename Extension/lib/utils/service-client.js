@@ -90,9 +90,9 @@ purify.backend = (function (purify) {
     get redirectSourcesFolder() {
       return "lib/filter/rules/scriptlets";
     },
-    // Array of filter identifiers, that have local file with rules. Range from 1 to 14 by default
+    // Array of filter identifiers, that have local file with rules. Range from 1 to 21 by default
     get localFilterIds() {
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21];
     },
   };
 
