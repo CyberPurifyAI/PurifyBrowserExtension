@@ -14,6 +14,8 @@ purify.nsfwFiltering = (function (purify, global) {
   const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
   const IMAGE_SIZE = 224;
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
+  const LOADING_TIMEOUT = 1000;
+  const Strictness = 50;
 
   let nsfwInstance = null;
 
@@ -46,6 +48,8 @@ purify.nsfwFiltering = (function (purify, global) {
     const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
 
     return new Promise((resolve, reject) => {
+      setTimeout(reject, LOADING_TIMEOUT, new Error(`Image timeout ${url}`));
+
       image.crossOrigin = "anonymous";
       image.onload = () => {
         return resolve(image);

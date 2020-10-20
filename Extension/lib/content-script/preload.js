@@ -37,6 +37,7 @@
       contentPage = {
         sendMessage: purifyContent.runtimeImpl.sendMessage,
         onMessage: purifyContent.runtimeImpl.onMessage,
+        lastError: purifyContent.runtimeImpl.lastError,
       };
     }
 
@@ -132,8 +133,7 @@
   const analyzeImage = function (image, srcAttribute) {
     if (
       image.src.length > 0 &&
-      ((image.width > this.MIN_IMAGE_SIZE &&
-        image.height > this.MIN_IMAGE_SIZE) ||
+      ((image.width > MIN_IMAGE_SIZE && image.height > MIN_IMAGE_SIZE) ||
         image.height === 0 ||
         image.width === 0)
     ) {
@@ -159,6 +159,13 @@
 
       try {
         getContentPage().sendMessage(request, (response) => {
+          if (
+            getContentPage().lastError !== null &&
+            getContentPage().lastError !== undefined
+          ) {
+            return;
+          }
+
           const { result, requestUrl, err } = response;
 
           if (!result && !err) {

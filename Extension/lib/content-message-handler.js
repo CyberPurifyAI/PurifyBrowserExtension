@@ -339,9 +339,15 @@
         purify.settings.disableShowPurifyPromoInfo();
         break;
       case "requestAnalyzeImage":
+        if (message.type === "SIGN_CONNECT") {
+          return;
+        }
+
         const requestUrl = message.requestUrl;
         const hashUrl = purify.nsfwFiltering.createHash(requestUrl);
-        const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(hashUrl);
+        const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+          hashUrl
+        );
 
         let arrNSFWUrl = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
           message.originUrl
