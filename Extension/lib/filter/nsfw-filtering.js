@@ -16,8 +16,11 @@ purify.nsfwFiltering = (function (purify, global) {
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
   const LOADING_TIMEOUT = 5000;
   const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
+  const DEFAULT_TAB_ID = 999999;
 
   let nsfwInstance = null;
+  let requestQueue = null;
+  let activeTabs = new Set([DEFAULT_TAB_ID]);
 
   const Strictness = 50;
   const coefficient = 1 - Strictness / 100;
@@ -25,6 +28,9 @@ purify.nsfwFiltering = (function (purify, global) {
   const initialize = async function () {
     purify.console.info("Initializing Predict Image");
     nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
+    nsfwImageCache.cache.object();
+    nsfwUrlCache.cache.object();
+    requestQueue = new Map();
   };
 
   const nsfwImageCache = {
@@ -157,8 +163,6 @@ purify.nsfwFiltering = (function (purify, global) {
       const threshold2 =
         Strictness === 100 ? MIN2 : coefficient * (MAX2 - MIN2) + MIN2;
 
-      console.log(threshold1, threshold2);
-
       const result1 =
         FILTER_LIST.has(cn1) &&
         pb1 > Math.round((threshold1 / 100) * 10000) / 10000;
@@ -179,11 +183,37 @@ purify.nsfwFiltering = (function (purify, global) {
     }
   };
 
+  const predictionQueue = function (requestUrl, _tabId) {
+    var promiseProducer = function () {
+      // Your code goes here.
+      // If there is work left to be done, return the next work item as a promise.
+      // Otherwise, return null to indicate that all promises have been created.
+      // Scroll down for an example.
+    };
+
+    // The number of promises to process simultaneously.
+    var concurrency = 3;
+
+    var pool = new PromisePool(promiseProducer, concurrency);
+
+    var poolPromise = pool.start();
+
+    poolPromise.then(
+      function () {
+        console.log("All promises fulfilled");
+      },
+      function (error) {
+        console.log("Some promise rejected: " + error.message);
+      }
+    );
+  };
+
   return {
     initialize,
     getPredictImage,
     nsfwImageCache,
     nsfwUrlCache,
     createHash,
+    predictionQueue,
   };
 })(purify, window);
