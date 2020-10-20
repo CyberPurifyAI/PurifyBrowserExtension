@@ -1,8 +1,8 @@
-! Checksum: k7z5B3r0GTL4kCbSRn/ujw
+! Checksum: JkzUF3bXH+L6sSL/+foQ5g
 ! Title: AdGuard Tracking Protection filter
 ! Description: The most comprehensive list of various online counters and web analytics tools. Use this filter if you do not want your actions on the Internet to be tracked.
-! Version: 2.0.17.23
-! TimeUpdated: 2020-09-29T20:03:30+03:00
+! Version: 2.0.17.56
+! TimeUpdated: 2020-10-20T01:31:25+03:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -190,6 +190,8 @@ journal-plaza.net#?#.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч
 ! ||notify.bugsnag.com^
 ! ||crashlytics2.l.google.com^
 ! ||crashlyticsreports-pa.googleapis.com^
+! ||bugly.qcloud.com^
+! ||admob-app-id-*.firebaseio.com^
 !
 !
 ! ||ensighten.com^$third-party - not a tracker
@@ -204,7 +206,24 @@ journal-plaza.net#?#.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч
 !||i.snssdk.com/log/*
 !||i.snssdk.com/slardar/sdk.js
 !
+||hubvisor.io^$third-party
+||sitest.jp^$third-party
+||husfly.com^$third-party
+||collect.lngtd.com^
+||cdn.resonate.com^$third-party
+||events.mapbox.com^
+||log2.spotify.com^
+||log.particlenews.com^
+||analytics.a-f.io^
+||analytics-api.a-f.io^
+||smetrics.att.com^
+||global.px.quantserve.com^
+||client-analytics.braintreegateway.com^
+||log.propermessage.io^
+||hit.acstat.com^
 ||fhits.xyz^$third-party
+||intelligenceretarget.com^$third-party
+||stpmgo.com^$third-party
 ||eproof.com^$third-party
 ||pdc.dmleonyc.com^$third-party
 ||letscheckmygeos.com^$third-party
@@ -220,7 +239,6 @@ journal-plaza.net#?#.rightside div.block.bnavi[-ext-has="h3.dtitle:contains(Сч
 ||logs.juspay.in
 ||logs.datadoghq.eu^$third-party
 ||logs.datadoghq.com^$third-party
-||suggestions.dadata.ru^$third-party
 ||zprk.io^$third-party
 ||getstat.net^$third-party
 ||untidyrice.com^$third-party
@@ -4583,6 +4601,12 @@ nethunt.com/api/v1/track/email/$image
 ! Disabled in DNS filter
 ||telemetry.mozilla.org^
 !
+||d3nq5jrakcyw1w.cloudfront.net^
+||tracking.netdoktor.at^
+||targeting.tbt.arcpublishing.com^
+||spixel.socy.es^
+||rcm.shinobi.jp^
+||app-analytics.snapchat.com^
 ||d2p3zdq8vjvnxd.cloudfront.net^
 ||logger.applovefrom.com^
 ||gstat.orange.fr^
@@ -6131,7 +6155,7 @@ charlestownwyllie.oaklawnnonantum.com^
 ! Popular on Japanese sites
 ! https://github.com/AdguardTeam/AdguardFilters/issues/58587#issuecomment-656098019
 ! Sample URL: ||js.passaro-de-fogo.biz/t/113/750/a1113750.js
-/^https?:\/\/js\.[-.0-9a-z]+\/t\/[0-9]{3}\/[0-9]{3}\/a[0-9]{7}\.js$/$script,third-party
+/^https?:\/\/js\.[-.0-9a-z]+\/t\/[0-9]{3}\/[0-9]{3}\/a[0-9]{7,9}\.js$/$script,third-party
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/60875
 /facebookproductad/views/js/pixel.js
@@ -6163,6 +6187,10 @@ charlestownwyllie.oaklawnnonantum.com^
 /submission/pageview
 /collect-*/pageview|
 !
+/set_tracking.js
+/Analytics/Tracking.js
+/autotrack.custom.js
+/admiral.js
 /comscore-min.js
 /pv?u=$image
 directtrack.*.js
@@ -6466,6 +6494,12 @@ _tracking.php?b=
 ||nd.demdex.net/event?d_mid=$redirect=nooptext,important,domain=9now.com.au
 ||adc.nine.com.au/?token=$redirect=nooptext,important,domain=9now.com.au
 !
+||churchtechtoday.com/?wordfence_lh=
+||hdfilmcehennemi6.org/analytics/
+||playep.pro/pl/vendor/stat.min.js
+||computerbase.de/api/consent-analytics
+||smutty.com/ajax/trcking/
+||spechy.live/spechyAnalytics/spcwganalytic.js
 ||atconnect.npo.nl/h?s=$image
 ||supleks.jp/action/log/
 ||pendo.io/data/ptm.gif
@@ -6508,7 +6542,6 @@ _tracking.php?b=
 ||chronicle.com/_track
 ||construction21.org/ga.js
 ||marsflag.com/mf2file/site/ext/tr.js
-||api.twitter.com/*/jot/client_event.json
 ||retailrocket.ru/content/javascript/tracking.js
 ||api.idg.zone/intextlinks-tracking/
 ||prometeo-media-service.com/assets/pixel.gif
@@ -6725,7 +6758,6 @@ dokonline.com###Counters + div[class="block"]
 ||movie2.kinoche.ru/iframe.js?id=$third-party
 ||articles2.marketrealist.com/aptrk^
 ||addthisedge.com/live/boost/*/_ate.track
-||macworld.com/www/js/analytics/tracking.js
 ||sheego.de/request/pvp.php
 ||yastatic.net/s3/distribution/yanalytics/yanalytics.js
 ||c0.froala.com/i?
@@ -8146,10 +8178,10 @@ dreamprogs.net##td[width="88"][height="31"]
 ||tribl.io/firm_tracking.js
 ||tribl.io/_t.gif?
 ||tribl.io/analytics*.js^
-||tripadvisor.com/actionrecord
-||tripadvisor.com/cookiepingback?
-||tripadvisor.com/garecord
-||tripadvisor.com/impressionrecord
+||tripadvisor.*/actionrecord
+||tripadvisor.*/cookiepingback?
+||tripadvisor.*/garecord
+||tripadvisor.*/impressionrecord
 ||trivago.de/search/log
 ||trk.helios.ligatus.com/imp?z=$image
 ||trust.zone/api_ip_info.php?$third-party
@@ -8262,6 +8294,8 @@ link.gmapp*.net$image
 !---- Domain pecific rules ----
 !------------------------------
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/64976
+||herder.de^$cookie=SC_ANALYTICS_GLOBAL_COOKIE
 ! https://forum.adguard.com/index.php?threads/31364/
 ||moniteurautomobile.be^$cookie=/_dc_gtm_|_gat_/
 !
@@ -8321,6 +8355,7 @@ link.gmapp*.net$image
 !
 ! Appsflyer
 !
+||inapps.appsflyer.com^
 ||gcdsdk.appsflyer.com^
 ||statsgoogle.appsflyer.com^
 ||impression.appsflyer.com^
@@ -8335,6 +8370,8 @@ link.gmapp*.net$image
 !+ NOT_PLATFORM(ios, ext_safari, ext_android_cb)
 ||adj.st^
 !
+||logs.gaaana.com^
+||sdk-log-inter.youdao.com^
 ||sensors.snappea.com^
 ||analytics.snappea.com^
 ||analytics.snaptube.app^
@@ -8774,6 +8811,23 @@ link.gmapp*.net$image
 ||rover.ebay.$image,object,script,badfilter
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/65334
+@@||src.litix.io/core/*/mux.js$domain=kanald.com.tr
+! https://github.com/AdguardTeam/AdguardFilters/issues/65116
+@@||cdn.dynamicyield.com^$domain=dafiti.com.co
+@@||st.dynamicyield.com/st?$domain=dafiti.com.co
+||googletagmanager.com/gtm.js$script,redirect=googletagmanager-gtm,domain=dafiti.com.co
+||googletagservices.com/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=dafiti.com.co
+! https://github.com/AdguardTeam/AdguardFilters/issues/64930
+@@||viu.com/ott/misc/tracking/tracking.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/65036
+@@||ipcheck.tmgrup.com.tr/ipcheck/getcountry?json=$xmlhttprequest,domain=aspor.com.tr
+! https://github.com/AdguardTeam/AdguardFilters/issues/65018
+||google-analytics.com/analytics.js$script,redirect=google-analytics,domain=straitstimes.com
+||googletagmanager.com/gtm.js$script,redirect=googletagmanager-gtm,domain=straitstimes.com
+||googletagservices.com/tag/js/gpt.js$script,redirect=googletagservices-gpt,domain=straitstimes.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/64772
+@@||cdn.optimizely.com/js/*.js$domain=ruggable.com
 ! lk.gosuslugi.ru - fixed a click on columns in the top
 @@||mc.yandex.ru/metrika/tag.js$domain=lk.gosuslugi.ru
 ! https://forum.adguard.com/index.php?threads/piano-io-tinypass-com.39875/
@@ -8799,14 +8853,18 @@ link.gmapp*.net$image
 ciokorea.com,adpiamall.com,live.joins.com,naver.com,jbe.go.kr#%#//scriptlet('set-constant', 'window.wcs_add', 'noopFunc')
 ciokorea.com,adpiamall.com,live.joins.com,naver.com,jbe.go.kr#%#//scriptlet('set-constant', 'window.wcs_do', 'noopFunc')
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/64945
+@@||cdn.cxense.com/cx*.js$domain=tn.com.ar
+@@||api.cxense.com/public/widget/data?json$domain=tn.com.ar
 ! https://onlineshop.smt.docomo.ne.jp/itunes-gift/index.html
 ! broken iTunes card button
 @@||www.googletagmanager.com^$domain=onlineshop.smt.docomo.ne.jp
+! https://github.com/AdguardTeam/AdguardFilters/issues/64862
+@@||googletagmanager.com/gtag/js$domain=m.hkgolden.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62521
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64508
 @@||google-analytics.com/analytics.js$domain=avselectro.ru
 @@||google-analytics.com/plugins/ua/ec.js$domain=avselectro.ru
-@@||suggestions.dadata.ru/suggestions/api/*/rs/suggest/address$domain=avselectro.ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62277
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62085
 @@||googletagmanager.com/gtm.js$domain=pult.ru

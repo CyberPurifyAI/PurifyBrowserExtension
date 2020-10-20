@@ -1,8 +1,8 @@
-! Checksum: E0D3LSDX4fUOqZMtlOS7MA
+! Checksum: J2vPW6WZ9NCXgz1/aMqpsg
 ! Title: AdGuard Spanish/Portuguese filter
 ! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.7.23
-! TimeUpdated: 2020-09-29T18:32:05+03:00
+! Version: 2.0.7.36
+! TimeUpdated: 2020-10-19T19:33:20+03:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -270,6 +270,11 @@
 tunovelaligera.com#%#AG_abortOnPropertyWrite(`adregain_wall`);
 tunovelaligera.com#%#AG_abortOnPropertyRead(`ad_nodes`);
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/65649
+applesfera.com,bebesymas.com,compradiccion.com,diariodelviajero.com,directoalpaladar.com,elblogsalmon.com,espinof.com,genbeta.com,motorpasion.com,motorpasionmoto.com,pymesyautonomos.com,trendencias.com,trendenciashombre.com,vidaextra.com,vitonica.com,xataka.com,xatakaciencia.com,xatakafoto.com,xatakahome.com,xatakamovil.com,xatakandroid.com,xatakawindows.com#%#//scriptlet("set-constant", "WSL2.config.enableAdblockEcommerce", "0")
+! https://github.com/AdguardTeam/AdguardFilters/issues/65579
+docero.com.br#$?#iframe#doublebillboard-1 { remove: true; }
+docero.com.br#%#//scriptlet("set-constant", "ads_unblocked", "true")
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64208
 @@||tags.premiumads.com.br/ads/advertisement.js$domain=outerspace.com.br
 outerspace.com.br#%#//scriptlet("abort-on-property-read", "ppAdblocks")
@@ -835,9 +840,8 @@ letras.mus.br#%#window.canAds = true;
 ||skidrow-games.com/wp-content/plugins/pause-adblocker/inc/pause-front.js
 ! https://forum.adguard.com/index.php?threads/25793/
 @@||adshort.co/js/ads.js
-! https://github.com/AdguardTeam/AdguardFilters/issues/6881
-muyinteresante.es#%#window.ads = true;
-@@||estaticos.muyinteresante.es/js/ads.js
+! https://github.com/AdguardTeam/AdguardFilters/issues/65422
+@@||adservice.google.es/adsid/integrator.js$domain=muyinteresante.es
 ! https://forum.adguard.com/index.php?threads/25538/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6778
 artesacro.org#%#AG_onLoad(function() { var el=document.querySelector('ins.adsbygoogle'); if(el) { el.appendChild(document.createElement('div')); } });
@@ -1292,7 +1296,7 @@ shortn-me.com#%#(function() { window.open_ = window.open; var w_open = window.op
 ! https://forum.adguard.com/index.php?threads/identi-li-pop-up.27296/
 identi.li#%#AG_abortOnPropertyRead('Identili');
 identi.li#%#document.cookie = "ads_accepted=1; path=/";
-removedor.net#%#(function() { window.open_ = window.open; var w_open = window.open, regex = /removedor\.net\/index\.php\?redirect=/; window.open = function(a, b) { if (typeof a !== 'string' || !regex.test(a)) { w_open(a, b); } }; })();$
+removedor.net#%#(function() { window.open_ = window.open; var w_open = window.open, regex = /removedor\.net\/index\.php\?redirect=/; window.open = function(a, b) { if (typeof a !== 'string' || !regex.test(a)) { w_open(a, b); } }; })();
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7559
 !+ NOT_PLATFORM(windows, mac, android)
 animalog.biz#%#window.open = function() {};
@@ -1487,6 +1491,16 @@ http://adw.
 ! Incorrectly blocked domains can be excluded usig regex
 /^(?!.*(google\.com|gstatic\.com|googleapis\.com|recaptcha\.net|cdn\.ampproject\.org|fluidplayer\.com|facebook\.net|fbcdn\.net|cloudflare\.com|ebacdn\.com|vk\.com|jquery\.com|jsdelivr\.net|yastatic\.net|yandex\.net|ytimg\.com|fontawesome\.com|dmca\.com|disqus\.com|twitter\.com|vidazoo\.com|disquscdn\.com|jwpcdn\.com|shrink\.pe|zencdn\.net|unpkg\.com|github\.io|ulogin\.ru|bootstrapcdn\.com|player)).*$/$third-party,script,domain=thepiratefilmestorrent.biz
 !
+noticiasaominuto.com,noticiasaominuto.com.br##.pub-container
+trendencias.com,vidaextra.com##.sticky-sidebar-container .m-desvio-ecommerce
+tuhentaionline.com###nuevo_publi
+||tuhentaionline.com/publi/
+tuhentaionline.com##iframe[src^="https://www.tuhentaionline.com/publi/"]
+wikicharlie.cl###mw-panel > .advertisements
+forodecostarica.com##div[class^="contenedorPublicidad"]
+tn.com.ar##div[id^="parent-arcAds-"]
+letras.mus.br##.cnt-space-top
+letras.mus.br##div[id^="pub_"]
 hipertextual.com##.wrapperBanner
 ||cdn.romanews.com.br/upload/dn_banner/
 ||app.upee.online/ad/
@@ -1636,7 +1650,6 @@ terra.com.br###advRuller2--wrapper
 luchaonline.com##.Anuncios
 13.cl##.center-banner
 online-dvdrip.com##.mvic-btn > a.btn-successful[target="_blank"]
-onyxplay.com###ad
 ||hoy21.com^$domain=animeflv.net
 repelisplus.vip###adxx
 ||descargaranimehentai.com/unrmnewzpt.php
@@ -2615,7 +2628,7 @@ infobolsa.es##.Web_Banner
 animeflv.net,animeid.com##.a160
 animeflv.net##.a300x250
 animeflv.net,animeid.com##.a728
-vagalume.com.br,xatakandroid.com,abril.com.br##.ad
+xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 letras.mus.br##.ad-full
 telecinco.es##.ad-top
 ondacero.es##.adContainer1
@@ -3375,6 +3388,8 @@ uol.com.br##ul.produtos
 !
 ! White list. Fixing filtration errors (false-positive)
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/65425
+@@||img.wikicharlie.cl^$~third-party
 ! https://github.com/AdguardTeam/AdguardFilters/issues/63720
 @@||laprovincia.es/elementosWeb/*/multimedia/player/videojs-contrib-ads/videojs.ads.min.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62524

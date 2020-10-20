@@ -1,8 +1,8 @@
-! Checksum: MwQK4x3d64QQ3LaqhjWVKg
+! Checksum: lwKlspG8S5KN1Zl7U+nqUA
 ! Title: AdGuard Mobile Ads filter
 ! Description: Filter for all known mobile ad networks. Useful for mobile devices.
-! Version: 2.0.15.60
-! TimeUpdated: 2020-09-29T14:30:13+03:00
+! Version: 2.0.15.87
+! TimeUpdated: 2020-10-19T14:30:24+03:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -196,7 +196,9 @@
 ||plugin.mobopay.baidu.com^
 ||mo.freeindoapp.com^
 !
+||ad.particlenews.com^
 ||ad.wynk.in^
+||pushad.metajoy.services^
 ||adzfun.info^$third-party
 ||adzfun.me^$third-party
 ||painsko.com^$third-party
@@ -1260,6 +1262,8 @@ westseattleblog.com#@#.header-ad
 !
 ! Extended CSS rules
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/65480
+loveha.net#?#.chapter-content > .quang-cao:has(> h3 > font[color="white"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64482#issuecomment-698309077
 m.baidu.com#?#.c-list > div.c-list-item:has(> div[class] > p[class] ~ div > span[class^="new-ad-label"])
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64112
@@ -1563,6 +1567,8 @@ yandex.ru#?#body[class*="news_phone"] div.news-container > span > div > div.unit
 pornhub.com,pornhubthbh7ap3u.onion#%#AG_onLoad(function() { if (typeof redirect !== 'function') return; var str = redirect.toString(); var m = str.match(/\'(\/view.*)\'/); if (m.length != 2) return; var link = m[1]; window.location.href = m[1]; });
 !#################
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/65274
+m.economictimes.com#%#//scriptlet('set-cookie', 'inter', '1')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64521
 supleks.jp#%#//scriptlet('abort-current-inline-script', 'document.getElementsByClassName', 'adBlocked')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/63495
@@ -1639,8 +1645,11 @@ sasisa.ru#%#AG_onLoad(function() { window.Umobi = function() {}; });
 !-------CSS---------
 !-------------------
 !
+! xhamster popup ads
+xhamster.com,xhamster2.com#$#.video-view-ads { display: none!important; }
+xhamster.com,xhamster2.com#$#body { overflow: visible!important; position: static!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/61897
-cnews.ru#$#.mobile-banner { display: none !important; }
+cnews.ru#$#html > body.modal-open div#mobile-banner.modal.mobile-banner { display: none !important; }
 cnews.ru#$#.modal-backdrop { display: none !important; }
 cnews.ru#$#body { overflow: auto !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62346
@@ -1659,9 +1668,6 @@ more-gamer.com#$#body { position: unset !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/46115
 zmovs.com#$#.holder-rich-media { display: none!important; }
 zmovs.com#$#body { position: inherit!important; }
-! https://github.com/AdguardTeam/AdguardFilters/issues/45238
-xhamster2.com#$#.video-view-ads { display: none!important; }
-xhamster2.com#$#body.xh-scroll-disabled { overflow: visible!important; position: unset!important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/43035
 m.detik.com#$#body[style^="overflow:"] { overflow: auto!important; height: auto!important; }
 m.detik.com#$#html[style^="overflow:"] { overflow: auto!important; height: auto!important; }
@@ -1732,6 +1738,8 @@ deviantart.com#$#div[class*="dp-ad-"] {height: 0!important; width: 0!important; 
 !
 ! AMP ads in ShadowRoot
 $$amp-ad
+dni.ru$$amp-iframe[src="https://news.gnezdo.ru/"]
+24tv.ua##div[class="within-ads"]
 vokrug.tv$$amp-embed[type="engageya"]
 finance.rambler.ru$$div[class="read-also__lentainform"]
 gordonua.com$$amp-iframe[src="https://recreativ.ru/"]
@@ -1748,8 +1756,12 @@ championat.com$$amp-embed[height="354"][width="600"]
 nashobmen.org$$script[tag-content="script_0.src ="][max-length="900"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/17500
 motherless.com$$script[tag-content="awentw.com"][min-length="2000"][max-length="2500"]
-! Yandex search
+! Yandex.Search
 yandex.by,yandex.com,yandex.com.tr,yandex.fr,yandex.kz,yandex.ru,yandex.ua$$div[class="serp-item serp-adv-item"]
+! Yandex.Weather
+yandex.ru#$#div[class*="_with-url-actualizer_yes"] > div.adv_type_top { display: none !important; }
+yandex.ru#$#div[class*="_with-url-actualizer_yes"] > div.adv_type_top ~ div[class$="__map_compressed"] { top: 0 !important; }
+!
 ! https://github.com/AdguardTeam/AdguardFilters/issues/7438
 pure-t.ru$$a[class="mobile-banner"]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4285
@@ -1834,6 +1846,10 @@ nasimke.ru$$script[tag-content="function show_ads"][max-length="6000"]
 ! ##### TEMPORARY END #####
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/65217
+@@||googletagservices.com/tag/js/gpt.js$domain=ukr.net
+@@||securepubads.g.doubleclick.net/gpt/pubads_impl_*.js$domain=ukr.net
+||googletagservices.com/tag/js/gpt.js$script,redirect=googletagservices-gpt,important,domain=ukr.net
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64416
 ! It's caused by RU AdList
 drive2.com,drive2.ru#@#div[itemtype^="http://schema.org/"] ~ div[data-role][data-target] ~ div:not(:last-child)
@@ -2159,6 +2175,8 @@ m.news.de##.articleTeaser + div[style="height: 250px"]
 m.news.de##.aside > div[style="height: 600px;"]
 !+ NOT_OPTIMIZED
 m.news.de##.unisterAdsStart
+!+ NOT_OPTIMIZED
+fplgameweek.com##mobile-sticky-ads
 !+ NOT_PLATFORM(ios, ext_android_cb)
 ||mobile.donanimhaber.com/ads^
 !
@@ -2167,10 +2185,26 @@ m.news.de##.unisterAdsStart
 ! ##amp-embed[type="taboola"]
 independent.co.uk,tomshardware.com,techbook.de,sueddeutsche.de,hurriyet.com.tr,elmundo.es,timesnownews.com,biz-journal.jp,sankei.com,m.mynet.com,amp.ibtimes.co.uk,lifehacker.com,jalopnik.com,ndtv.com,gizmodo.com,cnbc.com##amp-embed[type="taboola"]
 ! ##amp-ad
-independent.co.uk,komputerswiat.pl,dobreprogramy.pl,amp.pcwelt.de,tomshardware.com,techbook.de,forbes.com,auto-swiat.pl,dialog.ua,mobile.reuters.com,spiegel.de,amp.welt.de,forum.xda-developers.com,sueddeutsche.de,amp.usatoday.com,m.gadgets.ndtv.com##amp-ad
+dni.ru,independent.co.uk,komputerswiat.pl,dobreprogramy.pl,amp.pcwelt.de,tomshardware.com,techbook.de,forbes.com,auto-swiat.pl,dialog.ua,mobile.reuters.com,spiegel.de,amp.welt.de,forum.xda-developers.com,sueddeutsche.de,amp.usatoday.com,m.gadgets.ndtv.com##amp-ad
 ! ##.inline-ad-container
 avclub.com,clickhole.com,deadspin.com,gizmodo.com,jalopnik.com,jezebel.com,kotaku.com,lifehacker.com,splinternews.com,theinventory.com,theonion.com,theroot.com,thetakeout.com##.inline-ad-container
 !
+m.lenta.ru##.topic-page > div.board
+m.ruliweb.com##div[id^="nbp_container_"]
+yahoo.com##li[data-test-locator="ntk-ad"]
+dni.ru##amp-iframe[src^="https://news.gnezdo.ru/"]
+amp.segodnya.ua##.article-banner
+amp.segodnya.ua##.partners-news
+ukr.net##.news-banner
+jablickar.cz##.headerbanner
+m.thewire.in##.advert_text1
+m.thewire.in##.header_adcode
+m.thewire.in##div[id^="mercury_adcode_"]
+fossbytes.com##div[class^="index__adWrapper"]
+fossbytes.com##div[class^="AdChoiceContainer"]
+m.crank-in.net##.__uz__third_party_ad
+24tv.ua##.within-ads
+||c.mipcdn.com/*/*.js$domain=m.manhuafen.com
 lemonde.fr##.friend.ops--inline
 supleks.jp##div[class*="_"][data-height]
 supleks.jp###shop-body > #btn-post + div[style]
@@ -2220,8 +2254,8 @@ rankedboost.com##.top-mob-div-stick
 russkoe-porno.me##.player-bn
 news18.com##.closestickybtn
 honeysanime.com###footerFloatingMenu
-merkur.de,amp-focus-de.cdn.ampproject.org##amp-fx-flying-carpet
-merkur.de,amp-focus-de.cdn.ampproject.org##.amp-flying-carpet-text-border
+www-merkur-de.cdn.ampproject.org,merkur.de,amp-focus-de.cdn.ampproject.org##amp-fx-flying-carpet
+www-merkur-de.cdn.ampproject.org,merkur.de,amp-focus-de.cdn.ampproject.org##.amp-flying-carpet-text-border
 amp-focus-de.cdn.ampproject.org##div[class="textBlock orange-button-artobj ps-tracking-position ps-trackingposition_OrangerButton"]
 znak.com##.SVKNative-Widget li[data-unit-type="promo"]
 pixnet.net##.in-read-ad
@@ -2384,7 +2418,6 @@ mumbailive.com###bottom-drawer-ad
 healthline.com##.css-pdceuf
 18comic.org###wrapper > div.forum-pop ~ div.bot-per
 baumpflegeportal.de##.baump-mobil-unten
-turbopages.org##.advert
 m.trojmiasto.pl###body > .section-subcontent > div[class] > div[id][style^="text-decoration:"]
 m.trojmiasto.pl###body > div[class][style="margin: 10px auto"] > div[id][style^="text-decoration:"]
 sinefy.com##a[href^="https://partnerx.bethub.io/"]
@@ -3115,7 +3148,7 @@ intouch-wunderweib-de.cdn.ampproject.org##amp-embed.i-amphtml-layout-responsive[
 m.doisongphapluat.com###admbackgroundinpage
 ixbt.com##.mobadv
 m.baomoi.com##div.nocontent[id^="BaoMoi_Mobile_Middle"]
-vnexpress.net###banner_top
+vnexpress.net##body:not(.page-detail-kl) #banner_top
 m.haberler.com##.reklamAlan
 toucharcade.com##header > #header > .ta_mobileScrollMessage
 boards.4chan.org##body > iframe[id^="ag"][src="about:blank"]
@@ -3691,7 +3724,6 @@ porntrex.com,sleazyneasy.com,vikiporn.com,m.katestube.com,xhamster.com##.pop-fad
 zvistka.net##.pum-container
 pcmag.com##.row.pcm-content
 healthboards.com##.sticky_ad
-check-host.net##.thold10
 forums.androidcentral.com##.threadbit + li.ui-body-null
 redtube.com##.top-tabs
 m.yingshidaquan.cc##.topmessage
@@ -3868,6 +3900,7 @@ livejournal.com##.mdspost-aside__item--banner
 ! Blocking Facebook mobile ads
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/64666
 ! https://github.com/AdguardTeam/AdguardFilters/issues/64394
 ! https://github.com/AdguardTeam/AdguardFilters/issues/62310
 !

@@ -13,10 +13,10 @@ import "babel-polyfill";
 import {
   METADATA_DOWNLOAD_URL_FORMAT,
   FILTERS_DEST,
-  METADATA_I18N_DOWNLOAD_URL_FORMAT,
+  // METADATA_I18N_DOWNLOAD_URL_FORMAT,
   LAST_PURIFY_FILTER_ID,
   FILTER_DOWNLOAD_URL_FORMAT,
-  OPTIMIZED_FILTER_DOWNLOAD_URL_FORMAT,
+  // OPTIMIZED_FILTER_DOWNLOAD_URL_FORMAT,
 } from "./consts";
 
 const CHECKSUM_PATTERN = /^\s*!\s*checksum[\s-:]+([\w\+/=]+).*[\r\n]+/i;
@@ -53,17 +53,17 @@ const filtersList = (browser) => {
       validate: true,
     });
 
-    filtersMobile.push({
-      url: OPTIMIZED_FILTER_DOWNLOAD_URL_FORMAT.replace(
-        "%browser",
-        browser
-      ).replace("%s", i),
-      file: `filter_mobile_${i}.txt`,
-      validate: true,
-    });
+    // filtersMobile.push({
+    //   url: OPTIMIZED_FILTER_DOWNLOAD_URL_FORMAT.replace(
+    //     "%browser",
+    //     browser
+    //   ).replace("%s", i),
+    //   file: `filter_mobile_${i}.txt`,
+    //   validate: true,
+    // });
   }
 
-  return [...meta, ...filters, ...filtersMobile];
+  return [...meta, ...filters];
 };
 
 /**
