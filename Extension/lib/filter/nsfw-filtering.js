@@ -14,10 +14,13 @@ purify.nsfwFiltering = (function (purify, global) {
   const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
   const IMAGE_SIZE = 224;
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
-  const LOADING_TIMEOUT = 1000;
-  const Strictness = 50;
+  const LOADING_TIMEOUT = 5000;
+  const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
 
   let nsfwInstance = null;
+
+  const Strictness = 50;
+  const coefficient = 1 - Strictness / 100;
 
   const initialize = async function () {
     purify.console.info("Initializing Predict Image");
@@ -29,7 +32,7 @@ purify.nsfwFiltering = (function (purify, global) {
       return purify.lazyGet(
         nsfwImageCache,
         "cache",
-        () => new purify.utils.LruCache("nsfw-image-cache")
+        () => new purify.utils.LruCache("nsfw-image-cache", 200)
       );
     },
   };
@@ -39,7 +42,7 @@ purify.nsfwFiltering = (function (purify, global) {
       return purify.lazyGet(
         nsfwUrlCache,
         "cache",
-        () => new purify.utils.LruCache("nsfw-url-cache")
+        () => new purify.utils.LruCache("nsfw-url-cache", 100)
       );
     },
   };
@@ -48,7 +51,11 @@ purify.nsfwFiltering = (function (purify, global) {
     const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
 
     return new Promise((resolve, reject) => {
-      setTimeout(reject, LOADING_TIMEOUT, new Error(`Image timeout ${url}`));
+      setTimeout(
+        reject,
+        LOADING_TIMEOUT,
+        new Error(`Image timeout ${requestUrl}`)
+      );
 
       image.crossOrigin = "anonymous";
       image.onload = () => {
@@ -65,7 +72,7 @@ purify.nsfwFiltering = (function (purify, global) {
     return global.SHA256.hash(`${host}`);
   };
 
-  const getPredictImage = function (requestUrl, originUrl) {
+  const getPredictImage = function (requestUrl, originUrl, tabId) {
     let urlCache = nsfwUrlCache.cache.getValue(originUrl);
 
     if (typeof urlCache === "undefined") {
@@ -78,7 +85,7 @@ purify.nsfwFiltering = (function (purify, global) {
           return nsfwInstance
             .classifyGif(image)
             .then((prediction) => {
-              const { result, className, probability } = handlePredictions([
+              const { result, className, probability } = handlePrediction([
                 prediction,
               ]);
 
@@ -95,13 +102,14 @@ purify.nsfwFiltering = (function (purify, global) {
               return Boolean(result);
             })
             .catch((err) => {
+              console.log(err);
               return true;
             });
         } else {
           return nsfwInstance
-            .classify(image, 1)
+            .classify(image, 2)
             .then((prediction) => {
-              const { result, className, probability } = handlePredictions([
+              const { result, className, probability } = handlePrediction([
                 prediction,
               ]);
 
@@ -118,11 +126,13 @@ purify.nsfwFiltering = (function (purify, global) {
               return Boolean(result);
             })
             .catch((err) => {
+              console.log(err);
               return true;
             });
         }
       })
       .catch((err) => {
+        console.log(err);
         return true;
       });
   };
@@ -131,27 +141,42 @@ purify.nsfwFiltering = (function (purify, global) {
     return self.indexOf(value) === index;
   };
 
-  const handlePredictions = function (predictions) {
-    const flattenArr = predictions.flat();
+  const handlePrediction = function ([prediction]) {
+    try {
+      const [
+        { className: cn1, probability: pb1 },
+        { className: cn2, probability: pb2 },
+      ] = prediction;
 
-    const prediction = flattenArr.find(({ className, probability }) => {
-      if (
-        (["Hentai", "Porn"].includes(className) && probability > 0.4) ||
-        (["Sexy"].includes(className) && probability > 0.9)
-      ) {
-        return { result: true, className, probability };
+      const MIN1 = cn1 === "Porn" ? 33 : 45;
+      const MAX1 = 98;
+      const MIN2 = cn1 === "Porn" ? 12 : 20;
+      const MAX2 = 50;
+      const threshold1 =
+        Strictness === 100 ? MIN1 : coefficient * (MAX1 - MIN1) + MIN1;
+      const threshold2 =
+        Strictness === 100 ? MIN2 : coefficient * (MAX2 - MIN2) + MIN2;
+
+      console.log(threshold1, threshold2);
+
+      const result1 =
+        FILTER_LIST.has(cn1) &&
+        pb1 > Math.round((threshold1 / 100) * 10000) / 10000;
+      if (result1) {
+        return { result: result1, className: cn1, probability: pb1 };
       }
-    });
 
-    if (prediction !== undefined) {
-      return { result: true, ...prediction };
+      const result2 =
+        FILTER_LIST.has(cn2) &&
+        pb2 > Math.round((threshold2 / 100) * 10000) / 10000;
+      if (result2) {
+        return { result: result2, className: cn2, probability: pb2 };
+      }
+
+      return { result: result1, className: cn1, probability: pb1 };
+    } catch (error) {
+      return { result: true, className: null, probability: null };
     }
-
-    return {
-      result: false,
-      className: flattenArr[0].className,
-      probability: flattenArr[0].probability,
-    };
   };
 
   return {

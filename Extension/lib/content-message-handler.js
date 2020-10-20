@@ -340,7 +340,7 @@
         break;
       case "requestAnalyzeImage":
         if (message.type === "SIGN_CONNECT") {
-          return;
+          return false;
         }
 
         const requestUrl = message.requestUrl;
