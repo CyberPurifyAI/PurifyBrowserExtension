@@ -235,7 +235,12 @@
 
         return { cancel: true };
       } else {
-        purify.nsfwFiltering.getPredictImage(requestUrl, originUrl);
+        purify.predictionQueue
+          .Producer(requestUrl, originUrl, tabId)
+          .then((result) => (result ? { cancel: true } : { cancel: false }))
+          .catch((err) => {
+            cancel: false;
+          });
       }
     }
 
@@ -739,6 +744,9 @@
          * @param {Number} tabId
          */
         removeTabInjection(tabId) {
+          // clear queue nsfw
+          purify.predictionQueue.clearQueueByTabId(tabId);
+
           delete this[tabId];
         },
       };

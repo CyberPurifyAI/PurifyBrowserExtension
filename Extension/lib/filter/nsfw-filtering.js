@@ -16,11 +16,8 @@ purify.nsfwFiltering = (function (purify, global) {
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
   const LOADING_TIMEOUT = 5000;
   const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
-  const DEFAULT_TAB_ID = 999999;
 
   let nsfwInstance = null;
-  let requestQueue = null;
-  let activeTabs = new Set([DEFAULT_TAB_ID]);
 
   const Strictness = 50;
   const coefficient = 1 - Strictness / 100;
@@ -30,7 +27,6 @@ purify.nsfwFiltering = (function (purify, global) {
     nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
     nsfwImageCache.cache.object();
     nsfwUrlCache.cache.object();
-    requestQueue = new Map();
   };
 
   const nsfwImageCache = {
@@ -53,10 +49,10 @@ purify.nsfwFiltering = (function (purify, global) {
     },
   };
 
-  const loadImage = function (requestUrl) {
+  const loadImage = async function (requestUrl) {
     const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
 
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       setTimeout(
         reject,
         LOADING_TIMEOUT,
@@ -78,69 +74,53 @@ purify.nsfwFiltering = (function (purify, global) {
     return global.SHA256.hash(`${host}`);
   };
 
-  const getPredictImage = function (requestUrl, originUrl, tabId) {
+  const getPredictImage = async function (requestUrl, originUrl, tabId) {
+    const hashUrl = createHash(requestUrl);
+    const cacheValue = nsfwImageCache.cache.getValue(hashUrl);
+
+    if (cacheValue !== undefined) {
+      return cacheValue;
+    } else {
+      const image = await loadImage(requestUrl);
+
+      if (GIF_REGEX.test(requestUrl)) {
+        const prediction = await nsfwInstance.classifyGif(image);
+        const { result, className, probability } = handlePrediction([
+          prediction,
+        ]);
+
+        saveCache(hashUrl, requestUrl, originUrl, result);
+
+        return Boolean(result);
+      } else {
+        const prediction = await nsfwInstance.classify(image, 2);
+        const { result, className, probability } = handlePrediction([
+          prediction,
+        ]);
+
+        saveCache(hashUrl, requestUrl, originUrl, result);
+
+        purify.console.info(`${className} - ${probability} - ${result}`);
+
+        return Boolean(result);
+      }
+    }
+  };
+
+  const saveCache = function (hashUrl, requestUrl, originUrl, result) {
     let urlCache = nsfwUrlCache.cache.getValue(originUrl);
 
     if (typeof urlCache === "undefined") {
       urlCache = [];
     }
 
-    return loadImage(requestUrl)
-      .then((image) => {
-        if (GIF_REGEX.test(requestUrl)) {
-          return nsfwInstance
-            .classifyGif(image)
-            .then((prediction) => {
-              const { result, className, probability } = handlePrediction([
-                prediction,
-              ]);
+    nsfwImageCache.cache.saveValue(hashUrl, result);
 
-              // purify.console.info(`${className} - ${probability} - ${result}`);
-              const hash = createHash(requestUrl);
-              nsfwImageCache.cache.saveValue(hash, result);
-
-              if (result) {
-                urlCache.push(requestUrl);
-                const uniqueArr = urlCache.filter(uniqueArray);
-                nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
-              }
-
-              return Boolean(result);
-            })
-            .catch((err) => {
-              console.log(err);
-              return true;
-            });
-        } else {
-          return nsfwInstance
-            .classify(image, 2)
-            .then((prediction) => {
-              const { result, className, probability } = handlePrediction([
-                prediction,
-              ]);
-
-              // purify.console.info(`${className} - ${probability} - ${result}`);
-              const hash = createHash(requestUrl);
-              nsfwImageCache.cache.saveValue(hash, result);
-
-              if (result) {
-                urlCache.push(requestUrl);
-                const uniqueArr = urlCache.filter(uniqueArray);
-                nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
-              }
-
-              return Boolean(result);
-            })
-            .catch((err) => {
-              console.log(err);
-              return true;
-            });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        return true;
-      });
+    if (result === true) {
+      urlCache.push(requestUrl);
+      const uniqueArr = urlCache.filter(uniqueArray);
+      nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
+    }
   };
 
   const uniqueArray = function (value, index, self) {
@@ -183,37 +163,11 @@ purify.nsfwFiltering = (function (purify, global) {
     }
   };
 
-  const predictionQueue = function (requestUrl, _tabId) {
-    var promiseProducer = function () {
-      // Your code goes here.
-      // If there is work left to be done, return the next work item as a promise.
-      // Otherwise, return null to indicate that all promises have been created.
-      // Scroll down for an example.
-    };
-
-    // The number of promises to process simultaneously.
-    var concurrency = 3;
-
-    var pool = new PromisePool(promiseProducer, concurrency);
-
-    var poolPromise = pool.start();
-
-    poolPromise.then(
-      function () {
-        console.log("All promises fulfilled");
-      },
-      function (error) {
-        console.log("Some promise rejected: " + error.message);
-      }
-    );
-  };
-
   return {
     initialize,
     getPredictImage,
     nsfwImageCache,
     nsfwUrlCache,
     createHash,
-    predictionQueue,
   };
 })(purify, window);

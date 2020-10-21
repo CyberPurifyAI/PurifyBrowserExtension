@@ -344,11 +344,6 @@
         }
 
         const requestUrl = message.requestUrl;
-        const hashUrl = purify.nsfwFiltering.createHash(requestUrl);
-        const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
-          hashUrl
-        );
-
         let arrNSFWUrl = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
           message.originUrl
         );
@@ -361,7 +356,7 @@
           arrNSFWUrl = [];
         }
 
-        if (arrNSFWUrl.length > 10) {
+        if (arrNSFWUrl.length > 15) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             requestUrl,
             "Explicit Content"
@@ -372,20 +367,14 @@
             documentBlockedPage
           );
 
-          return callback({
-            result: cacheValue,
-            requestUrl,
-            err: null,
-          });
-        } else if (cacheValue) {
-          return callback({
-            result: cacheValue,
+          callback({
+            result: false,
             requestUrl,
             err: null,
           });
         } else {
-          purify.nsfwFiltering
-            .getPredictImage(requestUrl, message.originUrl, sender.tab.tabId)
+          purify.predictionQueue
+            .Producer(requestUrl, message.originUrl, sender.tab?.tabId)
             .then((result) => callback({ result, requestUrl, err: null }))
             .catch((err) => callback({ result: false, requestUrl, err }));
         }
