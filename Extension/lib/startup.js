@@ -42,6 +42,8 @@ purify.initialize = function () {
 
     // tf.enableProdMode();
     purify.nsfwFiltering.initialize();
+    purify.loadingQueue.init();
+    purify.predictionQueue.init();
 
     /**
      * Start application

@@ -12,86 +12,71 @@ purify.predictionQueue = (function (purify) {
   "use strict";
 
   const DEFAULT_TAB_ID = 999999;
-  const concurrentQueue = 3;
 
-  let limitQueue = 0;
-  let waitingQueue = [];
   let requestQueue = new Map();
-  let activeTabs = new Set([DEFAULT_TAB_ID]);
+  let activeTabId = DEFAULT_TAB_ID;
+  let pauseFlag = false;
+  let queue = null;
 
-  const addMessage = function (message) {
-    const hasChannel = limitQueue < concurrentQueue;
-
-    if (hasChannel) {
-      nextMessage(message);
-      return;
-    }
-
-    waitingQueue.push(message);
-  };
-
-  const nextMessage = function (message) {
-    limitQueue++;
-
-    onProcess(message, (err, result) => {
-      if (err !== undefined) {
-        onFailure(err);
-      } else {
-        onSuccess(result);
-      }
-
-      onDone(err !== undefined ? err : result);
-
-      limitQueue--;
-
-      if (waitingQueue.length > 0) {
-        const message = waitingQueue.shift();
-        setTimeout(() => nextMessage(message), 0);
-        return;
-      }
-
-      if (limitQueue === 0 && waitingQueue.length === 0) {
-        onDrain();
-      }
+  const init = function () {
+    queue = new purify.utils.concurrentQueue({
+      concurrency: 1,
+      timeout: 0,
+      onProcess: onProcess,
+      onSuccess: onSuccess,
+      onFailure: onFailure,
+      onDone: onDone,
+      onDrain: onDrain,
     });
   };
 
   const onProcess = async function (
-    { requestUrl, originUrl, tabId },
+    { requestUrl, image, originUrl, tabIdUrl },
     callback
   ) {
-    if (activeTabs.has(tabId)) {
-      purify.nsfwFiltering
-        .getPredictImage(requestUrl, originUrl)
-        .then((result) => callback(undefined, { requestUrl, result }))
-        .catch((error) =>
-          callback({ requestUrl, errMessage: error.message }, undefined)
-        );
-    } else {
-      callback({ requestUrl, errMessage: "User closed tab" }, undefined);
+    if (!purify.loadingQueue._checkCurrentTabIdUrlStatus(tabIdUrl)) {
+      callback(
+        {
+          requestUrl,
+          error: new Error(
+            "User closed tab or page where this requestUrl located"
+          ),
+        },
+        undefined
+      );
+      return;
     }
+
+    purify.nsfwFiltering
+      .getPredictImage(requestUrl, image, originUrl)
+      .then((result) => callback(undefined, { requestUrl, result }))
+      .catch((error) =>
+        callback({ requestUrl, errMessage: error.message }, undefined)
+      );
   };
 
   const onSuccess = function ({ requestUrl, result }) {
-    if (requestQueue.has(requestUrl)) {
-      for (const [{ resolve }] of requestQueue.get(requestUrl)) {
-        resolve(result);
-      }
-    } else {
-      onFailure({
-        requestUrl,
-        errMessage: "Cannot find values in requestQueue",
-      });
+    if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
+
+    // cache.set(requestUrl, result);
+
+    for (const [{ resolve }] of requestMap.get(requestUrl)) {
+      resolve(result);
+    }
+
+    if (pauseFlag && predictionQueue.getTaskAmount() <= 5) {
+      pauseFlag = false;
+      purify.loadingQueue.queue.resume();
     }
   };
 
   const onFailure = function ({ requestUrl, errMessage }) {
-    if (requestQueue.has(requestUrl)) {
-      for (const [{ reject }] of requestQueue.get(requestUrl)) {
-        reject(errMessage);
-      }
-    } else {
-      purify.console.info(`Cannot find ${requestUrl}`);
+    if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
+
+    cache.set(requestUrl, false);
+
+    for (const [{ reject }] of requestMap.get(requestUrl)) {
+      reject(errMessage);
     }
   };
 
@@ -99,32 +84,12 @@ purify.predictionQueue = (function (purify) {
     requestQueue.delete(requestUrl);
   };
 
-  const onDrain = function () {};
-
-  const clearQueueByTabId = function (tabId) {
-    activeTabs.delete(tabId);
-  };
-
-  const Producer = async function (requestUrl, originUrl, _tabId) {
-    return await new Promise((resolve, reject) => {
-      const tabId = _tabId === undefined ? DEFAULT_TAB_ID : _tabId;
-      if (!activeTabs.has(tabId)) {
-        activeTabs.add(tabId);
-      }
-
-      if (requestQueue.has(requestUrl)) {
-        requestQueue.get(requestUrl)?.push([{ resolve, reject }]);
-      } else {
-        requestQueue.set(requestUrl, [[{ resolve, reject, tabId }]]);
-        addMessage({ requestUrl, originUrl, tabId, resolve, reject });
-      }
-    });
+  const onDrain = function () {
+    pauseFlag = false;
+    purify.loadingQueue.queue.resume();
   };
 
   return {
-    addMessage,
-    nextMessage,
-    clearQueueByTabId,
-    Producer,
+    init,
   };
 })(purify);

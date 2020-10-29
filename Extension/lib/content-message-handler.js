@@ -340,9 +340,10 @@
         break;
       case "requestAnalyzeImage":
         if (message.type === "SIGN_CONNECT") {
-          return false;
+          return;
         }
 
+        const tabIdUrl = purify.loadingQueue._buildTabIdUrl(sender.tab);
         const requestUrl = message.requestUrl;
         let arrNSFWUrl = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
           message.originUrl
@@ -373,8 +374,8 @@
             err: null,
           });
         } else {
-          purify.predictionQueue
-            .Producer(requestUrl, message.originUrl, sender.tab?.tabId)
+          purify.loadingQueue
+            .predict(requestUrl, message.originUrl, tabIdUrl)
             .then((result) => callback({ result, requestUrl, err: null }))
             .catch((err) => callback({ result: false, requestUrl, err }));
         }
@@ -389,6 +390,29 @@
 
   // Add event listener from content-script messages
   purify.runtime.onMessage.addListener(handleMessage);
+
+  purify.tabs.onCreated.addListener(function (tab) {
+    const tabIdUrl = purify.loadingQueue._buildTabIdUrl(tab);
+    purify.loadingQueue.addTabIdUrl(tabIdUrl);
+  });
+
+  // When user closed tab
+  purify.tabs.onRemoved.addListener(function (tabId) {
+    purify.loadingQueue.clearByTabId(tabId);
+  });
+
+  // When user went to new url in same domain
+  purify.tabs.onUpdated.addListener(function (_tabId, changeInfo, tab) {
+    if (changeInfo.status === "loading") {
+      const tabIdUrl = purify.loadingQueue._buildTabIdUrl(tab);
+      purify.loadingQueue.updateTabIdUrl(tabIdUrl);
+    }
+  });
+
+  // When user selected tab as active
+  purify.tabs.onActivated.addListener(function (activeInfo) {
+    purify.loadingQueue.setActiveTabId(activeInfo.tabId);
+  });
 
   /**
    * There is no messaging in Safari popover context,

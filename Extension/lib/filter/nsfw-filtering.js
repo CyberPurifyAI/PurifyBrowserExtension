@@ -11,10 +11,9 @@
 purify.nsfwFiltering = (function (purify, global) {
   "use strict";
 
-  const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
+  const NSFW_MODEL_PATH = "../models/quant_mid/";
   const IMAGE_SIZE = 224;
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
-  const LOADING_TIMEOUT = 5000;
   const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
 
   let nsfwInstance = null;
@@ -24,7 +23,7 @@ purify.nsfwFiltering = (function (purify, global) {
 
   const initialize = async function () {
     purify.console.info("Initializing Predict Image");
-    nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
+    nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH, { type: "graph" });
     nsfwImageCache.cache.object();
     nsfwUrlCache.cache.object();
   };
@@ -49,61 +48,27 @@ purify.nsfwFiltering = (function (purify, global) {
     },
   };
 
-  const loadImage = async function (requestUrl) {
-    const image = new Image(IMAGE_SIZE, IMAGE_SIZE);
-
-    return await new Promise((resolve, reject) => {
-      setTimeout(
-        reject,
-        LOADING_TIMEOUT,
-        new Error(`Image timeout ${requestUrl}`)
-      );
-
-      image.crossOrigin = "anonymous";
-      image.onload = () => {
-        return resolve(image);
-      };
-      image.onerror = (err) => {
-        return reject(err);
-      };
-      image.src = requestUrl;
-    });
-  };
-
   const createHash = function (host) {
     return global.SHA256.hash(`${host}`);
   };
 
-  const getPredictImage = async function (requestUrl, originUrl, tabId) {
-    const hashUrl = createHash(requestUrl);
-    const cacheValue = nsfwImageCache.cache.getValue(hashUrl);
+  const getPredictImage = async function (requestUrl, image, originUrl) {
+    if (GIF_REGEX.test(requestUrl)) {
+      const prediction = await nsfwInstance.classifyGif(image);
+      const { result, className, probability } = handlePrediction([prediction]);
 
-    if (cacheValue !== undefined) {
-      return cacheValue;
+      saveCache(hashUrl, requestUrl, originUrl, result);
+
+      return Boolean(result);
     } else {
-      const image = await loadImage(requestUrl);
+      const prediction = await nsfwInstance.classify(image, 2);
+      const { result, className, probability } = handlePrediction([prediction]);
 
-      if (GIF_REGEX.test(requestUrl)) {
-        const prediction = await nsfwInstance.classifyGif(image);
-        const { result, className, probability } = handlePrediction([
-          prediction,
-        ]);
+      saveCache(hashUrl, requestUrl, originUrl, result);
 
-        saveCache(hashUrl, requestUrl, originUrl, result);
+      // purify.console.info(`${className} - ${probability} - ${result}`);
 
-        return Boolean(result);
-      } else {
-        const prediction = await nsfwInstance.classify(image, 2);
-        const { result, className, probability } = handlePrediction([
-          prediction,
-        ]);
-
-        saveCache(hashUrl, requestUrl, originUrl, result);
-
-        purify.console.info(`${className} - ${probability} - ${result}`);
-
-        return Boolean(result);
-      }
+      return Boolean(result);
     }
   };
 
@@ -134,9 +99,9 @@ purify.nsfwFiltering = (function (purify, global) {
         { className: cn2, probability: pb2 },
       ] = prediction;
 
-      const MIN1 = cn1 === "Porn" ? 33 : 45;
-      const MAX1 = 98;
-      const MIN2 = cn1 === "Porn" ? 12 : 20;
+      const MIN1 = cn1 === "Porn" ? 40 : 60;
+      const MAX1 = 100;
+      const MIN2 = cn1 === "Porn" ? 15 : 25;
       const MAX2 = 50;
       const threshold1 =
         Strictness === 100 ? MIN1 : coefficient * (MAX1 - MIN1) + MIN1;
