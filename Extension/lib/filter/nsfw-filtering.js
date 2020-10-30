@@ -11,7 +11,7 @@
 purify.nsfwFiltering = (function (purify, global) {
   "use strict";
 
-  const NSFW_MODEL_PATH = "../models/quant_mid/";
+  const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
   const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
 
@@ -22,7 +22,7 @@ purify.nsfwFiltering = (function (purify, global) {
 
   const init = async function () {
     purify.console.info("Initializing Predict Image");
-    nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH, { type: "graph" });
+    nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
     nsfwImageCache.cache.object();
     nsfwUrlCache.cache.object();
   };
