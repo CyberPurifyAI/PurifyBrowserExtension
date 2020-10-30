@@ -323,29 +323,6 @@ purify.ui = (function (purify) {
     }
   }
 
-  /**
-   * Update context menu for tab
-   * @param tab Tab
-   */
-  function updateTabContextMenu(tab) {
-    // Isn't supported by Android WebExt
-    if (!purify.contextMenus) {
-      return;
-    }
-    purify.contextMenus.removeAll();
-    if (purify.settings.showContextMenu()) {
-      if (purify.prefs.mobile) {
-        customizeMobileContextMenu(tab);
-      } else {
-        customizeContextMenu(tab);
-      }
-      if (typeof purify.contextMenus.render === "function") {
-        // In some case we need to manually render context menu
-        purify.contextMenus.render();
-      }
-    }
-  }
-
   function closeAllPages() {
     purify.tabs.forEach((tab) => {
       if (tab.url.indexOf(purify.getURL("")) >= 0) {
@@ -503,7 +480,6 @@ purify.ui = (function (purify) {
       purify.frames.reloadFrameData(tab);
     }
     updateTabIcon(tab);
-    updateTabContextMenu(tab);
   };
 
   /**
@@ -860,8 +836,6 @@ purify.ui = (function (purify) {
         if (aTab.tabId !== tabId) {
           return;
         }
-        // ContextMenu is set for all tabs, so update it only for current tab
-        updateTabContextMenu(aTab);
       });
     });
 
@@ -889,15 +863,6 @@ purify.ui = (function (purify) {
         updatePopupStatsAsync(activeTab);
       }
     });
-  });
-
-  // Update context menu on change user settings
-  purify.settings.onUpdated.addListener((setting) => {
-    if (setting === purify.settings.DISABLE_SHOW_CONTEXT_MENU) {
-      purify.tabs.getActive((tab) => {
-        updateTabContextMenu(tab);
-      });
-    }
   });
 
   // Update tab icon and context menu on application initialization

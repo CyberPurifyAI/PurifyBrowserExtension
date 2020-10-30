@@ -650,12 +650,6 @@
   "options_collect_hit_stats": {
     "message": "Send statistics of ad&nbsp;filters usage"
   },
-  "options_show_context_menu": {
-    "message": "Add CyberPurify item to the&nbsp;browser's context menu"
-  },
-  "options_use_optimized_filters": {
-    "message": "Use optimized filters"
-  },
   "options_learn_more": {
     "message": "Learn more about it"
   },

@@ -23,7 +23,6 @@ purify.settings = (function (purify) {
     DISABLE_SAFEBROWSING: "safebrowsing-disabled",
     DISABLE_FILTERING: "purify-disabled",
     DISABLE_COLLECT_HITS: "hits-count-disabled",
-    DISABLE_SHOW_CONTEXT_MENU: "context-menu-disabled",
     DEFAULT_WHITE_LIST_MODE: "default-whitelist-mode",
     DISABLE_SHOW_APP_UPDATED_NOTIFICATION: "show-app-updated-disabled",
     FILTERS_UPDATE_PERIOD: "filters-update-period",
@@ -192,14 +191,6 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_COLLECT_HITS, !enabled, options);
   };
 
-  const showContextMenu = function () {
-    return !getProperty(settings.DISABLE_SHOW_CONTEXT_MENU);
-  };
-
-  const changeShowContextMenu = function (enabled, options) {
-    setProperty(settings.DISABLE_SHOW_CONTEXT_MENU, !enabled, options);
-  };
-
   const isDefaultWhiteListMode = function () {
     return getProperty(settings.DEFAULT_WHITE_LIST_MODE);
   };
@@ -268,8 +259,6 @@ purify.settings = (function (purify) {
   api.changeShowAppUpdatedNotification = changeShowAppUpdatedNotification;
   api.collectHitsCount = collectHitsCount;
   api.changeCollectHitsCount = changeCollectHitsCount;
-  api.showContextMenu = showContextMenu;
-  api.changeShowContextMenu = changeShowContextMenu;
   api.isDefaultWhiteListMode = isDefaultWhiteListMode;
   api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
   api.getFiltersUpdatePeriod = getFiltersUpdatePeriod;

@@ -1416,16 +1416,6 @@ const Settings = function () {
   );
   checkboxes.push(
     new Checkbox(
-      "#enableShowContextMenu",
-      userSettings.names.DISABLE_SHOW_CONTEXT_MENU,
-      {
-        negate: true,
-        hidden: false,
-      }
-    )
-  );
-  checkboxes.push(
-    new Checkbox(
       "#showInfoAboutPurifyFullVersion",
       userSettings.names.DISABLE_SHOW_PURIFY_PROMO_INFO,
       {
