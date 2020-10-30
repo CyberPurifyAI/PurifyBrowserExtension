@@ -211,38 +211,31 @@
       );
     }
 
-    if (requestType === purify.RequestTypes.IMAGE) {
-      const originUrl = referrerUrl;
-      let arrImage = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
-        originUrl
-      );
+    // if (requestType === purify.RequestTypes.IMAGE) {
+    //   const originUrl = referrerUrl;
+    //   let arrImage = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
+    //     originUrl
+    //   );
 
-      if (!arrImage) {
-        purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(originUrl, []);
-        arrImage = [];
-      }
+    //   if (!arrImage) {
+    //     purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(originUrl, []);
+    //     arrImage = [];
+    //   }
 
-      if (arrImage.length > 10) {
-        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-          requestUrl,
-          "Explicit Content"
-        );
+    //   if (arrImage.length > 10) {
+    //     const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+    //       requestUrl,
+    //       "Explicit Content"
+    //     );
 
-        purify.rules.documentFilterService.showDocumentBlockPage(
-          tabId,
-          documentBlockedPage
-        );
+    //     purify.rules.documentFilterService.showDocumentBlockPage(
+    //       tabId,
+    //       documentBlockedPage
+    //     );
 
-        return { cancel: true };
-      } else {
-        purify.predictionQueue
-          .Producer(requestUrl, originUrl, tabId)
-          .then((result) => (result ? { cancel: true } : { cancel: false }))
-          .catch((err) => {
-            cancel: false;
-          });
-      }
-    }
+    //     return { cancel: true };
+    //   }
+    // }
 
     return response;
   }
@@ -744,9 +737,6 @@
          * @param {Number} tabId
          */
         removeTabInjection(tabId) {
-          // clear queue nsfw
-          purify.predictionQueue.clearQueueByTabId(tabId);
-
           delete this[tabId];
         },
       };

@@ -8,7 +8,7 @@
 /**
  * prediction queue
  */
-purify.predictionQueue = (function (purify) {
+purify.predictionQueue = (function (purify, global) {
   "use strict";
 
   const DEFAULT_TAB_ID = 999999;
@@ -31,7 +31,7 @@ purify.predictionQueue = (function (purify) {
   };
 
   const onProcess = async function (
-    { requestUrl, image, originUrl, tabIdUrl },
+    { requestUrl, hashUrl, image, originUrl, tabIdUrl },
     callback
   ) {
     if (!purify.loadingQueue._checkCurrentTabIdUrlStatus(tabIdUrl)) {
@@ -55,10 +55,10 @@ purify.predictionQueue = (function (purify) {
       );
   };
 
-  const onSuccess = function ({ requestUrl, result }) {
+  const onSuccess = function ({ requestUrl, hashUrl, originUrl, result }) {
     if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
 
-    // cache.set(requestUrl, result);
+    saveCache(requestUrl, hashUrl, originUrl, result);
 
     for (const [{ resolve }] of requestMap.get(requestUrl)) {
       resolve(result);
@@ -70,10 +70,10 @@ purify.predictionQueue = (function (purify) {
     }
   };
 
-  const onFailure = function ({ requestUrl, errMessage }) {
+  const onFailure = function ({ requestUrl, hashUrl, originUrl, errMessage }) {
     if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
 
-    cache.set(requestUrl, false);
+    saveCache(requestUrl, hashUrl, originUrl, false);
 
     for (const [{ reject }] of requestMap.get(requestUrl)) {
       reject(errMessage);
@@ -87,6 +87,22 @@ purify.predictionQueue = (function (purify) {
   const onDrain = function () {
     pauseFlag = false;
     purify.loadingQueue.queue.resume();
+  };
+
+  const saveCache = function (requestUrl, hashUrl, originUrl, result) {
+    let urlCache = nsfwUrlCache.cache.getValue(originUrl);
+
+    if (typeof urlCache === "undefined") {
+      urlCache = [];
+    }
+
+    nsfwImageCache.cache.saveValue(hashUrl, result);
+
+    if (result === true) {
+      urlCache.push(requestUrl);
+      const uniqueArr = urlCache.filter(uniqueArray);
+      nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
+    }
   };
 
   return {

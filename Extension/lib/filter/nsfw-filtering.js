@@ -57,34 +57,18 @@ purify.nsfwFiltering = (function (purify, global) {
       const prediction = await nsfwInstance.classifyGif(image);
       const { result, className, probability } = handlePrediction([prediction]);
 
-      saveCache(hashUrl, requestUrl, originUrl, result);
+      // saveCache(requestUrl, originUrl, result);
 
       return Boolean(result);
     } else {
       const prediction = await nsfwInstance.classify(image, 2);
       const { result, className, probability } = handlePrediction([prediction]);
 
-      saveCache(hashUrl, requestUrl, originUrl, result);
+      // saveCache(requestUrl, originUrl, result);
 
       // purify.console.info(`${className} - ${probability} - ${result}`);
 
       return Boolean(result);
-    }
-  };
-
-  const saveCache = function (hashUrl, requestUrl, originUrl, result) {
-    let urlCache = nsfwUrlCache.cache.getValue(originUrl);
-
-    if (typeof urlCache === "undefined") {
-      urlCache = [];
-    }
-
-    nsfwImageCache.cache.saveValue(hashUrl, result);
-
-    if (result === true) {
-      urlCache.push(requestUrl);
-      const uniqueArr = urlCache.filter(uniqueArray);
-      nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
     }
   };
 

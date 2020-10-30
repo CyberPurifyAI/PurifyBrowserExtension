@@ -44,7 +44,9 @@ purify.loadingQueue = (function (purify) {
   const predict = async function (requestUrl, originUrl, tabIdUrl) {
     return await new Promise((resolve, reject) => {
       const hashUrl = purify.nsfwFiltering.createHash(requestUrl);
-      const cacheValue = nsfwImageCache.cache.getValue(hashUrl);
+      const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+        hashUrl
+      );
 
       if (cacheValue !== undefined) {
         resolve(cacheValue);
@@ -55,7 +57,7 @@ purify.loadingQueue = (function (purify) {
         requestMap.get(requestUrl)?.push([{ resolve, reject }]);
       } else {
         requestMap.set(requestUrl, [[{ resolve, reject }]]);
-        queue.add({ requestUrl, originUrl, tabIdUrl });
+        queue.add({ requestUrl, hashUrl, originUrl, tabIdUrl });
       }
     });
   };
@@ -102,7 +104,7 @@ purify.loadingQueue = (function (purify) {
   };
 
   const onLoadingProcess = function (
-    { requestUrl, originUrl, tabIdUrl },
+    { requestUrl, hashUrl, originUrl, tabIdUrl },
     callback
   ) {
     if (!_checkCurrentTabIdUrlStatus(tabIdUrl)) {
@@ -120,13 +122,14 @@ purify.loadingQueue = (function (purify) {
 
     loadImage(requestUrl)
       .then((image) =>
-        callback(undefined, { requestUrl, image, originUrl, tabIdUrl })
+        callback(undefined, { requestUrl, hashUrl, image, originUrl, tabIdUrl })
       )
       .catch((error) => callback({ requestUrl, error }, undefined));
   };
 
   const onLoadingSuccess = function ({
     requestUrl,
+    hashUrl,
     image,
     originUrl,
     tabIdUrl,
@@ -140,6 +143,7 @@ purify.loadingQueue = (function (purify) {
 
     purify.predictionQueue.queue.add({
       requestUrl,
+      hashUrl,
       image,
       originUrl,
       tabIdUrl,
