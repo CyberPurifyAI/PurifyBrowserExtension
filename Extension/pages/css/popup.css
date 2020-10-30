@@ -242,16 +242,6 @@ span {
   min-height: 75px;
 }
 
-.header-cta-link {
-  text-align: center;
-  margin-bottom: 5px;
-}
-
-.header-cta-link__in {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
 .tab-main .head .total {
   text-align: center;
   font-size: 16px;

@@ -294,10 +294,6 @@ PopupController.prototype = {
 
   _renderMain(container, tabInfo) {
     const template = this.filteringDefaultHeader;
-    if (this.options.showInfoAboutFullVersion) {
-      const headerCtaLink = template.querySelector("#header-cta-link");
-      headerCtaLink.style.display = "block";
-    }
     const tabBlocked = template.querySelector(".blocked-tab");
     const totalBlocked = template.querySelector(".blocked-all");
     i18n.translateElement(tabBlocked, "popup_tab_blocked", [
@@ -664,7 +660,6 @@ PopupController.prototype = {
 
   _renderFooter(footerContainer, tabInfo, options) {
     const { footerDefault } = this;
-    const getPremium = footerDefault.querySelector(".popup-get-premium");
     const popupFooter = footerDefault.querySelector(".popup-footer");
     // There is no footer title for edge
     const footerDefaultTitle = footerDefault.querySelector(".footer__title");
@@ -684,17 +679,6 @@ PopupController.prototype = {
       }
     }
 
-    // CAUTION!
-    // Uncomment if condition bellow if you'd like to show
-    // get premium button in the action window (extension popup)
-
-    // if (!options.isDisableShowPurifyPromoInfo) {
-    //     getPremium.style.display = 'block';
-    //     popupFooter.style.display = 'none';
-    // } else {
-    //     getPremium.style.display = 'none';
-    //     popupFooter.style.display = 'block';
-    // }
     this._appendTemplate(footerContainer, footerDefault);
   },
 
@@ -775,26 +759,6 @@ PopupController.prototype = {
       }
     });
 
-    const handlePopupGetPremiumClose = () => {
-      const getPremium = parent.querySelector(".popup-get-premium");
-      const popupFooter = parent.querySelector(".popup-footer");
-      if (getPremium) {
-        getPremium.style.display = "none";
-        popupFooter.style.display = "block";
-        popupPage.sendMessage({
-          type: "disableGetPremiumNotification",
-        });
-      }
-    };
-    // close popup get premium notification if user clicked close button
-    this._bindAction(parent, ".popup_get_premium_close", "click", (e) => {
-      e.preventDefault();
-      handlePopupGetPremiumClose();
-    });
-    // close popup get premium if user clicked on the link
-    this._bindAction(parent, ".popup-get-premium", "click", () => {
-      handlePopupGetPremiumClose();
-    });
     this._bindAction(parent, ".resetStats", "click", (e) => {
       e.preventDefault();
       self.resetBlockedAdsCount();

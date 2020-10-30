@@ -1416,15 +1416,6 @@ const Settings = function () {
   );
   checkboxes.push(
     new Checkbox(
-      "#showInfoAboutPurifyFullVersion",
-      userSettings.names.DISABLE_SHOW_PURIFY_PROMO_INFO,
-      {
-        negate: true,
-      }
-    )
-  );
-  checkboxes.push(
-    new Checkbox(
       "#showAppUpdatedNotification",
       userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION,
       {

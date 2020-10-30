@@ -20,10 +20,10 @@
   "popup_header_cta_link": {
     "message": "Want to block more?"
   },
-  "popup_sfk_for_ios": {
+  "popup_purify_for_ios": {
     "message": "CyberPurify for iOS"
   },
-  "popup_sfk_for_android": {
+  "popup_purify_for_android": {
     "message": "CyberPurify for Android"
   },
   "options_filters_filter_version": {
@@ -32,16 +32,13 @@
   "options_filters_filter_updated": {
     "message": "updated:"
   },
-  "popup_get_premium": {
-    "message": "Get Premium"
-  },
   "options_popup_version_update_disable_notification": {
     "message": "Disable notifications"
   },
   "options_miscellaneous_title": {
     "message": "Miscellaneous"
   },
-  "popup_sfk_footer_title": {
+  "popup_purify_footer_title": {
     "message": "Get CyberPurify for your mobile"
   },
   "options_popup_new_filter_subscription": {
@@ -631,9 +628,6 @@
   },
   "options_miscellaneous_settings": {
     "message": "Miscellaneous"
-  },
-  "options_show_sfk_full_version": {
-    "message": "Show information on the&nbsp;CyberPurify full version"
   },
   "options_show_app_updated_notification": {
     "message": "Notify about extension updates"

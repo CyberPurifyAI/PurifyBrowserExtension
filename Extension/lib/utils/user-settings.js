@@ -19,7 +19,6 @@ purify.settings = (function (purify) {
     "utm_source,utm_medium,utm_term,utm_campaign,utm_content,utm_name,utm_cid,utm_reader,utm_viz_id,utm_pubreferrer,utm_swu,utm_referrer,utm_social,utm_social-type,utm_place,utm_userid,utm_channel,fb_action_ids,fb_action_types,fb_ref,fb_source";
 
   const settings = {
-    DISABLE_SHOW_PURIFY_PROMO_INFO: "show-info-about-purify-disabled",
     DISABLE_SAFEBROWSING: "safebrowsing-disabled",
     DISABLE_FILTERING: "purify-disabled",
     DISABLE_COLLECT_HITS: "hits-count-disabled",
@@ -58,10 +57,6 @@ purify.settings = (function (purify) {
             defaults[settings[name]] = false;
           }
         }
-        defaults[settings.DISABLE_SHOW_PURIFY_PROMO_INFO] =
-          (!purify.utils.browser.isWindowsOs() &&
-            !purify.utils.browser.isMacOs()) ||
-          purify.utils.browser.isEdgeBrowser();
         defaults[settings.DISABLE_SAFEBROWSING] = false;
         defaults[settings.DISABLE_COLLECT_HITS] = true;
         defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
@@ -167,14 +162,6 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_FILTERING, disabled);
   };
 
-  const isShowInfoAboutPurifyFullVersion = function () {
-    return !getProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO);
-  };
-
-  const changeShowInfoAboutPurifyFullVersion = function (show, options) {
-    setProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO, !show, options);
-  };
-
   const isShowAppUpdatedNotification = function () {
     return !getProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION);
   };
@@ -228,14 +215,6 @@ purify.settings = (function (purify) {
     return getProperty(settings.BLOCK_WEBRTC);
   };
 
-  const disableShowPurifyPromoInfo = function () {
-    setProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO, true);
-  };
-
-  const isDisableShowPurifyPromoInfo = function () {
-    return getProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO);
-  };
-
   const api = {};
 
   // Expose settings to api
@@ -253,8 +232,6 @@ purify.settings = (function (purify) {
 
   api.isFilteringDisabled = isFilteringDisabled;
   api.changeFilteringDisabled = changeFilteringDisabled;
-  api.isShowInfoAboutPurifyFullVersion = isShowInfoAboutPurifyFullVersion;
-  api.changeShowInfoAboutPurifyFullVersion = changeShowInfoAboutPurifyFullVersion;
   api.isShowAppUpdatedNotification = isShowAppUpdatedNotification;
   api.changeShowAppUpdatedNotification = changeShowAppUpdatedNotification;
   api.collectHitsCount = collectHitsCount;
@@ -264,8 +241,6 @@ purify.settings = (function (purify) {
   api.getFiltersUpdatePeriod = getFiltersUpdatePeriod;
   api.setFiltersUpdatePeriod = setFiltersUpdatePeriod;
   api.isWebRTCDisabled = isWebRTCDisabled;
-  api.disableShowPurifyPromoInfo = disableShowPurifyPromoInfo;
-  api.isDisableShowPurifyPromoInfo = isDisableShowPurifyPromoInfo;
   api.DEFAULT_FILTERS_UPDATE_PERIOD = DEFAULT_FILTERS_UPDATE_PERIOD;
 
   return api;

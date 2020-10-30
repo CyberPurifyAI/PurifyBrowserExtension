@@ -294,7 +294,6 @@
             options: {
               showStatsSupported: true,
               isFirefoxBrowser: purify.utils.browser.isFirefoxBrowser(),
-              showInfoAboutFullVersion: purify.settings.isShowInfoAboutPurifyFullVersion(),
               isMacOs: purify.utils.browser.isMacOs(),
               isEdgeBrowser:
                 purify.utils.browser.isEdgeBrowser() ||
@@ -302,7 +301,6 @@
               notification: purify.notifications.getCurrentNotification(
                 frameInfo
               ),
-              isDisableShowPurifyPromoInfo: purify.settings.isDisableShowPurifyPromoInfo(),
             },
           });
         });
@@ -334,9 +332,6 @@
         break;
       case "saveCssHitStats":
         processSaveCssHitStats(sender.tab, message.stats);
-        break;
-      case "disableGetPremiumNotification":
-        purify.settings.disableShowPurifyPromoInfo();
         break;
       case "requestAnalyzeImage":
         if (message.type === "SIGN_CONNECT") {
