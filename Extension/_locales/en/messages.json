@@ -581,9 +581,6 @@
   "options_settings": {
     "message": "CyberPurify Settings"
   },
-  "options_show_blocked_ads_count": {
-    "message": "Indicate the number of&nbsp;blocked ads on&nbsp;the CyberPurify extension icon"
-  },
   "options_privacy": {
     "message": "Stealth Mode"
   },

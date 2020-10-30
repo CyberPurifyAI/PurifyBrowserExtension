@@ -1416,16 +1416,6 @@ const Settings = function () {
   );
   checkboxes.push(
     new Checkbox(
-      "#showPageStatisticCheckbox",
-      userSettings.names.DISABLE_SHOW_PAGE_STATS,
-      {
-        negate: true,
-        hidden: environmentOptions.Prefs.mobile,
-      }
-    )
-  );
-  checkboxes.push(
-    new Checkbox(
       "#enableShowContextMenu",
       userSettings.names.DISABLE_SHOW_CONTEXT_MENU,
       {

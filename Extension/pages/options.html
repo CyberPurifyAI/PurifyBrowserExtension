@@ -381,15 +381,18 @@
         <div class="page-title" i18n="options_miscellaneous_settings"></div>
         <div class="settings-body">
           <ul class="opts-list">
-            <li class="active">
-              <div aria-labelledby="showPageStatisticCheckbox" class="opt-desc">
-                <label tabindex="0" for="showPageStatisticCheckbox" class="title"
-                  i18n="options_show_blocked_ads_count"></label>
+            <li>
+              <div aria-labelledby="enableHitsCount" class="opt-desc">
+                <label tabindex="0" for="enableHitsCount" class="title" i18n="options_collect_hit_stats"></label>
+                <div class="opt-state">
+                  <div class="sp-table-row-info desc">
+                    <a class="opt-state__link" href="#" target="_blank" i18n="options_learn_more"></a>
+                  </div>
+                </div>
               </div>
               <div class="opt-state">
-                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input"
-                    id="showPageStatisticCheckbox" />
+                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="enableHitsCount" />
                 </div>
               </div>
             </li>

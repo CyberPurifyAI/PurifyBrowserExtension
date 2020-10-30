@@ -19,7 +19,6 @@ purify.settings = (function (purify) {
     "utm_source,utm_medium,utm_term,utm_campaign,utm_content,utm_name,utm_cid,utm_reader,utm_viz_id,utm_pubreferrer,utm_swu,utm_referrer,utm_social,utm_social-type,utm_place,utm_userid,utm_channel,fb_action_ids,fb_action_types,fb_ref,fb_source";
 
   const settings = {
-    DISABLE_SHOW_PAGE_STATS: "disable-show-page-statistic",
     DISABLE_SHOW_PURIFY_PROMO_INFO: "show-info-about-purify-disabled",
     DISABLE_SAFEBROWSING: "safebrowsing-disabled",
     DISABLE_FILTERING: "purify-disabled",
@@ -169,14 +168,6 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_FILTERING, disabled);
   };
 
-  const showPageStatistic = function () {
-    return !getProperty(settings.DISABLE_SHOW_PAGE_STATS);
-  };
-
-  const changeShowPageStatistic = function (enabled, options) {
-    setProperty(settings.DISABLE_SHOW_PAGE_STATS, !enabled, options);
-  };
-
   const isShowInfoAboutPurifyFullVersion = function () {
     return !getProperty(settings.DISABLE_SHOW_PURIFY_PROMO_INFO);
   };
@@ -271,8 +262,6 @@ purify.settings = (function (purify) {
 
   api.isFilteringDisabled = isFilteringDisabled;
   api.changeFilteringDisabled = changeFilteringDisabled;
-  api.showPageStatistic = showPageStatistic;
-  api.changeShowPageStatistic = changeShowPageStatistic;
   api.isShowInfoAboutPurifyFullVersion = isShowInfoAboutPurifyFullVersion;
   api.changeShowInfoAboutPurifyFullVersion = changeShowInfoAboutPurifyFullVersion;
   api.isShowAppUpdatedNotification = isShowAppUpdatedNotification;

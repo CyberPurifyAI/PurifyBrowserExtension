@@ -98,7 +98,7 @@ purify.ui = (function (purify) {
         disabled = tabInfo.applicationFilteringDisabled;
         disabled = disabled || tabInfo.documentWhiteListed;
 
-        if (!disabled && purify.settings.showPageStatistic()) {
+        if (!disabled) {
           blocked = tabInfo.totalBlockedTab.toString();
         } else {
           blocked = "0";
