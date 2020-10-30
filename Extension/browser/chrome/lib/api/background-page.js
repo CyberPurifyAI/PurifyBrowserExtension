@@ -659,6 +659,4 @@ const browser = window.browser || chrome;
       // Do nothing
     },
   };
-
-  purify.contextMenus = browser.contextMenus;
 })(purify, browser);

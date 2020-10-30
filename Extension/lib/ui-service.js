@@ -9,52 +9,6 @@ purify.ui = (function (purify) {
   // jshint ignore:line
   const browserActionTitle = purify.i18n.getMessage("name");
 
-  const contextMenuCallbackMappings = {
-    context_security_report: function () {
-      purify.tabs.getActive((tab) => {
-        openSiteReportTab(tab.url);
-      });
-    },
-    context_complaint_website: function () {
-      purify.tabs.getActive((tab) => {
-        openAbuseTab(tab.url);
-      });
-    },
-    context_site_filtering_on: function () {
-      purify.tabs.getActive(unWhiteListTab);
-    },
-    context_site_filtering_off: function () {
-      purify.tabs.getActive(whiteListTab);
-    },
-    context_enable_protection: function () {
-      changeApplicationFilteringDisabled(false);
-    },
-    context_disable_protection: function () {
-      changeApplicationFilteringDisabled(true);
-    },
-    context_open_settings: function () {
-      openSettingsTab();
-    },
-    context_antibanner: function () {
-      openSettingsTab("antibanner");
-    },
-    context_safebrowsing: function () {
-      openSettingsTab("safebrowsing");
-    },
-    context_whitelist: function () {
-      openSettingsTab("whitelist");
-    },
-    context_userfilter: function () {
-      openSettingsTab("userfilter");
-    },
-    context_miscellaneous_settings: function () {
-      openSettingsTab("miscellaneous-settings");
-    },
-    context_update_antibanner_filters: function () {
-      checkFiltersUpdates();
-    },
-  };
-
   const extensionStoreLink = (function () {
     let browser = "chrome";
     if (purify.utils.browser.isOperaBrowser()) {
@@ -170,158 +124,6 @@ purify.ui = (function (purify) {
   const updatePopupStatsAsync = purify.utils.concurrent.debounce((tab) => {
     updatePopupStats(tab);
   }, 250);
-
-  /**
-   * Creates context menu item
-   * @param title Title id
-   * @param options Create options
-   */
-  function addMenu(title, options) {
-    const createProperties = {
-      contexts: ["all"],
-      title: purify.i18n.getMessage(title),
-    };
-    if (options) {
-      if (options.id) {
-        createProperties.id = options.id;
-      }
-      if (options.parentId) {
-        createProperties.parentId = options.parentId;
-      }
-      if (options.disabled) {
-        createProperties.enabled = false;
-      }
-      if (options.messageArgs) {
-        createProperties.title = purify.i18n.getMessage(
-          title,
-          options.messageArgs
-        );
-      }
-      if (options.contexts) {
-        createProperties.contexts = options.contexts;
-      }
-      if ("checkable" in options) {
-        createProperties.checkable = options.checkable;
-      }
-      if ("checked" in options) {
-        createProperties.checked = options.checked;
-      }
-    }
-    let callback;
-    if (options && options.action) {
-      callback = contextMenuCallbackMappings[options.action];
-    } else {
-      callback = contextMenuCallbackMappings[title];
-    }
-    if (typeof callback === "function") {
-      createProperties.onclick = callback;
-    }
-    purify.contextMenus.create(createProperties);
-  }
-
-  function customizeContextMenu(tab) {
-    function addSeparator() {
-      purify.contextMenus.create({
-        type: "separator",
-      });
-    }
-
-    const tabInfo = purify.frames.getFrameInfo(tab);
-
-    if (tabInfo.applicationFilteringDisabled) {
-      addMenu("context_site_protection_disabled");
-      addSeparator();
-      addMenu("context_open_log");
-      addMenu("context_open_settings");
-      addMenu("context_enable_protection");
-    } else if (tabInfo.urlFilteringDisabled) {
-      addMenu("context_site_filtering_disabled");
-      addSeparator();
-      addMenu("context_open_log");
-      addMenu("context_open_settings");
-      addMenu("context_update_antibanner_filters");
-    } else {
-      if (tabInfo.documentWhiteListed && !tabInfo.userWhiteListed) {
-        addMenu("context_site_exception");
-      } else if (tabInfo.canAddRemoveRule) {
-        if (tabInfo.documentWhiteListed) {
-          addMenu("context_site_filtering_on");
-        } else {
-          addMenu("context_site_filtering_off");
-        }
-      }
-      addSeparator();
-
-      if (!tabInfo.documentWhiteListed) {
-        addMenu("context_block_site_ads");
-        addMenu("context_block_site_element", {
-          contexts: ["image", "video", "audio"],
-        });
-      }
-      addMenu("context_security_report");
-      addMenu("context_complaint_website");
-      addSeparator();
-      addMenu("context_update_antibanner_filters");
-      addSeparator();
-      addMenu("context_open_settings");
-      addMenu("context_open_log");
-      addMenu("context_disable_protection");
-    }
-  }
-
-  function customizeMobileContextMenu(tab) {
-    const tabInfo = purify.frames.getFrameInfo(tab);
-
-    if (tabInfo.applicationFilteringDisabled) {
-      addMenu("popup_site_protection_disabled_android", {
-        action: "context_enable_protection",
-        checked: true,
-        checkable: true,
-      });
-      addMenu("popup_open_log_android", { action: "context_open_log" });
-      addMenu("popup_open_settings", { action: "context_open_settings" });
-    } else if (tabInfo.urlFilteringDisabled) {
-      addMenu("context_site_filtering_disabled");
-      addMenu("popup_open_log_android", { action: "context_open_log" });
-      addMenu("popup_open_settings", { action: "context_open_settings" });
-      addMenu("context_update_antibanner_filters");
-    } else {
-      addMenu("popup_site_protection_disabled_android", {
-        action: "context_disable_protection",
-        checked: false,
-        checkable: true,
-      });
-      if (tabInfo.documentWhiteListed && !tabInfo.userWhiteListed) {
-        addMenu("popup_in_white_list_android");
-      } else if (tabInfo.canAddRemoveRule) {
-        if (tabInfo.documentWhiteListed) {
-          addMenu("popup_site_filtering_state", {
-            action: "context_site_filtering_on",
-            checkable: true,
-            checked: false,
-          });
-        } else {
-          addMenu("popup_site_filtering_state", {
-            action: "context_site_filtering_off",
-            checkable: true,
-            checked: true,
-          });
-        }
-      }
-
-      if (!tabInfo.documentWhiteListed) {
-        addMenu("popup_block_site_ads_android", {
-          action: "context_block_site_ads",
-        });
-      }
-      addMenu("popup_open_log_android", { action: "context_open_log" });
-      addMenu("popup_security_report_android", {
-        action: "context_security_report",
-      });
-      addMenu("popup_open_settings", { action: "context_open_settings" });
-      addMenu("context_update_antibanner_filters");
-    }
-  }
 
   function closeAllPages() {
     purify.tabs.forEach((tab) => {
@@ -474,13 +276,6 @@ purify.ui = (function (purify) {
       text,
     };
   }
-
-  const updateTabIconAndContextMenu = function (tab, reloadFrameData) {
-    if (reloadFrameData) {
-      purify.frames.reloadFrameData(tab);
-    }
-    updateTabIcon(tab);
-  };
 
   /**
    * Open settings tab with hash parameters or without them
@@ -656,21 +451,18 @@ purify.ui = (function (purify) {
   var whiteListTab = function (tab) {
     const tabInfo = purify.frames.getFrameInfo(tab);
     purify.whitelist.whiteListUrl(tabInfo.url);
-    updateTabIconAndContextMenu(tab, true);
     purify.tabs.reload(tab.tabId);
   };
 
   var unWhiteListTab = function (tab) {
     const tabInfo = purify.frames.getFrameInfo(tab);
     purify.userrules.unWhiteListFrame(tabInfo);
-    updateTabIconAndContextMenu(tab, true);
     purify.tabs.reload(tab.tabId);
   };
 
   var changeApplicationFilteringDisabled = function (disabled) {
     purify.settings.changeFilteringDisabled(disabled);
     purify.tabs.getActive((tab) => {
-      updateTabIconAndContextMenu(tab, true);
       purify.tabs.reload(tab.tabId);
     });
   };
@@ -838,11 +630,6 @@ purify.ui = (function (purify) {
         }
       });
     });
-
-    // Update tab icon and context menu on active tab changed
-    purify.tabs.onActivated.addListener((tab) => {
-      updateTabIconAndContextMenu(tab, true);
-    });
   };
 
   // Update icon and popup stats on ads blocked
@@ -863,13 +650,6 @@ purify.ui = (function (purify) {
         updatePopupStatsAsync(activeTab);
       }
     });
-  });
-
-  // Update tab icon and context menu on application initialization
-  purify.listeners.addListener((event) => {
-    if (event === purify.listeners.APPLICATION_INITIALIZED) {
-      purify.tabs.getActive(updateTabIconAndContextMenu);
-    }
   });
 
   // on application updated event
@@ -927,8 +707,6 @@ purify.ui = (function (purify) {
     openExtensionStore,
     openFiltersDownloadPage,
     openAbuseTab,
-
-    updateTabIconAndContextMenu,
 
     whiteListTab,
     unWhiteListTab,

@@ -146,7 +146,6 @@ purify.notifications = (function (purify) {
       if (!viewedNotifications.includes(id)) {
         viewedNotifications.push(id);
         purify.localStorage.setItem(VIEWED_NOTIFICATIONS, viewedNotifications);
-        purify.tabs.getActive(purify.ui.updateTabIconAndContextMenu);
         currentNotification = null;
       }
     }
