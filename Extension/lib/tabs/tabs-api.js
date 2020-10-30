@@ -161,6 +161,9 @@
       }
       tabs[aTab.tabId] = aTab;
       onCreatedChannel.notify(aTab);
+
+      const tabIdUrl = purify.loadingQueue._buildTabIdUrl(aTab);
+      purify.loadingQueue.addTabIdUrl(tabIdUrl);
     }
 
     // Synchronize opened tabs
@@ -179,6 +182,8 @@
         onRemovedChannel.notify(tab);
         delete tabs[tabId];
       }
+
+      purify.loadingQueue.clearByTabId(tabId);
     });
 
     tabsImpl.onUpdated.addListener((aTab) => {
@@ -190,6 +195,9 @@
         // If the tab was updated it means that it wasn't used to send requests in the background
         tab.synthetic = false;
         onUpdatedChannel.notify(tab);
+
+        const tabIdUrl = purify.loadingQueue._buildTabIdUrl(aTab);
+        purify.loadingQueue.updateTabIdUrl(tabIdUrl);
       }
     });
 
@@ -197,6 +205,8 @@
       const tab = tabs[tabId];
       if (tab) {
         onActivatedChannel.notify(tab);
+
+        purify.loadingQueue.setActiveTabId(tabId);
       }
     });
 

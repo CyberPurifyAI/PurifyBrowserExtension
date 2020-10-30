@@ -8,19 +8,16 @@
 /**
  * prediction queue
  */
-purify.predictionQueue = (function (purify, global) {
+purify.predictionQueue = (function (purify) {
   "use strict";
 
-  const DEFAULT_TAB_ID = 999999;
-
   let requestQueue = new Map();
-  let activeTabId = DEFAULT_TAB_ID;
   let pauseFlag = false;
   let queue = null;
 
   const init = function () {
     queue = new purify.utils.concurrentQueue({
-      concurrency: 1,
+      concurrency: 2,
       timeout: 0,
       onProcess: onProcess,
       onSuccess: onSuccess,
@@ -31,7 +28,7 @@ purify.predictionQueue = (function (purify, global) {
   };
 
   const onProcess = async function (
-    { requestUrl, hashUrl, image, originUrl, tabIdUrl },
+    { requestUrl, hashUrl, image, tabIdUrl },
     callback
   ) {
     if (!purify.loadingQueue._checkCurrentTabIdUrlStatus(tabIdUrl)) {
@@ -48,34 +45,44 @@ purify.predictionQueue = (function (purify, global) {
     }
 
     purify.nsfwFiltering
-      .getPredictImage(requestUrl, image, originUrl)
-      .then((result) => callback(undefined, { requestUrl, result }))
+      .getPredictImage(requestUrl, image)
+      .then((result) =>
+        callback(undefined, { requestUrl, hashUrl, tabIdUrl, result })
+      )
       .catch((error) =>
         callback({ requestUrl, errMessage: error.message }, undefined)
       );
   };
 
-  const onSuccess = function ({ requestUrl, hashUrl, originUrl, result }) {
+  const onSuccess = function ({ requestUrl, hashUrl, tabIdUrl, result }) {
     if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
 
-    saveCache(requestUrl, hashUrl, originUrl, result);
+    const { tabUrl } = tabIdUrl;
 
-    for (const [{ resolve }] of requestMap.get(requestUrl)) {
+    saveCache({ requestUrl, hashUrl, tabUrl, result });
+
+    for (const [{ resolve }] of purify.loadingQueue
+      .getRequestMap()
+      .get(requestUrl)) {
       resolve(result);
     }
 
     if (pauseFlag && predictionQueue.getTaskAmount() <= 5) {
       pauseFlag = false;
-      purify.loadingQueue.queue.resume();
+      purify.loadingQueue.getQueue().resume();
     }
   };
 
-  const onFailure = function ({ requestUrl, hashUrl, originUrl, errMessage }) {
+  const onFailure = function ({ requestUrl, hashUrl, tabIdUrl, errMessage }) {
     if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
 
-    saveCache(requestUrl, hashUrl, originUrl, false);
+    const { tabUrl } = tabIdUrl;
 
-    for (const [{ reject }] of requestMap.get(requestUrl)) {
+    saveCache({ requestUrl, hashUrl, tabUrl, result: false });
+
+    for (const [{ reject }] of purify.loadingQueue
+      .getRequestMap()
+      .get(requestUrl)) {
       reject(errMessage);
     }
   };
@@ -86,26 +93,37 @@ purify.predictionQueue = (function (purify, global) {
 
   const onDrain = function () {
     pauseFlag = false;
-    purify.loadingQueue.queue.resume();
+    purify.loadingQueue.getQueue().resume();
   };
 
-  const saveCache = function (requestUrl, hashUrl, originUrl, result) {
-    let urlCache = nsfwUrlCache.cache.getValue(originUrl);
+  const saveCache = function ({ requestUrl, hashUrl, tabUrl, result }) {
+    let urlCache = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(tabUrl);
 
     if (typeof urlCache === "undefined") {
       urlCache = [];
     }
 
-    nsfwImageCache.cache.saveValue(hashUrl, result);
+    purify.nsfwFiltering.nsfwImageCache.cache.saveValue(hashUrl, result);
 
     if (result === true) {
       urlCache.push(requestUrl);
       const uniqueArr = urlCache.filter(uniqueArray);
-      nsfwUrlCache.cache.saveValue(originUrl, uniqueArr);
+      purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(tabUrl, uniqueArr);
     }
   };
 
-  return {
-    init,
+  const uniqueArray = function (value, index, self) {
+    return self.indexOf(value) === index;
   };
-})(purify);
+
+  const getQueue = function () {
+    return queue;
+  };
+
+  return {
+    getQueue,
+    pauseFlag,
+    init,
+    saveCache,
+  };
+})(purify, window);

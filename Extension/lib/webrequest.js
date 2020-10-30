@@ -211,31 +211,31 @@
       );
     }
 
-    // if (requestType === purify.RequestTypes.IMAGE) {
-    //   const originUrl = referrerUrl;
-    //   let arrImage = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
-    //     originUrl
-    //   );
+    if (requestType === purify.RequestTypes.DOCUMENT) {
+      const originUrl = requestUrl;
+      let arrImage = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
+        originUrl
+      );
 
-    //   if (!arrImage) {
-    //     purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(originUrl, []);
-    //     arrImage = [];
-    //   }
+      if (!arrImage) {
+        purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(originUrl, []);
+        arrImage = [];
+      }
 
-    //   if (arrImage.length > 10) {
-    //     const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-    //       requestUrl,
-    //       "Explicit Content"
-    //     );
+      if (arrImage.length > 20) {
+        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+          requestUrl,
+          "Explicit Content"
+        );
 
-    //     purify.rules.documentFilterService.showDocumentBlockPage(
-    //       tabId,
-    //       documentBlockedPage
-    //     );
+        purify.rules.documentFilterService.showDocumentBlockPage(
+          tabId,
+          documentBlockedPage
+        );
 
-    //     return { cancel: true };
-    //   }
-    // }
+        return { cancel: true };
+      }
+    }
 
     return response;
   }

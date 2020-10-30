@@ -41,7 +41,7 @@ purify.initialize = function () {
     // purify.parentalControl.syncParentalControl();
 
     // tf.enableProdMode();
-    purify.nsfwFiltering.initialize();
+    purify.nsfwFiltering.init();
     purify.loadingQueue.init();
     purify.predictionQueue.init();
 

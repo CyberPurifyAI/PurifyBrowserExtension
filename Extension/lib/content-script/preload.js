@@ -154,7 +154,6 @@
       const request = {
         type: "requestAnalyzeImage",
         requestUrl: image.src,
-        originUrl: window.location.href,
       };
 
       try {

@@ -12,7 +12,6 @@ purify.nsfwFiltering = (function (purify, global) {
   "use strict";
 
   const NSFW_MODEL_PATH = "../models/quant_mid/";
-  const IMAGE_SIZE = 224;
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
   const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
 
@@ -21,7 +20,7 @@ purify.nsfwFiltering = (function (purify, global) {
   const Strictness = 50;
   const coefficient = 1 - Strictness / 100;
 
-  const initialize = async function () {
+  const init = async function () {
     purify.console.info("Initializing Predict Image");
     nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH, { type: "graph" });
     nsfwImageCache.cache.object();
@@ -52,28 +51,20 @@ purify.nsfwFiltering = (function (purify, global) {
     return global.SHA256.hash(`${host}`);
   };
 
-  const getPredictImage = async function (requestUrl, image, originUrl) {
+  const getPredictImage = async function (requestUrl, image) {
     if (GIF_REGEX.test(requestUrl)) {
       const prediction = await nsfwInstance.classifyGif(image);
       const { result, className, probability } = handlePrediction([prediction]);
-
-      // saveCache(requestUrl, originUrl, result);
 
       return Boolean(result);
     } else {
       const prediction = await nsfwInstance.classify(image, 2);
       const { result, className, probability } = handlePrediction([prediction]);
 
-      // saveCache(requestUrl, originUrl, result);
-
       // purify.console.info(`${className} - ${probability} - ${result}`);
 
       return Boolean(result);
     }
-  };
-
-  const uniqueArray = function (value, index, self) {
-    return self.indexOf(value) === index;
   };
 
   const handlePrediction = function ([prediction]) {
@@ -113,7 +104,7 @@ purify.nsfwFiltering = (function (purify, global) {
   };
 
   return {
-    initialize,
+    init,
     getPredictImage,
     nsfwImageCache,
     nsfwUrlCache,

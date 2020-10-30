@@ -8,22 +8,23 @@
 /**
  * concurrent queue
  */
-(function () {
+(function (api) {
   "use strict";
 
-  const concurrentQueue = function (
+  const concurrentQueue = function ({
     concurrency,
     timeout,
     onProcess,
     onSuccess,
     onFailure,
     onDone,
-    onDrain
-  ) {
+    onDrain,
+  }) {
     const TIMEOUT = timeout;
-    const count = 0;
-    const waiting = [];
-    const paused = false;
+
+    let count = 0;
+    let waiting = [];
+    let paused = false;
 
     const add = function (task) {
       const hasChannel = count < concurrency;
@@ -41,7 +42,7 @@
 
       onProcess(task, (err, result) => {
         if (err !== undefined) {
-          onFailure(err);
+          onFailure(task, err);
         } else {
           onSuccess(result);
         }
