@@ -148,7 +148,6 @@
   const getPredictImageResult = function (image) {
     image._isPurified = true;
     hideImage(image);
-    // console.log(`Analyze ${image.src}`);
 
     new Promise((resolve, reject) => {
       const request = {
@@ -178,8 +177,7 @@
           resolve(response);
         });
       } catch (err) {
-        console.log(err);
-        reject(request);
+        reject();
       }
     });
   };
