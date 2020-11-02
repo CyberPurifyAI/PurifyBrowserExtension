@@ -42,7 +42,7 @@ purify.parentalControl = (function (purify) {
         });
 
         mqttc.on("error", (error) => {
-          purify.console.info("error");
+          purify.console.info("error init device");
         });
       }
     });
@@ -67,7 +67,7 @@ purify.parentalControl = (function (purify) {
                   mqttc.publish(
                     "mqtt_proxy",
                     JSON.stringify({
-                      action: "record_browser_ext",
+                      action: "stats_browser_ext",
                       client_id: MQTT_CONFIG.clientId,
                       puid: info.puid,
                       data: item,
@@ -85,7 +85,7 @@ purify.parentalControl = (function (purify) {
         });
 
         mqttc.on("error", (error) => {
-          purify.console.info("error");
+          purify.console.info("error hit stats");
         });
       }
     });
