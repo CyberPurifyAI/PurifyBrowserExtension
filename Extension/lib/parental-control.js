@@ -13,7 +13,8 @@ purify.parentalControl = (function (purify) {
 
   const MQTT_CONFIG = {
     path: "/ws",
-    clientId: "chrome_ext_" + Math.random().toString(16).substr(2, 8),
+    clientId:
+      purify.prefs.browser + "_" + Math.random().toString(16).substr(2, 16),
   };
 
   const initDevice = function () {
@@ -26,6 +27,8 @@ purify.parentalControl = (function (purify) {
           const payload = JSON.stringify({
             action: "init_device",
             client_id: MQTT_CONFIG.clientId,
+            user_agent: navigator.userAgent,
+            client_lang: navigator.language,
           });
 
           mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
