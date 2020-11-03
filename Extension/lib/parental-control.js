@@ -73,7 +73,7 @@ purify.parentalControl = (function (purify) {
                       action: "stats_browser_ext",
                       client_id: MQTT_CONFIG.clientId,
                       puid: info.puid,
-                      data: item,
+                      stat: item,
                     })
                   );
                 }
