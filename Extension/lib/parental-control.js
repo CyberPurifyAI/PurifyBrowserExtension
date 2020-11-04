@@ -11,27 +11,23 @@
 purify.parentalControl = (function (purify) {
   "use strict";
 
-  const MQTT_CONFIG = {
-    path: "/ws",
-    clientId:
-      purify.prefs.browser + "_" + Math.random().toString(16).substr(2, 16),
-  };
+  const clientId = purify.utils.browser.getClientId();
 
   const initDevice = function () {
     browser.storage.sync.get("puid", function (info) {
       if (Object.keys(info).length === 0 && info.constructor === Object) {
         const hub = atob(purify.HUB_SUBSCRIBE);
-        const mqttc = mqtt.connect(hub, MQTT_CONFIG);
+        const mqttc = mqtt.connect(hub);
 
         mqttc.on("connect", function () {
           const payload = JSON.stringify({
             action: "init_device",
-            client_id: MQTT_CONFIG.clientId,
+            client_id: clientId,
             user_agent: navigator.userAgent,
             client_lang: navigator.language,
           });
 
-          mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
+          mqttc.subscribe(clientId, function (err) {
             if (!err) {
               mqttc.publish("mqtt_proxy", payload);
             }
@@ -55,7 +51,7 @@ purify.parentalControl = (function (purify) {
     browser.storage.sync.get("puid", function (info) {
       if (Object.keys(info).length !== 0 && info.constructor === Object) {
         const hub = atob(purify.HUB_SUBSCRIBE);
-        const mqttc = mqtt.connect(hub, MQTT_CONFIG);
+        const mqttc = mqtt.connect(hub);
 
         mqttc.on("connect", function () {
           const cache = purify.nsfwFiltering.nsfwUrlCache.cache.object();
@@ -65,13 +61,13 @@ purify.parentalControl = (function (purify) {
             let item = arrCache[idx];
 
             if (typeof item.value !== "undefined" && item.value.length > 0) {
-              mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {
+              mqttc.subscribe(clientId, function (err) {
                 if (!err) {
                   mqttc.publish(
                     "mqtt_proxy",
                     JSON.stringify({
                       action: "stats_browser_ext",
-                      client_id: MQTT_CONFIG.clientId,
+                      client_id: clientId,
                       puid: info.puid,
                       stat: item,
                     })
@@ -94,7 +90,7 @@ purify.parentalControl = (function (purify) {
     });
   };
 
-  const init = async function () {
+  const init = function () {
     initDevice();
     purify.console.info("Initializing Parental Control");
   };

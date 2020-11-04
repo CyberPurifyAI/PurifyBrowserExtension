@@ -60,7 +60,7 @@
         const suffix = Date.now() % 1e8;
         const symbols =
           "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890";
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 64; i++) {
           const symbol = symbols[Math.floor(Math.random() * symbols.length)];
           result.push(symbol);
         }
