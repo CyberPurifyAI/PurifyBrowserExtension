@@ -32,9 +32,6 @@
   "options_filters_filter_updated": {
     "message": "updated:"
   },
-  "options_popup_version_update_disable_notification": {
-    "message": "Disable notifications"
-  },
   "options_miscellaneous_title": {
     "message": "Miscellaneous"
   },
@@ -334,24 +331,6 @@
   },
   "options_popup_update_filters": {
     "message": "were updated."
-  },
-  "options_popup_version_update_title": {
-    "message": "CyberPurify extension has been updated to version $1"
-  },
-  "options_popup_version_update_description_minor": {
-    "message": "This version contains mostly bugfixes and minor improvements."
-  },
-  "options_popup_version_update_description_major": {
-    "message": "This is a major extension upgrade that brings a lot of new features and improvements."
-  },
-  "options_popup_version_update_changelog_text": {
-    "message": "What's new in this version?"
-  },
-  "options_popup_version_update_offer": {
-    "message": "Did you know that CyberPurify capabilities are not limited to this browser?"
-  },
-  "options_popup_version_update_offer_button_text": {
-    "message": "LEARN MORE"
   },
   "popup_block_site_ads": {
     "message": "Block ads&nbsp;on&nbsp;this website"

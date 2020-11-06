@@ -155,74 +155,6 @@ purify.ui = (function (purify) {
     });
   }
 
-  /**
-   * Depending on version numbers select proper message for description
-   *
-   * @param currentVersion
-   * @param previousVersion
-   */
-  function getUpdateDescriptionMessage(currentVersion, previousVersion) {
-    if (
-      purify.utils.browser.getMajorVersionNumber(currentVersion) >
-        purify.utils.browser.getMajorVersionNumber(previousVersion) ||
-      purify.utils.browser.getMinorVersionNumber(currentVersion) >
-        purify.utils.browser.getMinorVersionNumber(previousVersion)
-    ) {
-      return purify.i18n.getMessage(
-        "options_popup_version_update_description_major"
-      );
-    }
-
-    return purify.i18n.getMessage(
-      "options_popup_version_update_description_minor"
-    );
-  }
-
-  /**
-   * Shows application updated popup
-   *
-   * @param currentVersion
-   * @param previousVersion
-   */
-  function showVersionUpdatedPopup(currentVersion, previousVersion) {
-    // Suppress for v3.0 hotfix
-    // TODO: Remove this in the next update
-    if (
-      purify.utils.browser.getMajorVersionNumber(currentVersion) ==
-        purify.utils.browser.getMajorVersionNumber(previousVersion) &&
-      purify.utils.browser.getMinorVersionNumber(currentVersion) ==
-        purify.utils.browser.getMinorVersionNumber(previousVersion)
-    ) {
-      return;
-    }
-    const message = {
-      type: "show-version-updated-popup",
-      title: purify.i18n.getMessage(
-        "options_popup_version_update_title",
-        currentVersion
-      ),
-      description: getUpdateDescriptionMessage(currentVersion, previousVersion),
-      changelogHref:
-        "https://cyberpurify.com/forward.html?action=github_version_popup&from=version_popup&app=browser_extension",
-      changelogText: purify.i18n.getMessage(
-        "options_popup_version_update_changelog_text"
-      ),
-      offer: purify.i18n.getMessage("options_popup_version_update_offer"),
-      offerButtonHref:
-        "https://cyberpurify.com/forward.html?action=learn_about_purify&from=version_popup&app=browser_extension",
-      offerButtonText: purify.i18n.getMessage(
-        "options_popup_version_update_offer_button_text"
-      ),
-      disableNotificationText: purify.i18n.getMessage(
-        "options_popup_version_update_disable_notification"
-      ),
-    };
-
-    purify.tabs.getActive((tab) => {
-      message.isPurifyTab = isPurifyTab(tab);
-      purify.tabs.sendMessage(tab.tabId, message);
-    });
-  }
 
   function getFiltersUpdateResultMessage(success, updatedFilters) {
     let title = "";
@@ -650,15 +582,6 @@ purify.ui = (function (purify) {
         updatePopupStatsAsync(activeTab);
       }
     });
-  });
-
-  // on application updated event
-  purify.listeners.addListener((event, info) => {
-    if (event === purify.listeners.APPLICATION_UPDATED) {
-      if (purify.settings.isShowAppUpdatedNotification()) {
-        showVersionUpdatedPopup(info.currentVersion, info.prevVersion);
-      }
-    }
   });
 
   // on filter auto-enabled event

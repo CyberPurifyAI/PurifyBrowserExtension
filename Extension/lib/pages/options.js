@@ -1414,15 +1414,6 @@ const Settings = function () {
       negate: true,
     })
   );
-  checkboxes.push(
-    new Checkbox(
-      "#showAppUpdatedNotification",
-      userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION,
-      {
-        negate: true,
-      }
-    )
-  );
 
   // Privacy settings
   checkboxes.push(

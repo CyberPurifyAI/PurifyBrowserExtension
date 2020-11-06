@@ -23,7 +23,6 @@ purify.settings = (function (purify) {
     DISABLE_FILTERING: "purify-disabled",
     DISABLE_COLLECT_HITS: "hits-count-disabled",
     DEFAULT_WHITE_LIST_MODE: "default-whitelist-mode",
-    DISABLE_SHOW_APP_UPDATED_NOTIFICATION: "show-app-updated-disabled",
     FILTERS_UPDATE_PERIOD: "filters-update-period",
     DISABLE_STEALTH_MODE: "stealth_disable_stealth_mode",
     HIDE_REFERRER: "stealth-hide-referrer",
@@ -60,7 +59,6 @@ purify.settings = (function (purify) {
         defaults[settings.DISABLE_SAFEBROWSING] = false;
         defaults[settings.DISABLE_COLLECT_HITS] = true;
         defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
-        defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
         defaults[
           settings.FILTERS_UPDATE_PERIOD
         ] = DEFAULT_FILTERS_UPDATE_PERIOD;
@@ -162,14 +160,6 @@ purify.settings = (function (purify) {
     setProperty(settings.DISABLE_FILTERING, disabled);
   };
 
-  const isShowAppUpdatedNotification = function () {
-    return !getProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION);
-  };
-
-  const changeShowAppUpdatedNotification = function (show, options) {
-    setProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, !show, options);
-  };
-
   const collectHitsCount = function () {
     return !getProperty(settings.DISABLE_COLLECT_HITS);
   };
@@ -232,8 +222,6 @@ purify.settings = (function (purify) {
 
   api.isFilteringDisabled = isFilteringDisabled;
   api.changeFilteringDisabled = changeFilteringDisabled;
-  api.isShowAppUpdatedNotification = isShowAppUpdatedNotification;
-  api.changeShowAppUpdatedNotification = changeShowAppUpdatedNotification;
   api.collectHitsCount = collectHitsCount;
   api.changeCollectHitsCount = changeCollectHitsCount;
   api.isDefaultWhiteListMode = isDefaultWhiteListMode;

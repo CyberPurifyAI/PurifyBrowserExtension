@@ -168,105 +168,6 @@
   }
 
   /**
-   * Shows version updated popup.
-   * Popup content is added right to the page content.
-   *
-   * @param {{title,description, changelogHref, changelogText, offer, offerButtonHref, offerButtonText}} message
-   */
-  function showVersionUpdatedPopup(message) {
-    const {
-      title,
-      description,
-      changelogHref,
-      changelogText,
-      offer,
-      offerButtonHref,
-      offerButtonText,
-      disableNotificationText,
-      isPurifyTab,
-    } = message;
-
-    const updateIframeHtml = `<head></head>
-                            <body>
-                            <div id="purify-new-version-popup" class="purify-update-popup purify-update-popup--active">
-                                <div id="purify-new-version-popup-close" class="purify-update-popup__close close-iframe"></div>
-                                <div class="purify-update-popup__logo"></div>
-                                <div class="purify-update-popup__title">
-                                    ${title}
-                                </div>
-                                <div class="purify-update-popup__desc">
-                                    ${description}
-                                </div>
-                                <div class="purify-update-popup__links">
-                                    <a href="${changelogHref}" class="purify-update-popup__link close-iframe" target="_blank">
-                                        ${changelogText}
-                                    </a>
-                                    <a href="#" class="purify-update-popup__link purify-update-popup__link--disable close-iframe disable-notifications">
-                                        ${disableNotificationText}
-                                    </a>
-                                </div>
-                                <div class="purify-update-popup__offer">
-                                    ${offer}
-                                </div>
-                                <a href="${offerButtonHref}" class="purify-update-popup__btn close-iframe" target="_blank">
-                                    ${offerButtonText}
-                                </a>
-                            </div>
-                            </body>`;
-
-    const triesCount = 10;
-
-    const handleCloseIframe = (iframe) => {
-      const iframeDocument =
-        iframe.contentDocument || iframe.contentWindow.document;
-      const closeElements = iframeDocument.querySelectorAll(".close-iframe");
-      if (closeElements.length > 0) {
-        closeElements.forEach((element) => {
-          element.addEventListener("click", () => {
-            if (element.classList.contains("disable-notifications")) {
-              // disable update notifications
-              contentPage.sendMessage({
-                type: "changeUserSetting",
-                key: "show-app-updated-disabled",
-                value: true,
-              });
-            }
-            // Remove iframe after click event fire on link
-            setTimeout(() => {
-              iframe.parentNode.removeChild(iframe);
-            }, 0);
-          });
-        });
-        return true;
-      }
-      return false;
-    };
-
-    function appendPopup(count) {
-      if (count >= triesCount) {
-        return;
-      }
-
-      if (document.body && !isPurifyTab) {
-        const iframe = appendIframe(document.body, updateIframeHtml);
-        iframe.classList.add("purify-update-iframe");
-        const isListening = handleCloseIframe(iframe);
-        if (!isListening) {
-          iframe.addEventListener("load", () => {
-            handleCloseIframe(iframe);
-          });
-        }
-      } else {
-        setTimeout(() => {
-          appendPopup(count + 1);
-        }, 500);
-      }
-    }
-
-    appendPopup(0);
-  }
-
-  /**
    * Reload page without cache
    */
   function noCacheReload() {
@@ -284,8 +185,6 @@
   contentPage.onMessage.addListener((message) => {
     if (message.type === "show-alert-popup") {
       showAlertPopup(message);
-    } else if (message.type === "show-version-updated-popup") {
-      showVersionUpdatedPopup(message);
     } else if (message.type === "no-cache-reload") {
       noCacheReload();
     } else if (message.type === "update-tab-url") {
