@@ -46,12 +46,6 @@
       "matches": ["http://*/*", "https://*/*"],
       "match_about_blank": true,
       "run_at": "document_start"
-    },
-    {
-      "all_frames": false,
-      "js": ["lib/pages/thankyou.js"],
-      "matches": ["*://*.cyberpurify.com/*/thankyou.html*"],
-      "run_at": "document_start"
     }
   ],
   "minimum_chrome_version": "55.0",

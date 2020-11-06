@@ -52,12 +52,6 @@
       "js": ["lib/content-script/i18n-helper.js"],
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_end"
-    },
-    {
-      "all_frames": false,
-      "js": ["lib/pages/thankyou.js"],
-      "matches": ["*://*.cyberpurify.com/*/thankyou.html*"],
-      "run_at": "document_start"
     }
   ],
   "minimum_edge_version": "40.15063.0.0",
