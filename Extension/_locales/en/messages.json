@@ -602,9 +602,6 @@
   "options_userfilter_description": {
     "message": "You can add your own rules here. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://cyberpurify.com/forward.html?action=userfilter_description&from=options&app=browser_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."
   },
-  "options_open_changelog": {
-    "message": "Changelog"
-  },
   "options_safebrowsing": {
     "message": "Browsing security"
   },
@@ -631,15 +628,6 @@
   },
   "options_show_app_updated_notification": {
     "message": "Notify about extension updates"
-  },
-  "options_open_log": {
-    "message": "Filtering log"
-  },
-  "options_reset_stats": {
-    "message": "Reset statistics"
-  },
-  "options_reset_stats_done": {
-    "message": "Statistics have been reset"
   },
   "options_collect_hit_stats": {
     "message": "Send statistics of ad&nbsp;filters usage"

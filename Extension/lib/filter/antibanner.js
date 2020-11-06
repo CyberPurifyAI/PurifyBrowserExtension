@@ -1594,9 +1594,6 @@ purify.filters = (function (purify) {
       purify.utils.filters.ENGLISH_FILTER_ID,
       purify.utils.filters.SEARCH_AND_SELF_PROMO_FILTER_ID,
     ];
-    if (purify.prefs.mobile) {
-      filterIds.push(purify.utils.filters.MOBILE_ADS_FILTER_ID);
-    }
     filterIds.concat(purify.subscriptions.getLangSuitableFilters());
     callback(filterIds);
   };

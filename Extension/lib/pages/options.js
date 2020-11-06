@@ -1646,10 +1646,6 @@ PageController.prototype = {
       "#tooManySubscriptions"
     );
 
-    document
-      .querySelector("#resetStats")
-      .addEventListener("click", this.onResetStatsClicked.bind(this));
-
     // document.querySelector('.openExtensionStore').addEventListener('click', (e) => {
     //     e.preventDefault();
     //     contentPage.sendMessage({ type: 'openExtensionStore' });
@@ -1665,10 +1661,6 @@ PageController.prototype = {
     Array.prototype.forEach.call(currentYearElements, (el) => {
       el.innerText = new Date().getFullYear().toString();
     });
-
-    if (environmentOptions.Prefs.mobile) {
-      document.querySelector("#resetStats").style.display = "none";
-    }
 
     this.settings = new Settings();
     this.settings.render();
@@ -1697,13 +1689,6 @@ PageController.prototype = {
         "options_about_version"
       )} ${environmentOptions.appVersion}`;
     }
-  },
-
-  onResetStatsClicked(e) {
-    e.preventDefault();
-    contentPage.sendMessage({ type: "resetBlockedAdsCount" }, () => {
-      Utils.showPopup(i18n.getMessage("options_reset_stats_done"));
-    });
   },
 };
 

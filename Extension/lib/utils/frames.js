@@ -314,18 +314,6 @@ purify.frames = (function (purify) {
   };
 
   /**
-   * Reset count of blocked requests for tab or overall stats
-   * @param tab - Tab (optional)
-   */
-  const resetBlockedAdsCount = function (tab) {
-    if (tab) {
-      purify.tabs.updateTabMetadata(tab.tabId, { blocked: 0 });
-    } else {
-      purify.pageStats.resetStats();
-    }
-  };
-
-  /**
    * Is tab in incognito mode?
    * @param tab Tab
    */
@@ -365,7 +353,6 @@ purify.frames = (function (purify) {
     recordFrameReferrerHeader,
     getFrameInfo,
     updateBlockedAdsCount,
-    resetBlockedAdsCount,
     isIncognitoTab,
     shouldStopRequestProcess,
     checkAndRecordMainFrame,

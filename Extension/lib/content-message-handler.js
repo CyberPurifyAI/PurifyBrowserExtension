@@ -191,9 +191,6 @@
       case "openTab":
         purify.ui.openTab(message.url, message.options);
         break;
-      case "resetBlockedAdsCount":
-        purify.frames.resetBlockedAdsCount();
-        break;
       case "getSelectorsAndScripts": {
         let urlForSelectors;
         // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1498

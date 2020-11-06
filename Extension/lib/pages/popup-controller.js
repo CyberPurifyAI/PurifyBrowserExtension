@@ -79,10 +79,6 @@ PopupController.prototype = {
     popupPage.sendMessage({ type: "openSettingsTab" });
   },
 
-  resetBlockedAdsCount() {
-    popupPage.sendMessage({ type: "resetBlockedAdsCount" });
-  },
-
   openLink(url) {
     popupPage.sendMessage({ type: "openTab", url });
   },
@@ -759,12 +755,6 @@ PopupController.prototype = {
       }
     });
 
-    this._bindAction(parent, ".resetStats", "click", (e) => {
-      e.preventDefault();
-      self.resetBlockedAdsCount();
-      parent.querySelector(".w-popup-filter-title-blocked-all").textContent =
-        "0";
-    });
     this._bindAction(parent, ".openLink", "click", (e) => {
       e.preventDefault();
       self.openLink(e.currentTarget.href);
