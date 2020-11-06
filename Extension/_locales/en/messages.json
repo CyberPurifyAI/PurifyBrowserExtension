@@ -608,9 +608,6 @@
   "options_show_app_updated_notification": {
     "message": "Notify about extension updates"
   },
-  "options_collect_hit_stats": {
-    "message": "Send statistics of ad&nbsp;filters usage"
-  },
   "options_learn_more": {
     "message": "Learn more about it"
   },

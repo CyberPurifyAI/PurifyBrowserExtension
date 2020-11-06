@@ -1409,11 +1409,6 @@ const Settings = function () {
   };
 
   const checkboxes = [];
-  checkboxes.push(
-    new Checkbox("#enableHitsCount", userSettings.names.DISABLE_COLLECT_HITS, {
-      negate: true,
-    })
-  );
 
   // Privacy settings
   checkboxes.push(

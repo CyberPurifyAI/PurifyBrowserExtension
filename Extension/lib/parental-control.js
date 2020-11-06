@@ -84,7 +84,7 @@ purify.parentalControl = (function (purify) {
         });
 
         mqttc.on("error", (error) => {
-          purify.console.info("error hit stats");
+          purify.console.info("Error Hit Stats");
         });
       }
     });
