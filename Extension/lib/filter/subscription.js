@@ -191,75 +191,6 @@ purify.subscriptions = (function (purify) {
   };
 
   /**
-   * Parses filter metadata from rules header
-   *
-   * @param rules
-   * @returns object
-   */
-  const parseFilterDataFromHeader = (rules) => {
-    const parseTag = (tagName) => {
-      let result = "";
-
-      // Look up no more than 50 first lines
-      const maxLines = Math.min(50, rules.length);
-      for (let i = 0; i < maxLines; i += 1) {
-        const rule = rules[i];
-        const search = `! ${tagName}: `;
-        const indexOfSearch = rule.indexOf(search);
-        if (indexOfSearch >= 0) {
-          result = rule.substring(indexOfSearch + search.length);
-        }
-      }
-
-      if (tagName === "Expires") {
-        result = parseExpiresStr(result);
-      }
-
-      return result;
-    };
-
-    return {
-      name: parseTag("Title"),
-      description: parseTag("Description"),
-      homepage: parseTag("Homepage"),
-      version: parseTag("Version"),
-      expires: parseTag("Expires"),
-      timeUpdated: parseTag("TimeUpdated"),
-    };
-  };
-
-  const addFilterId = () => {
-    let max = 0;
-    filters.forEach((f) => {
-      if (f.filterId > max) {
-        max = f.filterId;
-      }
-    });
-
-    return max;
-  };
-
-  /**
-   * Compares filter version or filter checksum
-   * @param newVersion
-   * @param newChecksum
-   * @param oldFilter
-   * @returns {*}
-   */
-  function didFilterUpdate(newVersion, newChecksum, oldFilter) {
-    if (newVersion) {
-      return !purify.utils.browser.isGreaterOrEqualsVersion(
-        oldFilter.version,
-        newVersion
-      );
-    }
-    if (!oldFilter.checksum) {
-      return true;
-    }
-    return newChecksum !== oldFilter.checksum;
-  }
-
-  /**
    * Load groups and filters metadata
    * @returns {Promise} returns promise
    */
@@ -324,7 +255,6 @@ purify.subscriptions = (function (purify) {
   const init = async function () {
     try {
       await loadMetadata();
-      // await loadMetadataI18n();
       await loadLocalScriptRules();
       await loadRedirectSources();
     } catch (e) {

@@ -629,17 +629,6 @@ const AntiBannerFilters = function (options) {
     return filters.filter((f) => f.groupId === groupId);
   }
 
-  function countEnabledFilters(filters) {
-    let count = 0;
-    for (let i = 0; i < filters.length; i++) {
-      const { filterId } = filters[i];
-      if (loadedFiltersInfo.isEnabled(filterId)) {
-        count++;
-      }
-    }
-    return count;
-  }
-
   function getCategoryElement(groupId) {
     return document.querySelector(`#category${groupId}`);
   }
