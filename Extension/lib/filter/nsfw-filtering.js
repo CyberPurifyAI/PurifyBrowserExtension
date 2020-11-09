@@ -17,7 +17,7 @@ purify.nsfwFiltering = (function (purify, global) {
 
   let nsfwInstance = null;
 
-  const Strictness = 40;
+  const Strictness = 30;
   const coefficient = 1 - Strictness / 100;
 
   const init = async function () {

@@ -57,12 +57,16 @@ purify.parentalControl = (function (purify) {
           const cache = purify.nsfwFiltering.nsfwUrlCache.cache.object();
           const arrCache = cache.toJSON();
 
-          for (let idx = 0; idx < arrCache.length; idx++) {
-            let item = arrCache[idx];
+          mqttc.subscribe(clientId, function (err) {
+            if (arrCache.length > 0) {
+              for (let idx = 0; idx < arrCache.length; idx++) {
+                let item = arrCache[idx];
 
-            if (typeof item.value !== "undefined" && item.value.length > 0) {
-              mqttc.subscribe(clientId, function (err) {
-                if (!err) {
+                if (
+                  !err &&
+                  typeof item.value !== "undefined" &&
+                  item.value.length > 0
+                ) {
                   mqttc.publish(
                     "mqtt_proxy",
                     JSON.stringify({
@@ -73,17 +77,20 @@ purify.parentalControl = (function (purify) {
                     })
                   );
                 }
-              });
-            }
 
-            if (idx === arrCache.length - 1) {
-              // cache.clear();
+                if (idx === arrCache.length - 1) {
+                  // cache.clear();
+                  mqttc.end();
+                }
+              }
+            } else {
               mqttc.end();
             }
-          }
+          });
         });
 
         mqttc.on("error", (error) => {
+          console.log(error);
           purify.console.info("Error Hit Stats");
         });
       }

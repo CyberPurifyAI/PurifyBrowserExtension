@@ -340,8 +340,13 @@
         let arrNSFWUrl = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
           tabIdUrl.tabUrl
         );
+        const imagesNum = message.imagesNum;
 
-        if (arrNSFWUrl && arrNSFWUrl.length > 15) {
+        if (
+          arrNSFWUrl &&
+          ((imagesNum <= 50 && arrNSFWUrl.length > 25) ||
+            (imagesNum > 50 && arrNSFWUrl.length / imagesNum > 0.2))
+        ) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             requestUrl,
             "Explicit Content"
@@ -357,6 +362,8 @@
             requestUrl,
             err: null,
           });
+
+          purify.parentalControl.syncData();
         } else {
           purify.loadingQueue
             .predict(requestUrl, tabIdUrl)

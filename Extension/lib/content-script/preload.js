@@ -153,6 +153,7 @@
       const request = {
         type: "requestAnalyzeImage",
         requestUrl: image.src,
+        imagesNum: document.images.length,
       };
 
       try {
