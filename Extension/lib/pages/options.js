@@ -1314,9 +1314,6 @@ const AntiBannerFilters = function (options) {
     if (checkboxes) {
       CheckboxUtils.updateCheckbox(checkboxes, enabled);
     }
-    if (filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
-      
-    }
   }
 
   function onCategoryStateChanged(category) {

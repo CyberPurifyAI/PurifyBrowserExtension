@@ -217,12 +217,7 @@
         originUrl
       );
 
-      if (!arrImage) {
-        purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(originUrl, []);
-        arrImage = [];
-      }
-
-      if (arrImage.length > 20) {
+      if (arrImage && arrImage.length > 20) {
         const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
           requestUrl,
           "Explicit Content"

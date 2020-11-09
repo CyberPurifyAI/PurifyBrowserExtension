@@ -1592,7 +1592,8 @@ purify.filters = (function (purify) {
     // These filters are enabled by default
     const filterIds = [
       purify.utils.filters.ENGLISH_FILTER_ID,
-      purify.utils.filters.SEARCH_AND_SELF_PROMO_FILTER_ID,
+      purify.utils.filters.EXPLICIT_CONTENT,
+      // purify.utils.filters.SEARCH_AND_SELF_PROMO_FILTER_ID,
     ];
     filterIds.concat(purify.subscriptions.getLangSuitableFilters());
     callback(filterIds);

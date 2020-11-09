@@ -17,7 +17,7 @@ purify.nsfwFiltering = (function (purify, global) {
 
   let nsfwInstance = null;
 
-  const Strictness = 90;
+  const Strictness = 40;
   const coefficient = 1 - Strictness / 100;
 
   const init = async function () {
@@ -32,7 +32,7 @@ purify.nsfwFiltering = (function (purify, global) {
       return purify.lazyGet(
         nsfwImageCache,
         "cache",
-        () => new purify.utils.LruCache("nsfw-image-cache", 200)
+        () => new purify.utils.LruCache("nsfw-image-cache", 100)
       );
     },
   };
@@ -42,7 +42,7 @@ purify.nsfwFiltering = (function (purify, global) {
       return purify.lazyGet(
         nsfwUrlCache,
         "cache",
-        () => new purify.utils.LruCache("nsfw-url-cache", 100)
+        () => new purify.utils.LruCache("nsfw-url-cache", 50)
       );
     },
   };

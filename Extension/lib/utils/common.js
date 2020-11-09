@@ -549,6 +549,7 @@ purify.utils = (function () {
     FANBOY_SOCIAL: 123,
     FANBOY_ENHANCED: 215,
     MOBILE_ADS_FILTER_ID: 11,
+    EXPLICIT_CONTENT: 21,
   };
 
   const FilterUtils = {

@@ -341,15 +341,7 @@
           tabIdUrl.tabUrl
         );
 
-        if (!arrNSFWUrl) {
-          purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(
-            tabIdUrl.tabUrl,
-            []
-          );
-          arrNSFWUrl = [];
-        }
-
-        if (arrNSFWUrl.length > 15) {
+        if (arrNSFWUrl && arrNSFWUrl.length > 15) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             requestUrl,
             "Explicit Content"
