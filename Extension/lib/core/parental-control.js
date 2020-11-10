@@ -1,6 +1,6 @@
 /**
  * ----------------------------------------------------------------------------------
- * PurifyBrowserExtension parental.js
+ * PurifyBrowserExtension parental-control.js
  * Licensed under MIT (https://github.com/CyberPurify/CyberPurify/blob/main/LICENSE)
  * ----------------------------------------------------------------------------------
  */

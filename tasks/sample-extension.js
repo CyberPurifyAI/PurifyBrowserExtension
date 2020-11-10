@@ -29,7 +29,7 @@ const API_SCRIPTS = [
   "Extension/lib/filter/rules/scriptlets/redirects.js",
   "Extension/lib/filter/rules/scriptlets/scriptlets.js",
   // Purify Global and preExtension/ferences
-  "Extension/lib/purify.js",
+  "Extension/lib/core/purify.js",
   "Extension/browser/webkit/lib/prefs.js",
   // Utils libraries
   "Extension/lib/utils/common.js",
@@ -46,7 +46,7 @@ const API_SCRIPTS = [
   // Local storage and rules storage libraries
   "Extension/browser/chrome/lib/utils/local-storage.js",
   "Extension/browser/chrome/lib/utils/rules-storage.js",
-  "Extension/lib/storage.js",
+  "Extension/lib/core/storage.js",
   // Chromium api adapter libraries
   "Extension/browser/chrome/lib/content-script/common-script.js",
   "Extension/browser/chrome/lib/api/background-page.js",
@@ -88,9 +88,9 @@ const API_SCRIPTS = [
   "Extension/lib/filter/request-context-storage.js",
   "Extension/lib/filter/rule-converter.js",
   // Content messaging
-  "Extension/lib/content-message-handler.js",
-  "Extension/lib/stealth.js",
-  "Extension/lib/webrequest.js",
+  "Extension/lib/core/content-message-handler.js",
+  "Extension/lib/core/stealth.js",
+  "Extension/lib/core/webrequest.js",
   "Extension/api/chrome/lib/api.js",
 ];
 
