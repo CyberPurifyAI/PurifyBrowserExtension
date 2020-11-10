@@ -13,7 +13,6 @@ const paths = {
   lib_tabs: path.join("src/lib/tabs/**/*"),
   lib_utils: path.join("src/lib/utils/**/*"),
   locales: path.join(LOCALES_DIR, "**/*"),
-  models: path.join("src/models/**/*"),
 };
 
 /**
@@ -36,10 +35,9 @@ const copyCommonFiles = (pathDest, exceptLanguages) => {
         paths.lib_filter,
         paths.lib_content_script,
         paths.pages,
-        paths.models,
         ...(exceptLanguages ? [] : [paths.locales]),
       ],
-      { base: "Extension" }
+      { base: "src" }
     )
     .pipe(gulp.dest(pathDest));
 };

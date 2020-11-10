@@ -28,6 +28,7 @@ import {
 import { version } from "./parse-package";
 import { updateLocalesMSGName, preprocessAll } from "./helpers";
 import copyCommonFiles from "./copy-common";
+import copyModelFiles from "./copy-models";
 // import copyExternal from "./copy-external";
 
 // set current type of build
@@ -47,6 +48,9 @@ const dest = {
   buildDir: path.join(BUILD_DIR, BRANCH),
   manifest: path.join(paths.dest, "manifest.json"),
 };
+
+// copy models
+const copyModels = () => copyModelFiles(paths.dest);
 
 // copy common files
 const copyCommon = () => copyCommonFiles(paths.dest);
@@ -134,6 +138,7 @@ const crxPack = async (done) => {
 
 export default gulp.series(
   // copyExternal,
+  copyModels,
   copyCommon,
   copyFilters,
   chromiumMainFiles,

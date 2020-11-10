@@ -28,6 +28,7 @@ import {
 import { version } from "./parse-package";
 import { updateLocalesMSGName, preprocessAll } from "./helpers";
 import copyCommonFiles from "./copy-common";
+import copyModelFiles from "./copy-models";
 // import copyExternal from "./copy-external";
 
 // set current type of build
@@ -52,6 +53,9 @@ const dest = {
   manifest: path.join(paths.dest, "manifest.json"),
   webext: path.join(BUILD_DIR, BRANCH, `firefox-amo-${BRANCH}-unsigned.zip`),
 };
+
+// copy models
+const copyModels = () => copyModelFiles(paths.dest);
 
 // copy common files
 const copyCommon = () => copyCommonFiles(paths.dest);
@@ -134,6 +138,7 @@ const createWebExt = (done) => {
 
 export default gulp.series(
   // copyExternal,
+  copyModels,
   copyCommon,
   copyFilters,
   firefoxWebext,
