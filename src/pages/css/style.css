@@ -74,7 +74,7 @@
   width: 280px;
 }
 .settings-sidebar .logo img {
-  width: 160px;
+  width: 200px;
 }
 .settings-sidebar .nav {
   padding: 0;
@@ -804,7 +804,7 @@ li.active .toggler:before {
   background-color: rgba(102, 181, 116, 0.15);
 }
 .dropdown__item--purify {
-  background-image: url("../images/logo-shield.svg");
+  background-image: url("../images/logo-shield.png");
 }
 .dropdown__item--dropbox {
   background-image: url("../images/dropbox.svg");
@@ -1023,7 +1023,7 @@ li.active .toggler:before {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background: url(../images/logo.svg) no-repeat;
+  background: url(../images/logo.png) no-repeat;
   text-align: right;
 }
 .wrap {
@@ -1403,7 +1403,7 @@ li.active .toggler:before {
 }
 
 .about-opt__logo {
-  width: 160px;
+  /* width: 160px; */
   margin-bottom: 25px;
   transform: translateX(-4px);
 }
@@ -1414,7 +1414,7 @@ li.active .toggler:before {
 .about-opt__desc {
   font-size: 12px;
   color: #888888;
-  margin-bottom: 55px;
+  margin-bottom: 20px;
   text-align: center;
 }
 .about-opt__desc-item {

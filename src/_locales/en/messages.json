@@ -345,7 +345,7 @@
     "message": "CyberPurify protection is paused"
   },
   "popup_block_site_ads_android": {
-    "message": "Block ads on the website"
+    "message": "Block explicit content on the website"
   },
   "popup_security_report_android": {
     "message": "Security report"
@@ -360,7 +360,7 @@
     "message": "Filtering log"
   },
   "context_block_site_ads": {
-    "message": "Block ads on this website..."
+    "message": "Block explicit content on this website..."
   },
   "context_block_site_element": {
     "message": "Block an element..."
@@ -576,7 +576,7 @@
     "message": "Invert the Whitelist"
   },
   "options_whitelist_inverse_desc": {
-    "message": "Unblock ads everywhere <i>except</i> for the websites from the Whitelist"
+    "message": "Unblock explicit content everywhere <i>except</i> for the websites from the Whitelist"
   },
   "options_userfilter_description": {
     "message": "You can add your own rules here. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://cyberpurify.com/forward.html?action=userfilter_description&from=options&app=browser_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."
