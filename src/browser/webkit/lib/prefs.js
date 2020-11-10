@@ -98,12 +98,12 @@ purify.prefs = (function (purify) {
     get ICONS() {
       return purify.lazyGet(Prefs, "ICONS", () => ({
         ICON_GREEN: {
-          19: purify.getURL("icons/green-19.png"),
-          38: purify.getURL("icons/green-38.png"),
+          19: purify.getURL("icons/icon-19.png"),
+          38: purify.getURL("icons/icon-38.png"),
         },
         ICON_GRAY: {
-          19: purify.getURL("icons/gray-19.png"),
-          38: purify.getURL("icons/gray-38.png"),
+          19: purify.getURL("icons/icon-gray-19.png"),
+          38: purify.getURL("icons/icon-gray-38.png"),
         },
       }));
     },

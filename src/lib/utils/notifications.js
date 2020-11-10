@@ -32,12 +32,12 @@ purify.notifications = (function (purify) {
     get icons() {
       return purify.lazyGet(newYearNotification, "icons", () => ({
         ICON_GREEN: {
-          19: purify.getURL("icons/green-19-ny.png"),
-          38: purify.getURL("icons/green-38-ny.png"),
+          19: purify.getURL("icons/icon-19-ny.png"),
+          38: purify.getURL("icons/icon-38-ny.png"),
         },
         ICON_GRAY: {
-          19: purify.getURL("icons/gray-19-ny.png"),
-          38: purify.getURL("icons/gray-38-ny.png"),
+          19: purify.getURL("icons/icon-gray-19-ny.png"),
+          38: purify.getURL("icons/icon-gray-38-ny.png"),
         },
       }));
     },

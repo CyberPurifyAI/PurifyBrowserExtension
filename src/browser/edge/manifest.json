@@ -7,13 +7,13 @@
   "default_locale": "en",
   "description": "__MSG_description__",
   "icons": {
-    "16": "icons/green-16.png",
-    "128": "icons/green-128.png"
+    "16": "icons/icon-16.png",
+    "128": "icons/icon-128.png"
   },
   "browser_action": {
     "default_icon": {
-      "19": "icons/green-19.png",
-      "38": "icons/green-38.png"
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
     },
     "default_title": "__MSG_name__",
     "default_popup": "pages/popup.html"
