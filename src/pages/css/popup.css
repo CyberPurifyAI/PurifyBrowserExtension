@@ -153,7 +153,7 @@ span {
   left: 16px;
 }
 .tabstack.status-paused .switch-btn:before {
-  background-image: linear-gradient(to bottom, #64beb0, #74be64);
+  background-image: linear-gradient(to bottom, #64beb0, #78d8ff);
 }
 .status-paused .tabstack.status-paused .switch-btn:before {
   background: linear-gradient(to bottom, #a8a8a8 0%, #4a4a4a 100%);
@@ -170,7 +170,7 @@ span {
 .tabstack.status-checkmark .switch-btn:before,
 .tabstack.status-checkmark-disabled .switch-btn:before,
 .tabstack.status-inner .switch-btn:before {
-  background-image: linear-gradient(to bottom, #64beb0, #74be64);
+  background-image: linear-gradient(to bottom, #64beb0, #78d8ff);
 }
 .tabstack.status-checkmark .switch-btn:after,
 .tabstack.status-checkmark-disabled .switch-btn:after,
@@ -581,7 +581,7 @@ span {
   color: rgba(255, 255, 255, 0.9);
 }
 .bg-green {
-  background-color: #71be70;
+  background-color: #78d8ff;
 }
 .bg-blue {
   background-color: #6093ae;
