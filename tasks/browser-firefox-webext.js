@@ -34,12 +34,12 @@ import copyCommonFiles from "./copy-common";
 const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
-  firefox_webext: path.join("Extension/browser/firefox_webext/**/*"),
+  firefox_webext: path.join("src/browser/firefox_webext/**/*"),
   filters: path.join("filters/filters/**/*"),
-  pages: path.join("Extension/pages/**/*"),
-  lib: path.join("Extension/lib/**/*"),
-  chromeFiles: path.join("Extension/browser/chrome/**/*"),
-  webkitFiles: path.join("Extension/browser/webkit/**/*"),
+  pages: path.join("src/pages/**/*"),
+  lib: path.join("src/lib/**/*"),
+  chromeFiles: path.join("src/browser/chrome/**/*"),
+  webkitFiles: path.join("src/browser/webkit/**/*"),
   dest: path.join(BUILD_DIR, BRANCH, "firefox-standalone"),
 };
 

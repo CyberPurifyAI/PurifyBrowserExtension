@@ -24,7 +24,7 @@ export const addLisence = () => {
     return eventStream.merge(
       gulp
         .src(
-          ["Extension/**/*.js", "Extension/**/*.css", "!Extension/lib/libs"],
+          ["src/**/*.js", "src/**/*.css", "!src/lib/libs"],
           { base: "./" }
         )
         .pipe(appendLisence())
@@ -34,7 +34,7 @@ export const addLisence = () => {
 };
 
 gulp.task("watch", () => {
-  gulp.watch("./Extension/**/*.{js,html,css}", buildDev);
+  gulp.watch("./src/**/*.{js,html,css}", buildDev);
 });
 
 // download filters to repository

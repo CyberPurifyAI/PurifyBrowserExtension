@@ -6,7 +6,7 @@ export const LAST_PURIFY_FILTER_ID = 14;
 
 export const BUILD_DIR = "build";
 
-export const LOCALES_DIR = "./Extension/_locales/";
+export const LOCALES_DIR = "./src/_locales/";
 
 export const FILTERS_DEST = "filters/filters";
 
@@ -58,4 +58,4 @@ export const BRANCH_RELEASE = "release";
 // URL for reserved domains
 export const PUBLIC_SUFFIXES_URL =
   "https://publicsuffix.org/list/public_suffix_list.dat";
-export const PUBLIC_SUFFIXES_FILE = "../Extension/lib/utils/public-suffixes.js";
+export const PUBLIC_SUFFIXES_FILE = "../src/lib/utils/public-suffixes.js";

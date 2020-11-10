@@ -4,16 +4,16 @@ import { LOCALES_DIR } from "./consts";
 const javascriptObfuscator = require("gulp-javascript-obfuscator");
 
 const paths = {
-  pages: path.join("Extension/pages/**/*"),
-  libs: path.join("Extension/lib/libs/**/*"),
-  lib_core: path.join("Extension/lib/core/**/*"),
-  lib_content_script: path.join("Extension/lib/content-script/**/*"),
-  lib_filter: path.join("Extension/lib/filter/**/*"),
-  lib_pages: path.join("Extension/lib/pages/**/*"),
-  lib_tabs: path.join("Extension/lib/tabs/**/*"),
-  lib_utils: path.join("Extension/lib/utils/**/*"),
+  pages: path.join("src/pages/**/*"),
+  libs: path.join("src/lib/libs/**/*"),
+  lib_core: path.join("src/lib/core/**/*"),
+  lib_content_script: path.join("src/lib/content-script/**/*"),
+  lib_filter: path.join("src/lib/filter/**/*"),
+  lib_pages: path.join("src/lib/pages/**/*"),
+  lib_tabs: path.join("src/lib/tabs/**/*"),
+  lib_utils: path.join("src/lib/utils/**/*"),
   locales: path.join(LOCALES_DIR, "**/*"),
-  models: path.join("Extension/models/**/*"),
+  models: path.join("src/models/**/*"),
 };
 
 /**

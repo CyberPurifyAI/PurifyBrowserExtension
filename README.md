@@ -130,7 +130,7 @@ To download and append localizations run:
   yarn locales-download
 ```
 
-To upload new phrases to crowdin you need the file with phrases `./Extension/_locales/en/messages.json`. Then run:
+To upload new phrases to crowdin you need the file with phrases `./src/_locales/en/messages.json`. Then run:
 
 ```
   yarn locales-upload

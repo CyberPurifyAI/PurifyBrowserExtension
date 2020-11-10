@@ -34,10 +34,10 @@ import copyCommonFiles from "./copy-common";
 const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
-  firefox_webext: path.join("Extension/browser/firefox_webext/**/*"),
+  firefox_webext: path.join("src/browser/firefox_webext/**/*"),
   filters: path.join("filters/filters/**/*"),
-  chromeFiles: path.join("Extension/browser/chrome/**/*"),
-  webkitFiles: path.join("Extension/browser/webkit/**/*"),
+  chromeFiles: path.join("src/browser/chrome/**/*"),
+  webkitFiles: path.join("src/browser/webkit/**/*"),
   dest: path.join(
     BUILD_DIR,
     BRANCH,

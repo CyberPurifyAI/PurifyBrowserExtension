@@ -23,10 +23,10 @@ import copyCommonFiles from "./copy-common";
 const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
-  edge: path.join("Extension/browser/edge/**/*"),
+  edge: path.join("src/browser/edge/**/*"),
   filters: path.join("filters/filters/**/*"),
-  chromeFiles: path.join("Extension/browser/chrome/**/*"),
-  webkitFiles: path.join("Extension/browser/webkit/**/*"),
+  chromeFiles: path.join("src/browser/chrome/**/*"),
+  webkitFiles: path.join("src/browser/webkit/**/*"),
   dest: path.join(BUILD_DIR, BRANCH, "edge"),
 };
 
