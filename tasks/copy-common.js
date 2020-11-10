@@ -25,16 +25,13 @@ const paths = {
  * @return stream
  */
 const copyCommonFiles = (pathDest, exceptLanguages) => {
-  gulp
-    .src([paths.lib_core, paths.lib_utils, paths.lib_tabs, paths.lib_pages], {
-      base: "Extension",
-    })
-    .pipe(javascriptObfuscator())
-    .pipe(gulp.dest(pathDest));
-
   return gulp
     .src(
       [
+        paths.lib_core,
+        paths.lib_tabs,
+        paths.lib_pages,
+        paths.lib_utils,
         paths.libs,
         paths.lib_filter,
         paths.lib_content_script,
