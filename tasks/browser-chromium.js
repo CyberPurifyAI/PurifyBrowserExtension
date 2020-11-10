@@ -35,7 +35,7 @@ const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
   chrome: path.join("Extension/browser/chrome/**/*"),
-  filters: path.join("filters/chromium/**/*"),
+  filters: path.join("filters/filters/**/*"),
   webkitFiles: path.join("Extension/browser/webkit/**/*"),
   cert: path.join(PRIVATE_FILES, "certificate.pem"),
   dest: path.join(BUILD_DIR, BRANCH, "chrome"),

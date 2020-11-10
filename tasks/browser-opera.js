@@ -16,7 +16,7 @@ import { BUILD_DIR, BRANCH_RELEASE, PRIVATE_FILES } from "./consts";
 const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
-  filtersOpera: path.join("filters/opera/**/*"),
+  filtersOpera: path.join("filters/filters/**/*"),
   chromium: path.join(BUILD_DIR, BRANCH, "chrome", "**/*"),
   chromiumManifest: path.join(BUILD_DIR, BRANCH, "chrome", "manifest.json"),
   cert: path.join(PRIVATE_FILES, "certificate.pem"),

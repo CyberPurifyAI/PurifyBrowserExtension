@@ -8,7 +8,7 @@ export const BUILD_DIR = "build";
 
 export const LOCALES_DIR = "./Extension/_locales/";
 
-export const FILTERS_DEST = "filters/%browser";
+export const FILTERS_DEST = "filters/filters";
 
 export const PRIVATE_FILES = "private/PurifyBrowserExtension";
 
