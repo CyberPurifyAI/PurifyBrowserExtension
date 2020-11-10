@@ -1017,7 +1017,7 @@ li.active .toggler:before {
 .filter-download__header-logo {
   float: left;
   width: 206px;
-  height: 45px;
+  height: 190px;
   padding: 12px 0 0;
   margin: 1px 0 0 35px;
   font: 0/0 a;
@@ -1053,7 +1053,7 @@ li.active .toggler:before {
   float: none;
   display: block;
   margin: 0 auto 0 auto;
-  width: 206px;
+  width: 490px;
 }
 .option-popup {
   display: none;

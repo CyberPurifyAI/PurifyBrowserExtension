@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     classname: "adg-progress-bar",
   });
 
-  nanobar.go(15);
+  nanobar.go(10);
 
   function onLoaded() {
     nanobar.go(100);
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window) {
         contentPage.sendMessage({ type: "openThankYouPage" });
       }
-    }, 1000);
+    }, 2000);
   }
 
   function checkRequestFilterReady() {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ready) {
         onLoaded();
       } else {
-        setTimeout(checkRequestFilterReady, 500);
+        setTimeout(checkRequestFilterReady, 1000);
       }
     });
   }
