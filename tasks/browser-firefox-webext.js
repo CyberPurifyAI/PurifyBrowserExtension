@@ -35,7 +35,7 @@ const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
   firefox_webext: path.join("Extension/browser/firefox_webext/**/*"),
-  filters: path.join("Extension/filters/firefox/**/*"),
+  filters: path.join("filters/firefox/**/*"),
   pages: path.join("Extension/pages/**/*"),
   lib: path.join("Extension/lib/**/*"),
   chromeFiles: path.join("Extension/browser/chrome/**/*"),

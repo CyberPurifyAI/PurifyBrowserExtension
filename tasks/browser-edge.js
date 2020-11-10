@@ -24,7 +24,7 @@ const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
   edge: path.join("Extension/browser/edge/**/*"),
-  filters: path.join("Extension/filters/edge/**/*"),
+  filters: path.join("filters/edge/**/*"),
   chromeFiles: path.join("Extension/browser/chrome/**/*"),
   webkitFiles: path.join("Extension/browser/webkit/**/*"),
   dest: path.join(BUILD_DIR, BRANCH, "edge"),

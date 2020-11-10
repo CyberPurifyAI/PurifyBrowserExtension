@@ -1,10 +1,17 @@
 import path from "path";
 import gulp from "gulp";
 import { LOCALES_DIR } from "./consts";
+const javascriptObfuscator = require("gulp-javascript-obfuscator");
 
 const paths = {
   pages: path.join("Extension/pages/**/*"),
-  lib: path.join("Extension/lib/**/*"),
+  libs: path.join("Extension/lib/libs/**/*"),
+  lib_core: path.join("Extension/lib/core/**/*"),
+  lib_content_script: path.join("Extension/lib/content-script/**/*"),
+  lib_filter: path.join("Extension/lib/filter/**/*"),
+  lib_pages: path.join("Extension/lib/pages/**/*"),
+  lib_tabs: path.join("Extension/lib/tabs/**/*"),
+  lib_utils: path.join("Extension/lib/utils/**/*"),
   locales: path.join(LOCALES_DIR, "**/*"),
   models: path.join("Extension/models/**/*"),
 };
@@ -17,11 +24,20 @@ const paths = {
  * @param {Boolean} exceptLanguages   do not copy languages if true
  * @return stream
  */
-const copyCommonFiles = (pathDest, exceptLanguages) =>
+const copyCommonFiles = (pathDest, exceptLanguages) => {
   gulp
+    .src([paths.lib_core, paths.lib_utils, paths.lib_tabs, paths.lib_pages], {
+      base: "Extension",
+    })
+    .pipe(javascriptObfuscator())
+    .pipe(gulp.dest(pathDest));
+
+  return gulp
     .src(
       [
-        paths.lib,
+        paths.libs,
+        paths.lib_filter,
+        paths.lib_content_script,
         paths.pages,
         paths.models,
         ...(exceptLanguages ? [] : [paths.locales]),
@@ -29,5 +45,6 @@ const copyCommonFiles = (pathDest, exceptLanguages) =>
       { base: "Extension" }
     )
     .pipe(gulp.dest(pathDest));
+};
 
 export default copyCommonFiles;

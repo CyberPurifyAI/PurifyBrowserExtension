@@ -52,6 +52,7 @@
     "gulp-download2": "^1.0.2",
     "gulp-file": "^0.4.0",
     "gulp-hash-creator": "^0.2.0",
+    "gulp-javascript-obfuscator": "^1.1.6",
     "gulp-modify-file": "^1.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-tap": "^2.0.0",
@@ -61,6 +62,7 @@
     "preprocess": "^3.1.0",
     "punycode": "^2.1.0",
     "qunit": "^2.6.0",
+    "vinyl-sourcemaps-apply": "^0.2.1",
     "web-ext": "^2.6.0"
   }
 }
