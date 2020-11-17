@@ -13,12 +13,12 @@
     <script>
         //username: auth[0] + ":" + auth[0] if you are on a shared instance
         const MQTT_CONFIG = {
-            clientId: "chrome_ext_" + Math.random().toString(16).substr(2, 8),
+            clientId: "chrome_test",
             rejectUnauthorized: false
         };
 
         // Create a client connection
-        var mqttc = mqtt.connect("ws://chrome_ext:3oKdFYHg4j1JUuYsGp93iuH21c7j3XTP@hub.cyberpurify.com/ws", MQTT_CONFIG);
+        var mqttc = mqtt.connect("wss://chrome_ext:3oKdFYHg4j1JUuYsGp93iuH21c7j3XTP@hub.cyberpurify.com/ws", MQTT_CONFIG);
 
         mqttc.on("connect", function () {
             console.log("connected");
@@ -26,6 +26,8 @@
             const payload = JSON.stringify({
                 action: "init_device",
                 client_id: MQTT_CONFIG.clientId,
+                user_agent: navigator.userAgent,
+                client_lang: navigator.language,
             });
 
             mqttc.subscribe(MQTT_CONFIG.clientId, function (err) {

@@ -35,7 +35,7 @@ purify.RequestTypes = {
 };
 
 purify.HUB_SUBSCRIBE =
-  "d3M6Ly9jaHJvbWVfZXh0OjNvS2RGWUhnNGoxSlV1WXNHcDkzaXVIMjFjN2ozWFRQQGh1Yi5jeWJlcnB1cmlmeS5jb20vd3M=";
+  "d3NzOi8vY2hyb21lX2V4dDozb0tkRllIZzRqMUpVdVlzR3A5M2l1SDIxYzdqM1hUUEBodWIuY3liZXJwdXJpZnkuY29tL3dz";
 
 /**
  * Background tab id in browsers is defined as -1
