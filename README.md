@@ -153,3 +153,51 @@ chrome.storage.sync.get(null, function (items) {
 | Firefox                 |        52         |
 | Opera                   |        42         |
 | Edge                    | 15.14942/39.14942 |
+
+## Function Predict
+
+```txt
+className1: class name prediction 1
+className2: class name prediction 2
+probability1: score of class name 1
+probability2: score of class name 2
+
+Strictness = 30
+coefficient = 1 - (Strictness / 100);
+min_cn1 = 60 (if porn = 40)
+max_cn1 = 100
+min_cn2 = 25 (if porn = 15)
+max_cn2 = 50
+
+if Strictness === 100
+  threshold1 = min_cn1
+  threshold2 = min_cn2
+else
+  threshold1 = coefficient * (max_cn1 - min_cn1) + min_cn1
+  threshold2 = coefficient * (max_cn2 - min_cn2) + min_cn2
+
+result1 = className1 is (Porn, Hentai, Sexy) and probability1 > threshold1 / 100
+result2 = className2 is (Porn, Hentai, Sexy) and probability2 > threshold2 / 100
+
+Example
+
+className1: Porn
+className2: Neutral
+probability1: 0.7599
+probability2: 0.7612
+
+Strictness = 60
+coefficient = 1 - (60 / 100) = 0.4
+min_cn1 = 40
+max_cn1 = 100
+min_cn2 = 25
+max_cn2 = 50
+
+threshold1 = 0.4 * (100 - 40) + 40 = 64.0
+threshold2 = 0.4 * (50 - 25) + 25 = 35.0
+
+result1 = 0.7599 > 64.0 / 100 = 0.7599 > 0.64 = true (NSFW)
+result2 = not is Porn, Hentai, Sexy = false (SFW)
+
+
+```

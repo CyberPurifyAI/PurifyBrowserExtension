@@ -100,22 +100,13 @@
         var mutation = mutations[i];
 
         if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-          if (mutation.target.nodeName === "TITLE") {
-            var images = document.getElementsByTagName("img");
-            for (let i = 0; i < images.length; i++) {
-              analyzeImage(images[i], false);
-            }
-          }
-
-          for (let i = 0; i < mutation.addedNodes.length; i++) {
-            if (mutation.addedNodes[i].nodeName === "IMG") {
-              analyzeImage(mutation.addedNodes[i], false);
-            }
+          var images = document.getElementsByTagName("img");
+          for (let i = 0; i < images.length; i++) {
+            analyzeImage(images[i], false);
           }
         } else if (mutation.type === "attributes") {
           if (mutation.target.nodeName === "IMG") {
             analyzeImage(mutation.target, mutation.attributeName === "src");
-            mutation.target;
           }
         }
       }
