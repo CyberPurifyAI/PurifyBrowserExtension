@@ -12,7 +12,7 @@
  */
 const PopupController = function () {};
 
-let purifySSO = new Keycloak({
+const purifySSO = new Keycloak({
   url: "https://id.cyberpurify.com/auth",
   realm: "purify",
   clientId: "purify-extension",
@@ -47,14 +47,6 @@ PopupController.prototype = {
 
   afterRender() {
     // Should be overwritten
-    purifySSO
-      .init({ onLoad: "check-sso", flow: "implicit" })
-      .then(function (authenticated) {
-        console.log(authenticated ? "authenticated" : "not authenticated");
-      })
-      .catch(function () {
-        console.log("failed to initialize");
-      });
   },
 
   addWhiteListDomain(url) {
@@ -121,6 +113,17 @@ PopupController.prototype = {
         ]);
       }
     }
+  },
+
+  updateUserInfo() {
+    purifySSO
+      .init({ onLoad: "check-sso", flow: "implicit" })
+      .then(function (authenticated) {
+        console.log(authenticated ? "authenticated" : "not authenticated");
+      })
+      .catch(function () {
+        console.log("failed to initialize");
+      });
   },
 
   _renderPopup(tabInfo) {
@@ -931,6 +934,7 @@ PopupController.prototype = {
     const timeout = 10;
     setTimeout(() => {
       controller.resizePopupWindow();
+      controller.updateUserInfo();
     }, timeout);
   };
 
