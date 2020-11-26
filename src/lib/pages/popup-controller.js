@@ -12,6 +12,12 @@
  */
 const PopupController = function () {};
 
+let purifySSO = new Keycloak({
+  url: "https://id.cyberpurify.com/auth",
+  realm: "purify",
+  clientId: "purify-extension",
+});
+
 PopupController.prototype = {
   /**
    * Renders popup using specified model object
@@ -41,6 +47,14 @@ PopupController.prototype = {
 
   afterRender() {
     // Should be overwritten
+    purifySSO
+      .init({ onLoad: "check-sso", flow: "implicit" })
+      .then(function (authenticated) {
+        console.log(authenticated ? "authenticated" : "not authenticated");
+      })
+      .catch(function () {
+        console.log("failed to initialize");
+      });
   },
 
   addWhiteListDomain(url) {
@@ -70,6 +84,10 @@ PopupController.prototype = {
   // openSiteReportTab(url) {
   //   popupPage.sendMessage({ type: "openSiteReportTab", url });
   // },
+
+  openLoginTab() {
+    popupPage.sendMessage({ type: "openLoginTab" });
+  },
 
   openAbuseTab(url) {
     popupPage.sendMessage({ type: "openAbuseTab", url });
@@ -176,6 +194,7 @@ PopupController.prototype = {
 
     // Actions
     this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
+    this.actionOpenLogin = this._getTemplate("action-open-login-template");
     // this.actionOpenSiteReport = this._getTemplate(
     //   "action-site-report-template"
     // );
@@ -637,11 +656,13 @@ PopupController.prototype = {
     el.classList.add("actions");
 
     this._appendTemplate(el, this.actionOpenAbuse);
+    this._appendTemplate(el, this.actionOpenLogin);
     // this._appendTemplate(el, this.actionOpenSiteReport);
 
     if (!tabInfo.applicationAvailable) {
       const disabledActionsSelectors = [
         // ".siteReport",
+        ".openLogin",
         ".openAbuse",
       ];
       disabledActionsSelectors.forEach((selector) => {
@@ -766,6 +787,14 @@ PopupController.prototype = {
         return;
       }
       self.openAbuseTab(self.tabInfo.url);
+      popupPage.closePopup();
+    });
+    this._bindAction(parent, ".openLogin", "click", (e) => {
+      e.preventDefault();
+      if (!self.tabInfo.applicationAvailable) {
+        return;
+      }
+      self.openLoginTab(self.tabInfo.url);
       popupPage.closePopup();
     });
 

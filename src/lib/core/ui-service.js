@@ -155,7 +155,6 @@ purify.ui = (function (purify) {
     });
   }
 
-
   function getFiltersUpdateResultMessage(success, updatedFilters) {
     let title = "";
     let text = "";
@@ -344,6 +343,12 @@ purify.ui = (function (purify) {
         filterIds.join(".")
       )}${getStealthString()}`
     );
+  };
+
+  const openLoginTab = function () {
+    openTab(getPageUrl("login.html"), {
+      inBackground: purify.utils.browser.isYaBrowser(),
+    });
   };
 
   const openThankYouPage = function () {
@@ -630,6 +635,7 @@ purify.ui = (function (purify) {
     openExtensionStore,
     openFiltersDownloadPage,
     openAbuseTab,
+    openLoginTab,
 
     whiteListTab,
     unWhiteListTab,

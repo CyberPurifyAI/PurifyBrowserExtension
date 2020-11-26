@@ -12,6 +12,7 @@
   <script type="text/javascript" src="../lib/content-script/common-script.js"></script>
   <script type="text/javascript" src="../lib/content-script/popup-script.js"></script>
   <script type="text/javascript" src="../lib/content-script/i18n-helper.js"></script>
+  <script type="text/javascript" src="../lib/libs/sso.min.js"></script>
   <script type="text/javascript" src="../lib/pages/i18n.js"></script>
   <script type="text/javascript" src="../lib/pages/script.js"></script>
   <script type="text/javascript" src="../lib/pages/popup-controller.js"></script>
@@ -90,6 +91,14 @@
     <div class="action siteReport">
       <span class="act-icon"><img src="images/icon-shield.svg" class="icon-shield" alt="" aria-hidden="true" /></span>
       <span class="act-name" i18n="popup_security_report" role="button" tabindex="0"></span>
+    </div>
+  </div>
+
+  <div id="action-open-login-template" style="display: none">
+    <div class="action openLogin">
+      <span class="act-icon"><img src="images/avatar.svg" class="icon-thumb-down" alt=""
+          aria-hidden="true" /></span>
+      <span class="act-name" i18n="popup_login_site" role="button" tabindex="0"></span>
     </div>
   </div>
 

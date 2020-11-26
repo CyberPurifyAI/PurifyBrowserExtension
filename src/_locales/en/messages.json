@@ -338,6 +338,9 @@
   "popup_security_report": {
     "message": "Check website security"
   },
+  "popup_login_site": {
+    "message": "Login"
+  },
   "popup_open_settings": {
     "message": "CyberPurify settings"
   },

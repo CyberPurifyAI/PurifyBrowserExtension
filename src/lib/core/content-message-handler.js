@@ -280,6 +280,9 @@
       case "openAbuseTab":
         purify.ui.openAbuseTab(message.url);
         break;
+      case "openLoginTab":
+        purify.ui.openLoginTab();
+        break;
       case "openSettingsTab":
         purify.ui.openSettingsTab();
         break;
