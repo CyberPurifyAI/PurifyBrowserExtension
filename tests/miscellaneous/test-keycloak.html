@@ -1,0 +1,33 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    Hello <div id="username"></div>
+    <script src="https://id.cyberpurify.com/auth/js/keycloak.min.js"></script>
+    <script>
+
+        const keycloak = new Keycloak({
+            url: 'https://id.cyberpurify.com/auth',
+            realm: 'purify',
+            clientId: 'purify-extension',
+        });
+
+        var loadData = function () {
+            console.log(keycloak.idTokenParsed);
+
+            document.getElementById('username').innerText = keycloak.idTokenParsed.family_name + ' ' + keycloak.idTokenParsed.given_name;
+        };
+
+        keycloak.init({ onLoad: 'check-sso', flow: 'implicit' }).then(function (authenticated) {
+            console.log(authenticated ? 'authenticated' : 'not authenticated');
+            loadData();
+        }).catch(function (err) {
+            console.log('failed to initialize');
+        });
+    </script>
+</body>
+
+</html>
