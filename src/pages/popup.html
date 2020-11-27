@@ -89,39 +89,38 @@
   <!--Actions-->
   <div id="action-site-report-template" style="display: none">
     <div class="action siteReport">
-      <span class="act-icon"><img src="images/icon-shield.svg" class="icon-shield" alt="" aria-hidden="true" /></span>
+      <span class="act-icon">
+        <img src="images/icon-shield.svg" class="icon-shield" alt="" aria-hidden="true" />
+      </span>
       <span class="act-name" i18n="popup_security_report" role="button" tabindex="0"></span>
+    </div>
+  </div>
+
+  <div id="show-user-info" style="display: none">
+    <div class="action showUserInfo">
+      <span class="act-icon">
+        <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true" />
+      </span>
+      <span class="act-name" tabindex="0"></span>
     </div>
   </div>
 
   <div id="action-open-login-template" style="display: none">
     <div class="action openLogin">
-      <span class="act-icon"><img src="images/avatar.svg" class="icon-thumb-down" alt=""
-          aria-hidden="true" /></span>
+      <span class="act-icon">
+        <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true" />
+      </span>
       <span class="act-name" i18n="popup_login_site" role="button" tabindex="0"></span>
     </div>
   </div>
 
   <div id="action-open-abuse-template" style="display: none">
     <div class="action openAbuse">
-      <span class="act-icon"><img src="images/thumb-down.svg" class="icon-thumb-down" alt=""
-          aria-hidden="true" /></span>
+      <span class="act-icon">
+        <img src="images/thumb-down.svg" class="icon-thumb-down" alt="" aria-hidden="true" />
+      </span>
       <span class="act-name" i18n="popup_abuse_site" role="button" tabindex="0"></span>
     </div>
-  </div>
-
-  <!--Statistics-->
-  <div id="filtering-statistics-template" style="display: none">
-    <div class="statistics-wrapper">
-      <select name="type" class="statistics-select statistics-select-type"></select>
-      <select name="time" class="statistics-select statistics-select-time">
-        <option value="day" i18n="popup_statistics_time_day"></option>
-        <option value="week" selected="true" i18n="popup_statistics_time_week"></option>
-        <option value="month" i18n="popup_statistics_time_month"></option>
-        <option value="year" i18n="popup_statistics_time_year"></option>
-      </select>
-    </div>
-    <div id="chart" class="chart"></div>
   </div>
 
   <!--Footer-->
@@ -142,7 +141,6 @@
   </div>
 
   <!-- Notification -->
-
   <div id="notification-template" style="display: none">
     <div class="notice" id="popup-notification">
       <a href="" class="notice__in cf">

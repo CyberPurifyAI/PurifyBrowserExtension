@@ -12,12 +12,6 @@
  */
 const PopupController = function () {};
 
-const purifySSO = new Keycloak({
-  url: "https://id.cyberpurify.com/auth",
-  realm: "purify",
-  clientId: "purify-extension",
-});
-
 PopupController.prototype = {
   /**
    * Renders popup using specified model object
@@ -115,15 +109,13 @@ PopupController.prototype = {
     }
   },
 
-  updateUserInfo() {
-    purifySSO
-      .init({ onLoad: "check-sso", flow: "implicit" })
-      .then(function (authenticated) {
-        console.log(authenticated ? "authenticated" : "not authenticated");
-      })
-      .catch(function () {
-        console.log("failed to initialize");
-      });
+  _renderUserInfo(name) {
+    const blockUserText = document.querySelector(
+      ".showUserInfo .act-name-user"
+    );
+
+    blockUserText.style = "font-weight:bold;";
+    blockUserText.innerHTML = name;
   },
 
   _renderPopup(tabInfo) {
@@ -152,11 +144,6 @@ PopupController.prototype = {
     const containerBottom = parent.querySelector(".tabstack-bottom.tab-main");
     while (containerBottom.firstChild) {
       containerBottom.removeChild(containerBottom.firstChild);
-    }
-
-    const containerStats = parent.querySelector(".tab-statistics");
-    while (containerStats.firstChild) {
-      containerStats.removeChild(containerStats.firstChild);
     }
 
     stack.setAttribute("class", "tabstack");
@@ -198,6 +185,7 @@ PopupController.prototype = {
     // Actions
     this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
     this.actionOpenLogin = this._getTemplate("action-open-login-template");
+    this.showUserInfo = this._getTemplate("show-user-info");
     // this.actionOpenSiteReport = this._getTemplate(
     //   "action-site-report-template"
     // );
@@ -208,13 +196,8 @@ PopupController.prototype = {
     // Message text
     this.filteringMessageText = this._getTemplate("filtering-message-template");
 
-    // Stats
-    this.filteringStatisticsTemplate = this._getTemplate(
-      "filtering-statistics-template"
-    );
-
     // Footer
-    // this.footerDefault = this._getTemplate("footer-default-template");
+    this.footerDefault = this._getTemplate("footer-default-template");
 
     // Notification
     this.notification = this._getTemplate("notification-template");
@@ -229,7 +212,6 @@ PopupController.prototype = {
     this._renderStatus(containerMain, tabInfo);
     this._renderActions(containerBottom, tabInfo);
     this._renderMessage(containerMain, tabInfo);
-    // this._renderStats(containerStats);
     // this._renderFooter(footerContainer, tabInfo, this.options);
     this._renderAnimatedNotification(parent, tabInfo, this.options);
   },
@@ -589,25 +571,6 @@ PopupController.prototype = {
     });
   },
 
-  _renderStatsGraphs(stats, range, type) {
-    // this._renderRequestsGraphs(stats, range, type);
-    this._renderAnalyticsBlock(stats, range);
-  },
-
-  _renderStatsBlock(stats) {
-    const timeRange = document.querySelector(".statistics-select-time").value;
-    const typeData = document.querySelector(".statistics-select-type").value;
-
-    if (!stats) {
-      const self = this;
-      popupPage.sendMessage({ type: "getStatisticsData" }, (message) => {
-        self._renderStatsGraphs(message.stats, timeRange, typeData);
-      });
-    } else {
-      this._renderStatsGraphs(stats, timeRange, typeData);
-    }
-  },
-
   _renderBlockedGroups(container, stats) {
     const TOTAL_GROUP_ID = "total";
 
@@ -640,42 +603,34 @@ PopupController.prototype = {
     });
   },
 
-  _renderStats(container) {
-    const template = this.filteringStatisticsTemplate;
-    this._appendTemplate(container, template);
-
-    const self = this;
-
-    popupPage.sendMessage({ type: "getStatisticsData" }, (message) => {
-      const { stats } = message;
-
-      self._renderBlockedGroups(container, stats);
-      self._renderStatsBlock(stats);
-    });
-  },
-
   _renderActions(container, tabInfo) {
-    const el = document.createElement("div");
-    el.classList.add("actions");
+    popupPage.sendMessage({ type: "getUserInfo" }, (message) => {
+      const el = document.createElement("div");
+      el.classList.add("actions");
 
-    this._appendTemplate(el, this.actionOpenAbuse);
-    this._appendTemplate(el, this.actionOpenLogin);
-    // this._appendTemplate(el, this.actionOpenSiteReport);
+      if (message.name) {
+        this._appendTemplate(el, this.showUserInfo);
+      } else {
+        this._appendTemplate(el, this.actionOpenLogin);
+      }
+      this._appendTemplate(el, this.actionOpenAbuse);
+      // this._appendTemplate(el, this.actionOpenSiteReport);
 
-    if (!tabInfo.applicationAvailable) {
-      const disabledActionsSelectors = [
-        // ".siteReport",
-        ".openLogin",
-        ".openAbuse",
-      ];
-      disabledActionsSelectors.forEach((selector) => {
-        const action = el.querySelector(selector);
-        action.classList.add("action_disabled");
-        action.setAttribute("aria-hidden", "true");
-      });
-    }
+      if (!tabInfo.applicationAvailable) {
+        const disabledActionsSelectors = [
+          // ".siteReport",
+          ".openLogin",
+          ".openAbuse",
+        ];
+        disabledActionsSelectors.forEach((selector) => {
+          const action = el.querySelector(selector);
+          action.classList.add("action_disabled");
+          action.setAttribute("aria-hidden", "true");
+        });
+      }
 
-    container.appendChild(el);
+      container.appendChild(el);
+    });
   },
 
   _renderFooter(footerContainer, tabInfo, options) {
@@ -830,18 +785,18 @@ PopupController.prototype = {
       self.resizePopupWindow();
     });
 
-    function changeProtectionState(disabled) {
-      const { tabInfo } = self;
-      if (tabInfo.applicationFilteringDisabled === disabled) {
-        return;
-      }
-      self.changeApplicationFilteringDisabled(disabled);
-      tabInfo.applicationFilteringDisabled = disabled;
-      tabInfo.totalBlockedTab = 0;
-      self._renderPopup(tabInfo);
-      self._bindActions();
-      self.resizePopupWindow();
-    }
+    // function changeProtectionState(disabled) {
+    //   const { tabInfo } = self;
+    //   if (tabInfo.applicationFilteringDisabled === disabled) {
+    //     return;
+    //   }
+    //   self.changeApplicationFilteringDisabled(disabled);
+    //   tabInfo.applicationFilteringDisabled = disabled;
+    //   tabInfo.totalBlockedTab = 0;
+    //   self._renderPopup(tabInfo);
+    //   self._bindActions();
+    //   self.resizePopupWindow();
+    // }
 
     // Disable filtering
     // const changeProtectionStateDisableButtons = [].slice.call(
@@ -892,18 +847,6 @@ PopupController.prototype = {
           });
       });
     });
-
-    /**
-     * Stats filters
-     * we call _renderStatsBlock function w/o stats parameter, in order to update stats on
-     * every selection of range or blockedGroup option
-     */
-    this._bindAction(parent, ".statistics-select-time", "change", () => {
-      self._renderStatsBlock();
-    });
-    this._bindAction(parent, ".statistics-select-type", "change", () => {
-      self._renderStatsBlock();
-    });
   },
 
   /**
@@ -934,12 +877,17 @@ PopupController.prototype = {
     const timeout = 10;
     setTimeout(() => {
       controller.resizePopupWindow();
-      controller.updateUserInfo();
     }, timeout);
   };
 
   document.addEventListener("resizePopup", () => {
     controller.resizePopupWindow();
+  });
+
+  popupPage.sendMessage({ type: "getUserInfo" }, (message) => {
+    if (message.name) {
+      controller._renderUserInfo(message.name);
+    }
   });
 
   popupPage.sendMessage({ type: "getTabInfoForPopup" }, (message) => {

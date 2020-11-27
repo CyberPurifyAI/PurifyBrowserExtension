@@ -191,6 +191,12 @@
       case "openTab":
         purify.ui.openTab(message.url, message.options);
         break;
+      case "updateUserInfo":
+        purify.parentalControl.updateUser(message.info);
+        return { ready: true };
+      case "getUserInfo":
+        purify.parentalControl.getUser((info) => callback(info));
+        return true;
       case "getSelectorsAndScripts": {
         let urlForSelectors;
         // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1498
@@ -308,15 +314,6 @@
       case "setNotificationViewed":
         purify.notifications.setNotificationViewed(message.withDelay);
         break;
-      case "getStatisticsData":
-        // There can't be data till localstorage is initialized
-        if (!purify.localStorage.isInitialized()) {
-          return {};
-        }
-        callback({
-          stats: purify.pageStats.getStatisticsData(),
-        });
-        return true;
       case "resizePanelPopup":
         purify.browserAction.resize(message.width, message.height);
         break;

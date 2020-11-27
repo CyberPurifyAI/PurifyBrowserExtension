@@ -13,19 +13,15 @@ const purifySSO = new Keycloak({
 
 const checkSSO = function (popup = false) {
   purifySSO
-  .init({ onLoad: "check-sso", flow: "implicit" })
-  .then(function (authenticated) {
-    console.log(authenticated ? "authenticated" : "not authenticated");
-    if (!authenticated && popup) {
-      openPopupLogin();
-    } else {
-      window.close();
-    }
-  })
-  .catch(function () {
-    console.log("failed to initialize");
-  });
-
+    .init({ onLoad: "check-sso", flow: "implicit" })
+    .then(function (authenticated) {
+      console.log(authenticated ? "authenticated" : "not authenticated");
+      if (!authenticated && popup) {
+        openPopupLogin();
+      } else {
+        updateUserInfo(purifySSO.idTokenParsed);
+      }
+    });
 };
 
 const openPopupLogin = function () {
@@ -47,4 +43,14 @@ const openPopupLogin = function () {
   }, 500);
 };
 
-checkSSO(true);
+const updateUserInfo = function (info) {
+  contentPage.sendMessage({ type: "updateUserInfo", info }, (response) => {
+    if (response.ready) {
+      window.close();
+    }
+  });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  checkSSO(true);
+});

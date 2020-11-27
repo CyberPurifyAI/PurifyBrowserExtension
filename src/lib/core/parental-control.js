@@ -97,12 +97,33 @@ purify.parentalControl = (function (purify) {
     });
   };
 
+  const updateUser = function (info) {
+    const { email, name, sub } = info;
+
+    browser.storage.sync.set({
+      pemail: email,
+      pname: name,
+      psub: sub,
+    });
+  };
+
+  const getUser = function (callback) {
+    browser.storage.sync.get(null, function (info) {
+      if (info) {
+        const { pname } = info;
+        callback({ name: pname });
+      }
+    });
+  };
+
   const init = function () {
     initDevice();
     purify.console.info("Initializing Parental Control");
   };
 
   return {
+    updateUser,
+    getUser,
     init,
     syncData,
   };
