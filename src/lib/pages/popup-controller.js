@@ -111,7 +111,7 @@ PopupController.prototype = {
 
   _renderUserInfo(name) {
     const blockUserText = document.querySelector(
-      ".showUserInfo .act-name-user"
+      ".showUserInfo .act-name"
     );
 
     blockUserText.style = "font-weight:bold;";
@@ -877,17 +877,17 @@ PopupController.prototype = {
     const timeout = 10;
     setTimeout(() => {
       controller.resizePopupWindow();
+
+      popupPage.sendMessage({ type: "getUserInfo" }, (message) => {
+        if (message.name) {
+          controller._renderUserInfo(message.name);
+        }
+      });
     }, timeout);
   };
 
   document.addEventListener("resizePopup", () => {
     controller.resizePopupWindow();
-  });
-
-  popupPage.sendMessage({ type: "getUserInfo" }, (message) => {
-    if (message.name) {
-      controller._renderUserInfo(message.name);
-    }
   });
 
   popupPage.sendMessage({ type: "getTabInfoForPopup" }, (message) => {
