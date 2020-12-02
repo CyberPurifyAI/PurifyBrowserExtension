@@ -54,7 +54,7 @@ purify.parentalControl = (function (purify) {
         const mqttc = mqtt.connect(hub);
 
         mqttc.on("connect", function () {
-          const cache = purify.nsfwFiltering.nsfwUrlCache.cache.object();
+          const cache = purify.purifyFiltering.purifyUrlCache.cache.object();
           const arrCache = cache.toJSON();
 
           mqttc.subscribe(clientId, function (err) {

@@ -337,15 +337,15 @@
 
         const tabIdUrl = purify.loadingQueue._buildTabIdUrl(sender.tab);
         const requestUrl = message.requestUrl;
-        let arrNSFWUrl = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
+        let arrPurifyUrl = purify.purifyFiltering.purifyUrlCache.cache.getValue(
           tabIdUrl.tabUrl
         );
         const imagesNum = message.imagesNum;
 
         if (
-          arrNSFWUrl &&
-          ((imagesNum <= 50 && arrNSFWUrl.length > 25) ||
-            (imagesNum > 50 && arrNSFWUrl.length / imagesNum > 0.2))
+          arrPurifyUrl &&
+          ((imagesNum <= 50 && arrPurifyUrl.length > 25) ||
+            (imagesNum > 50 && arrPurifyUrl.length / imagesNum > 0.2))
         ) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             requestUrl,

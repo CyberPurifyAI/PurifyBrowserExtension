@@ -35,8 +35,8 @@ purify.loadingQueue = (function (purify) {
 
   const predict = async function (requestUrl, tabIdUrl) {
     return await new Promise((resolve, reject) => {
-      const hashUrl = purify.nsfwFiltering.createHash(requestUrl);
-      const cacheValue = purify.nsfwFiltering.nsfwImageCache.cache.getValue(
+      const hashUrl = purify.purifyFiltering.createHash(requestUrl);
+      const cacheValue = purify.purifyFiltering.purifyImageCache.cache.getValue(
         hashUrl
       );
 

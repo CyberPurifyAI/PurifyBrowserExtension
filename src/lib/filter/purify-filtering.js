@@ -1,48 +1,58 @@
 /**
  * ----------------------------------------------------------------------------------
- * PurifyBrowserExtension nsfw-filtering.js
+ * PurifyBrowserExtension purify-filtering.js
  * Licensed under MIT (https://github.com/CyberPurify/CyberPurify/blob/main/LICENSE)
  * ----------------------------------------------------------------------------------
  */
 
 /**
- * nsfw filtering
+ * purify filtering
  */
-purify.nsfwFiltering = (function (purify, global) {
+purify.purifyFiltering = (function (purify, global) {
   "use strict";
 
-  const NSFW_MODEL_PATH = "../models/quant_nsfw_mobilenet/";
+  const PURIFY_MODEL_PATH = "../models/purify_mobilenet_tfjs/";
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
-  const FILTER_LIST = new Set(["Hentai", "Porn", "Sexy"]);
+  const FILTER_LIST = new Set(["Horror_aug", "Gory_aug", "Porn"]);
 
-  let nsfwInstance = null;
+  const RANGE_REJECT = {
+    Gory_aug: { max: 0.4, min: 0.2 },
+    Horror_aug: { max: 0.4, min: 0.2 },
+    Heroin_aug: { max: 0.7, min: 0.5 },
+    Drugs_aug: { max: 0.7, min: 0.5 },
+    Neutral: { max: 0.4, min: 0.2 },
+    Porn: { max: 0.9, min: 0.7 },
+    Sexy: { max: 0.8, min: 0.6 },
+  };
+
+  let purifyInstance = null;
 
   const Strictness = 30;
   const coefficient = 1 - Strictness / 100;
 
   const init = async function () {
     purify.console.info("Initializing Predict Image");
-    nsfwInstance = await nsfwjs.load(NSFW_MODEL_PATH);
-    nsfwImageCache.cache.object();
-    nsfwUrlCache.cache.object();
+    purifyInstance = await purifyjs.load(PURIFY_MODEL_PATH);
+    purifyImageCache.cache.object();
+    purifyUrlCache.cache.object();
   };
 
-  const nsfwImageCache = {
+  const purifyImageCache = {
     get cache() {
       return purify.lazyGet(
-        nsfwImageCache,
+        purifyImageCache,
         "cache",
-        () => new purify.utils.LruCache("nsfw-image-cache", 100)
+        () => new purify.utils.LruCache("purify-image-cache", 100)
       );
     },
   };
 
-  const nsfwUrlCache = {
+  const purifyUrlCache = {
     get cache() {
       return purify.lazyGet(
-        nsfwUrlCache,
+        purifyUrlCache,
         "cache",
-        () => new purify.utils.LruCache("nsfw-url-cache", 50)
+        () => new purify.utils.LruCache("purify-url-cache", 50)
       );
     },
   };
@@ -53,12 +63,12 @@ purify.nsfwFiltering = (function (purify, global) {
 
   const getPredictImage = async function (requestUrl, image) {
     if (GIF_REGEX.test(requestUrl)) {
-      const prediction = await nsfwInstance.classifyGif(image);
+      const prediction = await purifyInstance.classifyGif(image);
       const { result, className, probability } = handlePrediction([prediction]);
 
       return Boolean(result);
     } else {
-      const prediction = await nsfwInstance.classify(image, 2);
+      const prediction = await purifyInstance.classify(image, 2);
       const { result, className, probability } = handlePrediction([prediction]);
 
       // purify.console.info(`${className} - ${probability} - ${result}`);
@@ -74,10 +84,12 @@ purify.nsfwFiltering = (function (purify, global) {
         { className: cn2, probability: pb2 },
       ] = prediction;
 
-      const MIN1 = cn1 === "Porn" ? 40 : 60;
-      const MAX1 = 100;
-      const MIN2 = cn1 === "Porn" ? 15 : 25;
-      const MAX2 = 50;
+      purify.console.info(`${cn1} - ${cn2} - ${pb1} - ${pb2}`);
+
+      const MIN1 = RANGE_REJECT[cn1].min * 100;
+      const MAX1 = RANGE_REJECT[cn1].max * 100;
+      const MIN2 = RANGE_REJECT[cn2].min * 100;
+      const MAX2 = RANGE_REJECT[cn2].max * 100;
       const threshold1 =
         Strictness === 100 ? MIN1 : coefficient * (MAX1 - MIN1) + MIN1;
       const threshold2 =
@@ -106,8 +118,8 @@ purify.nsfwFiltering = (function (purify, global) {
   return {
     init,
     getPredictImage,
-    nsfwImageCache,
-    nsfwUrlCache,
+    purifyImageCache,
+    purifyUrlCache,
     createHash,
   };
 })(purify, window);

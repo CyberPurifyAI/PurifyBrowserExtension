@@ -44,7 +44,7 @@ purify.predictionQueue = (function (purify) {
       return;
     }
 
-    purify.nsfwFiltering
+    purify.purifyFiltering
       .getPredictImage(requestUrl, image)
       .then((result) =>
         callback(undefined, { requestUrl, hashUrl, tabIdUrl, result })
@@ -97,18 +97,18 @@ purify.predictionQueue = (function (purify) {
   };
 
   const saveCache = function ({ requestUrl, hashUrl, tabUrl, result }) {
-    let urlCache = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(tabUrl);
+    let urlCache = purify.purifyFiltering.purifyUrlCache.cache.getValue(tabUrl);
 
     if (typeof urlCache === "undefined") {
       urlCache = [];
     }
 
-    purify.nsfwFiltering.nsfwImageCache.cache.saveValue(hashUrl, result);
+    purify.purifyFiltering.purifyImageCache.cache.saveValue(hashUrl, result);
 
     if (result === true) {
       urlCache.push(requestUrl);
       const uniqueArr = urlCache.filter(uniqueArray);
-      purify.nsfwFiltering.nsfwUrlCache.cache.saveValue(tabUrl, uniqueArr);
+      purify.purifyFiltering.purifyUrlCache.cache.saveValue(tabUrl, uniqueArr);
     }
   };
 

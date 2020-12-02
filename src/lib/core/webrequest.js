@@ -213,7 +213,7 @@
 
     if (requestType === purify.RequestTypes.DOCUMENT) {
       const originUrl = requestUrl;
-      let arrImage = purify.nsfwFiltering.nsfwUrlCache.cache.getValue(
+      let arrImage = purify.purifyFiltering.purifyUrlCache.cache.getValue(
         originUrl
       );
 

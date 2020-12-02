@@ -85,7 +85,7 @@
   };
 
   /**
-   * Watch NSFW Content
+   * Watch Purify Content
    */
   const imageDOMWatcher = function () {
     var MutationObserver =
@@ -163,7 +163,7 @@
           } else {
             image.style.filter = "blur(100px)";
             showImage(image, requestUrl);
-            image.dataset.purify = "nsfw";
+            image.dataset.purify = "purify";
           }
 
           resolve(response);
