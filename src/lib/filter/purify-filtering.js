@@ -27,7 +27,7 @@ purify.purifyFiltering = (function (purify, global) {
 
   let purifyInstance = null;
 
-  const Strictness = 30;
+  const Strictness = 20;
   const coefficient = 1 - Strictness / 100;
 
   const init = async function () {
