@@ -68,48 +68,69 @@ purify.purifyFiltering = (function (purify, global) {
 
       return Boolean(result);
     } else {
-      const prediction = await purifyInstance.classify(image, 2);
+      const prediction = await purifyInstance.classify(image, 7);
       const { result, className, probability } = handlePrediction([prediction]);
 
-      // purify.console.info(`${className} - ${probability} - ${result}`);
+      // purify.console.info(`${result}`);
 
       return Boolean(result);
     }
   };
 
+  const Ruler = function (classes) {
+    let labels = [];
+    for (let i = 0; i < classes.length; i++) {
+      console.log(classes[i]);
+      labels[classes[i].className] = classes[i].probability;
+    }
+
+    if (
+      labels["Horror_aug"] >= 0.7 ||
+      labels["Gory_aug"] >= 0.7 ||
+      (labels["Gory_aug"] + labels["Horror_aug"] >= 0.7 &&
+        labels["Neutral"] <= 0.2) ||
+      labels["Porn"] >= 0.7 ||
+      (labels["Porn"] + labels["Sexy"] >= 0.8 && labels["Neutral"] <= 0.2) ||
+      (labels["Porn"] + labels["Gory_aug"] + labels["Horror_aug"] >= 0.8 &&
+        labels["Neutral"] <= 0.2)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handlePrediction = function ([prediction]) {
     try {
-      const [
-        { className: cn1, probability: pb1 },
-        { className: cn2, probability: pb2 },
-      ] = prediction;
+      const result = Ruler(prediction);
 
-      purify.console.info(`${cn1} - ${cn2} - ${pb1} - ${pb2}`);
-
-      const MIN1 = RANGE_REJECT[cn1].min * 100;
-      const MAX1 = RANGE_REJECT[cn1].max * 100;
-      const MIN2 = RANGE_REJECT[cn2].min * 100;
-      const MAX2 = RANGE_REJECT[cn2].max * 100;
-      const threshold1 =
-        Strictness === 100 ? MIN1 : coefficient * (MAX1 - MIN1) + MIN1;
-      const threshold2 =
-        Strictness === 100 ? MIN2 : coefficient * (MAX2 - MIN2) + MIN2;
-
-      const result1 =
-        FILTER_LIST.has(cn1) &&
-        pb1 > Math.round((threshold1 / 100) * 10000) / 10000;
-      if (result1) {
-        return { result: result1, className: cn1, probability: pb1 };
-      }
-
-      const result2 =
-        FILTER_LIST.has(cn2) &&
-        pb2 > Math.round((threshold2 / 100) * 10000) / 10000;
-      if (result2) {
-        return { result: result2, className: cn2, probability: pb2 };
-      }
-
-      return { result: result1, className: cn1, probability: pb1 };
+      return { result, className: null, probability: null };
+      // const [
+      //   { className: cn1, probability: pb1 },
+      //   { className: cn2, probability: pb2 },
+      // ] = prediction;
+      // purify.console.info(`${cn1} - ${cn2} - ${pb1} - ${pb2}`);
+      // const MIN1 = RANGE_REJECT[cn1].min * 100;
+      // const MAX1 = RANGE_REJECT[cn1].max * 100;
+      // const MIN2 = RANGE_REJECT[cn2].min * 100;
+      // const MAX2 = RANGE_REJECT[cn2].max * 100;
+      // const threshold1 =
+      //   Strictness === 100 ? MIN1 : coefficient * (MAX1 - MIN1) + MIN1;
+      // const threshold2 =
+      //   Strictness === 100 ? MIN2 : coefficient * (MAX2 - MIN2) + MIN2;
+      // const result1 =
+      //   FILTER_LIST.has(cn1) &&
+      //   pb1 > Math.round((threshold1 / 100) * 10000) / 10000;
+      // if (result1) {
+      //   return { result: result1, className: cn1, probability: pb1 };
+      // }
+      // const result2 =
+      //   FILTER_LIST.has(cn2) &&
+      //   pb2 > Math.round((threshold2 / 100) * 10000) / 10000;
+      // if (result2) {
+      //   return { result: result2, className: cn2, probability: pb2 };
+      // }
+      // return { result: result1, className: cn1, probability: pb1 };
     } catch (error) {
       return { result: true, className: null, probability: null };
     }

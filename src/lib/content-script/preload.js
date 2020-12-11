@@ -161,9 +161,9 @@
           if (!result && !err) {
             showImage(image, requestUrl);
           } else {
+            showImage(image, requestUrl);
             image.style.filter = "blur(100px)";
             image.dataset.purify = "purify";
-            showImage(image, requestUrl);
           }
 
           resolve(response);
