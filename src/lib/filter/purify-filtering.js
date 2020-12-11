@@ -80,7 +80,6 @@ purify.purifyFiltering = (function (purify, global) {
   const Ruler = function (classes) {
     let labels = [];
     for (let i = 0; i < classes.length; i++) {
-      console.log(classes[i]);
       labels[classes[i].className] = classes[i].probability;
     }
 
