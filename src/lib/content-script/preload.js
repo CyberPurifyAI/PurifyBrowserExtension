@@ -168,9 +168,7 @@
 
           resolve(response);
         });
-      } catch (err) {
-        reject();
-      }
+      } catch (err) {}
     });
   };
 
