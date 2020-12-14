@@ -80,18 +80,23 @@ purify.purifyFiltering = (function (purify, global) {
   const Ruler = function (classes) {
     let labels = [];
     for (let i = 0; i < classes.length; i++) {
-      labels[classes[i].className] = classes[i].probability;
+      labels[classes[i].className] =
+        Math.round(classes[i].probability * 100) / 100;
     }
 
     if (
-      labels["Horror_aug"] >= 0.7 ||
-      labels["Gory_aug"] >= 0.7 ||
-      (labels["Gory_aug"] + labels["Horror_aug"] >= 0.7 &&
+      labels["Horror_aug"] >= 0.8 ||
+      labels["Gory_aug"] >= 0.8 ||
+      (labels["Gory_aug"] + labels["Horror_aug"] >= 0.85 &&
         labels["Neutral"] <= 0.2) ||
       labels["Porn"] >= 0.7 ||
-      (labels["Porn"] + labels["Sexy"] >= 0.8 && labels["Neutral"] <= 0.2) ||
-      (labels["Porn"] + labels["Gory_aug"] + labels["Horror_aug"] >= 0.8 &&
-        labels["Neutral"] <= 0.2)
+      (labels["Porn"] + labels["Sexy"] >= 0.75 && labels["Neutral"] <= 0.2) ||
+      (labels["Porn"] +
+        labels["Gory_aug"] +
+        labels["Horror_aug"] +
+        labels["Sexy"] >=
+        0.85 &&
+        labels["Neutral"] <= 0.1)
     ) {
       return true;
     } else {
