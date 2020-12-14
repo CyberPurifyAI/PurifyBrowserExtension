@@ -34,13 +34,13 @@ purify.initialize = function () {
       // purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
     });
 
-    purify.parentalControl.init();
-    purify.whitelist.init();
-    purify.ui.init();
-
     purify.purifyFiltering.init();
     purify.loadingQueue.init();
     purify.predictionQueue.init();
+
+    purify.parentalControl.init();
+    purify.whitelist.init();
+    purify.ui.init();
 
     /**
      * Start application

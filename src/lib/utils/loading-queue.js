@@ -23,7 +23,7 @@ purify.loadingQueue = (function (purify) {
 
   const init = function () {
     queue = new purify.utils.concurrentQueue({
-      concurrency: 1,
+      concurrency: 2,
       timeout: 0,
       onProcess: onLoadingProcess,
       onSuccess: onLoadingSuccess,
@@ -36,14 +36,14 @@ purify.loadingQueue = (function (purify) {
   const predict = async function (requestUrl, tabIdUrl) {
     return await new Promise((resolve, reject) => {
       const hashUrl = purify.purifyFiltering.createHash(requestUrl);
-      const cacheValue = purify.purifyFiltering.purifyImageCache.cache.getValue(
-        hashUrl
-      );
+      // const cacheValue = purify.purifyFiltering.purifyImageCache.cache.getValue(
+      //   hashUrl
+      // );
 
-      if (cacheValue !== undefined) {
-        resolve(cacheValue);
-        return;
-      }
+      // if (cacheValue !== undefined) {
+      //   resolve(cacheValue);
+      //   return;
+      // }
 
       if (requestMap.has(requestUrl)) {
         requestMap.get(requestUrl)?.push([{ resolve, reject }]);
@@ -186,7 +186,7 @@ purify.loadingQueue = (function (purify) {
 
   const _buildTabIdUrl = function (tab) {
     const tabIdUrl = {
-      tabId: tab?.id ? tab.id : DEFAULT_TAB_ID,
+      tabId: tab?.tabId ? tab.tabId : DEFAULT_TAB_ID,
       tabUrl: tab?.url ? tab?.url : `${DEFAULT_TAB_ID}`,
     };
 
