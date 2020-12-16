@@ -111,12 +111,16 @@
     if (pos === -1) {
       // for paths like 'a.b.*' every final nested prop should be processed
       if (chain === "*" || chain === "[]") {
-        Object.keys(base).forEach(function (key) {
-          output.push({
-            base: base,
-            prop: key,
-          });
-        });
+        // eslint-disable-next-line no-restricted-syntax
+        for (var key in base) {
+          // to process each key in base except inherited ones
+          if (Object.prototype.hasOwnProperty.call(base, key)) {
+            output.push({
+              base: base,
+              prop: key,
+            });
+          }
+        }
       } else {
         output.push({
           base: base,
@@ -129,7 +133,8 @@
 
     var prop = chain.slice(0, pos);
     var shouldLookThrough =
-      (prop === "*" || prop === "[]") && base instanceof Object;
+      (prop === "[]" && Array.isArray(base)) ||
+      (prop === "*" && base instanceof Object);
 
     if (shouldLookThrough) {
       var nextProp = chain.slice(pos + 1);
@@ -482,7 +487,7 @@
 
   /**
    * Checks if the stackTrace contains stackRegexp
-   * // https://github.com/CyberPurify/Scriptlets/issues/82
+   * // https://github.com/AdguardTeam/Scriptlets/issues/82
    * @param {string} stackRegexp - stack regexp
    * @param {string} stackTrace - script error stack trace
    * @returns {boolean}
@@ -754,7 +759,7 @@
     return state;
   }
   /**
-   * CyberPurify scriptlet rule mask
+   * AdGuard scriptlet rule mask
    */
 
   var ADG_SCRIPTLET_MASK = "#//scriptlet";
@@ -1154,6 +1159,9 @@
    * If starts with `!`, scriptlet will not match the delay but all other will be defused.
    * If do not start with `!`, the delay passed to the `setTimeout` call will be matched.
    *
+   * > If `prevent-setTimeout` without parameters logs smth like `setTimeout(undefined, 1000)`,
+   * it means that no callback was passed to setTimeout() and that's not scriptlet issue
+   *
    * **Examples**
    * 1. Prevents `setTimeout` calls if the callback matches `/\.test/` regardless of the delay.
    *     ```bash
@@ -1254,20 +1262,20 @@
     match = match ? toRegExp(match) : toRegExp("/.?/");
 
     var timeoutWrapper = function timeoutWrapper(callback, timeout) {
-      var shouldPrevent = false;
+      var shouldPrevent = false; // https://github.com/AdguardTeam/Scriptlets/issues/105
+
+      var cbString = String(callback);
 
       if (shouldLog) {
         hit(source);
-        log(
-          'setTimeout("'.concat(callback.toString(), '", ').concat(timeout, ")")
-        );
+        log("setTimeout(".concat(cbString, ", ").concat(timeout, ")"));
       } else if (!delay) {
-        shouldPrevent = match.test(callback.toString()) !== isNotMatch;
+        shouldPrevent = match.test(cbString) !== isNotMatch;
       } else if (match === "/.?/") {
         shouldPrevent = (timeout === delay) !== isNotDelay;
       } else {
         shouldPrevent =
-          match.test(callback.toString()) !== isNotMatch &&
+          match.test(cbString) !== isNotMatch &&
           (timeout === delay) !== isNotDelay;
       }
 
@@ -1337,6 +1345,9 @@
    * If starts with `!`, scriptlet will not match the delay but all other will be defused.
    * If do not start with `!`, the delay passed to the `setInterval` call will be matched.
    *
+   * > If `prevent-setInterval` without parameters logs smth like `setInterval(undefined, 1000)`,
+   * it means that no callback was passed to setInterval() and that's not scriptlet issue
+
    *  **Examples**
    * 1. Prevents `setInterval` calls if the callback matches `/\.test/` regardless of the delay.
    *     ```bash
@@ -1437,22 +1448,20 @@
     match = match ? toRegExp(match) : toRegExp("/.?/");
 
     var intervalWrapper = function intervalWrapper(callback, interval) {
-      var shouldPrevent = false;
+      var shouldPrevent = false; // https://github.com/AdguardTeam/Scriptlets/issues/105
+
+      var cbString = String(callback);
 
       if (shouldLog) {
         hit(source);
-        log(
-          'setInterval("'
-            .concat(callback.toString(), '", ')
-            .concat(interval, ")")
-        );
+        log("setInterval(".concat(cbString, ", ").concat(interval, ")"));
       } else if (!delay) {
-        shouldPrevent = match.test(callback.toString()) !== isNotMatch;
+        shouldPrevent = match.test(cbString) !== isNotMatch;
       } else if (match === "/.?/") {
         shouldPrevent = (interval === delay) !== isNotDelay;
       } else {
         shouldPrevent =
-          match.test(callback.toString()) !== isNotMatch &&
+          match.test(cbString) !== isNotMatch &&
           (interval === delay) !== isNotDelay;
       }
 
@@ -1585,7 +1594,7 @@
       } else if (replacement.indexOf("=") > -1) {
         // We should return noopFunc instead of window.open
         // but with some property if website checks it (examples 5, 6)
-        // https://github.com/CyberPurify/Scriptlets/issues/71
+        // https://github.com/AdguardTeam/Scriptlets/issues/71
         var isProp = startsWith(replacement, "{") && endsWith(replacement, "}");
 
         if (isProp) {
@@ -1716,7 +1725,7 @@
       var content = scriptEl.textContent; // We are using Node.prototype.textContent property descriptor
       // to get the real script content
       // even when document.currentScript.textContent is replaced.
-      // https://github.com/CyberPurify/Scriptlets/issues/57#issuecomment-593638991
+      // https://github.com/AdguardTeam/Scriptlets/issues/57#issuecomment-593638991
 
       try {
         var textContentGetter = Object.getOwnPropertyDescriptor(
@@ -1745,7 +1754,7 @@
       // (for instance, document.body before the HTML body was loaded).
       // In this case we're checking whether the base element exists or not
       // and if not, we simply exit without overriding anything.
-      // e.g. https://github.com/CyberPurify/Scriptlets/issues/57#issuecomment-575841092
+      // e.g. https://github.com/AdguardTeam/Scriptlets/issues/57#issuecomment-575841092
 
       if (base instanceof Object === false && base === null) {
         var props = property.split(".");
@@ -2160,7 +2169,7 @@
     function addEventListenerWrapper(eventName, callback) {
       // The scriptlet might cause a website broke
       // if the website uses test addEventListener with callback = null
-      // https://github.com/CyberPurify/Scriptlets/issues/76
+      // https://github.com/AdguardTeam/Scriptlets/issues/76
       var funcToCheck = callback;
 
       if (callback && typeof callback === "function") {
@@ -2414,7 +2423,7 @@
     function addEventListenerWrapper(eventName, callback) {
       hit(source); // The scriptlet might cause a website broke
       // if the website uses test addEventListener with callback = null
-      // https://github.com/CyberPurify/Scriptlets/issues/76
+      // https://github.com/AdguardTeam/Scriptlets/issues/76
 
       var callbackToLog = callback;
 
@@ -2552,7 +2561,7 @@
 
   function noeval(source) {
     window.eval = function evalWrapper(s) {
-      hit(source, "CyberPurify has prevented eval:\n".concat(s));
+      hit(source, "AdGuard has prevented eval:\n".concat(s));
     }.bind();
   }
   noeval.names = [
@@ -2655,6 +2664,10 @@
     };
 
     Fab.prototype.setOption = noopFunc;
+    Fab.prototype.options = {
+      set: noopFunc,
+      get: noopFunc,
+    };
     var fab = new Fab();
     var getSetFab = {
       get: function get() {
@@ -3810,10 +3823,42 @@
 
       return shouldProcess;
     }
+    /**
+     * Prunes properties of 'root' object
+     * @param {Object} root
+     */
 
-    var nativeParse = JSON.parse;
+    var jsonPruner = function jsonPruner(root) {
+      if (prunePaths.length === 0) {
+        log(window.location.hostname, root);
+        return root;
+      }
 
-    var parseWrapper = function parseWrapper() {
+      try {
+        if (isPruningNeeded(root) === false) {
+          return root;
+        } // if pruning is needed, we check every input pathToRemove
+        // and delete it if root has it
+
+        prunePaths.forEach(function (path) {
+          var ownerObjArr = getWildcardPropertyInChain(root, path, true);
+          ownerObjArr.forEach(function (ownerObj) {
+            if (ownerObj !== undefined && ownerObj.base) {
+              delete ownerObj.base[ownerObj.prop];
+              hit(source);
+            }
+          });
+        });
+      } catch (e) {
+        log(e.toString());
+      }
+
+      return root;
+    };
+
+    var nativeJSONParse = JSON.parse;
+
+    var jsonParseWrapper = function jsonParseWrapper() {
       for (
         var _len = arguments.length, args = new Array(_len), _key = 0;
         _key < _len;
@@ -3822,31 +3867,30 @@
         args[_key] = arguments[_key];
       }
 
-      var root = nativeParse.apply(window, args);
+      // dealing with stringified json in args, which should be parsed.
+      // so we call nativeJSONParse as JSON.parse which is bound to JSON object
+      var root = nativeJSONParse.apply(JSON, args);
+      return jsonPruner(root);
+    }; // JSON.parse mocking
 
-      if (prunePaths.length === 0) {
-        log(window.location.hostname, root);
-        return root;
-      }
+    jsonParseWrapper.toString = nativeJSONParse.toString.bind(nativeJSONParse);
+    JSON.parse = jsonParseWrapper; // eslint-disable-next-line compat/compat
 
-      if (isPruningNeeded(root) === false) {
-        return root;
-      } // if pruning is needed, we check every input pathToRemove
-      // and delete it if root has it
+    var nativeResponseJson = Response.prototype.json; // eslint-disable-next-line func-names
 
-      prunePaths.forEach(function (path) {
-        var ownerObjArr = getWildcardPropertyInChain(root, path, true);
-        ownerObjArr.forEach(function (ownerObj) {
-          if (ownerObj !== undefined && ownerObj.base) {
-            delete ownerObj.base[ownerObj.prop];
-          }
-        });
+    var responseJsonWrapper = function responseJsonWrapper() {
+      var promise = nativeResponseJson.apply(this);
+      return promise.then(function (obj) {
+        return jsonPruner(obj);
       });
-      hit(source);
-      return root;
-    };
+    }; // do nothing if browser does not support Response (e.g. Internet Explorer)
+    // https://developer.mozilla.org/en-US/docs/Web/API/Response
 
-    JSON.parse = parseWrapper;
+    if (typeof Response === "undefined") {
+      return;
+    } // eslint-disable-next-line compat/compat
+
+    Response.prototype.json = responseJsonWrapper;
   }
   jsonPrune.names = [
     "json-prune", // aliases are needed for matching the related scriptlet converted into our syntax
@@ -4304,7 +4348,7 @@
     { ubo: "ampproject_v0.js" },
     { ubo: "chartbeat.js" },
     { ubo: "doubleclick_instream_ad_status.js" },
-    { ubo: "empty" },
+    { adg: "empty", ubo: "empty" },
     { ubo: "google-analytics_cx_api.js" },
     { ubo: "google-analytics_inpage_linkid.js" },
     { ubo: "hd-main.js" },
@@ -4314,6 +4358,7 @@
     { ubo: "window.open-defuser.js" },
     { ubo: "nobab.js" },
     { ubo: "noeval.js" },
+    { ubo: "click2load.html" },
   ];
 
   var JS_RULE_MARKER = "#%#";
@@ -4349,12 +4394,12 @@
   var ABP_SCRIPTLET_MASK = "#$#";
   var ABP_SCRIPTLET_EXCEPTION_MASK = "#@$#";
   /**
-   * CyberPurify CSS rule mask
+   * AdGuard CSS rule mask
    */
 
   var ADG_CSS_MASK_REG = /#@?\$#.+?\s*\{.*\}\s*$/g;
   /**
-   * Checks if the `rule` is CyberPurify scriptlet rule
+   * Checks if the `rule` is AdGuard scriptlet rule
    * @param {string} rule - rule text
    */
 
@@ -4437,13 +4482,65 @@
 
   var ADG_UBO_REDIRECT_MARKER = "redirect=";
   var ABP_REDIRECT_MARKER = "rewrite=abp-resource:";
+  var EMPTY_REDIRECT_MARKER = "empty";
   var VALID_SOURCE_TYPES = [
     "image",
+    "media",
     "subdocument",
     "stylesheet",
     "script",
     "xmlhttprequest",
-    "media",
+    "other",
+  ];
+  var EMPTY_REDIRECT_SUPPORTED_TYPES = [
+    "subdocument",
+    "stylesheet",
+    "script",
+    "xmlhttprequest",
+    "other",
+  ];
+  /**
+   * Source types for redirect rules if there is no one of them.
+   * Used for ADG -> UBO conversion.
+   */
+
+  var ABSENT_SOURCE_TYPE_REPLACEMENT = [
+    {
+      NAME: "nooptext",
+      TYPES: EMPTY_REDIRECT_SUPPORTED_TYPES,
+    },
+    {
+      NAME: "noopjs",
+      TYPES: ["script"],
+    },
+    {
+      NAME: "noopframe",
+      TYPES: ["subdocument"],
+    },
+    {
+      NAME: "1x1-transparent.gif",
+      TYPES: ["image"],
+    },
+    {
+      NAME: "noopmp3-0.1s",
+      TYPES: ["media"],
+    },
+    {
+      NAME: "noopmp4-1s",
+      TYPES: ["media"],
+    },
+    {
+      NAME: "googlesyndication-adsbygoogle",
+      TYPES: ["xmlhttprequest", "script"],
+    },
+    {
+      NAME: "google-analytics",
+      TYPES: ["script"],
+    },
+    {
+      NAME: "googletagservices-gpt",
+      TYPES: ["script"],
+    },
   ];
   var validAdgRedirects = redirects.filter(function (el) {
     return el.adg;
@@ -4509,7 +4606,7 @@
       })
   );
   /**
-   * Needed for CyberPurify redirect names validation where KEYS = **valid** CyberPurify redirect names
+   * Needed for AdGuard redirect names validation where KEYS = **valid** AdGuard redirect names
    * 'adgToUboCompatibility' is still needed for ADG -> UBO converting
    */
 
@@ -4560,7 +4657,7 @@
     return substringAfter(redirectNamePart, marker);
   };
   /**
-   * Checks if the `rule` is CyberPurify redirect rule.
+   * Checks if the `rule` is AdGuard redirect rule.
    * Discards comments and JS rules and checks if the `rule` has 'redirect' modifier.
    * @param {string} rule - rule text
    */
@@ -4588,6 +4685,11 @@
 
     if (rule && !isComment(rule) && rule.indexOf(marker) > -1) {
       var redirectName = getRedirectName(rule, marker);
+
+      if (!redirectName) {
+        return false;
+      }
+
       return (
         redirectName ===
         Object.keys(compatibility).find(function (el) {
@@ -4599,7 +4701,7 @@
     return false;
   };
   /**
-   * Checks if the `rule` is **valid** CyberPurify redirect resource rule
+   * Checks if the `rule` is **valid** AdGuard redirect resource rule
    * @param {string} rule - rule text
    * @returns {boolean}
    */
@@ -4608,8 +4710,8 @@
     return isRedirectRuleByType(rule, "VALID_ADG");
   };
   /**
-   * Checks if the CyberPurify redirect `rule` has Ubo analog. Needed for Adg->Ubo conversion
-   * @param {string} rule - CyberPurify rule text
+   * Checks if the AdGuard redirect `rule` has Ubo analog. Needed for Adg->Ubo conversion
+   * @param {string} rule - AdGuard rule text
    * @returns {boolean} - true if the rule can be converted to Ubo
    */
 
@@ -4619,9 +4721,9 @@
     return isAdgRedirectRule(rule) && isRedirectRuleByType(rule, "ADG");
   };
   /**
-   * Checks if the Ubo redirect `rule` has CyberPurify analog. Needed for Ubo->Adg conversion
+   * Checks if the Ubo redirect `rule` has AdGuard analog. Needed for Ubo->Adg conversion
    * @param {string} rule - Ubo rule text
-   * @returns {boolean} - true if the rule can be converted to CyberPurify
+   * @returns {boolean} - true if the rule can be converted to AdGuard
    */
 
   var isUboRedirectCompatibleWithAdg = function isUboRedirectCompatibleWithAdg(
@@ -4630,9 +4732,9 @@
     return isRedirectRuleByType(rule, "UBO");
   };
   /**
-   * Checks if the Abp redirect `rule` has CyberPurify analog. Needed for Abp->Adg conversion
+   * Checks if the Abp redirect `rule` has AdGuard analog. Needed for Abp->Adg conversion
    * @param {string} rule - Abp rule text
-   * @returns {boolean} - true if the rule can be converted to CyberPurify
+   * @returns {boolean} - true if the rule can be converted to AdGuard
    */
 
   var isAbpRedirectCompatibleWithAdg = function isAbpRedirectCompatibleWithAdg(
@@ -4658,15 +4760,29 @@
    */
 
   var hasValidContentType = function hasValidContentType(rule) {
-    if (isRedirectRuleByType(rule, "ADG")) {
-      var ruleModifiers = parseModifiers(rule);
-      var sourceType = ruleModifiers.find(function (el) {
-        return VALID_SOURCE_TYPES.indexOf(el) > -1;
-      });
-      return sourceType !== undefined;
+    var ruleModifiers = parseModifiers(rule); // rule can have more than one source type modifier
+
+    var sourceTypes = ruleModifiers.filter(function (el) {
+      return VALID_SOURCE_TYPES.indexOf(el) > -1;
+    });
+    var isSourceTypeSpecified = sourceTypes.length > 0;
+    var isEmptyRedirect =
+      ruleModifiers.indexOf(
+        "".concat(ADG_UBO_REDIRECT_MARKER).concat(EMPTY_REDIRECT_MARKER)
+      ) > -1;
+
+    if (isEmptyRedirect) {
+      if (isSourceTypeSpecified) {
+        var isValidType = sourceTypes.every(function (sType) {
+          return EMPTY_REDIRECT_SUPPORTED_TYPES.indexOf(sType) > -1;
+        });
+        return isValidType;
+      } // no source type for 'empty' is allowed
+
+      return true;
     }
 
-    return false;
+    return isSourceTypeSpecified;
   };
 
   var validator = {
@@ -4680,6 +4796,7 @@
     getScriptletByName: getScriptletByName,
     isValidScriptletName: isValidScriptletName,
     REDIRECT_RULE_TYPES: REDIRECT_RULE_TYPES,
+    ABSENT_SOURCE_TYPE_REPLACEMENT: ABSENT_SOURCE_TYPE_REPLACEMENT,
     isAdgRedirectRule: isAdgRedirectRule,
     isValidAdgRedirectRule: isValidAdgRedirectRule,
     isAdgRedirectCompatibleWithUbo: isAdgRedirectCompatibleWithUbo,
@@ -4690,12 +4807,37 @@
     hasValidContentType: hasValidContentType,
   };
 
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return arrayLikeToArray(arr);
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter))
       return Array.from(iter);
   }
 
   var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError(
+      "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+    );
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return (
+      arrayWithoutHoles(arr) ||
+      iterableToArray(arr) ||
+      unsupportedIterableToArray(arr) ||
+      nonIterableSpread()
+    );
+  }
+
+  var toConsumableArray = _toConsumableArray;
 
   function _toArray(arr) {
     return (
@@ -4709,14 +4851,14 @@
   var toArray = _toArray;
 
   /**
-   * CyberPurify scriptlet rule
+   * AdGuard scriptlet rule
    */
 
-  var PURIFY_SCRIPTLET_MASK_REG = /#@?%#\/\/scriptlet\(.+\)/; // eslint-disable-next-line no-template-curly-in-string
+  var ADGUARD_SCRIPTLET_MASK_REG = /#@?%#\/\/scriptlet\(.+\)/; // eslint-disable-next-line no-template-curly-in-string
 
-  var PURIFY_SCRIPTLET_TEMPLATE = "${domains}#%#//scriptlet(${args})"; // eslint-disable-next-line no-template-curly-in-string
+  var ADGUARD_SCRIPTLET_TEMPLATE = "${domains}#%#//scriptlet(${args})"; // eslint-disable-next-line no-template-curly-in-string
 
-  var PURIFY_SCRIPTLET_EXCEPTION_TEMPLATE =
+  var ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE =
     "${domains}#@%#//scriptlet(${args})";
   /**
    * uBlock scriptlet rule mask
@@ -4753,9 +4895,9 @@
     }, str);
   };
   /**
-   * Converts string of UBO scriptlet rule to CyberPurify scritlet rule
+   * Converts string of UBO scriptlet rule to AdGuard scritlet rule
    * @param {string} rule - UBO scriptlet rule
-   * @returns {Array} - array with one CyberPurify scriptlet rule
+   * @returns {Array} - array with one AdGuard scriptlet rule
    */
 
   var convertUboScriptletToAdg = function convertUboScriptletToAdg(rule) {
@@ -4764,13 +4906,19 @@
     var template;
 
     if (mask.indexOf("@") > -1) {
-      template = PURIFY_SCRIPTLET_EXCEPTION_TEMPLATE;
+      template = ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE;
     } else {
-      template = PURIFY_SCRIPTLET_TEMPLATE;
+      template = ADGUARD_SCRIPTLET_TEMPLATE;
     }
 
-    var args = getStringInBraces(rule)
-      .split(/, /g)
+    var parsedArgs = getStringInBraces(rule).split(/,\s/g);
+
+    if (parsedArgs.length === 1) {
+      // Most probably this is not correct separator, in this case we use ','
+      parsedArgs = getStringInBraces(rule).split(/,/g);
+    }
+
+    var args = parsedArgs
       .map(function (arg, index) {
         var outputArg;
 
@@ -4800,9 +4948,9 @@
     return [adgRule];
   };
   /**
-   * Convert string of ABP snippet rule to CyberPurify scritlet rule
+   * Convert string of ABP snippet rule to AdGuard scritlet rule
    * @param {string} rule - ABP snippet rule
-   * @returns {Array} - array of CyberPurify scriptlet rules -
+   * @returns {Array} - array of AdGuard scriptlet rules -
    * one or few items depends on Abp-rule
    */
 
@@ -4814,8 +4962,8 @@
         : validator.ABP_SCRIPTLET_EXCEPTION_MASK;
     var template =
       mask === validator.ABP_SCRIPTLET_MASK
-        ? PURIFY_SCRIPTLET_TEMPLATE
-        : PURIFY_SCRIPTLET_EXCEPTION_TEMPLATE;
+        ? ADGUARD_SCRIPTLET_TEMPLATE
+        : ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE;
     var domains = substringBefore(rule, mask);
     var args = substringAfter(rule, mask);
     return args
@@ -4841,9 +4989,9 @@
       });
   };
   /**
-   * Converts scriptlet rule to CyberPurify one
+   * Converts scriptlet rule to AdGuard one
    * @param {string} rule
-   * @returns {Array} - array of CyberPurify scriptlet rules -
+   * @returns {Array} - array of AdGuard scriptlet rules -
    * one item for Adg and Ubo or few items for Abp
    */
 
@@ -4864,8 +5012,8 @@
     return result;
   };
   /**
-   * Converts UBO scriptlet rule to CyberPurify one
-   * @param {string} rule - CyberPurify scriptlet rule
+   * Converts UBO scriptlet rule to AdGuard one
+   * @param {string} rule - AdGuard scriptlet rule
    * @returns {string} - UBO scriptlet rule
    */
 
@@ -4903,7 +5051,7 @@
           });
 
         if (uboAlias) {
-          var mask = rule.match(PURIFY_SCRIPTLET_MASK_REG)[0];
+          var mask = rule.match(ADGUARD_SCRIPTLET_MASK_REG)[0];
           var template;
 
           if (mask.indexOf("@") > -1) {
@@ -4912,7 +5060,7 @@
             template = UBO_SCRIPTLET_TEMPLATE;
           }
 
-          var domains = getBeforeRegExp(rule, PURIFY_SCRIPTLET_MASK_REG);
+          var domains = getBeforeRegExp(rule, ADGUARD_SCRIPTLET_MASK_REG);
           var uboName = uboAlias
             .replace(UBO_ALIAS_NAME_MARKER, "") // '.js' in the Ubo scriptlet name can be omitted
             // https://github.com/gorhill/uBlock/wiki/Resources-Library#general-purpose-scriptlets
@@ -4934,7 +5082,7 @@
   };
   /**
    * Validates any scriptlet rule
-   * @param {string} input - can be CyberPurify or Ubo or Abp scriptlet rule
+   * @param {string} input - can be Adguard or Ubo or Abp scriptlet rule
    */
 
   var isValidScriptletRule = function isValidScriptletRule(input) {
@@ -4945,10 +5093,10 @@
     var rulesArray = convertScriptletToAdg(input); // checking if each of parsed scriptlets is valid
     // if at least one of them is not valid - whole 'input' rule is not valid too
 
-    var isValid = rulesArray.reduce(function (acc, rule) {
+    var isValid = rulesArray.every(function (rule) {
       var parsedRule = parseRule(rule);
-      return validator.isValidScriptletName(parsedRule.name) && acc;
-    }, true);
+      return validator.isValidScriptletName(parsedRule.name);
+    });
     return isValid;
   };
   /**
@@ -5012,7 +5160,7 @@
     return "".concat(firstPartOfRule, "$").concat(adgModifiers);
   };
   /**
-   * Converts redirect rule to CyberPurify one
+   * Converts redirect rule to AdGuard one
    * @param {string} rule
    * @returns {string}
    */
@@ -5032,39 +5180,63 @@
   };
   /**
    * Converts Adg redirect rule to Ubo one
+   * 1. Checks if there is Ubo analog for Adg rule
+   * 2. Parses the rule and chechs if there are any source type modifiers which are required by Ubo
+   *    and if there are no one we add it manually to the end.
+   *    Source types are chosen according to redirect name
+   *    e.g. ||ad.com^$redirect=<name>,important  ->>  ||ad.com^$redirect=<name>,important,script
+   * 3. Replaces Adg redirect name by Ubo analog
    * @param {string} rule
    * @returns {string}
    */
 
   var convertAdgRedirectToUbo = function convertAdgRedirectToUbo(rule) {
-    if (!validator.hasValidContentType(rule)) {
+    if (!validator.isAdgRedirectCompatibleWithUbo(rule)) {
       throw new Error(
-        "Rule is not valid for converting to Ubo. Source type is not specified in the rule: ".concat(
+        "Unable to convert for uBO - unsupported redirect in rule: ".concat(
           rule
         )
       );
-    } else {
-      var firstPartOfRule = substringBefore(rule, "$");
-      var uboModifiers = validator.parseModifiers(rule);
-      var adgModifiers = uboModifiers
-        .map(function (el) {
-          if (el.indexOf(validator.REDIRECT_RULE_TYPES.ADG.marker) > -1) {
-            var adgName = substringAfter(
-              el,
-              validator.REDIRECT_RULE_TYPES.ADG.marker
-            );
-            var uboName =
-              validator.REDIRECT_RULE_TYPES.ADG.compatibility[adgName];
-            return ""
-              .concat(validator.REDIRECT_RULE_TYPES.UBO.marker)
-              .concat(uboName);
-          }
-
-          return el;
-        })
-        .join(",");
-      return "".concat(firstPartOfRule, "$").concat(adgModifiers);
     }
+
+    var basePart = substringBefore(rule, "$");
+    var adgModifiers = validator.parseModifiers(rule);
+    var adgRedirectModifier = adgModifiers.find(function (el) {
+      return el.indexOf(validator.REDIRECT_RULE_TYPES.ADG.marker) > -1;
+    });
+    var adgRedirectName = adgRedirectModifier.slice(
+      validator.REDIRECT_RULE_TYPES.ADG.marker.length
+    );
+    var uboRedirectName =
+      validator.REDIRECT_RULE_TYPES.ADG.compatibility[adgRedirectName];
+    var uboRedirectModifier = ""
+      .concat(validator.REDIRECT_RULE_TYPES.UBO.marker)
+      .concat(uboRedirectName);
+
+    if (!validator.hasValidContentType(rule)) {
+      // add missed source types as content type modifiers
+      var sourceTypesData = validator.ABSENT_SOURCE_TYPE_REPLACEMENT.find(
+        function (el) {
+          return el.NAME === adgRedirectName;
+        }
+      );
+      var additionModifiers = sourceTypesData.TYPES;
+      adgModifiers.push.apply(
+        adgModifiers,
+        toConsumableArray(additionModifiers)
+      );
+    }
+
+    var uboModifiers = adgModifiers
+      .map(function (el) {
+        if (el === adgRedirectModifier) {
+          return uboRedirectModifier;
+        }
+
+        return el;
+      })
+      .join(",");
+    return "".concat(basePart, "$").concat(uboModifiers);
   };
 
   /**
@@ -5101,17 +5273,23 @@
       } // eslint-disable-next-line prefer-rest-params
 
       var lastArg = arguments[len - 1];
+      var replacer;
 
       if (
-        typeof lastArg !== "object" ||
-        lastArg === null ||
-        typeof lastArg.hitCallback !== "function"
+        lastArg instanceof Object &&
+        lastArg !== null &&
+        typeof lastArg.hitCallback === "function"
       ) {
-        return;
+        replacer = lastArg.hitCallback;
+      } else if (typeof lastArg === "function") {
+        // https://github.com/AdguardTeam/Scriptlets/issues/98
+        replacer = function replacer() {
+          lastArg(ga.create());
+        };
       }
 
       try {
-        lastArg.hitCallback(); // eslint-disable-next-line no-empty
+        setTimeout(replacer, 1); // eslint-disable-next-line no-empty
       } catch (ex) {}
     }
 
@@ -5439,7 +5617,7 @@
           setTimeout(data.eventCallback, 1);
         }
       };
-    } // https://github.com/CyberPurify/Scriptlets/issues/81
+    } // https://github.com/AdguardTeam/Scriptlets/issues/81
 
     if (
       google_optimize instanceof Object &&
@@ -8327,7 +8505,11 @@
         /* - */
       ) {
         if (CHOMPING_CLIP === chomping) {
-          chomping = ch === 0x2b ? /* + */ CHOMPING_KEEP : CHOMPING_STRIP;
+          chomping =
+            ch === 0x2b
+              ? /* + */
+                CHOMPING_KEEP
+              : CHOMPING_STRIP;
         } else {
           throwError(state, "repeat of a chomping mode identifier");
         }

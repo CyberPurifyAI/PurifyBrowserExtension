@@ -7,7 +7,7 @@
 
 /**
  * CyberPurify Scriptlets
- * Version 1.3.2
+ * Version 1.3.12
  */
 
 var Redirects = (function () {
@@ -2429,7 +2429,11 @@ var Redirects = (function () {
         /* - */
       ) {
         if (CHOMPING_CLIP === chomping) {
-          chomping = ch === 0x2b ? /* + */ CHOMPING_KEEP : CHOMPING_STRIP;
+          chomping =
+            ch === 0x2b
+              ? /* + */
+                CHOMPING_KEEP
+              : CHOMPING_STRIP;
         } else {
           throwError(state, "repeat of a chomping mode identifier");
         }

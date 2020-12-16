@@ -85,9 +85,7 @@
   const genAlertHtml = (title, text) => {
     let descBlock = "";
     if (text && text.length > 0) {
-      descBlock = `<div class="purify-popup-alert__desc">
-                            ${text}
-                        </div>`;
+      descBlock = `<div class="purify-popup-alert__desc">${text}</div>`;
     }
 
     // don't show description text if it is same as title or if it is equal to undefined
@@ -98,14 +96,14 @@
     let titleBlock = "";
     if (title && title.length > 0) {
       titleBlock = `<div class="purify-popup-alert__title">
-                            ${title}
-                        </div>`;
+                          ${title}
+                      </div>`;
     }
 
     return `<div class="purify-popup-alert">
-                    ${titleBlock}
-                    ${descBlock}
-                </div>`;
+                  ${titleBlock}
+                  ${descBlock}
+              </div>`;
   };
 
   /**

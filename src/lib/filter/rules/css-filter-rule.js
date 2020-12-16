@@ -224,7 +224,6 @@
     ":only-of-type",
     ":optional",
     ":out-of-range",
-    ":properties",
     ":read-only",
     ":read-write",
     ":required",
@@ -234,11 +233,11 @@
     ":visited",
     ":-abp-has",
     ":-abp-contains",
-    ":-abp-properties",
     ":xpath",
     ":nth-ancestor",
     ":upward",
     ":remove",
+    ":is",
   ];
 
   /**
@@ -262,12 +261,11 @@
     ":-abp-contains(",
     ":if(",
     ":if-not(",
-    ":properties(",
-    ":-abp-properties(",
     ":xpath(",
     ":nth-ancestor(",
     ":upward(",
     ":remove(",
+    ":is(",
   ];
 
   /**
