@@ -87,16 +87,14 @@ purify.purifyFiltering = (function (purify, global) {
     if (
       labels["Horror_aug"] >= 0.8 ||
       labels["Gory_aug"] >= 0.8 ||
-      (labels["Gory_aug"] + labels["Horror_aug"] >= 0.85 &&
-        labels["Neutral"] <= 0.2) ||
+      labels["Gory_aug"] + labels["Horror_aug"] >= 0.85 ||
       labels["Porn"] >= 0.7 ||
-      (labels["Porn"] + labels["Sexy"] >= 0.75 && labels["Neutral"] <= 0.2) ||
-      (labels["Porn"] +
+      labels["Porn"] + labels["Sexy"] >= 0.75 ||
+      labels["Porn"] +
         labels["Gory_aug"] +
         labels["Horror_aug"] +
         labels["Sexy"] >=
-        0.85 &&
-        labels["Neutral"] <= 0.1)
+        0.85
     ) {
       return true;
     } else {
