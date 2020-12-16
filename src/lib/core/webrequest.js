@@ -211,26 +211,26 @@
       );
     }
 
-    if (requestType === purify.RequestTypes.DOCUMENT) {
-      const originUrl = requestUrl;
-      let arrImage = purify.purifyFiltering.purifyUrlCache.cache.getValue(
-        originUrl
-      );
+    // if (requestType === purify.RequestTypes.DOCUMENT) {
+    // const originUrl = requestUrl;
+    // let arrImage = purify.purifyFiltering.purifyUrlCache.cache.getValue(
+    //   originUrl
+    // );
 
-      if (arrImage && arrImage.length > 20) {
-        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-          requestUrl,
-          "Explicit Content"
-        );
+    // if (arrImage && arrImage.length > 20) {
+    //   const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+    //     requestUrl,
+    //     "Explicit Content"
+    //   );
 
-        purify.rules.documentFilterService.showDocumentBlockPage(
-          tabId,
-          documentBlockedPage
-        );
+    //   purify.rules.documentFilterService.showDocumentBlockPage(
+    //     tabId,
+    //     documentBlockedPage
+    //   );
 
-        return { cancel: true };
-      }
-    }
+    //   return { cancel: true };
+    // }
+    // }
 
     return response;
   }

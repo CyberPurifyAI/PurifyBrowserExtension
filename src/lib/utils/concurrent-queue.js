@@ -47,7 +47,9 @@
           onSuccess(result);
         }
 
-        if (onDone !== undefined) onDone(err !== undefined ? err : result);
+        if (onDone !== undefined) {
+          onDone(err !== undefined ? err : result);
+        }
 
         count--;
 
@@ -57,8 +59,8 @@
           return;
         }
 
-        if (count === 0 && waiting.length === 0) {
-          if (onDrain !== undefined) onDrain();
+        if (count === 0 && waiting.length === 0 && onDrain !== undefined) {
+          onDrain();
         }
       });
     };

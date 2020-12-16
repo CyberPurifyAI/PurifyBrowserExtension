@@ -130,14 +130,13 @@
     ) {
       if (srcAttribute) {
         getPredictImageResult(image);
-      } else if (image._isPurified === undefined) {
+      } else if (image.dataset.purify === undefined) {
         getPredictImageResult(image);
       }
     }
   };
 
   const getPredictImageResult = function (image) {
-    image._isPurified = true;
     hideImage(image);
 
     new Promise((resolve, reject) => {

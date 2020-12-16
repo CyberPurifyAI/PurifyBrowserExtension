@@ -71,7 +71,7 @@ purify.purifyFiltering = (function (purify, global) {
       const prediction = await purifyInstance.classify(image, 7);
       const { result, className, probability } = handlePrediction([prediction]);
 
-      // purify.console.info(`${result}`);
+      // purify.console.info(`${result} - ${requestUrl}`);
 
       return Boolean(result);
     }
