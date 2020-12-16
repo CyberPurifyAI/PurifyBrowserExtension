@@ -24,12 +24,12 @@ purify.loadingQueue = (function (purify) {
   const init = function () {
     queue = new purify.utils.concurrentQueue({
       concurrency: 4,
-      timeout: 0,
+      timeout: 1000,
       onProcess: onLoadingProcess,
       onSuccess: onLoadingSuccess,
       onFailure: onLoadingFailure,
-      onDone: onLoadingDone,
-      onDrain: onLoadingDrain,
+      onDone: undefined,
+      onDrain: undefined,
     });
   };
 
@@ -45,12 +45,15 @@ purify.loadingQueue = (function (purify) {
       //   return;
       // }
 
-      if (requestMap.has(requestUrl)) {
-        requestMap.get(requestUrl)?.push([{ resolve, reject }]);
-      } else {
-        requestMap.set(requestUrl, [[{ resolve, reject }]]);
-        queue.add({ requestUrl, hashUrl, tabIdUrl });
-      }
+      // if (requestMap.has(requestUrl)) {
+      //   requestMap.get(requestUrl)?.push([{ resolve, reject }]);
+      // } else {
+      //   requestMap.set(requestUrl, [[{ resolve, reject }]]);
+      //   queue.add({ requestUrl, hashUrl, tabIdUrl });
+      // }
+
+      requestMap.set(requestUrl, { resolve, reject });
+      queue.add({ requestUrl, hashUrl, tabIdUrl });
     });
   };
 
@@ -65,12 +68,8 @@ purify.loadingQueue = (function (purify) {
       );
 
       image.crossOrigin = "anonymous";
-      image.onload = () => {
-        return resolve(image);
-      };
-      image.onerror = (err) => {
-        return reject(err);
-      };
+      image.onload = () => resolve(image);
+      image.onerror = (err) => reject(err);
       image.src = requestUrl;
     });
   };
@@ -100,7 +99,9 @@ purify.loadingQueue = (function (purify) {
   };
 
   const onLoadingSuccess = function ({ requestUrl, hashUrl, image, tabIdUrl }) {
-    if (!_checkUrlStatus(requestUrl)) return;
+    if (!_checkUrlStatus(requestUrl)) {
+      return;
+    }
 
     if (
       !purify.predictionQueue.pauseFlag &&
@@ -121,9 +122,9 @@ purify.loadingQueue = (function (purify) {
   const onLoadingFailure = function ({ requestUrl, hashUrl, tabIdUrl }, error) {
     if (!_checkUrlStatus(requestUrl)) return;
 
-    for (const [{ reject }] of requestMap.get(requestUrl)) {
-      reject(error);
-    }
+    const { reject } = requestMap.get(requestUrl);
+
+    reject(error);
 
     const { tabUrl } = tabIdUrl;
 
@@ -135,10 +136,6 @@ purify.loadingQueue = (function (purify) {
     });
     requestMap.delete(requestUrl);
   };
-
-  const onLoadingDone = function () {};
-
-  const onLoadingDrain = function () {};
 
   const addTabIdUrl = function (tabIdUrl) {
     const { tabId, tabUrl } = tabIdUrl;

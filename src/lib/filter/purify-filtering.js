@@ -13,22 +13,22 @@ purify.purifyFiltering = (function (purify, global) {
 
   const PURIFY_MODEL_PATH = "../models/purify_mobilenet_tfjs/";
   const GIF_REGEX = /^.*(.gif)($|W.*$)/;
-  const FILTER_LIST = new Set(["Horror_aug", "Gory_aug", "Porn"]);
+  // const FILTER_LIST = new Set(["Horror_aug", "Gory_aug", "Porn"]);
 
-  const RANGE_REJECT = {
-    Gory_aug: { max: 0.4, min: 0.2 },
-    Horror_aug: { max: 0.4, min: 0.2 },
-    Heroin_aug: { max: 0.7, min: 0.5 },
-    Drugs_aug: { max: 0.7, min: 0.5 },
-    Neutral: { max: 0.4, min: 0.2 },
-    Porn: { max: 0.9, min: 0.7 },
-    Sexy: { max: 0.8, min: 0.6 },
-  };
+  // const RANGE_REJECT = {
+  //   Gory_aug: { max: 0.4, min: 0.2 },
+  //   Horror_aug: { max: 0.4, min: 0.2 },
+  //   Heroin_aug: { max: 0.7, min: 0.5 },
+  //   Drugs_aug: { max: 0.7, min: 0.5 },
+  //   Neutral: { max: 0.4, min: 0.2 },
+  //   Porn: { max: 0.9, min: 0.7 },
+  //   Sexy: { max: 0.8, min: 0.6 },
+  // };
 
   let purifyInstance = null;
 
-  const Strictness = 20;
-  const coefficient = 1 - Strictness / 100;
+  // const Strictness = 20;
+  // const coefficient = 1 - Strictness / 100;
 
   const init = async function () {
     purify.console.info("Initializing Predict Image");
@@ -71,7 +71,7 @@ purify.purifyFiltering = (function (purify, global) {
       const prediction = await purifyInstance.classify(image, 7);
       const { result, className, probability } = handlePrediction([prediction]);
 
-      // purify.console.info(`${result} - ${requestUrl}`);
+      // purify.console.info(`Result: ${result} - ${requestUrl}`);
 
       return Boolean(result);
     }

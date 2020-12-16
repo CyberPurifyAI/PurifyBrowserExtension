@@ -55,17 +55,17 @@ purify.predictionQueue = (function (purify) {
   };
 
   const onSuccess = function ({ requestUrl, hashUrl, tabIdUrl, result }) {
-    if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
+    if (!purify.loadingQueue._checkUrlStatus(requestUrl)) {
+      return;
+    }
+
+    const { resolve } = purify.loadingQueue.getRequestMap().get(requestUrl);
+
+    resolve(result);
 
     const { tabUrl } = tabIdUrl;
 
     saveCache({ requestUrl, hashUrl, tabUrl, result });
-
-    for (const [{ resolve }] of purify.loadingQueue
-      .getRequestMap()
-      .get(requestUrl)) {
-      resolve(result);
-    }
 
     if (pauseFlag && predictionQueue.getTaskAmount() <= 5) {
       pauseFlag = false;
@@ -74,17 +74,17 @@ purify.predictionQueue = (function (purify) {
   };
 
   const onFailure = function ({ requestUrl, hashUrl, tabIdUrl, errMessage }) {
-    if (!purify.loadingQueue._checkUrlStatus(requestUrl)) return;
+    if (!purify.loadingQueue._checkUrlStatus(requestUrl)) {
+      return;
+    }
+
+    const { reject } = purify.loadingQueue.getRequestMap().get(requestUrl);
+
+    reject(errMessage);
 
     const { tabUrl } = tabIdUrl;
 
     saveCache({ requestUrl, hashUrl, tabUrl, result: false });
-
-    for (const [{ reject }] of purify.loadingQueue
-      .getRequestMap()
-      .get(requestUrl)) {
-      reject(errMessage);
-    }
   };
 
   const onDone = function ({ requestUrl }) {
