@@ -64,14 +64,14 @@ purify.purifyFiltering = (function (purify, global) {
   const getPredictImage = async function (requestUrl, image) {
     if (GIF_REGEX.test(requestUrl)) {
       const prediction = await purifyInstance.classifyGif(image);
-      const { result, className, probability } = handlePrediction([prediction]);
+      const { result, score } = handlePrediction([prediction]);
 
       return Boolean(result);
     } else {
       const prediction = await purifyInstance.classify(image, 7);
-      const { result, className, probability } = handlePrediction([prediction]);
+      const { result, score } = handlePrediction([prediction]);
 
-      // purify.console.info(`Result: ${result} - ${requestUrl}`);
+      // purify.console.info(`Result: ${score} - ${requestUrl}`);
 
       return Boolean(result);
     }
@@ -79,34 +79,63 @@ purify.purifyFiltering = (function (purify, global) {
 
   const Ruler = function (classes) {
     let labels = [];
+    let Neutral_position = 7;
+
     for (let i = 0; i < classes.length; i++) {
       labels[classes[i].className] =
         Math.round(classes[i].probability * 100) / 100;
+
+      if (classes[i].className == "Neutral") {
+        Neutral_position = i;
+      }
     }
 
-    if (
-      labels["Horror_aug"] >= 0.8 ||
-      labels["Gory_aug"] >= 0.8 ||
-      labels["Gory_aug"] + labels["Horror_aug"] >= 0.85 ||
-      labels["Porn"] >= 0.7 ||
-      labels["Porn"] + labels["Sexy"] >= 0.75 ||
-      labels["Porn"] +
-        labels["Gory_aug"] +
-        labels["Horror_aug"] +
-        labels["Sexy"] >=
-        0.85
+    if (labels["Horror_aug"] >= 0.78) {
+      return 1;
+    } else if (labels["Gory_aug"] >= 0.75) {
+      return 2;
+    } else if (
+      labels["Gory_aug"] + labels["Horror_aug"] >= 0.79 &&
+      Neutral_position > 1
     ) {
-      return true;
+      return 3;
+    } else if (labels["Porn"] >= 0.7) {
+      return 4;
+    } else if (
+      labels["Porn"] + labels["Sexy"] >= 0.75 &&
+      Neutral_position > 1
+    ) {
+      return 5;
+    } else if (
+      labels["Porn"] + labels["Horror"] >= 0.75 &&
+      Neutral_position > 1
+    ) {
+      return 6;
+    } else if (
+      labels["Porn"] + labels["Gory_aug"] >= 0.77 &&
+      Neutral_position > 1
+    ) {
+      return 7;
+    } else if (
+      labels["Horror_aug"] + labels["Sexy"] >= 0.75 &&
+      Neutral_position > 1
+    ) {
+      return 8;
     } else {
-      return false;
+      return 0;
     }
   };
 
   const handlePrediction = function ([prediction]) {
     try {
-      const result = Ruler(prediction);
+      const score = Ruler(prediction);
 
-      return { result, className: null, probability: null };
+      if (score > 0) {
+        return { result: true, score };
+      } else {
+        return { result: false, score };
+      }
+
       // const [
       //   { className: cn1, probability: pb1 },
       //   { className: cn2, probability: pb2 },

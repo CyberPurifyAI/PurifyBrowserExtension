@@ -121,6 +121,24 @@
     });
   };
 
+  const getBackgoundImages = function () {
+    const srcChecker = /url\(\s*?['"]?\s*?(\S+?)\s*?["']?\s*?\)/i;
+
+    const arrayImage = Array.from(
+      Array.from(document.querySelectorAll("*")).reduce((collection, node) => {
+        let prop = window
+          .getComputedStyle(node, null)
+          .getPropertyValue("background-image");
+        // match `url(...)`
+        let match = srcChecker.exec(prop);
+        if (match) {
+          collection.add(match[1]);
+        }
+        return collection;
+      }, new Set())
+    );
+  };
+
   const analyzeImage = function (image, srcAttribute) {
     if (
       image.src.length > 0 &&
