@@ -344,8 +344,8 @@
 
         if (
           arrPurifyUrl &&
-          ((imagesNum <= 50 && arrPurifyUrl.length > 25) ||
-            (imagesNum > 50 && arrPurifyUrl.length / imagesNum > 0.2))
+          ((imagesNum <= 20 && arrPurifyUrl.length > 5) ||
+            (imagesNum > 20 && arrPurifyUrl.length / imagesNum > 0.2))
         ) {
           const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
             requestUrl,
