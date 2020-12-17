@@ -82,6 +82,16 @@
     tryLoadCssAndScripts();
 
     imageDOMWatcher();
+
+    if (
+      document.readyState === "complete" ||
+      document.readyState === "interactive"
+    ) {
+      setTimeout(getBackgoundImages, 1);
+    } else {
+      document.addEventListener("DOMContentLoaded", getBackgoundImages);
+      document.addEventListener("DOMNodeInserted", getBackgoundImages);
+    }
   };
 
   /**
@@ -129,14 +139,26 @@
         let prop = window
           .getComputedStyle(node, null)
           .getPropertyValue("background-image");
-        // match `url(...)`
+
         let match = srcChecker.exec(prop);
         if (match) {
-          collection.add(match[1]);
+          let imageSrc = match[1];
+
+          if (imageSrc.length > 0 && node.dataset.purify === undefined) {
+            hideImage(node);
+            node.dataset.purifyUrl = match[1];
+            collection.add(node);
+          }
         }
         return collection;
       }, new Set())
     );
+
+    for (let i = 0; i < arrayImage.length; i++) {
+      let node = arrayImage[i];
+
+      getPredictImageResult(node, node.dataset.purifyUrl);
+    }
   };
 
   const analyzeImage = function (image, srcAttribute) {
@@ -154,13 +176,13 @@
     }
   };
 
-  const getPredictImageResult = function (image) {
+  const getPredictImageResult = function (image, imageSrc = null) {
     hideImage(image);
 
     new Promise((resolve, reject) => {
       const request = {
         type: "requestAnalyzeImage",
-        requestUrl: image.src,
+        requestUrl: imageSrc ? imageSrc : image.src,
         imagesNum: document.images.length,
       };
 
@@ -173,19 +195,26 @@
             return;
           }
 
-          const { result, requestUrl, err } = response;
+          if (response) {
+            const { result, requestUrl, err } = response;
 
-          if (!result && !err) {
-            showImage(image, requestUrl);
+            if (!result && !err) {
+              showImage(image);
+            } else {
+              showImage(image);
+              image.style.filter = "blur(100px)";
+              image.dataset.purify = "purify";
+            }
           } else {
-            showImage(image, requestUrl);
-            image.style.filter = "blur(100px)";
-            image.dataset.purify = "purify";
+            console.log(imageSrc, response);
+            showImage(image);
           }
 
           resolve(response);
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     });
   };
 
@@ -198,15 +227,13 @@
     image.style.visibility = "hidden";
   };
 
-  const showImage = function (image, url) {
-    if (image.src === url) {
-      if (image.parentNode?.nodeName === "BODY") {
-        image.hidden = false;
-      }
-
-      image.dataset.purify = "sfw";
-      image.style.visibility = "visible";
+  const showImage = function (image) {
+    if (image.parentNode?.nodeName === "BODY") {
+      image.hidden = false;
     }
+
+    image.dataset.purify = "sfw";
+    image.style.visibility = "visible";
   };
 
   /**
