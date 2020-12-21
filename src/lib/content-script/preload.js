@@ -206,7 +206,6 @@
               image.dataset.purify = "purify";
             }
           } else {
-            console.log(imageSrc, response);
             showImage(image);
           }
 

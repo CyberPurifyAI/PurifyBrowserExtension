@@ -342,32 +342,33 @@
         );
         const imagesNum = message.imagesNum;
 
-        if (
-          arrPurifyUrl &&
-          ((imagesNum <= 20 && arrPurifyUrl.length > 5) ||
-            (imagesNum > 20 && arrPurifyUrl.length / imagesNum > 0.2))
-        ) {
-          const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-            requestUrl,
-            "Explicit Content"
-          );
+        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+          requestUrl,
+          "Explicit Content"
+        );
 
+        if (arrPurifyUrl && checkPurifyImage(imagesNum, arrPurifyUrl)) {
           purify.rules.documentFilterService.showDocumentBlockPage(
             sender.tab.tabId,
             documentBlockedPage
           );
 
-          callback({
-            result: false,
-            requestUrl,
-            err: null,
-          });
-
           purify.parentalControl.syncData();
         } else {
           purify.loadingQueue
             .predict(requestUrl, tabIdUrl)
-            .then((result) => callback({ result, requestUrl, err: null }))
+            .then((result) => {
+              if (arrPurifyUrl && checkPurifyImage(imagesNum, arrPurifyUrl)) {
+                purify.rules.documentFilterService.showDocumentBlockPage(
+                  sender.tab.tabId,
+                  documentBlockedPage
+                );
+
+                purify.parentalControl.syncData();
+              } else {
+                return callback({ result, requestUrl, err: null });
+              }
+            })
             .catch((err) => callback({ result: false, requestUrl, err }));
         }
 
@@ -376,6 +377,17 @@
       default:
         // Unhandled message
         return true;
+    }
+
+    function checkPurifyImage(imagesNum, arrPurifyUrl) {
+      if (
+        (imagesNum <= 20 && arrPurifyUrl.length > 5) ||
+        (imagesNum > 20 && arrPurifyUrl.length / imagesNum > 0.2)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
