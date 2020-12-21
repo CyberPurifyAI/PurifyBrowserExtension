@@ -337,7 +337,7 @@
 
         const tabIdUrl = purify.loadingQueue._buildTabIdUrl(sender.tab);
         const requestUrl = message.requestUrl;
-        let arrPurifyUrl = purify.purifyFiltering.purifyUrlCache.cache.getValue(
+        const arrPurifyUrl = purify.purifyFiltering.purifyUrlCache.cache.getValue(
           tabIdUrl.tabUrl
         );
         const imagesNum = message.imagesNum;
