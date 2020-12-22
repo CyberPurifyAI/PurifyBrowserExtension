@@ -358,7 +358,11 @@
           purify.loadingQueue
             .predict(requestUrl, tabIdUrl)
             .then((result) => {
-              if (arrPurifyUrl && checkPurifyImage(imagesNum, arrPurifyUrl)) {
+              const arrPurifyUrlNew = purify.purifyFiltering.purifyUrlCache.cache.getValue(
+                tabIdUrl.tabUrl
+              );
+
+              if (arrPurifyUrlNew && checkPurifyImage(imagesNum, arrPurifyUrlNew)) {
                 purify.rules.documentFilterService.showDocumentBlockPage(
                   sender.tab.tabId,
                   documentBlockedPage
