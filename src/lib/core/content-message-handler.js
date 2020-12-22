@@ -337,61 +337,41 @@
 
         const tabIdUrl = purify.loadingQueue._buildTabIdUrl(sender.tab);
         const requestUrl = message.requestUrl;
-        const arrPurifyUrl = purify.purifyFiltering.purifyUrlCache.cache.getValue(
-          tabIdUrl.tabUrl
-        );
-        const imagesNum = message.imagesNum;
 
-        const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
-          requestUrl,
-          "Explicit Content"
-        );
+        purify.loadingQueue
+          .predict(requestUrl, tabIdUrl)
+          .then((result) => {
+            const imagesNum = message.imagesNum;
+            const arrPurifyUrl = purify.purifyFiltering.purifyUrlCache.cache.getValue(
+              tabIdUrl.tabUrl
+            );
 
-        if (arrPurifyUrl && checkPurifyImage(imagesNum, arrPurifyUrl)) {
-          purify.rules.documentFilterService.showDocumentBlockPage(
-            sender.tab.tabId,
-            documentBlockedPage
-          );
-
-          purify.parentalControl.syncData();
-        } else {
-          purify.loadingQueue
-            .predict(requestUrl, tabIdUrl)
-            .then((result) => {
-              const arrPurifyUrlNew = purify.purifyFiltering.purifyUrlCache.cache.getValue(
-                tabIdUrl.tabUrl
+            if (
+              arrPurifyUrl &&
+              ((imagesNum <= 20 && arrPurifyUrl.length > 5) ||
+                (imagesNum > 20 && arrPurifyUrl.length / imagesNum > 0.2))
+            ) {
+              const documentBlockedPage = purify.rules.documentFilterService.getDocumentBlockPageUrl(
+                requestUrl,
+                "Explicit Content"
               );
 
-              if (arrPurifyUrlNew && checkPurifyImage(imagesNum, arrPurifyUrlNew)) {
-                purify.rules.documentFilterService.showDocumentBlockPage(
-                  sender.tab.tabId,
-                  documentBlockedPage
-                );
+              purify.rules.documentFilterService.showDocumentBlockPage(
+                sender.tab.tabId,
+                documentBlockedPage
+              );
 
-                purify.parentalControl.syncData();
-              } else {
-                return callback({ result, requestUrl, err: null });
-              }
-            })
-            .catch((err) => callback({ result: false, requestUrl, err }));
-        }
+              purify.parentalControl.syncData();
+            } else {
+              return callback({ result, requestUrl, err: null });
+            }
+          })
+          .catch((err) => callback({ result: false, requestUrl, err }));
 
         return true;
-
       default:
         // Unhandled message
         return true;
-    }
-
-    function checkPurifyImage(imagesNum, arrPurifyUrl) {
-      if (
-        (imagesNum <= 20 && arrPurifyUrl.length > 5) ||
-        (imagesNum > 20 && arrPurifyUrl.length / imagesNum > 0.2)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 
