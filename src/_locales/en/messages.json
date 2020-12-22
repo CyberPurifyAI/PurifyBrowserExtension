@@ -440,18 +440,6 @@
   "filter_download_loading": {
     "message": "Please wait while filters database is&nbsp;loading..."
   },
-  "filter_download_do_you_know": {
-    "message": "Did you know?"
-  },
-  "filter_download_sb_sites": {
-    "message": "CyberPurify phishing and malware database contains<br/>more than 1&nbsp;million websites."
-  },
-  "filter_download_rules": {
-    "message": "On&nbsp;average we&nbsp;add more than 100&nbsp;ad filter rules every week."
-  },
-  "filter_download_ads_malware": {
-    "message": "90% of malicious software and different viruses are&nbsp;spread<br/>through unscrupulous ad&nbsp;networks."
-  },
   "filtering_modal_element": {
     "message": "Element:"
   },

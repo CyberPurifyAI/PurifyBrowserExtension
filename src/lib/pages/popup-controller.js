@@ -183,7 +183,7 @@ PopupController.prototype = {
     );
 
     // Actions
-    this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
+    // this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
     this.actionOpenLogin = this._getTemplate("action-open-login-template");
     this.showUserInfo = this._getTemplate("show-user-info");
     // this.actionOpenSiteReport = this._getTemplate(
@@ -613,7 +613,7 @@ PopupController.prototype = {
       } else {
         this._appendTemplate(el, this.actionOpenLogin);
       }
-      this._appendTemplate(el, this.actionOpenAbuse);
+      // this._appendTemplate(el, this.actionOpenAbuse);
       // this._appendTemplate(el, this.actionOpenSiteReport);
 
       if (!tabInfo.applicationAvailable) {
