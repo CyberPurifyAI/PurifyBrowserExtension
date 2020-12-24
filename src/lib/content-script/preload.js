@@ -186,34 +186,27 @@
         imagesNum: document.images.length,
       };
 
-      try {
-        getContentPage().sendMessage(request, (response) => {
-          if (
-            getContentPage().lastError !== null &&
-            getContentPage().lastError !== undefined
-          ) {
-            return;
-          }
+      getContentPage().sendMessage(request, (response) => {
+        // if (getContentPage().lastError) {
+        //   return;
+        // }
 
-          if (response) {
-            const { result, requestUrl, err } = response;
+        if (response) {
+          const { result, requestUrl, err } = response;
+          image.dataset.purify = "purify";
 
-            if (!result && !err) {
-              showImage(image);
-            } else {
-              showImage(image);
-              image.style.filter = "blur(100px)";
-              image.dataset.purify = "purify";
-            }
+          if (!result && !err) {
+            showImage(image);
           } else {
             showImage(image);
+            image.style.filter = "blur(100px)";
           }
-
           resolve(response);
-        });
-      } catch (err) {
-        console.log(err);
-      }
+        } else {
+          showImage(image);
+          image.dataset.purify = "error";
+        }
+      });
     });
   };
 
@@ -231,7 +224,6 @@
       image.hidden = false;
     }
 
-    image.dataset.purify = "sfw";
     image.style.visibility = "visible";
   };
 

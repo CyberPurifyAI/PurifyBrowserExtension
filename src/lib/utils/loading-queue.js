@@ -23,7 +23,7 @@ purify.loadingQueue = (function (purify) {
 
   const init = function () {
     queue = new purify.utils.concurrentQueue({
-      concurrency: Math.round(navigator.hardwareConcurrency),
+      concurrency: Math.round(navigator.hardwareConcurrency * 0.5),
       timeout: 1000,
       onProcess: onLoadingProcess,
       onSuccess: onLoadingSuccess,
