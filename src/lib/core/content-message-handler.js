@@ -362,9 +362,9 @@
               );
 
               purify.parentalControl.syncData();
+            } else {
+              callback({ result, requestUrl, err: null });
             }
-
-            callback({ result, requestUrl, err: null });
           })
           .catch((err) => callback({ result: false, requestUrl, err }));
 
