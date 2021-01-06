@@ -108,6 +108,12 @@
    */
   function handleMessage(message, sender, callback) {
     switch (message.type) {
+      case "updateUserInfo":
+        purify.parentalControl.updateUser(message.info);
+        return { ready: true };
+      case "getUserInfo":
+        purify.parentalControl.getUser((info) => callback(info));
+        return true;
       case "unWhiteListFrame":
         purify.userrules.unWhiteListFrame(message.frameInfo);
         break;
@@ -190,12 +196,6 @@
       case "openTab":
         purify.ui.openTab(message.url, message.options);
         break;
-      case "updateUserInfo":
-        purify.parentalControl.updateUser(message.info);
-        return { ready: true };
-      case "getUserInfo":
-        purify.parentalControl.getUser((info) => callback(info));
-        return true;
       case "getSelectorsAndScripts": {
         let urlForSelectors;
         // https://github.com/CyberPurify/PurifyBrowserExtension/issues/1498
@@ -279,12 +279,12 @@
       case "changeApplicationFilteringDisabled":
         purify.ui.changeApplicationFilteringDisabled(message.disabled);
         break;
-      case "openSiteReportTab":
-        purify.ui.openSiteReportTab(message.url);
-        break;
-      case "openAbuseTab":
-        purify.ui.openAbuseTab(message.url);
-        break;
+      // case "openSiteReportTab":
+      //   purify.ui.openSiteReportTab(message.url);
+      //   break;
+      // case "openAbuseTab":
+      //   purify.ui.openAbuseTab(message.url);
+      //   break;
       case "openLoginTab":
         purify.ui.openLoginTab();
         break;
@@ -310,22 +310,22 @@
           });
         });
         return true; // Async
-      case "setNotificationViewed":
-        purify.notifications.setNotificationViewed(message.withDelay);
-        break;
-      case "resizePanelPopup":
-        purify.browserAction.resize(message.width, message.height);
-        break;
-      case "closePanelPopup":
-        purify.browserAction.close();
-        break;
-      case "sendFeedback":
-        purify.backend.sendUrlReport(
-          message.url,
-          message.topic,
-          message.comment
-        );
-        break;
+      // case "setNotificationViewed":
+      //   purify.notifications.setNotificationViewed(message.withDelay);
+      //   break;
+      // case "resizePanelPopup":
+      //   purify.browserAction.resize(message.width, message.height);
+      //   break;
+      // case "closePanelPopup":
+      //   purify.browserAction.close();
+      //   break;
+      // case "sendFeedback":
+      //   purify.backend.sendUrlReport(
+      //     message.url,
+      //     message.topic,
+      //     message.comment
+      //   );
+      //   break;
       case "saveCssHitStats":
         processSaveCssHitStats(sender.tab, message.stats);
         break;

@@ -345,10 +345,17 @@ purify.ui = (function (purify) {
     );
   };
 
-  const openLoginTab = function () {
-    openTab(getPageUrl("login.html"), {
-      inBackground: purify.utils.browser.isYaBrowser(),
-    });
+  const openLoginTab = function (anchor, hashParameters = {}) {
+    if (anchor) {
+      hashParameters.anchor = anchor;
+    }
+
+    const options = {
+      activateSameTab: true,
+      hashParameters,
+    };
+
+    openTab(getPageUrl("login.html"), options);
   };
 
   const openThankYouPage = function () {

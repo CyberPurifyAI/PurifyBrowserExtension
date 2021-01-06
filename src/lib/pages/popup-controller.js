@@ -25,14 +25,13 @@ PopupController.prototype = {
     // render
     this._renderPopup(tabInfo);
 
-    // Bind actions
     this._bindActions();
 
     this.afterRender();
   },
 
   resizePopupWindow() {
-    const widget = document.querySelector(".widget-popup");
+    const widget = document.querySelector("#widget-popup");
     const width = widget.offsetWidth;
     const height = widget.offsetHeight;
 
@@ -91,7 +90,7 @@ PopupController.prototype = {
     this.tabInfo = tabInfo;
     const { totalBlockedTab, totalBlocked } = tabInfo;
     if (totalBlockedTab) {
-      const tabBlocked = document.querySelector(".widget-popup .blocked-tab");
+      const tabBlocked = document.querySelector("#widget-popup .blocked-tab");
       if (tabBlocked) {
         i18n.translateElement(tabBlocked, "popup_tab_blocked", [
           this._formatNumber(totalBlockedTab),
@@ -100,7 +99,7 @@ PopupController.prototype = {
     }
 
     if (totalBlocked) {
-      const allBlocked = document.querySelector(".widget-popup .blocked-all");
+      const allBlocked = document.querySelector("#widget-popup .blocked-all");
       if (allBlocked) {
         i18n.translateElement(allBlocked, "popup_tab_blocked_all", [
           this._formatNumber(totalBlocked),
@@ -110,16 +109,14 @@ PopupController.prototype = {
   },
 
   _renderUserInfo(name) {
-    const blockUserText = document.querySelector(
-      ".showUserInfo .act-name"
-    );
+    const blockUserText = document.querySelector("#showUserInfo .act-name");
 
     blockUserText.style = "font-weight:bold;";
     blockUserText.innerHTML = name;
   },
 
   _renderPopup(tabInfo) {
-    const parent = document.querySelector(".widget-popup");
+    const parent = document.querySelector("#widget-popup");
     const switcher = document.querySelector(
       "#filtering-default-control-template > div.control-buttons"
     );
@@ -137,14 +134,15 @@ PopupController.prototype = {
 
     const containerMain = parent.querySelector(".tab-main");
 
-    while (containerMain.firstChild) {
-      containerMain.removeChild(containerMain.firstChild);
-    }
+    // while (containerMain.firstChild) {
+    //   containerMain.removeChild(containerMain.firstChild);
+    // }
 
     const containerBottom = parent.querySelector(".tabstack-bottom.tab-main");
-    while (containerBottom.firstChild) {
-      containerBottom.removeChild(containerBottom.firstChild);
-    }
+
+    // while (containerBottom.firstChild) {
+    //   containerBottom.removeChild(containerBottom.firstChild);
+    // }
 
     stack.setAttribute("class", "tabstack");
     parent.setAttribute("class", "widget-popup");
@@ -200,20 +198,20 @@ PopupController.prototype = {
     this.footerDefault = this._getTemplate("footer-default-template");
 
     // Notification
-    this.notification = this._getTemplate("notification-template");
-    this.animatedNotification = this._getTemplate(
-      "animated-notification-template"
-    );
+    // this.notification = this._getTemplate("notification-template");
+    // this.animatedNotification = this._getTemplate(
+    //   "animated-notification-template"
+    // );
 
+    this._renderActions(containerBottom, tabInfo);
     this._renderHeader(containerHeader, tabInfo);
-    this._renderNotificationBlock(stack, tabInfo, this.options);
+    // this._renderNotificationBlock(stack, tabInfo, this.options);
     this._renderMain(containerMain, tabInfo);
     this._renderFilteringControls(containerMain);
-    this._renderStatus(containerMain, tabInfo);
-    this._renderActions(containerBottom, tabInfo);
-    this._renderMessage(containerMain, tabInfo);
-    // this._renderFooter(footerContainer, tabInfo, this.options);
-    this._renderAnimatedNotification(parent, tabInfo, this.options);
+    // this._renderStatus(containerMain, tabInfo);
+    // this._renderMessage(containerMain, tabInfo);
+    this._renderFooter(footerContainer, tabInfo, this.options);
+    // this._renderAnimatedNotification(parent, tabInfo, this.options);
   },
 
   _getTemplate(id) {
@@ -546,31 +544,6 @@ PopupController.prototype = {
 
   _renderRequestsGraphs(stats, range, type) {},
 
-  _renderAnalyticsBlock(stats, range) {
-    const statsData = this._selectRequestTypesStatsData(stats, range);
-
-    const analytics = document.querySelector("#analytics-blocked-types-values");
-
-    while (analytics.firstChild) {
-      analytics.removeChild(analytics.firstChild);
-    }
-
-    const { blockedGroups } = stats;
-
-    blockedGroups.forEach((blockedGroup) => {
-      const number = statsData[blockedGroup.groupId];
-      if (number) {
-        const blockedItem = htmlToElement(`
-                <li>
-                    <span class="key" tabindex="0">${blockedGroup.groupName}</span>
-                    <span class="value" tabindex="0">${number}</span>
-                </li>
-            `);
-        analytics.appendChild(blockedItem);
-      }
-    });
-  },
-
   _renderBlockedGroups(container, stats) {
     const TOTAL_GROUP_ID = "total";
 
@@ -604,33 +577,28 @@ PopupController.prototype = {
   },
 
   _renderActions(container, tabInfo) {
-    popupPage.sendMessage({ type: "getUserInfo" }, (message) => {
-      const el = document.createElement("div");
-      el.classList.add("actions");
+    const el = document.createElement("div");
+    el.classList.add("actions");
 
-      if (message.name) {
-        this._appendTemplate(el, this.showUserInfo);
-      } else {
-        this._appendTemplate(el, this.actionOpenLogin);
-      }
-      // this._appendTemplate(el, this.actionOpenAbuse);
-      // this._appendTemplate(el, this.actionOpenSiteReport);
+    this._appendTemplate(el, this.actionOpenLogin);
+    this._appendTemplate(el, this.showUserInfo);
+    // this._appendTemplate(el, this.actionOpenAbuse);
+    // this._appendTemplate(el, this.actionOpenSiteReport);
 
-      if (!tabInfo.applicationAvailable) {
-        const disabledActionsSelectors = [
-          // ".siteReport",
-          ".openLogin",
-          ".openAbuse",
-        ];
-        disabledActionsSelectors.forEach((selector) => {
-          const action = el.querySelector(selector);
-          action.classList.add("action_disabled");
-          action.setAttribute("aria-hidden", "true");
-        });
-      }
+    if (!tabInfo.applicationAvailable) {
+      const disabledActionsSelectors = [
+        // "#siteReport",
+        "#openLogin",
+        // "#openAbuse",
+      ];
+      disabledActionsSelectors.forEach((selector) => {
+        const action = el.querySelector(selector);
+        action.classList.add("action_disabled");
+        action.setAttribute("aria-hidden", "true");
+      });
+    }
 
-      container.appendChild(el);
-    });
+    container.appendChild(el);
   },
 
   _renderFooter(footerContainer, tabInfo, options) {
@@ -640,7 +608,7 @@ PopupController.prototype = {
     const footerDefaultTitle = footerDefault.querySelector(".footer__title");
     if (popupFooter && footerDefaultTitle) {
       if (options.isEdgeBrowser) {
-        popupFooter.innerHTML = `<div class="popup-footer--edge">© 2009-${new Date().getFullYear()} CyberPurify Software Ltd</div>`;
+        popupFooter.innerHTML = `<div class="popup-footer--edge">© 2020-${new Date().getFullYear()} CyberPurify Software Ltd</div>`;
         // hide mobile app icons - https://github.com/CyberPurify/PurifyBrowserExtension/issues/1543
         const platforms = footerDefault.querySelector(".platforms");
         if (platforms) {
@@ -658,7 +626,8 @@ PopupController.prototype = {
   },
 
   _bindAction(parentElement, selector, eventName, handler) {
-    const elements = [].slice.call(parentElement.querySelectorAll(selector));
+    let elements = [].slice.call(parentElement.querySelectorAll(selector));
+    console.log(elements, selector, parentElement);
     if (!elements || elements.length <= 0) {
       return;
     }
@@ -666,10 +635,10 @@ PopupController.prototype = {
   },
 
   _bindActions() {
-    const parent = document.querySelector(".widget-popup");
+    const parent = document.querySelector("#widget-popup");
 
     const self = this;
-    // this._bindAction(parent, ".siteReport", "click", (e) => {
+    // this._bindAction(parent, "#siteReport", "click", (e) => {
     //   e.preventDefault();
     //   if (!self.tabInfo.applicationAvailable) {
     //     return;
@@ -684,77 +653,70 @@ PopupController.prototype = {
       popupPage.closePopup();
     });
 
-    this._bindAction(parent, ".openNotificationLink", "click", (e) => {
-      e.preventDefault();
-      const { url } = self.options.notification;
-      if (url) {
-        self.openLink(url);
-        popupPage.sendMessage({
-          type: "setNotificationViewed",
-          withDelay: false,
-        });
-        popupPage.closePopup();
-      }
-    });
+    // this._bindAction(parent, ".openNotificationLink", "click", (e) => {
+    //   e.preventDefault();
+    //   const { url } = self.options.notification;
+    //   if (url) {
+    //     self.openLink(url);
+    //     popupPage.sendMessage({
+    //       type: "setNotificationViewed",
+    //       withDelay: false,
+    //     });
+    //     popupPage.closePopup();
+    //   }
+    // });
 
-    this._bindAction(parent, ".closeNotification", "click", (e) => {
-      e.preventDefault();
-      const notification = parent.querySelector("#popup-notification");
-      if (notification) {
-        notification.style.display = "none";
-        popupPage.sendMessage({
-          type: "setNotificationViewed",
-          withDelay: false,
-        });
-      }
-    });
+    // this._bindAction(parent, ".closeNotification", "click", (e) => {
+    //   e.preventDefault();
+    //   const notification = parent.querySelector("#popup-notification");
+    //   if (notification) {
+    //     notification.style.display = "none";
+    //     popupPage.sendMessage({
+    //       type: "setNotificationViewed",
+    //       withDelay: false,
+    //     });
+    //   }
+    // });
 
-    this._bindAction(parent, ".holiday-notify__btn", "click", (e) => {
-      e.preventDefault();
-      const { url } = self.options.notification;
-      if (url) {
-        self.openLink(url);
-        popupPage.sendMessage({
-          type: "setNotificationViewed",
-          withDelay: false,
-        });
-        popupPage.closePopup();
-      }
-    });
+    // this._bindAction(parent, ".holiday-notify__btn", "click", (e) => {
+    //   e.preventDefault();
+    //   const { url } = self.options.notification;
+    //   if (url) {
+    //     self.openLink(url);
+    //     popupPage.sendMessage({
+    //       type: "setNotificationViewed",
+    //       withDelay: false,
+    //     });
+    //     popupPage.closePopup();
+    //   }
+    // });
 
-    this._bindAction(parent, ".holiday-notify__close", "click", (e) => {
-      e.preventDefault();
-      const notification = parent.querySelector(".holiday-notify");
-      if (notification) {
-        notification.classList.add("holiday-notify--close");
-        popupPage.sendMessage({
-          type: "setNotificationViewed",
-          withDelay: false,
-        });
-      }
-    });
+    // this._bindAction(parent, ".holiday-notify__close", "click", (e) => {
+    //   e.preventDefault();
+    //   const notification = parent.querySelector(".holiday-notify");
+    //   if (notification) {
+    //     notification.classList.add("holiday-notify--close");
+    //     popupPage.sendMessage({
+    //       type: "setNotificationViewed",
+    //       withDelay: false,
+    //     });
+    //   }
+    // });
 
-    this._bindAction(parent, ".openLink", "click", (e) => {
-      e.preventDefault();
-      self.openLink(e.currentTarget.href);
-      popupPage.closePopup();
-    });
-    this._bindAction(parent, ".openAbuse", "click", (e) => {
-      e.preventDefault();
-      if (!self.tabInfo.applicationAvailable) {
-        return;
-      }
-      self.openAbuseTab(self.tabInfo.url);
-      popupPage.closePopup();
-    });
-    this._bindAction(parent, ".openLogin", "click", (e) => {
-      e.preventDefault();
-      if (!self.tabInfo.applicationAvailable) {
-        return;
-      }
-      self.openLoginTab(self.tabInfo.url);
-      popupPage.closePopup();
-    });
+    // this._bindAction(parent, ".openLink", "click", (e) => {
+    //   e.preventDefault();
+    //   self.openLink(e.currentTarget.href);
+    //   popupPage.closePopup();
+    // });
+
+    // this._bindAction(parent, "#openAbuse", "click", (e) => {
+    //   e.preventDefault();
+    //   if (!self.tabInfo.applicationAvailable) {
+    //     return;
+    //   }
+    //   self.openAbuseTab(self.tabInfo.url);
+    //   popupPage.closePopup();
+    // });
 
     // checkbox
     this._bindAction(parent, ".changeDocumentWhiteListed", "click", (e) => {
@@ -783,6 +745,28 @@ PopupController.prototype = {
       self._renderPopup(tabInfo);
       self._bindActions();
       self.resizePopupWindow();
+    });
+
+    this._bindAction(parent, "#openLogin", "click", (e) => {
+      e.preventDefault();
+      if (!self.tabInfo.applicationAvailable) {
+        return;
+      }
+      self.openLoginTab();
+      popupPage.closePopup();
+    });
+
+    popupPage.sendMessage({ type: "getUserInfo" }, (message) => {
+      const openLogin = document.querySelector("#openLogin");
+      const showUserInfo = document.querySelector("#showUserInfo");
+
+      if (message.name) {
+        openLogin.style.display = "none";
+        showUserInfo.style.display = "flex";
+      } else {
+        openLogin.style.display = "flex";
+        showUserInfo.style.display = "none";
+      }
     });
 
     // function changeProtectionState(disabled) {
