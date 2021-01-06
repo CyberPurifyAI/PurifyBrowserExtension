@@ -25,7 +25,6 @@
     var listenerId = purify.listeners.addSpecifiedListener(
       message.events,
       function () {
-        var sender = eventListeners[listenerId];
         if (sender) {
           purify.tabs.sendMessage(sender.tab.tabId, {
             type: "notifyListeners",

@@ -20,9 +20,10 @@
 
   var collapseRequests = Object.create(null);
   var collapseRequestId = 1;
-  var isFirefox = false;
-  var isOpera = false;
+  // var isFirefox = false;
+  // var isOpera = false;
   var MIN_IMAGE_SIZE = 41;
+  var purifyRequestQueue = new Map();
 
   /**
    * Unexpectedly global variable contentPage could become undefined in FF,
@@ -74,9 +75,9 @@
 
     initRequestWrappers();
 
-    var userAgent = navigator.userAgent.toLowerCase();
-    isFirefox = userAgent.indexOf("firefox") > -1;
-    isOpera = userAgent.indexOf("opera") > -1 || userAgent.indexOf("opr") > -1;
+    // var userAgent = navigator.userAgent.toLowerCase();
+    // isFirefox = userAgent.indexOf("firefox") > -1;
+    // isOpera = userAgent.indexOf("opera") > -1 || userAgent.indexOf("opr") > -1;
 
     initCollapseEventListeners();
     tryLoadCssAndScripts();
@@ -168,9 +169,7 @@
         image.height === 0 ||
         image.width === 0)
     ) {
-      if (srcAttribute) {
-        getPredictImageResult(image);
-      } else if (image.dataset.purify === undefined) {
+      if (srcAttribute || image.dataset.purify === undefined) {
         getPredictImageResult(image);
       }
     }
@@ -180,33 +179,69 @@
     hideImage(image);
 
     new Promise((resolve, reject) => {
+      const requestUrl = imageSrc ? imageSrc : image.src;
+      const purifyQueueName = requestUrl;
+
       const request = {
         type: "requestAnalyzeImage",
-        requestUrl: imageSrc ? imageSrc : image.src,
+        requestUrl: requestUrl,
         imagesNum: document.images.length,
       };
 
-      getContentPage().sendMessage(request, (response) => {
-        // if (getContentPage().lastError) {
-        //   return;
-        // }
-
-        if (response) {
-          const { result, requestUrl, err } = response;
-          image.dataset.purify = "purify";
-
-          if (!result && !err) {
-            showImage(image);
-          } else {
-            showImage(image);
-            image.style.filter = "blur(100px)";
-          }
-          resolve(response);
+      try {
+        if (purifyRequestQueue.has(purifyQueueName)) {
+          purifyRequestQueue.get(purifyQueueName)?.push([{ resolve, reject }]);
         } else {
-          showImage(image);
-          image.dataset.purify = "error";
+          purifyRequestQueue.set(purifyQueueName, [[{ resolve, reject }]]);
+
+          getContentPage().sendMessage(request, (response) => {
+            if (
+              chrome.runtime.lastError !== null &&
+              chrome.runtime.lastError !== undefined
+            ) {
+              console.log(
+                `[Purify] Cannot connect to background worker for ${request.url} image, error: ${message}`
+              );
+
+              purifyRequestQueue.delete(request.url);
+
+              return;
+            }
+
+            if (response) {
+              const { result, err } = response;
+              image.dataset.purify = "purify";
+
+              if (!result && !err) {
+                showImage(image);
+              } else {
+                showImage(image);
+                image.style.filter = "blur(100px)";
+              }
+            } else {
+              // resolve(getContentPage().lastError);
+              // showImage(image);
+              image.dataset.purify = "error";
+            }
+
+            for (const [{ resolve }] of purifyRequestQueue.get(requestUrl)) {
+              resolve(response);
+            }
+
+            purifyRequestQueue.delete(requestUrl);
+          });
         }
-      });
+      } catch {
+        if (purifyRequestQueue.has(purifyQueueName)) {
+          for (const [{ reject }] of purifyRequestQueue.get(purifyQueueName)) {
+            reject(request);
+          }
+        } else {
+          reject(request);
+        }
+
+        purifyRequestQueue.delete(purifyQueueName);
+      }
     });
   };
 
