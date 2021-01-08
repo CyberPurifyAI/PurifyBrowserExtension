@@ -82,17 +82,18 @@
     initCollapseEventListeners();
     tryLoadCssAndScripts();
 
-    imageDOMWatcher();
+    // if (
+    //   document.readyState === "complete" ||
+    //   document.readyState === "interactive"
+    // ) {
 
-    if (
-      document.readyState === "complete" ||
-      document.readyState === "interactive"
-    ) {
-      setTimeout(getBackgoundImages, 1);
-    } else {
-      document.addEventListener("DOMContentLoaded", getBackgoundImages);
-      document.addEventListener("DOMNodeInserted", getBackgoundImages);
-    }
+    // } else {
+    //   document.addEventListener("DOMContentLoaded", getBackgoundImages);
+    //   document.addEventListener("DOMNodeInserted", getBackgoundImages);
+    // }
+
+    setTimeout(getBackgoundImages, 100);
+    setTimeout(imageDOMWatcher, 100);
   };
 
   /**

@@ -17,7 +17,7 @@ purify.predictionQueue = (function (purify) {
 
   const init = function () {
     queue = new purify.utils.concurrentQueue({
-      concurrency: Math.round(navigator.hardwareConcurrency),
+      concurrency: 2,
       timeout: 0,
       onProcess: onProcess,
       onSuccess: onSuccess,
