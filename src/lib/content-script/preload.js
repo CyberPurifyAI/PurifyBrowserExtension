@@ -82,20 +82,9 @@
     initCollapseEventListeners();
     tryLoadCssAndScripts();
 
-    // if (
-    //   document.readyState === "complete" ||
-    //   document.readyState === "interactive"
-    // ) {
-
-    // } else {
-    //   document.addEventListener("DOMContentLoaded", getBackgoundImages);
-    //   document.addEventListener("DOMNodeInserted", getBackgoundImages);
-    // }
-
-    // setTimeout(getBackgoundImages, 100);
-
     if (window.self === window.top) {
       setTimeout(imageDOMWatcher, 100);
+      setTimeout(getBackgoundImages, 200);
     }
   };
 
