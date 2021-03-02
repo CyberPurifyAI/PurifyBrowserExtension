@@ -61,18 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const checkboxes = [];
 
-  checkboxes.push(new Checkbox("#block_porn", userSettings.names.BLOCK_PORN));
-  checkboxes.push(new Checkbox("#block_sexy", userSettings.names.BLOCK_SEXY));
-  checkboxes.push(
-    new Checkbox("#block_bloody", userSettings.names.BLOCK_BLOODY)
-  );
-  checkboxes.push(
-    new Checkbox("#block_bloodshed", userSettings.names.BLOCK_BLOODSHED)
-  );
-  checkboxes.push(
-    new Checkbox("#block_blacklist", userSettings.names.BLOCK_BLACKLIST)
-  );
-  checkboxes.push(new Checkbox("#block_ads", userSettings.names.BLOCK_ADS));
+  checkboxes.push(new Checkbox("#block_porn", true));
+  checkboxes.push(new Checkbox("#block_sexy", true));
+  checkboxes.push(new Checkbox("#block_bloody", true));
+  checkboxes.push(new Checkbox("#block_bloodshed", true));
+  checkboxes.push(new Checkbox("#block_blacklist", true));
+  checkboxes.push(new Checkbox("#block_ads", true));
 
   function onLoaded() {
     nanobar.go(100);
@@ -80,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window) {
         contentPage.sendMessage({ type: "openThankYouPage" });
       }
-    }, 2000);
+    }, 5000);
   }
 
   function checkRequestFilterReady() {
@@ -88,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ready) {
         onLoaded();
       } else {
-        setTimeout(checkRequestFilterReady, 20000);
+        setTimeout(checkRequestFilterReady, 5000);
       }
     });
   }
