@@ -1388,6 +1388,14 @@ const Settings = function () {
 
   const checkboxes = [];
 
+  // Miscellaneous settings
+  checkboxes.push(new Checkbox("#block_porn", userSettings.names.BLOCK_PORN));
+  checkboxes.push(new Checkbox("#block_sexy", userSettings.names.BLOCK_SEXY));
+  checkboxes.push(new Checkbox("#block_bloody", userSettings.names.BLOCK_BLOODY));
+  checkboxes.push(new Checkbox("#block_bloodshed", userSettings.names.BLOCK_BLOODSHED));
+  checkboxes.push(new Checkbox("#block_blacklist", userSettings.names.BLOCK_BLACKLIST));
+  checkboxes.push(new Checkbox("#block_ads", userSettings.names.BLOCK_ADS));
+
   // Privacy settings
   checkboxes.push(
     new Checkbox("#hide_referrer", userSettings.names.HIDE_REFERRER)

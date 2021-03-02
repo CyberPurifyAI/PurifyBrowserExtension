@@ -1399,7 +1399,7 @@ li.active .toggler:before {
   justify-content: center;
   align-items: center;
   height: calc(100% - 55px);
-  padding-top: 100px;
+  /* padding-top: 10px; */
 }
 
 .about-opt__logo {

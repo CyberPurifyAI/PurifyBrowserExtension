@@ -19,6 +19,12 @@ purify.settings = (function (purify) {
     "utm_source,utm_medium,utm_term,utm_campaign,utm_content,utm_name,utm_cid,utm_reader,utm_viz_id,utm_pubreferrer,utm_swu,utm_referrer,utm_social,utm_social-type,utm_place,utm_userid,utm_channel,fb_action_ids,fb_action_types,fb_ref,fb_source";
 
   const settings = {
+    BLOCK_PORN: "block-porn",
+    BLOCK_SEXY: "block-sexy",
+    BLOCK_BLOODY: "block-bloody",
+    BLOCK_BLOODSHED: "block-bloodshed",
+    BLOCK_BLACKLIST: "block-blacklist",
+    BLOCK_ADS: "block-ads",
     DISABLE_SAFEBROWSING: "safebrowsing-disabled",
     DISABLE_FILTERING: "purify-disabled",
     DISABLE_COLLECT_HITS: "hits-count-disabled",
@@ -56,6 +62,12 @@ purify.settings = (function (purify) {
             defaults[settings[name]] = false;
           }
         }
+        defaults[settings.BLOCK_PORN] = true;
+        defaults[settings.BLOCK_SEXY] = true;
+        defaults[settings.BLOCK_BLOODY] = true;
+        defaults[settings.BLOCK_BLOODSHED] = true;
+        defaults[settings.BLOCK_BLACKLIST] = true;
+        defaults[settings.BLOCK_ADS] = true;
         defaults[settings.DISABLE_SAFEBROWSING] = false;
         defaults[settings.DISABLE_COLLECT_HITS] = true;
         defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
