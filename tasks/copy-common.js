@@ -1,7 +1,6 @@
 import path from "path";
 import gulp from "gulp";
 import { LOCALES_DIR } from "./consts";
-const javascriptObfuscator = require("gulp-javascript-obfuscator");
 
 const paths = {
   pages: path.join("src/pages/**/*"),
