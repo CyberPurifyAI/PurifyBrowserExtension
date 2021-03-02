@@ -5,15 +5,7 @@
  * ----------------------------------------------------------------------------------
  */
 
-/* global contentPage, i18n, moment, ace, CheckboxUtils */
-
-// Update default date format for zh-cn
-// https://github.com/CyberPurify/PurifyBrowserExtension/issues/1442
-moment.updateLocale("zh-cn", {
-  longDateFormat: {
-    LLL: "YYYY年M月D日 HH:mm",
-  },
-});
+/* global contentPage, i18n, ace, CheckboxUtils */
 
 const Utils = {
   debounce(func, wait) {
