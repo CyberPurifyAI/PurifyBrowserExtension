@@ -5,11 +5,11 @@
  * ----------------------------------------------------------------------------------
  */
 
-.adg-progress-bar {
+.purify-progress-bar {
   height: 2px;
 }
 
-.adg-progress-bar .bar {
+.purify-progress-bar .bar {
   background: #78d8ff;
   background: linear-gradient(
     45deg,

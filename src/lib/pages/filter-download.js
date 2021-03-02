@@ -8,7 +8,7 @@
 /* global Nanobar, contentPage */
 document.addEventListener("DOMContentLoaded", () => {
   const nanobar = new Nanobar({
-    classname: "adg-progress-bar",
+    classname: "purify-progress-bar",
   });
 
   nanobar.go(10);
