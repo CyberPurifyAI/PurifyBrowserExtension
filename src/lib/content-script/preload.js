@@ -92,8 +92,11 @@
     //   document.addEventListener("DOMNodeInserted", getBackgoundImages);
     // }
 
-    setTimeout(getBackgoundImages, 100);
-    setTimeout(imageDOMWatcher, 100);
+    // setTimeout(getBackgoundImages, 100);
+
+    if (window.self === window.top) {
+      setTimeout(imageDOMWatcher, 100);
+    }
   };
 
   /**
@@ -113,8 +116,8 @@
 
         if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
           var images = document.getElementsByTagName("img");
-          for (let i = 0; i < images.length; i++) {
-            analyzeImage(images[i], false);
+          for (let x = 0; x < images.length; x++) {
+            analyzeImage(images[x], false);
           }
         } else if (mutation.type === "attributes") {
           if (mutation.target.nodeName === "IMG") {
