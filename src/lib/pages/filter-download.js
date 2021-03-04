@@ -70,11 +70,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function onLoaded() {
     nanobar.go(100);
-    setTimeout(() => {
-      if (window) {
-        contentPage.sendMessage({ type: "openThankYouPage" });
-      }
-    }, 5000);
+    document.querySelector(".sp-lists-user-descr").firstChild.nodeValue =
+      "Your Kids Safe Now";
+
+    document.querySelector("#close-message").style.display = "block";
+
+    // setTimeout(() => {
+    //   if (window) {
+    //     contentPage.sendMessage({ type: "openThankYouPage" });
+    //   }
+    // }, 5000);
+
+    setTimeout(window.close(), 10000);
   }
 
   function checkRequestFilterReady() {
@@ -82,10 +89,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ready) {
         onLoaded();
       } else {
-        setTimeout(checkRequestFilterReady, 5000);
+        setTimeout(checkRequestFilterReady, 2000);
       }
     });
   }
 
   checkRequestFilterReady();
+
+  document.querySelector("a").addEventListener("click", function (e) {
+    if (window) {
+      window.open("/pages/options.html#miscellaneous-settings");
+
+      window.close();
+    }
+  });
 });
