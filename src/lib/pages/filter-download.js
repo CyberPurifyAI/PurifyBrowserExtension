@@ -81,6 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //     contentPage.sendMessage({ type: "openThankYouPage" });
     //   }
     // }, 5000);
+
+    setTimeout(function () {
+      if (window) {
+        window.close();
+      }
+    }, 10000);
   }
 
   function checkRequestFilterReady() {
@@ -104,10 +110,4 @@ document.addEventListener("DOMContentLoaded", () => {
         window.close();
       }
     });
-
-  setTimeout(function () {
-    if (window) {
-      window.close();
-    }
-  }, 10000);
 });
