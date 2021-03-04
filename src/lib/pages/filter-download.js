@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function onLoaded() {
     nanobar.go(100);
+
     document.querySelector(".sp-lists-user-descr").firstChild.nodeValue =
       "Your Kids Safe Now";
 
@@ -80,8 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //     contentPage.sendMessage({ type: "openThankYouPage" });
     //   }
     // }, 5000);
-
-    setTimeout(window.close(), 10000);
   }
 
   function checkRequestFilterReady() {
@@ -96,11 +95,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   checkRequestFilterReady();
 
-  document.querySelector("a").addEventListener("click", function (e) {
-    if (window) {
-      window.open("/pages/options.html#miscellaneous-settings");
+  document
+    .querySelector("a.open-settings")
+    .addEventListener("click", function (e) {
+      if (window) {
+        window.open("/pages/options.html#miscellaneous-settings");
 
+        window.close();
+      }
+    });
+
+  setTimeout(function () {
+    if (window) {
       window.close();
     }
-  });
+  }, 10000);
 });
