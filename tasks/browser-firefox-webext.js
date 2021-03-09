@@ -29,7 +29,7 @@ import { version } from "./parse-package";
 import { updateLocalesMSGName, preprocessAll } from "./helpers";
 import copyCommonFiles from "./copy-common";
 import copyModelFiles from "./copy-models";
-import obfuscatorFiles from "./obfuscator";
+// import obfuscatorFiles from "./obfuscator";
 // import copyExternal from "./copy-external";
 
 // set current type of build
@@ -59,7 +59,7 @@ const copyModels = () => copyModelFiles(paths.dest);
 const copyCommon = () => copyCommonFiles(paths.dest);
 
 // obfuscator secret files
-const obfuscatorSecretFiles = () => obfuscatorFiles(paths.dest);
+// const obfuscatorSecretFiles = () => obfuscatorFiles(paths.dest);
 
 // copy firefox filters
 const copyFilters = () => gulp.src(paths.filters).pipe(gulp.dest(dest.filters));
@@ -192,7 +192,7 @@ export default gulp.series(
   // copyExternal,
   copyModels,
   copyCommon,
-  obfuscatorSecretFiles,
+  // obfuscatorSecretFiles,
   copyFilters,
   firefoxWebext,
   updateManifest,

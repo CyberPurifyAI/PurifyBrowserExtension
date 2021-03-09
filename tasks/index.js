@@ -64,9 +64,9 @@ export const buildWatch = gulp.series("watch", (done) => done());
 // dev build
 export const buildDev = gulp.series(
   chromium,
-  // firefoxAmo,
-  // firefoxWebext,
-  // edge,
+  firefoxAmo,
+  firefoxWebext,
+  edge,
   api,
   (done) => done()
 );
