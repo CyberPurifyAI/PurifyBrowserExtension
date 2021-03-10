@@ -1391,57 +1391,16 @@ const Settings = function () {
   // Miscellaneous settings
   checkboxes.push(new Checkbox("#block_porn", userSettings.names.BLOCK_PORN));
   checkboxes.push(new Checkbox("#block_sexy", userSettings.names.BLOCK_SEXY));
-  checkboxes.push(new Checkbox("#block_bloody", userSettings.names.BLOCK_BLOODY));
-  checkboxes.push(new Checkbox("#block_bloodshed", userSettings.names.BLOCK_BLOODSHED));
-  checkboxes.push(new Checkbox("#block_blacklist", userSettings.names.BLOCK_BLACKLIST));
+  checkboxes.push(
+    new Checkbox("#block_bloody", userSettings.names.BLOCK_BLOODY)
+  );
+  checkboxes.push(
+    new Checkbox("#block_bloodshed", userSettings.names.BLOCK_BLOODSHED)
+  );
+  checkboxes.push(
+    new Checkbox("#block_blacklist", userSettings.names.BLOCK_BLACKLIST)
+  );
   checkboxes.push(new Checkbox("#block_ads", userSettings.names.BLOCK_ADS));
-
-  // Privacy settings
-  checkboxes.push(
-    new Checkbox("#hide_referrer", userSettings.names.HIDE_REFERRER)
-  );
-  checkboxes.push(
-    new Checkbox("#hide_search_queries", userSettings.names.HIDE_SEARCH_QUERIES)
-  );
-  checkboxes.push(
-    new Checkbox("#send_not_track", userSettings.names.SEND_DO_NOT_TRACK)
-  );
-  if (environmentOptions.isChrome) {
-    const removeClientDataInput = document.querySelector("#remove-client-data");
-    removeClientDataInput.closest("li").style.display = "flex";
-    checkboxes.push(
-      new Checkbox(
-        "#remove-client-data",
-        userSettings.names.BLOCK_CHROME_CLIENT_DATA
-      )
-    );
-  }
-  if (environmentOptions.canBlockWebRTC) {
-    // Edge doesn't support block webrtc
-    const disableWebRTCNode = document.querySelector("#disable_webrtc");
-    disableWebRTCNode.closest("li").style.display = "flex";
-    checkboxes.push(
-      new Checkbox("#disable_webrtc", userSettings.names.BLOCK_WEBRTC)
-    );
-  }
-  checkboxes.push(
-    new Checkbox(
-      "#third_party_cookies",
-      userSettings.names.SELF_DESTRUCT_THIRD_PARTY_COOKIES
-    )
-  );
-  checkboxes.push(
-    new Checkbox(
-      "#first_party_cookies",
-      userSettings.names.SELF_DESTRUCT_FIRST_PARTY_COOKIES
-    )
-  );
-  checkboxes.push(
-    new Checkbox(
-      "#strip_tracking_params",
-      userSettings.names.STRIP_TRACKING_PARAMETERS
-    )
-  );
 
   // set SELF_DESTRUCT_THIRD_PARTY_COOKIES_TIME and SELF_DESTRUCT_FIRST_PARTY_COOKIES_TIME values
   const selectorsMap = {
@@ -1508,70 +1467,10 @@ const Settings = function () {
     );
   }
 
-  const selectOptions = [
-    {
-      name: i18n.getMessage("options_select_update_period_default"),
-      value: -1,
-    },
-    {
-      name: i18n.getMessage("options_select_update_period_48h"),
-      value: Utils.hoursToMs(48),
-    },
-    {
-      name: i18n.getMessage("options_select_update_period_24h"),
-      value: Utils.hoursToMs(24),
-    },
-    {
-      name: i18n.getMessage("options_select_update_period_12h"),
-      value: Utils.hoursToMs(12),
-    },
-    {
-      name: i18n.getMessage("options_select_update_period_6h"),
-      value: Utils.hoursToMs(6),
-    },
-    {
-      name: i18n.getMessage("options_select_update_period_1h"),
-      value: Utils.hoursToMs(1),
-    },
-    {
-      name: i18n.getMessage("options_select_update_period_disabled"),
-      value: 0,
-    },
-  ];
-
-  function handleActiveStealthOptions(stealthModeDisabled) {
-    const miscellaneousOptionsContainer = document.querySelector(
-      "#miscellaneous-stealth-options"
-    );
-    const cookiesOptionsContainer = document.querySelector(
-      "#cookies-stealth-options"
-    );
-    const optionsContainers = [
-      miscellaneousOptionsContainer,
-      cookiesOptionsContainer,
-    ];
-    optionsContainers.forEach((container) => {
-      if (stealthModeDisabled) {
-        container.classList.add("opts-list--disabled");
-      } else {
-        container.classList.remove("opts-list--disabled");
-      }
-    });
-
-    const stripTrackingTextarea = document.querySelector(
-      "#strip_tracking_params_input"
-    );
-    stripTrackingTextarea.disabled = stealthModeDisabled;
-  }
-
   const render = function () {
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].render();
     }
-
-    handleActiveStealthOptions(
-      userSettings.values[userSettings.names.DISABLE_STEALTH_MODE]
-    );
   };
 
   const getSettingCheckboxes = (propertyName) =>

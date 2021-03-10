@@ -96,14 +96,6 @@
         tab
       );
 
-      // Strip tracking parameters
-      const cleansedUrl = purify.stealthService.removeTrackersFromUrl(
-        requestId
-      );
-      if (cleansedUrl) {
-        return { redirectUrl: cleansedUrl };
-      }
-
       /**
        * Just to remember!
        * In the case of the "about:newtab" pages we don't receive onResponseReceived event for the main_frame
@@ -146,12 +138,6 @@
       requestType,
       tab
     );
-
-    // Strip tracking parameters
-    const cleansedUrl = purify.stealthService.removeTrackersFromUrl(requestId);
-    if (cleansedUrl) {
-      return { redirectUrl: cleansedUrl };
-    }
 
     let requestRule = purify.webRequestService.getRuleForRequest(
       tab,
@@ -324,12 +310,6 @@
 
     if (
       purify.cookieFiltering.filterRequestHeaders(requestId, requestHeaders)
-    ) {
-      requestHeadersModified = true;
-    }
-
-    if (
-      purify.stealthService.processRequestHeaders(requestId, requestHeaders)
     ) {
       requestHeadersModified = true;
     }

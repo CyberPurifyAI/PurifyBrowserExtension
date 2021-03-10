@@ -89,7 +89,7 @@ const API_SCRIPTS = [
   "src/lib/filter/rule-converter.js",
   // Content messaging
   "src/lib/core/content-message-handler.js",
-  "src/lib/core/stealth.js",
+  // "src/lib/core/stealth.js",
   "src/lib/core/webrequest.js",
   "src/api/chrome/lib/api.js",
 ];

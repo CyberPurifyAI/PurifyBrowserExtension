@@ -143,7 +143,7 @@
   };
 
   /**
-   * Some "requests" can't be intercepted by webRequest API: WS and WebRTC, popups.
+   * Some "requests" can't be intercepted by webRequest API: WS, popups.
    * So them don't have usual request identifier and must be processing in the other way.
    * @param requestUrl {string} Request URL
    * @param referrerUrl {string} Referrer

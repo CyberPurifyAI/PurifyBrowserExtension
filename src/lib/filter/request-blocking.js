@@ -174,12 +174,12 @@ purify.webRequestService = (function (purify) {
 
   /**
    * Checks if request that is wrapped in page script should be blocked.
-   * We do this because browser API doesn't have full support for intercepting all requests, e.g. WebSocket or WebRTC.
+   * We do this because browser API doesn't have full support for intercepting all requests, e.g. WebSocket.
    *
    * @param tab           Tab
    * @param requestUrl    request url
    * @param referrerUrl   referrer url
-   * @param requestType   Request type (WEBSOCKET or WEBRTC)
+   * @param requestType   Request type (WEBSOCKET)
    * @returns {boolean}   true if request is blocked
    */
   const checkPageScriptWrapperRequest = function (

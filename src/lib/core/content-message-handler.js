@@ -62,7 +62,6 @@
       requestFilterInfo: purify.requestFilter.getRequestFilterInfo(),
       environmentOptions: {
         isMacOs: purify.utils.browser.isMacOs(),
-        canBlockWebRTC: purify.stealthService.canBlockWebRTC(),
         isChrome: purify.utils.browser.isChromeBrowser(),
         Prefs: {
           locale: purify.app.getLocale(),

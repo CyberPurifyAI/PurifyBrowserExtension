@@ -119,39 +119,6 @@
   "filtering_log_in_whitelist": {
     "message": "The site is whitelisted"
   },
-  "filtering_log_hide_referrer": {
-    "message": "Referrer hidden from third-parties"
-  },
-  "filtering_log_hide_search_queries": {
-    "message": "Your search queries hidden"
-  },
-  "filtering_log_remove_client_data": {
-    "message": "X-Client-Data header removed"
-  },
-  "filtering_log_send_not_track": {
-    "message": "Do-Not-Track header sent"
-  },
-  "options_select_update_period_default": {
-    "message": "Default"
-  },
-  "options_select_update_period_48h": {
-    "message": "48 hours"
-  },
-  "options_select_update_period_24h": {
-    "message": "24 hours"
-  },
-  "options_select_update_period_12h": {
-    "message": "12 hours"
-  },
-  "options_select_update_period_6h": {
-    "message": "6 hours"
-  },
-  "options_select_update_period_1h": {
-    "message": "1 hour"
-  },
-  "options_select_update_period_disabled": {
-    "message": "Disabled"
-  },
   "options_antibanner": {
     "message": "Filters"
   },
@@ -607,21 +574,6 @@
   },
   "options_privacy_desc": {
     "message": "Protect your identity and sensitive personal information from thousands of online trackers by blocking the most popular tracking methods."
-  },
-  "options_hide_referrer_title": {
-    "message": "Hide Referrer from third-parties"
-  },
-  "options_hide_referrer_desc": {
-    "message": "Prevent third-parties from knowing what website you are visiting"
-  },
-  "options_hide_search_queries_title": {
-    "message": "Hide your search queries"
-  },
-  "options_hide_search_queries_desc": {
-    "message": "Hide the queries for websites visited from a search engine"
-  },
-  "options_send_not_track_title": {
-    "message": "Send Do-Not-Track header"
   },
   "options_stripped_tracking_parameters": {
     "message": "Tracking parameters removed"

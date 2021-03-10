@@ -1325,18 +1325,6 @@ purify.requestFilter = (function (purify) {
     );
   };
 
-  const findStealthWhiteListRule = function (
-    requestUrl,
-    referrer,
-    requestType
-  ) {
-    return getRequestFilter().findStealthWhiteListRule(
-      requestUrl,
-      referrer,
-      requestType
-    );
-  };
-
   const getSelectorsForUrl = function (documentUrl, genericHideFlag) {
     return getRequestFilter().getSelectorsForUrl(documentUrl, genericHideFlag);
   };
@@ -1405,7 +1393,6 @@ purify.requestFilter = (function (purify) {
     getCspRules,
     getCookieRules,
     getReplaceRules,
-    findStealthWhiteListRule,
     getRequestFilterInfo,
   };
 })(purify);

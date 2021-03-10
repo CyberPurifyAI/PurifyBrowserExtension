@@ -240,71 +240,6 @@ purify.ui = (function (purify) {
   };
 
   /**
-   * Generates query string with stealth options information
-   * @returns {string}
-   */
-  const getStealthString = () => {
-    const stealthOptions = [
-      {
-        queryKey: "ext_hide_referrer",
-        settingKey: purify.settings.HIDE_REFERRER,
-      },
-      {
-        queryKey: "hide_search_queries",
-        settingKey: purify.settings.HIDE_SEARCH_QUERIES,
-      },
-      { queryKey: "DNT", settingKey: purify.settings.SEND_DO_NOT_TRACK },
-      {
-        queryKey: "x_client",
-        settingKey: purify.settings.BLOCK_CHROME_CLIENT_DATA,
-      },
-      { queryKey: "webrtc", settingKey: purify.settings.BLOCK_WEBRTC },
-      {
-        queryKey: "third_party_cookies",
-        settingKey: purify.settings.SELF_DESTRUCT_THIRD_PARTY_COOKIES,
-        settingValueKey: purify.settings.SELF_DESTRUCT_THIRD_PARTY_COOKIES_TIME,
-      },
-      {
-        queryKey: "first_party_cookies",
-        settingKey: purify.settings.SELF_DESTRUCT_FIRST_PARTY_COOKIES,
-        settingValueKey: purify.settings.SELF_DESTRUCT_FIRST_PARTY_COOKIES_TIME,
-      },
-      {
-        queryKey: "strip_url",
-        settingKey: purify.settings.STRIP_TRACKING_PARAMETERS,
-      },
-    ];
-
-    const stealthEnabled = !purify.settings.getProperty(
-      purify.settings.DISABLE_STEALTH_MODE
-    );
-
-    if (!stealthEnabled) {
-      return `&stealth.enabled=${stealthEnabled}`;
-    }
-
-    const stealthOptionsString = stealthOptions
-      .map((option) => {
-        const { queryKey, settingKey, settingValueKey } = option;
-        const setting = purify.settings.getProperty(settingKey);
-        let settingString;
-        if (!setting) {
-          return "";
-        }
-        if (!settingValueKey) {
-          settingString = setting;
-        } else {
-          settingString = purify.settings.getProperty(settingValueKey);
-        }
-        return `stealth.${queryKey}=${encodeURIComponent(settingString)}`;
-      })
-      .filter((string) => string.length > 0)
-      .join("&");
-
-    return `&stealth.enabled=${stealthEnabled}&${stealthOptionsString}`;
-  };
-
-  /**
    * Opens site complaint report tab
    * https://github.com/CyberPurify/ReportsWebApp#pre-filling-the-app-with-query-parameters
    * @param url
@@ -341,7 +276,7 @@ purify.ui = (function (purify) {
           : ""
       }&url=${encodeURIComponent(url)}&filters=${encodeURIComponent(
         filterIds.join(".")
-      )}${getStealthString()}`
+      )}`
     );
   };
 

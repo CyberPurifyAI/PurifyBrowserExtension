@@ -11,10 +11,9 @@
  * Function for injecting some helper API into page context, that is used by request wrappers.
  *
  * @param scriptName Unique script name
- * @param shouldOverrideWebRTC If true we should override WebRTC objects
  * @param isInjected True means that we've already injected scripts in the contentWindow, i.e. wrapped request objects and passed message channel
  */
-function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
+function injectPageScriptAPI(scriptName, isInjected) {
   "use strict";
 
   /**
@@ -56,7 +55,7 @@ function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
 
         /**
          * @param url                The URL to which wrapped object is willing to connect
-         * @param requestType        Request type ( WEBSOCKET or WEBRTC)
+         * @param requestType        Request type ( WEBSOCKET )
          * @param wrapper            WebSocket wrapper instance
          * @param onResponseReceived Called when response is received
          */
@@ -131,7 +130,7 @@ function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
       if (contentWindow && !injectedFramesHas(contentWindow)) {
         injectedFramesAdd(contentWindow);
         contentWindow[scriptName] = messageChannel; // Left message channel for the injected script
-        const args = `'${scriptName}', ${shouldOverrideWebRTC}, true`;
+        const args = `'${scriptName}', true`;
         contentWindow.eval(`(${injectedToString()})(${args});`);
         delete contentWindow[scriptName];
       }
@@ -191,267 +190,6 @@ function injectPageScriptAPI(scriptName, shouldOverrideWebRTC, isInjected) {
   const interfaces = [HTMLFrameElement, HTMLIFrameElement, HTMLObjectElement];
   for (let i = 0; i < interfaces.length; i += 1) {
     overrideContentAccess(interfaces[i]);
-  }
-
-  /**
-   * Defines properties in destination object
-   * @param src Source object
-   * @param dest Destination object
-   * @param properties Properties to copy
-   */
-  const copyProperties = function (src, dest, properties) {
-    for (let i = 0; i < properties.length; i += 1) {
-      const prop = properties[i];
-      const descriptor = Object.getOwnPropertyDescriptor(src, prop);
-      // Passed property may be undefined
-      if (descriptor) {
-        Object.defineProperty(dest, prop, descriptor);
-      }
-    }
-  };
-
-  /**
-   * Check request by sending message to content script
-   * @param url URL to block
-   * @param type Request type
-   * @param callback Result callback
-   */
-  const checkRequest = function (url, type, callback) {
-    messageChannel.sendMessage(url, type, this, function (
-      wrapper,
-      blockConnection
-    ) {
-      callback(blockConnection);
-    });
-  };
-
-  /**
-   * The function overrides window.RTCPeerConnection with our wrapper, that will check ice servers URLs with filters through messaging with content-script.
-   *
-   * IMPORTANT NOTE:
-   * This function is first loaded as a content script. The only purpose of it is to call
-   * the "toString" method and use resulting string as a text content for injected script.
-   */
-  const overrideWebRTC = function () {
-    if (
-      !(window.RTCPeerConnection instanceof Function) &&
-      !(window.webkitRTCPeerConnection instanceof Function)
-    ) {
-      return;
-    }
-
-    /**
-     * RTCPeerConnection wrapper implementation.
-     * https://github.com/CyberPurify/PurifyBrowserExtension/issues/588
-     *
-     * Based on:
-     * https://github.com/adblockplus/adblockpluschrome/commit/af0585137be19011eace1cf68bf61eed2e6db974
-     *
-     * Chromium webRequest API doesn't allow the blocking of WebRTC connections
-     * https://bugs.chromium.org/p/chromium/issues/detail?id=707683
-     */
-
-    const RealRTCPeerConnection =
-      window.RTCPeerConnection || window.webkitRTCPeerConnection;
-    const closeRTCPeerConnection = Function.prototype.call.bind(
-      RealRTCPeerConnection.prototype.close
-    );
-
-    const RealArray = Array;
-    const RealString = String;
-    const createObject = Object.create;
-    const defineProperty = Object.defineProperty;
-
-    /**
-     * Convert passed url to string
-     * @param url URL
-     * @returns {string}
-     */
-    function urlToString(url) {
-      if (typeof url !== "undefined") {
-        return RealString(url);
-      }
-    }
-
-    /**
-     * Creates new immutable array from original with some transform function
-     * @param original
-     * @param transform
-     * @returns {*}
-     */
-    function safeCopyArray(original, transform) {
-      if (original === null || typeof original !== "object") {
-        return original;
-      }
-
-      const immutable = RealArray(original.length);
-      for (let i = 0; i < immutable.length; i += 1) {
-        defineProperty(immutable, i, {
-          configurable: false,
-          enumerable: false,
-          writable: false,
-          value: transform(original[i]),
-        });
-      }
-      defineProperty(immutable, "length", {
-        configurable: false,
-        enumerable: false,
-        writable: false,
-        value: immutable.length,
-      });
-      return immutable;
-    }
-
-    /**
-     * Protect configuration from mutations
-     * @param configuration RTCPeerConnection configuration object
-     * @returns {*}
-     */
-    function protectConfiguration(configuration) {
-      if (configuration === null || typeof configuration !== "object") {
-        return configuration;
-      }
-
-      const iceServers = safeCopyArray(configuration.iceServers, function (
-        iceServer
-      ) {
-        let { url, urls } = iceServer;
-
-        // RTCPeerConnection doesn't iterate through pseudo Arrays of urls.
-        if (typeof urls !== "undefined" && !(urls instanceof RealArray)) {
-          urls = [urls];
-        }
-
-        return createObject(iceServer, {
-          url: {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: urlToString(url),
-          },
-          urls: {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: safeCopyArray(urls, urlToString),
-          },
-        });
-      });
-
-      return createObject(configuration, {
-        iceServers: {
-          configurable: false,
-          enumerable: false,
-          writable: false,
-          value: iceServers,
-        },
-      });
-    }
-
-    /**
-     * Check WebRTC connection's URL and close if it's blocked by rule
-     * @param connection Connection
-     * @param url URL to check
-     */
-    function checkWebRTCRequest(connection, url) {
-      checkRequest(url, "WEBRTC", function (blocked) {
-        if (blocked) {
-          try {
-            closeRTCPeerConnection(connection);
-          } catch (e) {
-            // Ignore exceptions
-          }
-        }
-      });
-    }
-
-    /**
-     * Check each URL of ice server in configuration for blocking.
-     *
-     * @param connection RTCPeerConnection
-     * @param configuration Configuration for RTCPeerConnection
-     * https://developer.mozilla.org/en-US/docs/Web/API/RTCConfiguration
-     */
-    function checkConfiguration(connection, configuration) {
-      if (!configuration || !configuration.iceServers) {
-        return;
-      }
-
-      const iceServers = configuration.iceServers;
-      for (let i = 0; i < iceServers.length; i += 1) {
-        const iceServer = iceServers[i];
-
-        if (!iceServer) {
-          continue;
-        }
-
-        if (iceServer.url) {
-          checkWebRTCRequest(connection, iceServer.url);
-        }
-
-        if (iceServer.urls) {
-          for (let j = 0; j < iceServer.urls.length; j += 1) {
-            checkWebRTCRequest(connection, iceServer.urls[j]);
-          }
-        }
-      }
-    }
-
-    /**
-     * Overrides setConfiguration method
-     * https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/setConfiguration
-     */
-    if (RealRTCPeerConnection.prototype.setConfiguration) {
-      const realSetConfiguration = Function.prototype.call.bind(
-        RealRTCPeerConnection.prototype.setConfiguration
-      );
-
-      RealRTCPeerConnection.prototype.setConfiguration = function (
-        configuration
-      ) {
-        configuration = protectConfiguration(configuration);
-        // Call the real method first, so that validates the configuration
-        realSetConfiguration(this, configuration);
-        checkConfiguration(this, configuration);
-      };
-    }
-
-    function WrappedRTCPeerConnection(configuration, arg) {
-      if (!(this instanceof WrappedRTCPeerConnection)) {
-        return RealRTCPeerConnection();
-      }
-
-      configuration = protectConfiguration(configuration);
-
-      /**
-       * The old webkitRTCPeerConnection constructor takes an optional second argument and we must pass it.
-       */
-      const connection = new RealRTCPeerConnection(configuration, arg);
-      checkConfiguration(connection, configuration);
-      return connection;
-    }
-
-    WrappedRTCPeerConnection.prototype = RealRTCPeerConnection.prototype;
-
-    const boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
-    copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection, [
-      "caller",
-      "generateCertificate",
-      "name",
-      "prototype",
-    ]);
-    RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
-
-    if ("RTCPeerConnection" in window) {
-      window.RTCPeerConnection = boundWrappedRTCPeerConnection;
-    }
-    if ("webkitRTCPeerConnection" in window) {
-      window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
-    }
-  };
-
-  if (shouldOverrideWebRTC) {
-    overrideWebRTC();
   }
 }
 

@@ -224,13 +224,7 @@ purify.cookieFiltering = (function (purify) {
    * @return {Promise<any[] | never>}
    */
   // eslint-disable-next-line arrow-body-style
-  const apiRemoveCookieByRule = (
-    tab,
-    name,
-    url,
-    thirdParty,
-    rule,
-  ) => {
+  const apiRemoveCookieByRule = (tab, name, url, thirdParty, rule) => {
     return apiGetCookies(name, url).then((cookies) => {
       const promises = [];
       if (cookies.length > 0) {
@@ -254,13 +248,7 @@ purify.cookieFiltering = (function (purify) {
    * @param {Array} rules Cookie matching rules
    */
   // eslint-disable-next-line arrow-body-style
-  const apiModifyCookiesWithRules = (
-    tab,
-    name,
-    url,
-    thirdParty,
-    rules,
-  ) => {
+  const apiModifyCookiesWithRules = (tab, name, url, thirdParty, rules) => {
     return apiGetCookies(name, url).then((cookies) => {
       const promises = [];
       for (let i = 0; i < cookies.length; i += 1) {
@@ -561,15 +549,7 @@ purify.cookieFiltering = (function (purify) {
       referrerUrl,
       requestType
     );
-    const stealthRules = purify.stealthService.getCookieRules(
-      requestUrl,
-      referrerUrl,
-      requestType
-    );
-    if (
-      (!rules || rules.length === 0) &&
-      (!stealthRules || stealthRules.length === 0)
-    ) {
+    if (!rules || rules.length === 0) {
       // Nothing to apply
       return false;
     }
@@ -606,22 +586,6 @@ purify.cookieFiltering = (function (purify) {
           requestUrl,
           thirdParty,
           mRules,
-          false
-        );
-      }
-
-      // If cookie rules found - ignore stealth cookie rules
-      const ignoreStealthRules = !!(
-        (bRule && !bRule.whiteListRule) ||
-        (mRules && mRules.length > 0)
-      );
-      if (!ignoreStealthRules && stealthRules && stealthRules.length > 0) {
-        scheduleProcessingCookie(
-          requestId,
-          cookieName,
-          requestUrl,
-          thirdParty,
-          stealthRules,
           false
         );
       }
@@ -733,32 +697,6 @@ purify.cookieFiltering = (function (purify) {
         setCookieHeaderModified = true;
         processedCookies.push(cookieName);
       }
-
-      // If cookie rules found - ignore stealth cookie rules
-      const ignoreStealthRules = !!(
-        (bRule && !bRule.whiteListRule) ||
-        (mRules && mRules.length > 0)
-      );
-      if (!ignoreStealthRules) {
-        const stealthRules = purify.stealthService.getCookieRules(
-          cookieUrl,
-          referrerUrl,
-          requestType
-        );
-        if (
-          processModifySetCookieByRules(
-            tab,
-            setCookie,
-            cookieDomain,
-            thirdParty,
-            header,
-            stealthRules
-          )
-        ) {
-          setCookieHeaderModified = true;
-          processedCookies.push(cookieName);
-        }
-      }
     }
 
     removeProcessingCookies(requestId, processedCookies);
@@ -807,7 +745,7 @@ purify.cookieFiltering = (function (purify) {
           cookie.name,
           cookie.url,
           cookie.thirdParty,
-          rules[0],
+          rules[0]
         );
       } else {
         promise = apiModifyCookiesWithRules(
@@ -815,7 +753,7 @@ purify.cookieFiltering = (function (purify) {
           cookie.name,
           cookie.url,
           cookie.thirdParty,
-          rules,
+          rules
         );
       }
       promises.push(promise);
