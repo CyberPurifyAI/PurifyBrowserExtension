@@ -1023,7 +1023,7 @@ li.active .toggler:before {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background: url(../images/logo.png) no-repeat;
+  background: url(../images/logo.svg) no-repeat;
   text-align: right;
 }
 .wrap {

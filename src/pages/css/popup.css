@@ -77,11 +77,11 @@ span {
   justify-content: space-between;
 }
 .widget-popup__header-logo {
-  width: 100px;
+  width: 135px;
   height: 35px;
   background-repeat: no-repeat;
-  background-image: url(../images/logo.png);
-  background-size: 95px 35px;
+  background-image: url(../images/logo.svg);
+  background-size: 135px 35px;
 }
 .widget-popup__header-btns {
   display: flex;

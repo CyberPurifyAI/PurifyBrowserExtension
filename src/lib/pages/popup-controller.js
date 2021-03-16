@@ -221,7 +221,6 @@ PopupController.prototype = {
 
   _bindAction(parentElement, selector, eventName, handler) {
     let elements = [].slice.call(parentElement.querySelectorAll(selector));
-    console.log(elements, selector, parentElement);
     if (!elements || elements.length <= 0) {
       return;
     }
