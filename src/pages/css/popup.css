@@ -796,21 +796,6 @@ img .footer .platforms:first-child {
   right: 15px;
 }
 
-.holiday-notify {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  background-color: #000;
-  z-index: 2;
-  width: 100%;
-  animation: notify-show 0.3s ease-in;
-}
-
-.holiday-notify--close {
-  animation: notify-show-reverse 0.3s ease-out;
-  animation-fill-mode: forwards;
-}
-
 @keyframes notify-show {
   0% {
     transform: translateY(200px);
@@ -829,60 +814,4 @@ img .footer .platforms:first-child {
   100% {
     transform: translateY(200px);
   }
-}
-
-.holiday-notify__close {
-  top: 15px;
-  right: 15px;
-  position: absolute;
-  z-index: 2;
-  width: 15px;
-  height: 15px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: 15px;
-  background-image: url(../images/cross-white.svg);
-  cursor: pointer;
-}
-
-.holiday-notify__content {
-  width: 100%;
-  min-height: 225px;
-  padding: 43px 5px;
-  font-weight: bold;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  background-size: contain;
-  background-image: url(../images/ny_bg.jpg);
-}
-
-.holiday-notify__title {
-  font-size: 24px;
-  line-height: 26px;
-  color: #fff;
-  margin-bottom: 25px;
-}
-
-.holiday-notify__desc {
-  font-size: 24px;
-  line-height: 32px;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.holiday-notify__btn {
-  display: inline-block;
-  text-align: center;
-  padding: 0 15px;
-  min-width: 255px;
-  line-height: 44px;
-  font-size: 16px;
-  border: 0;
-  cursor: pointer;
-  border-radius: 25px;
-  background: linear-gradient(to bottom, #e14355 0%, #dd4161 100%);
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
 }
