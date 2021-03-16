@@ -806,12 +806,6 @@ li.active .toggler:before {
 .dropdown__item--purify {
   background-image: url("../images/logo-shield.png");
 }
-.dropdown__item--dropbox {
-  background-image: url("../images/dropbox.svg");
-}
-.dropdown__item--chrome {
-  background-image: url("../images/chrome.svg");
-}
 
 .settings-form {
   padding-top: 30px;
@@ -882,25 +876,6 @@ li.active .toggler:before {
   margin-bottom: 20px;
   font-size: 12px;
   opacity: 0.5;
-}
-
-.btn-app-store {
-  cursor: pointer;
-  border: 0;
-  display: inline-block;
-  vertical-align: middle;
-  width: 91px;
-  height: 32px;
-  background-image: url(../images/app-store.svg);
-}
-.btn-google-play {
-  cursor: pointer;
-  border: 0;
-  display: inline-block;
-  vertical-align: middle;
-  width: 104px;
-  height: 24px;
-  background-image: url(../images/google-play.svg);
 }
 
 .filter-rules__label {
