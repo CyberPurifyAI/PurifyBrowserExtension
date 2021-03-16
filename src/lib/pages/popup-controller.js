@@ -134,15 +134,15 @@ PopupController.prototype = {
 
     const containerMain = parent.querySelector(".tab-main");
 
-    // while (containerMain.firstChild) {
-    //   containerMain.removeChild(containerMain.firstChild);
-    // }
+    while (containerMain.firstChild) {
+      containerMain.removeChild(containerMain.firstChild);
+    }
 
     const containerBottom = parent.querySelector(".tabstack-bottom.tab-main");
 
-    // while (containerBottom.firstChild) {
-    //   containerBottom.removeChild(containerBottom.firstChild);
-    // }
+    while (containerBottom.firstChild) {
+      containerBottom.removeChild(containerBottom.firstChild);
+    }
 
     stack.setAttribute("class", "tabstack");
     parent.setAttribute("class", "widget-popup");
