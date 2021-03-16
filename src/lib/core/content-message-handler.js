@@ -329,12 +329,20 @@
         processSaveCssHitStats(sender.tab, message.stats);
         break;
       case "requestAnalyzeImage":
+        const isWhiteListed = purify.frames.isTabWhiteListed(sender.tab);
+        const requestUrl = message.requestUrl;
+
+        if (isWhiteListed) {
+          callback({ result: false, requestUrl, err: null });
+
+          return;
+        }
+
         if (message.type === "SIGN_CONNECT") {
           return;
         }
 
         const tabIdUrl = purify.loadingQueue._buildTabIdUrl(sender.tab);
-        const requestUrl = message.requestUrl;
 
         purify.loadingQueue
           .predict(requestUrl, tabIdUrl)
