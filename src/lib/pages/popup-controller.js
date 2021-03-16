@@ -120,28 +120,12 @@ PopupController.prototype = {
     const switcher = document.querySelector(
       "#filtering-default-control-template > div.control-buttons"
     );
-    const containerHeader = document.querySelector(".widget-popup__header");
-    while (containerHeader.firstChild) {
-      containerHeader.removeChild(containerHeader.firstChild);
-    }
-
-    const footerContainer = parent.querySelector(".footer");
-    while (footerContainer.firstChild) {
-      footerContainer.removeChild(footerContainer.firstChild);
-    }
-
     const stack = parent.querySelector(".tabstack");
 
     const containerMain = parent.querySelector(".tab-main");
 
     while (containerMain.firstChild) {
       containerMain.removeChild(containerMain.firstChild);
-    }
-
-    const containerBottom = parent.querySelector(".tabstack-bottom.tab-main");
-
-    while (containerBottom.firstChild) {
-      containerBottom.removeChild(containerBottom.firstChild);
     }
 
     stack.setAttribute("class", "tabstack");
@@ -170,7 +154,7 @@ PopupController.prototype = {
     }
 
     // Header
-    this.filteringHeader = this._getTemplate("filtering-header-template");
+    // this.filteringHeader = this._getTemplate("filtering-header-template");
     this.filteringDefaultHeader = this._getTemplate(
       "filtering-default-header-template"
     );
@@ -182,8 +166,8 @@ PopupController.prototype = {
 
     // Actions
     // this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
-    this.actionOpenLogin = this._getTemplate("action-open-login-template");
-    this.showUserInfo = this._getTemplate("show-user-info");
+    // this.actionOpenLogin = this._getTemplate("action-open-login-template");
+    // this.actionOpenUserInfo = this._getTemplate("action-open-user-info-template");
     // this.actionOpenSiteReport = this._getTemplate(
     //   "action-site-report-template"
     // );
@@ -195,23 +179,10 @@ PopupController.prototype = {
     this.filteringMessageText = this._getTemplate("filtering-message-template");
 
     // Footer
-    this.footerDefault = this._getTemplate("footer-default-template");
+    // this.footerDefault = this._getTemplate("footer-default-template");
 
-    // Notification
-    // this.notification = this._getTemplate("notification-template");
-    // this.animatedNotification = this._getTemplate(
-    //   "animated-notification-template"
-    // );
-
-    this._renderActions(containerBottom, tabInfo);
-    this._renderHeader(containerHeader, tabInfo);
-    // this._renderNotificationBlock(stack, tabInfo, this.options);
     this._renderMain(containerMain, tabInfo);
     this._renderFilteringControls(containerMain);
-    // this._renderStatus(containerMain, tabInfo);
-    // this._renderMessage(containerMain, tabInfo);
-    this._renderFooter(footerContainer, tabInfo, this.options);
-    // this._renderAnimatedNotification(parent, tabInfo, this.options);
   },
 
   _getTemplate(id) {
@@ -222,72 +193,6 @@ PopupController.prototype = {
     [].slice.call(template.childNodes).forEach((c) => {
       container.appendChild(c.cloneNode(true));
     });
-  },
-
-  _renderHeader(container) {
-    const template = this.filteringHeader;
-    this._appendTemplate(container, template);
-  },
-
-  _renderAnimatedNotification(container, tabInfo, options) {
-    const { notification } = options;
-    // Do not show
-    if (!notification) {
-      return;
-    }
-
-    // Do not show notification if the type is not animated or there is no text
-    if (notification.type !== "animated" || !notification.text) {
-      return;
-    }
-
-    const title = this.animatedNotification.querySelector(
-      ".holiday-notify__title"
-    );
-    const button = this.animatedNotification.querySelector(
-      ".holiday-notify__btn"
-    );
-    title.innerText = notification.text.title;
-    button.innerText = notification.text.btn;
-
-    this._appendTemplate(container, this.animatedNotification);
-
-    // Schedule notification removal
-    popupPage.sendMessage({ type: "setNotificationViewed", withDelay: true });
-  },
-
-  _renderNotificationBlock(container, tabInfo, options) {
-    const { notification } = options;
-    // Do not show notification
-    if (!notification) {
-      return;
-    }
-
-    if (notification.type !== "simple") {
-      return;
-    }
-
-    const { bgColor, textColor, text } = notification;
-
-    if (!text) {
-      return;
-    }
-
-    const notificationTitleNode = this.notification.querySelector(
-      ".openNotificationLink"
-    );
-    notificationTitleNode.innerHTML = text;
-    if (bgColor && textColor) {
-      const notification = this.notification.querySelector(".notice");
-      notification.setAttribute(
-        "style",
-        `background-color: ${bgColor}; color: ${textColor}`
-      );
-    }
-    this._appendTemplate(container, this.notification);
-
-    // Schedule notification removal
-    popupPage.sendMessage({ type: "setNotificationViewed", withDelay: true });
   },
 
   _renderMain(container, tabInfo) {
@@ -317,55 +222,6 @@ PopupController.prototype = {
     this._appendTemplate(container, template);
   },
 
-  _renderStatus(container, tabInfo) {
-    const template = this.filteringStatusText;
-
-    let messageKey = "";
-    if (!tabInfo.applicationAvailable) {
-      messageKey = "popup_site_filtering_state_secure_page";
-    } else if (tabInfo.documentWhiteListed && !tabInfo.userWhiteListed) {
-      messageKey = "";
-    } else if (tabInfo.applicationFilteringDisabled) {
-      messageKey = "popup_site_filtering_state_paused";
-    } else if (tabInfo.documentWhiteListed) {
-      messageKey = "popup_site_filtering_state_disabled";
-    } else {
-      messageKey = "popup_site_filtering_state_enabled";
-    }
-
-    const statusElement = template.querySelector(".status");
-    if (messageKey) {
-      i18n.translateElement(statusElement, messageKey);
-    } else {
-      statusElement.classList.add("status--hide");
-    }
-
-    const currentSiteElement = template.querySelector(".current-site");
-    if (tabInfo.applicationAvailable) {
-      currentSiteElement.textContent = tabInfo.domainName
-        ? tabInfo.domainName
-        : tabInfo.url;
-    } else {
-      currentSiteElement.textContent = tabInfo.url;
-    }
-
-    this._appendTemplate(container, template);
-  },
-
-  _renderMessage(container, tabInfo) {
-    let messageKey;
-    if (!tabInfo.applicationAvailable) {
-      messageKey = "";
-    } else if (tabInfo.documentWhiteListed && !tabInfo.userWhiteListed) {
-      messageKey = "popup_site_exception_info";
-    }
-
-    const template = this.filteringMessageText;
-    if (messageKey) {
-      i18n.translateElement(template.childNodes[1], messageKey);
-      this._appendTemplate(container, template);
-    }
-  },
 
   _selectRequestTypesStatsData(stats, range) {
     let result = {};
@@ -599,30 +455,6 @@ PopupController.prototype = {
     }
 
     container.appendChild(el);
-  },
-
-  _renderFooter(footerContainer, tabInfo, options) {
-    const { footerDefault } = this;
-    const popupFooter = footerDefault.querySelector(".popup-footer");
-    // There is no footer title for edge
-    const footerDefaultTitle = footerDefault.querySelector(".footer__title");
-    if (popupFooter && footerDefaultTitle) {
-      if (options.isEdgeBrowser) {
-        popupFooter.innerHTML = `<div class="popup-footer--edge">© 2020-${new Date().getFullYear()} CyberPurify Software Ltd</div>`;
-        // hide mobile app icons - https://github.com/CyberPurify/PurifyBrowserExtension/issues/1543
-        const platforms = footerDefault.querySelector(".platforms");
-        if (platforms) {
-          platforms.style.display = "none";
-        }
-      } else {
-        footerDefaultTitle.setAttribute(
-          "title",
-          i18n.getMessage("popup_purify_footer_title")
-        );
-      }
-    }
-
-    this._appendTemplate(footerContainer, footerDefault);
   },
 
   _bindAction(parentElement, selector, eventName, handler) {

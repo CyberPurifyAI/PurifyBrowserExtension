@@ -20,24 +20,65 @@
 </head>
 
 <body style="overflow: hidden">
-  <div id="widget-popup">
+  <!-- <div id="widget-popup">
     <div class="widget-popup__header"></div>
     <div class="tabstack">
       <div class="tab-main tab-main--base active tab-switch-tab" tab-switch="main"></div>
-      <div class="tab-statistics tab-switch-tab" tab-switch="statistics"></div>
     </div>
-    <!-- <div class="tabbar">
-            <button class="tab active tab-actions-button" tab-switch="main" i18n="popup_tab_actions"></button>
-            <button class="tab tab-stats-button" tab-switch="statistics" i18n="popup_tab_statistics"></button>
-        </div> -->
 
     <div class="tabstack-bottom tab-main tab-switch-tab" tab-switch="main"></div>
-    <!-- <div class="tabstack-bottom tab-switch-tab" style="display: none;" tab-switch="statistics">
-      <div class="analytics">
-        <ul id="analytics-blocked-types-values"></ul>
-      </div>
-    </div> -->
     <div class="footer"></div>
+  </div> -->
+
+  <div id="widget-popup" class="widget-popup status-checkmark">
+    <div class="widget-popup__header">
+      <div class="widget-popup__header-logo"></div>
+      <div class="widget-popup__header-btns" id="popup-header-buttons">
+        <button i18n-title="options_settings" class="cir-btn settings openSettings" title="CyberPurify Settings">
+          <img src="images/icon-settings.svg" alt="">
+        </button>
+      </div>
+    </div>
+    <div class="tabstack">
+      <div class="tab-main tab-main--base active tab-switch-tab" tab-switch="main"></div>
+    </div>
+
+    <div class="tabstack-bottom tab-main tab-switch-tab" tab-switch="main">
+      <div class="actions">
+        <div id="openLogin" class="action" style="display: flex;">
+          <span class="act-icon">
+            <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true">
+          </span>
+          <span class="act-name" i18n="popup_login_site" role="button" tabindex="0">Login</span>
+        </div>
+
+        <div id="showUserInfo" class="action" style="display: none;">
+          <span class="act-icon">
+            <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true">
+          </span>
+          <a style="text-decoration: none !important;" href="https://id.cyberpurify.com/auth/realms/purify/account"
+            target="_blank">
+            <span class="act-name" tabindex="0"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer__in footer__default" role="contentinfo">
+        <div class="popup-footer">
+          <span class="footer__title" i18n="popup_purify_footer_title" title="© CyberPurify, 2020–2021">© CyberPurify,
+            2020–2021</span>
+        </div>
+        <div class="platforms">
+          <!-- <a href="" target="_blank" i18n-title="popup_purify_for_ios" class="popup-footer-link openLink">
+          <img src="images/apple.svg" alt="" class="icon-apple" />
+        </a>
+        <a href="" target="_blank" i18n-title="popup_purify_for_android" class="popup-footer-link openLink">
+          <img src="images/android.svg" alt="" class="icon-android" />
+        </a> -->
+        </div>
+      </div>
+    </div>
   </div>
 
   <!--Templates-->
@@ -49,21 +90,6 @@
         <span class="blocked-tab"></span>
       </div>
       <div class="total blocked-all"></div>
-    </div>
-  </div>
-
-  <div id="filtering-header-template" style="display: none;">
-    <div class="widget-popup__header-logo"></div>
-    <div class="widget-popup__header-btns" id="popup-header-buttons">
-      <!-- <button i18n-title="context_disable_protection" class="cir-btn pause changeProtectionStateDisable">
-        <img src="images/icon-pause.svg" alt="">
-      </button>
-      <button i18n-title="context_enable_protection" class="cir-btn start changeProtectionStateEnable">
-        <img src="images/icon-start.svg" alt="">
-      </button> -->
-      <button i18n-title="options_settings" class="cir-btn settings openSettings">
-        <img src="images/icon-settings.svg" alt="" />
-      </button>
     </div>
   </div>
 
@@ -88,82 +114,6 @@
     <div class="error-msg"></div>
   </div>
 
-  <!--Actions-->
-  <div id="action-site-report-template" style="display: none;">
-    <div id="siteReport" class="action">
-      <span class="act-icon">
-        <img src="images/icon-shield.svg" class="icon-shield" alt="" aria-hidden="true" />
-      </span>
-      <span class="act-name" i18n="popup_security_report" role="button" tabindex="0"></span>
-    </div>
-  </div>
-
-  <div id="action-open-login-template" style="display: none;">
-    <div id="openLogin" class="action">
-      <span class="act-icon">
-        <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true" />
-      </span>
-      <span class="act-name" i18n="popup_login_site" role="button" tabindex="0"></span>
-    </div>
-  </div>
-
-  <div id="action-open-abuse-template" style="display: none;">
-    <div id="openAbuse" class="action">
-      <span class="act-icon">
-        <img src="images/thumb-down.svg" class="icon-thumb-down" alt="" aria-hidden="true" />
-      </span>
-      <span class="act-name" i18n="popup_abuse_site" role="button" tabindex="0"></span>
-    </div>
-  </div>
-
-  <div id="show-user-info" style="display: none;">
-    <div id="showUserInfo" class="action">
-      <span class="act-icon">
-        <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true" />
-      </span>
-      <a style="text-decoration: none !important;" href="https://id.cyberpurify.com/auth/realms/purify/account"
-        target="_blank">
-        <span class="act-name" tabindex="0"></span>
-      </a>
-    </div>
-  </div>
-
-  <!--Footer-->
-  <div id="footer-default-template" style="display: none;">
-    <div class="footer__in footer__default" role="contentinfo">
-      <div class="popup-footer">
-        <span class="footer__title" i18n="popup_purify_footer_title"></span>
-      </div>
-      <div class="platforms">
-        <!-- <a href="" target="_blank" i18n-title="popup_purify_for_ios" class="popup-footer-link openLink">
-          <img src="images/apple.svg" alt="" class="icon-apple" />
-        </a>
-        <a href="" target="_blank" i18n-title="popup_purify_for_android" class="popup-footer-link openLink">
-          <img src="images/android.svg" alt="" class="icon-android" />
-        </a> -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Notification -->
-  <div id="notification-template" style="display: none;">
-    <div class="notice" id="popup-notification">
-      <a href="" class="notice__in cf">
-        <span class="openNotificationLink"></span>
-        <span class="closeNotification notice__close"> close </span>
-      </a>
-    </div>
-  </div>
-
-  <div id="animated-notification-template" style="display: none;">
-    <div class="holiday-notify">
-      <div class="holiday-notify__close"></div>
-      <div class="holiday-notify__content">
-        <div class="holiday-notify__title"></div>
-        <button class="holiday-notify__btn"></button>
-      </div>
-    </div>
-  </div>
 </body>
 
 </html>
