@@ -82,10 +82,7 @@
     initCollapseEventListeners();
     tryLoadCssAndScripts();
 
-    if (window.self === window.top) {
-      setTimeout(imageDOMWatcher, 100);
-      // setTimeout(getBackgoundImages, 200);
-    }
+    imageDOMWatcher();
   };
 
   /**
