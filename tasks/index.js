@@ -34,7 +34,7 @@ export const addLisence = () => {
 };
 
 gulp.task("watch", () => {
-  gulp.watch("./src/**/*.{js,html,css}", buildDev);
+  gulp.watch("./src/**/*.{js,html,css}", buildDevWatch);
 });
 
 // download filters to repository
@@ -60,6 +60,12 @@ export const buildUpdatesFilesStream = gulp.series(buildUpdatesFiles, (done) =>
 
 // watch build
 export const buildWatch = gulp.series("watch", (done) => done());
+
+// dev watch build
+export const buildDevWatch = gulp.series(
+  chromium,
+  (done) => done()
+);
 
 // dev build
 export const buildDev = gulp.series(

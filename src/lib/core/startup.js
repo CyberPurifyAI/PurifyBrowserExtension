@@ -34,11 +34,6 @@ purify.initialize = function () {
       // purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
     });
 
-    purify.purifyFiltering.init();
-    purify.loadingQueue.init();
-    purify.predictionQueue.init();
-
-    purify.parentalControl.init();
     purify.whitelist.init();
     purify.ui.init();
 
@@ -65,6 +60,11 @@ purify.initialize = function () {
       }
     );
   }
+
+  purify.purifyFiltering.init();
+  purify.loadingQueue.init();
+  purify.predictionQueue.init();
+  purify.parentalControl.init();
 
   purify.rulesStorage.init(() => {
     purify.localStorage.init(onLocalStorageLoaded);
