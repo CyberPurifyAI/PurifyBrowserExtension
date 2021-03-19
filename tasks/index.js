@@ -91,9 +91,9 @@ export const buildBeta = gulp.series(
 // release build
 export const buildRelease = gulp.series(
   chromium,
-  opera,
-  firefoxAmo,
-  edge,
+  // opera,
+  // firefoxAmo,
+  // edge,
   updateBuildInfo,
   clean,
   (done) => done()

@@ -10,7 +10,7 @@ export const LOCALES_DIR = "./src/_locales/";
 
 export const FILTERS_DEST = "filters/filters";
 
-export const PRIVATE_FILES = "private/PurifyBrowserExtension";
+export const PRIVATE_FILES = "private/";
 
 export const EXTENSION_FILTERS_SERVER_URL_FORMAT =
   "https://filters.adtidy.org/extension/%browser";
