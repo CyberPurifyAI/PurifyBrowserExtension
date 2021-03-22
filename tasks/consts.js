@@ -32,8 +32,8 @@ export const LOCAL_SCRIPT_RULES_COMMENT =
 
 // Firefox extension IDs
 export const FIREFOX_EXTENSION_ID_DEV = "cyberpurifydev@cyberpurify.com";
-export const FIREFOX_EXTENSION_ID_BETA = "cyberpurifybeta@cyberpurify.com";
-export const FIREFOX_EXTENSION_ID_RELEASE = "cyberpurify@cyberpurify.com";
+export const FIREFOX_EXTENSION_ID_BETA = "cyberpurifydev@cyberpurify.com";
+export const FIREFOX_EXTENSION_ID_RELEASE = "cyberpurifydev@cyberpurify.com";
 
 // Update urls
 export const CHROME_UPDATE_URL =
