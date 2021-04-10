@@ -1,6 +1,6 @@
 {
   "name": "purify-browser-extension",
-  "version": "0.3.15",
+  "version": "0.4.1",
   "description": "Purify Browser Extension",
   "scripts": {
     "watch": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildWatch --require babel-register --gulpfile tasks",
