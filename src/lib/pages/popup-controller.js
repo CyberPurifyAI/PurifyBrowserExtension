@@ -179,7 +179,7 @@ PopupController.prototype = {
     this.filteringMessageText = this._getTemplate("filtering-message-template");
 
     this._renderMain(containerMain, tabInfo);
-    this._renderFilteringControls(containerMain);
+    // this._renderFilteringControls(containerMain);
   },
 
   _getTemplate(id) {
