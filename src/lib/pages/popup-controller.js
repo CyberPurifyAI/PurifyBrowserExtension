@@ -117,9 +117,9 @@ PopupController.prototype = {
 
   _renderPopup(tabInfo) {
     const parent = document.querySelector("#widget-popup");
-    const switcher = document.querySelector(
-      "#filtering-default-control-template > div.control-buttons"
-    );
+    // const switcher = document.querySelector(
+    //   "#filtering-default-control-template > div.control-buttons"
+    // );
     const stack = parent.querySelector(".tabstack");
 
     const containerMain = parent.querySelector(".tab-main");
@@ -135,22 +135,22 @@ PopupController.prototype = {
     if (tabInfo.applicationFilteringDisabled) {
       stack.classList.add("status-paused");
       parent.classList.add("status-paused");
-      switcher.setAttribute("aria-checked", "false");
+      // switcher.setAttribute("aria-checked", "false");
     } else if (!tabInfo.applicationAvailable) {
       stack.classList.add("status-inner");
       parent.classList.add("status-checkmark");
-      switcher.setAttribute("aria-hidden", "true");
+      // switcher.setAttribute("aria-hidden", "true");
     } else if (!tabInfo.canAddRemoveRule) {
       stack.classList.add("status-error");
       parent.classList.add("status-checkmark");
     } else if (tabInfo.documentWhiteListed) {
       stack.classList.add("status-cross");
       parent.classList.add("status-cross");
-      switcher.setAttribute("aria-checked", "false");
+      // switcher.setAttribute("aria-checked", "false");
     } else {
       stack.classList.add("status-checkmark");
       parent.classList.add("status-checkmark");
-      switcher.setAttribute("aria-checked", "true");
+      // switcher.setAttribute("aria-checked", "true");
     }
 
     // Header
@@ -160,9 +160,9 @@ PopupController.prototype = {
     );
 
     // Controls
-    this.filteringControlDefault = this._getTemplate(
-      "filtering-default-control-template"
-    );
+    // this.filteringControlDefault = this._getTemplate(
+    //   "filtering-default-control-template"
+    // );
 
     // Actions
     // this.actionOpenAbuse = this._getTemplate("action-open-abuse-template");
