@@ -26,12 +26,35 @@
       return blockingUrl;
     };
 
+    const verifyWhiteListDomains = (url) => {
+      const whiteListRedirectDomains = [
+        "facebook.com",
+        "www.facebook.com",
+        "youtube.com",
+        "www.youtube.com",
+        "linkedin.com",
+        "www.linkedin.com",
+        "cyberpurify.com",
+        "www.cyberpurify.com",
+      ];
+
+      for (let i = 0; i < whiteListRedirectDomains.length; i++) {
+        if (url.indexOf(whiteListRedirectDomains[i]) > -1) {
+          return true;
+        }
+      }
+    };
+
     /**
      * Shows document block page
      * @param tabId
      * @param url
      */
     const showDocumentBlockPage = (tabId, url) => {
+      if (verifyWhiteListDomains(url)) {
+        return;
+      }
+
       const incognitoTab = purify.frames.isIncognitoTab({ tabId });
       // Chromium browsers do not allow to show extension pages in incognito mode
       // Firefox allows, but on private pages do not work browser.runtime.getBackgroundPage()

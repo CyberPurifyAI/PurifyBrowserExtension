@@ -423,15 +423,7 @@ purify.whitelist = (function (purify) {
     purify.lazyGetClear(whiteListDomainsHolder, "domains");
     purify.lazyGetClear(blockListDomainsHolder, "domains");
 
-    const initWhiteListDomains = [
-      "facebook.com",
-      "www.facebook.com",
-      "youtube.com",
-      "www.youtube.com",
-      "linkedin.com",
-      "www.linkedin.com"
-    ];
-    addWhiteListed(initWhiteListDomains);
+    // addWhiteListed(initWhiteListDomains);
   };
 
   return {
