@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "declaration": true,
+        "target": "es5",
+        "lib": ["es2015", "dom"],
+        "outDir": "./src/lib/libs/purifyjs",
+        "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedParameters": false,
+        "esModuleInterop": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowUnreachableCode": false,
+        "experimentalDecorators": true,
+        "showConfig": true
+    },
+    "include": ["src/lib/libs/purifyjs/"],
+    "exclude": ["node_modules/"]
+}

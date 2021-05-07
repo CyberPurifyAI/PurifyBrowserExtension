@@ -5,7 +5,8 @@
 - v2.29.1
 - Licence: MIT
 - Release: https://github.com/moment/moment/tree/2.29.1
-- Raw file: https://raw.githubusercontent.com/moment/moment/2.29.1/min/moment-with-locales.min.js
+- Raw file: https://raw.githubusercontent.com/moment/moment/2.29.1/min/moment-with-locales.js
+- Raw minify: https://raw.githubusercontent.com/moment/moment/2.29.1/min/moment-with-locales.min.js
 
 ## `deferred.js`
 
