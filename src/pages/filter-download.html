@@ -2,191 +2,161 @@
 <html>
 
 <head>
-  <title i18n="filter_download_title"></title>
+    <title i18n="filter_download_title"></title>
 
-  <meta charset="utf-8" />
-  <link type="text/css" rel="stylesheet" href="css/main.css" />
-  <link type="text/css" rel="stylesheet" href="css/nanobar.css" />
-  <link type="text/css" rel="stylesheet" href="../lib/content-script/css/alert-popup.css" />
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" />
+    <link type="text/css" rel="stylesheet" href="css/nanobar.css" />
+    <link type="text/css" rel="stylesheet" href="../lib/content-script/css/alert-popup.css" />
 
-  <!-- @if browser == "CHROMIUM" || browser == "EDGE" || browser == "OPERA" || browser == "FIREFOX_WEBEXT" -->
-  <script type="text/javascript" src="../lib/libs/nanobar.min.js"></script>
-  <script type="text/javascript" src="../lib/content-script/purify-content.js"></script>
-  <script type="text/javascript" src="../lib/content-script/common-script.js"></script>
-  <script type="text/javascript" src="../lib/content-script/content-script.js"></script>
-  <script type="text/javascript" src="../lib/content-script/content-utils.js"></script>
-  <script type="text/javascript" src="../lib/content-script/i18n-helper.js"></script>
-  <script type="text/javascript" src="../lib/pages/i18n.js"></script>
-  <script type="text/javascript" src="../lib/pages/filter-download.js"></script>
-  <!-- @endif -->
-  <link rel="shortcut icon" href="images/favicon.ico" />
+    <!-- @if browser == "CHROMIUM" || browser == "EDGE" || browser == "OPERA" || browser == "FIREFOX_WEBEXT" -->
+    <script type="text/javascript" src="../lib/libs/nanobar.js"></script>
+    <script type="text/javascript" src="../lib/content-script/purify-content.js"></script>
+    <script type="text/javascript" src="../lib/content-script/common-script.js"></script>
+    <script type="text/javascript" src="../lib/content-script/content-script.js"></script>
+    <script type="text/javascript" src="../lib/content-script/content-utils.js"></script>
+    <script type="text/javascript" src="../lib/content-script/i18n-helper.js"></script>
+    <script type="text/javascript" src="../lib/pages/i18n.js"></script>
+    <script type="text/javascript" src="../lib/pages/filter-download.js"></script>
+    <!-- @endif -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
 
 <body>
-  <header class="filter-download__header downloading" style="padding:20px 0;">
-    <div class="wlimit cf">
-      <!--  -->
-      <div style="">
-        <img src="images/logo.svg" height="100px"
-          style="display: block; margin-left: auto; margin-right: auto; width: 500px;" alt="CyberPurify" />
-      </div>
-    </div>
-  </header>
-
-  <div class="settings-page downloading">
-    <div class="wlimit">
-      <div class="sp-lists-user-descr" style="margin-bottom: 10px; font-size: 22px; font-style: inherit;"
-        i18n="filter_download_loading"></div>
-      <div style="display: none;" id="close-message" class="sp-lists-user-descr">This window will close automatically
-        after 10 seconds</div>
-
-      <div class="settings-content tab-pane" style="display: block;margin: auto; width: 60%;text-align:left;">
-        <div class="settings-body" style="margin-top: 12px;">
-          <ul class="opts-list" id="miscellaneous-stealth-options">
-            <li class="active">
-              <div aria-labelledby="block_porn" class="opt-desc">
-                <label tabindex="0" for="block_porn" class="title">
-                  Proactively block porn and nude images
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_porn"
-                    togglecheckbox="true" style="display: none;">
-                  <a href="#" class="open-settings">
-                    <div class="toggler"></div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="active">
-              <div aria-labelledby="block_sexy" class="opt-desc">
-                <label tabindex="0" for="block_sexy" class="title">
-                  Proactively block sexy revealing images
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_sexy"
-                    togglecheckbox="true" style="display: none;">
-                  <a href="#" class="open-settings">
-                    <div class="toggler"></div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="active">
-              <div aria-labelledby="block_bloody" class="opt-desc">
-                <label tabindex="0" for="block_bloody" class="title">
-                  Proactively block bloody corpses images
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloody"
-                    togglecheckbox="true" style="display: none;">
-                  <a href="#" class="open-settings">
-                    <div class="toggler"></div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="active">
-              <div aria-labelledby="block_bloodshed" class="opt-desc">
-                <label tabindex="0" for="block_bloodshed" class="title">
-                  Proactively block bloodshed, injured images
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloodshed"
-                    togglecheckbox="true" style="display: none;">
-                  <a href="#" class="open-settings">
-                    <div class="toggler"></div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="active">
-              <div aria-labelledby="block_blacklist" class="opt-desc">
-                <label tabindex="0" for="block_blacklist" class="title">
-                  Block domains based on blacklist
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_blacklist"
-                    togglecheckbox="true" style="display: none;">
-                  <a href="#" class="open-settings">
-                    <div class="toggler"></div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="active">
-              <div aria-labelledby="block_ads" class="opt-desc">
-                <label tabindex="0" for="block_ads" class="title">
-                  Block all ads
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_ads"
-                    togglecheckbox="true" style="display: none;">
-                  <a href="#" class="open-settings">
-                    <div class="toggler"></div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <!-- <li>
-              <div aria-labelledby="hide_referrer" class="opt-desc">
-                <label tabindex="0" for="hide_referrer" class="title">
-                  Proactively block harmful words
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="hide_referrer"
-                    togglecheckbox="true" style="display: none;">
-                  <div class="toggler"></div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div aria-labelledby="hide_referrer" class="opt-desc">
-                <label tabindex="0" for="hide_referrer" class="title">
-                  Send reports when your child learns about pharmaceuticals
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="hide_referrer"
-                    togglecheckbox="true" style="display: none;">
-                  <div class="toggler"></div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div aria-labelledby="hide_referrer" class="opt-desc">
-                <label tabindex="0" for="hide_referrer" class="title">
-                  Send reports when your child learns about drugs (heroin, cocaine)
-                </label>
-              </div>
-              <div class="opt-state input">
-                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
-                  <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="hide_referrer"
-                    togglecheckbox="true" style="display: none;">
-                  <div class="toggler"></div>
-                </div>
-              </div>
-            </li> -->
-          </ul>
+    <header class="filter-download__header downloading" style="padding:20px 0;">
+        <div class="wlimit cf">
+            <!--  -->
+            <div style="">
+                <img src="images/logo.svg" height="100px" style="display: block; margin-left: auto; margin-right: auto; width: 500px;" alt="CyberPurify" />
+            </div>
         </div>
-      </div>
+    </header>
 
+    <div class="settings-page downloading">
+        <div class="wlimit">
+            <div class="sp-lists-user-descr" style="margin-bottom: 10px; font-size: 22px; font-style: inherit;" i18n="filter_download_loading"></div>
+            <div style="display: none;" id="close-message" class="sp-lists-user-descr">This window will close automatically after 10 seconds</div>
+
+            <div class="settings-content tab-pane" style="display: block;margin: auto; width: 60%;text-align:left;">
+                <div class="settings-body" style="margin-top: 12px;">
+                    <ul class="opts-list" id="miscellaneous-stealth-options">
+                        <li class="active">
+                            <div aria-labelledby="block_porn" class="opt-desc">
+                                <label tabindex="0" for="block_porn" class="title">Proactively block porn and nude images</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_porn" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_sexy" class="opt-desc">
+                                <label tabindex="0" for="block_sexy" class="title">Proactively block sexy revealing images</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_sexy" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_bloody" class="opt-desc">
+                                <label tabindex="0" for="block_bloody" class="title">Proactively block bloody corpses images</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloody" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_bloodshed" class="opt-desc">
+                                <label tabindex="0" for="block_bloodshed" class="title">Proactively block bloodshed, injured images</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloodshed" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_blacklist" class="opt-desc">
+                                <label tabindex="0" for="block_blacklist" class="title">Block domains based on blacklist</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_blacklist" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_ads" class="opt-desc">
+                                <label tabindex="0" for="block_ads" class="title">Block all ads</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_ads" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <div aria-labelledby="hide_referrer" class="opt-desc">
+                                <label tabindex="0" for="hide_referrer" class="title">Proactively block harmful words</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="hide_referrer" togglecheckbox="true" style="display: none;">
+                                    <div class="toggler"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div aria-labelledby="hide_referrer" class="opt-desc">
+                                <label tabindex="0" for="hide_referrer" class="title">Send reports when your child learns about pharmaceuticals</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="hide_referrer" togglecheckbox="true" style="display: none;">
+                                    <div class="toggler"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div aria-labelledby="hide_referrer" class="opt-desc">
+                                <label tabindex="0" for="hide_referrer" class="title">Send reports when your child learns about drugs (heroin, cocaine)</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="hide_referrer" togglecheckbox="true" style="display: none;">
+                                    <div class="toggler"></div>
+                                </div>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
 </body>
 
 </html>
