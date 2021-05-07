@@ -19,3 +19,6 @@ tmp
 output.md
 package-lock.json
 yarn.lock
+src/lib/libs/purifyjs/*.d.ts
+src/lib/libs/purifyjs/*.map
+src/lib/libs/purifyjs/*.js
