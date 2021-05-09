@@ -5,8 +5,8 @@
     "scripts": {
         "watch": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildWatch --require babel-register --gulpfile tasks",
         "dev": "yarn shipit && NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildDev --require babel-register --gulpfile tasks",
-        "beta": "NODE_ENV=beta gulp buildBeta --require babel-register --gulpfile tasks",
-        "release": "NODE_ENV=release gulp buildRelease --require babel-register --gulpfile tasks",
+        "beta": "yarn shipit && NODE_ENV=beta gulp buildBeta --require babel-register --gulpfile tasks",
+        "release": "yarn shipit && NODE_ENV=release gulp buildRelease --require babel-register --gulpfile tasks",
         "sample-api": "NODE_ENV=dev gulp buildSampleApi --require babel-register --gulpfile tasks",
         "test": "gulp runTests --require babel-register --gulpfile tasks",
         "locales-download": "gulp updateLocalesStream --require babel-register --gulpfile tasks",
