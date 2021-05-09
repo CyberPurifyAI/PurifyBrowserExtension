@@ -2,20 +2,31 @@
 
 > CyberPurify is a fast and lightweight purify browser extension that effectively blocks all types of explicit content, nsfw, ads and trackers on all web pages.
 
-- [Installation](#installation)
-  - [Chrome and Chromium-based browsers](#installation-chrome)
-  - [Firefox](#installation-firefox)
-  - [Opera](#installation-opera)
-  - [Microsoft Edge](#installation-edge)
-- [Development](#dev)
-  - [Requirements](#dev-requirements)
-  - [How to build](#dev-build)
-  - [Linter](#dev-linter)
-  - [Update localizations](#dev-localizations)
+- [Purify Browser Extension](#purify-browser-extension)
+  - [Installation](#installation)
+    - [Chrome and Chromium-based browsers](#chrome-and-chromium-based-browsers)
+    - [Firefox](#firefox)
+    - [Opera](#opera)
+    - [Microsoft Edge](#microsoft-edge)
+  - [Development](#development)
+    - [Requirements](#requirements)
+    - [How to build](#how-to-build)
+    - [Linter](#linter)
+    - [Update localizations](#update-localizations)
+    - [Get all keys from Chrome Storage](#get-all-keys-from-chrome-storage)
+  - [Minimum supported browser versions](#minimum-supported-browser-versions)
+  - [Function Predict](#function-predict)
+  - [Third-party libs](src/lib/libs/sources.md)
 
 <a id="installation"></a>
 
 ## Installation
+
+| service    |      version      |
+| ---------- | :---------------: |
+| Ubuntu     |      18.04.5 LTS  |
+| nodejs     |      v12.22.1     |
+| yarn       |      1.22.10      |
 
 <a id="installation-chrome"></a>
 
@@ -61,6 +72,13 @@ Install local dependencies by running:
 <a id="dev-build"></a>
 
 ### How to build
+
+**Building the PyrifyJs**
+Client-side indecent content checking. Inherited from [nsfw-js](src/lib/libs/sources.md#nsfwjs) 3rd party libraries
+
+```
+  yarn shipit
+```
 
 **How to run tests**
 
