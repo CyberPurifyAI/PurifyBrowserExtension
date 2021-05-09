@@ -17,3 +17,16 @@ node_modules
 private
 tmp
 output.md
+
+src/lib/libs/purifyjs/*.d.ts
+src/lib/libs/purifyjs/*.map
+src/lib/libs/purifyjs/*.js
+src/lib/libs/moment-with-locales.min.js
+src/lib/libs/mqtt.min.js
+src/lib/libs/sso.min.js
+src/lib/libs/nanobar.min.js
+src/lib/libs/extended-css.min.js
+src/lib/libs/ace/ace.min.js
+src/lib/libs/nsfwjs.min.js
+src/lib/libs/purifyjs.min.js
+src/lib/libs/purifyjs.min.js.backup

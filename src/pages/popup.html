@@ -2,106 +2,108 @@
 <html>
 
 <head>
-  <title></title>
-  <meta charset="utf-8" />
-  <link type="text/css" rel="stylesheet" href="css/popup.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title i18n="popup_title"></title>
 
-  <!-- @if browser == "CHROMIUM" || browser == "EDGE" || browser == "OPERA" || browser == "FIREFOX_WEBEXT" -->
-  <script type="text/javascript" src="../lib/content-script/purify-content.js"></script>
-  <script type="text/javascript" src="../lib/content-script/common-script.js"></script>
-  <script type="text/javascript" src="../lib/content-script/popup-script.js"></script>
-  <script type="text/javascript" src="../lib/content-script/i18n-helper.js"></script>
-  <script type="text/javascript" src="../lib/libs/sso.min.js"></script>
-  <script type="text/javascript" src="../lib/pages/i18n.js"></script>
-  <script type="text/javascript" src="../lib/pages/script.js"></script>
-  <script type="text/javascript" src="../lib/pages/popup-controller.js"></script>
-  <!-- @endif -->
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="css/popup.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- @if browser == "CHROMIUM" || browser == "EDGE" || browser == "OPERA" || browser == "FIREFOX_WEBEXT" -->
+    <script type="text/javascript" src="../lib/content-script/purify-content.js"></script>
+    <script type="text/javascript" src="../lib/content-script/common-script.js"></script>
+    <script type="text/javascript" src="../lib/content-script/popup-script.js"></script>
+    <script type="text/javascript" src="../lib/content-script/i18n-helper.js"></script>
+    <script type="text/javascript" src="../lib/libs/sso/sso.js"></script>
+    <script type="text/javascript" src="../lib/pages/i18n.js"></script>
+    <script type="text/javascript" src="../lib/pages/script.js"></script>
+    <script type="text/javascript" src="../lib/pages/popup-controller.js"></script>
+    <!-- @endif -->
 </head>
 
 <body style="overflow: hidden">
-  <div id="widget-popup" class="widget-popup status-checkmark">
-    <div class="widget-popup__header">
-      <div class="widget-popup__header-logo"></div>
-      <div class="widget-popup__header-btns" id="popup-header-buttons">
-        <button i18n-title="options_settings" class="cir-btn settings openSettings" title="CyberPurify Settings">
-          <img src="images/icon-settings.svg" alt="">
-        </button>
-      </div>
-    </div>
-    <div class="tabstack">
-      <div class="tab-main tab-main--base active tab-switch-tab" tab-switch="main"></div>
-    </div>
-
-    <div class="tabstack-bottom tab-main tab-switch-tab" tab-switch="main">
-      <div class="actions">
-        <div id="openLogin" class="action" style="display: flex;">
-          <span class="act-icon">
-            <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true">
-          </span>
-          <span class="act-name" i18n="popup_login_site" role="button" tabindex="0">Login</span>
+    <div id="widget-popup" class="widget-popup status-checkmark">
+        <div class="widget-popup__header">
+            <a href="https://cyberpurify.com/" target="_blank" i18n-title="popup_title">
+                <div class="widget-popup__header-logo"></div>
+            </a>
+            <div class="widget-popup__header-btns" id="popup-header-buttons">
+                <button i18n-title="options_settings" class="cir-btn settings openSettings" title="CyberPurify Settings">
+					<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 22 22" ><path d="M15.808,14.066H6.516v-1.162H5.354v1.162H4.193c-0.321,0-0.581,0.26-0.581,0.58s0.26,0.58,0.581,0.58h1.162 v1.162h1.162v-1.162h9.292c0.32,0,0.58-0.26,0.58-0.58S16.128,14.066,15.808,14.066z M15.808,9.419h-1.742V8.258h-1.162v1.161 h-8.71c-0.321,0-0.581,0.26-0.581,0.581c0,0.321,0.26,0.581,0.581,0.581h8.71v1.161h1.162v-1.161h1.742 c0.32,0,0.58-0.26,0.58-0.581C16.388,9.679,16.128,9.419,15.808,9.419z M17.55,0.708H2.451c-0.962,0-1.742,0.78-1.742,1.742v15.1 c0,0.961,0.78,1.74,1.742,1.74H17.55c0.962,0,1.742-0.779,1.742-1.74v-15.1C19.292,1.488,18.512,0.708,17.55,0.708z M18.13,17.551 c0,0.32-0.26,0.58-0.58,0.58H2.451c-0.321,0-0.581-0.26-0.581-0.58v-15.1c0-0.321,0.26-0.581,0.581-0.581H17.55 c0.32,0,0.58,0.26,0.58,0.581V17.551z M15.808,4.774H9.419V3.612H8.258v1.162H4.193c-0.321,0-0.581,0.26-0.581,0.581 s0.26,0.581,0.581,0.581h4.065v1.162h1.161V5.935h6.388c0.32,0,0.58-0.26,0.58-0.581S16.128,4.774,15.808,4.774z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+				</button>
+            </div>
+        </div>
+        <div class="tabstack">
+            <div class="tab-main tab-main--base active tab-switch-tab" tab-switch="main"></div>
         </div>
 
-        <div id="showUserInfo" class="action" style="display: none;">
-          <span class="act-icon">
-            <img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true">
-          </span>
-          <a style="text-decoration: none !important;" href="https://id.cyberpurify.com/auth/realms/purify/account"
-            target="_blank">
-            <span class="act-name" tabindex="0"></span>
-          </a>
+        <div class="tabstack-bottom tab-main tab-switch-tab" tab-switch="main" style="display: none;">
+            <div class="actions">
+                <div id="openLogin" class="action" style="display: flex;">
+                    <span class="act-icon">
+						<img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true">
+					</span>
+                    <span class="act-name" i18n="popup_login_site" role="button" tabindex="0">Login</span>
+                </div>
+
+                <div id="showUserInfo" class="action" style="display: none;">
+                    <span class="act-icon">
+						<img src="images/avatar.svg" class="icon-thumb-down" alt="" aria-hidden="true">
+					</span>
+                    <a style="text-decoration: none !important;" href="https://id.cyberpurify.com/auth/realms/purify/account" target="_blank">
+                        <span class="act-name" tabindex="0"></span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="footer">
-      <div class="footer__in footer__default" role="contentinfo">
-        <div class="popup-footer">
-          <span class="footer__title" i18n="popup_purify_footer_title" title="© CyberPurify, 2020–2021">© CyberPurify, 2020–2021</span>
+
+        <div class="footer">
+            <div class="footer__in footer__default" role="contentinfo">
+                <div class="popup-footer">
+                    <span class="footer__title" i18n="popup_purify_footer_title" i18n-title="popup_purify_footer_title">© <span class="current-year"></span> CyberPurify</span>
+                </div>
+                <!-- <div class="platforms">
+                    <a href="" target="_blank" i18n-title="popup_purify_for_ios" class="popup-footer-link openLink">
+                        <img src="images/apple.svg" alt="" class="icon-apple" />
+                    </a>
+                    <a href="" target="_blank" i18n-title="popup_purify_for_android" class="popup-footer-link openLink">
+                        <img src="images/android.svg" alt="" class="icon-android" />
+                    </a>
+                </div> -->
+            </div>
         </div>
-        <div class="platforms">
-          <!-- <a href="" target="_blank" i18n-title="popup_purify_for_ios" class="popup-footer-link openLink">
-          <img src="images/apple.svg" alt="" class="icon-apple" />
-        </a>
-        <a href="" target="_blank" i18n-title="popup_purify_for_android" class="popup-footer-link openLink">
-          <img src="images/android.svg" alt="" class="icon-android" />
-        </a> -->
+    </div>
+
+    <!--Templates-->
+
+    <!--Headers-->
+    <div id="filtering-default-header-template" style="display: none;">
+        <div class="head">
+            <div class="blocked">
+                <span class="blocked-tab"></span>
+            </div>
+            <div class="total blocked-all"></div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!--Templates-->
-
-  <!--Headers-->
-  <div id="filtering-default-header-template" style="display: none;">
-    <div class="head">
-      <div class="blocked">
-        <span class="blocked-tab"></span>
-      </div>
-      <div class="total blocked-all"></div>
+    <!--Filtering State Checkbox-->
+    <div id="filtering-default-control-template" style="display: none;">
+        <div i18n-title="popup_switch_button" class="control-buttons changeProtectionStateEnable changeDocumentWhiteListed" role="switch" tabindex="0">
+            <div class="center-switch">
+                <div class="switch-btn"></div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!--Filtering State Checkbox-->
-  <div id="filtering-default-control-template" style="display: none;">
-    <div i18n-title="popup_switch_button" class="control-buttons changeProtectionStateEnable changeDocumentWhiteListed"
-      role="switch" tabindex="0">
-      <div class="center-switch">
-        <div class="switch-btn"></div>
-      </div>
+    <!--Status Text-->
+    <div id="filtering-status-template" style="display: none;">
+        <div class="current-site"></div>
+        <div class="status"></div>
     </div>
-  </div>
 
-  <!--Status Text-->
-  <div id="filtering-status-template" style="display: none;">
-    <div class="current-site"></div>
-    <div class="status"></div>
-  </div>
-
-  <!--Message Text-->
-  <div id="filtering-message-template" style="display: none;">
-    <div class="error-msg"></div>
-  </div>
+    <!--Message Text-->
+    <div id="filtering-message-template" style="display: none;">
+        <div class="error-msg"></div>
+    </div>
 
 </body>
 
