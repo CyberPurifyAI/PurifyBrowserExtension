@@ -17,13 +17,13 @@ import zip from "gulp-zip";
 import Crx from "crx";
 import rename from "gulp-rename";
 import {
-  BUILD_DIR,
-  BRANCH_BETA,
-  BRANCH_RELEASE,
-  BRANCH_DEV,
-  PRIVATE_FILES,
-  CHROME_UPDATE_URL,
-  CHROME_CODEBASE_URL,
+    BUILD_DIR,
+    BRANCH_BETA,
+    BRANCH_RELEASE,
+    BRANCH_DEV,
+    PRIVATE_FILES,
+    CHROME_UPDATE_URL,
+    CHROME_CODEBASE_URL,
 } from "./consts";
 import { version } from "./parse-package";
 import { updateLocalesMSGName, preprocessAll } from "./helpers";
@@ -36,18 +36,18 @@ import copyModelFiles from "./copy-models";
 const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
-  chrome: path.join("src/browser/chrome/**/*"),
-  filters: path.join("filters/filters/**/*"),
-  webkitFiles: path.join("src/browser/webkit/**/*"),
-  cert: path.join(PRIVATE_FILES, "certificate.pem"),
-  dest: path.join(BUILD_DIR, BRANCH, "chrome"),
+    chrome: path.join("src/browser/chrome/**/*"),
+    filters: path.join("filters/filters/**/*"),
+    webkitFiles: path.join("src/browser/webkit/**/*"),
+    cert: path.join(PRIVATE_FILES, "certificate.pem"),
+    dest: path.join(BUILD_DIR, BRANCH, "chrome"),
 };
 
 const dest = {
-  filters: path.join(paths.dest, "filters"),
-  inner: path.join(paths.dest, "**/*"),
-  buildDir: path.join(BUILD_DIR, BRANCH),
-  manifest: path.join(paths.dest, "manifest.json"),
+    filters: path.join(paths.dest, "filters"),
+    inner: path.join(paths.dest, "**/*"),
+    buildDir: path.join(BUILD_DIR, BRANCH),
+    manifest: path.join(paths.dest, "manifest.json"),
 };
 
 // copy models
@@ -64,92 +64,91 @@ const copyFilters = () => gulp.src(paths.filters).pipe(gulp.dest(dest.filters));
 
 // copy chromium and webkit files
 const chromiumMainFiles = () =>
-  gulp.src([paths.webkitFiles, paths.chrome]).pipe(gulp.dest(paths.dest));
+    gulp.src([paths.webkitFiles, paths.chrome]).pipe(gulp.dest(paths.dest));
 
 // preprocess with params
 const preprocess = (done) =>
-  preprocessAll(
-    paths.dest,
-    {
-      browser: "CHROMIUM",
-      remoteScripts: true,
-    },
-    done
-  );
+    preprocessAll(
+        paths.dest, {
+            browser: "CHROMIUM",
+            remoteScripts: true,
+        },
+        done
+    );
 
 // change the extension name based on a type of a build (dev, beta or release)
 const localesProcess = (done) => updateLocalesMSGName(BRANCH, paths.dest, done);
 
 // update current version of extension
 const updateManifest = (done) => {
-  const manifest = JSON.parse(fs.readFileSync(dest.manifest));
-  manifest.version = version;
-  fs.writeFileSync(dest.manifest, JSON.stringify(manifest, null, 4));
-  return done();
+    const manifest = JSON.parse(fs.readFileSync(dest.manifest));
+    manifest.version = version;
+    fs.writeFileSync(dest.manifest, JSON.stringify(manifest, null, 4));
+    return done();
 };
 
 const createArchive = (done) => {
-  if (BRANCH !== BRANCH_BETA && BRANCH !== BRANCH_RELEASE) {
-    return done();
-  }
+    if (BRANCH !== BRANCH_BETA && BRANCH !== BRANCH_RELEASE) {
+        return done();
+    }
 
-  return (
-    gulp
-      .src(dest.inner)
-      .pipe(zip(`chrome-${BRANCH}.zip`))
-      .pipe(gulp.dest(dest.buildDir))
-      // chrome.zip artifact
-      .pipe(rename("chrome.zip"))
-      .pipe(gulp.dest(BUILD_DIR))
-      // edge.zip artifact
-      .pipe(rename("edge.zip"))
-      .pipe(gulp.dest(BUILD_DIR))
-  );
+    return (
+        gulp
+        .src(dest.inner)
+        .pipe(zip(`chrome-${BRANCH}-${version}.zip`))
+        .pipe(gulp.dest(dest.buildDir))
+        // chrome.zip artifact
+        // .pipe(rename("chrome.zip"))
+        // .pipe(gulp.dest(BUILD_DIR))
+        // edge.zip artifact
+        // .pipe(rename("edge.zip"))
+        // .pipe(gulp.dest(BUILD_DIR))
+    );
 };
 
-const crxPack = async (done) => {
-  if (BRANCH === BRANCH_DEV || BRANCH === BRANCH_RELEASE) {
-    return done();
-  }
+const crxPack = async(done) => {
+    if (BRANCH === BRANCH_DEV || BRANCH === BRANCH_RELEASE) {
+        return done();
+    }
 
-  const manifest = JSON.parse(await fs.promises.readFile(dest.manifest));
-  manifest.update_url = CHROME_UPDATE_URL;
-  await fs.promises.writeFile(dest.manifest, JSON.stringify(manifest, null, 4));
+    const manifest = JSON.parse(await fs.promises.readFile(dest.manifest));
+    manifest.update_url = CHROME_UPDATE_URL;
+    await fs.promises.writeFile(dest.manifest, JSON.stringify(manifest, null, 4));
 
-  const privateKey = await fs.promises.readFile(paths.cert, "utf-8");
+    const privateKey = await fs.promises.readFile(paths.cert, "utf-8");
 
-  const crx = new Crx({
-    codebase: CHROME_CODEBASE_URL,
-    privateKey,
-  });
+    const crx = new Crx({
+        codebase: CHROME_CODEBASE_URL,
+        privateKey,
+    });
 
-  await crx.load(paths.dest);
-  const crxBuffer = await crx.pack();
-  const updateXml = await crx.generateUpdateXML();
+    await crx.load(paths.dest);
+    const crxBuffer = await crx.pack();
+    const updateXml = await crx.generateUpdateXML();
 
-  const crxBuildFilename = `chrome-standalone-${BRANCH}.crx`;
-  const crxBuildPath = path.join(dest.buildDir, crxBuildFilename);
-  const updateXmlPath = path.join(dest.buildDir, "update.xml");
-  await fs.promises.writeFile(crxBuildPath, crxBuffer);
-  await fs.promises.writeFile(updateXmlPath, updateXml);
+    const crxBuildFilename = `chrome-standalone-${BRANCH}.crx`;
+    const crxBuildPath = path.join(dest.buildDir, crxBuildFilename);
+    const updateXmlPath = path.join(dest.buildDir, "update.xml");
+    await fs.promises.writeFile(crxBuildPath, crxBuffer);
+    await fs.promises.writeFile(updateXmlPath, updateXml);
 
-  return gulp
-    .src(crxBuildPath)
-    .pipe(rename("chrome.crx"))
-    .pipe(gulp.src(updateXmlPath))
-    .pipe(gulp.dest(BUILD_DIR));
+    return gulp
+        .src(crxBuildPath)
+        .pipe(rename("chrome.crx"))
+        .pipe(gulp.src(updateXmlPath))
+        .pipe(gulp.dest(BUILD_DIR));
 };
 
 export default gulp.series(
-  // copyExternal,
-  copyModels,
-  copyCommon,
-  // obfuscatorSecretFiles,
-  copyFilters,
-  chromiumMainFiles,
-  updateManifest,
-  localesProcess,
-  preprocess,
-  createArchive,
-  crxPack
+    // copyExternal,
+    copyModels,
+    copyCommon,
+    // obfuscatorSecretFiles,
+    copyFilters,
+    chromiumMainFiles,
+    updateManifest,
+    localesProcess,
+    preprocess,
+    createArchive,
+    crxPack
 );

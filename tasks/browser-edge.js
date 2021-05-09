@@ -25,18 +25,18 @@ import copyModelFiles from "./copy-models";
 const BRANCH = process.env.NODE_ENV || "";
 
 const paths = {
-  edge: path.join("src/browser/edge/**/*"),
-  filters: path.join("filters/filters/**/*"),
-  chromeFiles: path.join("src/browser/chrome/**/*"),
-  webkitFiles: path.join("src/browser/webkit/**/*"),
-  dest: path.join(BUILD_DIR, BRANCH, "edge"),
+    edge: path.join("src/browser/edge/**/*"),
+    filters: path.join("filters/filters/**/*"),
+    chromeFiles: path.join("src/browser/chrome/**/*"),
+    webkitFiles: path.join("src/browser/webkit/**/*"),
+    dest: path.join(BUILD_DIR, BRANCH, "edge"),
 };
 
 const dest = {
-  filters: path.join(paths.dest, "filters"),
-  inner: path.join(paths.dest, "**/*"),
-  buildDir: path.join(BUILD_DIR, BRANCH),
-  manifest: path.join(paths.dest, "manifest.json"),
+    filters: path.join(paths.dest, "filters"),
+    inner: path.join(paths.dest, "**/*"),
+    buildDir: path.join(BUILD_DIR, BRANCH),
+    manifest: path.join(paths.dest, "manifest.json"),
 };
 
 // copy models
@@ -53,45 +53,45 @@ const copyFilters = () => gulp.src(paths.filters).pipe(gulp.dest(dest.filters));
 
 // edge extension includes webkit and chromium files
 const edge = () =>
-  gulp
+    gulp
     .src([paths.webkitFiles, paths.chromeFiles, paths.edge])
     .pipe(gulp.dest(paths.dest));
 
 // preprocess with params
 const preprocess = (done) =>
-  preprocessAll(paths.dest, { browser: "EDGE", remoteScripts: true }, done);
+    preprocessAll(paths.dest, { browser: "EDGE", remoteScripts: true }, done);
 
 // change the extension name based on a type of a build (dev, beta or release)
 const localesProcess = (done) => updateLocalesMSGName(BRANCH, paths.dest, done);
 
 // update current version of extension
 const updateManifest = (done) => {
-  const manifest = JSON.parse(fs.readFileSync(dest.manifest));
-  manifest.version = version;
-  fs.writeFileSync(dest.manifest, JSON.stringify(manifest, null, 4));
-  return done();
+    const manifest = JSON.parse(fs.readFileSync(dest.manifest));
+    manifest.version = version;
+    fs.writeFileSync(dest.manifest, JSON.stringify(manifest, null, 4));
+    return done();
 };
 
 const createArchive = (done) => {
-  if (BRANCH !== BRANCH_BETA && BRANCH !== BRANCH_RELEASE) {
-    return done();
-  }
+    if (BRANCH !== BRANCH_BETA && BRANCH !== BRANCH_RELEASE) {
+        return done();
+    }
 
-  return gulp
-    .src(dest.inner)
-    .pipe(zip(`edge-${BRANCH}.zip`))
-    .pipe(gulp.dest(dest.buildDir));
+    return gulp
+        .src(dest.inner)
+        .pipe(zip(`edge-${BRANCH}-${version}.zip`))
+        .pipe(gulp.dest(dest.buildDir));
 };
 
 export default gulp.series(
-  // copyExternal,
-  copyModels,
-  copyCommon,
-  // obfuscatorSecretFiles,
-  copyFilters,
-  edge,
-  updateManifest,
-  localesProcess,
-  preprocess,
-  createArchive
+    // copyExternal,
+    copyModels,
+    copyCommon,
+    // obfuscatorSecretFiles,
+    copyFilters,
+    edge,
+    updateManifest,
+    localesProcess,
+    preprocess,
+    createArchive
 );
