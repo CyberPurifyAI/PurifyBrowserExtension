@@ -41,9 +41,9 @@ export async function load(base = BASE_PATH, options = { size: IMAGE_SIZE }) {
   }
   // Default size is IMAGE_SIZE - needed if just type option is used
   options.size = options.size || IMAGE_SIZE;
-  const purify = new PURIFYJS(base, options);
-  await purify.load();
-  return purify;
+  const purifyjs = new PURIFYJS(base, options);
+  await purifyjs.load();
+  return purifyjs;
 }
 
 interface IOHandler {
