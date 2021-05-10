@@ -91,3 +91,8 @@
 ## Keycloak-js
 
 - Library source: https://github.com/keycloak/keycloak
+
+## Adguard
+
+- 3.5.37
+- Library source: https://github.com/AdguardTeam/AdguardBrowserExtension
