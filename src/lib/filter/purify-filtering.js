@@ -32,7 +32,7 @@ purify.purifyFiltering = (function(purify, global) {
 
     const init = async function() {
         purify.console.info("Initializing Predict Image");
-        purifyInstance = await purifyjs.load(PURIFY_MODEL_PATH);
+        purifyInstance = await purifyjs.load(PURIFY_MODEL_PATH, { type: 'graph' });
         purifyImageCache.cache.object();
         purifyUrlCache.cache.object();
     };
@@ -64,13 +64,15 @@ purify.purifyFiltering = (function(purify, global) {
     const getPredictImage = async function(requestUrl, image) {
         if (GIF_REGEX.test(requestUrl)) {
             const prediction = await purifyInstance.classifyGif(image);
+            image.dispose();
             const { result, score } = handlePrediction([prediction]);
+            // purify.console.info(`Result GIF: ${score} - ${requestUrl}`);
 
             return Boolean(result);
         } else {
             const prediction = await purifyInstance.classify(image, 7);
+            image.dispose();
             const { result, score } = handlePrediction([prediction]);
-
             // purify.console.info(`Result: ${score} - ${requestUrl}`);
 
             return Boolean(result);
@@ -78,49 +80,98 @@ purify.purifyFiltering = (function(purify, global) {
     };
 
     const Ruler = function(classes) {
-        labels = []
-        Neutral_position = 7;
-        for (var i = 0; i < classes.length; i++) {
-            labels[classes[i].className] = (Math.round(classes[i].probability * 100) / 100);
-            if (classes[i].className == "Neutral") { Neutral_position = i; }
+        let labels = [];
+        let Neutral_position = 7;
+
+        for (let i = 0; i < classes.length; i++) {
+            labels[classes[i].className] =
+                Math.round(classes[i].probability * 100) / 100;
+
+            if (classes[i].className == "Neutral") {
+                Neutral_position = i;
+            }
         }
+
         if (labels["Horror_aug"] >= 0.78) {
             return 1;
         } else if (labels["Gory_aug"] >= 0.75) {
             return 2;
-        } else if (labels["Porn"] >= 0.7) {
-            return 4;
-        } else if (labels["Sexy"] >= 0.8) {
-            return 9;
         } else if (
-            (labels["Gory_aug"] + labels["Horror_aug"]) >= 0.79 &&
+            labels["Gory_aug"] + labels["Horror_aug"] >= 0.79 &&
             Neutral_position > 1
         ) {
             return 3;
+        } else if (labels["Porn"] >= 0.7) {
+            return 4;
         } else if (
-            (labels["Porn"] + labels["Sexy"]) >= 0.75 &&
+            labels["Porn"] + labels["Sexy"] >= 0.75 &&
             Neutral_position > 1
         ) {
             return 5;
         } else if (
-            (labels["Porn"] + labels["Horror_aug"]) >= 0.75 &&
+            labels["Porn"] + labels["Horror"] >= 0.75 &&
             Neutral_position > 1
         ) {
             return 6;
         } else if (
-            (labels["Porn"] + labels["Gory_aug"]) >= 0.77 &&
+            labels["Porn"] + labels["Gory_aug"] >= 0.77 &&
             Neutral_position > 1
         ) {
             return 7;
         } else if (
-            (labels["Horror_aug"] + labels["Sexy"]) >= 0.75 &&
+            labels["Horror_aug"] + labels["Sexy"] >= 0.75 &&
             Neutral_position > 1
         ) {
             return 8;
         } else {
             return 0;
         }
-    }
+    };
+
+    // const Ruler = function(classes) {
+    //     labels = []
+    //     Neutral_position = 7;
+    //     for (var i = 0; i < classes.length; i++) {
+    //         labels[classes[i].className] = (Math.round(classes[i].probability * 100) / 100);
+    //         if (classes[i].className == "Neutral") { Neutral_position = i; }
+    //     }
+    //     if (labels["Horror_aug"] >= 0.78) {
+    //         return 1;
+    //     } else if (labels["Gory_aug"] >= 0.75) {
+    //         return 2;
+    //     } else if (labels["Porn"] >= 0.7) {
+    //         return 4;
+    //     } else if (labels["Sexy"] >= 0.8) {
+    //         return 9;
+    //     } else if (
+    //         (labels["Gory_aug"] + labels["Horror_aug"]) >= 0.79 &&
+    //         Neutral_position > 1
+    //     ) {
+    //         return 3;
+    //     } else if (
+    //         (labels["Porn"] + labels["Sexy"]) >= 0.75 &&
+    //         Neutral_position > 1
+    //     ) {
+    //         return 5;
+    //     } else if (
+    //         (labels["Porn"] + labels["Horror_aug"]) >= 0.75 &&
+    //         Neutral_position > 1
+    //     ) {
+    //         return 6;
+    //     } else if (
+    //         (labels["Porn"] + labels["Gory_aug"]) >= 0.77 &&
+    //         Neutral_position > 1
+    //     ) {
+    //         return 7;
+    //     } else if (
+    //         (labels["Horror_aug"] + labels["Sexy"]) >= 0.75 &&
+    //         Neutral_position > 1
+    //     ) {
+    //         return 8;
+    //     } else {
+    //         return 0;
+    //     }
+    // }
 
     const handlePrediction = function([prediction]) {
         try {

@@ -83,9 +83,8 @@ export class PURIFYJS {
       this.model = await tf.loadGraphModel(this.pathOrIOHandler);
     } else {
       // this is a Layers Model
-      this.model = await tf.loadGraphModel(this.pathOrIOHandler);
-      // this.model = await tf.loadLayersModel(this.pathOrIOHandler);
-      // this.endpoints = this.model.layers.map((l) => l.name);
+      this.model = await tf.loadLayersModel(this.pathOrIOHandler);
+      this.endpoints = this.model.layers.map((l) => l.name);
     }
 
     // Warmup the model.
