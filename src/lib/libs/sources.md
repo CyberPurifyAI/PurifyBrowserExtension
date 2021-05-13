@@ -74,7 +74,8 @@
 
 ## `lru.js`
 
-- Library source https://raw.githubusercontent.com/rsms/js-lru/master/lru.js
+- Library source https://github.com/rsms/js-lru
+- Raw files: https://raw.githubusercontent.com/rsms/js-lru/master/lru.js
 
 ## `nsfwjs`
 
@@ -84,4 +85,14 @@
 ## `mqtt.js`
 
 - v4.2.1
+- Release: https://github.com/mqttjs/MQTT.js/releases/tag/v4.2.1
 - Library source: https://github.com/mqttjs/MQTT.js
+
+## Keycloak-js
+
+- Library source: https://github.com/keycloak/keycloak
+
+## Adguard
+
+- 3.5.37
+- Library source: https://github.com/AdguardTeam/AdguardBrowserExtension

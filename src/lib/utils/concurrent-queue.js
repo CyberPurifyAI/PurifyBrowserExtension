@@ -8,91 +8,91 @@
 /**
  * concurrent queue
  */
-(function (api) {
-  "use strict";
+(function(api) {
+    "use strict";
 
-  const concurrentQueue = function ({
-    concurrency,
-    timeout,
-    onProcess,
-    onSuccess,
-    onFailure,
-    onDone,
-    onDrain,
-  }) {
-    const TIMEOUT = timeout;
+    const concurrentQueue = function({
+        concurrency,
+        timeout,
+        onProcess,
+        onSuccess,
+        onFailure,
+        onDone,
+        onDrain,
+    }) {
+        const TIMEOUT = timeout;
 
-    let count = 0;
-    let waiting = [];
-    let paused = false;
+        let count = 0;
+        let waiting = [];
+        let paused = false;
 
-    const add = function (task) {
-      const hasChannel = count < concurrency;
+        const add = function(task) {
+            const hasChannel = count < concurrency;
 
-      if (hasChannel) {
-        next(task);
-        return;
-      }
+            if (hasChannel) {
+                next(task);
+                return;
+            }
 
-      waiting.push(task);
+            waiting.push(task);
+        };
+
+        const next = function(task) {
+            count++;
+
+            onProcess(task, (err, result) => {
+                if (err !== undefined) {
+                    onFailure(task, err);
+                } else {
+                    onSuccess(result);
+                }
+
+                if (onDone !== undefined) {
+                    onDone(err !== undefined ? err : result);
+                }
+
+                count--;
+
+                if (!paused && waiting.length > 0) {
+                    const task = waiting.shift();
+                    setTimeout(() => next(task), TIMEOUT);
+                    return;
+                }
+
+                if (count === 0 && waiting.length === 0 && onDrain !== undefined) {
+                    onDrain();
+                }
+            });
+        };
+
+        const pause = function() {
+            paused = true;
+        };
+
+        const resume = function() {
+            if (waiting.length > 0) {
+                const channels = concurrency - count;
+
+                for (let i = 0; i < channels; i++) {
+                    const task = waiting.shift();
+                    next(task);
+                }
+            }
+            paused = false;
+        };
+
+        const getTaskAmount = function() {
+            return waiting.length;
+        };
+
+        return {
+            add,
+            next,
+            pause,
+            resume,
+            getTaskAmount,
+        };
     };
 
-    const next = function (task) {
-      count++;
-
-      onProcess(task, (err, result) => {
-        if (err !== undefined) {
-          onFailure(task, err);
-        } else {
-          onSuccess(result);
-        }
-
-        if (onDone !== undefined) {
-          onDone(err !== undefined ? err : result);
-        }
-
-        count--;
-
-        if (!paused && waiting.length > 0) {
-          const task = waiting.shift();
-          setTimeout(() => next(task), TIMEOUT);
-          return;
-        }
-
-        if (count === 0 && waiting.length === 0 && onDrain !== undefined) {
-          onDrain();
-        }
-      });
-    };
-
-    const pause = function () {
-      paused = true;
-    };
-
-    const resume = function () {
-      if (waiting.length > 0) {
-        const channels = concurrency - count;
-
-        for (let i = 0; i < channels; i++) {
-          const task = waiting.shift();
-          next(task);
-        }
-      }
-      paused = false;
-    };
-
-    const getTaskAmount = function () {
-      return waiting.length;
-    };
-
-    return {
-      add,
-      next,
-      pause,
-      resume,
-      getTaskAmount,
-    };
-  };
-
-  api.concurrentQueue = concurrentQueue;
+    api.concurrentQueue = concurrentQueue;
 })(purify.utils, window);
