@@ -369,113 +369,245 @@
 
             <div id="miscellaneous-settings" class="settings-content tab-pane" style="display: none">
                 <div class="page-title" i18n="options_miscellaneous_settings"></div>
-                <div class="settings-body">
-                    <ul class="opts-list" id="miscellaneous-stealth-options">
+                <div class="settings-body" style="margin-top: 20px;">
+                    <div class="subtitle settings-body-subtitle">The content will be blurred immediately</div>
+                    <ul class="opts-list">
                         <li class="active">
                             <div aria-labelledby="block_porn" class="opt-desc">
-                                <label tabindex="0" for="block_porn" class="title">
-                                    Proactively block porn and nude images
-                                </label>
+                                <label tabindex="0" for="block_porn" class="title">Proactively block porn and nude images</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_porn" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_porn" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
                         <li class="active">
                             <div aria-labelledby="block_sexy" class="opt-desc">
-                                <label tabindex="0" for="block_sexy" class="title">
-                                    Proactively block sexy revealing images
-                                </label>
+                                <label tabindex="0" for="block_sexy" class="title">Pornographic, nude, sexual content</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_sexy" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_sexy" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
                         <li class="active">
                             <div aria-labelledby="block_bloody" class="opt-desc">
-                                <label tabindex="0" for="block_bloody" class="title">
-                                    Proactively block bloody corpses images
-                                </label>
+                                <label tabindex="0" for="block_bloody" class="title">Hentai comic</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloody" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloody" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
                         <li class="active">
                             <div aria-labelledby="block_bloodshed" class="opt-desc">
-                                <label tabindex="0" for="block_bloodshed" class="title">
-                                    Proactively block bloodshed, injured images
-                                </label>
+                                <label tabindex="0" for="block_bloodshed" class="title">Extreme violence</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloodshed" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_bloodshed" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
                         <li class="active">
                             <div aria-labelledby="block_blacklist" class="opt-desc">
-                                <label tabindex="0" for="block_blacklist" class="title">
-                                    Block domains based on blacklist
-                                </label>
+                                <label tabindex="0" for="block_blacklist" class="title">Gory war, dead body</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_blacklist" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_blacklist" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="active">
+                            <div aria-labelledby="block_medical" class="opt-desc">
+                                <label tabindex="0" for="block_medical" class="title">Medical bloody, injured and surgery content</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_medical" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
                         <li class="active">
+                            <div aria-labelledby="block_accident" class="opt-desc">
+                                <label tabindex="0" for="block_accident" class="title">Bloody accident content</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_accident" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_murder" class="opt-desc">
+                                <label tabindex="0" for="block_murder" class="title">Murder, execution, suicide</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_murder" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_zombies" class="opt-desc">
+                                <label tabindex="0" for="block_zombies" class="title">Zombies, ghosts, demons</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_zombies" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="active">
+                            <div aria-labelledby="block_obsessive" class="opt-desc">
+                                <label tabindex="0" for="block_obsessive" class="title">Obsessive images</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_obsessive" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="active">
                             <div aria-labelledby="block_ads" class="opt-desc">
-                                <label tabindex="0" for="block_ads" class="title">
-                                    Block all ads
-                                </label>
+                                <label tabindex="0" for="block_ads" class="title">Block all ads, scams and domains based on blacklist</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_ads" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_ads" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div aria-labelledby="block_words" class="opt-desc">
-                                <label tabindex="0" for="block_words" class="title">
-                                    Proactively block harmful words
-                                </label>
+                    </ul>
+                    <div class="subtitle settings-body-subtitle">Reports will be sent to parents (Premium only)</div>
+                    <ul class="opts-list">
+                        <li class="disabled">
+                            <div aria-labelledby="block_threatening" class="opt-desc">
+                                <label tabindex="0" for="block_threatening" class="title">Profanity, threatening</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_words" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_threatening" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div aria-labelledby="send_report_pharmaceuticals" class="opt-desc">
-                                <label tabindex="0" for="send_report_pharmaceuticals" class="title">
-                                    Send reports when your child learns about pharmaceuticals
-                                </label>
+                        <li class="disabled">
+                            <div aria-labelledby="block_offensive" class="opt-desc">
+                                <label tabindex="0" for="block_offensive" class="title">Offensive language, bullying</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="send_report_pharmaceuticals" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_offensive" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div aria-labelledby="send_report_drugs" class="opt-desc">
-                                <label tabindex="0" for="send_report_drugs" class="title">
-                                    Send reports when your child learns about drugs (heroin, cocaine)
-                                </label>
+                        <li class="disabled">
+                            <div aria-labelledby="block_medicines" class="opt-desc">
+                                <label tabindex="0" for="block_medicines" class="title">Medicines</label>
                             </div>
                             <div class="opt-state input">
-                                <div class="toggler-wr" role="checkbox" aria-checked="true" tabindex="0">
-                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="send_report_drugs" />
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_medicines" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disabled">
+                            <div aria-labelledby="block_drugs" class="opt-desc">
+                                <label tabindex="0" for="block_drugs" class="title">Drugs, heroin, cocaine, cannabis, addictive substances, etc.</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_drugs" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disabled">
+                            <div aria-labelledby="block_alcohol" class="opt-desc">
+                                <label tabindex="0" for="block_alcohol" class="title">Alcohol, wine, beer</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_alcohol" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disabled">
+                            <div aria-labelledby="block_tobacco" class="opt-desc">
+                                <label tabindex="0" for="block_tobacco" class="title">Tobacco</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_tobacco" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disabled">
+                            <div aria-labelledby="block_stabbed" class="opt-desc">
+                                <label tabindex="0" for="block_stabbed" class="title">Stabbed and slashed weapon</label>
+                            </div>
+                            <div class="opt-state input">
+                                <div class="toggler-wr" role="checkbox" aria-checked="false" tabindex="0">
+                                    <input aria-hidden="false" type="checkbox" class="sp-table-row-input" id="block_stabbed" togglecheckbox="true" style="display: none;">
+                                    <a href="#" class="open-settings">
+                                        <div class="toggler"></div>
+                                    </a>
                                 </div>
                             </div>
                         </li>
@@ -489,9 +621,9 @@
                 <div class="settings-content">
                     <div class="settings-body">
                         <div class="about-opt">
-                            <div class="logo about-opt__logo">
+                            <!-- <div class="logo about-opt__logo">
                                 <img src="images/logo.svg" width="500" alt="" />
-                            </div>
+                            </div> -->
                             <div class="about-opt__desc">
                                 <div id="about-version-placeholder" class="about-opt__version"></div>
                                 <div class="about-opt__desc">
