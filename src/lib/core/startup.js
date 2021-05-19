@@ -60,10 +60,10 @@ purify.initialize = function() {
         );
     }
 
-    purify.purifyFiltering.init();
-    purify.loadingQueue.init();
-    purify.predictionQueue.init();
-    purify.parentalControl.init();
+    // purify.purifyFiltering.init();
+    // purify.loadingQueue.init();
+    // purify.predictionQueue.init();
+    // purify.parentalControl.init();
 
     purify.rulesStorage.init(() => {
         purify.localStorage.init(onLocalStorageLoaded);

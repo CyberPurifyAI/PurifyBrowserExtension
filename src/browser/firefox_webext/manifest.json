@@ -33,11 +33,8 @@
                 "lib/utils/element-collapser.js",
                 "lib/utils/css-hits-counter.js",
                 "lib/libs/extended-css.js",
-                "lib/content-script/purify-content.js",
-                "lib/content-script/common-script.js",
-                "lib/content-script/content-script.js",
-                "lib/content-script/wrappers.js",
-                "lib/content-script/preload.js"
+                "lib/background-page/content.js",
+                "lib/content-script/wrappers.js"
             ],
             "matches": ["http://*/*", "https://*/*"],
             "match_about_blank": true,

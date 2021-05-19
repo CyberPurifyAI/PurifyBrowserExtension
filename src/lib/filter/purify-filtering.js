@@ -64,14 +64,14 @@ purify.purifyFiltering = (function(purify, global) {
     const getPredictImage = async function(requestUrl, image) {
         if (GIF_REGEX.test(requestUrl)) {
             const prediction = await purifyInstance.classifyGif(image);
-            image.dispose();
+            // image.dispose();
             const { result, score } = handlePrediction([prediction]);
             // purify.console.info(`Result GIF: ${score} - ${requestUrl}`);
 
             return Boolean(result);
         } else {
             const prediction = await purifyInstance.classify(image, 7);
-            image.dispose();
+            // image.dispose();
             const { result, score } = handlePrediction([prediction]);
             // purify.console.info(`Result: ${score} - ${requestUrl}`);
 
