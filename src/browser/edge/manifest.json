@@ -28,11 +28,8 @@
                 "lib/utils/element-collapser.js",
                 "lib/utils/css-hits-counter.js",
                 "lib/libs/extended-css.js",
-                "lib/content-script/purify-content.js",
-                "lib/content-script/common-script.js",
-                "lib/content-script/content-script.js",
-                "lib/content-script/wrappers.js",
-                "lib/content-script/preload.js"
+                "lib/background/content.min.js",
+                "lib/content-script/wrappers.js"
             ],
             "matches": ["http://*/*", "https://*/*"],
             "match_about_blank": true,
@@ -64,6 +61,7 @@
         "storage",
         "unlimitedStorage",
         "contextMenus",
+        "activeTab",
         "cookies"
     ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"

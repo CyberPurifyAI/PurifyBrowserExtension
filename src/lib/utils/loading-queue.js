@@ -171,11 +171,11 @@ purify.loadingQueue = (function (purify) {
   const _checkCurrentTabIdUrlStatus = function ({ tabId, tabUrl }) {
     if (!currentTabIdUrls.has(tabId)) {
       return false; // user closed this tab id
-    } else if (
-      currentTabIdUrls.has(tabId) &&
-      tabUrl !== currentTabIdUrls.get(tabId)
-    ) {
-      return false; // user's tab id matches current tab id, but url references to an another page
+    // } else if (
+    //   currentTabIdUrls.has(tabId) &&
+    //   tabUrl !== currentTabIdUrls.get(tabId)
+    // ) {
+    //   return false; // user's tab id matches current tab id, but url references to an another page
     } else {
       return true;
     }

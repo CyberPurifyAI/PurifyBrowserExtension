@@ -40,10 +40,11 @@
                 "*.youtube.com",
                 "*.googlevideo.com",
                 "googleads.g.doubleclick.net",
-                "google.com",
-                "www.google.com",
                 "doubleclick.net",
-                "static.doubleclick.net"
+                "static.doubleclick.net",
+                "vnexpress.net",
+                "dantri.com.vn",
+                "kenh14.vn",
             ];
 
             for (let i = 0; i < whiteListRedirectDomains.length; i++) {
