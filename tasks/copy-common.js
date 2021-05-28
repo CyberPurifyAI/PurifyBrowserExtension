@@ -1,3 +1,4 @@
+import regeneratorRuntime from "regenerator-runtime";
 import path from "path";
 import gulp from "gulp";
 import { LOCALES_DIR } from "./consts";
@@ -9,7 +10,7 @@ const paths = {
     lib_content_script: path.join("src/lib/content-script/**/*"),
     lib_filter: path.join("src/lib/filter/**/*"),
     lib_pages: path.join("src/lib/pages/**/*"),
-    background_page: path.join("src/lib/background-page/**/*"),
+    background_page: path.join("src/lib/background/**/*"),
     lib_tabs: path.join("src/lib/tabs/**/*"),
     lib_utils: path.join("src/lib/utils/**/*"),
     locales: path.join(LOCALES_DIR, "**/*"),

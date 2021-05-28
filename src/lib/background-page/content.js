@@ -44,7 +44,6 @@ navigator.saysWho = (() => {
 
     if (/trident/i.test(match[1])) {
         temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
-
         return `IE ${temp[1] || ''}`
     }
 
@@ -282,11 +281,16 @@ function Ruler(classes) {
 }
 
 function is_valid_image(url) {
-    if (url.indexOf("http://") == -1 && url.indexOf("https://") == -1 && url.indexOf("base64") == -1 && url.indexOf("data:image/svg") != -1) {
-        return 0;
-    } else {
+    if (url.indexOf("base64") != -1 || url.indexOf(".png") != -1 || url.indexOf(".svg") != -1 || url.indexOf(".gif") != -1 || url.indexOf(".jpg") != -1 || url.indexOf(".jpeg") != -1) {
         return 1;
     }
+    return 0;
+
+    // if(url.indexOf("http://")==-1 && url.indexOf("https://")==-1 && url.indexOf("base64")==-1 && url.indexOf("data:image/svg")!=-1 && url.indexOf(".png")==-1 && url.indexOf(".gif")==-1 && url.indexOf(".jpg")==-1 && url.indexOf(".jpeg")==-1){
+    //   return 0;
+    // }else{
+    //   return 1;
+    // }
 }
 
 function blurallimgs(srcUrl, srcType, predict_result) {
@@ -311,7 +315,7 @@ function blurallimgs(srcUrl, srcType, predict_result) {
                     // el.style.setProperty('filter','blur(30px) !important',"");
                     el.style.filter = "blur(30px)";
                     // el.style.visibility = "hidden";
-                    // console.log(TOTAL_POSITIVE+"/"+process_images.length+" "+(TOTAL_POSITIVE/process_images.length))  
+                    // console.log(TOTAL_POSITIVE+"/"+process_images.length+" "+(TOTAL_POSITIVE/process_images.length))
                     if ((process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) || (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)) {
                         if (HIDETAB == 0) {
                             HIDETAB = 1;
@@ -332,7 +336,7 @@ function blurallimgs(srcUrl, srcType, predict_result) {
             if (bg_img_url == srcUrl) {
                 el.style.backgroundImage = "url('" + ban_image + "')";
                 // console.log(TOTAL_POSITIVE+"/"+process_images.length+" FOUND bg_images "+bg_img_url);
-                // console.log(TOTAL_POSITIVE+"/"+process_images.length+" "+(TOTAL_POSITIVE/process_images.length))  
+                // console.log(TOTAL_POSITIVE+"/"+process_images.length+" "+(TOTAL_POSITIVE/process_images.length))
                 if ((process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) || (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)) {
                     if (HIDETAB == 0) {
                         HIDETAB = 1;
@@ -344,33 +348,33 @@ function blurallimgs(srcUrl, srcType, predict_result) {
                 }
             }
 
-
         }
     });
 }
 
 
-var wait_imgs = []
+// var wait_imgs = []
 
 function getallimgs(tag) {
+
     // if(tag!="alltag"){
     //   var elements = document.querySelectorAll(image_tags.join(","));
     // }else{
     //   var elements = document.getElementsByTagName("*");
     // }
 
-    // var elements = document.querySelectorAll("img, div");
-    var elements = document.getElementsByTagName("*");
+    var elements = document.querySelectorAll("img, div");
+    // var elements = document.getElementsByTagName("*");
     /* When the DOM is ready find all the images and background images
         initially loaded */
     Array.prototype.forEach.call(elements, function(el) {
         var style = window.getComputedStyle(el, false);
         if (el.tagName === "IMG") {
             md5src = md5(el.src);
-            if (el.src != "" && process_images.indexOf(md5src) == -1) {
+            if (el.src != "" && process_images.indexOf(md5src) == -1 && is_valid_image(el.src) == 1) {
                 process_images.push(md5src);
-                wait_imgs.push(el.src)
-                    // console.log(" FOUND IMG "+el.src)
+                // wait_imgs.push(el.src);
+                // console.log(" FOUND IMG "+el.src);
                 if (tag == "alltag") {
                     // el.style="-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
                     // el.style.setProperty('filter','blur(30px) !important',"");
@@ -380,25 +384,27 @@ function getallimgs(tag) {
                 }
 
                 el.setAttribute('draggable', false);
-
+                // console.log({ action: "predict", srcUrl: el.src, srcType: "img" });
                 chrome.runtime.sendMessage({ action: "predict", srcUrl: el.src, srcType: "img" }, function(response) {
-                    // console.log(response.result);
+                    // console.log(response);
                 });
             }
 
         } else if (style.backgroundImage != "none") {
-            bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "")
+            bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
             md5src = md5(bg_img_url);
-            if (image_tags.indexOf(el.tagName) == -1) { image_tags.push(el.tagName); }
-            if (bg_img_url != "" && process_images.indexOf(md5src) == -1 && is_valid_image(bg_img_url) == 1) {
-                process_images.push(md5src)
-
-                // console.log(" FOUND bg_images "+bg_img_url);
-                chrome.runtime.sendMessage({ action: "predict", srcUrl: bg_img_url, srcType: "bg" }, function(response) {
-                    // console.log(response.result);
-                });
+            if (image_tags.indexOf(el.tagName) == -1) {
+                image_tags.push(el.tagName);
             }
 
+            if (bg_img_url != "" && process_images.indexOf(md5src) == -1 && is_valid_image(bg_img_url) == 1) {
+                process_images.push(md5src);
+                // console.log({ action: "predict", srcUrl: bg_img_url, srcType: "bg" });
+                // console.log(" FOUND bg_images "+bg_img_url);
+                // chrome.runtime.sendMessage({ action: "predict", srcUrl: bg_img_url, srcType: "bg" }, function(response) {
+                //     // console.log(response.result);
+                // });
+            }
         }
     });
 }
@@ -452,7 +458,7 @@ function watchdog() {
         if (current_time - start_watch_time > 100) {
             start_watch_time = current_time;
             // console.log("DOM CHANGED ");
-            //phải dùn galltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
+            // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
             getallimgs("alltag");
         }
     }
@@ -468,9 +474,13 @@ function watchdog() {
 }
 
 if (navigator.saysWho.toLowerCase().indexOf("safari") != -1) {
-
+    var safari_not_fire_event = setInterval(function() {
+        getallimgs("sometag");
+        //Safari suck không return IMG TAG DOM event when load from cache
+    }, 1000);
     window.onload = function() {
         watchdog();
+        clearInterval(safari_not_fire_event);
     }
 
 } else if (navigator.saysWho.toLowerCase().indexOf("firefox") != -1) {
