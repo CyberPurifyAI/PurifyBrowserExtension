@@ -303,7 +303,6 @@ function blurallimgs(srcUrl, srcType, predict_result) {
         var style = window.getComputedStyle(el, false);
         if (el.src == srcUrl) {
             if (el.tagName === "IMG") {
-
                 if (predict_result == 0) {
                     // el.style="filter: blur(0px) !important;opacity:1 !important;";
                     // el.style.setProperty('filter','blur(0px) !important',"");
@@ -326,10 +325,7 @@ function blurallimgs(srcUrl, srcType, predict_result) {
                         }
                     }
                 }
-
-
             }
-
 
         } else if (style.backgroundImage != "none" && predict_result > 0) {
             bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
@@ -380,7 +376,6 @@ function getallimgs(tag) {
                     // el.style.setProperty('filter','blur(30px) !important',"");
                     el.style.filter = "blur(30px)";
                     // el.style.visibility = "hidden";
-
                 }
 
                 el.setAttribute('draggable', false);
@@ -400,7 +395,7 @@ function getallimgs(tag) {
             if (bg_img_url != "" && process_images.indexOf(md5src) == -1 && is_valid_image(bg_img_url) == 1) {
                 process_images.push(md5src);
                 // console.log({ action: "predict", srcUrl: bg_img_url, srcType: "bg" });
-                // console.log(" FOUND bg_images "+bg_img_url);
+                // console.log(" FOUND bg_images " + bg_img_url);
                 // chrome.runtime.sendMessage({ action: "predict", srcUrl: bg_img_url, srcType: "bg" }, function(response) {
                 //     // console.log(response.result);
                 // });
@@ -415,7 +410,8 @@ function getallimgs(tag) {
 // output of the classifier)
 //
 // message: {action, url, predictions}
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => { //alert(JSON.stringify(message))
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    // alert(JSON.stringify(message))
     if (message && message.action === 'predict' && message.srcUrl && message.predictions) {
         FROM_CACHE = 0;
         var predict_result = Ruler(message.predictions);
@@ -424,17 +420,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => { //aler
 
         if (predict_result > 0) {
             TOTAL_POSITIVE += 1;
-
         }
     }
 
 });
 
-
 chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href }, function(response) {});
 
-// if(navigator.saysWho.toLowerCase().indexOf("safari")==-1){
-// document.getElementsByTagName("html")[0].style.visibility="hidden";
+// if (navigator.saysWho.toLowerCase().indexOf("safari") == -1) {
+//     document.getElementsByTagName("html")[0].style.visibility = "hidden";
 // }
 
 var autohideallimgs = setInterval(function() {
@@ -443,7 +437,7 @@ var autohideallimgs = setInterval(function() {
     Array.prototype.forEach.call(elements, function(el) {
         el.style.filter = "blur(30px)";
     });
-    //Che nhanh nhất có thể
+    // Che nhanh nhất có thể
 }, 100);
 
 

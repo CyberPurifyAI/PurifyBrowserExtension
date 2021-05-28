@@ -189,11 +189,11 @@ class ImageClassifier {
             const batched = normalized.reshape([1, IMAGE_SIZE, IMAGE_SIZE, 3]);
             startTime2 = performance.now();
             const output = this.model.predict(batched);
-            batched.dispose()
-            normalized.dispose()
-            img.dispose()
-            imgElement = null
-                // console.log("Result "+JSON.stringify(output));
+            batched.dispose();
+            normalized.dispose();
+            img.dispose();
+            imgElement = null;
+            // console.log("Result "+JSON.stringify(output));
             return output;
             if (output.shape[output.shape.length - 1] === 1001) {
                 // Remove the very first logit (background noise).
@@ -234,7 +234,7 @@ function loadBlacklist() {
                         var ex = allText[i].split('^$document');
                         BLACKLIST.push(ex[0]);
                     }
-                    console.log("BLACKLIST " + BLACKLIST.length);
+                    console.log("BLACKLIST -->" + BLACKLIST.length);
                 }
             }
         };
@@ -243,8 +243,9 @@ function loadBlacklist() {
         var allText = localStorage.getItem("cp_blacklist");
         if (allText != null) {
             CP_BLACKLIST = JSON.parse(allText);
+            console.log("CP_BLACKLIST --> " + allText);
         }
-        console.log("CP_BLACKLIST " + allText);
+
         const totalTime = Math.floor(performance.now() - startTime);
         console.log(`Blacklist loaded and initialized in ${ totalTime } ms...`);
     } catch (error) {
@@ -254,7 +255,7 @@ function loadBlacklist() {
 
 function extractHostname(url) {
     var hostname;
-    //find & remove protocol (http, ftp, etc.) and get hostname
+    // find & remove protocol (http, ftp, etc.) and get hostname
 
     if (url.indexOf("//") > -1) {
         hostname = url.split('/')[2];
@@ -276,13 +277,13 @@ function extractRootDomain(url) {
         splitArr = domain.split('.'),
         arrLen = splitArr.length;
 
-    //extracting the root domain here
-    //if there is a subdomain
+    // extracting the root domain here
+    // if there is a subdomain
     if (arrLen > 2) {
         domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
-        //check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
+        // check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
         if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
-            //this is using a ccTLD
+            // this is using a ccTLD
             domain = splitArr[arrLen - 3] + '.' + domain;
         }
     }
@@ -290,8 +291,8 @@ function extractRootDomain(url) {
 }
 
 function is_toplist(domain) {
-    //widecart thay vì phải declare cụ thể google.com với google.com.vn hay www.google.com thì chỉ cần google.com
-    //Hàm chạy tạm, cần cải thiện sau thay vì loop như thế này
+    // widecart thay vì phải declare cụ thể google.com với google.com.vn hay www.google.com thì chỉ cần google.com
+    // Hàm chạy tạm, cần cải thiện sau thay vì loop như thế này
     for (var i = 0; i < TOPLIST.length; i++) {
         var id = domain.indexOf(TOPLIST[i]);
         if (id != -1) {
@@ -306,32 +307,34 @@ chrome.runtime.onMessage.addListener(
         // console.log(sender.tab ?
         //             "from a content script:" + sender.tab.url :
         //             "from the extension");
-        if (request.action == "predict") {
-            imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
-
-        } else if (request.action == "analyze") {
-            imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
-
-        } else if (request.action == "hidetab") {
-            chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
-            var domain = extractRootDomain(request.url);
-            if (CP_BLACKLIST.indexOf(domain) == -1 && is_toplist(domain) == -1) {
-                CP_BLACKLIST.push(domain);
-                localStorage.setItem("cp_blacklist", JSON.stringify(CP_BLACKLIST));
-            }
-        } else if (request.action == "checkdomain") {
-            if (BLACKLIST.length == 0) {
-                loadBlacklist();
-            }
-
-            chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-                var domain = extractRootDomain(tabs[0].url);
-                // console.log("domain "+domain+" is_toplist "+is_toplist(domain));
-                if ((BLACKLIST.indexOf(domain) >= 0 || CP_BLACKLIST.indexOf(domain) >= 0) && is_toplist(domain) == -1) {
-                    chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
+        switch (request.action) {
+            case 'predict':
+                imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
+                break;
+            case 'analyze':
+                imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
+                break;
+            case 'hidetab':
+                chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
+                var domain = extractRootDomain(request.url);
+                if (CP_BLACKLIST.indexOf(domain) == -1 && is_toplist(domain) == -1) {
+                    CP_BLACKLIST.push(domain);
+                    localStorage.setItem("cp_blacklist", JSON.stringify(CP_BLACKLIST));
                 }
-            })
+                break;
+            case 'checkdomain':
+                if (BLACKLIST.length == 0) {
+                    loadBlacklist();
+                }
 
+                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                    var domain = extractRootDomain(tabs[0].url);
+                    // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
+                    if ((BLACKLIST.indexOf(domain) >= 0 || CP_BLACKLIST.indexOf(domain) >= 0) && is_toplist(domain) == -1) {
+                        chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
+                    }
+                })
+                break;
         }
     }
 );
