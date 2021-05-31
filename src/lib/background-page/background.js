@@ -293,8 +293,9 @@ function extractRootDomain(url) {
 function is_toplist(domain) {
     // widecart thay vì phải declare cụ thể google.com với google.com.vn hay www.google.com thì chỉ cần google.com
     // Hàm chạy tạm, cần cải thiện sau thay vì loop như thế này
+    var d = extractHostname(domain);
     for (var i = 0; i < TOPLIST.length; i++) {
-        var id = domain.indexOf(TOPLIST[i]);
+        var id = d.indexOf(TOPLIST[i]);
         if (id != -1) {
             return id;
         }
@@ -317,7 +318,7 @@ chrome.runtime.onMessage.addListener(
             case 'hidetab':
                 chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
 
-                var domain = extractRootDomain(request.url);
+                var domain = extractHostname(request.url);
                 if (CP_BLACKLIST.indexOf(domain) == -1 && is_toplist(domain) == -1) {
                     CP_BLACKLIST.push(domain);
                     localStorage.setItem("cp_blacklist", JSON.stringify(CP_BLACKLIST));
@@ -336,7 +337,7 @@ chrome.runtime.onMessage.addListener(
                 }
 
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-                    var domain = extractRootDomain(tabs[0].url);
+                    var domain = extractHostname(tabs[0].url);
                     // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
                     if ((BLACKLIST.indexOf(domain) >= 0 || CP_BLACKLIST.indexOf(domain) >= 0) && is_toplist(domain) == -1) {
                         chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
