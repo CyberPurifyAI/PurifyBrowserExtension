@@ -62,9 +62,9 @@ class ImageClassifier {
                 this.model.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3]));
             });
             const totalTime = Math.floor(performance.now() - startTime);
-            console.log(`Model loaded and initialized in ${totalTime} ms...`);
+            console.log(`Model loaded and initialized in ${ totalTime } ms...`);
         } catch (error) {
-            console.error(`Unable to load model from URL: ${MOBILENET_MODEL_TFHUB_URL}`);
+            console.error(`Unable to load model from URL: ${ MOBILENET_MODEL_TFHUB_URL }`);
         }
     }
 
@@ -234,7 +234,7 @@ function loadBlacklist() {
                         var ex = allText[i].split('^$document');
                         BLACKLIST.push(ex[0]);
                     }
-                    console.log("BLACKLIST -->" + BLACKLIST.length);
+                    console.log("BLACKLIST --> " + BLACKLIST.length);
                 }
             }
         };
@@ -316,11 +316,19 @@ chrome.runtime.onMessage.addListener(
                 break;
             case 'hidetab':
                 chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
+
                 var domain = extractRootDomain(request.url);
                 if (CP_BLACKLIST.indexOf(domain) == -1 && is_toplist(domain) == -1) {
                     CP_BLACKLIST.push(domain);
                     localStorage.setItem("cp_blacklist", JSON.stringify(CP_BLACKLIST));
                 }
+                // req to server
+                var messages = {
+                    clientId: purify.utils.browser.getClientId(),
+                    link: sender.tab.url,
+                    POSITIVE_IMAGES: request.POSITIVE_IMAGES
+                };
+                // console.log(messages);
                 break;
             case 'checkdomain':
                 if (BLACKLIST.length == 0) {
