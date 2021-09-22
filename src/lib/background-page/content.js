@@ -284,10 +284,19 @@ function Ruler(classes) {
 }
 
 function is_valid_image(url) {
-    if (url.indexOf("base64") != -1 || url.indexOf(".png") != -1 || url.indexOf(".svg") != -1 || url.indexOf(".gif") != -1 || url.indexOf(".jpg") != -1 || url.indexOf(".jpeg") != -1) {
-        return 1;
+    if (
+        url.indexOf("base64") != -1 ||
+        url.indexOf(".png") != -1 ||
+        url.indexOf(".svg") != -1 ||
+        url.indexOf(".gif") != -1 ||
+        url.indexOf(".jpg") != -1 ||
+        url.indexOf(".jpeg") != -1
+    ) {
+        return true;
     }
-    return 0;
+
+    // return isImageURL(url);
+    return false;
 
     // if(url.indexOf("http://")==-1 && url.indexOf("https://")==-1 && url.indexOf("base64")==-1 && url.indexOf("data:image/svg")!=-1 && url.indexOf(".png")==-1 && url.indexOf(".gif")==-1 && url.indexOf(".jpg")==-1 && url.indexOf(".jpeg")==-1){
     //   return 0;
@@ -379,8 +388,8 @@ function getallimgs(tag) {
     Array.prototype.forEach.call(elements, function(el) {
         var style = window.getComputedStyle(el, false);
         if (el.tagName === "IMG") {
-            md5src = md5(el.src);
-            if (el.src != "" && process_images.indexOf(md5src) == -1 && is_valid_image(el.src) == 1) {
+            md5src = md5(`${ el.src }`);
+            if (el.src != "" && process_images.indexOf(md5src) == -1) {
                 process_images.push(md5src);
                 // wait_imgs.push(el.src);
                 // console.log(" FOUND IMG " + el.src);
@@ -406,7 +415,7 @@ function getallimgs(tag) {
                 image_tags.push(el.tagName);
             }
 
-            if (bg_img_url != "" && process_images.indexOf(md5src) == -1 && is_valid_image(bg_img_url) == 1) {
+            if (bg_img_url != "" && process_images.indexOf(md5src) == -1) {
                 process_images.push(md5src);
                 // console.log({ action: "predict", srcUrl: bg_img_url, srcType: "bg", backgroundImage: style.backgroundImage.match(urlRegex)[1] });
                 // console.log(" FOUND bg_images " + bg_img_url);

@@ -325,11 +325,15 @@ chrome.runtime.onMessage.addListener(
                 }
                 // req to server
                 var messages = {
+                    action: "domain_blacklist",
                     clientId: purify.utils.browser.getClientId(),
                     link: sender.tab.url,
-                    POSITIVE_IMAGES: request.POSITIVE_IMAGES
+                    POSITIVE_IMAGES: request.POSITIVE_IMAGES,
+                    timestamp: performance.now(),
+                    user_agent: navigator.userAgent,
+                    client_lang: navigator.language,
                 };
-                // console.log(messages);
+                purify.parentalControl.syncBlacklist(messages);
                 break;
             case 'checkdomain':
                 if (BLACKLIST.length == 0) {
