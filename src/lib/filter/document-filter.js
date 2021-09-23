@@ -26,26 +26,13 @@
             return blockingUrl;
         };
 
+        /**
+         *
+         * @param {string} url
+         * @returns {true}
+         */
         const verifyWhiteListDomains = (url) => {
-            const whiteListRedirectDomains = [
-                "facebook.com",
-                "www.facebook.com",
-                "linkedin.com",
-                "www.linkedin.com",
-                "cyberpurify.com",
-                "www.cyberpurify.com",
-                "youtube.com",
-                "www.youtube.com",
-                "youtu.be",
-                "*.youtube.com",
-                "*.googlevideo.com",
-                "googleads.g.doubleclick.net",
-                "doubleclick.net",
-                "static.doubleclick.net",
-                "vnexpress.net",
-                "dantri.com.vn",
-                "kenh14.vn",
-            ];
+            const whiteListRedirectDomains = purify.whitelist.getWhiteListedDomains();
 
             for (let i = 0; i < whiteListRedirectDomains.length; i++) {
                 if (url.indexOf(whiteListRedirectDomains[i]) > -1) {

@@ -442,8 +442,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         blurallimgs(message.srcUrl, message.srcType, predict_result);
 
         if (predict_result > 0) {
-            TOTAL_POSITIVE += 1;
             if (POSITIVE_IMAGES.indexOf(message.srcUrl) == -1) {
+                TOTAL_POSITIVE += 1;
                 POSITIVE_IMAGES.push(message.srcUrl);
             }
         }

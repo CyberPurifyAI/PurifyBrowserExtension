@@ -8,6 +8,7 @@
 purify.whitelist = (function(purify) {
     var WHITE_LIST_DOMAINS_LS_PROP = "white-list-domains";
     var BLOCK_LIST_DOMAINS_LS_PROP = "block-list-domains";
+    const WHITE_FILTERLIST_URL = chrome.extension.getURL("filters/filter_whitelist.txt");
 
     var allowAllWhiteListRule = new purify.rules.UrlFilterRule(
         "@@whitelist-all$document",
@@ -91,6 +92,40 @@ purify.whitelist = (function(purify) {
             }
         },
     };
+
+    function initWhiteListDomains() {
+        const startTime = performance.now();
+        var INIT_WHITELIST_DOMAINS = [];
+
+        try {
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", WHITE_FILTERLIST_URL, false);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status === 0) {
+                        var allText = rawFile.responseText.split('||');
+                        for (var i = 1; i < allText.length; i++) {
+                            var ex = allText[i].split('^$document');
+                            if (INIT_WHITELIST_DOMAINS.indexOf(ex[0]) === -1) {
+                                // Since we now know we haven't seen this car before,
+                                // copy it to the end of the uniqueCars list.
+                                INIT_WHITELIST_DOMAINS.push(ex[0].replace(/\n/g, ''));
+                            }
+                        }
+                        console.log("INIT_WHITELIST_DOMAINS --> " + INIT_WHITELIST_DOMAINS.length);
+                    }
+                }
+            };
+            rawFile.send(null);
+
+            const totalTime = Math.floor(performance.now() - startTime);
+            console.log(`whitelist loaded and initialized in ${ totalTime } ms...`);
+
+            return INIT_WHITELIST_DOMAINS;
+        } catch (error) {
+            console.error(`Unable to load whitelist from URL: ${ ADGUARD_FILTERLIST_URL }`);
+        }
+    }
 
     function notifyWhiteListUpdated() {
         purify.listeners.notifyListeners(
@@ -423,7 +458,11 @@ purify.whitelist = (function(purify) {
         purify.lazyGetClear(whiteListDomainsHolder, "domains");
         purify.lazyGetClear(blockListDomainsHolder, "domains");
 
-        // addWhiteListed(initWhiteListDomains);
+        /**
+         *
+         * add initWhiteListDomains
+         */
+        addWhiteListed(initWhiteListDomains());
     };
 
     return {
