@@ -1,6 +1,6 @@
 {
     "name": "purify-browser-extension",
-    "version": "0.5.9",
+    "version": "0.6.1",
     "description": "Purify Browser Extension",
     "scripts": {
         "watch": "NODE_ENV=dev NODE_NO_WARNINGS=1 gulp buildWatch --require babel-register --gulpfile tasks",
@@ -43,7 +43,8 @@
     },
     "dependencies": {
         "@nsfw-filter/gif-frames": "1.0.2",
-        "@tensorflow/tfjs-node": "^3.6.1"
+        "@tensorflow/tfjs-node": "^3.6.1",
+        "md5": "^2.3.0"
     },
     "author": "cyberpurify@cyberpurify.com",
     "license": "MIT",
