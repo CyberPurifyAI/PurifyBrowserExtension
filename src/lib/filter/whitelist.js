@@ -8,7 +8,9 @@
 purify.whitelist = (function(purify) {
     var WHITE_LIST_DOMAINS_LS_PROP = "white-list-domains";
     var BLOCK_LIST_DOMAINS_LS_PROP = "block-list-domains";
-    const WHITE_FILTERLIST_URL = chrome.extension.getURL("filters/filter_whitelist.txt");
+
+    const BLACK_FILTERLIST_URL = purify.getURL("filters/filter_blacklist.txt");
+    const WHITE_FILTERLIST_URL = purify.getURL("filters/filter_whitelist.txt");
 
     var allowAllWhiteListRule = new purify.rules.UrlFilterRule(
         "@@whitelist-all$document",
@@ -86,6 +88,21 @@ purify.whitelist = (function(purify) {
                 return domains;
             });
         },
+        init: function(domains) {
+            if (!domains) {
+                return;
+            }
+
+            for (var i = 0; i < domains.length; i++) {
+                var domain = domains[i];
+                this.domains.push(domain);
+                var rule = createWhiteListRule(domain);
+                if (rule) {
+                    whiteListFilter.addRule(rule);
+                }
+            }
+            saveDomainsToLocalStorage();
+        },
         add: function(domain) {
             if (this.domains.indexOf(domain) < 0) {
                 this.domains.push(domain);
@@ -94,6 +111,7 @@ purify.whitelist = (function(purify) {
     };
 
     function initWhiteListDomains() {
+
         const startTime = performance.now();
         var INIT_WHITELIST_DOMAINS = [];
 
@@ -112,18 +130,58 @@ purify.whitelist = (function(purify) {
                                 INIT_WHITELIST_DOMAINS.push(ex[0].replace(/\n/g, ''));
                             }
                         }
-                        console.log("INIT_WHITELIST_DOMAINS --> " + INIT_WHITELIST_DOMAINS.length);
+                        if (INIT_WHITELIST_DOMAINS.length > whiteListDomainsHolder.domains.length) {
+                            purify.localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
+                            addWhiteListed(INIT_WHITELIST_DOMAINS);
+                            purify.console.info("INIT_WHITELIST_DOMAINS --> " + whiteListDomainsHolder.domains.length);
+                        }
                     }
                 }
             };
             rawFile.send(null);
 
             const totalTime = Math.floor(performance.now() - startTime);
-            console.log(`whitelist loaded and initialized in ${ totalTime } ms...`);
+            purify.console.info(`whitelist loaded and initialized in ${ totalTime } ms...`);
 
-            return INIT_WHITELIST_DOMAINS;
         } catch (error) {
-            console.error(`Unable to load whitelist from URL: ${ ADGUARD_FILTERLIST_URL }`);
+            purify.console.error(`Unable to load whitelist from URL: ${ WHITE_FILTERLIST_URL }`);
+        }
+    }
+
+    function initBlockListDomains() {
+        // purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
+
+        const startTime = performance.now();
+        var INIT_BLACKLIST_DOMAINS = [];
+
+        try {
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", BLACK_FILTERLIST_URL, false);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status === 0) {
+                        var allText = rawFile.responseText.split('||');
+
+                        for (var i = 1; i < allText.length; i++) {
+                            var ex = allText[i].split('^$document');
+                            INIT_BLACKLIST_DOMAINS.push(ex[0].replace(/\n/g, ''));
+                        }
+
+                        if (INIT_BLACKLIST_DOMAINS.length > blockListDomainsHolder.domains.length) {
+                            purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
+                            blockListDomainsHolder.init(INIT_BLACKLIST_DOMAINS);
+                            purify.console.info("INIT_BLACKLIST_DOMAINS --> " + blockListDomainsHolder.domains.length);
+                        }
+                    }
+                }
+            };
+            rawFile.send(null);
+
+            const totalTime = Math.floor(performance.now() - startTime);
+            purify.console.info(`blockListDomainsHolder loaded and initialized in ${ totalTime } ms...`);
+
+        } catch (error) {
+            purify.console.error(`Unable to load blockListDomainsHolder from URL: ${ BLACK_FILTERLIST_URL }`);
         }
     }
 
@@ -460,9 +518,10 @@ purify.whitelist = (function(purify) {
 
         /**
          *
-         * add initWhiteListDomains
+         * * add initWhiteListDomains & initBlockListDomains
          */
-        addWhiteListed(initWhiteListDomains());
+        initWhiteListDomains()
+        initBlockListDomains();
     };
 
     return {

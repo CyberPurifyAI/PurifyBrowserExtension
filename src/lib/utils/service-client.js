@@ -56,7 +56,7 @@ purify.backend = (function (purify) {
     // URL for checking filter updates
     get filtersMetadataUrl() {
       const params = purify.utils.browser.getExtensionParams();
-      // return `${this.filtersUrl}/filters.js?${params.join("&")}`;
+      return `${this.filtersUrl}/filters.js?${params.join("&")}`;
     },
 
     // URL for user complaints on missed ads or malware/phishing websites
