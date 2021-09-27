@@ -29,8 +29,7 @@ var images = [],
     tfjs_images = [],
     image_parents = [],
     image_tags = ["IMG"],
-    // urlRegex = /url\((?!['"]?(?:data|http):)['"]?([^'"\)]*)['"]?\)/i;
-    urlRegex = /url(?:\([\'"\s]?)((?!data|http|\/\/)(\.\.?\/|\/))(.*?)(?:[\'"\s]?\))/g;
+    urlRegex = /url\((?!['"]?(?:data|http):)['"]?([^'"\)]*)['"]?\)/i;
 
 var ban_image = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwcHCAcHBwcHBwoHBwcHBw8ICQcKFREiFhURExMYHCggGCYlGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDy0ZFRk3NysrKysrKysrKysrKysrKysrKys3KysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAKgBLAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIHA//EABYQAQEBAAAAAAAAAAAAAAAAAAABEf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARESAv/aAAwDAQACEQMRAD8A7eAAAAACAAAAAAIoCAAgqAAAgqAgoCCgIKACgIKAKAKCgAAAAAAAAgoCCgIKAgqAIqAIoCAAAAAAAoIKAgoCKACigAACAKAAAAAAAAAAAAigIACCgIKAgoCCgIKAAAAAigAoAIAAIDQoCCgIKAgoCCgIKAgoCCgIKAgoCCgIKAgAAAAICiAKgUAQAABsAAAAAAAAAAAAAAAAAAAAEAAAEAUQAAAAAABBQEFAaAAAAAAAAAAAAAAAABAVAABAVAEEAAAFEAURRQAAAAFBQAAAAAAAAAAAAAEAAEBUAQEAAAAQRQBQABUAUAUUAAAUAAAAAAAAAAACotQAABFQBAQBA1AQNFEDTFEDTFVlTRRA0URTVVWVBVRVAAAAAAAAAAAACotQAEQEVE0QETVE0TU0xdNZ01OjF01nTU6Ma1dY006XG9NZ01ejGtNZ1ToxpWVXTGosZWLKjSpFaiACgAAAAAAAAABUWoAi1mpVKhWaxaoJqWsauGpalrNrF9LjWprOprPS43prGmp2uN6axpp0Y3q689XV6Mb1dY1ZV6TG5VYlalalTG41GI1G5UrUaZjTrGaAKgAAAAAAAAABUAEqUGasZrNByrUZtZtBytbjNrNqjna1Izamg521rE00Gdq4auoLpi6ugsqYutSg3KjUqwHSM1qNxR18sVqNA7eWK//Z";
 
@@ -372,18 +371,6 @@ function blurallimgs(srcUrl, srcType, predict_result) {
 }
 
 
-function focus_all_imgs() {
-    var elements = document.querySelectorAll("img");
-    Array.prototype.forEach.call(elements, function(el) {
-        if (el.getAttribute("cp_status") == null) {
-            browser.runtime.sendMessage({ action: "predict", srcUrl: el.src, srcType: "img" }, function(response) {
-                // console.log(response);
-            });
-            el.setAttribute("cp_status", "done");
-        }
-    });
-}
-
 // var wait_imgs = []
 
 function getallimgs(tag) {
@@ -404,7 +391,6 @@ function getallimgs(tag) {
             md5src = md5(`${ el.src }`);
             if (el.src != "" && process_images.indexOf(md5src) == -1) {
                 process_images.push(md5src);
-                el.setAttribute("cp_status", "done");
                 // wait_imgs.push(el.src);
                 // console.log(" FOUND IMG " + el.src);
                 if (tag == "alltag") {
@@ -452,12 +438,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message && message.action === 'predict' && message.srcUrl && message.predictions) {
         FROM_CACHE = 0;
         var predict_result = Ruler(message.predictions);
-        // clearInterval(autohideallimgs);
+        clearInterval(autohideallimgs);
         blurallimgs(message.srcUrl, message.srcType, predict_result);
 
         if (predict_result > 0) {
+            TOTAL_POSITIVE += 1;
             if (POSITIVE_IMAGES.indexOf(message.srcUrl) == -1) {
-                TOTAL_POSITIVE += 1;
                 POSITIVE_IMAGES.push(message.srcUrl);
             }
         }
@@ -471,14 +457,14 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
 //     document.getElementsByTagName("html")[0].style.visibility = "hidden";
 // }
 
-// var autohideallimgs = setInterval(function() {
+var autohideallimgs = setInterval(function() {
 
-//     var elements = document.getElementsByTagName("img");
-//     Array.prototype.forEach.call(elements, function(el) {
-//         el.style.filter = "blur(30px)";
-//     });
-//     // Che nhanh nhất có thể
-// }, 100);
+    var elements = document.getElementsByTagName("img");
+    Array.prototype.forEach.call(elements, function(el) {
+        el.style.filter = "blur(30px)";
+    });
+    // Che nhanh nhất có thể
+}, 100);
 
 
 var start_watch_time = new Date().getTime();
@@ -486,7 +472,6 @@ var start_watch_time = new Date().getTime();
 function watchdog() {
 
     getallimgs("alltag");
-    setInterval(function() { focus_all_imgs(); }, 5000);
     /* MutationObserver callback to add images when the body changes */
     var callback = function(mutationsList, observer) {
         var current_time = new Date().getTime();
