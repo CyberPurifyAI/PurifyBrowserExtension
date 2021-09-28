@@ -150,7 +150,7 @@ purify.whitelist = (function(purify) {
                     }
 
                     if (INIT_WHITELIST_DOMAINS.length > whiteListDomainsHolder.domains.length) {
-                        purify.localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
+                        clearWhiteListed();
                         addWhiteListed(INIT_WHITELIST_DOMAINS);
                         purify.console.info("INIT_WHITELIST_DOMAINS --> " + whiteListDomainsHolder.domains.length);
                     }
@@ -192,7 +192,7 @@ purify.whitelist = (function(purify) {
                     }
 
                     if (INIT_BLACKLIST_DOMAINS.length > blockListDomainsHolder.domains.length) {
-                        purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
+                        clearBlockListed();
                         blockListDomainsHolder.init(INIT_BLACKLIST_DOMAINS);
                         purify.console.info("INIT_BLACKLIST_DOMAINS --> " + blockListDomainsHolder.domains.length);
                     }
@@ -543,9 +543,9 @@ purify.whitelist = (function(purify) {
         purify.lazyGetClear(whiteListDomainsHolder, "domains");
         purify.lazyGetClear(blockListDomainsHolder, "domains");
 
-        /**
+        /*
          *
-         * * add initWhiteListDomains & initBlockListDomains
+         * add initWhiteListDomains & initBlockListDomains
          */
         initWhiteListDomains()
         initBlockListDomains();
