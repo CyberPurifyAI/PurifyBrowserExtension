@@ -605,6 +605,7 @@ purify.backend = (function (purify) {
 
     sendUrlReport,
     sendHitStats,
+    executeRequestAsync,
 
     getResponseHeaders,
 

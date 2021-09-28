@@ -110,80 +110,107 @@ purify.whitelist = (function(purify) {
         },
     };
 
-    function initWhiteListDomains() {
+    /**
+     *
+     * @param {*} message
+     * @param {*} url
+     * @param {*} response
+     * @returns
+     */
+    const createError = (message, url, response) => {
+        const errorMessage = `
+        error:                    ${message}
+        requested url:            ${url}
+        request status text:      ${response.statusText}`;
+        return new Error(errorMessage);
+    };
 
-        const startTime = performance.now();
-        var INIT_WHITELIST_DOMAINS = [];
+    /**
+     * Loads whitelist domains
+     */
+    const initWhiteListDomains = () =>
+        new Promise((resolve, reject) => {
 
-        try {
-            var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", WHITE_FILTERLIST_URL, false);
-            rawFile.onreadystatechange = function() {
-                if (rawFile.readyState === 4) {
-                    if (rawFile.status === 200 || rawFile.status === 0) {
-                        var allText = rawFile.responseText.split('||');
-                        for (var i = 1; i < allText.length; i++) {
-                            var ex = allText[i].split('^$document');
-                            if (INIT_WHITELIST_DOMAINS.indexOf(ex[0]) === -1) {
-                                // Since we now know we haven't seen this car before,
-                                // copy it to the end of the uniqueCars list.
-                                INIT_WHITELIST_DOMAINS.push(ex[0].replace(/\n/g, ''));
-                            }
-                        }
-                        if (INIT_WHITELIST_DOMAINS.length > whiteListDomainsHolder.domains.length) {
-                            purify.localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
-                            addWhiteListed(INIT_WHITELIST_DOMAINS);
-                            purify.console.info("INIT_WHITELIST_DOMAINS --> " + whiteListDomainsHolder.domains.length);
+            const success = function(response) {
+                if (response && response.responseText) {
+                    const responseDomains = response.responseText.split('||');
+                    if (!responseDomains) {
+                        reject(createError("invalid response", WHITE_FILTERLIST_URL, response));
+                        return;
+                    }
+
+                    const INIT_WHITELIST_DOMAINS = [];
+                    for (var i = 1; i < responseDomains.length; i++) {
+                        const explode = responseDomains[i].split('^$document');
+                        if (INIT_WHITELIST_DOMAINS.indexOf(explode[0]) === -1) {
+                            // Since we now know we haven't seen this car before,
+                            // copy it to the end of the uniqueCars list.
+                            INIT_WHITELIST_DOMAINS.push(explode[0].replace(/\n/g, ''));
                         }
                     }
-                }
-            };
-            rawFile.send(null);
 
-            const totalTime = Math.floor(performance.now() - startTime);
-            purify.console.info(`whitelist loaded and initialized in ${ totalTime } ms...`);
-
-        } catch (error) {
-            purify.console.error(`Unable to load whitelist from URL: ${ WHITE_FILTERLIST_URL }`);
-        }
-    }
-
-    function initBlockListDomains() {
-        // purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
-
-        const startTime = performance.now();
-        var INIT_BLACKLIST_DOMAINS = [];
-
-        try {
-            var rawFile = new XMLHttpRequest();
-            rawFile.open("GET", BLACK_FILTERLIST_URL, false);
-            rawFile.onreadystatechange = function() {
-                if (rawFile.readyState === 4) {
-                    if (rawFile.status === 200 || rawFile.status === 0) {
-                        var allText = rawFile.responseText.split('||');
-
-                        for (var i = 1; i < allText.length; i++) {
-                            var ex = allText[i].split('^$document');
-                            INIT_BLACKLIST_DOMAINS.push(ex[0].replace(/\n/g, ''));
-                        }
-
-                        if (INIT_BLACKLIST_DOMAINS.length > blockListDomainsHolder.domains.length) {
-                            purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
-                            blockListDomainsHolder.init(INIT_BLACKLIST_DOMAINS);
-                            purify.console.info("INIT_BLACKLIST_DOMAINS --> " + blockListDomainsHolder.domains.length);
-                        }
+                    if (INIT_WHITELIST_DOMAINS.length > whiteListDomainsHolder.domains.length) {
+                        purify.localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
+                        addWhiteListed(INIT_WHITELIST_DOMAINS);
+                        purify.console.info("INIT_WHITELIST_DOMAINS --> " + whiteListDomainsHolder.domains.length);
                     }
+
+                    resolve(responseDomains);
+                } else {
+                    reject(createError("empty response", WHITE_FILTERLIST_URL, response));
                 }
             };
-            rawFile.send(null);
 
-            const totalTime = Math.floor(performance.now() - startTime);
-            purify.console.info(`blockListDomainsHolder loaded and initialized in ${ totalTime } ms...`);
+            const error = (request, ex) => {
+                const exMessage =
+                    (ex && ex.message) || "couldn't load local filters metadata";
+                reject(createError(exMessage, WHITE_FILTERLIST_URL, request));
+            };
 
-        } catch (error) {
-            purify.console.error(`Unable to load blockListDomainsHolder from URL: ${ BLACK_FILTERLIST_URL }`);
-        }
-    }
+            purify.backend.executeRequestAsync(WHITE_FILTERLIST_URL, "application/json", success, error);
+        });
+
+
+    /**
+     * Loads blacklist domains
+     */
+    const initBlockListDomains = () =>
+        new Promise((resolve, reject) => {
+
+            const success = function(response) {
+                if (response && response.responseText) {
+                    const responseDomains = response.responseText.split('||');
+                    if (!responseDomains) {
+                        reject(createError("invalid response", BLACK_FILTERLIST_URL, response));
+                        return;
+                    }
+
+                    const INIT_BLACKLIST_DOMAINS = [];
+                    for (var i = 1; i < responseDomains.length; i++) {
+                        const explode = responseDomains[i].split('^$document');
+                        INIT_BLACKLIST_DOMAINS.push(explode[0].replace(/\n/g, ''));
+                    }
+
+                    if (INIT_BLACKLIST_DOMAINS.length > blockListDomainsHolder.domains.length) {
+                        purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
+                        blockListDomainsHolder.init(INIT_BLACKLIST_DOMAINS);
+                        purify.console.info("INIT_BLACKLIST_DOMAINS --> " + blockListDomainsHolder.domains.length);
+                    }
+
+                    resolve(responseDomains);
+                } else {
+                    reject(createError("empty response", BLACK_FILTERLIST_URL, response));
+                }
+            };
+
+            const error = (request, ex) => {
+                const exMessage =
+                    (ex && ex.message) || "couldn't load local filters metadata";
+                reject(createError(exMessage, BLACK_FILTERLIST_URL, request));
+            };
+
+            purify.backend.executeRequestAsync(BLACK_FILTERLIST_URL, "application/json", success, error);
+        });
 
     function notifyWhiteListUpdated() {
         purify.listeners.notifyListeners(
