@@ -987,7 +987,7 @@ purify.antiBannerService = (function(purify) {
     let scheduleUpdateTimeoutId;
 
     function scheduleUpdate() {
-        const checkTimeout = 1000 * 60 * 1; // 30 minutes
+        const checkTimeout = 1000 * 60 * 30; // 30 minutes
         if (scheduleUpdateTimeoutId) {
             clearTimeout(scheduleUpdateTimeoutId);
         }
