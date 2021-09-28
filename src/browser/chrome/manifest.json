@@ -31,9 +31,6 @@
                 "lib/background/content.min.js",
                 "lib/content-script/wrappers.js"
             ],
-            "css": [
-                "lib/background/blur.css"
-            ],
             "matches": ["http://*/*", "https://*/*"],
             "match_about_blank": true,
             "run_at": "document_start"
