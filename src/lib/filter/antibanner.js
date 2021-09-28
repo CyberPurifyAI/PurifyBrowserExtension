@@ -998,7 +998,10 @@ purify.antiBannerService = (function (purify) {
 
     scheduleUpdateTimeoutId = setTimeout(() => {
       try {
-        checkAntiBannerFiltersUpdate();
+        // checkAntiBannerFiltersUpdate();
+        purify.whitelist.updateBlackListDomains(
+          purify.whitelist.getBlockListedDomains().length
+        );
       } catch (ex) {
         purify.console.error("Error update filters, cause {0}", ex);
       }

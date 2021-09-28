@@ -387,16 +387,16 @@ chrome.runtime.onMessage.addListener(
                     // loadBlacklist();
                     // loadWhitelist();
                     if (localStorage.getItem("cp_blacklist") != null) {
-                        CP_BLACKLIST = JSON.parse(allText);
-                        console.log("CP_BLACKLIST --> " + allText);
+                        CP_BLACKLIST = JSON.parse(localStorage.getItem("cp_blacklist"));
+                        console.log("CP_BLACKLIST --> " + localStorage.getItem("cp_blacklist"));
                     }
 
                     BLACKLIST = purify.whitelist.getBlockListedDomains();
                     CP_TOPLIST = purify.whitelist.getWhiteListedDomains();
-
-                    purify.console.info(BLACKLIST.length);
-                    purify.console.info(CP_TOPLIST.length);
                 }
+
+                purify.console.info(BLACKLIST.length);
+                purify.console.info(CP_TOPLIST.length);
 
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                     var domain = extractHostname(tabs[0].url);

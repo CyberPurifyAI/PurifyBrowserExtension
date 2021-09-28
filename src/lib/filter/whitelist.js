@@ -11,6 +11,7 @@ purify.whitelist = (function(purify) {
 
     const BLACK_FILTERLIST_URL = purify.getURL("filters/filter_blacklist.txt");
     const WHITE_FILTERLIST_URL = purify.getURL("filters/filter_whitelist.txt");
+    const BLACK_FILTERLIST_UPDATE_URL = 'https://api.cyberpurify.com/api/domains/blacklist-hash';
 
     var allowAllWhiteListRule = new purify.rules.UrlFilterRule(
         "@@whitelist-all$document",
@@ -163,7 +164,7 @@ purify.whitelist = (function(purify) {
 
             const error = (request, ex) => {
                 const exMessage =
-                    (ex && ex.message) || "couldn't load local filters metadata";
+                    (ex && ex.message) || "couldn't load local filters whitelist";
                 reject(createError(exMessage, WHITE_FILTERLIST_URL, request));
             };
 
@@ -205,7 +206,7 @@ purify.whitelist = (function(purify) {
 
             const error = (request, ex) => {
                 const exMessage =
-                    (ex && ex.message) || "couldn't load local filters metadata";
+                    (ex && ex.message) || "couldn't load local filters blacklist";
                 reject(createError(exMessage, BLACK_FILTERLIST_URL, request));
             };
 
@@ -427,6 +428,48 @@ purify.whitelist = (function(purify) {
     };
 
     /**
+     * Updates domains in blacklist
+     * @param number_line
+     */
+    var updateBlackListDomains = function(number_line = 1) {
+        new Promise((resolve, reject) => {
+            let BLACK_FILTERLIST_URL = BLACK_FILTERLIST_UPDATE_URL + '?number_line=' + number_line;
+            const success = function(response) {
+                if (response && response.responseText) {
+                    const responseDomains = JSON.parse(response.responseText);
+                    if (!responseDomains) {
+                        reject(createError("invalid response", BLACK_FILTERLIST_URL, response));
+                        return;
+                    }
+                    const lines = responseDomains.data;
+                    if (lines.length > 0) {
+                        const INIT_BLACKLIST_DOMAINS = [];
+                        for (var i = 1; i < lines.length; i++) {
+                            const explode = lines[i].replace("||", "");
+                            INIT_BLACKLIST_DOMAINS.push(explode.replace(/\n/g, ''));
+                        }
+
+                        addBlockListed(INIT_BLACKLIST_DOMAINS);
+                        purify.console.info("UPDATED_BLACKLIST_DOMAINS --> " + INIT_BLACKLIST_DOMAINS.length);
+                    }
+
+                    resolve(responseDomains);
+                } else {
+                    reject(createError("empty response", BLACK_FILTERLIST_URL, response));
+                }
+            };
+
+            const error = (request, ex) => {
+                const exMessage =
+                    (ex && ex.message) || "couldn't request filters update blacklist";
+                reject(createError(exMessage, BLACK_FILTERLIST_URL, request));
+            };
+
+            purify.backend.executeRequestAsync(BLACK_FILTERLIST_URL, "application/json", success, error);
+        });
+    };
+
+    /**
      * Add domains to whitelist
      * @param domains
      */
@@ -565,6 +608,7 @@ purify.whitelist = (function(purify) {
         unWhiteListUrl: unWhiteListUrl,
 
         updateWhiteListDomains: updateWhiteListDomains,
+        updateBlackListDomains: updateBlackListDomains,
 
         configure: configure,
 
