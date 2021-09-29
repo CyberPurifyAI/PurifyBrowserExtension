@@ -20,12 +20,12 @@ import * as tf from '@tensorflow/tfjs';
 import { IMAGENET_CLASSES } from './imagenet_classes';
 import md5 from 'md5';
 
-
 // Where to load the model from.
 const MOBILENET_MODEL_TFHUB_URL = chrome.extension.getURL("models/purify_mobilenet_tfjs/model.json");
-const ADGUARD_FILTERLIST_URL = chrome.extension.getURL("filters/filter_21.txt");
-const BLACK_FILTERLIST_URL = chrome.extension.getURL("filters/filter_blacklist.txt");
-const WHITE_FILTERLIST_URL = chrome.extension.getURL("filters/filter_whitelist.txt");
+// const ADGUARD_FILTERLIST_URL = chrome.extension.getURL("filters/filter_21.txt");
+// const BLACK_FILTERLIST_URL = chrome.extension.getURL("filters/filter_blacklist.txt");
+// const WHITE_FILTERLIST_URL = chrome.extension.getURL("filters/filter_whitelist.txt");
+
 // Size of the image expected by mobilenet.
 const IMAGE_SIZE = 224;
 // The minimum image size to consider classifying.  Below this limit the
@@ -223,72 +223,6 @@ class ImageClassifier {
 
 const imageClassifier = new ImageClassifier();
 
-function loadBlacklist() {
-    console.log('Loading blacklist...');
-    const startTime = performance.now();
-
-    try {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", BLACK_FILTERLIST_URL, false);
-        rawFile.onreadystatechange = function() {
-            if (rawFile.readyState === 4) {
-                if (rawFile.status === 200 || rawFile.status === 0) {
-                    var allText = rawFile.responseText.split('||');
-                    for (var i = 1; i < allText.length; i++) {
-                        var ex = allText[i].split('^$document');
-                        BLACKLIST.push(ex[0].replace(/\n/g, ''));
-                    }
-                    console.log("BLACKLIST --> " + BLACKLIST.length);
-                }
-            }
-        };
-        rawFile.send(null);
-
-        var allText = localStorage.getItem("cp_blacklist");
-        if (allText != null) {
-            CP_BLACKLIST = JSON.parse(allText);
-            console.log("CP_BLACKLIST --> " + allText);
-        }
-
-        const totalTime = Math.floor(performance.now() - startTime);
-        console.log(`Blacklist loaded and initialized in ${ totalTime } ms...`);
-    } catch (error) {
-        console.error(`Unable to load blacklist from URL: ${ ADGUARD_FILTERLIST_URL }`);
-    }
-}
-
-function loadWhitelist() {
-    console.log('Loading whitelist...');
-    const startTime = performance.now();
-
-    try {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", WHITE_FILTERLIST_URL, false);
-        rawFile.onreadystatechange = function() {
-            if (rawFile.readyState === 4) {
-                if (rawFile.status === 200 || rawFile.status === 0) {
-                    var allText = rawFile.responseText.split('||');
-                    for (var i = 1; i < allText.length; i++) {
-                        var ex = allText[i].split('^$document');
-                        if (CP_TOPLIST.indexOf(ex[0]) === -1) {
-                            // Since we now know we haven't seen this car before,
-                            // copy it to the end of the uniqueCars list.
-                            CP_TOPLIST.push(ex[0].replace(/\n/g, ''));
-                        }
-                    }
-                    console.log("CP_TOPLIST --> " + CP_TOPLIST.length);
-                }
-            }
-        };
-        rawFile.send(null);
-
-        const totalTime = Math.floor(performance.now() - startTime);
-        console.log(`whitelist loaded and initialized in ${ totalTime } ms...`);
-    } catch (error) {
-        console.error(`Unable to load whitelist from URL: ${ ADGUARD_FILTERLIST_URL }`);
-    }
-}
-
 /**
  *
  * @param {string} url
@@ -311,7 +245,11 @@ function extractHostname(url) {
     return hostname;
 }
 
-
+/**
+ *
+ * @param {string} url
+ * @returns
+ */
 function extractRootDomain(url) {
     var domain = extractHostname(url),
         splitArr = domain.split('.'),
@@ -352,9 +290,6 @@ function is_toplist(domain) {
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        // console.log(sender.tab ?
-        //             "from a content script:" + sender.tab.url :
-        //             "from the extension");
         switch (request.action) {
             case 'predict':
                 imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
@@ -370,7 +305,9 @@ chrome.runtime.onMessage.addListener(
                     CP_BLACKLIST.push(md5(domain));
                     localStorage.setItem("cp_blacklist", JSON.stringify(CP_BLACKLIST));
                 }
-                // req to server
+                /*
+                 * sync Blocked host to backend
+                 */
                 var messages = {
                     action: "domain_blacklist",
                     clientId: purify.utils.browser.getClientId(),
@@ -381,27 +318,25 @@ chrome.runtime.onMessage.addListener(
                     client_lang: navigator.language,
                 };
                 purify.parentalControl.syncBlacklist(messages);
+
                 break;
             case 'checkdomain':
                 if (BLACKLIST.length == 0) {
-                    // loadBlacklist();
-                    // loadWhitelist();
                     if (localStorage.getItem("cp_blacklist") != null) {
                         CP_BLACKLIST = JSON.parse(localStorage.getItem("cp_blacklist"));
                         console.log("CP_BLACKLIST --> " + localStorage.getItem("cp_blacklist"));
                     }
-
                     BLACKLIST = purify.whitelist.getBlockListedDomains();
                     CP_TOPLIST = purify.whitelist.getWhiteListedDomains();
                 }
 
-                purify.console.info(BLACKLIST.length);
-                purify.console.info(CP_TOPLIST.length);
+                // purify.console.info(BLACKLIST.length);
+                // purify.console.info(CP_TOPLIST.length);
 
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                     var domain = extractHostname(tabs[0].url);
                     // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
-                    console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain))
+                    // console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain))
                     if ((is_blacklist(md5(domain)) == true) && is_toplist(domain) == false) {
                         chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
                     }
@@ -410,39 +345,3 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
-
-// chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
-//   console.log("details "+JSON.stringify(details));
-//     // chrome.tabs.executeScript(null,{file:"src/content.js"});
-// });
-
-// chrome.webRequest.onBeforeRequest.addListener(
-//   function(details) {
-
-//       if(details.url.indexOf(".png") != -1 || details.url.indexOf(".jpg") != -1 || details.url.indexOf(".gif") != -1){
-//          console.log("details.url "+details.url);
-//          // srcUrl=details.url;
-//          // srcType="img";
-//          // chrome.tabs.sendMessage(tabId, {action: 'blurimage', srcUrl,srcType});
-//       }
-//   },
-//   {urls: ["<all_urls>"]
-
-//   },
-//     ["blocking"]
-// );
-
-// chrome.webRequest.onBeforeRequest.addListener(
-//   function(details) {
-
-//     if(details.url.indexOf(".png") != -1 || details.url.indexOf(".jpg") != -1 || details.url.indexOf(".gif") != -1){
-//       console.log("details.url "+details.url);
-//     }
-//     return {cancel: details.url.indexOf("doubleclick") != -1 || details.url.indexOf("eclick") != -1};
-//   },
-//   {urls: ["<all_urls>"],
-//   types: ["script"]
-
-//   },
-//     ["blocking"]
-// );
