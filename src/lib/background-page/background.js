@@ -120,7 +120,7 @@ class ImageClassifier {
                 reject(`Could not load image from external source ${ srcUrl }.`);
                 // return org status
 
-                if (repeat < 20) {
+                if (repeat < 5) {
                     repeat += 1;
                     // console.log("Try again " + repeat);
                     // var autoreload
@@ -242,7 +242,7 @@ function extractHostname(url) {
     //find & remove "?"
     hostname = hostname.split('?')[0];
 
-    return hostname;
+    return hostname.replace("www.", "");;
 }
 
 /**
