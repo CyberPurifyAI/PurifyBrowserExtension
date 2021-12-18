@@ -324,7 +324,7 @@ chrome.runtime.onMessage.addListener(
                 if (BLACKLIST.length == 0) {
                     if (localStorage.getItem("cp_blacklist") != null) {
                         CP_BLACKLIST = JSON.parse(localStorage.getItem("cp_blacklist"));
-                        console.log("CP_BLACKLIST --> " + localStorage.getItem("cp_blacklist"));
+                        // console.log("CP_BLACKLIST --> " + localStorage.getItem("cp_blacklist"));
                     }
                     BLACKLIST = purify.whitelist.getBlockListedDomains();
                     CP_TOPLIST = purify.whitelist.getUnBlockListedDomains();
