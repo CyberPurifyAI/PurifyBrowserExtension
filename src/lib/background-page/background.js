@@ -327,16 +327,16 @@ chrome.runtime.onMessage.addListener(
                         console.log("CP_BLACKLIST --> " + localStorage.getItem("cp_blacklist"));
                     }
                     BLACKLIST = purify.whitelist.getBlockListedDomains();
-                    CP_TOPLIST = purify.whitelist.getWhiteListedDomains();
+                    CP_TOPLIST = purify.whitelist.getUnBlockListedDomains();
                 }
 
-                // purify.console.info(BLACKLIST.length);
-                // purify.console.info(CP_TOPLIST.length);
+                purify.console.info(BLACKLIST.length);
+                purify.console.info(CP_TOPLIST.length);
 
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                     var domain = extractHostname(tabs[0].url);
                     // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
-                    // console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain))
+                    console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain))
                     if ((is_blacklist(md5(domain)) == true) && is_toplist(domain) == false) {
                         chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
                     }

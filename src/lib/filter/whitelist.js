@@ -8,6 +8,7 @@
 purify.whitelist = (function(purify) {
     var WHITE_LIST_DOMAINS_LS_PROP = "white-list-domains";
     var BLOCK_LIST_DOMAINS_LS_PROP = "block-list-domains";
+    var UNBLOCK_LIST_DOMAINS_LS_PROP = "unblock-list-domains";
 
     const BLACK_FILTERLIST_URL = purify.getURL("filters/filter_blacklist.txt");
     const WHITE_FILTERLIST_URL = purify.getURL("filters/filter_whitelist.txt");
@@ -74,6 +75,29 @@ purify.whitelist = (function(purify) {
             }
         },
     };
+
+    var unblockListDomainsHolder = {
+        get domains() {
+            return purify.lazyGet(unblockListDomainsHolder, "domains", function() {
+                whiteListFilter = new purify.rules.UrlFilter();
+                // Reading from local storage
+                var domains = getDomainsFromLocalStorage(UNBLOCK_LIST_DOMAINS_LS_PROP);
+                for (var i = 0; i < domains.length; i++) {
+                    var rule = createWhiteListRule(domains[i]);
+                    if (rule) {
+                        whiteListFilter.addRule(rule);
+                    }
+                }
+                return domains;
+            });
+        },
+        add: function(domain) {
+            if (this.domains.indexOf(domain) < 0) {
+                this.domains.push(domain);
+            }
+        },
+    };
+
     var blockListDomainsHolder = {
         get domains() {
             return purify.lazyGet(blockListDomainsHolder, "domains", function() {
@@ -129,7 +153,7 @@ purify.whitelist = (function(purify) {
     /**
      * Loads whitelist domains
      */
-    const initWhiteListDomains = () =>
+    const initUnBlockListDomains = () =>
         new Promise((resolve, reject) => {
 
             const success = function(response) {
@@ -150,10 +174,10 @@ purify.whitelist = (function(purify) {
                         }
                     }
 
-                    if (INIT_WHITELIST_DOMAINS.length > whiteListDomainsHolder.domains.length) {
-                        clearWhiteListed();
-                        addWhiteListed(INIT_WHITELIST_DOMAINS);
-                        purify.console.info("INIT_WHITELIST_DOMAINS --> " + whiteListDomainsHolder.domains.length);
+                    if (INIT_WHITELIST_DOMAINS.length > unblockListDomainsHolder.domains.length) {
+                        clearUnBlockListed();
+                        addUnBlockListed(INIT_WHITELIST_DOMAINS);
+                        purify.console.info("INIT_WHITELIST_DOMAINS --> " + unblockListDomainsHolder.domains.length);
                     }
 
                     resolve(responseDomains);
@@ -300,6 +324,10 @@ purify.whitelist = (function(purify) {
         purify.localStorage.setItem(
             BLOCK_LIST_DOMAINS_LS_PROP,
             JSON.stringify(blockListDomainsHolder.domains)
+        );
+        purify.localStorage.setItem(
+            UNBLOCK_LIST_DOMAINS_LS_PROP,
+            JSON.stringify(unblockListDomainsHolder.domains)
         );
     }
 
@@ -508,6 +536,25 @@ purify.whitelist = (function(purify) {
     };
 
     /**
+     * Add domains to unblocklist
+     * @param domains
+     */
+    var addUnBlockListed = function(domains) {
+        if (!domains) {
+            return;
+        }
+        for (var i = 0; i < domains.length; i++) {
+            var domain = domains[i];
+            unblockListDomainsHolder.add(domain);
+            var rule = createWhiteListRule(domain);
+            if (rule) {
+                whiteListFilter.addRule(rule);
+            }
+        }
+        saveDomainsToLocalStorage();
+    };
+
+    /**
      * Clear whitelisted only
      */
     var clearWhiteListed = function() {
@@ -523,6 +570,15 @@ purify.whitelist = (function(purify) {
         purify.localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
         purify.lazyGetClear(blockListDomainsHolder, "domains");
         blockListFilter = new purify.rules.UrlFilter();
+    };
+
+    /**
+     * Clear unblocklisted only
+     */
+    var clearUnBlockListed = function() {
+        purify.localStorage.removeItem(UNBLOCK_LIST_DOMAINS_LS_PROP);
+        purify.lazyGetClear(unblockListDomainsHolder, "domains");
+        whiteListFilter = new purify.rules.UrlFilter();
     };
 
     /**
@@ -566,6 +622,13 @@ purify.whitelist = (function(purify) {
     };
 
     /**
+     * Returns the array of unblocklisted domains
+     */
+    var getUnBlockListedDomains = function() {
+        return unblockListDomainsHolder.domains;
+    };
+
+    /**
      * Returns the array of loaded rules
      */
     var getRules = function() {
@@ -585,12 +648,14 @@ purify.whitelist = (function(purify) {
          */
         purify.lazyGetClear(whiteListDomainsHolder, "domains");
         purify.lazyGetClear(blockListDomainsHolder, "domains");
+        purify.lazyGetClear(unblockListDomainsHolder, "domains");
 
         /*
          *
-         * add initWhiteListDomains & initBlockListDomains
+         * add initUnBlockListDomains & initBlockListDomains
          */
-        initWhiteListDomains()
+        // initWhiteListDomains();
+        initUnBlockListDomains();
         initBlockListDomains();
     };
 
@@ -601,6 +666,7 @@ purify.whitelist = (function(purify) {
 
         getWhiteListedDomains: getWhiteListedDomains,
         getBlockListedDomains: getBlockListedDomains,
+        getUnBlockListedDomains: getUnBlockListedDomains,
 
         findWhiteListRule: findWhiteListRule,
 
