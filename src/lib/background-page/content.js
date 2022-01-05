@@ -28,10 +28,14 @@ var images = [],
     type_of_images = [],
     tfjs_images = [],
     image_parents = [],
-    image_tags = ["IMG"];
-var TOTAL_POSITIVE = 0;
+    image_tags = ["IMG"],
+    urlRegex = /url\((?!['"]?(?:data|http):)['"]?([^'"\)]*)['"]?\)/i;
+
 var ban_image = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwcHCAcHBwcHBwoHBwcHBw8ICQcKFREiFhURExMYHCggGCYlGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDy0ZFRk3NysrKysrKysrKysrKysrKysrKys3KysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAKgBLAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIHA//EABYQAQEBAAAAAAAAAAAAAAAAAAABEf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARESAv/aAAwDAQACEQMRAD8A7eAAAAACAAAAAAIoCAAgqAAAgqAgoCCgIKACgIKAKAKCgAAAAAAAAgoCCgIKAgqAIqAIoCAAAAAAAoIKAgoCKACigAACAKAAAAAAAAAAAAigIACCgIKAgoCCgIKAAAAAigAoAIAAIDQoCCgIKAgoCCgIKAgoCCgIKAgoCCgIKAgAAAAICiAKgUAQAABsAAAAAAAAAAAAAAAAAAAAEAAAEAUQAAAAAABBQEFAaAAAAAAAAAAAAAAAABAVAABAVAEEAAAFEAURRQAAAAFBQAAAAAAAAAAAAAEAAEBUAQEAAAAQRQBQABUAUAUUAAAUAAAAAAAAAAACotQAABFQBAQBA1AQNFEDTFEDTFVlTRRA0URTVVWVBVRVAAAAAAAAAAAACotQAEQEVE0QETVE0TU0xdNZ01OjF01nTU6Ma1dY006XG9NZ01ejGtNZ1ToxpWVXTGosZWLKjSpFaiACgAAAAAAAAABUWoAi1mpVKhWaxaoJqWsauGpalrNrF9LjWprOprPS43prGmp2uN6axpp0Y3q689XV6Mb1dY1ZV6TG5VYlalalTG41GI1G5UrUaZjTrGaAKgAAAAAAAAABUAEqUGasZrNByrUZtZtBytbjNrNqjna1Izamg521rE00Gdq4auoLpi6ugsqYutSg3KjUqwHSM1qNxR18sVqNA7eWK//Z";
+
+var TOTAL_POSITIVE = 0;
 var IMAGE_IN_NUMBER = 30;
+var POSITIVE_IMAGES = [];
 var POSITIVE_IN_NUMBER = 10;
 var POSITIVE_IN_RATE = 0.3;
 var HIDETAB = 0;
@@ -263,7 +267,6 @@ function Ruler(classes) {
     } else if (labels["Gory_aug"] >= 0.75) {
         return 2;
     } else if (labels["Porn"] >= 0.7) {
-
         return 4;
     } else if ((labels["Gory_aug"] + labels["Horror_aug"]) >= 0.79 && Neutral_position > 1) {
         return 3;
@@ -281,10 +284,19 @@ function Ruler(classes) {
 }
 
 function is_valid_image(url) {
-    if (url.indexOf("base64") != -1 || url.indexOf(".png") != -1 || url.indexOf(".svg") != -1 || url.indexOf(".gif") != -1 || url.indexOf(".jpg") != -1 || url.indexOf(".jpeg") != -1) {
-        return 1;
+    if (
+        url.indexOf("base64") != -1 ||
+        url.indexOf(".png") != -1 ||
+        url.indexOf(".svg") != -1 ||
+        url.indexOf(".gif") != -1 ||
+        url.indexOf(".jpg") != -1 ||
+        url.indexOf(".jpeg") != -1
+    ) {
+        return true;
     }
-    return 0;
+
+    // return isImageURL(url);
+    return false;
 
     // if(url.indexOf("http://")==-1 && url.indexOf("https://")==-1 && url.indexOf("base64")==-1 && url.indexOf("data:image/svg")!=-1 && url.indexOf(".png")==-1 && url.indexOf(".gif")==-1 && url.indexOf(".jpg")==-1 && url.indexOf(".jpeg")==-1){
     //   return 0;
@@ -303,44 +315,50 @@ function blurallimgs(srcUrl, srcType, predict_result) {
         var style = window.getComputedStyle(el, false);
         if (el.src == srcUrl) {
             if (el.tagName === "IMG") {
-
                 if (predict_result == 0) {
-                    // el.style="filter: blur(0px) !important;opacity:1 !important;";
-                    // el.style.setProperty('filter','blur(0px) !important',"");
-                    // el.setAttribute('cp-srcurl', el.src +" == "+srcUrl);
+                    // el.style = "filter: blur(0px) !important;opacity:1 !important;";
+                    // el.style.setProperty('filter', 'blur(0px) !important', "");
+                    // el.setAttribute('cp-srcurl', el.src + " == " + srcUrl);
                     el.style.filter = "blur(0px)";
                     // el.style.visibility = "visible";
                 } else {
-                    // el.style="-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
-                    // el.style.setProperty('filter','blur(30px) !important',"");
+                    // el.style = "-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
+                    // el.style.setProperty('filter', 'blur(30px) !important', "");
                     el.style.filter = "blur(30px)";
                     // el.style.visibility = "hidden";
-                    // console.log(TOTAL_POSITIVE+"/"+process_images.length+" "+(TOTAL_POSITIVE/process_images.length))
-                    if ((process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) || (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)) {
+                    // console.log(TOTAL_POSITIVE + "/" + process_images.length + " " + (TOTAL_POSITIVE / process_images.length))
+                    if (
+                        (process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
+                        (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)
+                    ) {
                         if (HIDETAB == 0) {
                             HIDETAB = 1;
-                            chrome.runtime.sendMessage({ action: "hidetab", url: window.location.href }, function(response) {
+                            chrome.runtime.sendMessage({ action: "hidetab", url: window.location.href, POSITIVE_IMAGES }, function(response) {
                                 // console.log(response.result);
                             });
                             // console.log("HIDETAB");
                         }
                     }
                 }
-
-
             }
 
-
-        } else if (style.backgroundImage != "none" && predict_result > 0) {
-            bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+        } else if (style.backgroundImage != "none" && predict_result > 0 && style.backgroundImage.match(urlRegex)) {
+            // bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+            bg_img_url = style.backgroundImage.match(urlRegex)[1];
             if (bg_img_url == srcUrl) {
-                el.style.backgroundImage = "url('" + ban_image + "')";
-                // console.log(TOTAL_POSITIVE+"/"+process_images.length+" FOUND bg_images "+bg_img_url);
-                // console.log(TOTAL_POSITIVE+"/"+process_images.length+" "+(TOTAL_POSITIVE/process_images.length))
-                if ((process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) || (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)) {
+                // el.style.backgroundImage = "url('" + ban_image + "')";
+                el.style.backgroundImage = style.backgroundImage.replace(urlRegex, "url('" + ban_image + "')");
+                // console.log(style.backgroundImage.replace(urlRegex, "url('" + ban_image + "')"));
+
+                // console.log(TOTAL_POSITIVE + "/" + process_images.length + " FOUND bg_images " + bg_img_url);
+                // console.log(TOTAL_POSITIVE + "/" + process_images.length + " " + (TOTAL_POSITIVE / process_images.length))
+                if (
+                    (process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
+                    (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)
+                ) {
                     if (HIDETAB == 0) {
                         HIDETAB = 1;
-                        chrome.runtime.sendMessage({ action: "hidetab", url: window.location.href }, function(response) {
+                        chrome.runtime.sendMessage({ action: "hidetab", url: window.location.href, POSITIVE_IMAGES }, function(response) {
                             // console.log(response.result);
                         });
                         // console.log("HIDETAB");
@@ -363,24 +381,23 @@ function getallimgs(tag) {
     //   var elements = document.getElementsByTagName("*");
     // }
 
-    var elements = document.querySelectorAll("img, div");
+    var elements = document.querySelectorAll("img, div, i");
     // var elements = document.getElementsByTagName("*");
     /* When the DOM is ready find all the images and background images
         initially loaded */
     Array.prototype.forEach.call(elements, function(el) {
         var style = window.getComputedStyle(el, false);
         if (el.tagName === "IMG") {
-            md5src = md5(el.src);
-            if (el.src != "" && process_images.indexOf(md5src) == -1 && is_valid_image(el.src) == 1) {
+            md5src = md5(`${ el.src }`);
+            if (el.src != "" && process_images.indexOf(md5src) == -1) {
                 process_images.push(md5src);
                 // wait_imgs.push(el.src);
-                // console.log(" FOUND IMG "+el.src);
+                // console.log(" FOUND IMG " + el.src);
                 if (tag == "alltag") {
                     // el.style="-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
                     // el.style.setProperty('filter','blur(30px) !important',"");
                     el.style.filter = "blur(30px)";
                     // el.style.visibility = "hidden";
-
                 }
 
                 el.setAttribute('draggable', false);
@@ -390,20 +407,21 @@ function getallimgs(tag) {
                 });
             }
 
-        } else if (style.backgroundImage != "none") {
-            bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+        } else if (style.backgroundImage != "none" && style.backgroundImage.match(urlRegex)) {
+            // bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+            bg_img_url = style.backgroundImage.match(urlRegex)[1];
             md5src = md5(bg_img_url);
             if (image_tags.indexOf(el.tagName) == -1) {
                 image_tags.push(el.tagName);
             }
 
-            if (bg_img_url != "" && process_images.indexOf(md5src) == -1 && is_valid_image(bg_img_url) == 1) {
+            if (bg_img_url != "" && process_images.indexOf(md5src) == -1) {
                 process_images.push(md5src);
-                // console.log({ action: "predict", srcUrl: bg_img_url, srcType: "bg" });
-                // console.log(" FOUND bg_images "+bg_img_url);
-                // chrome.runtime.sendMessage({ action: "predict", srcUrl: bg_img_url, srcType: "bg" }, function(response) {
-                //     // console.log(response.result);
-                // });
+                // console.log({ action: "predict", srcUrl: bg_img_url, srcType: "bg", backgroundImage: style.backgroundImage.match(urlRegex)[1] });
+                // console.log(" FOUND bg_images " + bg_img_url);
+                chrome.runtime.sendMessage({ action: "predict", srcUrl: bg_img_url, srcType: "bg" }, function(response) {
+                    // console.log(response.result);
+                });
             }
         }
     });
@@ -415,7 +433,8 @@ function getallimgs(tag) {
 // output of the classifier)
 //
 // message: {action, url, predictions}
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => { //alert(JSON.stringify(message))
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    // alert(JSON.stringify(message))
     if (message && message.action === 'predict' && message.srcUrl && message.predictions) {
         FROM_CACHE = 0;
         var predict_result = Ruler(message.predictions);
@@ -424,17 +443,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => { //aler
 
         if (predict_result > 0) {
             TOTAL_POSITIVE += 1;
-
+            if (POSITIVE_IMAGES.indexOf(message.srcUrl) == -1) {
+                POSITIVE_IMAGES.push(message.srcUrl);
+            }
         }
     }
 
 });
 
-
 chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href }, function(response) {});
 
-// if(navigator.saysWho.toLowerCase().indexOf("safari")==-1){
-// document.getElementsByTagName("html")[0].style.visibility="hidden";
+// if (navigator.saysWho.toLowerCase().indexOf("safari") == -1) {
+//     document.getElementsByTagName("html")[0].style.visibility = "hidden";
 // }
 
 var autohideallimgs = setInterval(function() {
@@ -443,7 +463,7 @@ var autohideallimgs = setInterval(function() {
     Array.prototype.forEach.call(elements, function(el) {
         el.style.filter = "blur(30px)";
     });
-    //Che nhanh nhất có thể
+    // Che nhanh nhất có thể
 }, 100);
 
 

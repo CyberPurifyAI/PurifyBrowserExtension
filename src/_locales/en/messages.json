@@ -266,6 +266,9 @@
     "options_github": {
         "message": "GitHub"
     },
+    "options_3rd_adguard": {
+        "message": "3rd Library AdGuard"
+    },
     "options_copyright": {
         "message": "All rights reserved."
     },
