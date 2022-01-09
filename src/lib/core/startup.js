@@ -34,8 +34,9 @@ purify.initialize = function() {
             // purify.console.info(`Uninstall url was set to: ${uninstallUrl}`);
         });
 
-        purify.whitelist.init();
         purify.ui.init();
+        purify.whitelist.init();
+        purify.hateSpeech.init();
 
         /**
          * Start application

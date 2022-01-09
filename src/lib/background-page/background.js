@@ -22,9 +22,6 @@ import md5 from 'md5';
 
 // Where to load the model from.
 const MOBILENET_MODEL_TFHUB_URL = chrome.extension.getURL("models/purify_mobilenet_tfjs/model.json");
-// const ADGUARD_FILTERLIST_URL = chrome.extension.getURL("filters/filter_21.txt");
-// const BLACK_FILTERLIST_URL = chrome.extension.getURL("filters/filter_blacklist.txt");
-// const WHITE_FILTERLIST_URL = chrome.extension.getURL("filters/filter_whitelist.txt");
 
 // Size of the image expected by mobilenet.
 const IMAGE_SIZE = 224;
@@ -137,7 +134,9 @@ class ImageClassifier {
                     img.height = IMAGE_SIZE;
                     resolve(img);
                 }
-                // Fail out if either dimension is less than MIN_IMG_SIZE.
+                /*
+                 * Fail out if either dimension is less than MIN_IMG_SIZE.
+                 */
                 if (img.height && img.height <= MIN_IMG_SIZE || img.width && img.width <= MIN_IMG_SIZE) {
                     const predictions = [{ className: "Neutral", probability: 1 }];
                     chrome.tabs.sendMessage(tabId, { action: 'predict', srcUrl, srcType, predictions });
@@ -151,7 +150,7 @@ class ImageClassifier {
     /**
      * Sorts predictions by score and keeps only topK
      * @param {Tensor} logits A tensor with one element per predicatable class
-     *   type of mobilenet.  Return of executing model.predict on an Image.
+     * type of mobilenet.  Return of executing model.predict on an Image.
      * @param {number} topK how many to keep.
      */
     async getTopKClasses(logits, topK) {
@@ -170,10 +169,9 @@ class ImageClassifier {
     }
 
     /**
-     * Executes the model on the input image, and returns the top predicted
-     * classes.
-     * @param {HTMLElement} imgElement HTML element holding the image to predict
-     *     from.  Should have the correct size ofr mobilenet.
+     * Executes the model on the input image, and returns the top predicted classes.
+     * @param {HTMLElement} imgElement HTML element holding the image to predict from.
+     * Should have the correct size ofr mobilenet.
      */
     async predict(imgElement) {
         console.log('Predicting...');
@@ -242,7 +240,7 @@ function extractHostname(url) {
     //find & remove "?"
     hostname = hostname.split('?')[0];
 
-    return hostname.replace("www.", "");;
+    return hostname.replace("www.", "");
 }
 
 /**
@@ -291,16 +289,13 @@ function is_toplist(domain) {
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         switch (request.action) {
+            case 'analyze':
             case 'predict':
                 imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
                 break;
-            case 'analyze':
-                imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
-                break;
-            case 'hidetab':
-                chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
 
-                var domain = extractHostname(request.url);
+            case 'hidetab':
+                let domain = extractHostname(request.url);
                 if (CP_BLACKLIST.indexOf(md5(domain)) === -1 && is_toplist(domain) == false) {
                     CP_BLACKLIST.push(md5(domain));
                     localStorage.setItem("cp_blacklist", JSON.stringify(CP_BLACKLIST));
@@ -308,7 +303,7 @@ chrome.runtime.onMessage.addListener(
                 /*
                  * sync Blocked host to backend
                  */
-                var messages = {
+                let messages = {
                     action: "domain_blacklist",
                     clientId: purify.utils.browser.getClientId(),
                     link: sender.tab.url,
@@ -319,7 +314,9 @@ chrome.runtime.onMessage.addListener(
                 };
                 purify.parentalControl.syncBlacklist(messages);
 
+                chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
                 break;
+
             case 'checkdomain':
                 if (BLACKLIST.length == 0) {
                     if (localStorage.getItem("cp_blacklist") != null) {
@@ -336,10 +333,16 @@ chrome.runtime.onMessage.addListener(
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                     var domain = extractHostname(tabs[0].url);
                     // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
-                    // console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain))
+                    // console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain));
                     if ((is_blacklist(md5(domain)) == true) && is_toplist(domain) == false) {
                         chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
                     }
+
+                    // console.log([
+                    //     'background', request, sender, `${purify.hateSpeech.regexModelHateSpeech()}`
+                    // ]);
+                    // chrome.tabs.sendMessage(sender.tab.id, { action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
+                    sendResponse({ action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                 });
                 break;
         }

@@ -92,7 +92,7 @@ purify.backend = (function (purify) {
     },
     // Array of filter identifiers, that have local file with rules. Range from 1 to 21 by default
     get localFilterIds() {
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21];
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 224];
     },
   };
 
