@@ -338,13 +338,12 @@ chrome.runtime.onMessage.addListener(
                         chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
                     }
 
-                    // console.log([
-                    //     'background', request, sender, `${purify.hateSpeech.regexModelHateSpeech()}`
-                    // ]);
+                    // console.log(['background', request, sender, `${purify.hateSpeech.regexModelHateSpeech()}`]);
                     // chrome.tabs.sendMessage(sender.tab.id, { action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                     sendResponse({ action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                 });
                 break;
         }
+        return true;
     }
 );

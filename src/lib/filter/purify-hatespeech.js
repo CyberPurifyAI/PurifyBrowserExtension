@@ -87,7 +87,5 @@ purify.hateSpeech = (function(purify) {
     return {
         init,
         regexModelHateSpeech
-        // nativeSelectorText,
-        // replaceHateSpeech
     };
 })(purify);
