@@ -434,32 +434,44 @@ function getallimgs(tag) {
 
 // message: {action, url, predictions}
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    // alert(JSON.stringify(message))
-    if (message && message.action === 'predict' && message.srcUrl && message.predictions) {
-        FROM_CACHE = 0;
-        var predict_result = Ruler(message.predictions);
-        clearInterval(autoHideAllImgs);
-        blurallimgs(message.srcUrl, message.srcType, predict_result);
+    if (message) {
+        switch (message.action) {
+            case 'predict':
+                if (message.srcUrl && message.predictions) {
+                    FROM_CACHE = 0;
+                    var predict_result = Ruler(message.predictions);
+                    clearInterval(autoHideAllImgs);
+                    blurallimgs(message.srcUrl, message.srcType, predict_result);
 
-        if (predict_result > 0) {
-            TOTAL_POSITIVE += 1;
-            if (POSITIVE_IMAGES.indexOf(message.srcUrl) == -1) {
-                POSITIVE_IMAGES.push(message.srcUrl);
-            }
+                    if (predict_result > 0) {
+                        TOTAL_POSITIVE += 1;
+                        if (POSITIVE_IMAGES.indexOf(message.srcUrl) == -1) {
+                            POSITIVE_IMAGES.push(message.srcUrl);
+                        }
+                    }
+                }
+                break;
         }
     }
-
 });
 
 chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href }, function(response) {
-    switch (response.action) {
-        case 'replace_hatespeech':
-            /*
-             * quét văn bản và thay đổi nội dung có chứa hate
-             */
-            regexModelHateSpeech = response.regexModelHateSpeech;
-            nativeSelectorText();
-            break;
+    if (chrome.runtime.lastError) {
+        console.log('lastError.message', chrome.runtime.lastError.message);
+        // 'Could not establish connection. Receiving end does not exist.'
+        return;
+    }
+    if (response) {
+        // console.log('replace_hatespeech', response);
+        switch (response.action) {
+            case 'replace_hatespeech':
+                /*
+                 * quét văn bản và thay đổi nội dung có chứa hate
+                 */
+                regexModelHateSpeech = response.regexModelHateSpeech;
+                nativeSelectorText();
+                break;
+        }
     }
 });
 
