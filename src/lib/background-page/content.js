@@ -427,6 +427,10 @@ function getallimgs(tag) {
     });
 }
 
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 /*
  * Add a listener to hear from the content.js page when the image is through processing.
  * The message should contin an action, a url, and predictions (the output of the classifier)
@@ -462,7 +466,7 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
         return;
     }
     if (response) {
-        // console.log('replace_hatespeech', response);
+        console.log('replace_hatespeech', response.action);
         switch (response.action) {
             case 'replace_hatespeech':
                 /*
@@ -486,38 +490,102 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
  */
 const nativeSelectorText = () => {
     // console.log('nativeSelectorText', regexModelHateSpeech);
-    const elements = document.querySelectorAll("body, body *");
+    // const elements = document.querySelectorAll("body, body *");
+    const elements = document.querySelectorAll("div *, p, span, li *");
+    const excludeTagsHtml = ['SCRIPT', 'STYLE'];
     let child;
+    let toxicContentPredict = [];
     for (let i = 0; i < elements.length; i++) {
         child = elements[i].childNodes[0];
-        if (elements[i].hasChildNodes() && child.nodeType == 3) {
-            elementsNodeValue = elements[i].childNodes[0].nodeValue;
-            elementsNodeValueMd5 = md5(elementsNodeValue);
-            if (elementsNodeValue != "" && processReplaceHateSpeech.indexOf(elementsNodeValueMd5) == -1) {
+        if (elements[i].hasChildNodes() && child.nodeType == 3 && excludeTagsHtml.indexOf(elements[i].tagName) == -1) {
+            let elementsNodeValue = elements[i].childNodes[0].nodeValue.trim();
+            let elementsNodeValueMd5 = md5(elementsNodeValue);
+
+            if (!isNumeric(elementsNodeValue) &&
+                elementsNodeValue.trim().length >= 3 &&
+                processReplaceHateSpeech.indexOf(elementsNodeValueMd5) == -1 &&
+                elements[i].dataset.toxicScanned === undefined
+            ) {
                 processReplaceHateSpeech.push(elementsNodeValueMd5);
-                elements[i].childNodes[0].nodeValue = replaceHateSpeech(child);
+                elements[i].dataset.toxicScanned = true;
+                const obj = { 'text': elementsNodeValue };
+                obj.id_node = i;
+                toxicContentPredict.push(obj);
+
+                /**
+                 * * Sử dụng điều kiện này để thay thế cho queue
+                 * * DOM thay đổi sẽ quyết tới 10 và cứ tiếp tục cho tới khi full tag scanned
+                 * * Tối ưu được bộ nhớ RAM
+                 */
+                if (toxicContentPredict.length > 10) {
+                    break;
+                }
+
+                // console.log(elementsNodeValue, elements[i].tagName);
+                // elements[i].childNodes[0].nodeValue = replaceHateSpeech(child);
             }
         }
+    }
+    if (toxicContentPredict.length > 0) {
+        // console.log(toxicContentPredict);
+        chrome.runtime.sendMessage({ action: "toxicity", url: window.location.href, toxicContentPredict }, function(response) {
+            if (chrome.runtime.lastError) {
+                // 'Could not establish connection. Receiving end does not exist.'
+                console.log('lastError.message', chrome.runtime.lastError.message);
+                return;
+            }
+            if (response) {
+                switch (response.action) {
+                    case 'replace_toxicity':
+                        for (let i = 0; i < response.predicted.length; i++) {
+                            const el_predicted = response.predicted[i];
+                            for (const [key, value] of Object.entries(el_predicted)) {
+                                if (value === true) {
+                                    elements[response.predicted[i].id_node].childNodes[0].nodeValue = replaceHateSpeech(response.predicted[i].text, 'text');
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+        });
     }
 }
 
 /**
- * * 1. replace text UpperCase and non-uppercase
- * * 2. replace multi text
- * * 3. convert length text to number length *
+ * * replace text UpperCase and non-uppercase
+ * * replace multi text
+ * * convert length text to number length *
  * @param {*} textnode
+ * @param {string} choose
  * @returns {string}
  */
-const replaceHateSpeech = (textnode) => {
+const replaceHateSpeech = (textnode, choose = 'default') => {
     // console.log('replaceHateSpeech', regexModelHateSpeech);
-    return textnode.nodeValue.replace(new RegExp(regexModelHateSpeech, "gi"), (matched) => {
-        let text_replace = '',
-            character = '*';
-        for (let i = 0; i < matched.length; i++) {
-            text_replace += character;
-        }
-        return text_replace;
-    });
+    let text_replace = '',
+        character = '*';
+    switch (choose) {
+        case 'text':
+            for (let i = 0; i < textnode.length; i++) {
+                if (textnode[i] !== ' ') {
+                    text_replace += character;
+                } else {
+                    text_replace += ' ';
+                }
+            }
+            return text_replace;
+            break;
+
+        default:
+            return textnode.nodeValue.replace(new RegExp(regexModelHateSpeech, "gi"), (matched) => {
+                for (let i = 0; i < matched.length; i++) {
+                    text_replace += character;
+                }
+                return text_replace;
+            });
+            break;
+    }
 }
 
 // if (navigator.saysWho.toLowerCase().indexOf("safari") == -1) {
@@ -538,30 +606,14 @@ function watchdog() {
 
     getallimgs('alltag');
     /* MutationObserver callback to add images when the body changes */
-    var observer = new MutationObserver((mutationsList, observer) => {
-        var current_time = new Date().getTime();
+    const observer = new MutationObserver((mutationsList, observer) => {
+        let current_time = new Date().getTime();
         if (current_time - start_watch_time > 100) {
             start_watch_time = current_time;
             // console.log("DOM CHANGED ");
-            for (const mutation of mutationsList) {
-                switch (mutation.type) {
-                    case 'childList':
-                        // If there are new nodes added
-                        if (mutation.addedNodes !== null) {
-                            // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
-                            getallimgs('alltag');
-                            nativeSelectorText();
-                        }
-                        break;
-                    case 'characterData':
-                        // console.log('characterData', regexModelHateSpeech);
-                        // nativeSelectorText();
-                        break;
-                    case 'attributes':
-                        break;
-                }
-                // console.log(mutation);
-            }
+            // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
+            getallimgs('alltag');
+            nativeSelectorText();
         }
     });
 

@@ -18,6 +18,7 @@
 import 'babel-polyfill';
 import * as tf from '@tensorflow/tfjs';
 import { IMAGENET_CLASSES } from './imagenet_classes';
+import { toxicClassifier } from './toxicity';
 import md5 from 'md5';
 
 // Where to load the model from.
@@ -342,6 +343,10 @@ chrome.runtime.onMessage.addListener(
                     // chrome.tabs.sendMessage(sender.tab.id, { action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                     sendResponse({ action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                 });
+                break;
+
+            case 'toxicity':
+                toxicClassifier.classify(sendResponse, request.toxicContentPredict);
                 break;
         }
         return true;
