@@ -466,7 +466,7 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
         return;
     }
     if (response) {
-        console.log('replace_hatespeech', response.action);
+        // console.log('replace_hatespeech', response.action);
         switch (response.action) {
             case 'replace_hatespeech':
                 /*
@@ -499,14 +499,14 @@ const nativeSelectorText = () => {
         child = elements[i].childNodes[0];
         if (elements[i].hasChildNodes() && child.nodeType == 3 && excludeTagsHtml.indexOf(elements[i].tagName) == -1) {
             let elementsNodeValue = elements[i].childNodes[0].nodeValue.trim();
-            let elementsNodeValueMd5 = md5(elementsNodeValue);
+            // let elementsNodeValueMd5 = md5(elementsNodeValue);
 
             if (!isNumeric(elementsNodeValue) &&
                 elementsNodeValue.trim().length >= 3 &&
-                processReplaceHateSpeech.indexOf(elementsNodeValueMd5) == -1 &&
+                // processReplaceHateSpeech.indexOf(elementsNodeValueMd5) == -1 &&
                 elements[i].dataset.toxicScanned === undefined
             ) {
-                processReplaceHateSpeech.push(elementsNodeValueMd5);
+                // processReplaceHateSpeech.push(elementsNodeValueMd5);
                 elements[i].dataset.toxicScanned = true;
                 const obj = { 'text': elementsNodeValue };
                 obj.id_node = i;
@@ -514,7 +514,7 @@ const nativeSelectorText = () => {
 
                 /**
                  * * Sử dụng điều kiện này để thay thế cho queue
-                 * * DOM thay đổi sẽ quyết tới 10 và cứ tiếp tục cho tới khi full tag scanned
+                 * * DOM thay đổi sẽ quét tới 10 và cứ tiếp tục cho tới khi full tag scanned
                  * * Tối ưu được bộ nhớ RAM
                  */
                 if (toxicContentPredict.length > 10) {
