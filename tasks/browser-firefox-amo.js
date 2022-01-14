@@ -123,6 +123,7 @@ const createArtifactBuild = (done) => {
 };
 
 const createWebExt = (done) => {
+    return done();
     if (BRANCH !== BRANCH_BETA && BRANCH !== BRANCH_RELEASE) {
         return done();
     }

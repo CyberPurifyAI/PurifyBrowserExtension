@@ -1,6 +1,6 @@
 import gulp from "gulp";
 import chromium from "./browser-chromium";
-// import opera from "./browser-opera";
+import safari from "./browser-safari";
 import edge from "./browser-edge";
 import firefoxWebext from "./browser-firefox-webext";
 import firefoxAmo from "./browser-firefox-amo";
@@ -92,6 +92,7 @@ export const buildRelease = gulp.series(
     chromium,
     // opera,
     firefoxAmo,
+    // safari
     edge,
     updateBuildInfo,
     clean,

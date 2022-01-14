@@ -27,7 +27,7 @@ purify.hateSpeech = (function(purify) {
 
             const success = function(response) {
                 if (response && response.responseText) {
-                    // purify.console.info("HATESPEECH_MODEL_URL --> " + response.responseText);
+                    purify.console.info("HATESPEECH_MODEL_URL --> " + response.responseText.length);
 
                     const responseHateSpeechs = response.responseText;
 
