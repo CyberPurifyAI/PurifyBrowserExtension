@@ -5,270 +5,270 @@
  * ----------------------------------------------------------------------------------
  */
 
-purify.ui = (function (purify) {
-  // jshint ignore:line
-  const browserActionTitle = purify.i18n.getMessage("name");
+purify.ui = (function(purify) {
+            // jshint ignore:line
+            const browserActionTitle = purify.i18n.getMessage("name");
 
-  const extensionStoreLink = (function () {
-    let browser = "chrome";
-    if (purify.utils.browser.isOperaBrowser()) {
-      browser = "opera";
-    } else if (purify.utils.browser.isFirefoxBrowser()) {
-      browser = "firefox";
-    } else if (purify.utils.browser.isEdgeChromiumBrowser()) {
-      browser = "edge";
-    }
+            const extensionStoreLink = (function() {
+                let browser = "chrome";
+                if (purify.utils.browser.isOperaBrowser()) {
+                    browser = "opera";
+                } else if (purify.utils.browser.isFirefoxBrowser()) {
+                    browser = "firefox";
+                } else if (purify.utils.browser.isEdgeChromiumBrowser()) {
+                    browser = "edge";
+                }
 
-    const action = `${browser}_store`;
+                const action = `${browser}_store`;
 
-    return `https://cyberpurify.com/forward.html?action=${action}&from=options_screen&app=browser_extension`;
-  })();
+                return `https://cyberpurify.com/forward.html?action=${action}&from=options_screen&app=browser_extension`;
+            })();
 
-  const THANKYOU_PAGE_URL = "https://welcome.cyberpurify.com/v2/thankyou.html";
+            const THANKYOU_PAGE_URL = "https://welcome.cyberpurify.com/v2/thankyou.html";
 
-  /**
-   * Update icon for tab
-   * @param tab Tab
-   * @param options Options for icon or badge values
-   */
-  function updateTabIcon(tab, options) {
-    let icon;
-    let badge;
-    let badgeColor = "#555";
+            /**
+             * Update icon for tab
+             * @param tab Tab
+             * @param options Options for icon or badge values
+             */
+            function updateTabIcon(tab, options) {
+                let icon;
+                let badge;
+                let badgeColor = "#555";
 
-    if (tab.tabId === purify.BACKGROUND_TAB_ID) {
-      return;
-    }
+                if (tab.tabId === purify.BACKGROUND_TAB_ID) {
+                    return;
+                }
 
-    try {
-      if (options) {
-        icon = options.icon;
-        badge = options.badge;
-      } else {
-        let blocked;
-        let disabled;
+                try {
+                    if (options) {
+                        icon = options.icon;
+                        badge = options.badge;
+                    } else {
+                        let blocked;
+                        let disabled;
 
-        const tabInfo = purify.frames.getFrameInfo(tab);
-        disabled = tabInfo.applicationFilteringDisabled;
-        disabled = disabled || tabInfo.documentWhiteListed;
+                        const tabInfo = purify.frames.getFrameInfo(tab);
+                        disabled = tabInfo.applicationFilteringDisabled;
+                        disabled = disabled || tabInfo.documentWhiteListed;
 
-        if (!disabled) {
-          blocked = tabInfo.totalBlockedTab.toString();
-        } else {
-          blocked = "0";
-        }
+                        if (!disabled) {
+                            blocked = tabInfo.totalBlockedTab.toString();
+                        } else {
+                            blocked = "0";
+                        }
 
-        if (disabled) {
-          icon = purify.prefs.ICONS.ICON_GRAY;
-        } else {
-          icon = purify.prefs.ICONS.ICON_GREEN;
-        }
+                        if (disabled) {
+                            icon = purify.prefs.ICONS.ICON_GRAY;
+                        } else {
+                            icon = purify.prefs.ICONS.ICON_GREEN;
+                        }
 
-        badge = purify.utils.workaround.getBlockedCountText(blocked);
+                        badge = purify.utils.workaround.getBlockedCountText(blocked);
 
-        // If there's an active notification, indicate it on the badge
-        const notification = purify.notifications.getCurrentNotification(
-          tabInfo
-        );
-        if (notification) {
-          badge = notification.badgeText || badge;
-          badgeColor = notification.badgeBgColor || badgeColor;
+                        // If there's an active notification, indicate it on the badge
+                        const notification = purify.notifications.getCurrentNotification(
+                            tabInfo
+                        );
+                        if (notification) {
+                            badge = notification.badgeText || badge;
+                            badgeColor = notification.badgeBgColor || badgeColor;
 
-          const hasSpecialIcons = !!notification.icons;
+                            const hasSpecialIcons = !!notification.icons;
 
-          if (hasSpecialIcons) {
-            if (disabled) {
-              icon = notification.icons.ICON_GRAY;
-            } else {
-              icon = notification.icons.ICON_GREEN;
+                            if (hasSpecialIcons) {
+                                if (disabled) {
+                                    icon = notification.icons.ICON_GRAY;
+                                } else {
+                                    icon = notification.icons.ICON_GREEN;
+                                }
+                            }
+                        }
+                    }
+
+                    purify.browserAction.setBrowserAction(
+                        tab,
+                        icon,
+                        badge,
+                        badgeColor,
+                        browserActionTitle
+                    );
+                } catch (ex) {
+                    purify.console.error(
+                        "Error while updating icon for tab {0}: {1}",
+                        tab.tabId,
+                        new Error(ex)
+                    );
+                }
             }
-          }
-        }
-      }
 
-      purify.browserAction.setBrowserAction(
-        tab,
-        icon,
-        badge,
-        badgeColor,
-        browserActionTitle
-      );
-    } catch (ex) {
-      purify.console.error(
-        "Error while updating icon for tab {0}: {1}",
-        tab.tabId,
-        new Error(ex)
-      );
-    }
-  }
+            const updateTabIconAsync = purify.utils.concurrent.debounce((tab) => {
+                updateTabIcon(tab);
+            }, 250);
 
-  const updateTabIconAsync = purify.utils.concurrent.debounce((tab) => {
-    updateTabIcon(tab);
-  }, 250);
-
-  /**
-   * Update extension browser action popup window
-   * @param tab - active tab
-   */
-  function updatePopupStats(tab) {
-    const tabInfo = purify.frames.getFrameInfo(tab);
-    if (!tabInfo) {
-      return;
-    }
-    purify.runtimeImpl.sendMessage({
-      type: "updateTotalBlocked",
-      tabInfo,
-    });
-  }
-
-  const updatePopupStatsAsync = purify.utils.concurrent.debounce((tab) => {
-    updatePopupStats(tab);
-  }, 250);
-
-  function closeAllPages() {
-    purify.tabs.forEach((tab) => {
-      if (tab.url.indexOf(purify.getURL("")) >= 0) {
-        purify.tabs.remove(tab.tabId);
-      }
-    });
-  }
-
-  function getPageUrl(page) {
-    return purify.getURL(`pages/${page}`);
-  }
-
-  const isPurifyTab = (tab) => {
-    const { url } = tab;
-    const parsedUrl = new URL(url);
-    const schemeUrl = purify.app.getUrlScheme();
-    return parsedUrl.protocol.indexOf(schemeUrl) > -1;
-  };
-
-  function showAlertMessagePopup(title, text) {
-    purify.tabs.getActive((tab) => {
-      purify.tabs.sendMessage(tab.tabId, {
-        type: "show-alert-popup",
-        isPurifyTab: isPurifyTab(tab),
-        title,
-        text,
-      });
-    });
-  }
-
-  function getFiltersUpdateResultMessage(success, updatedFilters) {
-    let title = "";
-    let text = "";
-    if (success) {
-      if (updatedFilters.length === 0) {
-        title = "";
-        text = purify.i18n.getMessage("options_popup_update_not_found");
-      } else {
-        title = "";
-        text = updatedFilters
-          .sort((a, b) => {
-            if (a.groupId === b.groupId) {
-              return a.displayNumber - b.displayNumber;
+            /**
+             * Update extension browser action popup window
+             * @param tab - active tab
+             */
+            function updatePopupStats(tab) {
+                const tabInfo = purify.frames.getFrameInfo(tab);
+                if (!tabInfo) {
+                    return;
+                }
+                purify.runtimeImpl.sendMessage({
+                    type: "updateTotalBlocked",
+                    tabInfo,
+                });
             }
-            return a.groupId === b.groupId;
-          })
-          .map((filter) => `"${filter.name}"`)
-          .join(", ");
-        if (updatedFilters.length > 1) {
-          text += ` ${purify.i18n.getMessage("options_popup_update_filters")}`;
-        } else {
-          text += ` ${purify.i18n.getMessage("options_popup_update_filter")}`;
-        }
-      }
-    } else {
-      title = purify.i18n.getMessage("options_popup_update_title_error");
-      text = purify.i18n.getMessage("options_popup_update_error");
-    }
 
-    return {
-      title,
-      text,
-    };
-  }
+            const updatePopupStatsAsync = purify.utils.concurrent.debounce((tab) => {
+                updatePopupStats(tab);
+            }, 250);
 
-  function getFiltersEnabledResultMessage(enabledFilters) {
-    const title = purify.i18n.getMessage("alert_popup_filter_enabled_title");
-    const text = [];
-    enabledFilters.sort((a, b) => a.displayNumber - b.displayNumber);
-    for (let i = 0; i < enabledFilters.length; i++) {
-      const filter = enabledFilters[i];
-      text.push(
-        purify.i18n
-          .getMessage("alert_popup_filter_enabled_text", [filter.name])
-          .replace("$1", filter.name)
-      );
-    }
-    return {
-      title,
-      text,
-    };
-  }
+            function closeAllPages() {
+                purify.tabs.forEach((tab) => {
+                    if (tab.url.indexOf(purify.getURL("")) >= 0) {
+                        purify.tabs.remove(tab.tabId);
+                    }
+                });
+            }
 
-  /**
-   * Open settings tab with hash parameters or without them
-   * @param anchor
-   * @param hashParameters
-   */
-  var openSettingsTab = function (anchor, hashParameters = {}) {
-    if (anchor) {
-      hashParameters.anchor = anchor;
-    }
+            function getPageUrl(page) {
+                return purify.getURL(`pages/${page}`);
+            }
 
-    const options = {
-      activateSameTab: true,
-      hashParameters,
-    };
+            const isPurifyTab = (tab) => {
+                const { url } = tab;
+                const parsedUrl = new URL(url);
+                const schemeUrl = purify.app.getUrlScheme();
+                return parsedUrl.protocol.indexOf(schemeUrl) > -1;
+            };
 
-    openTab(getPageUrl("options.html"), options);
-  };
+            function showAlertMessagePopup(title, text) {
+                purify.tabs.getActive((tab) => {
+                    purify.tabs.sendMessage(tab.tabId, {
+                        type: "show-alert-popup",
+                        isPurifyTab: isPurifyTab(tab),
+                        title,
+                        text,
+                    });
+                });
+            }
 
-  var openSiteReportTab = function (url) {
-    const domain = purify.utils.url.toPunyCode(
-      purify.utils.url.getDomainName(url)
-    );
-    if (domain) {
-      openTab(
-        `https://cyberpurify.com/site.html?domain=${encodeURIComponent(
+            function getFiltersUpdateResultMessage(success, updatedFilters) {
+                let title = "";
+                let text = "";
+                if (success) {
+                    if (updatedFilters.length === 0) {
+                        title = "";
+                        text = purify.i18n.getMessage("options_popup_update_not_found");
+                    } else {
+                        title = "";
+                        text = updatedFilters
+                            .sort((a, b) => {
+                                if (a.groupId === b.groupId) {
+                                    return a.displayNumber - b.displayNumber;
+                                }
+                                return a.groupId === b.groupId;
+                            })
+                            .map((filter) => `"${filter.name}"`)
+                            .join(", ");
+                        if (updatedFilters.length > 1) {
+                            text += ` ${purify.i18n.getMessage("options_popup_update_filters")}`;
+                        } else {
+                            text += ` ${purify.i18n.getMessage("options_popup_update_filter")}`;
+                        }
+                    }
+                } else {
+                    title = purify.i18n.getMessage("options_popup_update_title_error");
+                    text = purify.i18n.getMessage("options_popup_update_error");
+                }
+
+                return {
+                    title,
+                    text,
+                };
+            }
+
+            function getFiltersEnabledResultMessage(enabledFilters) {
+                const title = purify.i18n.getMessage("alert_popup_filter_enabled_title");
+                const text = [];
+                enabledFilters.sort((a, b) => a.displayNumber - b.displayNumber);
+                for (let i = 0; i < enabledFilters.length; i++) {
+                    const filter = enabledFilters[i];
+                    text.push(
+                        purify.i18n
+                        .getMessage("alert_popup_filter_enabled_text", [filter.name])
+                        .replace("$1", filter.name)
+                    );
+                }
+                return {
+                    title,
+                    text,
+                };
+            }
+
+            /**
+             * Open settings tab with hash parameters or without them
+             * @param anchor
+             * @param hashParameters
+             */
+            var openSettingsTab = function(anchor, hashParameters = {}) {
+                if (anchor) {
+                    hashParameters.anchor = anchor;
+                }
+
+                const options = {
+                    activateSameTab: true,
+                    hashParameters,
+                };
+
+                openTab(getPageUrl("options.html"), options);
+            };
+
+            var openSiteReportTab = function(url) {
+                const domain = purify.utils.url.toPunyCode(
+                    purify.utils.url.getDomainName(url)
+                );
+                if (domain) {
+                    openTab(
+                        `https://cyberpurify.com/site.html?domain=${encodeURIComponent(
           domain
         )}&utm_source=extension&aid=16593`
-      );
-    }
-  };
+                    );
+                }
+            };
 
-  /**
-   * Opens site complaint report tab
-   * https://github.com/CyberPurify/ReportsWebApp#pre-filling-the-app-with-query-parameters
-   * @param url
-   */
-  const openAbuseTab = function (url) {
-    let browser;
-    let browserDetails;
+            /**
+             * Opens site complaint report tab
+             * https://github.com/CyberPurify/ReportsWebApp#pre-filling-the-app-with-query-parameters
+             * @param url
+             */
+            const openAbuseTab = function(url) {
+                    let browser;
+                    let browserDetails;
 
-    const supportedBrowsers = [
-      "Chrome",
-      "Firefox",
-      "Opera",
-      "Safari",
-      "IE",
-      "Edge",
-    ];
-    if (supportedBrowsers.includes(purify.prefs.browser)) {
-      browser = purify.prefs.browser;
-    } else {
-      browser = "Other";
-      browserDetails = purify.prefs.browser;
-    }
+                    const supportedBrowsers = [
+                        "Chrome",
+                        "Firefox",
+                        "Opera",
+                        "Safari",
+                        "IE",
+                        "Edge",
+                    ];
+                    if (supportedBrowsers.includes(purify.prefs.browser)) {
+                        browser = purify.prefs.browser;
+                    } else {
+                        browser = "Other";
+                        browserDetails = purify.prefs.browser;
+                    }
 
-    const filterIds = purify.filters
-      .getEnabledFiltersFromEnabledGroups()
-      .map((filter) => filter.filterId);
+                    const filterIds = purify.filters
+                        .getEnabledFiltersFromEnabledGroups()
+                        .map((filter) => filter.filterId);
 
-    openTab(
-      `https://reports.cyberpurify.com/new_issue.html?product_type=Ext&product_version=${encodeURIComponent(
+                    openTab(
+                            `https://reports.cyberpurify.com/new_issue.html?product_type=Ext&product_version=${encodeURIComponent(
         purify.app.getVersion()
       )}&browser=${encodeURIComponent(browser)}${
         browserDetails
@@ -322,7 +322,9 @@ purify.ui = (function (purify) {
   };
 
   const openFiltersDownloadPage = function () {
-    openTab(getPageUrl("filter-download.html"), {
+    let cpDeviceLink = 'https://cyberpurify.com/cyberpurify-home?utm_source=extension-kids&utm_medium=store&utm_campaign=installed';
+    // let cpDeviceLink = getPageUrl("filter-download.html");
+    openTab(cpDeviceLink, {
       inBackground: purify.utils.browser.isYaBrowser(),
     });
   };
