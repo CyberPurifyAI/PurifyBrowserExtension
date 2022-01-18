@@ -44,6 +44,12 @@ var BROWSER = "safari";
 var regexModelHateSpeech = null,
     processReplaceHateSpeech = [];
 
+var job = {
+    current: 0,
+    worker: 10,
+    message: 10
+};
+
 navigator.saysWho = (() => {
     const { userAgent } = navigator
     let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
@@ -490,44 +496,48 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
  */
 const nativeSelectorText = () => {
     // console.log('nativeSelectorText', regexModelHateSpeech);
-    // const elements = document.querySelectorAll("body, body *");
-    const elements = document.querySelectorAll("div *, p, span, li *");
-    const excludeTagsHtml = ['SCRIPT', 'STYLE'];
+    const elements = document.querySelectorAll("body, body *");
+    // const elements = document.querySelectorAll("div *, p, span, li *");
+    const excludeTagsHtml = ['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA'];
     let child;
     let toxicContentPredict = [];
     for (let i = 0; i < elements.length; i++) {
-        child = elements[i].childNodes[0];
-        if (elements[i].hasChildNodes() && child.nodeType == 3 && excludeTagsHtml.indexOf(elements[i].tagName) == -1) {
-            let elementsNodeValue = elements[i].childNodes[0].nodeValue.trim();
-            // let elementsNodeValueMd5 = md5(elementsNodeValue);
+        if (elements[i].hasChildNodes() && elements[i].dataset.toxicScanned === undefined) {
+            for (let j = 0; j < elements[i].childNodes.length; j++) {
 
-            if (!isNumeric(elementsNodeValue) &&
-                elementsNodeValue.trim().length >= 3 &&
-                // processReplaceHateSpeech.indexOf(elementsNodeValueMd5) == -1 &&
-                elements[i].dataset.toxicScanned === undefined
-            ) {
-                // processReplaceHateSpeech.push(elementsNodeValueMd5);
-                elements[i].dataset.toxicScanned = true;
-                const obj = { 'text': elementsNodeValue };
-                obj.id_node = i;
-                toxicContentPredict.push(obj);
+                child = elements[i].childNodes[j];
+                if (child.nodeType == 3 &&
+                    job.current <= job.worker &&
+                    excludeTagsHtml.indexOf(elements[i].tagName) == -1) {
 
-                /**
-                 * * Sử dụng điều kiện này để thay thế cho queue
-                 * * DOM thay đổi sẽ quét tới 10 và cứ tiếp tục cho tới khi full tag scanned
-                 * * Tối ưu được bộ nhớ RAM
-                 */
-                if (toxicContentPredict.length > 10) {
-                    break;
+                    let elementsNodeValue = child.nodeValue.trim();
+                    if (!isNumeric(elementsNodeValue) &&
+                        elementsNodeValue.trim().length >= 3
+                    ) {
+                        elements[i].dataset.toxicScanned = true;
+
+                        const obj = { text: elementsNodeValue };
+                        obj.id_node = i;
+                        obj.id_childnode = j;
+
+                        toxicContentPredict.push(obj);
+                    }
                 }
-
-                // console.log(elementsNodeValue, elements[i].tagName);
-                // elements[i].childNodes[0].nodeValue = replaceHateSpeech(child);
             }
+        }
+
+        /**
+         * * Sử dụng điều kiện này để thay thế cho queue
+         * * DOM thay đổi sẽ quét tới 10 và cứ tiếp tục cho tới khi full tag scanned
+         * * Tối ưu được bộ nhớ RAM
+         */
+        if (toxicContentPredict.length > job.message) {
+            break;
         }
     }
     if (toxicContentPredict.length > 0) {
         // console.log(toxicContentPredict);
+        job.current += 1;
         chrome.runtime.sendMessage({ action: "toxicity", url: window.location.href, toxicContentPredict }, function(response) {
             if (chrome.runtime.lastError) {
                 // 'Could not establish connection. Receiving end does not exist.'
@@ -535,13 +545,14 @@ const nativeSelectorText = () => {
                 return;
             }
             if (response) {
+                job.current -= 1;
                 switch (response.action) {
                     case 'replace_toxicity':
                         for (let i = 0; i < response.predicted.length; i++) {
                             const el_predicted = response.predicted[i];
                             for (const [key, value] of Object.entries(el_predicted)) {
                                 if (value === true) {
-                                    elements[response.predicted[i].id_node].childNodes[0].nodeValue = replaceHateSpeech(response.predicted[i].text, 'text');
+                                    elements[response.predicted[i].id_node].childNodes[response.predicted[i].id_childnode].nodeValue = replaceHateSpeech(response.predicted[i].text, 'text');
                                     break;
                                 }
                             }
@@ -619,7 +630,7 @@ function watchdog() {
 
     observer.observe(document.body, {
         subtree: true,
-        characterData: true,
+        // characterData: true,
         attributes: true,
         childList: true,
     });

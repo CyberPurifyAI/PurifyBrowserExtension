@@ -322,7 +322,7 @@ purify.ui = (function(purify) {
   };
 
   const openFiltersDownloadPage = function () {
-    let cpDeviceLink = 'https://cyberpurify.com/cyberpurify-home?utm_source=extension-kids&utm_medium=store&utm_campaign=installed';
+    let cpDeviceLink = 'https://cyberpurify.com/egg?utm_source=extension-kids&utm_medium=store&utm_campaign=install';
     // let cpDeviceLink = getPageUrl("filter-download.html");
     openTab(cpDeviceLink, {
       inBackground: purify.utils.browser.isYaBrowser(),
