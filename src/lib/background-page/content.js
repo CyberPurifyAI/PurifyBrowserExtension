@@ -15,20 +15,10 @@
  * =============================================================================
  */
 
-// class name for all text nodes added by this script.
-const TEXT_DIV_CLASSNAME = 'tfjs_mobilenet_extension_text';
-// Thresholds for LOW_CONFIDENCE_THRESHOLD and HIGH_CONFIDENCE_THRESHOLD,
-// controlling which messages are printed.
-const HIGH_CONFIDENCE_THRESHOLD = 0.5;
-const LOW_CONFIDENCE_THRESHOLD = 0.1;
+import md5 from 'md5';
+
 const THIS_DOMAIN = window.location.hostname;
-var images = [],
-    bg_images = [],
-    process_images = [],
-    type_of_images = [],
-    tfjs_images = [],
-    image_parents = [],
-    image_tags = ["IMG"],
+var process_images = [],
     urlRegex = /url\((?!['"]?(?:data|http):)['"]?([^'"\)]*)['"]?\)/i;
 
 var ban_image = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwcHCAcHBwcHBwoHBwcHBw8ICQcKFREiFhURExMYHCggGCYlGxMTITEhMSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDy0ZFRk3NysrKysrKysrKysrKysrKysrKys3KysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAKgBLAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAQIHA//EABYQAQEBAAAAAAAAAAAAAAAAAAABEf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARESAv/aAAwDAQACEQMRAD8A7eAAAAACAAAAAAIoCAAgqAAAgqAgoCCgIKACgIKAKAKCgAAAAAAAAgoCCgIKAgqAIqAIoCAAAAAAAoIKAgoCKACigAACAKAAAAAAAAAAAAigIACCgIKAgoCCgIKAAAAAigAoAIAAIDQoCCgIKAgoCCgIKAgoCCgIKAgoCCgIKAgAAAAICiAKgUAQAABsAAAAAAAAAAAAAAAAAAAAEAAAEAUQAAAAAABBQEFAaAAAAAAAAAAAAAAAABAVAABAVAEEAAAFEAURRQAAAAFBQAAAAAAAAAAAAAEAAEBUAQEAAAAQRQBQABUAUAUUAAAUAAAAAAAAAAACotQAABFQBAQBA1AQNFEDTFEDTFVlTRRA0URTVVWVBVRVAAAAAAAAAAAACotQAEQEVE0QETVE0TU0xdNZ01OjF01nTU6Ma1dY006XG9NZ01ejGtNZ1ToxpWVXTGosZWLKjSpFaiACgAAAAAAAAABUWoAi1mpVKhWaxaoJqWsauGpalrNrF9LjWprOprPS43prGmp2uN6axpp0Y3q689XV6Mb1dY1ZV6TG5VYlalalTG41GI1G5UrUaZjTrGaAKgAAAAAAAAABUAEqUGasZrNByrUZtZtBytbjNrNqjna1Izamg521rE00Gdq4auoLpi6ugsqYutSg3KjUqwHSM1qNxR18sVqNA7eWK//Z";
@@ -39,7 +29,7 @@ var POSITIVE_IMAGES = [];
 var POSITIVE_IN_NUMBER = 10;
 var POSITIVE_IN_RATE = 0.3;
 var HIDETAB = 0;
-var BROWSER = "safari";
+
 
 var regexModelHateSpeech = null,
     processReplaceHateSpeech = [];
@@ -51,9 +41,9 @@ var job = {
 };
 
 navigator.saysWho = (() => {
-    const { userAgent } = navigator
-    let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
-    let temp
+    const { userAgent } = navigator;
+    let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    let temp;
 
     if (/trident/i.test(match[1])) {
         temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
@@ -84,194 +74,10 @@ navigator.saysWho = (() => {
     return match.join(' ')
 })()
 
-var md5cycle = function(x, k) {
-    var a = x[0],
-        b = x[1],
-        c = x[2],
-        d = x[3];
-
-    a = ff(a, b, c, d, k[0], 7, -680876936);
-    d = ff(d, a, b, c, k[1], 12, -389564586);
-    c = ff(c, d, a, b, k[2], 17, 606105819);
-    b = ff(b, c, d, a, k[3], 22, -1044525330);
-    a = ff(a, b, c, d, k[4], 7, -176418897);
-    d = ff(d, a, b, c, k[5], 12, 1200080426);
-    c = ff(c, d, a, b, k[6], 17, -1473231341);
-    b = ff(b, c, d, a, k[7], 22, -45705983);
-    a = ff(a, b, c, d, k[8], 7, 1770035416);
-    d = ff(d, a, b, c, k[9], 12, -1958414417);
-    c = ff(c, d, a, b, k[10], 17, -42063);
-    b = ff(b, c, d, a, k[11], 22, -1990404162);
-    a = ff(a, b, c, d, k[12], 7, 1804603682);
-    d = ff(d, a, b, c, k[13], 12, -40341101);
-    c = ff(c, d, a, b, k[14], 17, -1502002290);
-    b = ff(b, c, d, a, k[15], 22, 1236535329);
-
-    a = gg(a, b, c, d, k[1], 5, -165796510);
-    d = gg(d, a, b, c, k[6], 9, -1069501632);
-    c = gg(c, d, a, b, k[11], 14, 643717713);
-    b = gg(b, c, d, a, k[0], 20, -373897302);
-    a = gg(a, b, c, d, k[5], 5, -701558691);
-    d = gg(d, a, b, c, k[10], 9, 38016083);
-    c = gg(c, d, a, b, k[15], 14, -660478335);
-    b = gg(b, c, d, a, k[4], 20, -405537848);
-    a = gg(a, b, c, d, k[9], 5, 568446438);
-    d = gg(d, a, b, c, k[14], 9, -1019803690);
-    c = gg(c, d, a, b, k[3], 14, -187363961);
-    b = gg(b, c, d, a, k[8], 20, 1163531501);
-    a = gg(a, b, c, d, k[13], 5, -1444681467);
-    d = gg(d, a, b, c, k[2], 9, -51403784);
-    c = gg(c, d, a, b, k[7], 14, 1735328473);
-    b = gg(b, c, d, a, k[12], 20, -1926607734);
-
-    a = hh(a, b, c, d, k[5], 4, -378558);
-    d = hh(d, a, b, c, k[8], 11, -2022574463);
-    c = hh(c, d, a, b, k[11], 16, 1839030562);
-    b = hh(b, c, d, a, k[14], 23, -35309556);
-    a = hh(a, b, c, d, k[1], 4, -1530992060);
-    d = hh(d, a, b, c, k[4], 11, 1272893353);
-    c = hh(c, d, a, b, k[7], 16, -155497632);
-    b = hh(b, c, d, a, k[10], 23, -1094730640);
-    a = hh(a, b, c, d, k[13], 4, 681279174);
-    d = hh(d, a, b, c, k[0], 11, -358537222);
-    c = hh(c, d, a, b, k[3], 16, -722521979);
-    b = hh(b, c, d, a, k[6], 23, 76029189);
-    a = hh(a, b, c, d, k[9], 4, -640364487);
-    d = hh(d, a, b, c, k[12], 11, -421815835);
-    c = hh(c, d, a, b, k[15], 16, 530742520);
-    b = hh(b, c, d, a, k[2], 23, -995338651);
-
-    a = ii(a, b, c, d, k[0], 6, -198630844);
-    d = ii(d, a, b, c, k[7], 10, 1126891415);
-    c = ii(c, d, a, b, k[14], 15, -1416354905);
-    b = ii(b, c, d, a, k[5], 21, -57434055);
-    a = ii(a, b, c, d, k[12], 6, 1700485571);
-    d = ii(d, a, b, c, k[3], 10, -1894986606);
-    c = ii(c, d, a, b, k[10], 15, -1051523);
-    b = ii(b, c, d, a, k[1], 21, -2054922799);
-    a = ii(a, b, c, d, k[8], 6, 1873313359);
-    d = ii(d, a, b, c, k[15], 10, -30611744);
-    c = ii(c, d, a, b, k[6], 15, -1560198380);
-    b = ii(b, c, d, a, k[13], 21, 1309151649);
-    a = ii(a, b, c, d, k[4], 6, -145523070);
-    d = ii(d, a, b, c, k[11], 10, -1120210379);
-    c = ii(c, d, a, b, k[2], 15, 718787259);
-    b = ii(b, c, d, a, k[9], 21, -343485551);
-
-    x[0] = add32(a, x[0]);
-    x[1] = add32(b, x[1]);
-    x[2] = add32(c, x[2]);
-    x[3] = add32(d, x[3]);
-
-}
-
-var cmn = function(q, a, b, x, s, t) {
-    a = add32(add32(a, q), add32(x, t));
-    return add32((a << s) | (a >>> (32 - s)), b);
-}
-
-var ff = function(a, b, c, d, x, s, t) {
-    return cmn((b & c) | ((~b) & d), a, b, x, s, t);
-}
-
-var gg = function(a, b, c, d, x, s, t) {
-    return cmn((b & d) | (c & (~d)), a, b, x, s, t);
-}
-
-var hh = function(a, b, c, d, x, s, t) {
-    return cmn(b ^ c ^ d, a, b, x, s, t);
-}
-
-var ii = function(a, b, c, d, x, s, t) {
-    return cmn(c ^ (b | (~d)), a, b, x, s, t);
-}
-
-var md51 = function(s) {
-    var txt = '',
-        n = s.length,
-        state = [1732584193, -271733879, -1732584194, 271733878],
-        i;
-    for (i = 64; i <= s.length; i += 64) {
-        md5cycle(state, md5blk(s.substring(i - 64, i)));
-    }
-    s = s.substring(i - 64);
-    var tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (i = 0; i < s.length; i++)
-        tail[i >> 2] |= s.charCodeAt(i) << ((i % 4) << 3);
-    tail[i >> 2] |= 0x80 << ((i % 4) << 3);
-    if (i > 55) {
-        md5cycle(state, tail);
-        for (i = 0; i < 16; i++) tail[i] = 0;
-    }
-    tail[14] = n * 8;
-    md5cycle(state, tail);
-    return state;
-}
-
-/*
- * there needs to be support for Unicode here,
- * unless we pretend that we can redefine the MD-5
- * algorithm for multi-byte characters (perhaps
- * by adding every four 16-bit characters and
- * shortening the sum to 32 bits). Otherwise
- * I suggest performing MD-5 as if every character
- * was two bytes--e.g., 0040 0025 = @%--but then
- * how will an ordinary MD-5 sum be matched?
- * There is no way to standardize text to something
- * like UTF-8 before transformation; speed cost is
- * utterly prohibitive. The JavaScript standard
- * itself needs to look at this: it should start
- * providing access to strings as preformed UTF-8
- * 8-bit unsigned value arrays.
- */
-
-var md5blk = function(s) {
-    /*
-     * I figured global was faster.
-     */
-
-    var md5blks = [],
-        i; /* Andy King said do it this way. */
-    for (i = 0; i < 64; i += 4) {
-        md5blks[i >> 2] = s.charCodeAt(i) + (s.charCodeAt(i + 1) << 8) + (s.charCodeAt(i + 2) << 16) + (s.charCodeAt(i + 3) << 24);
-    }
-    return md5blks;
-}
-
-var hex_chr = '0123456789abcdef'.split('');
-
-var rhex = function(n) {
-    var s = '',
-        j = 0;
-    for (; j < 4; j++)
-        s += hex_chr[(n >> (j * 8 + 4)) & 0x0F] + hex_chr[(n >> (j * 8)) & 0x0F];
-    return s;
-}
-
-var hex = function(x) {
-    for (var i = 0; i < x.length; i++)
-        x[i] = rhex(x[i]);
-    return x.join('');
-}
-
-var md5 = function(s) {
-    return hex(md51(s));
-}
-
-/*
- * This function is much faster, so if possible we use it.
- * Some IEs are the only ones I know of that need the idiotic second function,
- * generated by an if clause.
- */
-
-var add32 = function(a, b) {
-    return (a + b) & 0xFFFFFFFF;
-}
-
 
 function Ruler(classes) {
-    labels = []
-    Neutral_position = 7;
+    let labels = [];
+    let Neutral_position = 7;
     for (var i = 0; i < classes.length; i++) {
         labels[classes[i].className] = (Math.round(classes[i].probability * 100) / 100);
         if (classes[i].className == "Neutral") { Neutral_position = i; }
@@ -298,172 +104,9 @@ function Ruler(classes) {
     }
 }
 
-function is_valid_image(url) {
-    if (
-        url.indexOf("base64") != -1 ||
-        url.indexOf(".png") != -1 ||
-        url.indexOf(".svg") != -1 ||
-        url.indexOf(".gif") != -1 ||
-        url.indexOf(".jpg") != -1 ||
-        url.indexOf(".jpeg") != -1
-    ) {
-        return true;
-    }
-
-    // return isImageURL(url);
-    return false;
-
-    // if(url.indexOf("http://")==-1 && url.indexOf("https://")==-1 && url.indexOf("base64")==-1 && url.indexOf("data:image/svg")!=-1 && url.indexOf(".png")==-1 && url.indexOf(".gif")==-1 && url.indexOf(".jpg")==-1 && url.indexOf(".jpeg")==-1){
-    //   return 0;
-    // }else{
-    //   return 1;
-    // }
-}
-
-function blurallimgs(srcUrl, srcType, predict_result) {
-
-    var elements = document.querySelectorAll(image_tags.join(","));
-    // var elements = document.body.getElementsByTagName("*");
-    /**
-     ** When the DOM is ready find all the images and background images initially loaded */
-    Array.prototype.forEach.call(elements, function(el) {
-        var style = window.getComputedStyle(el, false);
-        if (el.src == srcUrl) {
-            if (el.tagName === "IMG") {
-                if (predict_result == 0) {
-                    // el.style = "filter: blur(0px) !important;opacity:1 !important;";
-                    // el.style.setProperty('filter', 'blur(0px) !important', "");
-                    // el.setAttribute('cp-srcurl', el.src + " == " + srcUrl);
-                    el.style.filter = "blur(0px)";
-                    // el.style.visibility = "visible";
-                } else {
-                    // el.style = "-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
-                    // el.style.setProperty('filter', 'blur(30px) !important', "");
-                    el.style.filter = "blur(30px)";
-                    // el.style.visibility = "hidden";
-                    // console.log(TOTAL_POSITIVE + "/" + process_images.length + " " + (TOTAL_POSITIVE / process_images.length))
-                    if (
-                        (process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
-                        (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)
-                    ) {
-                        if (HIDETAB == 0) {
-                            HIDETAB = 1;
-                            chrome.runtime.sendMessage({ action: "hidetab", url: window.location.href, POSITIVE_IMAGES }, function(response) {
-                                // console.log(response.result);
-                            });
-                            // console.log("HIDETAB");
-                        }
-                    }
-                }
-            }
-
-        } else if (style.backgroundImage != "none" && predict_result > 0 && style.backgroundImage.match(urlRegex)) {
-            // bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
-            bg_img_url = style.backgroundImage.match(urlRegex)[1];
-            if (bg_img_url == srcUrl) {
-                // el.style.backgroundImage = "url('" + ban_image + "')";
-                el.style.backgroundImage = style.backgroundImage.replace(urlRegex, "url('" + ban_image + "')");
-                // console.log(style.backgroundImage.replace(urlRegex, "url('" + ban_image + "')"));
-
-                // console.log(TOTAL_POSITIVE + "/" + process_images.length + " FOUND bg_images " + bg_img_url);
-                // console.log(TOTAL_POSITIVE + "/" + process_images.length + " " + (TOTAL_POSITIVE / process_images.length))
-                if (
-                    (process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
-                    (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)
-                ) {
-                    if (HIDETAB == 0) {
-                        HIDETAB = 1;
-                        chrome.runtime.sendMessage({ action: "hidetab", url: window.location.href, POSITIVE_IMAGES }, function(response) {
-                            // console.log(response.result);
-                        });
-                        // console.log("HIDETAB");
-                    }
-                }
-            }
-
-        }
-    });
-}
-
-function getallimgs(tag) {
-
-    var elements = document.querySelectorAll("img, div, i");
-    /**
-     ** When the DOM is ready find all the images and background images initially loaded
-     */
-    Array.prototype.forEach.call(elements, function(el) {
-        var style = window.getComputedStyle(el, false);
-        if (el.tagName === "IMG") {
-            md5src = md5(`${ el.src }`);
-            if (el.src != "" && process_images.indexOf(md5src) == -1) {
-                process_images.push(md5src);
-                // wait_imgs.push(el.src);
-                // console.log(" FOUND IMG " + el.src);
-                if (tag == "alltag") {
-                    // el.style="-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
-                    // el.style.setProperty('filter','blur(30px) !important',"");
-                    el.style.filter = "blur(30px)";
-                    // el.style.visibility = "hidden";
-                }
-
-                el.setAttribute('draggable', false);
-                // console.log({ action: "predict", srcUrl: el.src, srcType: "img" });
-                chrome.runtime.sendMessage({ action: "predict", srcUrl: el.src, srcType: "img" }, function(response) {
-                    // console.log(response);
-                });
-            }
-
-        } else if (style.backgroundImage != "none" && style.backgroundImage.match(urlRegex)) {
-            // bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
-            bg_img_url = style.backgroundImage.match(urlRegex)[1];
-            md5src = md5(bg_img_url);
-            if (image_tags.indexOf(el.tagName) == -1) {
-                image_tags.push(el.tagName);
-            }
-
-            if (bg_img_url != "" && process_images.indexOf(md5src) == -1) {
-                process_images.push(md5src);
-                // console.log({ action: "predict", srcUrl: bg_img_url, srcType: "bg", backgroundImage: style.backgroundImage.match(urlRegex)[1] });
-                // console.log(" FOUND bg_images " + bg_img_url);
-                chrome.runtime.sendMessage({ action: "predict", srcUrl: bg_img_url, srcType: "bg" }, function(response) {
-                    // console.log(response.result);
-                });
-            }
-        }
-    });
-}
-
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
-
-/*
- * Add a listener to hear from the content.js page when the image is through processing.
- * The message should contin an action, a url, and predictions (the output of the classifier)
- */
-
-// message: {action, url, predictions}
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message) {
-        switch (message.action) {
-            case 'predict':
-                if (message.srcUrl && message.predictions) {
-                    FROM_CACHE = 0;
-                    var predict_result = Ruler(message.predictions);
-                    clearInterval(autoHideAllImgs);
-                    blurallimgs(message.srcUrl, message.srcType, predict_result);
-
-                    if (predict_result > 0) {
-                        TOTAL_POSITIVE += 1;
-                        if (POSITIVE_IMAGES.indexOf(message.srcUrl) == -1) {
-                            POSITIVE_IMAGES.push(message.srcUrl);
-                        }
-                    }
-                }
-                break;
-        }
-    }
-});
 
 chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href }, function(response) {
     if (chrome.runtime.lastError) {
@@ -479,7 +122,7 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
                  * quét văn bản và thay đổi nội dung có chứa hate
                  */
                 regexModelHateSpeech = response.regexModelHateSpeech;
-                nativeSelectorText();
+                nativeSelector();
                 break;
         }
     }
@@ -491,77 +134,181 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
  * * --------------------------------------------------
  * * querySelectorAll            1725            1.725
  *
+ * @param {string} choose
  * @returns
  * +-----------------------------------------------------------------------------------+
  */
-const nativeSelectorText = () => {
-    // console.log('nativeSelectorText', regexModelHateSpeech);
-    const elements = document.querySelectorAll("body, body *");
-    // const elements = document.querySelectorAll("div *, p, span, li *");
+const nativeSelector = (choose = 'text') => {
+    // console.log('nativeSelector', regexModelHateSpeech);
+    const elements = choose == 'text' ? document.querySelectorAll("body, body *") : document.querySelectorAll("img, div, i");
     const excludeTagsHtml = ['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA'];
     let child;
-    let toxicContentPredict = [];
+    let toxicContentPredict = [],
+        imagePredict = [];
     for (let i = 0; i < elements.length; i++) {
-        if (elements[i].hasChildNodes() && elements[i].dataset.toxicScanned === undefined) {
-            for (let j = 0; j < elements[i].childNodes.length; j++) {
-
-                child = elements[i].childNodes[j];
-                if (child.nodeType == 3 &&
+        switch (choose) {
+            case 'text':
+                if (elements[i].hasChildNodes() &&
+                    elements[i].dataset.toxicScanned === undefined &&
                     job.current <= job.worker &&
                     excludeTagsHtml.indexOf(elements[i].tagName) == -1) {
 
-                    let elementsNodeValue = child.nodeValue.trim();
-                    if (!isNumeric(elementsNodeValue) &&
-                        elementsNodeValue.trim().length >= 3
-                    ) {
-                        elements[i].dataset.toxicScanned = true;
+                    for (let j = 0; j < elements[i].childNodes.length; j++) {
+                        child = elements[i].childNodes[j];
+                        if (child.nodeType == 3) {
 
-                        const obj = { text: elementsNodeValue };
-                        obj.id_node = i;
-                        obj.id_childnode = j;
+                            let elementsNodeValue = child.nodeValue.trim();
+                            if (!isNumeric(elementsNodeValue) && elementsNodeValue.trim().length >= 3) {
+                                elements[i].dataset.toxicScanned = true;
+                                console.log(elementsNodeValue.split('. '));
+                                const obj = { text: elementsNodeValue };
+                                obj.id_node = i;
+                                obj.id_childnode = j;
 
-                        toxicContentPredict.push(obj);
+                                toxicContentPredict.push(obj);
+                            }
+                        }
                     }
                 }
-            }
+                break;
+
+            case 'imagenet':
+                const element = elements[i];
+                if (element.nodeType == 1 &&
+                    element.dataset.imagenetScanned === undefined &&
+                    job.current <= job.worker) {
+
+                    child = element;
+
+                    const obj = {};
+                    obj.id_node = i;
+
+                    switch (child.nodeName) {
+                        case 'IMG':
+                            child.dataset.imagenetScanned = true;
+                            child.style.filter = "blur(35px)";
+                            if (child.currentSrc != '' || child.src != '') {
+                                obj.src = child.currentSrc != '' ? child.currentSrc : child.src;
+                                obj.src_type = 'image';
+                            }
+                            break;
+
+                        default: // use for background image DIV, I, P
+                            let child_style = window.getComputedStyle(child, false);
+                            if (child_style.backgroundImage != "none" &&
+                                child_style.backgroundImage.match(urlRegex)) {
+                                let backgroundImageUrl = child_style.backgroundImage.match(urlRegex)[1];
+                                if (backgroundImageUrl != '') {
+                                    child.dataset.imagenetScanned = true;
+                                    child.style.filter = "blur(30px)";
+
+                                    obj.src = backgroundImageUrl;
+                                    obj.src_type = 'background_image';
+                                }
+                            }
+                            break;
+                    }
+
+                    if (Object.keys(obj).length >= 2) {
+                        process_images.push(md5(obj.src));
+                        imagePredict.push(obj);
+                    }
+                }
+                break;
         }
 
         /**
          * * Sử dụng điều kiện này để thay thế cho queue
-         * * DOM thay đổi sẽ quét tới 10 và cứ tiếp tục cho tới khi full tag scanned
-         * * Tối ưu được bộ nhớ RAM
+         * * DOM thay đổi sẽ quét tới thứ job.message và cứ tiếp tục cho tới khi full tag scanned
+         * * Tối ưu được bộ nhớ đệm RAM
          */
-        if (toxicContentPredict.length > job.message) {
+        if (toxicContentPredict.length > job.message || imagePredict.length > 4) {
             break;
         }
     }
+
+    /**
+     * * toxicity_predicting
+     * * Phản hồi của extension khi xử lý xong ngôn ngữ tự nhiên
+     */
     if (toxicContentPredict.length > 0) {
-        // console.log(toxicContentPredict);
+        // console.log('toxicContentPredict', toxicContentPredict);
         job.current += 1;
-        chrome.runtime.sendMessage({ action: "toxicity", url: window.location.href, toxicContentPredict }, function(response) {
-            if (chrome.runtime.lastError) {
-                // 'Could not establish connection. Receiving end does not exist.'
-                console.log('lastError.message', chrome.runtime.lastError.message);
-                return;
-            }
-            if (response) {
-                job.current -= 1;
-                switch (response.action) {
-                    case 'replace_toxicity':
-                        for (let i = 0; i < response.predicted.length; i++) {
-                            const el_predicted = response.predicted[i];
-                            for (const [key, value] of Object.entries(el_predicted)) {
-                                if (value === true) {
-                                    elements[response.predicted[i].id_node].childNodes[response.predicted[i].id_childnode].nodeValue = replaceHateSpeech(response.predicted[i].text, 'text');
-                                    break;
-                                }
+        sendMessageToExtension((message) => {
+            job.current -= 1;
+            switch (message.action) {
+                case 'toxicity_predicted':
+                    for (let i = 0; i < message.predicted.length; i++) {
+                        const el_predicted = message.predicted[i];
+                        for (const [key, value] of Object.entries(el_predicted)) {
+                            if (value === true) {
+                                elements[message.predicted[i].id_node].childNodes[message.predicted[i].id_childnode].nodeValue = replaceHateSpeech(message.predicted[i].text, 'text');
+                                break;
                             }
                         }
-                        break;
-                }
+                    }
+                    break;
             }
-        });
+        }, { action: "toxicity", toxicContentPredict });
     }
+
+    /**
+     * * image_predicting
+     * * Phản hồi từ extension khi xử lý xong chấm điểm hình ảnh.
+     */
+    if (imagePredict.length > 0) {
+        // console.log('imagePredict', imagePredict);
+        job.current += 1;
+        sendMessageToExtension((message) => {
+            job.current -= 1;
+            switch (message.action) {
+                case 'image_predicted':
+                    // console.log("image_predicted `${message.predicted.length}`", message);
+                    clearInterval(autoHideAllImgs);
+                    for (let i = 0; i < message.predicted.length; i++) {
+                        const el_predicted = message.predicted[i];
+                        var predict_result = Ruler(el_predicted.predictions);
+                        if (predict_result == 0) {
+                            elements[el_predicted.id_node].style.filter = "blur(0px)";
+                        } else if (predict_result > 0) {
+                            TOTAL_POSITIVE += 1;
+                            if (POSITIVE_IMAGES.indexOf(el_predicted.src) == -1) {
+                                POSITIVE_IMAGES.push(el_predicted.src);
+                            }
+                        }
+
+                        if (((process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
+                                (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)) &&
+                            HIDETAB == 0) {
+
+                            sendMessageToExtension((r) => {
+                                HIDETAB = 1;
+                            }, { action: "hidetab", url: window.location.href, POSITIVE_IMAGES });
+                        }
+                    }
+                    break;
+            }
+        }, { action: "image_predict", imagePredict });
+    }
+}
+
+/**
+ *
+ * @param {*} callback
+ * @param {*} message
+ * @return
+ */
+const sendMessageToExtension = (callback, message) => {
+    chrome.runtime.sendMessage(message, function(response) {
+        if (chrome.runtime.lastError) {
+            // 'Could not establish connection. Receiving end does not exist.'
+            console.log('lastError.message', chrome.runtime.lastError.message);
+            return;
+        }
+        if (response) {
+            return callback(response);
+        }
+    });
 }
 
 /**
@@ -575,6 +322,7 @@ const nativeSelectorText = () => {
 const replaceHateSpeech = (textnode, choose = 'default') => {
     // console.log('replaceHateSpeech', regexModelHateSpeech);
     let text_replace = '',
+        t = '',
         character = '*';
     switch (choose) {
         case 'text':
@@ -585,28 +333,24 @@ const replaceHateSpeech = (textnode, choose = 'default') => {
                     text_replace += ' ';
                 }
             }
-            return text_replace;
             break;
 
         default:
-            return textnode.nodeValue.replace(new RegExp(regexModelHateSpeech, "gi"), (matched) => {
+            text_replace = textnode.nodeValue.replace(new RegExp(regexModelHateSpeech, "gi"), (matched) => {
                 for (let i = 0; i < matched.length; i++) {
-                    text_replace += character;
+                    t += character;
                 }
-                return text_replace;
+                return t;
             });
             break;
     }
+    return text_replace;
 }
-
-// if (navigator.saysWho.toLowerCase().indexOf("safari") == -1) {
-//     document.getElementsByTagName("html")[0].style.visibility = "hidden";
-// }
 
 var autoHideAllImgs = setInterval(() => {
     let elements = document.getElementsByTagName("img");
     Array.prototype.forEach.call(elements, (e) => {
-        e.style.filter = "blur(30px)";
+        e.style.filter = "blur(25px)";
     });
     // Che nhanh nhất có thể
 }, 100);
@@ -615,16 +359,15 @@ var start_watch_time = new Date().getTime();
 
 function watchdog() {
 
-    getallimgs('alltag');
+    nativeSelector('imagenet');
     /* MutationObserver callback to add images when the body changes */
     const observer = new MutationObserver((mutationsList, observer) => {
         let current_time = new Date().getTime();
         if (current_time - start_watch_time > 100) {
             start_watch_time = current_time;
             // console.log("DOM CHANGED ");
-            // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
-            getallimgs('alltag');
-            nativeSelectorText();
+            nativeSelector('imagenet');
+            nativeSelector('text');
         }
     });
 
@@ -638,8 +381,8 @@ function watchdog() {
 
 if (navigator.saysWho.toLowerCase().indexOf("safari") != -1) {
     var safari_not_fire_event = setInterval(function() {
-        getallimgs("sometag");
-        //Safari suck không return IMG TAG DOM event when load from cache
+        nativeSelector('imagenet');
+        // Safari suck không return IMG TAG DOM event when load from cache
     }, 1000);
     window.onload = function() {
         watchdog();
