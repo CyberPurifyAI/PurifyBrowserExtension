@@ -26,10 +26,16 @@ class ToxicClassifier {
      * @returns
      */
     async classify(callback, inputs) {
+        if (!this.modelToxic) {
+            console.log('Waiting for model to load...');
+            setTimeout(() => { this.classify(callback, inputs) }, 5000);
+            return;
+        }
+
         const input_predictions = inputs.map(d => d.text);
         const results = await this.modelToxic.classify(input_predictions);
         callback({
-            action: 'replace_toxicity',
+            action: 'toxicity_predicted',
             predicted: inputs.map((data, index) => {
                 results.forEach((classification) => {
                     data[classification.label] = classification.results[index].match;
