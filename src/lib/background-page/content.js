@@ -160,7 +160,7 @@ const nativeSelector = (choose = 'text') => {
                             let elementsNodeValue = child.nodeValue.trim();
                             if (!isNumeric(elementsNodeValue) && elementsNodeValue.trim().length >= 3) {
                                 elements[i].dataset.toxicScanned = true;
-                                console.log(elementsNodeValue.split('. '));
+
                                 const obj = { text: elementsNodeValue };
                                 obj.id_node = i;
                                 obj.id_childnode = j;
@@ -249,7 +249,7 @@ const nativeSelector = (choose = 'text') => {
                     }
                     break;
             }
-        }, { action: "toxicity", toxicContentPredict });
+        }, { action: "toxicity_predict", toxicContentPredict });
     }
 
     /**

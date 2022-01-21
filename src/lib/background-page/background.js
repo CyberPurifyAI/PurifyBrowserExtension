@@ -151,7 +151,7 @@ chrome.runtime.onMessage.addListener(
                 });
                 break;
 
-            case 'toxicity':
+            case 'toxicity_predict':
                 toxicClassifier.classify(sendResponse, request.toxicContentPredict);
                 break;
         }

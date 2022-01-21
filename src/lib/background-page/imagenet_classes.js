@@ -108,7 +108,7 @@ class ImageClassifier {
                 );
             return input;
         })).then((results) => {
-            console.log(results);
+            // console.log(results);
             callback({
                 action: 'image_predicted',
                 predicted: results
@@ -128,7 +128,7 @@ class ImageClassifier {
             const img = document.createElement('img');
             img.crossOrigin = 'anonymous';
             img.onerror = function(e) {
-                reject(`Could not load image from external source ${ input.src }. Train again ${ input.repeat }`);
+                reject(`Could not load image from external source ${ input.src }. Try again ${ input.repeat }`);
                 input.predictions = [{ className: "Neutral", probability: 1 }];
 
                 // if (input.repeat < 5) {
