@@ -152,7 +152,7 @@ chrome.runtime.onMessage.addListener(
                 break;
 
             case 'toxicity_predict':
-                toxicClassifier.classify(sendResponse, request.toxicContentPredict);
+                toxicClassifier.predicting(sendResponse, request.toxicContentPredict);
                 break;
         }
         return true;

@@ -242,7 +242,7 @@ const nativeSelector = (choose = 'text') => {
                         const el_predicted = message.predicted[i];
                         for (const [key, value] of Object.entries(el_predicted)) {
                             if (value === true) {
-                                elements[message.predicted[i].id_node].childNodes[message.predicted[i].id_childnode].nodeValue = replaceHateSpeech(message.predicted[i].text, 'text');
+                                elements[message.predicted[i].id_node].childNodes[message.predicted[i].id_childnode].nodeValue = message.predicted[i].text;
                                 break;
                             }
                         }
