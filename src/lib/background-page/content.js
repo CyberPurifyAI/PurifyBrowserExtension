@@ -185,9 +185,8 @@ const nativeSelector = (choose = 'text') => {
 
                     switch (child.nodeName) {
                         case 'IMG':
-                            child.dataset.imagenetScanned = true;
-                            child.style.filter = "blur(35px)";
-                            if (child.currentSrc != '' || child.src != '') {
+                            if ((child.currentSrc != '' || child.src != '')) {
+
                                 obj.src = child.currentSrc != '' ? child.currentSrc : child.src;
                                 obj.src_type = 'image';
                             }
@@ -199,8 +198,6 @@ const nativeSelector = (choose = 'text') => {
                                 child_style.backgroundImage.match(urlRegex)) {
                                 let backgroundImageUrl = child_style.backgroundImage.match(urlRegex)[1];
                                 if (backgroundImageUrl != '') {
-                                    child.dataset.imagenetScanned = true;
-                                    child.style.filter = "blur(30px)";
 
                                     obj.src = backgroundImageUrl;
                                     obj.src_type = 'background_image';
@@ -209,7 +206,12 @@ const nativeSelector = (choose = 'text') => {
                             break;
                     }
 
-                    if (Object.keys(obj).length >= 2) {
+                    if (Object.keys(obj).length >= 2 &&
+                        process_images.indexOf(md5(obj.src)) === -1) {
+
+                        child.dataset.imagenetScanned = true;
+                        child.style.filter = "blur(30px)";
+
                         process_images.push(md5(obj.src));
                         imagePredict.push(obj);
                     }
