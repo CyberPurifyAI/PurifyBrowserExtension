@@ -150,7 +150,7 @@ class ImageClassifier {
                 if (img.height && img.height <= MIN_IMG_SIZE || img.width && img.width <= MIN_IMG_SIZE) {
                     input.predictions = [{ className: "Neutral", probability: 1 }];
                 }
-                reject(`Image size too small. [${ img.height } x ${ img.width }] vs. minimum [${ MIN_IMG_SIZE } x ${ MIN_IMG_SIZE }]`);
+                reject(`Image size too small. [${ img.height } x ${ img.width }] vs. minimum [${ MIN_IMG_SIZE } x ${ MIN_IMG_SIZE }]. Source ${ input.src }`);
             };
             img.src = input.src;
         });
