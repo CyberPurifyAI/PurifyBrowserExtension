@@ -122,7 +122,7 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
                  * quét văn bản và thay đổi nội dung có chứa hate
                  */
                 regexModelHateSpeech = response.regexModelHateSpeech;
-                nativeSelector();
+                nativeSelector('text');
                 break;
         }
     }
@@ -274,7 +274,7 @@ const nativeSelector = (choose = 'text') => {
                             elements[el_predicted.id_node].style.filter = "blur(0px)";
                         } else if (predict_result > 0) {
                             TOTAL_POSITIVE += 1;
-                            if (POSITIVE_IMAGES.indexOf(el_predicted.src) == -1) {
+                            if (POSITIVE_IMAGES.indexOf(el_predicted.src) === -1) {
                                 POSITIVE_IMAGES.push(el_predicted.src);
                             }
                         }
