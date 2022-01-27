@@ -18,10 +18,8 @@
 import 'babel-polyfill';
 import * as tf from '@tensorflow/tfjs';
 import { IMAGENET_CLASSES } from './imagenet_classes';
+import * as toxicity from './toxicity';
 import md5 from 'md5';
-
-// Where to load the model from.
-const MOBILENET_MODEL_TFHUB_URL = chrome.extension.getURL("models/purify_mobilenet_tfjs/model.json");
 
 // Size of the image expected by mobilenet.
 const IMAGE_SIZE = 224;
@@ -52,11 +50,13 @@ class ImageClassifier {
      * Loads mobilenet from URL and keeps a reference to it in the object.
      */
     async loadModel() {
-        console.log('Loading model...');
+        console.log('Loading imagenet model...');
         const startTime = performance.now();
         try {
-            this.model =
-                await tf.loadGraphModel(MOBILENET_MODEL_TFHUB_URL, { fromTFHub: false });
+            // Where to load the model from.
+            const MOBILENET_MODEL_TFHUB_URL = chrome.extension.getURL("models/purify_mobilenet_tfjs/model.json");
+            this.model = await tf.loadGraphModel(MOBILENET_MODEL_TFHUB_URL, { fromTFHub: false });
+
             // Warms up the model by causing intermediate tensor values
             // to be built and pushed to GPU.
             tf.tidy(() => {
@@ -114,10 +114,10 @@ class ImageClassifier {
             const img = document.createElement('img');
             img.crossOrigin = 'anonymous';
             img.onerror = function(e) {
-                reject(`Could not load image from external source ${ srcUrl }.`);
+                reject(`Could not load image from external source ${ srcUrl }. Try again ${ repeat }`);
                 // return org status
 
-                if (repeat < 5) {
+                if (repeat < 3) {
                     repeat += 1;
                     // console.log("Try again " + repeat);
                     // var autoreload
@@ -125,7 +125,8 @@ class ImageClassifier {
                         imageClassifier.analyzeImage(srcUrl, srcType, tabId, repeat);
                     }, repeat * 750);
                 } else {
-                    chrome.tabs.sendMessage(tabId, { action: 'imgfail' });
+                    const predictions = [{ className: "Neutral", probability: 1 }];
+                    chrome.tabs.sendMessage(tabId, { action: 'predict', srcUrl, srcType, predictions });
                 }
             };
             img.onload = function(e) {
@@ -141,7 +142,7 @@ class ImageClassifier {
                     const predictions = [{ className: "Neutral", probability: 1 }];
                     chrome.tabs.sendMessage(tabId, { action: 'predict', srcUrl, srcType, predictions });
                 }
-                reject(`Image size too small. [${ img.height } x ${ img.width }] vs. minimum [${ MIN_IMG_SIZE } x ${ MIN_IMG_SIZE }]`);
+                reject(`Image size too small. [${ img.height } x ${ img.width }] vs. minimum [${ MIN_IMG_SIZE } x ${ MIN_IMG_SIZE }]. Source ${ srcUrl }`);
             };
             img.src = srcUrl;
         });
@@ -157,7 +158,7 @@ class ImageClassifier {
         const { values, indices } = tf.topk(logits, topK, true);
         const valuesArr = await values.data();
         const indicesArr = await indices.data();
-        console.log(`indicesArr ${indicesArr}`);
+        // console.log(`indicesArr ${indicesArr}`);
         const topClassesAndProbs = [];
         for (let i = 0; i < topK; i++) {
             topClassesAndProbs.push({
@@ -174,7 +175,7 @@ class ImageClassifier {
      * Should have the correct size ofr mobilenet.
      */
     async predict(imgElement) {
-        console.log('Predicting...');
+        // console.log('Predicting...');
         // The first start time includes the time it takes to extract the image
         // from the HTML and preprocess it, in additon to the predict() call.
         const startTime1 = performance.now();
@@ -197,29 +198,122 @@ class ImageClassifier {
             imgElement = null;
             // console.log("Result "+JSON.stringify(output));
             return output;
-            if (output.shape[output.shape.length - 1] === 1001) {
-                // Remove the very first logit (background noise).
-                return output.slice([0, 1], [-1, 1000]);
-            } else if (output.shape[output.shape.length - 1] === 1000) {
-                return output;
-            } else {
-                throw new Error('Unexpected shape...');
-            }
+            // if (output.shape[output.shape.length - 1] === 1001) {
+            //     // Remove the very first logit (background noise).
+            //     return output.slice([0, 1], [-1, 1000]);
+            // } else if (output.shape[output.shape.length - 1] === 1000) {
+            //     return output;
+            // } else {
+            //     throw new Error('Unexpected shape...');
+            // }
         });
 
         // Convert logits to probabilities and class names.
         const classes = await this.getTopKClasses(logits, TOPK_PREDICTIONS);
-        const totalTime1 = performance.now() - startTime1;
-        const totalTime2 = performance.now() - startTime2;
-        console.log(
-            `Done in ${totalTime1.toFixed(1)} ms ` +
-            `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
+        // const totalTime1 = performance.now() - startTime1;
+        // const totalTime2 = performance.now() - startTime2;
+        // console.log(
+        //     `Done in ${totalTime1.toFixed(1)} ms ` +
+        //     `(not including preprocessing: ${Math.floor(totalTime2)} ms)`);
         // console.log(classes);
         return classes;
     }
 }
 
-const imageClassifier = new ImageClassifier();
+class ToxicClassifier {
+    constructor() {
+        this.loadModel();
+    }
+
+    /**
+     * * Load Toxicity Classifier
+     */
+    async loadModel() {
+        console.log('Loading Toxicity Classifier...');
+        // The minimum prediction confidence.
+        const startTime = performance.now();
+        try {
+            const threshold = 0.9;
+            const TOXICITY_MODEL_PATH = chrome.extension.getURL("models/toxicity/model.json");
+            // Load the model.
+            // Users optionally pass in a threshold and an array of labels to include.
+            this.modelToxic = await toxicity.load(threshold, [], TOXICITY_MODEL_PATH);
+
+            const totalTime = Math.floor(performance.now() - startTime);
+            console.log(`Model ToxicClassifier loaded and initialized in ${ totalTime } ms...`);
+        } catch (error) {
+            console.error(`Unable to load model from URL: ${ TOXICITY_MODEL_PATH }`, error);
+        }
+    }
+
+    /**
+     *
+     * @param {*} callback
+     * @param {[]|object} inputs {id_node, text}
+     * @returns
+     */
+    async predicting(callback, inputs) {
+        await Promise.all(inputs.map(async(node, k) => {
+            let sentences = node.text.split('. ').filter(Boolean);
+            const result_sentences = await this.modelToxic.classify(sentences);
+
+            return await Promise.all(sentences.map(async(data, index) => {
+                let replace_flag = false;
+                for (let i = 0; i < result_sentences.length; i++) {
+                    const classification = result_sentences[i];
+                    if (classification.results[index].match === true) {
+                        data = await this.replaceHateSpeech(sentences[index]);
+                        replace_flag = classification.results[index].match;
+                        break;
+                    }
+                }
+                return { text: data, replace_flag };
+            }));
+
+        })).then((processed) => {
+            return callback({
+                action: 'toxicity_predicted',
+                predicted: inputs.map((n, k) => {
+                    n.text = processed[k].map(n => n.text).join(". ");
+                    for (let i = 0; i < processed[k].length; i++) {
+                        n.replace_flag = processed[k][i].replace_flag;
+                        if (n.replace_flag === true) {
+                            break;
+                        }
+                    }
+                    return n;
+                })
+            });
+        });
+    }
+
+    /**
+     * * replace text UpperCase and non-uppercase
+     * * replace multi text
+     * * convert length text to number length *
+     * @param {*} textnode
+     * @param {string} choose
+     * @returns {string}
+     */
+    async replaceHateSpeech(textnode, choose = 'text') {
+        return new Promise((resolve, reject) => {
+            let text_replace = '',
+                character = '*';
+            switch (choose) {
+                case 'text':
+                    for (let i = 0; i < textnode.length; i++) {
+                        if (textnode[i] !== ' ') {
+                            text_replace += character;
+                        } else {
+                            text_replace += ' ';
+                        }
+                    }
+                    break;
+            }
+            return resolve(text_replace);
+        });
+    }
+}
 
 /**
  *
@@ -286,6 +380,10 @@ function is_toplist(domain) {
     return CP_TOPLIST.indexOf(d) === -1 ? false : true;
 }
 
+
+const imageClassifier = new ImageClassifier();
+const toxicClassifier = new ToxicClassifier();
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         switch (request.action) {
@@ -331,17 +429,23 @@ chrome.runtime.onMessage.addListener(
                 // purify.console.info(CP_TOPLIST.length);
 
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-                    var domain = extractHostname(tabs[0].url);
-                    // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
-                    // console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain));
-                    if ((is_blacklist(md5(domain)) == true) && is_toplist(domain) == false) {
-                        chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
-                    }
+                    if (tabs.length > 0) {
+                        const domain = extractHostname(tabs[0].url);
+                        // console.log("domain " + domain + " is_toplist " + is_toplist(domain));
+                        // console.log(md5(domain), is_blacklist(md5(domain)), is_toplist(domain));
+                        if ((is_blacklist(md5(domain)) == true) && is_toplist(domain) == false) {
+                            chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
+                        }
 
-                    // console.log(['background', request, sender, `${purify.hateSpeech.regexModelHateSpeech()}`]);
-                    // chrome.tabs.sendMessage(sender.tab.id, { action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
-                    sendResponse({ action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
+                        // console.log(['background', request, sender, `${purify.hateSpeech.regexModelHateSpeech()}`]);
+                        // chrome.tabs.sendMessage(sender.tab.id, { action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
+                        // sendResponse({ action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
+                    }
                 });
+                break;
+
+            case 'toxicity_predict':
+                toxicClassifier.predicting(sendResponse, request.toxicContentPredict);
                 break;
         }
         return true;

@@ -44,6 +44,12 @@ var BROWSER = "safari";
 var regexModelHateSpeech = null,
     processReplaceHateSpeech = [];
 
+var job = {
+    current: 0,
+    worker: 5,
+    message: 10
+};
+
 navigator.saysWho = (() => {
     const { userAgent } = navigator
     let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
@@ -325,17 +331,9 @@ function blurallimgs(srcUrl, srcType, predict_result) {
         if (el.src == srcUrl) {
             if (el.tagName === "IMG") {
                 if (predict_result == 0) {
-                    // el.style = "filter: blur(0px) !important;opacity:1 !important;";
-                    // el.style.setProperty('filter', 'blur(0px) !important', "");
-                    // el.setAttribute('cp-srcurl', el.src + " == " + srcUrl);
                     el.style.filter = "blur(0px)";
-                    // el.style.visibility = "visible";
                 } else {
-                    // el.style = "-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
-                    // el.style.setProperty('filter', 'blur(30px) !important', "");
                     el.style.filter = "blur(30px)";
-                    // el.style.visibility = "hidden";
-                    // console.log(TOTAL_POSITIVE + "/" + process_images.length + " " + (TOTAL_POSITIVE / process_images.length))
                     if (
                         (process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
                         (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)
@@ -352,7 +350,6 @@ function blurallimgs(srcUrl, srcType, predict_result) {
             }
 
         } else if (style.backgroundImage != "none" && predict_result > 0 && style.backgroundImage.match(urlRegex)) {
-            // bg_img_url = style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
             bg_img_url = style.backgroundImage.match(urlRegex)[1];
             if (bg_img_url == srcUrl) {
                 // el.style.backgroundImage = "url('" + ban_image + "')";
@@ -391,7 +388,6 @@ function getallimgs(tag) {
             md5src = md5(`${ el.src }`);
             if (el.src != "" && process_images.indexOf(md5src) == -1) {
                 process_images.push(md5src);
-                // wait_imgs.push(el.src);
                 // console.log(" FOUND IMG " + el.src);
                 if (tag == "alltag") {
                     // el.style="-webkit-filter: blur(30px) !important;filter: blur(30px) !important;opacity:0.25 !important;";
@@ -469,11 +465,15 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
                  * quét văn bản và thay đổi nội dung có chứa hate
                  */
                 regexModelHateSpeech = response.regexModelHateSpeech;
-                nativeSelectorText();
+                nativeSelector('text');
                 break;
         }
     }
 });
+
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 /**
  * * Quét văn bản trong body
@@ -481,43 +481,220 @@ chrome.runtime.sendMessage({ action: "checkdomain", url: window.location.href },
  * * --------------------------------------------------
  * * querySelectorAll            1725            1.725
  *
+ * @param {string} choose
  * @returns
  * +-----------------------------------------------------------------------------------+
  */
-const nativeSelectorText = () => {
-    // console.log('nativeSelectorText', regexModelHateSpeech);
-    const elements = document.querySelectorAll("body, body *");
+const nativeSelector = (choose = 'text') => {
+    // console.log('nativeSelector', nativeSelector);
+    const elements = choose == 'text' ? document.querySelectorAll("body, body *") : document.querySelectorAll("img, div, i");
+    const excludeTagsHtml = ['SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA'];
     let child;
+    let toxicContentPredict = [],
+        imagePredict = [];
     for (let i = 0; i < elements.length; i++) {
-        child = elements[i].childNodes[0];
-        if (elements[i].hasChildNodes() && child.nodeType == 3) {
-            elementsNodeValue = elements[i].childNodes[0].nodeValue;
-            elementsNodeValueMd5 = md5(elementsNodeValue);
-            if (elementsNodeValue != "" && processReplaceHateSpeech.indexOf(elementsNodeValueMd5) == -1) {
-                processReplaceHateSpeech.push(elementsNodeValueMd5);
-                elements[i].childNodes[0].nodeValue = replaceHateSpeech(child);
-            }
+        switch (choose) {
+            case 'text':
+                if (elements[i].hasChildNodes() &&
+                    elements[i].dataset.toxicScanned === undefined &&
+                    job.current <= job.worker &&
+                    excludeTagsHtml.indexOf(elements[i].tagName) == -1) {
+
+                    for (let j = 0; j < elements[i].childNodes.length; j++) {
+                        child = elements[i].childNodes[j];
+                        if (child.nodeType == 3) {
+
+                            let elementsNodeValue = child.nodeValue.trim();
+                            if (!isNumeric(elementsNodeValue) && elementsNodeValue.trim().length >= 3) {
+                                elements[i].dataset.toxicScanned = true;
+
+                                const obj = { text: elementsNodeValue };
+                                obj.id_node = i;
+                                obj.id_childnode = j;
+
+                                toxicContentPredict.push(obj);
+                            }
+                        }
+                    }
+                }
+                break;
+
+                // case 'imagenet':
+                //     const element = elements[i];
+                //     if (element.nodeType == 1 &&
+                //         element.dataset.imagenetScanned === undefined &&
+                //         job.current <= job.worker) {
+
+                //         child = element;
+
+                //         const obj = {};
+                //         obj.id_node = i;
+
+                //         switch (child.nodeName) {
+                //             case 'IMG':
+                //                 if ((child.currentSrc != '' || child.src != '')) {
+
+                //                     obj.src = child.currentSrc != '' ? child.currentSrc : child.src;
+                //                     obj.src_type = 'image';
+                //                 }
+                //                 break;
+
+                //             default: // use for background image DIV, I, P
+                //                 let child_style = window.getComputedStyle(child, false);
+                //                 if (child_style.backgroundImage != "none" &&
+                //                     child_style.backgroundImage.match(urlRegex)) {
+                //                     let backgroundImageUrl = child_style.backgroundImage.match(urlRegex)[1];
+                //                     if (backgroundImageUrl != '') {
+
+                //                         obj.src = backgroundImageUrl;
+                //                         obj.src_type = 'background_image';
+                //                     }
+                //                 }
+                //                 break;
+                //         }
+
+                //         if (Object.keys(obj).length >= 2 &&
+                //             process_images.indexOf(md5(obj.src)) === -1) {
+
+                //             child.dataset.imagenetScanned = true;
+                //             child.style.filter = "blur(30px)";
+
+                //             process_images.push(md5(obj.src));
+                //             imagePredict.push(obj);
+                //         }
+                //     }
+                //     break;
+        }
+
+        /**
+         * * Sử dụng điều kiện này để thay thế cho queue
+         * * DOM thay đổi sẽ quét tới thứ job.message và cứ tiếp tục cho tới khi full tag scanned
+         * * Tối ưu được bộ nhớ đệm RAM
+         */
+        if (toxicContentPredict.length > job.message || imagePredict.length > 4) {
+            break;
         }
     }
+
+    /**
+     * * toxicity_predicting
+     * * Phản hồi của extension khi xử lý xong ngôn ngữ tự nhiên
+     */
+    if (toxicContentPredict.length > 0) {
+        // console.log('toxicContentPredict', toxicContentPredict);
+        job.current += 1;
+        sendMessageToExtension({ action: "toxicity_predict", toxicContentPredict }, (message) => {
+            job.current -= 1;
+            switch (message.action) {
+                case 'toxicity_predicted':
+                    // console.log('toxicContentPredicted', message);
+                    for (let i = 0; i < message.predicted.length; i++) {
+                        const el_predicted = message.predicted[i];
+                        for (const [key, value] of Object.entries(el_predicted)) {
+                            if (value === true) {
+                                elements[message.predicted[i].id_node].childNodes[message.predicted[i].id_childnode].nodeValue = message.predicted[i].text;
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+        });
+    }
+
+    /**
+     * * image_predicting
+     * * Phản hồi từ extension khi xử lý xong chấm điểm hình ảnh.
+     */
+    // if (imagePredict.length > 0) {
+    //     // console.log('imagePredict', imagePredict);
+    //     job.current += 1;
+    //     sendMessageToExtension({ action: "image_predict", imagePredict }, (message) => {
+    //         job.current -= 1;
+    //         switch (message.action) {
+    //             case 'image_predicted':
+    //                 // console.log("image_predicted `${message.predicted.length}`", message);
+    //                 clearInterval(autoHideAllImgs);
+    //                 for (let i = 0; i < message.predicted.length; i++) {
+    //                     const el_predicted = message.predicted[i];
+    //                     var predict_result = Ruler(el_predicted.predictions);
+    //                     if (predict_result == 0) {
+    //                         elements[el_predicted.id_node].style.filter = "blur(0px)";
+    //                     } else if (predict_result > 0) {
+    //                         TOTAL_POSITIVE += 1;
+    //                         if (POSITIVE_IMAGES.indexOf(el_predicted.src) === -1) {
+    //                             POSITIVE_IMAGES.push(el_predicted.src);
+    //                         }
+    //                     }
+
+    //                     if (((process_images.length <= IMAGE_IN_NUMBER && TOTAL_POSITIVE >= POSITIVE_IN_NUMBER) ||
+    //                             (process_images.length > IMAGE_IN_NUMBER && (TOTAL_POSITIVE / process_images.length) >= POSITIVE_IN_RATE)) &&
+    //                         HIDETAB == 0) {
+
+    //                         sendMessageToExtension((r) => {
+    //                             HIDETAB = 1;
+    //                         }, { action: "hidetab", url: window.location.href, POSITIVE_IMAGES });
+    //                     }
+    //                 }
+    //                 break;
+    //         }
+    //     });
+    // }
 }
 
 /**
- * * 1. replace text UpperCase and non-uppercase
- * * 2. replace multi text
- * * 3. convert length text to number length *
+ *
+ * @param {*} message
+ * @param {*} callback
+ * @return
+ */
+const sendMessageToExtension = (message, callback) => {
+    chrome.runtime.sendMessage(message, function(response) {
+        if (chrome.runtime.lastError) {
+            // 'Could not establish connection. Receiving end does not exist.'
+            console.log('lastError.message', chrome.runtime.lastError.message);
+            return;
+        }
+        if (response) {
+            return callback(response);
+        }
+    });
+}
+
+/**
+ * * replace text UpperCase and non-uppercase
+ * * replace multi text
+ * * convert length text to number length *
  * @param {*} textnode
+ * @param {string} choose
  * @returns {string}
  */
-const replaceHateSpeech = (textnode) => {
+const replaceHateSpeech = (textnode, choose = 'default') => {
     // console.log('replaceHateSpeech', regexModelHateSpeech);
-    return textnode.nodeValue.replace(new RegExp(regexModelHateSpeech, "gi"), (matched) => {
-        let text_replace = '',
-            character = '*';
-        for (let i = 0; i < matched.length; i++) {
-            text_replace += character;
-        }
-        return text_replace;
-    });
+    let text_replace = '',
+        t = '',
+        character = '*';
+    switch (choose) {
+        case 'text':
+            for (let i = 0; i < textnode.length; i++) {
+                if (textnode[i] !== ' ') {
+                    text_replace += character;
+                } else {
+                    text_replace += ' ';
+                }
+            }
+            break;
+
+        default:
+            text_replace = textnode.nodeValue.replace(new RegExp(regexModelHateSpeech, "gi"), (matched) => {
+                for (let i = 0; i < matched.length; i++) {
+                    t += character;
+                }
+                return t;
+            });
+            break;
+    }
+    return text_replace;
 }
 
 // if (navigator.saysWho.toLowerCase().indexOf("safari") == -1) {
@@ -538,36 +715,20 @@ function watchdog() {
 
     getallimgs('alltag');
     /* MutationObserver callback to add images when the body changes */
-    var observer = new MutationObserver((mutationsList, observer) => {
-        var current_time = new Date().getTime();
+    const observer = new MutationObserver((mutationsList, observer) => {
+        let current_time = new Date().getTime();
         if (current_time - start_watch_time > 100) {
             start_watch_time = current_time;
-            // console.log("DOM CHANGED ");
-            for (const mutation of mutationsList) {
-                switch (mutation.type) {
-                    case 'childList':
-                        // If there are new nodes added
-                        if (mutation.addedNodes !== null) {
-                            // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
-                            getallimgs('alltag');
-                            nativeSelectorText();
-                        }
-                        break;
-                    case 'characterData':
-                        // console.log('characterData', regexModelHateSpeech);
-                        // nativeSelectorText();
-                        break;
-                    case 'attributes':
-                        break;
-                }
-                // console.log(mutation);
-            }
+            // console.log("DOM CHANGED");
+            // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
+            getallimgs('alltag');
+            nativeSelector('text');
         }
     });
 
     observer.observe(document.body, {
         subtree: true,
-        characterData: true,
+        // characterData: true,
         attributes: true,
         childList: true,
     });

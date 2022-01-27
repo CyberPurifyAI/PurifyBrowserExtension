@@ -322,7 +322,9 @@ purify.ui = (function (purify) {
   };
 
   const openFiltersDownloadPage = function () {
-    openTab(getPageUrl("filter-download.html"), {
+    let cpDeviceLink = 'https://cyberpurify.com/egg?utm_source=extension-kids&utm_medium=store&utm_campaign=install';
+    // let cpDeviceLink = getPageUrl("filter-download.html");
+    openTab(cpDeviceLink, {
       inBackground: purify.utils.browser.isYaBrowser(),
     });
   };

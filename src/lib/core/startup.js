@@ -25,7 +25,7 @@ purify.initialize = function() {
 
         // Set uninstall page url
         const uninstallUrl =
-            "https://cyberpurify.com/wifi-device/?action=purify_uninstal_ext&from=background&app=browser_extension";
+            "https://cyberpurify.com/egg/?action=purify_uninstal_ext&from=background&app=browser_extension";
         purify.runtime.setUninstallURL(uninstallUrl, () => {
             if (purify.runtime.lastError) {
                 purify.console.error(purify.runtime.lastError);
