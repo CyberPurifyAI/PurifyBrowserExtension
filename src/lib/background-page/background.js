@@ -253,8 +253,10 @@ class ToxicClassifier {
      * @returns
      */
     async predicting(callback, inputs) {
+        // const _toxic_startTime = new Date().getTime();
         await Promise.all(inputs.map(async(node, k) => {
             let sentences = node.text.split('. ').filter(Boolean);
+            // console.log(sentences);
             const result_sentences = await this.modelToxic.classify(sentences);
 
             return await Promise.all(sentences.map(async(data, index) => {
@@ -271,6 +273,8 @@ class ToxicClassifier {
             }));
 
         })).then((processed) => {
+            // const _toxic_endTime = new Date().getTime();
+            // console.log(processed, Math.floor(_toxic_endTime - _toxic_startTime));
             return callback({
                 action: 'toxicity_predicted',
                 predicted: inputs.map((n, k) => {

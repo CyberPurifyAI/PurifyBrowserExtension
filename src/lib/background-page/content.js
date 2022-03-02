@@ -47,7 +47,7 @@ var regexModelHateSpeech = null,
 var job = {
     current: 0,
     worker: 5,
-    message: 10
+    message: 4
 };
 
 navigator.saysWho = (() => {
@@ -505,8 +505,13 @@ const nativeSelector = (choose = 'text') => {
                         if (child.nodeType == 3) {
 
                             let elementsNodeValue = child.nodeValue.trim();
-                            if (!isNumeric(elementsNodeValue) && elementsNodeValue.trim().length >= 3) {
+                            md5_elementsNodeValue = md5(elementsNodeValue);
+                            if (!isNumeric(elementsNodeValue) &&
+                                elementsNodeValue.trim().length >= 3 &&
+                                processReplaceHateSpeech.indexOf(md5_elementsNodeValue) == -1) {
+
                                 elements[i].dataset.toxicScanned = true;
+                                processReplaceHateSpeech.push(md5_elementsNodeValue);
 
                                 const obj = { text: elementsNodeValue };
                                 obj.id_node = i;
@@ -710,6 +715,7 @@ var autoHideAllImgs = setInterval(() => {
 }, 100);
 
 var start_watch_time = new Date().getTime();
+var clearSetTimeout = 0;
 
 function watchdog() {
 
@@ -719,10 +725,14 @@ function watchdog() {
         let current_time = new Date().getTime();
         if (current_time - start_watch_time > 100) {
             start_watch_time = current_time;
+            clearTimeout(clearSetTimeout);
             // console.log("DOM CHANGED");
             // phải dùng alltag để tránh lỗi sử dụng background mặc dù chạy nặng hơn
             getallimgs('alltag');
-            nativeSelector('text');
+            clearSetTimeout = setTimeout(() => {
+                // start_watch_time = current_time;
+                nativeSelector('text');
+            }, 1000);
         }
     });
 
