@@ -394,6 +394,7 @@ chrome.runtime.onMessage.addListener(
             case 'analyze':
             case 'predict':
                 imageClassifier.analyzeImage(request.srcUrl, request.srcType, sender.tab.id, 0);
+                sendResponse({ status: true });
                 break;
 
             case 'hidetab':
@@ -417,6 +418,7 @@ chrome.runtime.onMessage.addListener(
                 purify.parentalControl.syncBlacklist(messages);
 
                 chrome.tabs.update(sender.tab.id, { url: chrome.extension.getURL("pages/blocking-pages/adBlockedPage.html") });
+                sendResponse({ status: true });
                 break;
 
             case 'checkdomain':
@@ -445,6 +447,7 @@ chrome.runtime.onMessage.addListener(
                         // chrome.tabs.sendMessage(sender.tab.id, { action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                         // sendResponse({ action: 'replace_hatespeech', regexModelHateSpeech: purify.hateSpeech.regexModelHateSpeech() });
                     }
+                    sendResponse({ status: true });
                 });
                 break;
 
@@ -452,6 +455,5 @@ chrome.runtime.onMessage.addListener(
                 toxicClassifier.predicting(sendResponse, request.toxicContentPredict);
                 break;
         }
-        return true;
     }
 );
